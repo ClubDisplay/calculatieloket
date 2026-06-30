@@ -18,6 +18,17 @@ Gebruik deze checklist vóór de eerste push naar GitHub.
 
 ---
 
+## Authenticatie
+
+GitHub accepteert twee manieren om te pushen:
+
+- **SSH (aanbevolen):** gebruik `git remote add origin git@github.com:...`. Zorg dat je publieke SSH-key in GitHub staat en dat `github.com` in `~/.ssh/known_hosts` staat.
+- **HTTPS + Personal Access Token:** gebruik `git remote add origin https://github.com/...`. Het token heeft minimaal de scopes **`repo`** en **`workflow`** nodig omdat de repository een workflow bestand bevat.
+
+Zie [03-GITHUB-ACTIVATION-RUNBOOK.md](03-GITHUB-ACTIVATION-RUNBOOK.md) voor exacte stappen en troubleshooting.
+
+---
+
 ## Verifieer lokaal
 
 ```bash

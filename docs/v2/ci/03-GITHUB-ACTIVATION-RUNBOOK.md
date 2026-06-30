@@ -100,16 +100,48 @@ git commit -m "Initial commit: Atlas v2 static site with Knowledge Layer and CI"
 
 ## Stap 6 — Voeg remote toe en push
 
+### Optie A — HTTPS (met Personal Access Token)
+
 ```bash
 git remote add origin https://github.com/GEBRUIKERSNAAM/calculatieloket.git
 git branch -M main
 git push -u origin main
 ```
 
+Vul bij de prompt:
+
+- **Gebruikersnaam:** je GitHub gebruikersnaam
+- **Wachtwoord:** je Personal Access Token
+
+> ⚠️ Het token heeft minimaal de scopes **`repo`** en **`workflow`** nodig. De `workflow` scope is verplicht omdat de repository een `.github/workflows/atlas-ci.yml` bestand bevat.
+
 Vervang:
 
 - `GEBRUIKERSNAAM` door je GitHub gebruikersnaam.
 - `calculatieloket` door de repository naam die je in stap 5 hebt gekozen.
+
+### Optie B — SSH (aanbevolen)
+
+Als je al een SSH-key hebt:
+
+```bash
+git remote add origin git@github.com:GEBRUIKERSNAAM/calculatieloket.git
+git branch -M main
+git push -u origin main
+```
+
+Voeg je publieke SSH-key toe aan GitHub: https://github.com/settings/keys
+
+Als je nog geen SSH-key hebt, genereer er een:
+
+```bash
+ssh-keygen -t ed25519 -C "jouw@email.com"
+cat ~/.ssh/id_ed25519.pub
+```
+
+Kopieer de output naar GitHub onder **Settings > SSH and GPG keys > New SSH key**.
+
+> Bij een eerste SSH-push op macOS kan de fout `Host key verification failed` optreden. Zie de troubleshooting hieronder voor de oplossing.
 
 ---
 
@@ -147,7 +179,8 @@ Samenvatting:
 
 ```bash
 git checkout -b test/ci-status
-# Doe een kleine tekstwijziging in README of changelog
+# Doe een kleine tekstwijziging in README of changelog, of gebruik een empty commit:
+# git commit --allow-empty -m "test: verify CI status check on PR"
 git add .
 git commit -m "test: verify CI status check on PR"
 git push -u origin test/ci-status
@@ -158,6 +191,8 @@ Open in GitHub een pull request naar `main`. Controleer dat:
 - De PR de check **Atlas CI / Run Atlas CI checks** toont.
 - De check groen wordt.
 - Je de PR pas merged na een groene check.
+
+> De status check naam in de PR is `Atlas CI / Run Atlas CI checks (pull_request)`. In de branch protection instellingen gebruik je de naam zonder `(pull_request)`: `Atlas CI / Run Atlas CI checks`.
 
 ---
 
@@ -237,6 +272,72 @@ git push origin main
 ```
 
 > Als `.env` al in de git-historie zit, moet je die verwijderen met `git filter-repo` of GitHub's BFG Repo-Cleaner. Raadpleeg de GitHub documentatie voor het verwijderen van gevoelige data uit de historie.
+
+---
+
+### Push faalt: Personal Access Token heeft geen `workflow` scope
+
+**Symptoom:**
+
+```text
+! [remote rejected] main -> main
+  (refusing to allow a Personal Access Token to create or update workflow
+  `.github/workflows/atlas-ci.yml` without `workflow` scope)
+```
+
+**Oplossing:**
+
+1. Ga naar https://github.com/settings/tokens
+2. Genereer een nieuw **classic** token of pas je bestaande token aan.
+3. Vink minimaal aan:
+   - ✅ `repo`
+   - ✅ `workflow`
+4. Vervang het oude token in je credential helper (macOS Keychain):
+
+```bash
+printf "host=github.com\nprotocol=https\n\n" | git credential-osxkeychain erase
+```
+
+5. Push opnieuw en plak het nieuwe token.
+
+---
+
+### Push faalt: `Host key verification failed` (SSH)
+
+**Symptoom:**
+
+```text
+Host key verification failed.
+fatal: Could not read from remote repository.
+```
+
+**Oplossing:** GitHub's host key staat nog niet in `~/.ssh/known_hosts`.
+
+```bash
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+git push -u origin main
+```
+
+---
+
+### Push faalt: `Device not configured` of credentials prompt blijft hangen
+
+**Symptoom:**
+
+```text
+fatal: could not read Username for 'https://github.com': Device not configured
+```
+
+**Oplossing:**
+
+- Voor HTTPS: je token is niet opgeslagen. Draai de push in een echte terminal (niet via een script) zodat je het token kunt plakken.
+- Voor SSH: controleer dat je de publieke key aan GitHub hebt toegevoegd en dat de remote URL correct is:
+
+```bash
+git remote -v
+```
+
+Zie ook **Optie B — SSH** in stap 6.
 
 ---
 

@@ -253,4 +253,4 @@ Zie `docs/v2/ci/` voor de volledige checklist, branch protection handleiding, ru
 - ✅ GitHub Readiness Checklist: push checklist, branch protection, Actions runbook (Sprint 069).
 - ✅ `de.tax.income.2026` geactiveerd op basis van § 32a EStG voor veranlagingsperiode 2026 (Sprint 070).
 - ✅ `be.tax.income.2026` toegevoegd op basis van FOD Financiën voor inkomstenjaar 2026 / aanslagjaar 2027 (Sprint 071).
-- ✅ GitHub Activation Runbook toegevoegd (`docs/v2/ci/03-GITHUB-ACTIVATION-RUNBOOK.md`) met exacte terminalcommando's om de lokale repo naar GitHub te pushen en Atlas CI live te activeren (Sprint 075).
+- ✅ GitHub Activation Runbook toegevoegd (`docs/v2/ci/03-GITHUB-ACTIVATION-RUNBOOK.md`) met exacte terminalcommando's om de lokale repo naar GitHub te pushen en Atlas CI live te activeren; runbook bijgewerkt met SSH-aanbeveling, PAT workflow-scope vereiste en troubleshooting; repository succesvol gepusht naar `https://github.com/ClubDisplay/calculatieloket` en test PR bevestigt groene `Atlas CI / Run Atlas CI checks` (Sprint 075).

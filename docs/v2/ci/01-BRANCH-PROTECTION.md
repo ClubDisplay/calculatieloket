@@ -19,6 +19,7 @@ Stel in voor branch pattern `main`:
   - [ ] **Dismiss stale PR approvals when new commits are pushed** (aanbevolen)
 - [ ] **Require status checks to pass before merging**
   - Status check: `Atlas CI / Run Atlas CI checks`
+  - In de PR zelf toont de check de naam `Atlas CI / Run Atlas CI checks (pull_request)`; in branch protection selecteer je de naam **zonder** `(pull_request)`.
 - [ ] **Require branches to be up to date before merging** (aanbevolen)
 - [ ] **Restrict pushes that create files larger than 100 MB** (GitHub default)
 - [ ] **Do not allow bypassing the above settings** (optioneel; alleen als Barry zelf geen directe push naar `main` wil doen)
