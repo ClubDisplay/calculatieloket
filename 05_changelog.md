@@ -2,6 +2,16 @@
 
 ## 2026-06-30
 
+**Type:** Product/Architectuur
+**Wijziging:** Atlas v2 Sprint 076 — Calculatieloket App Experience Blueprint + FiscalMesh Agents Architecture
+**Details:** Nieuwe productdocumentatie aangemaakt in `docs/product/`: `00-CALCULATIELOKET-APP-VISION.md` (app/tool visie: vraag → bedrag → direct antwoord → vervolgstappen → gerelateerde calculators → bronvermelding → disclaimer), `01-CURRENT-SITE-AUDIT.md` (audit van huidige `src/pages` calculators: wat al goed is, wat mist, welke pagina's nog niet app-like aanvoelen, welke componenten beter moeten, pagina-specifieke beoordelingen), `02-APP-UX-BLUEPRINT.md` (ideaal calculator-scherm: hero micro-header, input card, result card, "Wat kun je hiermee?", next steps, bronnen, FAQ, mobiel gedrag, componentenarchitectuur), `03-CALCULATOR-JOURNEY-MODEL.md` (eerste app-journey: "Ik vul mijn maandinkomen in → wat betekent dit voor salaris, toeslagen, hypotheek en ZZP?", persona, state overdracht via URL parameters/sessionStorage, mapping naar bestaande pagina's, nieuwe calculators die de journey versterken), `04-FIRST-IMPLEMENTATION-PLAN.md` (5-stappen implementatieplan zonder big bang: eerst componenten, daarna `bruto-netto-2026` perfectioneren, daarna hergebruik naar andere pagina's, aanbevolen eerste calculator is `bruto-netto-2026`), `05-FISCALMESH-AGENTS-ARCHITECTURE.md` (architectuur van eerste generatie interne FiscalMesh Agents: SEO, Knowledge, Content, QA, Design, Analytics, Product; duidelijk gescheiden van publieke website; roadmap Agent v1/v2/v3). Geen code gewijzigd; geen websitepagina's, calculator engines, calculatorlogica, UI/SEO-content, runtime code, Rule Resolver, Knowledge Objects, `.env`, deploy, npm ci, node_modules verwijdering of dependencies aangeraakt. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 15 pagina's, sitemap met 15 HTTPS-URL's, geen TypeScript-fouten.
+
+---
+
+## 2026-06-30
+
 **Type:** Technisch/Architectuur
 **Wijziging:** Repository public gemaakt + branch protection nu afgedwongen
 **Details:** De GitHub repository `ClubDisplay/calculatieloket` is van privé naar public gezet via **Settings > General > Danger zone > Change repository visibility**. Daardoor wordt de branch protection regel voor `main` (require PR + require status check `Atlas CI / Run Atlas CI checks`) technisch afgedwongen. De documentatie is bijgewerkt: `docs/v2/ci/01-BRANCH-PROTECTION.md` en `docs/v2/ci/03-GITHUB-ACTIVATION-RUNBOOK.md` bevatten nu een waarschuwing dat gratis privé-repositories op persoonlijke accounts branch protection niet afdwingen; `docs/v2/03-RULE-ENGINE.md`, `src/lib/rules/README.md` en `src/lib/knowledge/README.md` status headers en roadmap bullets bijgewerkt naar "Public Repository + Branch Protection Enforced". Geen wijzigingen aan websitepagina's, calculatorpagina's, Knowledge Objects, UI/SEO-content, runtime code, engines, Rule Resolver, `.env`, deploy, secrets of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
