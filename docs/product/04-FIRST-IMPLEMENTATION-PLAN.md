@@ -18,6 +18,21 @@ Dit geeft ook een duidelijk voorbeeld voor toekomstige calculators.
 
 ---
 
+## Status update: v0.1 componenten zijn gebouwd
+
+De eerste app/tool componenten zijn gerealiseerd in Sprint 077:
+
+- `CalculatorShell.astro`
+- `InputPanel.astro`
+- `ResultPanel.astro`
+- `UseCasesPanel.astro`
+- `FaqAccordion.astro`
+- `ToolFooter.astro`
+
+Ze staan in `src/components/calculator/` en zijn visueel getest via de demo-pagina `/demo/calculator-shell/`. Zie `07-CALCULATOR-COMPONENT-LIBRARY-v0.1.md` voor de volledige documentatie van props, slots en gebruik.
+
+---
+
 ## Aanbevolen eerste calculator: `bruto-netto-2026`
 
 **Waarom deze?**

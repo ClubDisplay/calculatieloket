@@ -1,0 +1,95 @@
+---
+interface Item {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+}
+
+const { title = "Veelgestelde vragen", items } = Astro.props;
+---
+
+<div class="calc-faq">
+  <h2 class="calc-faq-title">{title}</h2>
+  <div class="calc-faq-list">
+    {items.map((item, index) => (
+      <details class="calc-faq-item" open={index === 0}>
+        <summary class="calc-faq-question">{item.question}</summary>
+        <div class="calc-faq-answer">{item.answer}</div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<style>
+  .calc-faq-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .calc-faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .calc-faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s;
+  }
+
+  .calc-faq-question:hover {
+    background: var(--color-primary-light);
+  }
+
+  .calc-faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .calc-faq-question::after {
+    content: "+";
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+  }
+
+  .calc-faq-item[open] .calc-faq-question::after {
+    content: "−";
+  }
+
+  .calc-faq-answer {
+    padding: 0 1rem 1rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .calc-faq-answer :global(p) {
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-faq-answer :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

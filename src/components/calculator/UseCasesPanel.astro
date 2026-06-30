@@ -1,0 +1,87 @@
+---
+interface Item {
+  title: string;
+  description: string;
+  href: string;
+  accent?: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+}
+
+const { title = "Wat kun je hiermee?", items } = Astro.props;
+---
+
+<section class="calc-use-cases">
+  <h2 class="calc-use-cases-title">{title}</h2>
+  <div class="calc-use-cases-grid">
+    {items.map((item) => (
+      <a
+        href={item.href}
+        class="calc-use-cases-card"
+        style={item.accent ? `--uc-accent: ${item.accent}` : undefined}
+      >
+        <span class="calc-use-cases-card-title">{item.title}</span>
+        <span class="calc-use-cases-card-desc">{item.description}</span>
+        <span class="calc-use-cases-card-cta">Bekijk &rarr;</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .calc-use-cases-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-use-cases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .calc-use-cases-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+
+  .calc-use-cases-card:hover,
+  .calc-use-cases-card:focus-visible {
+    border-color: var(--uc-accent, var(--color-primary));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .calc-use-cases-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .calc-use-cases-card-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .calc-use-cases-card-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--uc-accent, var(--color-primary));
+    margin-top: 0.25rem;
+  }
+</style>

@@ -1,0 +1,94 @@
+---
+interface Props {
+  title?: string;
+  heroValue: string;
+  heroLabel?: string;
+  badge?: string;
+}
+
+const { title, heroValue, heroLabel = "Resultaat", badge = "Indicatie" } = Astro.props;
+---
+
+<div class="calc-result-panel">
+  {title && <h2 class="calc-result-panel-title">{title}</h2>}
+
+  <div class="calc-result-panel-header">
+    <span class="calc-result-panel-label">{heroLabel}</span>
+    {badge && <span class="calc-result-panel-badge">{badge}</span>}
+  </div>
+
+  <div class="calc-result-panel-hero" data-calc-result-hero>{heroValue}</div>
+
+  <div class="calc-result-panel-breakdown">
+    <slot />
+  </div>
+
+  <div class="calc-result-panel-actions">
+    <slot name="actions" />
+  </div>
+</div>
+
+<style>
+  .calc-result-panel {
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+
+  .calc-result-panel-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-result-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .calc-result-panel-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .calc-result-panel-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-surface);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--color-primary);
+  }
+
+  .calc-result-panel-hero {
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin: 0.5rem 0 1rem;
+  }
+
+  .calc-result-panel-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .calc-result-panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+</style>
