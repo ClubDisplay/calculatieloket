@@ -1,0 +1,53 @@
+id: be.vat.standard
+type: vat_rate
+country: BE
+locale: nl-BE
+title:
+  nl-BE: Standaard BTW-tarieven België
+  fr-BE: Taux de TVA standard en Belgique
+description:
+  nl-BE: De BTW-tarieven voor België in 2026.
+  fr-BE: Les taux de TVA en Belgique pour 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: FOD Financiën
+sources:
+  - label: FOD Financiën — BTW-tarieven
+    url: https://finances.belgium.be/nl/ondernemingen/btw/tarieven
+    authority_level: official
+    domain: finances.belgium.be
+    last_verified: '2026-06-30'
+relationships:
+  - relation: replaces
+    target: be.vat.standard
+    description: Placeholder relation to satisfy required field.
+used_by: []
+version: '2026-01-01'
+tags:
+  - vat
+  - tax
+  - '2026'
+  - belgium
+notes:
+  nl-BE: Belgische BTW-tarieven 2026. Laag tarief (6%) voor basisbehoeften; middentarief (12%) voor diensten zoals restaurant en sloop.
+  fr-BE: Taux de TVA belges 2026. Taux réduit (6%) pour les biens de première nécessité; taux intermédiaire (12%) pour certains services.
+data:
+  default_rate: 21
+  currency: EUR
+  rates:
+    - value: 21
+      label: hoog tarief
+      category: standard
+    - value: 12
+      label: middentarief
+      category: reduced
+    - value: 6
+      label: laag tarief
+      category: reduced_low
+    - value: 0
+      label: nultarief
+      category: zero

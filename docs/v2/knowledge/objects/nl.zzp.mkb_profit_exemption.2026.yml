@@ -1,0 +1,40 @@
+id: nl.zzp.mkb_profit_exemption.2026
+type: profit_exemption
+country: NL
+locale: nl-NL
+title:
+  nl-NL: MKB-winstvrijstelling 2026
+description:
+  nl-NL: MKB-winstvrijstelling voor ondernemers in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: ondernemersplein
+sources:
+  - label: Ondernemersplein — MKB-winstvrijstelling
+    url: https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/
+    authority_level: official
+    domain: ondernemersplein.overheid.nl
+    last_verified: '2026-06-30'
+relationships:
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - zzp
+  - profit_exemption
+  - mkb
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De MKB-winstvrijstelling bedraagt in 2026 12,70% van de winst na ondernemersaftrek.
+data:
+  exemption_type: mkb
+  rate: 0.127
+  currency: EUR

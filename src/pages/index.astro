@@ -1,0 +1,766 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+---
+
+<BaseLayout
+  title="Calculatieloket.nl — Gratis calculators voor btw, salaris, zzp, hypotheek en toeslagen"
+  description="Bereken snel een indicatie voor btw, bruto-netto salaris, hypotheek, zzp uurtarief en toeslagen. Gratis, zonder account en met duidelijke uitleg."
+  containerClass="container-wide"
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-home">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-home-title">Wat wil je berekenen?</h1>
+        <p class="hero-home-sub">Gratis calculators voor btw, salaris, hypotheek, zzp en toeslagen. Snel, duidelijk en zonder account.</p>
+        <div class="hero-home-ctas">
+          <a href="#tools" class="btn btn-primary btn-lg">Bekijk alle calculators</a>
+          <a href="#waarom" class="btn btn-secondary btn-lg">Waarom Calculatieloket?</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-full">Gratis</span>
+            <span class="trust-short">Gratis</span>
+          </div>
+          <div class="hero-trust-item">
+            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-full">Geen account</span>
+            <span class="trust-short">Geen account</span>
+          </div>
+          <div class="hero-trust-item">
+            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-full">Geen opslag van je invoer</span>
+            <span class="trust-short">Geen opslag</span>
+          </div>
+          <div class="hero-trust-item">
+            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-full">Uitkomst is een indicatie</span>
+            <span class="trust-short">Indicatie</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-dashboard">
+          <div class="hero-dash-card dash-btw">
+            <span class="hd-label">&euro;121 incl. BTW</span>
+            <span class="hd-result">&rarr; &euro;100 excl.</span>
+          </div>
+          <div class="hero-dash-card dash-salar">
+            <span class="hd-label">Bruto &euro;3.500</span>
+            <span class="hd-result">&rarr; netto indicatie</span>
+          </div>
+          <div class="hero-dash-card dash-zzp">
+            <span class="hd-label">ZZP uurtarief</span>
+            <span class="hd-result">indicatie op maat</span>
+          </div>
+          <div class="hero-dash-card dash-toeslag">
+            <span class="hd-label">Huursubsidie</span>
+            <span class="hd-result">zorgtoeslag indicatie</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POPULAIRE CALCULATORS ===== -->
+  <section id="tools" class="popular-section">
+    <h2 class="section-heading">Populaire calculators</h2>
+    <p class="section-sub">Kies snel wat je wilt berekenen.</p>
+
+    <div class="popular-grid">
+      <a href="/btw-calculator/" class="popular-card pc-btw">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="3" width="24" height="22" rx="3" stroke="#2563eb" stroke-width="2"/><line x1="9" y1="10" x2="19" y2="10" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="19" y2="15" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="20" x2="14" y2="20" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <div class="pc-text">
+          <h3>BTW Calculator</h3>
+          <p>BTW berekenen over elk bedrag. Incl. naar excl. en terug, met 21%, 9% en 0% tarief.</p>
+          <span class="pc-meta">Bijgewerkt 12 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="/salaris-calculator/" class="popular-card pc-salaris">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#059669" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="#059669">&euro;</text></svg>
+        </span>
+        <div class="pc-text">
+          <h3>Bruto Netto Calculator 2026</h3>
+          <p>Indicatie van je nettoloon. Met actuele belastingtarieven, heffingskortingen en pensioenpremie.</p>
+          <span class="pc-meta">Bijgewerkt 12 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="/hypotheek-calculator/" class="popular-card pc-hypotheek">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 12L14 4L25 12" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="13" width="12" height="11" rx="1" stroke="#d97706" stroke-width="2"/><rect x="12" y="18" width="4" height="6" rx="1" stroke="#d97706" stroke-width="2"/></svg>
+        </span>
+        <div class="pc-text">
+          <h3>Hypotheek Calculator</h3>
+          <p>Indicatie van hypotheekbedrag en maandlasten op basis van inkomen, rente en looptijd.</p>
+          <span class="pc-meta">Bijgewerkt 12 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="/zzp-calculator/" class="popular-card pc-zzp">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="#7c3aed" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="#7c3aed" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="#7c3aed" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="#7c3aed" stroke-width="1.5"/></svg>
+        </span>
+        <div class="pc-text">
+          <h3>ZZP Calculator 2026</h3>
+          <p>Welk uurtarief heb je als freelancer nodig? Met belasting, pensioen en aftrekposten.</p>
+          <span class="pc-meta">Bijgewerkt 12 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="/toeslagen-calculator/" class="popular-card pc-toeslagen">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="18" rx="3" stroke="#0d9488" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="#0d9488" stroke-width="2"/><circle cx="14" cy="14" r="2" fill="#0d9488"/></svg>
+        </span>
+        <div class="pc-text">
+          <h3>Toeslagen Calculator 2026</h3>
+          <p>Indicatie van mogelijke huurtoeslag en zorgtoeslag op basis van inkomen, huur en situatie.</p>
+          <span class="pc-meta">Bijgewerkt 12 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="/auto-importkosten-berekenen/" class="popular-card pc-auto">
+        <span class="pc-icon-box">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="#0891b2" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="#fff" stroke="#0891b2" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="#fff" stroke="#0891b2" stroke-width="2"/></svg>
+        </span>
+        <div class="pc-text">
+          <h3>Auto importkosten <span class="pc-badge">Nieuw</span></h3>
+          <p>Bereken een indicatie van de kosten om een auto of camper te importeren.</p>
+          <span class="pc-meta">Laatst bijgewerkt: 26 juni 2026</span>
+        </div>
+        <span class="pc-arr" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <AdSlot slot="1234567893" format="auto" style="min-height:100px" />
+
+  <!-- ===== CATEGORIEËN ===== -->
+  <section class="categories-section">
+    <h2 class="section-heading">Berekenen per onderwerp</h2>
+    <div class="category-row">
+      <a href="/btw-calculator/" class="cat-chip">Belasting &amp; btw</a>
+      <a href="/salaris-calculator/" class="cat-chip">Inkomen &amp; salaris</a>
+      <a href="/zzp-calculator/" class="cat-chip">Ondernemen &amp; zzp</a>
+      <a href="/hypotheek-calculator/" class="cat-chip">Wonen &amp; hypotheek</a>
+      <a href="/toeslagen-calculator/" class="cat-chip">Toeslagen</a>
+      <a href="/auto-importkosten-berekenen/" class="cat-chip">Auto &amp; import</a>
+    </div>
+  </section>
+
+  <!-- ===== TRUSTBLOK ===== -->
+  <section id="waarom" class="trust-band">
+    <h2 class="section-heading">Waarom Calculatieloket?</h2>
+    <div class="trust-band-inner">
+      <div class="trust-band-item">
+        <span class="tb-check">&check;</span>
+        <span>Gratis en zonder account</span>
+      </div>
+      <div class="trust-band-item">
+        <span class="tb-check">&check;</span>
+        <span>Geen opslag van je invoer</span>
+      </div>
+      <div class="trust-band-item">
+        <span class="tb-check">&check;</span>
+        <span>Gebaseerd op offici&euml;le bronnen</span>
+      </div>
+      <div class="trust-band-item">
+        <span class="tb-check">&check;</span>
+        <span>Resultaten zijn een indicatie</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section">
+    <h2 class="section-heading">Veelgestelde vragen</h2>
+
+    <details class="faq-item">
+      <summary>Zijn de calculators gratis?</summary>
+      <p>Ja, alle calculators op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig en er zijn geen verborgen kosten.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Worden mijn gegevens opgeslagen?</summary>
+      <p>Nee. Alle berekeningen vinden plaats in je eigen browser. Wat je invult in een calculator wordt niet door ons opgeslagen of doorgestuurd. Lees meer in ons <a href="/privacy/">privacybeleid</a>.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Waarom is de uitkomst een indicatie?</summary>
+      <p>Onze calculators gebruiken de offici&euml;le tarieven en regels, maar je persoonlijke situatie kan afwijken door factoren die wij niet kennen. Denk aan andere inkomsten, specifieke aftrekposten, vermogen of bijzondere regelingen. Gebruik de uitkomst als richtlijn, niet als definitief bedrag.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Welke bronnen gebruikt Calculatieloket?</summary>
+      <p>We baseren onze calculators op informatie van de <a href="https://www.belastingdienst.nl">Belastingdienst</a>, <a href="https://www.toeslagen.nl">Dienst Toeslagen</a> en <a href="https://www.rijksoverheid.nl">Rijksoverheid</a>. Bij elke calculator vermelden we de gebruikte bronnen.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Kan ik de uitkomst gebruiken voor aangifte of aanvraag?</summary>
+      <p>De uitkomsten zijn indicatief. Gebruik ze als hulpmiddel, maar doe voor offici&euml;le zaken zoals belastingaangifte of toeslagaanvraag altijd een offici&euml;le proefberekening op de website van de Belastingdienst of Dienst Toeslagen. Raadpleeg bij twijfel een financieel adviseur.</p>
+    </details>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ===== HERO ===== */
+  .hero-home {
+    background: linear-gradient(160deg, #eff6ff 0%, #f0f4ff 30%, #fafafa 100%);
+    margin-bottom: 2.5rem;
+    padding: 4rem 0;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .hero-left {
+    max-width: 540px;
+  }
+
+  .hero-home-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: 0.85rem;
+    color: var(--color-text);
+  }
+
+  .hero-home-sub {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  .hero-home-ctas {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  /* CTA buttons — explicit overrides to prevent link styling */
+  .hero-home-ctas .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    max-width: 100%;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+
+  .hero-home-ctas .btn-primary {
+    background: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.18);
+  }
+
+  .hero-home-ctas .btn-primary:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+    text-decoration: none;
+  }
+
+  .hero-home-ctas .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .hero-home-ctas .btn-secondary:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary-hover);
+    text-decoration: none;
+  }
+
+  /* Trust items */
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.75rem;
+  }
+
+  .hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .trust-short { display: none; }
+
+  .hti-icon {
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+
+  /* Hero right: dashboard mockup */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .hero-dash-card {
+    border-radius: 12px;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .dash-btw    { background: #eff6ff; }
+  .dash-salar  { background: #ecfdf5; }
+  .dash-zzp    { background: #f5f3ff; }
+  .dash-toeslag { background: #f0fdfa; }
+
+  .hd-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .hd-result {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ===== SECTION HEADINGS ===== */
+  .section-heading {
+    font-size: 2.1rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  /* ===== POPULAIRE CALCULATORS ===== */
+  .popular-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .popular-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .popular-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.15s, border-color 0.15s;
+    position: relative;
+  }
+
+  .popular-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .pc-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    background: var(--color-primary-light);
+  }
+
+  .pc-salaris .pc-icon-box { background: #ecfdf5; }
+  .pc-hypotheek .pc-icon-box { background: #fffbeb; }
+  .pc-zzp .pc-icon-box { background: #f5f3ff; }
+  .pc-toeslagen .pc-icon-box { background: #f0fdfa; }
+  .pc-auto .pc-icon-box { background: #ecfeff; }
+
+  .pc-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pc-text h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    color: var(--color-text);
+  }
+
+  .pc-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #0891b2;
+    background: #ecfeff;
+    border: 1px solid #a5f3fc;
+    padding: 1px 6px;
+    border-radius: 6px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  .pc-text p {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.35rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .pc-meta {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+  }
+
+  .pc-arr {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .popular-card:hover .pc-arr {
+    transform: translateX(3px);
+    color: var(--color-primary);
+  }
+
+  /* ===== CATEGORIEËN ===== */
+  .categories-section {
+    margin: 3rem 0 2rem;
+  }
+
+  .category-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .cat-chip {
+    display: inline-block;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .cat-chip:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  /* ===== TRUSTBAND ===== */
+  .trust-band {
+    margin: 2rem 0;
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, #f0fdf4 0%, #fafafa 100%);
+    border-radius: 16px;
+    border: 1px solid #bbf7d0;
+  }
+
+  .trust-band .section-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .trust-band-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .trust-band-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .tb-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-success);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-section {
+    margin-top: 3rem;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-top: 0.6rem;
+    background: var(--color-surface);
+  }
+
+  .faq-item summary {
+    padding: 0.85rem 1.15rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: "+";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+  }
+
+  .faq-item[open] summary::after {
+    content: "\2212";
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary);
+  }
+
+  .faq-item p {
+    padding: 0 1.15rem 0.85rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== RESPONSIVE ===== */
+
+  /* Tablet: drop to 1 column, dashboard below text */
+  @media (max-width: 960px) {
+    .hero-home {
+      padding: 2.5rem 0;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-dashboard {
+      max-width: 100%;
+    }
+
+    .hero-home-title {
+      font-size: 2rem;
+    }
+
+    .hero-left {
+      max-width: 100%;
+    }
+
+    .popular-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Mobile: hide dashboard, compact hero, 2x2 trust grid */
+  @media (max-width: 640px) {
+    .hero-home {
+      padding: 1.75rem 0 1.5rem;
+    }
+
+    .hero-grid {
+      gap: 0.75rem;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-home-title {
+      font-size: 1.5rem;
+    }
+
+    .hero-home-sub {
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
+    .hero-home-ctas {
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-home-ctas .btn {
+      width: 100%;
+      text-align: center;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .hero-right {
+      display: none;
+    }
+
+    .hero-trust {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1rem;
+    }
+
+    .hero-trust-item {
+      font-size: 0.8rem;
+    }
+
+    .trust-full { display: none; }
+    .trust-short { display: inline; }
+
+    .section-heading {
+      font-size: 1.5rem;
+    }
+
+    .section-sub {
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  /* Small mobile: keep compact */
+  @media (max-width: 600px) {
+    .popular-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .category-row {
+      gap: 0.4rem;
+    }
+
+    .cat-chip {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.85rem;
+    }
+
+    .trust-band {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .trust-band .section-heading {
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  /* Large desktop: extra breathing room */
+  @media (min-width: 1280px) {
+    .hero-home {
+      padding: 4rem 0;
+    }
+
+    .hero-home-title {
+      font-size: 2.8rem;
+    }
+
+    .hero-dashboard {
+      max-width: 440px;
+      padding: 1.75rem;
+    }
+  }
+</style>

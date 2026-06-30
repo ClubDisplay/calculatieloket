@@ -1,0 +1,44 @@
+name: Atlas CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  atlas-ci:
+    name: Run Atlas CI checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      # We gebruiken npm ci in plaats van npm install omdat:
+      # - package-lock.json aanwezig is en de enige bron van waarheid moet zijn;
+      # - npm ci een schone, reproduceerbare installatie doet zonder bestaande
+      #   node_modules te muteren of versies te upgraden;
+      # - dit veiliger is voor CI-omgevingen dan npm install.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Atlas CI checks
+        run: |
+          npm run atlas:check -- \
+            --report reports/atlas-check-report.md \
+            --json-report reports/atlas-check-report.json
+
+      - name: Upload Atlas CI reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: atlas-check-reports
+          path: reports/
+          if-no-files-found: ignore

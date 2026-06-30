@@ -1,0 +1,70 @@
+id: nl.import.costs.2026
+
+type: import_cost
+
+country: NL
+
+locale: nl-NL
+
+title:
+  nl-NL: Auto-importkosten 2026 — engine parameters
+
+description:
+  nl-NL: Standaardwaarden voor de kostencategorieën bij het importeren van een voertuig in 2026, zoals gebruikt door de Import Cost Engine. De bpm blijft handmatige invoer.
+
+status: active
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: RDW / Belastingdienst
+
+sources:
+  - label: RDW — Voertuigen importeren
+    url: https://www.rdw.nl/particulier/voertuigen/importeren
+    authority_level: official
+    domain: rdw.nl
+    last_verified: '2026-06-30'
+  - label: Belastingdienst — Bpm bij invoer
+    url: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: used_by
+    target: calculator.auto-importkosten-berekenen
+    description: Gebruikt door de Auto Importkosten Calculator.
+  - relation: depends_on
+    target: nl.import.bpm.manual
+    description: De bpm is handmatige invoer en wordt apart vastgelegd in nl.import.bpm.manual.
+
+used_by:
+  - calculator.auto-importkosten-berekenen
+
+version: '2026-01-01'
+
+tags:
+  - import
+  - vehicle
+  - costs
+  - '2026'
+  - netherlands
+
+notes:
+  nl-NL: Deze standaardwaarden (alle 0) komen overeen met de vorige hardcoded defaults in de Import Cost Engine. De werkelijke kosten worden door de gebruiker ingevoerd; indien niet ingevuld wordt de standaardwaarde 0 gebruikt. Bpm blijft handmatige invoer.
+
+data:
+  cost_type: import_costs
+  currency: EUR
+  estimatedBpm: 0
+  rdwCosts: 0
+  transportCosts: 0
+  exportCosts: 0
+  inspectionCosts: 0
+  plateCosts: 0
+  otherCosts: 0

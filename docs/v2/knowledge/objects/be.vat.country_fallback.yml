@@ -1,0 +1,70 @@
+id: be.vat.country_fallback
+
+type: vat_rate
+
+country: BE
+
+locale: BE
+
+title:
+  nl-BE: Belgische BTW-tarieven — landfallback
+  fr-BE: Taux de TVA belges — fallback pays
+
+description:
+  nl-BE: Landfallback BTW-tarieven voor België, onafhankelijk van de taallocale.
+  fr-BE: Taux de TVA belges de fallback au niveau pays, indépendamment de la locale linguistique.
+
+status: active
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: FOD Financiën
+
+sources:
+  - label: FOD Financiën — BTW-tarieven
+    url: https://finances.belgium.be/nl/ondernemingen/btw/tarieven
+    authority_level: official
+    domain: finances.belgium.be
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: fallback_for
+    target: be.vat.standard
+    description: Landfallback object voor Belgische BTW-tarieven, gebruikt wanneer een specifieke taallocale ontbreekt.
+
+used_by: []
+
+version: '2026-01-01'
+
+tags:
+  - vat
+  - tax
+  - '2026'
+  - belgium
+  - fallback
+
+notes:
+  nl-BE: Identieke tarieven als be.vat.standard, maar op country-niveau (locale BE) zodat fr-BE en andere Belgische locales hierop kunnen terugvallen.
+  fr-BE: Taux identiques à be.vat.standard, mais au niveau pays (locale BE), pour que les locales belges comme fr-BE puissent y faire appel.
+
+data:
+  default_rate: 21
+  currency: EUR
+  rates:
+    - value: 21
+      label: hoog tarief
+      category: standard
+    - value: 12
+      label: middentarief
+      category: reduced
+    - value: 6
+      label: laag tarief
+      category: reduced_low
+    - value: 0
+      label: nultarief
+      category: zero

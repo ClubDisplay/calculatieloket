@@ -1,0 +1,47 @@
+id: de.vat.standard
+type: vat_rate
+country: DE
+locale: de-DE
+title:
+  de-DE: Mehrwertsteuersätze Deutschland
+  en-US: German standard VAT rates
+description:
+  de-DE: Die Mehrwertsteuersätze für Deutschland in 2026.
+  en-US: Standard VAT rates applicable in Germany in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Bundeszentralamt für Steuern
+sources:
+  - label: Bundeszentralamt für Steuern — Mehrwertsteuer
+    url: https://www.bzst.de/DE/Steuern_International/Mehrwertsteuer/mehrwertsteuer_node.html
+    authority_level: official
+    domain: bzst.de
+    last_verified: '2026-06-30'
+relationships:
+  - relation: replaces
+    target: de.vat.standard
+    description: Placeholder relation to satisfy required field.
+used_by: []
+version: '2026-01-01'
+tags:
+  - vat
+  - tax
+  - '2026'
+  - germany
+notes:
+  de-DE: Deutsche Mehrwertsteuersätze 2026. Standard 19%, ermäßigt 7%. Quellen-URL bei nächster offizieller Überprüfung verifizieren.
+  en-US: German VAT rates 2026. Standard 19%, reduced 7%. Source URL to verify during next official source review.
+data:
+  default_rate: 19
+  currency: EUR
+  rates:
+    - value: 19
+      label: Standardsatz
+      category: standard
+    - value: 7
+      label: ermäßigter Satz
+      category: reduced

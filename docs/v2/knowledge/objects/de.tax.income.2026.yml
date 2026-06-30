@@ -1,0 +1,62 @@
+id: de.tax.income.2026
+type: tax_bracket
+country: DE
+locale: de-DE
+title:
+  de-DE: Deutsche Einkommensteuer 2026
+  en-US: German income tax 2026
+description:
+  de-DE: Grundtarif der deutschen Einkommensteuer für Veranlagungszeitraum 2026, basierend auf § 32a EStG.
+  en-US: German income tax basic tariff for assessment period 2026, based on § 32a EStG.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Bundesministerium der Finanzen
+sources:
+  - label: Gesetze im Internet — § 32a EStG (geldend ab Veranlagungszeitraum 2026)
+    url: https://www.gesetze-im-internet.de/estg/__32a.html
+    authority_level: official
+    domain: gesetze-im-internet.de
+    last_verified: '2026-06-30'
+  - label: Bundesministerium der Finanzen — Einkommensteuer
+    url: https://www.bundesfinanzministerium.de/Steuern/Steuerarten/Einkommensteuer
+    authority_level: official
+    domain: bundesfinanzministerium.de
+    last_verified: '2026-06-30'
+relationships: []
+used_by: []
+version: '2026-01-01'
+tags:
+  - tax
+  - income
+  - '2026'
+  - germany
+notes:
+  de-DE: "Grundtarif für alleinstehende Steuerpflichtige. Für zusammenveranlagte Ehegatten gilt das Splitting-Verfahren (§ 32a Abs. 5 EStG): das Zweifache des Steuerbetrags für die Hälfte des gemeinsamen Einkommens."
+  en-US: "Basic tariff for individual taxpayers. For jointly assessed spouses the splitting procedure applies (§ 32a Abs. 5 EStG): twice the tax calculated on half of the combined income."
+data:
+  year: 2026
+  currency: EUR
+  applies_to: individual
+  basic_allowance: 12348
+  splitting: true
+  brackets:
+    - up_to: 12348
+      rate: 0
+    - up_to: 17799
+      rate: null
+      formula: "(914.51 * y + 1400) * y"
+      formula_note: "y = (income - 12348) / 10000"
+    - up_to: 69878
+      rate: null
+      formula: "(173.10 * z + 2397) * z + 1034.87"
+      formula_note: "z = (income - 17799) / 10000"
+    - up_to: 277825
+      rate: 0.42
+      base_offset: -11135.63
+    - up_to: null
+      rate: 0.45
+      base_offset: -19470.38

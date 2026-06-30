@@ -1,0 +1,62 @@
+id: nl.mortgage.formula.2026
+
+type: mortgage_formula
+
+country: NL
+
+locale: nl-NL
+
+title:
+  nl-NL: Hypotheekformule 2026
+
+description:
+  nl-NL: Parameters voor de hypotheekindicatie in 2026. Bevat de inkomensfactor-formule, de hypotheekrenteaftrekpercentage en de minimale inkomensfactor.
+
+status: active
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: semi_official
+  last_review: '2026-06-30'
+  name: Nibud / Belastingdienst
+
+sources:
+  - label: Nibud — Budgetvoorlichting
+    url: https://www.nibud.nl
+    authority_level: semi_official
+    domain: nibud.nl
+    last_verified: '2026-06-30'
+  - label: Belastingdienst — Hypotheekrenteaftrek
+    url: https://www.belastingdienst.nl
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: used_by
+    target: calculator.hypotheek-calculator
+    description: Gebruikt door de Hypotheek Calculator voor de maximale hypotheek, maandlasten en netto maandlasten.
+
+used_by:
+  - calculator.hypotheek-calculator
+
+version: '2026-01-01'
+
+tags:
+  - mortgage
+  - formula
+  - '2026'
+  - netherlands
+
+notes:
+  nl-NL: De inkomensfactor is max(3.5, 5.8 - rente * 0.28). Het hypotheekrenteaftrekpercentage voor 2026 is 37.56%. De waarden komen overeen met de huidige inline hypotheekcalculator.
+
+data:
+  year: 2026
+  interest_deduction_rate: 0.3756
+  min_income_factor: 3.5
+  income_factor_base: 5.8
+  income_factor_rate_multiplier: 0.28

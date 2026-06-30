@@ -1,0 +1,54 @@
+id: nl.mortgage.annuity
+type: annuity_formula
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Annuïteitsformule hypotheek
+description:
+  nl-NL: De formule voor de berekening van maandlasten bij een annuïtaire hypotheek.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: internal
+  last_review: '2026-06-29'
+  name: calculatieloket
+sources:
+  - label: Calculatieloket.nl — Annuïteitsformule
+    url: https://calculatieloket.nl/
+    authority_level: internal
+    domain: calculatieloket.nl
+    last_verified: '2026-06-29'
+  - label: Nibud — Budgetvoorlichting
+    url: https://www.nibud.nl
+    authority_level: semi_official
+    domain: nibud.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.hypotheek-calculator
+    description: Gebruikt door de Hypotheek Calculator voor maandlasten.
+used_by:
+  - calculator.hypotheek-calculator
+version: '1.0'
+tags:
+  - mortgage
+  - formula
+  - annuity
+  - netherlands
+notes:
+  nl-NL: De formule beschrijft de relatie tussen leningbedrag, rente en looptijd. De daadwerkelijke berekening vindt plaats in de Calculation Engine.
+data:
+  formula_name: annuity
+  parameters:
+    - name: principal
+      type: money
+      description: Leningbedrag
+    - name: monthly_rate
+      type: percentage
+      description: Maandrente als decimaal
+    - name: periods
+      type: integer
+      description: Aantal maanden in de looptijd
+  description:
+    nl-NL: Maandlast = principal × (monthly_rate × (1 + monthly_rate)^periods) / ((1 + monthly_rate)^periods - 1)

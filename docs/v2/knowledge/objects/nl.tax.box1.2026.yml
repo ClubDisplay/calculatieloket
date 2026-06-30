@@ -1,0 +1,54 @@
+id: nl.tax.box1.2026
+type: tax_bracket
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Box 1 inkomstenbelasting 2026
+description:
+  nl-NL: Inkomstenbelastingschijven voor 2026 voor personen onder de AOW-leeftijd.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Box 1 tarieven
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.salaris-calculator
+    description: Gebruikt door de Salaris Calculator.
+  - relation: used_by
+    target: calculator.bruto-netto-2026
+    description: Gebruikt door Bruto Netto 2026.
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.salaris-calculator
+  - calculator.bruto-netto-2026
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - tax
+  - box1
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: Tarieven gelden voor personen die de AOW-leeftijd nog niet hebben bereikt.
+data:
+  year: 2026
+  currency: EUR
+  applies_to: income_under_aow_age
+  brackets:
+    - up_to: 38883
+      rate: 0.3575
+    - up_to: 78426
+      rate: 0.3756
+    - up_to: null
+      rate: 0.495

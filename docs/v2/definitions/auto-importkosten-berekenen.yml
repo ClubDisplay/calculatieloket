@@ -1,0 +1,516 @@
+id: auto-importkosten-berekenen
+slug: /auto-importkosten-berekenen/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: auto
+subcategory: import
+priority: A
+title:
+  nl-NL: Auto Importkosten Berekenen
+description:
+  nl-NL: Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten.
+status: live
+route:
+  path: /auto-importkosten-berekenen/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/auto-importkosten-berekenen/
+calculator_module: import
+engine_version: '0.0'
+engine_status: inline
+engine_reference: src/pages/auto-importkosten-berekenen.astro
+inputs:
+  - label:
+      nl-NL: Voertuigtype
+    type: radio
+    options:
+      - value: auto
+        label:
+          nl-NL: Auto
+      - value: camper
+        label:
+          nl-NL: Camper
+    default: auto
+    required: true
+    group: voertuig
+    name: vehicleType
+    privacy_level: non_personal
+  - label:
+      nl-NL: Aankoopland
+    type: select
+    options:
+      - value: Duitsland
+        label:
+          nl-NL: Duitsland
+      - value: Frankrijk
+        label:
+          nl-NL: Frankrijk
+      - value: België
+        label:
+          nl-NL: België
+      - value: Spanje
+        label:
+          nl-NL: Spanje
+      - value: Anders
+        label:
+          nl-NL: Anders
+    default: Duitsland
+    required: true
+    group: voertuig
+    name: purchaseCountry
+    privacy_level: non_personal
+  - label:
+      nl-NL: Aankoopprijs buitenland
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 15000
+    placeholder: Bijv. 15000
+    required: true
+    group: aankoop-bpm
+    name: purchasePrice
+    privacy_level: financial_input
+  - label:
+      nl-NL: Geschatte bpm
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 3000
+    placeholder: Bijv. 3000
+    required: false
+    group: aankoop-bpm
+    help_text:
+      nl-NL: Zelf invullen. Bpm wordt niet automatisch berekend.
+    name: estimatedBpm
+    privacy_level: financial_input
+  - label:
+      nl-NL: RDW-/kenteken-/keuringskosten
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 150
+    placeholder: Bijv. 150
+    required: false
+    group: importkosten
+    name: rdwCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Transport- of ophaalkosten
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 400
+    placeholder: Bijv. 400
+    required: false
+    group: importkosten
+    name: transportCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Exportkenteken / tijdelijke verzekering
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 150
+    placeholder: Bijv. 150
+    required: false
+    group: importkosten
+    name: exportCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Aankoopkeuring
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 150
+    placeholder: Bijv. 150
+    required: false
+    group: importkosten
+    name: inspectionCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Kentekenplaten
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 50
+    placeholder: Bijv. 50
+    required: false
+    group: importkosten
+    name: plateCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Overige kosten
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 100
+    placeholder: Bijv. 100
+    required: false
+    group: importkosten
+    name: otherCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Vergelijkbare Nederlandse prijs
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: null
+    placeholder: Bijv. 21000
+    required: false
+    group: vergelijking
+    help_text:
+      nl-NL: Optioneel
+    name: nlPrice
+    privacy_level: financial_input
+outputs:
+  - label:
+      nl-NL: Totale importkosten
+    decimals: 2
+    group: result
+    highlight: true
+    name: totalImportCost
+    type: money
+  - label:
+      nl-NL: Aankoopprijs buitenland
+    decimals: 2
+    group: details
+    name: detailPurchasePrice
+    type: money
+  - label:
+      nl-NL: Geschatte bpm
+    decimals: 2
+    group: details
+    name: detailBpm
+    type: money
+  - label:
+      nl-NL: RDW/kenteken/keuring
+    decimals: 2
+    group: details
+    name: detailRdw
+    type: money
+  - label:
+      nl-NL: Transport/ophalen
+    decimals: 2
+    group: details
+    name: detailTransport
+    type: money
+  - label:
+      nl-NL: Exportkenteken/verzekering
+    decimals: 2
+    group: details
+    name: detailExport
+    type: money
+  - label:
+      nl-NL: Aankoopkeuring
+    decimals: 2
+    group: details
+    name: detailInspection
+    type: money
+  - label:
+      nl-NL: Kentekenplaten
+    decimals: 2
+    group: details
+    name: detailPlates
+    type: money
+  - label:
+      nl-NL: Overige kosten
+    decimals: 2
+    group: details
+    name: detailOther
+    type: money
+  - label:
+      nl-NL: Vergelijkbare NL prijs
+    decimals: 2
+    group: vergelijking
+    condition:
+      input: nlPrice
+      operator: greater_than
+      value: 0
+    name: nlComparisonPrice
+    type: money
+  - label:
+      nl-NL: Verschil
+    decimals: 2
+    group: vergelijking
+    condition:
+      input: nlPrice
+      operator: greater_than
+      value: 0
+    dynamic_label:
+      positive:
+        nl-NL: Voordeliger (indicatie)
+      negative:
+        nl-NL: Duurder (indicatie)
+    name: priceDifference
+    type: money
+rules:
+  - id: positive_purchase_price
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: purchasePrice
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldige aankoopprijs in (hoger dan 0).
+  - id: non_negative_bpm
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: estimatedBpm
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Geschatte bpm mag niet negatief zijn.
+  - id: non_negative_rdw
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: rdwCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: RDW-kosten mag niet negatief zijn.
+  - id: non_negative_transport
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: transportCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Transportkosten mag niet negatief zijn.
+  - id: non_negative_export
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: exportCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Exportkosten mag niet negatief zijn.
+  - id: non_negative_inspection
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: inspectionCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Aankoopkeuringskosten mag niet negatief zijn.
+  - id: non_negative_plates
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: plateCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Kentekenplatenkosten mag niet negatief zijn.
+  - id: non_negative_other
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: otherCosts
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Overige kosten mag niet negatief zijn.
+  - id: non_negative_nl_price
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: nlPrice
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Nederlandse prijs mag niet negatief zijn.
+  - id: bpm_manual_input
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: estimatedBpm
+    source:
+      label: Belastingdienst — Hoe kan ik de bpm berekenen?
+      url: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen
+      authority_level: official
+    status: active
+  - id: import_cost_total
+    type: import_cost
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: RDW — Invoeren, exporteren of doorvoeren
+      url: https://www.rdw.nl/invoeren-exporteren-doorvoeren
+      authority_level: official
+    status: active
+  - id: vehicle_type_import_rule
+    type: import_cost
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: vehicleType
+    source:
+      label: RDW — Voertuig invoeren vanuit een Europees land
+      url: https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa
+      authority_level: official
+    status: active
+  - id: btw_import_informational
+    type: informational
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Calculatieloket.nl — btw bij import
+      url: https://calculatieloket.nl/
+      authority_level: editorial
+    status: active
+warnings:
+  - id: bpm_not_calculated
+    message:
+      nl-NL: Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer altijd de officiële informatie van RDW en Belastingdienst.
+    severity: warning
+journeys:
+  enabled: true
+  next_steps:
+    - target: btw-calculator
+      label:
+        nl-NL: BTW Calculator
+      condition: always
+      priority: 1
+    - target: btw-inclusief-exclusief
+      label:
+        nl-NL: Btw inclusief en exclusief
+      condition: always
+      priority: 2
+    - target: zzp-calculator
+      label:
+        nl-NL: ZZP Calculator
+      condition: always
+      priority: 3
+    - target: bruto-netto-2026
+      label:
+        nl-NL: Bruto netto 2026
+      condition: always
+      priority: 4
+seo:
+  title:
+    nl-NL: Auto importkosten berekenen — indicatie voor auto of camper importeren
+  description:
+    nl-NL: Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten.
+  keywords:
+    nl-NL:
+      - auto importeren
+      - importkosten auto
+      - bpm berekenen
+      - auto import calculator
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa
+    domain: rdw.nl
+    label:
+      nl-NL: RDW — Voertuig invoeren vanuit een Europees land
+  - url:
+      nl-NL: https://www.rdw.nl/invoeren-exporteren-doorvoeren
+    domain: rdw.nl
+    label:
+      nl-NL: RDW — Invoeren, exporteren of doorvoeren
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Bpm
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Aangifte bpm bij aanvraag Nederlands kenteken
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Hoe kan ik de bpm berekenen?
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Bpm berekenen voor een personenauto
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Hoe bereken ik de bpm voor een kampeerauto?
+  - url:
+      nl-NL: https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren
+    domain: rijksoverheid.nl
+    label:
+      nl-NL: Rijksoverheid — Auto uit het buitenland importeren
+disclaimers:
+  nl-NL: Deze berekening is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer belangrijke bedragen altijd via de officiële bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - legislation_change
+    - tax_rate_change
+    - bpm_tariff_change
+  source_review_required: true

@@ -1,0 +1,336 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+import CrossSellCards from "../components/CrossSellCards.astro";
+import SourceCards from "../components/SourceCards.astro";
+---
+
+<BaseLayout
+  title="Auto importkosten berekenen — indicatie voor auto of camper importeren"
+  description="Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten."
+>
+  <h1 class="page-title">Auto importkosten berekenen</h1>
+  <p class="page-subtitle">
+    Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. De uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen.
+  </p>
+
+  <AdSlot slot="1234567899" format="auto" style="min-height:100px" />
+
+  <div class="calculator-card calc-modern">
+    <div class="calc-fields">
+    <p class="calc-group-title">Voertuig</p>
+    <div class="form-group">
+      <label>Voertuigtype</label>
+      <div class="radio-group" id="vehicleType">
+        <button data-type="auto" class="active">Auto</button>
+        <button data-type="camper">Camper</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Aankoopland</label>
+      <select id="purchaseCountry">
+        <option value="Duitsland">Duitsland</option>
+        <option value="Frankrijk">Frankrijk</option>
+        <option value="België">België</option>
+        <option value="Spanje">Spanje</option>
+        <option value="Anders">Anders</option>
+      </select>
+    </div>
+
+    <p class="calc-group-title">Aankoop en bpm</p>
+    <div class="form-group">
+      <label for="purchasePrice">Aankoopprijs buitenland</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="purchasePrice" placeholder="Bijv. 15000" min="0" step="1" value="15000" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="estimatedBpm">Geschatte bpm <span class="hint">(zelf invullen)</span></label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="estimatedBpm" placeholder="Bijv. 3000" min="0" step="1" value="3000" /></div>
+    </div>
+    <p class="calc-field-hint">Bpm wordt niet automatisch berekend. Controleer de <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" target="_blank" rel="noopener">bpm-informatie van de Belastingdienst</a>.</p>
+
+    <p class="calc-group-title">Importkosten</p>
+    <div class="form-group">
+      <label for="rdwCosts">RDW-/kenteken-/keuringskosten</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="rdwCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="transportCosts">Transport- of ophaalkosten</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="transportCosts" placeholder="Bijv. 400" min="0" step="1" value="400" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="exportCosts">Exportkenteken / tijdelijke verzekering</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="exportCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="inspectionCosts">Aankoopkeuring</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="inspectionCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="plateCosts">Kentekenplaten</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="plateCosts" placeholder="Bijv. 50" min="0" step="1" value="50" /></div>
+    </div>
+
+    <div class="form-group">
+      <label for="otherCosts">Overige kosten</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="otherCosts" placeholder="Bijv. 100" min="0" step="1" value="100" /></div>
+    </div>
+
+    <p class="calc-group-title">Vergelijking met Nederlandse prijs</p>
+    <div class="form-group">
+      <label for="nlPrice">Vergelijkbare Nederlandse prijs <span class="hint">(optioneel)</span></label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="nlPrice" placeholder="Bijv. 21000" min="0" step="1" value="" /></div>
+    </div>
+    </div>
+
+    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken importkosten</button>
+    <p class="calc-error" id="calcError" style="display:none;">Vul een geldige aankoopprijs in (hoger dan 0).</p>
+
+    <div class="result-box" id="result" style="display:none;">
+      <h3>Totale importkosten <span class="badge-indicatie">Indicatie</span></h3>
+      <div class="result-value" id="resultTotal">&mdash;</div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Aankoopprijs buitenland</span><span class="value" id="detailPurchase">&mdash;</span></div>
+      <div class="result-row"><span class="label">Geschatte bpm</span><span class="value" id="detailBpm">&mdash;</span></div>
+      <div class="result-row"><span class="label">RDW/kenteken/keuring</span><span class="value" id="detailRdw">&mdash;</span></div>
+      <div class="result-row"><span class="label">Transport/ophalen</span><span class="value" id="detailTransport">&mdash;</span></div>
+      <div class="result-row"><span class="label">Exportkenteken/verzekering</span><span class="value" id="detailExport">&mdash;</span></div>
+      <div class="result-row"><span class="label">Aankoopkeuring</span><span class="value" id="detailInspection">&mdash;</span></div>
+      <div class="result-row"><span class="label">Kentekenplaten</span><span class="value" id="detailPlates">&mdash;</span></div>
+      <div class="result-row"><span class="label">Overige kosten</span><span class="value" id="detailOther">&mdash;</span></div>
+      <div class="result-divider" id="comparisonDivider" style="display:none;"></div>
+      <div class="result-row" id="comparisonRow" style="display:none;"><span class="label">Vergelijkbare NL prijs</span><span class="value" id="detailNlPrice">&mdash;</span></div>
+      <div class="result-row" id="differenceRow" style="display:none;"><span class="label" id="differenceLabel">Verschil</span><span class="value" id="detailDifference">&mdash;</span></div>
+      <p class="result-note">Deze berekening is een indicatie.</p>
+    </div>
+
+    <p class="bpm-waarschuwing" style="margin-top:1rem;">Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer altijd de offici&euml;le informatie van RDW en Belastingdienst.</p>
+  </div>
+
+  <AdSlot slot="1234567900" format="auto" style="min-height:280px" />
+
+  <div class="calculator-card">
+    <h2>Welke kosten betaal je bij auto importeren?</h2>
+    <p>Bij het importeren van een auto of camper naar Nederland komen meerdere kostenposten kijken. Hieronder een overzicht:</p>
+    <ul>
+      <li><strong>Aankoopprijs:</strong> het bedrag dat je in het buitenland betaalt voor het voertuig.</li>
+      <li><strong>Bpm:</strong> de belasting van personenauto's en motorrijwielen. Dit kan een forse kostenpost zijn, afhankelijk van het voertuigtype en de CO2-uitstoot.</li>
+      <li><strong>RDW-keuring/kenteken:</strong> na import moet het voertuig gekeurd worden door de RDW en op Nederlands kenteken worden gezet.</li>
+      <li><strong>Transport of ophalen:</strong> kosten om het voertuig van het buitenland naar Nederland te krijgen.</li>
+      <li><strong>Exportkenteken/tijdelijke verzekering:</strong> om het voertuig legaal naar Nederland te rijden, heb je vaak een exportkenteken en tijdelijke verzekering nodig.</li>
+      <li><strong>Aankoopkeuring:</strong> het is verstandig om het voertuig voor aankoop technisch te laten keuren.</li>
+      <li><strong>Kentekenplaten:</strong> nieuwe Nederlandse kentekenplaten na registratie.</li>
+      <li><strong>Overige kosten:</strong> denk aan tol, brandstof, administratiekosten of een verblijf in het buitenland.</li>
+    </ul>
+
+    <h2>Hoe zit het met bpm bij import?</h2>
+    <p>Bpm (belasting van personenauto's en motorrijwielen) kan een grote kostenpost zijn bij het importeren van een auto. De hoogte hangt af van:</p>
+    <ul>
+      <li>Het type voertuig (personenauto, camper, motor)</li>
+      <li>De CO2-uitstoot (voor personenauto's)</li>
+      <li>De catalogusprijs en leeftijd van het voertuig</li>
+    </ul>
+    <p>Deze calculator berekent de bpm <strong>niet automatisch</strong>. Vul zelf een geschatte bpm in op basis van de offici&euml;le bpm-tool van de Belastingdienst. Voor campers en kampeerauto's gelden aparte regels.</p>
+
+    <h2>Hoe zit het met btw bij import?</h2>
+    <p>Bij de import van een voertuig uit een ander EU-land is de btw-situatie afhankelijk van de verkoper en de leeftijd van het voertuig:</p>
+    <ul>
+      <li>Bij aankoop van een <strong>particulier</strong> in de EU betaal je meestal geen btw in het land van aankoop en ook niet bij import in Nederland.</li>
+      <li>Bij aankoop van een <strong>bedrijf</strong> kunnen btw-regels anders uitpakken, vooral bij nieuwe of bijna nieuwe voertuigen.</li>
+      <li>Bij <strong>gebruikte voertuigen</strong> kan de margeregeling van toepassing zijn.</li>
+    </ul>
+    <p>Gebruik onze <a href="/btw-calculator/">BTW Calculator</a> of <a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief tool</a> voor btw-berekeningen. Raadpleeg bij twijfel de Belastingdienst.</p>
+
+    <h2>Auto importeren uit Duitsland of Frankrijk</h2>
+    <p>Duitsland en Frankrijk zijn populaire landen om een auto te importeren. De aankoopprijs kan daar lager lijken, maar de totale importkosten bepalen of het echt interessant is. Controleer altijd:</p>
+    <ul>
+      <li>De geschatte bpm via de offici&euml;le Belastingdienst-tool</li>
+      <li>Transportkosten: Duitsland is dichterbij dan Frankrijk, dus transport kan goedkoper zijn</li>
+      <li>Keuringseisen: elk land heeft eigen technische eisen; controleer of het voertuig aan de Nederlandse eisen voldoet</li>
+      <li>Administratieve rompslomp: exportdocumenten, T&Uuml;V/CT-keuring, RDW-aanvraag</li>
+    </ul>
+    <p>Of importeren uiteindelijk voordeliger is, hangt af van het specifieke voertuig. Gebruik deze calculator als indicatie.</p>
+
+    <h2>Camper importeren: extra aandachtspunten</h2>
+    <p>Voor campers en kampeerauto's gelden bij import extra regels:</p>
+    <ul>
+      <li>De bpm voor campers wordt anders berekend dan voor personenauto's</li>
+      <li>De RDW-keuring kan aanvullende eisen stellen aan de inrichting van de camper</li>
+      <li>Controleer of het voertuig voldoet aan de Nederlandse definitie van een kampeerauto</li>
+      <li>Raadpleeg de specifieke Belastingdienst-pagina over <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen" target="_blank" rel="noopener">bpm voor kampeerauto's</a></li>
+    </ul>
+
+    <h2>Voorbeeld importkosten berekenen</h2>
+    <p>Stel, je koopt een auto in Duitsland voor <strong>&euro;15.000</strong>. Hieronder een voorbeeld van de totale importkosten:</p>
+    <ul>
+      <li>Aankoopprijs Duitsland: <strong>&euro;15.000</strong></li>
+      <li>Geschatte bpm: <strong>&euro;3.000</strong></li>
+      <li>RDW/kenteken/keuring: <strong>&euro;150</strong></li>
+      <li>Transport/ophalen: <strong>&euro;400</strong></li>
+      <li>Exportkenteken/tijdelijke verzekering: <strong>&euro;150</strong></li>
+      <li>Aankoopkeuring: <strong>&euro;150</strong></li>
+      <li>Kentekenplaten: <strong>&euro;50</strong></li>
+      <li>Overige kosten: <strong>&euro;100</strong></li>
+    </ul>
+    <p><strong>Totale importkosten: circa &euro;19.000</strong> (indicatie).</p>
+
+    <h2>Veelgemaakte fouten bij auto importeren</h2>
+    <ul>
+      <li><strong>Alleen naar de aankoopprijs kijken:</strong> de totale kosten kunnen flink oplopen door bpm, transport, keuring en administratie.</li>
+      <li><strong>Bpm onderschatten:</strong> de bpm kan hoger uitvallen dan verwacht, vooral bij auto's met een hoge CO2-uitstoot.</li>
+      <li><strong>Camperregels gelijkstellen aan gewone auto's:</strong> voor campers gelden andere bpm-berekeningen en RDW-eisen.</li>
+      <li><strong>Btw bij nieuwe/bijna nieuwe voertuigen vergeten:</strong> bij aankoop via een buitenlands bedrijf kan btw verschuldigd zijn.</li>
+      <li><strong>Transport, exportkenteken en keuring vergeten:</strong> deze kosten kunnen samen enkele honderden euro's bedragen.</li>
+      <li><strong>Geen aankoopkeuring doen:</strong> een technische keuring voorkomt verrassingen achteraf.</li>
+      <li><strong>Denken dat importeren altijd goedkoper is:</strong> de totale kosten kunnen tegenvallen. Bereken vooraf een indicatie.</li>
+    </ul>
+
+    <h2>Veelgestelde vragen</h2>
+
+    <h3>Wat kost een auto importeren naar Nederland?</h3>
+    <p>De kosten vari&euml;ren sterk per voertuig. Naast de aankoopprijs moet je rekening houden met bpm, RDW-kosten, transport, exportkenteken, keuring en kentekenplaten. Gebruik de calculator bovenaan deze pagina voor een indicatie.</p>
+
+    <h3>Hoe bereken je importkosten voor een auto?</h3>
+    <p>Tel de aankoopprijs, geschatte bpm, RDW-kosten, transport, exportkenteken, aankoopkeuring, kentekenplaten en overige kosten bij elkaar op. De bpm moet je apart inschatten via de offici&euml;le tool van de Belastingdienst.</p>
+
+    <h3>Moet ik bpm betalen bij auto importeren?</h3>
+    <p>Ja, bij het importeren van een personenauto, motor of camper naar Nederland moet je in de meeste gevallen bpm betalen. De hoogte hangt af van het type voertuig en de CO2-uitstoot. Voor elektrische auto's geldt een vrijstelling.</p>
+
+    <h3>Kan ik de bpm automatisch berekenen?</h3>
+    <p>Deze calculator berekent de bpm niet automatisch. Je vult zelf een geschatte bpm in. Gebruik de <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" target="_blank" rel="noopener">offici&euml;le bpm-tool van de Belastingdienst</a> voor een nauwkeurige berekening.</p>
+
+    <h3>Wat kost een camper importeren?</h3>
+    <p>De kosten voor het importeren van een camper zijn vergelijkbaar met een auto, maar de bpm wordt anders berekend. Ook kunnen RDW-eisen afwijken. Raadpleeg de Belastingdienst-pagina over bpm voor kampeerauto's.</p>
+
+    <h3>Is een auto importeren uit Duitsland altijd goedkoper?</h3>
+    <p>Niet altijd. Hoewel de aankoopprijs in Duitsland vaak lager ligt, kunnen bpm, transport en keuringskosten het voordeel tenietdoen. Maak altijd een volledige kostenindicatie voordat je een aankoopbeslissing neemt.</p>
+
+    <h3>Hoe zit het met btw bij import uit de EU?</h3>
+    <p>Bij aankoop van een particulier in de EU betaal je meestal geen btw bij import. Bij aankoop via een buitenlands bedrijf kunnen btw-regels anders uitpakken. Raadpleeg de Belastingdienst voor jouw specifieke situatie.</p>
+
+    <h3>Kan ik deze berekening gebruiken voor een aankoopbeslissing?</h3>
+    <p>Deze berekening is een indicatie. Gebruik hem als hulpmiddel, maar doe altijd een offici&euml;le bpm-berekening en raadpleeg de RDW en Belastingdienst voor actuele tarieven en regels.</p>
+
+    <SourceCards
+      title="Bronnen en informatie"
+      items={[
+        { label: "RDW", title: "Voertuig invoeren vanuit een Europees land", description: "Stappen en eisen voor het invoeren van een voertuig uit de EU.", href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa" },
+        { label: "RDW", title: "Invoeren, exporteren of doorvoeren", description: "Overzicht van de RDW-procedures rond in- en uitvoer van voertuigen.", href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren" },
+        { label: "Belastingdienst", title: "Bpm", description: "Algemene informatie over de bpm bij voertuigen.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm" },
+        { label: "Belastingdienst", title: "Aangifte bpm bij aanvraag Nederlands kenteken", description: "Hoe je bpm-aangifte doet bij een aanvraag voor een Nederlands kenteken.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm" },
+        { label: "Belastingdienst", title: "Hoe kan ik de bpm berekenen?", description: "Uitleg over het berekenen van de bpm.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" },
+        { label: "Belastingdienst", title: "Bpm berekenen voor een personenauto", description: "Berekeningswijze van de bpm voor personenauto's.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen" },
+        { label: "Belastingdienst", title: "Hoe bereken ik de bpm voor een kampeerauto?", description: "Berekeningswijze van de bpm voor kampeerauto's.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen" },
+        { label: "Rijksoverheid", title: "Auto uit het buitenland importeren", description: "Algemene uitleg over het importeren van een auto naar Nederland.", href: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren" },
+      ]}
+    />
+
+    <p class="disclaimer">Deze berekening is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer belangrijke bedragen altijd via de offici&euml;le bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist.</p>
+    <p class="last-updated">Laatst bijgewerkt: 26 juni 2026</p>
+  </div>
+
+  <CrossSellCards
+    title="Ook handig om te berekenen"
+    items={[
+      { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen." },
+      { href: "/btw-inclusief-exclusief/", title: "Btw inclusief en exclusief", description: "Reken bedragen met en zonder btw om." },
+      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten." },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026." },
+    ]}
+  />
+</BaseLayout>
+
+<script>
+  import { calculateImportCosts } from "../lib/calculators/import-costs";
+  import { formatEuroHtml } from "../lib/format/currency";
+
+  let vehicleType = "auto";
+  const resultDiv = document.getElementById("result") as HTMLDivElement;
+  const errorBox = document.getElementById("calcError") as HTMLElement;
+  const comparisonDivider = document.getElementById("comparisonDivider") as HTMLDivElement;
+  const comparisonRow = document.getElementById("comparisonRow") as HTMLDivElement;
+  const differenceRow = document.getElementById("differenceRow") as HTMLDivElement;
+
+  function parseValue(id: string): number { return parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0; }
+
+  function calculate() {
+    const result = calculateImportCosts({
+      vehicleType,
+      purchasePrice: parseValue("purchasePrice"),
+      estimatedBpm: parseValue("estimatedBpm"),
+      rdwCosts: parseValue("rdwCosts"),
+      transportCosts: parseValue("transportCosts"),
+      exportCosts: parseValue("exportCosts"),
+      inspectionCosts: parseValue("inspectionCosts"),
+      plateCosts: parseValue("plateCosts"),
+      otherCosts: parseValue("otherCosts"),
+      nlPrice: parseValue("nlPrice"),
+    });
+
+    if (!result.valid) {
+      resultDiv.style.display = "none";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    errorBox.style.display = "none";
+
+    resultDiv.style.display = "block";
+    document.getElementById("resultTotal")!.innerHTML = formatEuroHtml(result.totalCost, 2);
+    document.getElementById("detailPurchase")!.innerHTML = formatEuroHtml(result.purchasePrice, 2);
+    document.getElementById("detailBpm")!.innerHTML = formatEuroHtml(result.estimatedBpm, 2);
+    document.getElementById("detailRdw")!.innerHTML = formatEuroHtml(result.rdwCosts, 2);
+    document.getElementById("detailTransport")!.innerHTML = formatEuroHtml(result.transportCosts, 2);
+    document.getElementById("detailExport")!.innerHTML = formatEuroHtml(result.exportCosts, 2);
+    document.getElementById("detailInspection")!.innerHTML = formatEuroHtml(result.inspectionCosts, 2);
+    document.getElementById("detailPlates")!.innerHTML = formatEuroHtml(result.plateCosts, 2);
+    document.getElementById("detailOther")!.innerHTML = formatEuroHtml(result.otherCosts, 2);
+
+    if (result.nlPrice !== undefined && result.nlPrice > 0) {
+      comparisonDivider.style.display = "block";
+      comparisonRow.style.display = "flex";
+      differenceRow.style.display = "flex";
+      document.getElementById("detailNlPrice")!.innerHTML = formatEuroHtml(result.nlPrice, 2);
+      document.getElementById("differenceLabel")!.innerHTML = result.differenceLabel ?? "Verschil";
+      document.getElementById("detailDifference")!.innerHTML = formatEuroHtml(Math.abs(result.priceDifference ?? 0), 2);
+    } else {
+      comparisonDivider.style.display = "none";
+      comparisonRow.style.display = "none";
+      differenceRow.style.display = "none";
+    }
+  }
+
+  document.querySelectorAll("input").forEach(el => {
+    el.addEventListener("input", calculate);
+    el.addEventListener("change", calculate);
+  });
+
+  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
+
+  document.getElementById("vehicleType")!.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button");
+    if (!btn) return;
+    document.querySelectorAll("#vehicleType button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    vehicleType = btn.dataset.type!;
+  });
+
+  calculate();
+</script>
+
+<style>
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
+  ul, ol { margin: 0.5rem 0; padding-left: 1.25rem; }
+  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
+  .result-note { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.75rem; }
+  .bpm-waarschuwing { background: #fff8e1; border: 1px solid #f9a825; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.9rem; color: #795548; }
+  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+</style>

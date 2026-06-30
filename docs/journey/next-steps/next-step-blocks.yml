@@ -1,0 +1,326 @@
+# =============================================================================
+# Calculatieloket.nl — Journey Engine — Next Step Blocks (v0.1)
+# Velddefinities: zie 00-NEXT-STEP-BLOCKS.md en 01-BLOCK-TYPES.md
+# =============================================================================
+blocks:
+
+  # ---------------------------------------------------------------------------
+  # Blok 1: bruto-netto-2026 → inkomen-gerelateerde vervolgstappen
+  # ---------------------------------------------------------------------------
+  - id: "nsb-bruto-netto-journey"
+    journey_id: "salary-to-benefits"
+    source_calculator: "bruto-netto-2026"
+    title: "Jouw volgende stap"
+    intro: "Op basis van jouw inkomen"
+    items:
+      - label: "Bereken je zorgtoeslag"
+        href: "/toeslagen-calculator/?income={belastbaar_jaarinkomen}"
+        reason: "Omdat je inkomen invloed kan hebben op je recht op zorgtoeslag."
+        reused_data: ["belastbaar_jaarinkomen"]
+        priority: 1
+        display_rules:
+          - "Altijd tonen"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bekijk je maximale hypotheek"
+        href: "/hypotheek-calculator/?income={bruto_jaarsalaris}"
+        reason: "Met jouw salaris kun je een indicatie krijgen van je leenbedrag."
+        reused_data: ["bruto_jaarsalaris"]
+        priority: 2
+        display_rules:
+          - "Altijd tonen"
+          - "Als bruto_jaarsalaris > 0"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken je vakantiegeld"
+        href: "/salaris-calculator/"
+        reason: "Je vakantiegeld (8%) wordt berekend over je bruto jaarsalaris."
+        reused_data: []
+        priority: 3
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Check je pensioen"
+        href: "/salaris-calculator/"
+        reason: "Jouw pensioenpremie beïnvloedt je belastbaar inkomen."
+        reused_data: []
+        priority: 4
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bekijk je toeslagen"
+        href: "/toeslagen-calculator/"
+        reason: "Naast zorgtoeslag kun je mogelijk ook huurtoeslag ontvangen."
+        reused_data: []
+        priority: 5
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+  # ---------------------------------------------------------------------------
+  # Blok 2: salaris-calculator → bredere financiële oriëntatie
+  # ---------------------------------------------------------------------------
+  - id: "nsb-salaris-journey"
+    journey_id: "salary-to-mortgage"
+    source_calculator: "salaris-calculator"
+    title: "Jouw volgende stap"
+    intro: "Op basis van jouw salaris"
+    items:
+      - label: "Bekijk je bruto-netto in detail"
+        href: "/bruto-netto-2026/"
+        reason: "Een uitgebreidere bruto-netto berekening met voorbeelden en uitleg."
+        reused_data: []
+        priority: 1
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken je maximale hypotheek"
+        href: "/hypotheek-calculator/?income={bruto_jaarsalaris}"
+        reason: "Met jouw salaris kun je een indicatie krijgen van je leenbedrag."
+        reused_data: ["bruto_jaarsalaris"]
+        priority: 2
+        display_rules:
+          - "Altijd tonen"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Check je recht op toeslagen"
+        href: "/toeslagen-calculator/?income={belastbaar_jaarinkomen}"
+        reason: "Jouw inkomen bepaalt mede of je in aanmerking kunt komen voor toeslagen."
+        reused_data: ["belastbaar_jaarinkomen"]
+        priority: 3
+        display_rules:
+          - "Altijd tonen"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken bijtelling auto van de zaak"
+        href: null
+        reason: "Een leaseauto kan invloed hebben op je belastbaar inkomen."
+        reused_data: []
+        priority: 4
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Vergelijk ZZP met loondienst"
+        href: null
+        reason: "Ontdek wat je netto overhoudt als ondernemer versus werknemer."
+        reused_data: []
+        priority: 5
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+  # ---------------------------------------------------------------------------
+  # Blok 3: zzp-calculator → ondernemers- en belastingtools
+  # ---------------------------------------------------------------------------
+  - id: "nsb-zzp-journey"
+    journey_id: "zzp-to-tax"
+    source_calculator: "zzp-calculator"
+    title: "Jouw volgende stap"
+    intro: "Op basis van jouw uurtarief en winst"
+    items:
+      - label: "Bereken btw over je uurtarief"
+        href: "/btw-calculator/"
+        reason: "Als ondernemer bereken je btw over je omzet. Gebruik 21% voor de meeste diensten."
+        reused_data: []
+        priority: 1
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Check je uurtarief in detail"
+        href: null
+        reason: "Een uitgebreidere uurtariefberekening met nacalculatie."
+        reused_data: ["nettowinst_indicatie", "jaaromzet", "uurtarief"]
+        priority: 2
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Schat je inkomstenbelasting in"
+        href: null
+        reason: "Over je winst betaal je inkomstenbelasting — maak een indicatie."
+        reused_data: ["nettowinst_indicatie"]
+        priority: 3
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken je zakelijke kosten"
+        href: null
+        reason: "Verzekeringen, tools en kantoor — wat ben je maandelijks kwijt?"
+        reused_data: []
+        priority: 4
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bekijk je netto-inkomen als zzp'er"
+        href: null
+        reason: "Van uurtarief naar netto besteedbaar inkomen per maand."
+        reused_data: ["uurtarief", "nettowinst_indicatie"]
+        priority: 5
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+  # ---------------------------------------------------------------------------
+  # Blok 4: toeslagen-calculator → volledige toeslagentoets
+  # ---------------------------------------------------------------------------
+  - id: "nsb-toeslagen-journey"
+    journey_id: "benefits-check"
+    source_calculator: "toeslagen-calculator"
+    title: "Jouw volgende stap"
+    intro: "Op basis van jouw inkomen en huishouden"
+    items:
+      - label: "Bereken je zorgtoeslag in detail"
+        href: null
+        reason: "Een uitgebreidere zorgtoeslag-berekening met vermogenstoets."
+        reused_data: ["bruto_jaarinkomen", "huishouden_type"]
+        priority: 1
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken je huurtoeslag in detail"
+        href: null
+        reason: "Een uitgebreidere huurtoeslag-berekening inclusief servicekosten."
+        reused_data: ["bruto_jaarinkomen", "huishouden_type"]
+        priority: 2
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bekijk je bruto-netto salaris"
+        href: "/bruto-netto-2026/"
+        reason: "Weet je zeker wat je belastbaar jaarinkomen is? Check je bruto-netto."
+        reused_data: []
+        priority: 3
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken kinderopvangtoeslag"
+        href: null
+        reason: "Heb je kinderen? Ontdek of je in aanmerking komt voor kinderopvangtoeslag."
+        reused_data: ["bruto_jaarinkomen"]
+        priority: 4
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "query_param"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Check je vermogenstoets"
+        href: null
+        reason: "Vermogen kan invloed hebben op je recht op toeslagen."
+        reused_data: []
+        priority: 5
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+  # ---------------------------------------------------------------------------
+  # Blok 5: auto-importkosten-berekenen → verdieping importproces
+  # ---------------------------------------------------------------------------
+  - id: "nsb-auto-import-journey"
+    journey_id: "auto-import"
+    source_calculator: "auto-importkosten-berekenen"
+    title: "Jouw volgende stap"
+    intro: "Op basis van jouw importindicatie"
+    items:
+      - label: "Bereken de BPM nauwkeuriger"
+        href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen"
+        reason: "Gebruik de officiële BPM-tool van de Belastingdienst voor een nauwkeurige berekening."
+        reused_data: []
+        priority: 1
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Check btw bij import"
+        href: "/btw-calculator/"
+        reason: "Bij aankoop via een buitenlands bedrijf kan btw verschuldigd zijn."
+        reused_data: []
+        priority: 2
+        display_rules:
+          - "Altijd tonen"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Bereken wegenbelasting (MRB)"
+        href: null
+        reason: "Na registratie betaal je motorrijtuigenbelasting. Gewicht en brandstof bepalen het tarief."
+        reused_data: []
+        priority: 3
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Vergelijk autoverzekeringen"
+        href: null
+        reason: "Een geïmporteerde auto moet verzekerd worden. Bereken een indicatie van de premie."
+        reused_data: []
+        priority: 4
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"
+
+      - label: "Vergelijk elektrisch met brandstof"
+        href: null
+        reason: "Overweeg je een elektrische auto? Vergelijk de totale kosten over 5 jaar."
+        reused_data: []
+        priority: 5
+        display_rules:
+          - "Tonen wanneer calculator beschikbaar is"
+        privacy: "none"
+        tracking: "future"
+        status: "planned"

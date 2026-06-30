@@ -1,0 +1,169 @@
+id: btw-calculator
+slug: /btw-calculator/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: btw
+subcategory: standaard
+priority: A
+title:
+  nl-NL: BTW Calculator
+description:
+  nl-NL: Snel btw berekenen over elk bedrag. Geschikt voor het hoge (21%), lage (9%) en nultarief (0%).
+status: migrated
+route:
+  path: /btw-calculator/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/btw-calculator/
+calculator_module: btw
+engine_version: '1.0'
+engine_status: migrated
+engine_reference: src/lib/calculators/btw.ts
+inputs:
+  - label:
+      nl-NL: Bedrag
+    type: money
+    prefix: €
+    min: 0
+    step: 0.01
+    default: 100
+    placeholder: Bijv. 100
+    required: true
+    name: amount
+    privacy_level: financial_input
+  - label:
+      nl-NL: BTW-tarief
+    type: radio
+    options:
+      - value: 21
+        label:
+          nl-NL: 21% — hoog tarief
+      - value: 9
+        label:
+          nl-NL: 9% — laag tarief
+      - value: 0
+        label:
+          nl-NL: 0% — nultarief
+    default: 21
+    required: true
+    name: btwRate
+    privacy_level: non_personal
+  - label:
+      nl-NL: Bereken
+    type: radio
+    options:
+      - value: exclusive_to_inclusive
+        label:
+          nl-NL: Bedrag is exclusief btw
+      - value: inclusive_to_exclusive
+        label:
+          nl-NL: Bedrag is inclusief btw
+    default: exclusive_to_inclusive
+    required: true
+    name: direction
+    privacy_level: non_personal
+outputs:
+  - label:
+      nl-NL: Bedrag exclusief btw
+    decimals: 2
+    group: result
+    name: amountExcl
+    type: money
+  - label:
+      nl-NL: btw-bedrag
+    decimals: 2
+    group: result
+    name: btwAmount
+    type: money
+  - label:
+      nl-NL: Bedrag inclusief btw
+    decimals: 2
+    group: result
+    name: amountIncl
+    type: money
+rules:
+  - id: vat_rates_nl_2026
+    type: vat_rate
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — BTW-tarief
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief
+      authority_level: official
+    status: active
+  - id: non_negative_amount
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: amount
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig bedrag in (0 of hoger).
+journeys:
+  enabled: true
+  primary_journey: salary-to-benefits
+  next_steps:
+    - target: btw-terugrekenen
+      label:
+        nl-NL: Btw terugrekenen
+      condition: always
+      priority: 1
+    - target: btw-inclusief-exclusief
+      label:
+        nl-NL: Btw inclusief en exclusief
+      condition: always
+      priority: 2
+    - target: zzp-calculator
+      label:
+        nl-NL: ZZP Calculator
+      condition: always
+      priority: 3
+    - target: auto-importkosten-berekenen
+      label:
+        nl-NL: Auto importkosten
+      condition: always
+      priority: 4
+seo:
+  title:
+    nl-NL: BTW Calculator — Bereken 21%, 9% en 0% BTW
+  description:
+    nl-NL: Bereken direct btw inclusief of exclusief. Reken met 21%, 9% of 0% btw en bekijk de formule en voorbeeldberekening.
+  keywords:
+    nl-NL:
+      - btw calculator
+      - btw berekenen
+      - 21 btw
+      - 9 btw
+      - btw inclusief exclusief
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — BTW-tarief
+disclaimers:
+  nl-NL: Deze berekening is een indicatie. Controleer belangrijke bedragen altijd via officiële bronnen of een financieel adviseur.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - tax_year_change
+    - legislation_change
+  source_review_required: true

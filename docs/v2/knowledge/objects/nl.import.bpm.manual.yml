@@ -1,0 +1,59 @@
+id: nl.import.bpm.manual
+type: import_cost
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Bpm bij import personenauto's en campers
+description:
+  nl-NL: Bpm (belasting van personenauto's en motorrijwielen) moet bij import handmatig worden ingeschat of berekend via de officiële Belastingdienst-tool.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Hoe kan ik de bpm berekenen?
+    url: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+  - label: Belastingdienst — Bpm berekenen voor een personenauto
+    url: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+  - label: Belastingdienst — Hoe bereken ik de bpm voor een kampeerauto?
+    url: https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.auto-importkosten-berekenen
+    description: Gebruikt door de Auto Importkosten Calculator.
+  - relation: depends_on
+    target: nl.vat.standard
+    description: Btw-regels kunnen van invloed zijn op de totale importkosten.
+used_by:
+  - calculator.auto-importkosten-berekenen
+version: '2026-01-01'
+tags:
+  - import
+  - bpm
+  - vehicle
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De bpm wordt niet automatisch berekend in de calculator. Gebruikers vullen een geschatte bpm in op basis van de officiële Belastingdienst-tool. Elektrische auto's kunnen onder voorwaarden vrijgesteld zijn.
+data:
+  cost_type: bpm
+  requires_manual_input: true
+  applies_to:
+    - passenger_car
+    - motor_vehicle
+    - camper
+  exempt_when:
+    - electric_vehicle_under_conditions
+  calculation_method: official_bpm_tool

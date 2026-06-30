@@ -1,0 +1,236 @@
+id: salaris-calculator
+slug: /salaris-calculator/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: salaris
+subcategory: bruto-netto
+priority: A
+title:
+  nl-NL: Salaris Calculator 2026
+description:
+  nl-NL: Bruto-netto indicatie op basis van de belastingtarieven en heffingskortingen van 2026.
+status: live
+route:
+  path: /salaris-calculator/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/salaris-calculator/
+calculator_module: tax
+engine_version: '0.0'
+engine_status: inline
+engine_reference: src/pages/salaris-calculator.astro
+inputs:
+  - label:
+      nl-NL: Bruto maandsalaris
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 3500
+    placeholder: Bijv. 3500
+    required: true
+    name: grossSalary
+    privacy_level: financial_input
+  - label:
+      nl-NL: Pensioenpremie werknemer
+    type: percentage
+    suffix: '%'
+    min: 0
+    max: 30
+    step: 0.1
+    default: 5
+    placeholder: Bijv. 5
+    required: false
+    help_text:
+      nl-NL: Percentage van brutoloon
+    name: pensionRate
+    privacy_level: financial_input
+  - label:
+      nl-NL: Loonheffingskorting toepassen
+    type: checkbox
+    default: true
+    required: false
+    name: loonheffingskorting
+    privacy_level: non_personal
+outputs:
+  - label:
+      nl-NL: Netto salaris per maand
+    decimals: 2
+    group: result
+    highlight: true
+    name: nettoPerMaand
+    type: money
+  - label:
+      nl-NL: Bruto maandsalaris
+    decimals: 2
+    group: details
+    name: brutoMaandsalaris
+    type: money
+  - label:
+      nl-NL: Vakantiegeld (8%)
+    decimals: 2
+    group: details
+    name: vakantiegeld
+    type: money
+  - label:
+      nl-NL: Pensioenpremie
+    decimals: 2
+    group: details
+    name: pensioenpremie
+    type: money
+  - label:
+      nl-NL: Belastbaar jaarinkomen
+    decimals: 2
+    group: details
+    name: belastbaarJaarinkomen
+    type: money
+  - label:
+      nl-NL: Inkomstenbelasting
+    decimals: 2
+    group: details
+    name: inkomstenbelasting
+    type: money
+  - label:
+      nl-NL: Heffingskortingen
+    decimals: 2
+    group: details
+    name: heffingskortingen
+    type: money
+  - label:
+      nl-NL: Netto per jaar
+    decimals: 2
+    group: details
+    name: nettoPerJaar
+    type: money
+rules:
+  - id: positive_gross_salary
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: grossSalary
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig bruto maandsalaris in (hoger dan 0).
+  - id: pension_rate_range
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: pensionRate
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Pensioenpremie moet tussen 0 en 30% liggen.
+    min: 0
+    max: 30
+  - id: box1_tax_brackets_2026
+    type: tax_bracket
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Box 1 tarieven 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1
+      authority_level: official
+    status: active
+  - id: general_tax_credit_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Algemene heffingskorting 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026
+      authority_level: official
+    status: active
+  - id: labour_tax_credit_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Arbeidskorting 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026
+      authority_level: official
+    status: active
+journeys:
+  enabled: true
+  primary_journey: salary-to-benefits
+  next_steps:
+    - target: bruto-netto-2026
+      label:
+        nl-NL: Bruto netto 2026
+      condition: always
+      priority: 1
+    - target: toeslagen-calculator
+      label:
+        nl-NL: Toeslagen Calculator
+      condition: always
+      priority: 2
+    - target: zzp-calculator
+      label:
+        nl-NL: ZZP Calculator
+      condition: always
+      priority: 3
+    - target: hypotheek-calculator
+      label:
+        nl-NL: Hypotheek Calculator
+      condition: always
+      priority: 4
+seo:
+  title:
+    nl-NL: Bruto Netto Calculator 2026 — Bereken je nettoloon
+  description:
+    nl-NL: Bereken een indicatie van je nettosalaris op basis van bruto inkomen, loonheffingskorting en Nederlandse belastingtarieven 2026.
+  keywords:
+    nl-NL:
+      - bruto netto calculator
+      - salaris calculator
+      - nettoloon 2026
+      - bruto netto 2026
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Box 1 tarieven
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Algemene heffingskorting 2026
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Arbeidskorting 2026
+disclaimers:
+  nl-NL: Deze berekening is een indicatie op basis van de ingevoerde gegevens en bekende tarieven. Je persoonlijke situatie kan afwijken. Controleer belangrijke beslissingen altijd via officiële bronnen of een financieel adviseur.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - tax_year_change
+    - legislation_change
+  source_review_required: true

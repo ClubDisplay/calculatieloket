@@ -1,0 +1,63 @@
+id: nl.tax.ak.2026
+type: tax_credit
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Arbeidskorting 2026
+description:
+  nl-NL: Arbeidskorting voor 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Arbeidskorting 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.salaris-calculator
+    description: Gebruikt door de Salaris Calculator.
+  - relation: used_by
+    target: calculator.bruto-netto-2026
+    description: Gebruikt door Bruto Netto 2026.
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.salaris-calculator
+  - calculator.bruto-netto-2026
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - tax
+  - tax_credit
+  - ak
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De arbeidskorting wordt afgebouwd vanaf een inkomen van € 45.592.
+data:
+  credit_type: labour_tax_credit
+  currency: EUR
+  max: 5685
+  brackets:
+    - up_to: 11965
+      rate: 0.08324
+    - up_to: 25845
+      base: 996
+      rate: 0.31009
+    - up_to: 45592
+      base: 5300
+      rate: 0.0195
+    - up_to: 132920
+      base: 5685
+      rate: -0.0651
+    - up_to: null
+      base: 0
+      rate: 0

@@ -1,0 +1,53 @@
+id: nl.allowance.health
+type: allowance_threshold
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Zorgtoeslag 2026
+description:
+  nl-NL: Drempels en maximumbedragen voor zorgtoeslag in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Dienst Toeslagen — Zorgtoeslag
+    url: https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+  - label: Toeslagenkaart 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.toeslagen-calculator
+    description: Gebruikt door de Toeslagen Calculator.
+used_by:
+  - calculator.toeslagen-calculator
+version: '2026-01-01'
+tags:
+  - allowance
+  - health
+  - zorgtoeslag
+  - '2026'
+  - netherlands
+  - reference
+  - general
+notes:
+  nl-NL: De exacte toeslag hangt af van inkomen, vermogen en huishouden. Controleer altijd de officiële proefberekening op Toeslagen.nl. Dit object is een algemeen referentie-object met drempels en maximumbedragen; de exacte berekeningsparameters voor de Allowance Engine staan in `nl.allowance.health.2026`.
+data:
+  allowance_type: zorgtoeslag
+  currency: EUR
+  period: year
+  max_amount_single: 1550
+  max_amount_couple: 2963
+  income_limit_single: 40857
+  income_limit_couple: 51142
+  wealth_limit_single: 146011
+  wealth_limit_couple: 184633

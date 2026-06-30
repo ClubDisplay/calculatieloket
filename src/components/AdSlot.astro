@@ -1,0 +1,40 @@
+---
+// AdSlot component voor handmatige AdSense-advertentieplekken
+// Gebruik: <AdSlot slot="1234567890" format="auto" />
+// Deze component wordt alleen gerenderd als ads enabled zijn
+const { slot, format = "auto", style = "" } = Astro.props;
+
+const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
+const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
+---
+
+{adsEnabled && adsenseId && (
+  <div class="ad-container">
+    <ins
+      class="adsbygoogle"
+      style={`display:block;${style}`}
+      data-ad-client={adsenseId}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+  </div>
+)}
+
+<style>
+  .ad-container {
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .adsbygoogle {
+    min-width: 300px;
+    min-height: 100px;
+    margin: 0 auto;
+  }
+
+  .adsbygoogle:empty {
+    display: none;
+  }
+</style>

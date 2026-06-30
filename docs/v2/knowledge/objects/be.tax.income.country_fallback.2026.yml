@@ -1,0 +1,58 @@
+id: be.tax.income.country_fallback.2026
+type: tax_bracket
+country: BE
+locale: BE
+title:
+  nl-BE: Belgische personenbelasting 2026 — landfallback
+  fr-BE: Impôt des personnes physiques Belgique 2026 — fallback pays
+  en-US: Belgian personal income tax 2026 — country fallback
+description:
+  nl-BE: Landfallback voor Belgische personenbelasting 2026, onafhankelijk van de taallocale.
+  fr-BE: Fallback au niveau pays pour l'impôt des personnes physiques belge 2026, indépendamment de la locale linguistique.
+  en-US: Country-level fallback for Belgian personal income tax 2026, independent of language locale.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: FOD Financiën / SPF Finances
+sources:
+  - label: FOD Financiën — Belastingtarieven
+    url: https://fin.belgium.be/nl/particulieren/belastingaangifte/inkomsten/belastingtarieven
+    authority_level: official
+    domain: fin.belgium.be
+    last_verified: '2026-06-30'
+relationships:
+  - relation: fallback_for
+    target: be.tax.income.2026
+    description: Landfallback object voor Belgische personenbelasting, gebruikt wanneer een specifieke taallocale ontbreekt.
+used_by: []
+version: '2026-01-01'
+tags:
+  - tax
+  - income
+  - '2026'
+  - belgium
+  - fallback
+notes:
+  nl-BE: Identieke tarieven als be.tax.income.2026, maar op country-niveau (locale BE) zodat fr-BE en andere Belgische locales hierop kunnen terugvallen.
+  fr-BE: Taux identiques à be.tax.income.2026, mais au niveau pays (locale BE), pour que les locales belges comme fr-BE puissent y faire appel.
+  en-US: Identical rates to be.tax.income.2026, but at country level (locale BE) so that Belgian locales like fr-BE can fall back to it.
+data:
+  year: 2026
+  currency: EUR
+  applies_to: individual
+  assessment_year: 2027
+  tax_free_amount: 11180
+  tax_free_amount_rate: 0.25
+  splitting: false
+  brackets:
+    - up_to: 16720
+      rate: 0.25
+    - up_to: 29510
+      rate: 0.40
+    - up_to: 51070
+      rate: 0.45
+    - up_to: null
+      rate: 0.50

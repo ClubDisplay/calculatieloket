@@ -1,0 +1,40 @@
+id: nl.zzp.self_employed_deduction.2026
+type: entrepreneur_deduction
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Zelfstandigenaftrek 2026
+description:
+  nl-NL: Zelfstandigenaftrek voor ondernemers in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Zelfstandigenaftrek 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-30'
+relationships:
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - zzp
+  - entrepreneur_deduction
+  - self_employed
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De zelfstandigenaftrek bedraagt in 2026 €1.200. Het belastingvoordeel is beperkt tot 37,56%.
+data:
+  deduction_type: self_employed
+  amount: 1200
+  currency: EUR

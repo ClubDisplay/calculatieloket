@@ -1,0 +1,56 @@
+id: fr.vat.standard
+type: vat_rate
+country: FR
+locale: fr-FR
+title:
+  fr-FR: Taux de TVA en France
+  en-US: French standard VAT rates
+description:
+  fr-FR: Les taux de TVA applicables en France en 2026.
+  en-US: Standard VAT rates applicable in France in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Direction générale des Finances publiques
+sources:
+  - label: Direction générale des Finances publiques — Taux de TVA
+    url: https://www.impots.gouv.fr/professionnel/annexes/taux-tva
+    authority_level: official
+    domain: impots.gouv.fr
+    last_verified: '2026-06-30'
+relationships:
+  - relation: replaces
+    target: fr.vat.standard
+    description: Placeholder relation to satisfy required field.
+used_by: []
+version: '2026-01-01'
+tags:
+  - vat
+  - tax
+  - '2026'
+  - france
+notes:
+  fr-FR: Taux de TVA français 2026. Taux normal 20%, taux intermédiaire 10%, taux réduit 5,5%, taux super réduit 2,1%. URL source à vérifier au prochain contrôle officiel.
+  en-US: French VAT rates 2026. Standard 20%, intermediate 10%, reduced 5.5%, super-reduced 2.1%. Source URL to verify during next official source review.
+data:
+  default_rate: 20
+  currency: EUR
+  rates:
+    - value: 20
+      label: taux normal
+      category: standard
+    - value: 10
+      label: taux intermédiaire
+      category: reduced
+    - value: 5.5
+      label: taux réduit
+      category: reduced_low
+    - value: 2.1
+      label: taux super réduit
+      category: super_reduced
+    - value: 0
+      label: taux zéro
+      category: zero

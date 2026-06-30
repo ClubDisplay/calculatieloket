@@ -1,0 +1,56 @@
+id: nl.vat.standard
+type: vat_rate
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Standaard BTW-tarieven Nederland
+description:
+  nl-NL: De standaard BTW-tarieven voor Nederland in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — BTW-tarief
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.btw-calculator
+    description: Gebruikt door de BTW Calculator.
+  - relation: used_by
+    target: calculator.btw-terugrekenen
+    description: Gebruikt door BTW Terugrekenen.
+  - relation: used_by
+    target: calculator.btw-inclusief-exclusief
+    description: Gebruikt door BTW Inclusief/Exclusief.
+used_by:
+  - calculator.btw-calculator
+  - calculator.btw-terugrekenen
+  - calculator.btw-inclusief-exclusief
+version: '2026-01-01'
+tags:
+  - vat
+  - tax
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: Het nultarief (0%) is alleen van toepassing op specifieke goederen en diensten.
+data:
+  default_rate: 21
+  currency: EUR
+  rates:
+    - value: 21
+      label: hoog tarief
+      category: standard
+    - value: 9
+      label: laag tarief
+      category: reduced
+    - value: 0
+      label: nultarief
+      category: zero

@@ -1,0 +1,249 @@
+id: hypotheek-calculator
+slug: /hypotheek-calculator/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: wonen
+subcategory: hypotheek
+priority: A
+title:
+  nl-NL: Hypotheek Calculator
+description:
+  nl-NL: Indicatie van hypotheekbedrag en maandlasten op basis van je inkomen en rente.
+status: live
+route:
+  path: /hypotheek-calculator/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/hypotheek-calculator/
+calculator_module: mortgage
+engine_version: '0.0'
+engine_status: inline
+engine_reference: src/pages/hypotheek-calculator.astro
+inputs:
+  - label:
+      nl-NL: Bruto jaarinkomen
+    type: money
+    prefix: €
+    min: 0
+    step: 100
+    default: 60000
+    placeholder: Bijv. 70000
+    required: true
+    name: income
+    privacy_level: financial_input
+  - label:
+      nl-NL: Hypotheekrente
+    type: percentage
+    suffix: '%'
+    min: 0
+    max: 15
+    step: 0.1
+    default: 3.8
+    placeholder: Bijv. 3.8
+    required: true
+    help_text:
+      nl-NL: Voorbeeldrente
+    name: rate
+    privacy_level: financial_input
+  - label:
+      nl-NL: Looptijd
+    type: radio
+    options:
+      - value: 10
+        label:
+          nl-NL: 10 jaar
+      - value: 20
+        label:
+          nl-NL: 20 jaar
+      - value: 30
+        label:
+          nl-NL: 30 jaar
+    default: 30
+    required: true
+    name: termYears
+    privacy_level: non_personal
+  - label:
+      nl-NL: Tweede inkomen meerekenen
+    type: checkbox
+    default: false
+    required: false
+    name: includePartner
+    privacy_level: non_personal
+  - label:
+      nl-NL: Bruto jaarinkomen partner
+    type: money
+    prefix: €
+    min: 0
+    step: 100
+    default: 40000
+    placeholder: Bijv. 40000
+    required: false
+    depends_on:
+      input: includePartner
+      value: true
+    name: partnerIncome
+    privacy_level: financial_input
+outputs:
+  - label:
+      nl-NL: Hypotheekbedrag (indicatie)
+    decimals: 0
+    group: result
+    highlight: true
+    name: maxMortgage
+    type: money
+  - label:
+      nl-NL: Bruto maandlasten
+    decimals: 0
+    group: result
+    name: grossMonthlyPayment
+    type: money
+  - label:
+      nl-NL: Netto maandlasten
+    decimals: 0
+    group: result
+    help_text:
+      nl-NL: Inclusief hypotheekrenteaftrek
+    name: netMonthlyPayment
+    type: money
+  - label:
+      nl-NL: Totale rentekosten
+    decimals: 0
+    group: details
+    name: totalInterest
+    type: money
+rules:
+  - id: positive_income
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: income
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig inkomen in (hoger dan 0).
+  - id: positive_rate
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: rate
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldige rente in (hoger dan 0).
+  - id: rate_range
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: rate
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Rentevoet moet tussen 0 en 15% liggen.
+    min: 0
+    max: 15
+  - id: non_negative_partner_income
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: partnerIncome
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Inkomen partner mag niet negatief zijn.
+  - id: mortgage_income_factor_2026
+    type: mortgage_formula
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Nibud — Budgetvoorlichting
+      url: https://www.nibud.nl
+      authority_level: semi_official
+    status: active
+  - id: annuity_payment_formula
+    type: annuity_formula
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: calculator
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+journeys:
+  enabled: true
+  next_steps:
+    - target: bruto-netto-2026
+      label:
+        nl-NL: Bruto netto 2026
+      condition: always
+      priority: 1
+    - target: salaris-calculator
+      label:
+        nl-NL: Salaris Calculator
+      condition: always
+      priority: 2
+    - target: toeslagen-calculator
+      label:
+        nl-NL: Toeslagen Calculator
+      condition: always
+      priority: 3
+seo:
+  title:
+    nl-NL: Hypotheek Calculator — Indicatie maandlasten en hypotheek
+  description:
+    nl-NL: Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Geen officiële hypotheekofferte.
+  keywords:
+    nl-NL:
+      - hypotheek calculator
+      - hypotheek berekenen
+      - maandlasten hypotheek
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.nibud.nl
+    domain: nibud.nl
+    label:
+      nl-NL: Nibud — Budgetvoorlichting
+  - url:
+      nl-NL: https://www.rijksoverheid.nl/hypotheek
+    domain: rijksoverheid.nl
+    label:
+      nl-NL: Rijksoverheid — Hypotheek
+disclaimers:
+  nl-NL: Deze berekening is geen officiële hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een officiële berekening aan bij een hypotheekadviseur.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - interest_rate_change
+    - legislation_change
+    - market_norm_change
+  source_review_required: true

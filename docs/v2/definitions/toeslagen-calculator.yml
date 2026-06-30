@@ -1,0 +1,313 @@
+id: toeslagen-calculator
+slug: /toeslagen-calculator/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: toeslagen
+subcategory: huur-zorg
+priority: A
+title:
+  nl-NL: Toeslagen Calculator 2026
+description:
+  nl-NL: Indicatie van huurtoeslag en zorgtoeslag op basis van inkomen, huur en huishouden.
+status: live
+route:
+  path: /toeslagen-calculator/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/toeslagen-calculator/
+calculator_module: benefits
+engine_version: '0.0'
+engine_status: inline
+engine_reference: src/pages/toeslagen-calculator.astro
+inputs:
+  - label:
+      nl-NL: Bruto jaarinkomen
+    type: money
+    prefix: €
+    min: 0
+    step: 100
+    default: 28000
+    placeholder: Bijv. 25000
+    required: true
+    group: situatie
+    name: income
+    privacy_level: financial_input
+  - label:
+      nl-NL: Huishouden
+    type: radio
+    options:
+      - value: single
+        label:
+          nl-NL: Alleenstaand
+      - value: couple
+        label:
+          nl-NL: Met partner
+    default: single
+    required: true
+    group: situatie
+    name: household
+    privacy_level: non_personal
+  - label:
+      nl-NL: Bruto jaarinkomen partner
+    type: money
+    prefix: €
+    min: 0
+    step: 100
+    default: 20000
+    placeholder: Bijv. 20000
+    required: false
+    group: situatie
+    depends_on:
+      input: household
+      value: couple
+    name: partnerIncome
+    privacy_level: financial_input
+  - label:
+      nl-NL: Leeftijd
+    type: number
+    min: 18
+    max: 120
+    step: 1
+    default: 35
+    placeholder: Bijv. 35
+    required: true
+    group: situatie
+    name: age
+    privacy_level: personal_input
+  - label:
+      nl-NL: Maandelijkse huur
+    type: money
+    prefix: €
+    min: 0
+    step: 1
+    default: 700
+    placeholder: Bijv. 700
+    required: true
+    group: huurtoeslag
+    help_text:
+      nl-NL: Kale huur, excl. servicekosten
+    name: rent
+    privacy_level: financial_input
+outputs:
+  - label:
+      nl-NL: Huurtoeslag per maand
+    decimals: 0
+    group: huurtoeslag
+    highlight: true
+    name: rentBenefit
+    type: money
+  - label:
+      nl-NL: Rekengrens huurtoeslagberekening
+    decimals: 2
+    group: huurtoeslag
+    static_value: 932.93
+    name: rentCap
+    type: money
+  - label:
+      nl-NL: Zorgtoeslag per maand
+    decimals: 0
+    group: zorgtoeslag
+    highlight: true
+    name: zorgBenefit
+    type: money
+  - label:
+      nl-NL: Maximale zorgtoeslag (alleen)
+    group: zorgtoeslag
+    static_value: € 1.550/jaar (± € 129 p/m)
+    name: maxZorgBenefitSingle
+    type: text
+  - label:
+      nl-NL: Maximale zorgtoeslag (samen)
+    group: zorgtoeslag
+    static_value: € 2.963/jaar (± € 247 p/m)
+    name: maxZorgBenefitCouple
+    type: text
+rules:
+  - id: non_negative_income
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: income
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Inkomen mag niet negatief zijn.
+  - id: non_negative_partner_income
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: partnerIncome
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Inkomen partner mag niet negatief zijn.
+  - id: age_range
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: age
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Leeftijd moet tussen 18 en 120 liggen.
+    min: 18
+    max: 120
+  - id: non_negative_rent
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: rent
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Huur mag niet negatief zijn.
+  - id: huurtoeslag_rent_cap_2026
+    type: allowance_threshold
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: rent
+    source:
+      label: Dienst Toeslagen — Huurtoeslag
+      url: https://www.toeslagen.nl/huurtoeslag
+      authority_level: official
+    status: active
+  - id: zorgtoeslag_income_limit_single_2026
+    type: allowance_threshold
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Dienst Toeslagen — Zorgtoeslag
+      url: https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag
+      authority_level: official
+    status: active
+  - id: zorgtoeslag_income_limit_couple_2026
+    type: allowance_threshold
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Dienst Toeslagen — Zorgtoeslag
+      url: https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag
+      authority_level: official
+    status: active
+  - id: zorgtoeslag_max_single_2026
+    type: allowance_threshold
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Toeslagenkaart 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+      authority_level: official
+    status: active
+  - id: zorgtoeslag_max_couple_2026
+    type: allowance_threshold
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Toeslagenkaart 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+      authority_level: official
+    status: active
+  - id: wealth_check_informational
+    type: informational
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Calculatieloket.nl — Vermogenscheck toelichting
+      url: https://calculatieloket.nl/
+      authority_level: editorial
+    status: active
+warnings:
+  - id: no_wealth_check
+    message:
+      nl-NL: 'Let op: deze calculator houdt nog geen rekening met vermogen. Je vermogen kan bepalen of je wel of geen recht hebt op toeslag.'
+    severity: warning
+journeys:
+  enabled: true
+  next_steps:
+    - target: bruto-netto-2026
+      label:
+        nl-NL: Bruto netto 2026
+      condition: always
+      priority: 1
+    - target: salaris-calculator
+      label:
+        nl-NL: Salaris Calculator
+      condition: always
+      priority: 2
+    - target: hypotheek-calculator
+      label:
+        nl-NL: Hypotheek Calculator
+      condition: always
+      priority: 3
+seo:
+  title:
+    nl-NL: Toeslagen Calculator 2026 — Zorgtoeslag en huurtoeslag indicatie
+  description:
+    nl-NL: Bereken een indicatie van zorgtoeslag en huurtoeslag op basis van inkomen, huur en huishouden. Gebaseerd op regels 2026 van Dienst Toeslagen.
+  keywords:
+    nl-NL:
+      - toeslagen calculator
+      - zorgtoeslag 2026
+      - huurtoeslag 2026
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.toeslagen.nl/huurtoeslag
+    domain: toeslagen.nl
+    label:
+      nl-NL: Dienst Toeslagen — Huurtoeslag
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Dienst Toeslagen — Zorgtoeslag
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Toeslagenkaart 2026
+disclaimers:
+  nl-NL: Deze berekening is een indicatie. Je werkelijke toeslag kan afwijken. Doe altijd de officiële proefberekening op Toeslagen.nl. Aan deze indicatie kunnen geen rechten worden ontleend.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - tax_year_change
+    - legislation_change
+  source_review_required: true

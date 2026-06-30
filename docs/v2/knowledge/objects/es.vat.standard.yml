@@ -1,0 +1,53 @@
+id: es.vat.standard
+type: vat_rate
+country: ES
+locale: es-ES
+title:
+  es-ES: Tipos de IVA en España
+  en-US: Spanish standard VAT rates
+description:
+  es-ES: Los tipos de IVA aplicables en España en 2026.
+  en-US: Standard VAT rates applicable in Spain in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Agencia Tributaria
+sources:
+  - label: Agencia Tributaria — IVA
+    url: https://sede.agenciatributaria.gob.es/Sede/impuestos-tasas/iva/introduccion.html
+    authority_level: official
+    domain: agenciatributaria.gob.es
+    last_verified: '2026-06-30'
+relationships:
+  - relation: replaces
+    target: es.vat.standard
+    description: Placeholder relation to satisfy required field.
+used_by: []
+version: '2026-01-01'
+tags:
+  - vat
+  - tax
+  - '2026'
+  - spain
+notes:
+  es-ES: Tipos de IVA españoles 2026. General 21%, reducido 10%, superreducido 4%. URL de fuente a verificar en la próxima revisión oficial.
+  en-US: Spanish VAT rates 2026. Standard 21%, reduced 10%, super-reduced 4%. Source URL to verify during next official source review.
+data:
+  default_rate: 21
+  currency: EUR
+  rates:
+    - value: 21
+      label: tipo general
+      category: standard
+    - value: 10
+      label: tipo reducido
+      category: reduced
+    - value: 4
+      label: tipo superreducido
+      category: reduced_low
+    - value: 0
+      label: tipo cero
+      category: zero

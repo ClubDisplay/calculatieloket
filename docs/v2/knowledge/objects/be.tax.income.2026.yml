@@ -1,0 +1,55 @@
+id: be.tax.income.2026
+type: tax_bracket
+country: BE
+locale: nl-BE
+title:
+  nl-BE: Belgische personenbelasting 2026
+  fr-BE: Impôt des personnes physiques Belgique 2026
+  en-US: Belgian personal income tax 2026
+description:
+  nl-BE: Tarieven en belastingvrije som voor inkomstenjaar 2026 (aanslagjaar 2027), gebaseerd op de FOD Financiën.
+  fr-BE: Taux et somme exonérée pour l'exercice 2026 (année d'imposition 2027), basé sur le SPF Finances.
+  en-US: Tax rates and tax-free amount for income year 2026 (assessment year 2027), based on FPS Finance.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: FOD Financiën / SPF Finances
+sources:
+  - label: FOD Financiën — Belastingtarieven
+    url: https://fin.belgium.be/nl/particulieren/belastingaangifte/inkomsten/belastingtarieven
+    authority_level: official
+    domain: fin.belgium.be
+    last_verified: '2026-06-30'
+relationships: []
+used_by: []
+version: '2026-01-01'
+tags:
+  - tax
+  - income
+  - '2026'
+  - belgium
+  - personenbelasting
+notes:
+  nl-BE: "Inkomstenjaar 2026 = aanslagjaar 2027. De belastingvrije som vermindert de berekende belasting (niet het belastbare inkomen). Voor inkomstenjaar 2026 bedraagt de basis-som 11.180 euro, verrekend tegen het laagste tarief van 25%."
+  fr-BE: "Exercice 2026 = année d'imposition 2027. La somme exonérée réduit l'impôt calculé (pas le revenu imposable). Pour l'exercice 2026, le montant de base est de 11.180 euros, déduit au taux le plus bas de 25%."
+  en-US: "Income year 2026 = assessment year 2027. The tax-free amount reduces the calculated tax (not the taxable income). For income year 2026 the base amount is 11,180 EUR, offset at the lowest rate of 25%."
+data:
+  year: 2026
+  currency: EUR
+  applies_to: individual
+  assessment_year: 2027
+  tax_free_amount: 11180
+  tax_free_amount_rate: 0.25
+  splitting: false
+  brackets:
+    - up_to: 16720
+      rate: 0.25
+    - up_to: 29510
+      rate: 0.40
+    - up_to: 51070
+      rate: 0.45
+    - up_to: null
+      rate: 0.50

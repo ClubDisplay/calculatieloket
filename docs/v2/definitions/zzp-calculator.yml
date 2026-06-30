@@ -1,0 +1,352 @@
+id: zzp-calculator
+slug: /zzp-calculator/
+product: calculatieloket.nl
+locale: nl-NL
+country: NL
+category: ondernemen
+subcategory: uurtarief
+priority: A
+title:
+  nl-NL: ZZP Calculator 2026
+description:
+  nl-NL: Bereken als zzp'er een indicatie van je netto inkomen, belasting, zelfstandigenaftrek en benodigd uurtarief voor 2026.
+status: live
+route:
+  path: /zzp-calculator/
+  trailing_slash: true
+  canonical: https://calculatieloket.nl/zzp-calculator/
+calculator_module: zzp
+engine_version: '0.0'
+engine_status: inline
+engine_reference: src/pages/zzp-calculator.astro
+inputs:
+  - label:
+      nl-NL: Gewenst netto inkomen per maand
+    type: money
+    prefix: €
+    min: 0
+    step: 100
+    default: 4000
+    placeholder: Bijv. 3500
+    required: true
+    group: inkomenswens
+    name: desiredNet
+    privacy_level: financial_input
+  - label:
+      nl-NL: Declarabele dagen per jaar
+    type: number
+    min: 1
+    max: 365
+    step: 1
+    default: 210
+    placeholder: Bijv. 210
+    required: true
+    group: inzet
+    help_text:
+      nl-NL: Gemiddeld 200-220
+    name: billableDays
+    privacy_level: non_personal
+  - label:
+      nl-NL: Declarabele uren per dag
+    type: number
+    min: 1
+    max: 12
+    step: 0.5
+    default: 8
+    placeholder: Bijv. 8
+    required: true
+    group: inzet
+    name: hoursPerDay
+    privacy_level: non_personal
+  - label:
+      nl-NL: Zakelijke kosten per maand
+    type: money
+    prefix: €
+    min: 0
+    step: 10
+    default: 300
+    placeholder: Bijv. 500
+    required: false
+    group: kosten
+    help_text:
+      nl-NL: Verzekeringen, tools, kantoor, etc.
+    name: businessCosts
+    privacy_level: financial_input
+  - label:
+      nl-NL: Pensioenopbouw per maand
+    type: money
+    prefix: €
+    min: 0
+    step: 10
+    default: 500
+    placeholder: Bijv. 500
+    required: false
+    group: kosten
+    help_text:
+      nl-NL: ZZP'er moet zelf pensioen regelen
+    name: pensionSavings
+    privacy_level: financial_input
+  - label:
+      nl-NL: Zelfstandigenaftrek (€ 1.200)
+    type: checkbox
+    default: true
+    required: false
+    group: aftrek
+    name: zzpDeduction
+    privacy_level: non_personal
+  - label:
+      nl-NL: Startersaftrek (€ 2.123)
+    type: checkbox
+    default: false
+    required: false
+    group: aftrek
+    help_text:
+      nl-NL: Alleen als je hiervoor in aanmerking komt
+    name: starterDeduction
+    privacy_level: non_personal
+  - label:
+      nl-NL: MKB-winstvrijstelling (12,70%)
+    type: checkbox
+    default: true
+    required: false
+    group: aftrek
+    name: mkbDeduction
+    privacy_level: non_personal
+outputs:
+  - label:
+      nl-NL: Benodigd uurtarief
+    decimals: 0
+    group: result
+    highlight: true
+    name: hourlyRate
+    type: money
+  - label:
+      nl-NL: Benodigde jaaromzet (excl. BTW)
+    decimals: 0
+    group: details
+    name: yearlyRevenue
+    type: money
+  - label:
+      nl-NL: Zakelijke kosten per jaar
+    decimals: 0
+    group: details
+    name: yearlyBusinessCosts
+    type: money
+  - label:
+      nl-NL: Pensioenopbouw per jaar
+    decimals: 0
+    group: details
+    name: yearlyPension
+    type: money
+  - label:
+      nl-NL: Aftrekposten
+    decimals: 0
+    group: details
+    name: totalDeductions
+    type: money
+  - label:
+      nl-NL: Nettowinst (indicatie)
+    decimals: 0
+    group: details
+    name: netProfit
+    type: money
+  - label:
+      nl-NL: Inkomstenbelasting (indicatie)
+    decimals: 0
+    group: details
+    name: incomeTax
+    type: money
+rules:
+  - id: positive_desired_net
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: desiredNet
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig gewenst netto inkomen in (hoger dan 0).
+  - id: positive_billable_days
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: billableDays
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig aantal declarabele dagen in.
+  - id: billable_days_range
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: billableDays
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Aantal declarabele dagen moet tussen 1 en 365 liggen.
+    min: 1
+    max: 365
+  - id: positive_hours_per_day
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: hoursPerDay
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Vul een geldig aantal uren per dag in.
+  - id: hours_per_day_range
+    type: manual_input
+    locale: nl-NL
+    country: NL
+    version: '1.0'
+    applies_to: hoursPerDay
+    source:
+      label: Calculatieloket.nl — interne validatie
+      url: https://calculatieloket.nl/
+      authority_level: internal
+    status: active
+    message:
+      nl-NL: Uren per dag moet tussen 1 en 12 liggen.
+    min: 1
+    max: 12
+  - id: box1_tax_brackets_2026
+    type: tax_bracket
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Box 1 tarieven 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1
+      authority_level: official
+    status: active
+  - id: general_tax_credit_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Algemene heffingskorting 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026
+      authority_level: official
+    status: active
+  - id: labour_tax_credit_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Arbeidskorting 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026
+      authority_level: official
+    status: active
+  - id: self_employed_deduction_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Belastingdienst — Zelfstandigenaftrek 2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026
+      authority_level: official
+    status: active
+  - id: starter_deduction_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Ondernemersplein — Startersaftrek
+      url: https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/
+      authority_level: semi_official
+    status: active
+  - id: mkb_exemption_2026
+    type: tax_credit
+    locale: nl-NL
+    country: NL
+    version: '2026'
+    applies_to: calculator
+    source:
+      label: Ondernemersplein — MKB-winstvrijstelling
+      url: https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/
+      authority_level: semi_official
+    status: active
+journeys:
+  enabled: true
+  next_steps:
+    - target: auto-importkosten-berekenen
+      label:
+        nl-NL: Auto importkosten
+      condition: always
+      priority: 1
+    - target: btw-calculator
+      label:
+        nl-NL: BTW Calculator
+      condition: always
+      priority: 2
+    - target: bruto-netto-2026
+      label:
+        nl-NL: Bruto netto 2026
+      condition: always
+      priority: 3
+seo:
+  title:
+    nl-NL: ZZP Calculator 2026 — Bereken uurtarief en netto inkomen
+  description:
+    nl-NL: Bereken als zzp'er een indicatie van je netto inkomen, belasting, zelfstandigenaftrek (€1.200) en benodigd uurtarief voor 2026.
+  keywords:
+    nl-NL:
+      - zzp calculator
+      - uurtarief zzp
+      - zzp netto inkomen
+  schema:
+    - WebSite
+    - FAQPage
+    - HowTo
+sources:
+  - url:
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026
+    domain: belastingdienst.nl
+    label:
+      nl-NL: Belastingdienst — Zelfstandigenaftrek 2026
+  - url:
+      nl-NL: https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/
+    domain: ondernemersplein.overheid.nl
+    label:
+      nl-NL: Ondernemersplein — MKB-winstvrijstelling
+disclaimers:
+  nl-NL: Deze berekening is een indicatie. Je werkelijke belastingdruk kan afwijken door je specifieke situatie. Raadpleeg bij twijfel een fiscaal adviseur of boekhouder.
+privacy:
+  no_storage: true
+  client_side_only: true
+  no_tracking: true
+  no_personal_data: true
+maintenance:
+  last_review: '2026-06-29'
+  owner: Barry
+  update_frequency: yearly
+  review_on:
+    - tax_year_change
+    - legislation_change
+  source_review_required: true

@@ -1,0 +1,241 @@
+# =============================================================================
+# Calculatieloket.nl — Journey Engine — Journeys (v0.1)
+# Documentatie van bezoekersreizen. Velddefinities: zie 01-JOURNEY-MODEL.md.
+# =============================================================================
+journeys:
+
+  # ---------------------------------------------------------------------------
+  # Journey 1: Werknemer van salaris naar toeslagen
+  # ---------------------------------------------------------------------------
+  - id: "salary-to-benefits"
+    name: "Salaris naar toeslagen"
+    primary_calculator: "bruto-netto-2026"
+    entry_intent: "Een werknemer wil weten wat zijn nettoloon is en of hij recht heeft op toeslagen."
+    user_question: "Wat houd ik netto over en kan ik toeslag krijgen?"
+    known_inputs:
+      - "bruto-maandsalaris"
+      - "loonheffingskorting (aan/uit)"
+      - "pensioenpremie"
+    derived_outputs:
+      - "netto-per-maand"
+      - "belastbaar-jaarinkomen"
+      - "vakantiegeld"
+    reusable_data:
+      - "belastbaar-jaarinkomen"
+    next_calculators:
+      - "toeslagen-calculator"
+      - "hypotheek-calculator"
+      - "bruto-netto-2026"
+      - "vakantiegeld-check"
+      - "pensioen-indicatie"
+    official_sources:
+      - name: "Belastingdienst — Box 1 tarieven"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1"
+      - name: "Dienst Toeslagen — Huurtoeslag"
+        url: "https://www.toeslagen.nl/huurtoeslag"
+    warnings:
+      - "Toeslagen zijn afhankelijk van vermogen en toeslagpartner — deze calculator neemt alleen inkomen mee."
+      - "Deze berekening is een indicatie. Doe altijd de officiële proefberekening op Toeslagen.nl."
+    conversion_opportunities:
+      - "Inschakelen financieel adviseur voor belastingoptimalisatie"
+      - "Inschakelen hypotheekadviseur bij koopwens"
+    future_features:
+      - "Vermogenstoets toevoegen aan toeslagen-calculator"
+      - "Partnerinkomen optioneel meerekenen"
+      - "Notificatie bij tariefwijzigingen"
+    priority: "A"
+    status: "documented"
+
+  # ---------------------------------------------------------------------------
+  # Journey 2: Werknemer van salaris naar hypotheek
+  # ---------------------------------------------------------------------------
+  - id: "salary-to-mortgage"
+    name: "Salaris naar hypotheek"
+    primary_calculator: "salaris-calculator"
+    entry_intent: "Een werknemer wil zijn maximale hypotheek weten op basis van zijn inkomen."
+    user_question: "Hoeveel hypotheek kan ik krijgen met mijn salaris?"
+    known_inputs:
+      - "bruto-maandsalaris"
+      - "loonheffingskorting (aan/uit)"
+      - "pensioenpremie-percentage"
+    derived_outputs:
+      - "bruto-jaarsalaris"
+      - "netto-per-maand"
+    reusable_data:
+      - "bruto-jaarsalaris"
+    next_calculators:
+      - "hypotheek-calculator"
+      - "bruto-netto-2026"
+      - "overdrachtsbelasting"
+      - "eigen-geld-nodig"
+    official_sources:
+      - name: "Nibud — Budgetvoorlichting"
+        url: "https://www.nibud.nl"
+      - name: "Rijksoverheid — Hypotheek"
+        url: "https://www.rijksoverheid.nl/hypotheek"
+    warnings:
+      - "Dit is een indicatie, geen officiële hypotheekofferte."
+      - "Banken hanteren eigen acceptatieregels (studieschuld, BKR, gezinssituatie)."
+    conversion_opportunities:
+      - "Inschakelen hypotheekadviseur"
+      - "Oriënteren op NHG-voorwaarden"
+    future_features:
+      - "Studieschuld-input toevoegen aan hypotheek-calculator"
+      - "BKR-check niet mogelijk — verwijzing naar officieel loket"
+    priority: "A"
+    status: "documented"
+
+  # ---------------------------------------------------------------------------
+  # Journey 3: ZZP'er van uurtarief naar belasting
+  # ---------------------------------------------------------------------------
+  - id: "zzp-to-tax"
+    name: "ZZP naar belasting"
+    primary_calculator: "zzp-calculator"
+    entry_intent: "Een ZZP'er wil zijn benodigd uurtarief berekenen en begrijpen hoeveel belasting hij betaalt."
+    user_question: "Welk uurtarief heb ik nodig en hoeveel belasting betaal ik?"
+    known_inputs:
+      - "gewenst-netto-per-maand"
+      - "declarabele-dagen"
+      - "declarabele-uren-per-dag"
+      - "zakelijke-kosten"
+      - "pensioenopbouw"
+    derived_outputs:
+      - "benodigd-uurtarief"
+      - "jaaromzet"
+      - "nettowinst-indicatie"
+      - "belasting-indicatie"
+    reusable_data:
+      - "nettowinst-indicatie"
+      - "jaaromzet"
+      - "benodigd-uurtarief"
+    next_calculators:
+      - "btw-calculator"
+      - "inkomstenbelasting-indicatie"
+      - "uurtarief-check-uitgebreid"
+      - "netto-inkomen-zzp"
+      - "zakelijke-kosten"
+    official_sources:
+      - name: "Belastingdienst — Zelfstandigenaftrek 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026"
+      - name: "Ondernemersplein — MKB-winstvrijstelling"
+        url: "https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/"
+      - name: "Belastingdienst — BTW-tarief"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief"
+    warnings:
+      - "Dit is een indicatie. Je werkelijke belastingdruk kan afwijken."
+      - "Raadpleeg een boekhouder of fiscaal adviseur."
+      - "De zelfstandigenaftrek is beperkt tot 37,56% belastingvoordeel in 2026."
+    conversion_opportunities:
+      - "Inschakelen boekhouder"
+      - "Aanschaf boekhoudsoftware"
+    future_features:
+      - "Koppeling met btw-aangifte calculator"
+      - "FOR / oudedagsreserve meerekenen"
+    priority: "B"
+    status: "documented"
+
+  # ---------------------------------------------------------------------------
+  # Journey 4: Auto-importeur berekent totale kosten
+  # ---------------------------------------------------------------------------
+  - id: "auto-import"
+    name: "Auto import journey"
+    primary_calculator: "auto-importkosten-berekenen"
+    entry_intent: "Iemand overweegt een auto uit het buitenland te importeren en wil de totale kosten weten."
+    user_question: "Wat kost het om een auto te importeren naar Nederland?"
+    known_inputs:
+      - "aankoopprijs"
+      - "geschatte-bpm"
+      - "rdw-kosten"
+      - "transportkosten"
+      - "exportkenteken"
+      - "aankoopkeuring"
+      - "nl-vergelijkingsprijs"
+    derived_outputs:
+      - "totale-importkosten"
+      - "verschil-met-nl-prijs"
+    reusable_data:
+      - "aankoopprijs"
+      - "geschatte-bpm"
+      - "totale-importkosten"
+    next_calculators:
+      - "bpm-berekenen"
+      - "btw-bij-import"
+      - "invoerrechten"
+      - "wegenbelasting"
+      - "autoverzekering"
+    official_sources:
+      - name: "RDW — Voertuig invoeren vanuit een Europees land"
+        url: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa"
+      - name: "RDW — Invoeren, exporteren of doorvoeren"
+        url: "https://www.rdw.nl/invoeren-exporteren-doorvoeren"
+      - name: "Belastingdienst — Bpm"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm"
+      - name: "Belastingdienst — Aangifte bpm bij aanvraag Nederlands kenteken"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm"
+      - name: "Belastingdienst — Hoe kan ik de bpm berekenen?"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen"
+      - name: "Belastingdienst — Bpm berekenen voor een personenauto"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen"
+      - name: "Belastingdienst — Hoe bereken ik de bpm voor een kampeerauto?"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen"
+      - name: "Rijksoverheid — Auto uit het buitenland importeren"
+        url: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren"
+    warnings:
+      - "Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen."
+      - "Deze berekening is een indicatie. Controleer altijd de officiële informatie van RDW en Belastingdienst."
+      - "Bpm wordt niet automatisch berekend — gebruik de officiële bpm-tool van de Belastingdienst."
+    conversion_opportunities:
+      - "Inschakelen auto-importspecialist"
+      - "Aanschaf exportkenteken via RDW-erkend loket"
+    future_features:
+      - "BPM automatisch berekenen (CO2-uitstoot, cataloguswaarde, leeftijd)"
+      - "Auto Importkosten Duitsland en Frankrijk specifieke landingspagina's"
+    priority: "A"
+    status: "documented"
+
+  # ---------------------------------------------------------------------------
+  # Journey 5: Toeslagaanvrager checkt volledige rechten
+  # ---------------------------------------------------------------------------
+  - id: "benefits-check"
+    name: "Toeslagen journey"
+    primary_calculator: "toeslagen-calculator"
+    entry_intent: "Iemand wil weten op welke toeslagen hij recht heeft en wat de bedragen zijn."
+    user_question: "Op welke toeslagen heb ik mogelijk recht en hoeveel krijg ik?"
+    known_inputs:
+      - "bruto-jaarinkomen"
+      - "huishouden-type"
+      - "partner-inkomen"
+      - "leeftijd"
+      - "huur"
+    derived_outputs:
+      - "huurtoeslag-indicatie"
+      - "zorgtoeslag-indicatie"
+    reusable_data:
+      - "bruto-jaarinkomen"
+      - "huishouden-type"
+    next_calculators:
+      - "zorgtoeslag-uitgebreid"
+      - "huurtoeslag-uitgebreid"
+      - "kinderopvangtoeslag"
+      - "kindgebonden-budget"
+      - "vermogenstoets"
+    official_sources:
+      - name: "Dienst Toeslagen — Huurtoeslag"
+        url: "https://www.toeslagen.nl/huurtoeslag"
+      - name: "Dienst Toeslagen — Zorgtoeslag"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag"
+      - name: "Toeslagenkaart 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026"
+    warnings:
+      - "Deze berekening is een indicatie. De Dienst Toeslagen kijkt naar meer factoren."
+      - "De calculator houdt nog geen rekening met vermogen — dit kan je recht op toeslag bepalen."
+      - "Doe altijd de officiële proefberekening op Toeslagen.nl."
+    conversion_opportunities:
+      - "Officiële proefberekening starten op Toeslagen.nl"
+      - "Inschakelen financieel adviseur bij complexe situatie"
+    future_features:
+      - "Vermogenstoets toevoegen"
+      - "Toeslagpartner automatisch meerekenen"
+      - "Kinderopvangtoeslag integreren"
+    priority: "A"
+    status: "documented"

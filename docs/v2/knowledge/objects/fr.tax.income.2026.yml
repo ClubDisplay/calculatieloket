@@ -1,0 +1,63 @@
+id: fr.tax.income.2026
+
+type: tax_bracket
+
+country: FR
+
+locale: fr-FR
+
+title:
+  fr-FR: Impôt sur le revenu — barème 2026 (revenus 2026)
+  en-US: French income tax — 2026 schedule (2026 income)
+  nl-BE: Franse inkomstenbelasting — tarief 2026 (inkomsten 2026)
+
+description:
+  fr-FR: Barème de l'impôt sur le revenu pour les revenus de l'année 2026 (imposition 2027). En attente de publication officielle par la loi de finances pour 2027.
+  en-US: French income tax schedule for income year 2026 (taxation 2027). Pending official publication by the 2027 finance law.
+  nl-BE: Franse inkomstenbelastingtarief voor inkomstenjaar 2026 (aanslag 2027). In afwachting van officiële publicatie via de financiële wet 2027.
+
+status: draft
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Ministère chargé des finances / Service Public / DILA
+
+sources:
+  - label: Service Public — Quel est le barème de l'impôt sur le revenu ?
+    url: https://www.service-public.fr/particuliers/vosdroits/F1419
+    authority_level: official
+    domain: service-public.gouv.fr
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: related
+    target: fr.vat.standard
+    description: Object du même pays (France) pour un autre type de règle fiscale.
+
+used_by: []
+
+version: '2026-01-01'
+
+tags:
+  - tax
+  - income
+  - '2026'
+  - france
+  - draft
+
+notes:
+  fr-FR: Le barème de l'impôt sur le revenu applicable aux revenus de 2025 (imposition 2026) est publié, mais le barème pour les revenus de 2026 (imposition 2027) ne l'est pas encore. L'object reste en draft jusqu'à publication officielle de la loi de finances pour 2027.
+  en-US: The income tax schedule for 2025 income (taxation 2026) is published, but the schedule for 2026 income (taxation 2027) is not yet available. This object remains draft until the 2027 finance law is published.
+  nl-BE: Het inkomstenbelastingtarief voor inkomsten 2025 (aanslag 2026) is gepubliceerd, maar het tarief voor inkomsten 2026 (aanslag 2027) is dat nog niet. Het object blijft draft totdat de financiële wet 2027 verschijnt.
+
+data:
+  year: 2026
+  currency: EUR
+  applies_to: individual
+  assessment_year: 2027
+  brackets: []

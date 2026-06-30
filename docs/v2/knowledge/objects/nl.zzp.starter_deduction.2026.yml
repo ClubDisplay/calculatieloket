@@ -1,0 +1,40 @@
+id: nl.zzp.starter_deduction.2026
+type: entrepreneur_deduction
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Startersaftrek 2026
+description:
+  nl-NL: Startersaftrek voor beginnende ondernemers in 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Startersaftrek 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/startersaftrek-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-30'
+relationships:
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - zzp
+  - entrepreneur_deduction
+  - starter
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De startersaftrek bedraagt in 2026 €2.123 en is een verhoging van de zelfstandigenaftrek.
+data:
+  deduction_type: starter
+  amount: 2123
+  currency: EUR

@@ -1,0 +1,68 @@
+---
+// Cookie consent banner voor AVG/GDPR compliance
+// TODO: Voor live AdSense in EER/VK/Zwitserland: implementeer Google-gecertificeerde CMP met IAB TCF-integratie.
+// Zie: https://support.google.com/adsense/answer/13554116?hl=nl
+const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
+---
+
+{adsEnabled && (
+  <div id="cookie-consent" class="cookie-banner" style="display:none;">
+    <div class="cookie-content">
+      <p><strong>Cookies &amp; advertenties</strong></p>
+      <p>Deze site gebruikt noodzakelijke cookies om goed te werken. We kunnen in de toekomst advertenties tonen via Google AdSense om de tools gratis te houden. Voor advertentiecookies vragen we toestemming zodra advertenties actief zijn.</p>
+      <div class="cookie-buttons">
+        <button id="cookie-decline" class="btn btn-ghost">Weigeren</button>
+        <button id="cookie-accept" class="btn">Accepteren</button>
+      </div>
+    </div>
+  </div>
+)}
+
+<script>
+  const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
+  const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
+
+  if (adsEnabled) {
+    const consentKey = "cookie_consent";
+    const storedConsent = localStorage.getItem(consentKey);
+    const banner = document.getElementById("cookie-consent")!;
+
+    if (storedConsent === "accepted" && adsenseId) {
+      const s = document.createElement("script");
+      s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`;
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      document.head.appendChild(s);
+      s.onload = () => document.querySelectorAll(".adsbygoogle").forEach(el => (window as any).adsbygoogle?.push?.({}));
+    } else if (!storedConsent) {
+      banner.style.display = "block";
+    }
+
+    document.getElementById("cookie-accept")!.addEventListener("click", () => {
+      localStorage.setItem(consentKey, "accepted");
+      banner.style.display = "none";
+      if (adsenseId) {
+        const s = document.createElement("script");
+        s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`;
+        s.async = true;
+        s.crossOrigin = "anonymous";
+        document.head.appendChild(s);
+        s.onload = () => document.querySelectorAll(".adsbygoogle").forEach(el => (window as any).adsbygoogle?.push?.({}));
+      }
+    });
+
+    document.getElementById("cookie-decline")!.addEventListener("click", () => {
+      localStorage.setItem(consentKey, "declined");
+      banner.style.display = "none";
+    });
+  }
+</script>
+
+<style>
+  .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: var(--color-surface); border-top: 2px solid var(--color-primary); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); padding: 1.25rem; animation: slideUp 0.3s ease-out; }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .cookie-content { max-width: var(--max-width); margin: 0 auto; }
+  .cookie-content p { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--color-text); }
+  .cookie-buttons { display: flex; gap: 0.75rem; justify-content: flex-end; }
+  @media (max-width: 480px) { .cookie-buttons { flex-direction: column; } .cookie-buttons .btn { width: 100%; text-align: center; } }
+</style>

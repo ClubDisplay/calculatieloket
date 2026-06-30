@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+import CrossSellCards from "../components/CrossSellCards.astro";
+---
+
+<BaseLayout
+  title="Toeslagen Calculator 2026 — Zorgtoeslag en huurtoeslag indicatie"
+  description="Bereken een indicatie van zorgtoeslag en huurtoeslag op basis van inkomen, huur en huishouden. Gebaseerd op regels 2026 van Dienst Toeslagen."
+>
+  <h1 class="page-title">Toeslagen Calculator 2026</h1>
+  <p class="page-subtitle">
+    Indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en situatie.
+  </p>
+
+  <AdSlot slot="1234567896" format="auto" style="min-height:100px" />
+
+  <div class="calculator-card calc-modern">
+    <p class="vermogen-waarschuwing">Let op: deze calculator houdt nog geen rekening met vermogen. Je vermogen kan bepalen of je wel of geen recht hebt op toeslag.</p>
+
+    <div class="calc-fields">
+    <p class="calc-group-title">Jouw situatie</p>
+    <div class="form-group">
+      <label for="income">Bruto jaarinkomen</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="income" placeholder="Bijv. 25000" min="0" step="100" value="28000" /></div>
+    </div>
+    <div class="form-group">
+      <label>Huishouden</label>
+      <div class="radio-group" id="household">
+        <button data-type="single" class="active">Alleenstaand</button>
+        <button data-type="couple">Met partner</button>
+      </div>
+    </div>
+    <div class="form-group" id="partnerIncomeGroup" style="display:none;">
+      <label for="partnerIncome">Bruto jaarinkomen partner</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="partnerIncome" placeholder="Bijv. 20000" min="0" step="100" value="20000" /></div>
+    </div>
+    <div class="form-group">
+      <label for="age">Leeftijd</label>
+      <input type="number" id="age" placeholder="Bijv. 35" min="18" max="120" step="1" value="35" />
+    </div>
+    </div>
+    <div class="result-divider" style="margin: 1.5rem 0;"></div>
+
+    <h2>Huurtoeslag</h2>
+    <div class="calc-fields">
+    <div class="form-group">
+      <label for="rent">Maandelijkse huur <span class="hint">(kale huur, excl. servicekosten)</span></label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="rent" placeholder="Bijv. 700" min="0" step="1" value="700" /></div>
+    </div>
+    </div>
+    <div class="result-box" id="rentResult">
+      <h3>Huurtoeslag per maand <span class="badge-indicatie">Indicatie</span></h3>
+      <div class="result-value" id="resultRentBenefit">&mdash;</div>
+      <div class="result-row" style="margin-top:0.5rem;"><span class="label">Rekengrens huurtoeslagberekening</span><span class="value">&euro;&nbsp;932,93</span></div>
+      <div class="result-row"><span class="label">Inkomensgrens</span><span class="value">Geen vaste grens &mdash; hangt af van huur, huishouden, leeftijd en vermogen</span></div>
+      <p class="result-note">Indicatie &mdash; controleer de offici&euml;le proefberekening op Toeslagen.nl.</p>
+    </div>
+    <div class="result-divider" style="margin: 1.5rem 0;"></div>
+
+    <h2>Zorgtoeslag</h2>
+    <div class="result-box" id="zorgResult">
+      <h3>Zorgtoeslag per maand <span class="badge-indicatie">Indicatie</span></h3>
+      <div class="result-value" id="resultZorgBenefit">&mdash;</div>
+      <div class="result-row" style="margin-top:0.5rem;"><span class="label">Maximale zorgtoeslag (alleen)</span><span class="value">&euro;&nbsp;1.550/jaar (&plusmn;&euro;129 p/m)</span></div>
+      <div class="result-row"><span class="label">Maximale zorgtoeslag (samen)</span><span class="value">&euro;&nbsp;2.963/jaar (&plusmn;&euro;247 p/m)</span></div>
+      <p class="result-note">Indicatie &mdash; controleer de offici&euml;le proefberekening op Toeslagen.nl.</p>
+    </div>
+  </div>
+
+  <div class="calculator-card">
+    <h2>Hoe werkt deze berekening?</h2>
+    <p>Deze calculator geeft een indicatie van huurtoeslag en zorgtoeslag op basis van de regels van 2026.</p>
+    <ul>
+      <li><strong>Huurtoeslag:</strong> vanaf 2026 kan je huur niet meer 'te hoog' zijn om huurtoeslag aan te vragen. De rekengrenzen (&euro;932,93 voor 21+) tellen nog wel mee voor de hoogte. Vermogensgrens: &euro;38.479 (alleen) / &euro;76.958 (samen).</li>
+      <li><strong>Zorgtoeslag:</strong> maximaal &euro;1.550/jaar (&plusmn;&euro;129/maand) voor alleenstaanden, &euro;2.963/jaar (&plusmn;&euro;247/maand) met partner. Inkomensgrens &euro;40.857 (alleen) / &euro;51.142 (samen). Vermogensgrens: &euro;146.011 (alleen) / &euro;184.633 (samen).</li>
+    </ul>
+
+    <h2>Veelgestelde vragen</h2>
+    <h3>Is dit hetzelfde als de offici&euml;le proefberekening?</h3>
+    <p>Nee. Dit is een indicatie. De Dienst Toeslagen kijkt naar meer factoren waaronder je uiteindelijke toetsingsinkomen en vermogen. Doe de offici&euml;le proefberekening op <a href="https://www.toeslagen.nl" target="_blank" rel="noopener">Toeslagen.nl</a>.</p>
+    <h3>Wat is een toeslagpartner?</h3>
+    <p>Je toeslagpartner is de persoon met wie je een gezamenlijk huishouden voert. Het inkomen van je toeslagpartner telt mee voor de berekening.</p>
+    <h3>Waarom telt vermogen mee?</h3>
+    <p>Naast inkomen kijkt de Belastingdienst naar je vermogen (spaargeld, beleggingen). Deze calculator houdt hier nog geen rekening mee — dit kan invloed hebben op je mogelijke toeslag.</p>
+    <h3>Waarom kan het definitieve bedrag afwijken?</h3>
+    <p>De Dienst Toeslagen berekent je toeslag op basis van een geschat inkomen. Na afloop van het jaar volgt een definitieve berekening op basis van je werkelijke inkomen.</p>
+
+    <h2>Bronnen en informatie</h2>
+    <ul>
+      <li><a href="https://www.toeslagen.nl/huurtoeslag" target="_blank" rel="noopener">Dienst Toeslagen — Huurtoeslag</a></li>
+      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag" target="_blank" rel="noopener">Dienst Toeslagen — Zorgtoeslag</a></li>
+      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026" target="_blank" rel="noopener">Toeslagenkaart 2026</a></li>
+    </ul>
+
+    <p class="disclaimer">Deze berekening is een indicatie. Je werkelijke toeslag kan afwijken. Doe altijd de offici&euml;le proefberekening op Toeslagen.nl. Aan deze indicatie kunnen geen rechten worden ontleend.</p>
+    <p class="last-updated">Laatst bijgewerkt: 12 juni 2026</p>
+  </div>
+
+  <CrossSellCards
+    title="Ook handig om te berekenen"
+    items={[
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon." },
+      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Bereken een indicatie van bruto naar netto." },
+      { href: "/hypotheek-calculator/", title: "Hypotheek Calculator", description: "Maak een indicatie van maandlasten." },
+    ]}
+  />
+</BaseLayout>
+
+<script>
+  import { calculateAllowances } from "../lib/calculators/allowances";
+  import { formatEuroHtml } from "../lib/format/currency";
+
+  let household: "single" | "couple" = "single";
+
+  function calculate() {
+    const income = parseFloat((document.getElementById("income") as HTMLInputElement).value) || 0;
+    const partnerIncome = parseFloat((document.getElementById("partnerIncome") as HTMLInputElement).value) || 0;
+    const rent = parseFloat((document.getElementById("rent") as HTMLInputElement).value) || 0;
+
+    const result = calculateAllowances({
+      income,
+      partnerIncome,
+      isCouple: household === "couple",
+      rent,
+    });
+
+    if (!result.valid) {
+      document.getElementById("resultRentBenefit")!.innerHTML = "Geen recht (indicatie)";
+      document.getElementById("resultZorgBenefit")!.innerHTML = "Geen recht (indicatie)";
+      return;
+    }
+
+    document.getElementById("resultRentBenefit")!.innerHTML = result.rentBenefit > 0 ? formatEuroHtml(result.rentBenefit, 0) : "Geen recht (indicatie)";
+    document.getElementById("resultZorgBenefit")!.innerHTML = result.zorgBenefit > 0 ? formatEuroHtml(result.zorgBenefit, 0) : "Geen recht (indicatie)";
+  }
+  document.querySelectorAll("input").forEach(el => { el.addEventListener("input", calculate); el.addEventListener("change", calculate); });
+  document.getElementById("household")!.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button"); if (!btn) return;
+    document.querySelectorAll("#household button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active"); household = btn.dataset.type as "single" | "couple";
+    document.getElementById("partnerIncomeGroup")!.style.display = household === "couple" ? "block" : "none";
+    calculate();
+  });
+  calculate();
+</script>
+
+<style>
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
+  ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
+  .vermogen-waarschuwing { background: #fff8e1; border: 1px solid #f9a825; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.9rem; margin-bottom: 1.25rem; color: #795548; }
+  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+</style>

@@ -1,0 +1,32 @@
+{
+  "name": "boring-websites",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0 <26"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run check:knowledge && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate:cdl": "node scripts/validate-cdl.mjs",
+    "validate:knowledge": "node scripts/validate-knowledge.mjs",
+    "generate:knowledge": "node scripts/generate-knowledge-registry.mjs",
+    "check:knowledge": "node scripts/check-knowledge-registry.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "qa:rules": "node scripts/qa-rule-resolver.mjs",
+    "rule:impact": "node scripts/rule-impact.mjs",
+    "knowledge:changelog": "node scripts/knowledge-changelog.mjs",
+    "atlas:check": "node scripts/atlas-ci-check.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.6"
+  },
+  "devDependencies": {
+    "js-yaml": "^5.2.0",
+    "vitest": "^4.1.9"
+  }
+}

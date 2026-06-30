@@ -1,0 +1,262 @@
+# =============================================================================
+# Calculatieloket.nl — Calculator Catalog
+# Centraal register van alle calculators. Voeg nieuwe calculators toe onderaan.
+# =============================================================================
+calculators:
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: BTW
+  # ---------------------------------------------------------------------------
+  - id: "btw-calculator"
+    slug: "/btw-calculator/"
+    title: "BTW Calculator"
+    category: "btw"
+    subcategory: "standaard"
+    priority: 1
+    status: "live"
+    search_volume: 0          # placeholder
+    keyword_difficulty: 0     # placeholder
+    commercial_value: 0       # placeholder
+    estimated_rpm: 0          # placeholder
+    cluster: "btw"
+    official_sources:
+      - name: "Belastingdienst — BTW-tarief"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief"
+    schema: "faq,howto"
+    component_version: "2.0"   # calc-modern UI
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/btw.ts
+    content_version: "2.0"
+    last_review: "2026-06-29"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/btw.ts"
+
+  - id: "btw-terugrekenen"
+    slug: "/btw-terugrekenen/"
+    title: "BTW Terugrekenen"
+    category: "btw"
+    subcategory: "terugrekenen"
+    priority: 2
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "btw"
+    official_sources:
+      - name: "Belastingdienst — BTW-tarief"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief"
+      - name: "Belastingdienst — Rekenvoorbeeld btw berekenen"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/rekenvoorbeeld_btw_berekenen"
+    schema: "faq,howto"
+    component_version: "2.0"   # calc-modern UI
+    engine_version: "1.0"        # Atlas Calculator Engine: src/lib/calculators/btw.ts
+    content_version: "2.0"
+    last_review: "2026-06-29"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/btw.ts"
+
+  - id: "btw-inclusief-exclusief"
+    slug: "/btw-inclusief-exclusief/"
+    title: "BTW Inclusief/Exclusief"
+    category: "btw"
+    subcategory: "omrekenen"
+    priority: 3
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "btw"
+    official_sources:
+      - name: "Belastingdienst — BTW-tarief"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief"
+    schema: "faq,howto"
+    component_version: "2.0"   # calc-modern UI
+    engine_version: "1.0"        # Atlas Calculator Engine: src/lib/calculators/btw.ts
+    content_version: "2.0"
+    last_review: "2026-06-29"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/btw.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Salaris / Box 1
+  # ---------------------------------------------------------------------------
+  - id: "salaris-calculator"
+    slug: "/salaris-calculator/"
+    title: "Salaris Calculator"
+    category: "salaris"
+    subcategory: "bruto-netto"
+    priority: 1
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "salaris"
+    official_sources:
+      - name: "Belastingdienst — Box 1 tarieven"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1"
+      - name: "Belastingdienst — Algemene heffingskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026"
+      - name: "Belastingdienst — Arbeidskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/tax.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/tax.ts"
+
+  - id: "bruto-netto-2026"
+    slug: "/bruto-netto-2026/"
+    title: "Bruto Netto 2026"
+    category: "salaris"
+    subcategory: "bruto-netto"
+    priority: 2
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "salaris"
+    official_sources:
+      - name: "Belastingdienst — Box 1 tarieven"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1"
+      - name: "Belastingdienst — Algemene heffingskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026"
+      - name: "Belastingdienst — Arbeidskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/tax.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/tax.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Wonen
+  # ---------------------------------------------------------------------------
+  - id: "hypotheek-calculator"
+    slug: "/hypotheek-calculator/"
+    title: "Hypotheek Calculator"
+    category: "wonen"
+    subcategory: "hypotheek"
+    priority: 1
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "wonen"
+    official_sources:
+      - name: "Nibud — Budgetvoorlichting"
+        url: "https://www.nibud.nl"
+      - name: "Rijksoverheid — Hypotheek"
+        url: "https://www.rijksoverheid.nl/hypotheek"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/mortgage.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/mortgage.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Ondernemen
+  # ---------------------------------------------------------------------------
+  - id: "zzp-calculator"
+    slug: "/zzp-calculator/"
+    title: "ZZP Calculator"
+    category: "ondernemen"
+    subcategory: "uurtarief"
+    priority: 1
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "ondernemen"
+    official_sources:
+      - name: "Belastingdienst — Zelfstandigenaftrek 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026"
+      - name: "Ondernemersplein — MKB-winstvrijstelling"
+        url: "https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/zzp.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/zzp.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Toeslagen
+  # ---------------------------------------------------------------------------
+  - id: "toeslagen-calculator"
+    slug: "/toeslagen-calculator/"
+    title: "Toeslagen Calculator"
+    category: "toeslagen"
+    subcategory: "huur-zorg"
+    priority: 1
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "toeslagen"
+    official_sources:
+      - name: "Dienst Toeslagen — Huurtoeslag"
+        url: "https://www.toeslagen.nl/huurtoeslag"
+      - name: "Dienst Toeslagen — Zorgtoeslag"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag"
+      - name: "Toeslagenkaart 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/allowances.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/allowances.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Auto / Import
+  # ---------------------------------------------------------------------------
+  - id: "auto-importkosten-berekenen"
+    slug: "/auto-importkosten-berekenen/"
+    title: "Auto Importkosten Berekenen"
+    category: "auto"
+    subcategory: "import"
+    priority: 1
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "auto-import"
+    official_sources:
+      - name: "RDW — Voertuig invoeren vanuit een Europees land"
+        url: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa"
+      - name: "RDW — Invoeren, exporteren of doorvoeren"
+        url: "https://www.rdw.nl/invoeren-exporteren-doorvoeren"
+      - name: "Belastingdienst — Bpm"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm"
+      - name: "Belastingdienst — Aangifte bpm bij aanvraag Nederlands kenteken"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm"
+      - name: "Belastingdienst — Hoe kan ik de bpm berekenen?"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen"
+      - name: "Belastingdienst — Bpm berekenen voor een personenauto"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen"
+      - name: "Belastingdienst — Hoe bereken ik de bpm voor een kampeerauto?"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen"
+      - name: "Rijksoverheid — Auto uit het buitenland importeren"
+        url: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren"
+    schema: "faq,howto"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/import-costs.ts
+    content_version: "2.0"
+    last_review: "2026-06-30"
+    owner: "Barry"
+    notes: "Gemigreerd naar src/lib/calculators/import-costs.ts"

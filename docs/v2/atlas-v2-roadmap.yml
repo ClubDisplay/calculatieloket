@@ -1,0 +1,111 @@
+# Atlas v2 Roadmap
+
+> **Status:** Architecture Foundation — v2 Sprint 001  
+> **Laatst bijgewerkt:** 2026-06-29
+
+---
+
+## Faseplanning
+
+```yaml
+phase_1:
+  name: Architecture
+  status: in_progress
+  goal: Documenteer visie, core architecture, DSL, rule engine, generator, localization, products, API, AI OS en migratie.
+  deliverables:
+    - docs/v2/00-ATLAS-V2-OVERVIEW.md
+    - docs/v2/01-CORE-ARCHITECTURE.md
+    - docs/v2/02-CALCULATOR-DEFINITION-LANGUAGE.md
+    - docs/v2/03-RULE-ENGINE.md
+    - docs/v2/04-GENERATOR.md
+    - docs/v2/05-LOCALIZATION.md
+    - docs/v2/06-PRODUCTS-ON-ATLAS.md
+    - docs/v2/07-API-VISION.md
+    - docs/v2/08-AI-OPERATING-SYSTEM.md
+    - docs/v2/09-MIGRATION-FROM-V1.md
+    - docs/v2/atlas-v2-roadmap.yml
+
+phase_2:
+  name: Core Engines
+  status: planned
+  goal: Verdere uitwerking en stabilisatie van Calculation Engine, Validation Engine, Formatting Engine, Localization Engine.
+  deliverables:
+    - Tax engine (Box 1, AHK, AK)
+    - Mortgage engine
+    - Benefits engine
+    - ZZP engine
+    - Import engine
+    - Verdere uitwerking Rule Engine
+
+phase_3:
+  name: Calculator Definitions
+  status: in_progress
+  goal: Definieer bestaande v1 calculators in Atlas v2 YAML-formaat.
+  deliverables:
+    - YAML-definities voor alle 9 calculators
+    - Mapping naar bestaande engine-modules
+    - Review en validatie
+
+phase_4:
+  name: Generator Prototype
+  status: planned
+  goal: Bouw een prototype dat één of meerdere calculators genereert vanuit YAML.
+  deliverables:
+    - Generator script / module
+    - Gegenereerde Astro pagina voor btw-calculator
+    - Vergelijking met handgeschreven v1 pagina
+
+phase_5:
+  name: Localization
+  status: planned
+  goal: Scheiding van locale-specifieke regels, content en formatting.
+  deliverables:
+    - Rule Engine met locale-bestanden
+    - Localization Engine voor valuta/formatting
+    - Content fallback systeem
+
+phase_6:
+  name: API/Widgets
+  status: planned
+  goal: Atlas beschikbaar maken voor externe gebruik.
+  deliverables:
+    - Runtime API prototype
+    - Partner API design
+    - White-label widget concept
+    - Admin API specificatie
+```
+
+---
+
+## Tijdlijn (indicatief)
+
+| Sprint | Fase | Focus |
+|---|---|---|
+| v2 Sprint 001 | Phase 1 | Architecture Foundation |
+| v2 Sprint 002 | Phase 1 | DSL + Rule Engine design |
+| v2 Sprint 003 | Phase 2 | Tax engine + salaris migratie |
+| v2 Sprint 004 | Phase 2 | Overige engines |
+| v2 Sprint 005 | Phase 3 | Calculator YAML definitions |
+| v2 Sprint 006 | Phase 4 | Generator prototype |
+| v2 Sprint 007 | Phase 5 | Localization engine |
+| v2 Sprint 008 | Phase 6 | API/Widgets vision concrete |
+
+---
+
+## Succescriteria
+
+- Alle v1 calculators draaien op Atlas v2-engine zonder output-afwijking.
+- Nieuwe calculators kunnen worden toegevoegd via YAML-definities.
+- Multi-locale support is technisch mogelijk.
+- Build levert 15+ pagina's op zonder errors.
+- Documentatie is up-to-date en consistent.
+
+---
+
+## Belangrijke beslissingen
+
+1. **v1 blijft live** tijdens de hele migratie.
+2. **Calculatieloket.nl** is de eerste en referentie-implementatie.
+3. **Geen big bang**: per cluster migreren.
+4. **Documentatie first**: elke fase begint met ontwerp, gevolgd door code.
+5. **AI-native**: definities en prompts worden onderdeel van het platform.

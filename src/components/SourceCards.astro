@@ -1,0 +1,106 @@
+---
+interface Item {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  items: Item[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="srcc">
+  <h2 class="srcc-title">{title}</h2>
+  <div class="srcc-grid">
+    {items.map((item) => (
+      <a href={item.href} target="_blank" rel="noopener" class="srcc-card">
+        <span class="srcc-label">{item.label}</span>
+        <span class="srcc-card-title">{item.title}</span>
+        <span class="srcc-desc">{item.description}</span>
+        <span class="srcc-cta">Bekijk bron &rarr;</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .srcc {
+    margin-top: 1.5rem;
+  }
+
+  .srcc-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .srcc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .srcc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .srcc-card:hover,
+  .srcc-card:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+  }
+
+  .srcc-label {
+    align-self: flex-start;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .srcc-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .srcc-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .srcc-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 560px) {
+    .srcc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

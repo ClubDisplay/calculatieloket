@@ -1,0 +1,52 @@
+id: nl.tax.ahk.2026
+type: tax_credit
+country: NL
+locale: nl-NL
+title:
+  nl-NL: Algemene heffingskorting 2026
+description:
+  nl-NL: Algemene heffingskorting voor 2026.
+status: active
+effective_from: '2026-01-01'
+effective_until: null
+authority:
+  level: official
+  last_review: '2026-06-29'
+  name: belastingdienst
+sources:
+  - label: Belastingdienst — Algemene heffingskorting 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-29'
+relationships:
+  - relation: used_by
+    target: calculator.salaris-calculator
+    description: Gebruikt door de Salaris Calculator.
+  - relation: used_by
+    target: calculator.bruto-netto-2026
+    description: Gebruikt door Bruto Netto 2026.
+  - relation: used_by
+    target: calculator.zzp-calculator
+    description: Gebruikt door de ZZP Calculator.
+used_by:
+  - calculator.salaris-calculator
+  - calculator.bruto-netto-2026
+  - calculator.zzp-calculator
+version: '2026-01-01'
+tags:
+  - tax
+  - tax_credit
+  - ahk
+  - '2026'
+  - netherlands
+notes:
+  nl-NL: De algemene heffingskorting wordt afgebouwd vanaf een inkomen van € 29.736 en is nul vanaf € 78.427.
+data:
+  credit_type: general_tax_credit
+  currency: EUR
+  max: 3115
+  phase_out:
+    threshold: 29736
+    rate: 0.06398
+  cut_off: 78427

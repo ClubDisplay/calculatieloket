@@ -1,0 +1,69 @@
+id: nl.allowance.rent.2026
+
+type: allowance_threshold
+
+country: NL
+
+locale: nl-NL
+
+title:
+  nl-NL: Huurtoeslag 2026 — engine parameters
+
+description:
+  nl-NL: Parameters voor de huurtoeslagberekening in 2026 zoals gebruikt door de Allowance Engine.
+
+status: active
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Dienst Toeslagen
+
+sources:
+  - label: Dienst Toeslagen — Huurtoeslag
+    url: https://www.toeslagen.nl/huurtoeslag
+    authority_level: official
+    domain: toeslagen.nl
+    last_verified: '2026-06-30'
+  - label: Toeslagenkaart 2026
+    url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+    authority_level: official
+    domain: belastingdienst.nl
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: used_by
+    target: calculator.toeslagen-calculator
+    description: Gebruikt door de Toeslagen Calculator.
+
+used_by:
+  - calculator.toeslagen-calculator
+
+version: '2026-01-01'
+
+tags:
+  - allowance
+  - rent
+  - huurtoeslag
+  - '2026'
+  - netherlands
+  - engine_parameters
+
+notes:
+  nl-NL: Deze parameters komen overeen met de hardcoded RENT_2026 waarden in de vorige versie van de Allowance Engine. Dit object bevat de exacte engine-parameters; algemene drempels en maximumbedragen staan in `nl.allowance.rent`. De exacte toeslag hangt af van huur, inkomen, huishouden, leeftijd en vermogen.
+
+data:
+  allowance_type: huurtoeslag
+  currency: EUR
+  period: month
+  max_rent: 932.93
+  income_limit_single: 32500
+  income_limit_couple: 43500
+  base_benefit: 425
+  own_payment_threshold_single: 18000
+  own_payment_threshold_couple: 21000
+  own_payment_rate: 0.15

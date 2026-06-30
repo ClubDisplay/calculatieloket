@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+import CrossSellCards from "../components/CrossSellCards.astro";
+---
+
+<BaseLayout
+  title="Btw terugrekenen — van inclusief naar exclusief btw"
+  description="Reken eenvoudig btw terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw en krijg een duidelijke indicatie met formule en voorbeeld."
+>
+  <h1 class="page-title">Btw terugrekenen</h1>
+  <p class="page-subtitle">
+    Reken een bedrag inclusief btw om naar exclusief btw. Kies je tarief en zie direct het bedrag exclusief btw en het btw-bedrag.
+    <strong>De uitkomst is een indicatie.</strong>
+    Gebruik ook onze <a href="/btw-calculator/">uitgebreide BTW Calculator</a> voor beide rekenrichtingen.
+  </p>
+
+  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
+
+  <div class="calculator-card calc-modern">
+    <div class="calc-fields">
+    <div class="form-group">
+      <label for="amount">Bedrag inclusief btw</label>
+      <div class="input-prefix">
+        <span class="prefix">&euro;</span>
+        <input type="number" id="amount" placeholder="Bijv. 121" min="0" step="0.01" value="121" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Btw-tarief</label>
+      <div class="radio-group" id="btwRate">
+        <button data-rate="21" class="active">21% &mdash; hoog tarief</button>
+        <button data-rate="9">9% &mdash; laag tarief</button>
+        <button data-rate="0">0% &mdash; nultarief</button>
+      </div>
+    </div>
+    </div>
+
+    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken btw terug</button>
+    <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bedrag in (0 of hoger).</p>
+
+    <div class="result-box" id="result">
+      <h3>Resultaat <span class="badge-indicatie">Indicatie</span></h3>
+      <div class="result-row">
+        <span class="label">Bedrag exclusief btw</span>
+        <span class="value" id="resultExcl">&mdash;</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Btw-bedrag</span>
+        <span class="value" id="resultBtw">&mdash;</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Ingevoerd bedrag inclusief btw</span>
+        <span class="value" id="resultIncl">&mdash;</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Gebruikt tarief</span>
+        <span class="value" id="resultRate">&mdash;</span>
+      </div>
+      <p class="result-note">Deze berekening is een indicatie.</p>
+    </div>
+
+    <p class="calc-disclaimer">Deze berekening is een indicatie. Controleer belangrijke bedragen altijd via offici&euml;le bronnen of een adviseur.</p>
+  </div>
+
+  <div class="calculator-card">
+    <h2>Hoe werkt btw terugrekenen?</h2>
+    <p>Bij btw terugrekenen wil je van een bedrag inclusief btw weten wat het bedrag exclusief btw is en hoeveel btw er in het totaalbedrag zit.</p>
+    <p>Je kunt niet simpelweg het btw-percentage van het inclusief bedrag aftrekken. Het inclusief bedrag is namelijk al opgebouwd uit het bedrag exclusief btw plus de btw daarover. Daarom gebruik je een deling in plaats van een aftrekking.</p>
+    <p>Stel, je hebt een factuur van &euro;121 inclusief 21% btw. Als je daar 21% van aftrekt (&euro;25,41), kom je uit op &euro;95,59. Dat klopt niet. Het juiste bedrag exclusief btw is &euro;100. Het verschil ontstaat doordat de 21% btw is berekend over het exclusieve bedrag, niet over het inclusieve bedrag.</p>
+
+    <h2>Formule voor btw terugrekenen</h2>
+    <p>De formule voor het terugrekenen van btw is:</p>
+
+    <div class="formula-box">
+      <p><strong>Bedrag exclusief btw = bedrag inclusief btw &divide; (1 + btw-percentage)</strong></p>
+      <p><strong>Btw-bedrag = bedrag inclusief btw &minus; bedrag exclusief btw</strong></p>
+    </div>
+
+    <p>In de praktijk:</p>
+    <ul>
+      <li>Bij 21% btw: deel je het bedrag door <strong>1,21</strong></li>
+      <li>Bij 9% btw: deel je het bedrag door <strong>1,09</strong></li>
+      <li>Bij 0% btw: is het exclusieve bedrag gelijk aan het inclusieve bedrag en is het btw-bedrag <strong>&euro;0</strong></li>
+    </ul>
+
+    <h2>Voorbeelden van btw terugrekenen</h2>
+
+    <h3>Voorbeeld 1: 21% btw</h3>
+    <ul>
+      <li>Bedrag inclusief btw: <strong>&euro;121</strong></li>
+      <li>Btw-tarief: <strong>21%</strong></li>
+      <li>Berekening: &euro;121 &divide; 1,21 = <strong>&euro;100</strong></li>
+      <li>Btw-bedrag: &euro;121 &minus; &euro;100 = <strong>&euro;21</strong></li>
+    </ul>
+
+    <h3>Voorbeeld 2: 9% btw</h3>
+    <ul>
+      <li>Bedrag inclusief btw: <strong>&euro;109</strong></li>
+      <li>Btw-tarief: <strong>9%</strong></li>
+      <li>Berekening: &euro;109 &divide; 1,09 = <strong>&euro;100</strong></li>
+      <li>Btw-bedrag: &euro;109 &minus; &euro;100 = <strong>&euro;9</strong></li>
+    </ul>
+
+    <h2>Veelgemaakte fouten bij btw terugrekenen</h2>
+    <ul>
+      <li><strong>21% van het inclusief bedrag aftrekken:</strong> dit is niet hetzelfde als btw terugrekenen. Je moet delen door 1,21, niet vermenigvuldigen met 0,79.</li>
+      <li><strong>Verkeerd tarief gebruiken:</strong> controleer welk btw-tarief (&mdash; hoog 21% of laag 9% &mdash;) van toepassing is op jouw product of dienst. Gebruik het verkeerde tarief en je berekening klopt niet.</li>
+      <li><strong>0% btw verwarren met vrijgesteld:</strong> het 0%-tarief is iets anders dan een btw-vrijstelling. Bij 0% breng je wel btw in rekening (0%), bij een vrijstelling helemaal niet. Dit heeft gevolgen voor je btw-aangifte.</li>
+      <li><strong>Niet controleren bij de Belastingdienst:</strong> btw-regels kunnen wijzigen. Controleer bij twijfel de offici&euml;le informatie van de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst</a>.</li>
+    </ul>
+
+    <h2>Veelgestelde vragen</h2>
+
+    <h3>Hoe reken je btw terug van inclusief naar exclusief?</h3>
+    <p>Deel het bedrag inclusief btw door (1 + het btw-percentage gedeeld door 100). Bij 21% btw deel je door 1,21. Bij 9% btw deel je door 1,09. Het btw-bedrag is het verschil tussen het inclusieve en het exclusieve bedrag.</p>
+
+    <h3>Wat is de formule voor 21% btw terugrekenen?</h3>
+    <p>Bedrag exclusief btw = bedrag inclusief btw &divide; 1,21. Het btw-bedrag is het inclusieve bedrag min het exclusieve bedrag.</p>
+
+    <h3>Wat is de formule voor 9% btw terugrekenen?</h3>
+    <p>Bedrag exclusief btw = bedrag inclusief btw &divide; 1,09. Het btw-bedrag is het inclusieve bedrag min het exclusieve bedrag.</p>
+
+    <h3>Is 0% btw hetzelfde als geen btw?</h3>
+    <p>Nee. Het 0%-tarief (nultarief) betekent dat je 0% btw berekent, maar je moet dit wel op je factuur vermelden. Je mag het nultarief alleen in specifieke situaties toepassen, zoals bij export naar andere EU-landen. Een btw-vrijstelling betekent dat je helemaal geen btw in rekening brengt en ook geen btw mag vermelden.</p>
+
+    <h3>Kan ik deze berekening gebruiken voor mijn btw-aangifte?</h3>
+    <p>De uitkomst is een indicatie. Gebruik de berekening als hulpmiddel, maar controleer voor je administratie of btw-aangifte altijd de offici&euml;le informatie van de <a href="https://www.belastingdienst.nl" target="_blank" rel="noopener">Belastingdienst</a> of vraag een adviseur.</p>
+
+    <h2>Bronnen</h2>
+    <ul>
+      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst &mdash; Btw-tarieven</a></li>
+      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/rekenvoorbeeld_btw_berekenen" target="_blank" rel="noopener">Belastingdienst &mdash; Rekenvoorbeeld btw berekenen</a></li>
+    </ul>
+
+    <p class="disclaimer">Deze berekening is een indicatie. Aan de uitkomsten kunnen geen rechten worden ontleend. Controleer belangrijke bedragen altijd via offici&euml;le bronnen of een financieel adviseur.</p>
+    <p class="last-updated">Laatst bijgewerkt: 26 juni 2026</p>
+  </div>
+
+  <CrossSellCards
+    title="Ook handig bij btw"
+    items={[
+      { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen met 21%, 9% en 0%." },
+      { href: "/btw-inclusief-exclusief/", title: "Btw inclusief en exclusief", description: "Reken bedragen met en zonder btw om." },
+      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Handig voor ondernemers en uurtarieven." },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon." },
+    ]}
+  />
+</BaseLayout>
+
+<script>
+  import { calculateBtw } from "../lib/calculators/btw";
+  import { formatEuro } from "../lib/format/currency";
+
+  const amountInput = document.getElementById("amount") as HTMLInputElement;
+  const resultExcl = document.getElementById("resultExcl")!;
+  const resultBtw = document.getElementById("resultBtw")!;
+  const resultIncl = document.getElementById("resultIncl")!;
+  const resultRate = document.getElementById("resultRate")!;
+
+  let btwRate = 21;
+
+  function calculate() {
+    const amount = parseFloat(amountInput.value);
+    const errorBox = document.getElementById("calcError") as HTMLElement;
+    const result = calculateBtw({ amount, rate: btwRate, direction: "inclusive_to_exclusive" });
+
+    if (!result.valid) {
+      resultExcl.textContent = "—";
+      resultBtw.textContent = "—";
+      resultIncl.textContent = "—";
+      resultRate.textContent = "—";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    errorBox.style.display = "none";
+    resultExcl.textContent = formatEuro(result.amountExcl, 2);
+    resultBtw.textContent = formatEuro(result.btwAmount, 2);
+    resultIncl.textContent = formatEuro(result.amountIncl, 2);
+    resultRate.textContent = `${result.rate}% btw`;
+  }
+
+  amountInput.addEventListener("input", calculate);
+  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
+  document.getElementById("btwRate")!.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button");
+    if (!btn) return;
+    document.querySelectorAll("#btwRate button").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    btwRate = parseInt(btn.dataset.rate!);
+    calculate();
+  });
+  calculate();
+</script>
+
+<style>
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; color: var(--color-text); }
+  ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
+  .calc-disclaimer { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 1rem; }
+  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+  .formula-box { background: var(--color-primary-light); border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 1rem 1.25rem; margin: 1rem 0; }
+  .formula-box p { margin: 0.25rem 0; font-size: 0.95rem; }
+</style>

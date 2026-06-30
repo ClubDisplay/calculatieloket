@@ -1,0 +1,97 @@
+---
+interface Item {
+  href: string;
+  title: string;
+  description: string;
+  accent?: string;
+}
+
+interface Props {
+  title: string;
+  items: Item[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="xsell">
+  <h2 class="xsell-title">{title}</h2>
+  <div class="xsell-grid">
+    {items.map((item) => (
+      <a
+        href={item.href}
+        class="xsell-card"
+        style={item.accent ? `--xsell-accent:${item.accent}` : undefined}
+      >
+        <span class="xsell-card-title">{item.title}</span>
+        <span class="xsell-card-desc">{item.description}</span>
+        <span class="xsell-card-cta">Bekijk &rarr;</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .xsell {
+    margin-top: 2rem;
+  }
+
+  .xsell-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .xsell-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .xsell-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  }
+
+  .xsell-card:hover,
+  .xsell-card:focus-visible {
+    border-color: var(--xsell-accent, var(--color-primary));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+  }
+
+  .xsell-card-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .xsell-card-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .xsell-card-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--xsell-accent, var(--color-primary));
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 560px) {
+    .xsell-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+id: es.tax.income.2026
+
+type: tax_bracket
+
+country: ES
+
+locale: es-ES
+
+title:
+  es-ES: Impuesto sobre la Renta de las Personas Físicas — escala 2026
+  en-US: Spanish personal income tax — 2026 scale
+  nl-BE: Spaanse inkomstenbelasting — schaal 2026
+
+description:
+  es-ES: Escala estatal del IRPF para el ejercicio impositivo 2026 (rentas de 2026). En espera de publicación oficial de los tipos impositivos y tramos por la Agencia Tributaria / Ley de Presupuestos.
+  en-US: State IRPF scale for the 2026 tax year (2026 income). Pending official publication of rates and brackets by the Agencia Tributaria / Budget Law.
+  nl-BE: Staatsschaal IRPF voor belastingjaar 2026 (inkomsten 2026). In afwachting van officiële publicatie van tarieven en schijven door de Agencia Tributaria / Begrotingswet.
+
+status: draft
+
+effective_from: '2026-01-01'
+
+effective_until: null
+
+authority:
+  level: official
+  last_review: '2026-06-30'
+  name: Agencia Tributaria / Ministerio de Hacienda
+
+sources:
+  - label: Agencia Tributaria — IRPF
+    url: https://sede.agenciatributaria.gob.es/Sede/irpf.html
+    authority_level: official
+    domain: sede.agenciatributaria.gob.es
+    last_verified: '2026-06-30'
+  - label: BOE — Ley 35/2006 del Impuesto sobre la Renta de las Personas Físicas
+    url: https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764
+    authority_level: official
+    domain: boe.es
+    last_verified: '2026-06-30'
+
+relationships:
+  - relation: related
+    target: es.vat.standard
+    description: Objecto del mismo país (España) para otro tipo de regla fiscal.
+
+used_by: []
+
+version: '2026-01-01'
+
+tags:
+  - tax
+  - income
+  - '2026'
+  - spain
+  - draft
+
+notes:
+  es-ES: La escala del IRPF para 2026 (rentas de 2026) no está publicada en la Sede electrónica de la Agencia Tributaria a fecha 30 de junio de 2026. El objeto permanece en draft hasta que se publiquen los tramos y tipos oficiales.
+  en-US: The IRPF scale for 2026 (2026 income) is not published on the Agencia Tributaria electronic site as of 30 June 2026. The object remains draft until official brackets and rates are published.
+  nl-BE: De IRPF-schaal voor 2026 (inkomsten 2026) is op 30 juni 2026 nog niet gepubliceerd op de elektronische site van de Agencia Tributaria. Het object blijft draft totdat de officiële schijven en tarieven verschijnen.
+
+data:
+  year: 2026
+  currency: EUR
+  applies_to: individual
+  brackets: []

@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+import CrossSellCards from "../components/CrossSellCards.astro";
+---
+
+<BaseLayout
+  title="ZZP Calculator 2026 — Bereken uurtarief en netto inkomen"
+  description="Bereken als zzp'er een indicatie van je netto inkomen, belasting, zelfstandigenaftrek (€1.200) en benodigd uurtarief voor 2026."
+>
+  <h1 class="page-title">ZZP Calculator 2026</h1>
+  <p class="page-subtitle">
+    Indicatie: welk uurtarief heb je nodig om je gewenste netto inkomen als zzp'er te halen?
+  </p>
+
+  <AdSlot slot="1234567895" format="auto" style="min-height:100px" />
+
+  <div class="calculator-card calc-modern">
+    <div class="calc-fields">
+    <p class="calc-group-title">Inkomenswens</p>
+    <div class="form-group">
+      <label for="desiredNet">Gewenst netto inkomen per maand</label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="desiredNet" placeholder="Bijv. 3500" min="0" step="100" value="4000" /></div>
+    </div>
+    <p class="calc-group-title">Declarabele inzet</p>
+    <div class="form-group">
+      <label for="billableDays">Declarabele dagen per jaar <span class="hint">(gemiddeld 200-220)</span></label>
+      <input type="number" id="billableDays" placeholder="Bijv. 210" min="1" max="365" step="1" value="210" />
+    </div>
+    <div class="form-group">
+      <label for="hoursPerDay">Declarabele uren per dag</label>
+      <input type="number" id="hoursPerDay" placeholder="Bijv. 8" min="1" max="12" step="0.5" value="8" />
+    </div>
+    <p class="calc-group-title">Kosten en pensioen</p>
+    <div class="form-group">
+      <label for="businessCosts">Zakelijke kosten per maand <span class="hint">(verzekeringen, tools, kantoor, etc.)</span></label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="businessCosts" placeholder="Bijv. 500" min="0" step="10" value="300" /></div>
+    </div>
+    <div class="form-group">
+      <label for="pensionSavings">Pensioenopbouw per maand <span class="hint">(zzp'er moet zelf pensioen regelen)</span></label>
+      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="pensionSavings" placeholder="Bijv. 500" min="0" step="10" value="500" /></div>
+    </div>
+    <div class="form-group">
+      <label>Ondernemersaftrek</label>
+      <div class="toggle-row"><span class="toggle-label">Zelfstandigenaftrek (&euro;1.200)</span><label class="toggle"><input type="checkbox" id="zzpDeduction" checked /><span class="slider"></span></label></div>
+      <div class="toggle-row"><span class="toggle-label">Startersaftrek (&euro;2.123) <span class="hint">— alleen als je hiervoor in aanmerking komt</span></span><label class="toggle"><input type="checkbox" id="starterDeduction" /><span class="slider"></span></label></div>
+      <div class="toggle-row"><span class="toggle-label">MKB-winstvrijstelling (12,70%)</span><label class="toggle"><input type="checkbox" id="mkbDeduction" checked /><span class="slider"></span></label></div>
+    </div>
+    </div>
+
+    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken uurtarief</button>
+    <p class="calc-error" id="calcError" style="display:none;">Vul een geldig netto-inkomen en declarabele inzet in.</p>
+
+    <div class="result-box" id="result">
+      <h3>Benodigd uurtarief <span class="badge-indicatie">Indicatie</span></h3>
+      <div class="result-value" id="resultHourlyRate">&mdash;</div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Benodigde jaaromzet (excl. BTW)</span><span class="value" id="detailRevenue">&mdash;</span></div>
+      <div class="result-row"><span class="label">Zakelijke kosten per jaar</span><span class="value" id="detailCost">&mdash;</span></div>
+      <div class="result-row"><span class="label">Pensioenopbouw per jaar</span><span class="value" id="detailPension">&mdash;</span></div>
+      <div class="result-row"><span class="label">Aftrekposten</span><span class="value" id="detailDeduction">&mdash;</span></div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Nettowinst (indicatie)</span><span class="value" id="detailNet">&mdash;</span></div>
+      <div class="result-row"><span class="label">Inkomstenbelasting (indicatie)</span><span class="value" id="detailTax">&mdash;</span></div>
+      <p class="result-note">Deze berekening is een indicatie.</p>
+    </div>
+  </div>
+
+  <div class="calculator-card">
+    <h2>Hoe werkt deze berekening?</h2>
+    <p>Deze calculator rekent terug van je gewenste netto maandinkomen naar het benodigde uurtarief. Gebruikte regels 2026:</p>
+    <ul>
+      <li><strong>Zelfstandigenaftrek:</strong> &euro;1.200 (belastingvoordeel beperkt tot 37,56%)</li>
+      <li><strong>Startersaftrek:</strong> &euro;2.123 extra, als je aan de voorwaarden voldoet</li>
+      <li><strong>MKB-winstvrijstelling:</strong> 12,70% van de winst na ondernemersaftrek</li>
+      <li>Box 1 tarieven: 35,75% / 37,56% / 49,50%</li>
+    </ul>
+
+    <h2>Veelgestelde vragen</h2>
+    <h3>Wat is het verschil tussen omzet en winst?</h3>
+    <p>Omzet is alles wat je factureert. Winst is wat overblijft na aftrek van zakelijke kosten. Over je winst betaal je inkomstenbelasting.</p>
+    <h3>Hoe werkt de zelfstandigenaftrek?</h3>
+    <p>In 2026 bedraagt de zelfstandigenaftrek &euro;1.200. Je moet voldoen aan het urencriterium (minimaal 1.225 uur per jaar). Het belastingvoordeel is beperkt tot 37,56%.</p>
+    <h3>Kom ik in aanmerking voor startersaftrek?</h3>
+    <p>De startersaftrek (&euro;2.123) is een verhoging van de zelfstandigenaftrek. Je komt in aanmerking als je in de afgelopen 5 jaar maximaal 2 keer zelfstandigenaftrek toepaste en in minimaal 1 van die jaren geen ondernemer was.</p>
+    <h3>Hoeveel moet ik reserveren voor belasting?</h3>
+    <p>Dit is een indicatie. De werkelijke belastingdruk hangt af van je totale inkomen, aftrekposten en heffingskortingen. Reserveer ruim en raadpleeg een boekhouder of fiscaal adviseur.</p>
+
+    <h2>Bronnen en informatie</h2>
+    <ul>
+      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026" target="_blank" rel="noopener">Belastingdienst — Zelfstandigenaftrek 2026</a></li>
+      <li><a href="https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/" target="_blank" rel="noopener">Ondernemersplein — MKB-winstvrijstelling</a></li>
+    </ul>
+
+    <p class="disclaimer">Deze berekening is een indicatie. Je werkelijke belastingdruk kan afwijken door je specifieke situatie. Raadpleeg bij twijfel een fiscaal adviseur of boekhouder.</p>
+    <p class="last-updated">Laatst bijgewerkt: 12 juni 2026</p>
+  </div>
+
+  <CrossSellCards
+    title="Ook handig om te berekenen"
+    items={[
+      { href: "/auto-importkosten-berekenen/", title: "Auto importkosten", description: "Bereken een indicatie van importkosten voor auto of camper." },
+      { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen." },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Vergelijk met een indicatie van nettoloon." },
+    ]}
+  />
+</BaseLayout>
+
+<script>
+  import { calculateZzpReverse } from "../lib/calculators/zzp";
+  import { formatEuroHtml } from "../lib/format/currency";
+
+  function calculate() {
+    const net = parseFloat((document.getElementById("desiredNet") as HTMLInputElement).value) || 0;
+    const days = parseFloat((document.getElementById("billableDays") as HTMLInputElement).value) || 0;
+    const hrs = parseFloat((document.getElementById("hoursPerDay") as HTMLInputElement).value) || 0;
+    const costs = parseFloat((document.getElementById("businessCosts") as HTMLInputElement).value) || 0;
+    const pension = parseFloat((document.getElementById("pensionSavings") as HTMLInputElement).value) || 0;
+    const hasZA = (document.getElementById("zzpDeduction") as HTMLInputElement).checked;
+    const hasStarter = (document.getElementById("starterDeduction") as HTMLInputElement).checked;
+    const hasMKB = (document.getElementById("mkbDeduction") as HTMLInputElement).checked;
+
+    const errorBox = document.getElementById("calcError") as HTMLElement;
+
+    if (net <= 0 || days <= 0 || hrs <= 0) {
+      document.getElementById("resultHourlyRate")!.innerHTML = "&mdash;";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    const result = calculateZzpReverse({
+      desiredNetMonthly: net,
+      billableDaysPerYear: days,
+      hoursPerDay: hrs,
+      businessCostsMonthly: costs,
+      pensionSavingsMonthly: pension,
+      applySelfEmployedDeduction: hasZA,
+      applyStarterDeduction: hasStarter,
+      applyMkbExemption: hasMKB,
+    });
+
+    if (!result.valid) {
+      document.getElementById("resultHourlyRate")!.innerHTML = "&mdash;";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    errorBox.style.display = "none";
+
+    const hours = days * hrs;
+
+    document.getElementById("resultHourlyRate")!.innerHTML = formatEuroHtml(result.requiredHourlyRate, 0);
+    document.getElementById("detailRevenue")!.innerHTML = formatEuroHtml(result.requiredYearlyRevenue, 0);
+    document.getElementById("detailCost")!.innerHTML = formatEuroHtml(result.yearlyCosts, 0);
+    document.getElementById("detailPension")!.innerHTML = formatEuroHtml(result.yearlyPension, 0);
+    document.getElementById("detailDeduction")!.innerHTML = formatEuroHtml(result.totalEntrepreneurDeductions + result.mkbExemptionAmount, 0);
+    document.getElementById("detailNet")!.innerHTML = formatEuroHtml(result.netProfit, 0);
+    document.getElementById("detailTax")!.innerHTML = formatEuroHtml(result.totalTaxDue, 0);
+  }
+
+  document.querySelectorAll("input").forEach(el => { el.addEventListener("input", calculate); el.addEventListener("change", calculate); });
+  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
+  calculate();
+</script>
+
+<style>
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
+  ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
+  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+</style>

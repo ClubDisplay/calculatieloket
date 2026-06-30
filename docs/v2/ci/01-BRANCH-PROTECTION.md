@@ -1,0 +1,49 @@
+# 01 — Branch Protection
+
+> Doel: `main` beschermen tegen ongewenste wijzigingen en de Atlas CI-workflow verplicht maken.
+
+---
+
+## Aanbevolen instellingen voor `main`
+
+Ga in GitHub naar:
+
+```
+Settings > Branches > Branch protection rules > Add rule
+```
+
+Stel in voor branch pattern `main`:
+
+- [ ] **Require a pull request before merging**
+  - [ ] **Require approvals**: minimaal 1 (optioneel, afhankelijk van teamgrootte)
+  - [ ] **Dismiss stale PR approvals when new commits are pushed** (aanbevolen)
+- [ ] **Require status checks to pass before merging**
+  - Status check: `Atlas CI / Run Atlas CI checks`
+- [ ] **Require branches to be up to date before merging** (aanbevolen)
+- [ ] **Restrict pushes that create files larger than 100 MB** (GitHub default)
+- [ ] **Do not allow bypassing the above settings** (optioneel; alleen als Barry zelf geen directe push naar `main` wil doen)
+
+---
+
+## Directe push naar `main`
+
+Standaard is directe push naar `main` **niet** toegestaan. Als Barry bewust wil kunnen pushen naar `main` zonder pull request, dan kan dat door:
+
+- Branch protection uit te schakelen, óf
+- Zichzelf als bypasser toe te voegen (alleen beschikbaar bij GitHub Pro/Team/Enterprise).
+
+De aanbeveling is om pull requests verplicht te houden en de CI-check te laten slagen voordat er gemerged wordt.
+
+---
+
+## Controleren
+
+Na het instellen:
+
+1. Maak een nieuwe branch.
+2. Doe een kleine wijziging (bijvoorbeeld een tekstfix in README).
+3. Open een pull request.
+4. Controleer dat de **“Atlas CI / Run Atlas CI checks”** check draait.
+5. Merge pas als de check groen is.
+
+Zie ook [02-ACTIONS-RUNBOOK.md](02-ACTIONS-RUNBOOK.md) voor wat te doen als de check faalt en [03-GITHUB-ACTIVATION-RUNBOOK.md](03-GITHUB-ACTIVATION-RUNBOOK.md) voor het stap-voor-stap activeren van GitHub en CI.
