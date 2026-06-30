@@ -92,6 +92,34 @@ Omdat er geen account is, gebruiken we URL-parameters en eventueel `sessionStora
 
 ---
 
+## Interne linkstrategie
+
+De journey wordt gedreven door interne links op drie niveaus:
+
+1. **In de resultaatkaart:** 1–2 contextuele next-step links (bijv. “Bekijk welke toeslagen je kunt krijgen”).
+2. **In “Wat kun je hiermee?”:** 3–4 use-case kaartjes die verwijzen naar gerelateerde calculators.
+3. **In content en FAQ:** natuurlijke verwijzingen naar andere tools, met beschrijvende anchors.
+4. **Onderaan de pagina:** `CrossSellCards` met 4–6 gerelateerde calculators.
+
+Voor de inkomens-journey geldt:
+
+```
+Bruto-netto → Salaris → Vakantiegeld → Bijtelling → ZZP vs. Loondienst
+     ↓            ↓           ↓              ↓
+Hypotheek ← Toeslagen ← ZZP Calculator
+```
+
+**Regels:**
+
+- Gebruik beschrijvende anchors (“Bereken je nettoloon”, “Bekijk hypotheekindicatie”).
+- Vermijd generieke “klik hier”.
+- Elke calculatorpagina linkt naar minimaal 3–5 gerelateerde tools.
+- Overweeg breadcrumbs per cluster: `Home > Inkomen > Bruto-netto 2026`.
+
+Zie `06-SEO-ADSENSE-STRATEGY.md` voor de volledige SEO- en linkstrategie.
+
+---
+
 ## Nieuwe calculators die de journey versterken
 
 De huidige set is niet compleet genoeg voor de volledige “inkomen”-reis. Aanbevolen toevoegingen (niet in deze sprint):

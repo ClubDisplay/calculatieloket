@@ -179,3 +179,33 @@ Gebruik bestaande CSS custom properties:
 - `--font` voor typografie.
 
 Geen nieuwe kleuren of lettertypen introduceren zonder design review.
+
+---
+
+## SEO, AdSense en meetpunten
+
+De UX is ontworpen met SEO en AdSense als harde randvoorwaarden.
+
+### AdSense-plaatsingsregels
+
+- **Toegestaan:** boven de tool (max 1), onder de resultaatkaart, tussen contentblokken.
+- **Verboden:** tussen invoer en resultaat, in de resultaatkaart, sticky ad-banners.
+- Alle ad-containers krijgen een `min-height` om layout shift te voorkomen.
+
+### Server-rendered content
+
+De volgende blokken moeten in de statische HTML staan:
+
+- Hero micro-header, invoervelden, initiële resultaat.
+- Uitleg, voorbeelden, veelgemaakte fouten, FAQ.
+- Bronnen, disclaimer, update-datum, gerelateerde calculators.
+
+Client-side mag alleen het resultaat bijwerken op basis van gebruikersinvoer.
+
+### Meetpunten
+
+- Organic clicks, pageviews per sessie, scroll depth.
+- Calculator starts, completions, result views, next-step clicks.
+- Ad RPM, viewability, layout shift (CLS).
+
+Zie `06-SEO-ADSENSE-STRATEGY.md` voor de volledige strategie.

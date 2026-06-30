@@ -77,6 +77,19 @@ De gewenste ervaring ligt tussen:
 
 ---
 
+## SEO en AdSense als randvoorwaarden
+
+De app-ervaring staat bovenaan, maar de pagina blijft een SEO-landingspagina. Daarom:
+
+- **De tool staat bovenaan** — invoer, resultaat en primaire actie direct zichtbaar.
+- **SEO-content staat eronder** — uitleg, voorbeelden, FAQ, bronnen en gerelateerde tools zijn server-rendered en indexeerbaar.
+- **Geen advertenties tussen invoer en resultaat** — ads mogen alleen boven de tool, onder het resultaat of tussen contentblokken staan.
+- **Geen calculator verstoppen achter client-only flows** — de invoervelden en het initiële resultaat moeten in de statische HTML staan.
+
+Zie `06-SEO-ADSENSE-STRATEGY.md` voor de volledige strategie, plaatsingsregels, internationale SEO-structuur, interne linkstrategie en meetpunten.
+
+---
+
 ## Speerpunten voor Sprint 077+
 
 1. Één calculatorpagina omzetten naar het nieuwe app-patroon.

@@ -99,22 +99,28 @@ Volgorde:
 ## Technische aandachtspunten
 
 - **URL state** moet backwards-compatible zijn: bestaande links blijven werken.
-- **SEO** mag niet lijden: schema.org markup, canonical, title/description blijven intact.
-- **Ads** blijven staan, maar worden geplaatst buiten de kritieke flow (invoer/resultaat).
+- **SEO** mag niet lijden: schema.org markup, canonical, title/description blijven intact; uitleg, FAQ en bronnen blijven server-rendered.
+- **Ads** blijven staan, maar worden nooit geplaatst tussen invoer en resultaat; toegestane locaties: boven tool, onder resultaat, tussen contentblokken.
+- **Internationale SEO** is voorbereid: componenten ondersteunen land/locale parameters; hreflang kan later worden toegevoegd.
 - **Performance** blijft client-side; geen nieuwe JavaScript bundels of runtime dependencies.
 - **Accessibility** is verplicht: focus states, labels, foutmeldingen, kleurcontrast.
+- **Meetpunten** worden toegevoegd: calculator starts, completions, result views, next-step clicks, scroll depth, ad RPM.
 
 ---
 
 ## Definition of Done per pagina
 
 - [ ] Pagina gebruikt `CalculatorShell`.
-- [ ] Invoer en resultaat zijn direct zichtbaar bij geldige defaults.
+- [ ] Invoer en resultaat zijn direct zichtbaar bij geldige defaults (server-rendered).
 - [ ] Resultaat heeft hero number, breakdown, badge “Indicatie”, acties.
 - [ ] “Wat kun je hiermee?” en next steps staan onder het resultaat.
-- [ ] Bronnen en FAQ zijn aanwezig.
+- [ ] Bronnen en FAQ zijn aanwezig en server-rendered.
+- [ ] Geen advertenties tussen invoer en resultaat.
+- [ ] Interne links naar minimaal 3–5 gerelateerde calculators/tools.
 - [ ] URL parameters vullen de invoer in.
 - [ ] Mobiele viewport toont input + resultaat zonder scroll.
+- [ ] Title, meta description, canonical, H1 en schema.org markup zijn intact of verbeterd.
+- [ ] Meetpunten voor starts, completions, result views, next-step clicks en scroll depth zijn toegevoegd.
 - [ ] `npm run atlas:check` slaagt.
 - [ ] Geen regressie in bestaande tests.
 
