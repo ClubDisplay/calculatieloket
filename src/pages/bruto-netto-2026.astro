@@ -2,238 +2,486 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
+import CalculatorShell from "../components/calculator/CalculatorShell.astro";
+import InputPanel from "../components/calculator/InputPanel.astro";
+import ResultPanel from "../components/calculator/ResultPanel.astro";
+import UseCasesPanel from "../components/calculator/UseCasesPanel.astro";
+import FaqAccordion from "../components/calculator/FaqAccordion.astro";
+import ToolFooter from "../components/calculator/ToolFooter.astro";
+import SourceCards from "../components/SourceCards.astro";
+import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
+import { formatEuro } from "../lib/format/currency";
+
+const title = "Bruto netto 2026 | Nettoloon berekenen | Calculatieloket.nl";
+const description = "Bereken je bruto netto salaris in 2026. Direct zichtbaar: nettoloon, inkomstenbelasting, vakantiegeld, pensioen en loonheffingskorting. Geheel gratis en anoniem.";
+
+const defaultGross = 3000;
+const defaultPension = 150;
+const defaultLhk = true;
+
+const initialResult = calculateNetIncomeEstimate2026({
+  grossMonthlySalary: defaultGross,
+  pensionAmount: defaultPension,
+  applyLoonheffingskorting: defaultLhk,
+});
+
+const lastUpdated = "30 juni 2026";
+
+const useCases = [
+  {
+    title: "Toeslagen berekenen",
+    description: "Bekijk of jouw inkomen recht geeft op huur- of zorgtoeslag.",
+    href: "/toeslagen-calculator/",
+    accent: "#059669",
+  },
+  {
+    title: "Hypotheek berekenen",
+    description: "Vind een indicatie op basis van je bruto inkomen.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+  {
+    title: "Salaris vergelijken",
+    description: "Vergelijk bruto en netto op de salaris calculator.",
+    href: "/salaris-calculator/",
+    accent: "#2563eb",
+  },
+  {
+    title: "ZZP uurtarief berekenen",
+    description: "Reken terug van gewenst netto naar benodigd uurtarief.",
+    href: "/zzp-calculator/",
+    accent: "#7c3aed",
+  },
+];
+
+const sources = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 1 tarieven 2026",
+    description: "Actuele tarieven en schijven voor de inkomstenbelasting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Algemene heffingskorting 2026",
+    description: "Tabel en maximale bedragen voor de algemene heffingskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Arbeidskorting 2026",
+    description: "Tabel en maximale bedragen voor de arbeidskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+  },
+];
+
+const faq = [
+  {
+    question: "Waarom is dit een indicatie?",
+    answer: "Dit is een schatting op basis van de meest voorkomende aannames: een voltijds dienstverband, 8% vakantiegeld, een standaard pensioenpremie en de loonheffingskorting. Je uiteindelijke nettoloon kan afwijken door cao-afwijkingen, bijzondere beloningen, lease-auto bijtelling, tweede baan of extra aftrekposten. Gebruik de uitkomst als richtlijn, niet als definitieve loonstrook.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto en netto salaris?",
+    answer: "Bruto salaris is wat je werkgever je betaalt voor je werk, inclusief vakantiegeld. Netto salaris is het bedrag dat daadwerkelijk op je bankrekening komt, nadat inkomstenbelasting, premies en heffingskortingen zijn verrekend.",
+  },
+  {
+    question: "Hoe werkt loonheffingskorting?",
+    answer: "Loonheffingskorting is de verzamelnaam voor de algemene heffingskorting en arbeidskorting. Als je deze toepast, betaal je minder belasting. Je kunt de loonheffingskorting maar bij één werkgever tegelijk laten toepassen. ZZP’ers en mensen met meerdere banen moeten hier extra op letten.",
+  },
+  {
+    question: "Waarom kan mijn loonstrook afwijken?",
+    answer: "Je loonstrook kan afwijken door het soort pensioenfonds, extra verzekeringen via de werkgever, cao-regelingen, bijzondere beloningen, reiskostenvergoedingen, lease-auto bijtelling, of andere toeslagen en kortingen.",
+  },
+  {
+    question: "Wordt pensioenpremie meegenomen?",
+    answer: "Ja, je kunt je eigen werknemersbijdrage aan de pensioenpremie invullen. Deze wordt afgetrokken van je bruto inkomen voordat de belasting wordt berekend. De werkgeversbijdrage betaalt je werkgever zelf en zie je niet op je loonstrook.",
+  },
+  {
+    question: "Welke tarieven gelden in 2026?",
+    answer: "In 2026 zijn er twee Box 1 schijven: 35,75% over inkomen tot € 38.441, en 37,56% over inkomen van € 38.441 tot € 75.518. Boven de € 75.518 geldt 49,50%. De algemene heffingskorting is maximaal € 3.115 en loopt af vanaf € 29.736. De arbeidskorting loopt op tot maximaal € 5.685.",
+  },
+];
 ---
 
-<BaseLayout
-  title="Bruto netto 2026 berekenen — indicatie van je nettoloon"
-  description="Bereken een indicatie van je netto salaris in 2026. Vul je bruto loon in en zie hoe loonheffing, heffingskortingen en pensioenpremie je nettoloon kunnen beïnvloeden."
->
-  <h1 class="page-title">Bruto netto 2026 berekenen</h1>
-  <p class="page-subtitle">
-    Bereken een indicatie van je nettoloon op basis van je bruto maandsalaris, loonheffingskorting en pensioenpremie voor 2026.
-  </p>
-
-  <AdSlot slot="1234567897" format="auto" style="min-height:100px" />
-
-  <div class="calculator-card calc-modern">
-    <div class="calc-fields">
-    <div class="form-group">
-      <label for="grossSalary">Bruto maandsalaris</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="grossSalary" placeholder="Bijv. 3000" min="0" step="1" value="3000" /></div>
-    </div>
-    <div class="form-group">
-      <label for="pensionAmount">Pensioenpremie per maand <span class="hint">(werknemersdeel)</span></label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="pensionAmount" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
-    </div>
-    <div class="form-group">
-      <div class="toggle-row"><span class="toggle-label">Loonheffingskorting toepassen</span><label class="toggle"><input type="checkbox" id="loonheffingskorting" checked /><span class="slider"></span></label></div>
-    </div>
-    </div>
-
-    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken netto</button>
-    <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0).</p>
-
-    <div class="result-box" id="result" style="display:none;">
-      <h3>Jouw netto salaris per maand <span class="badge-indicatie">Indicatie</span></h3>
-      <div class="result-value" id="resultNetto">&mdash;</div>
-      <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Bruto maandsalaris</span><span class="value" id="detailGross">&mdash;</span></div>
-      <div class="result-row"><span class="label">Vakantiegeld (8%)</span><span class="value" id="detailHoliday">&mdash;</span></div>
-      <div class="result-row"><span class="label">Pensioenpremie per jaar</span><span class="value" id="detailPension">&mdash;</span></div>
-      <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Belastbaar jaarinkomen</span><span class="value" id="detailTaxable">&mdash;</span></div>
-      <div class="result-row"><span class="label">Inkomstenbelasting</span><span class="value" id="detailTax">&mdash;</span></div>
-      <div class="result-row"><span class="label">Heffingskortingen</span><span class="value" id="detailCredits">&mdash;</span></div>
-      <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Netto per jaar</span><span class="value" id="detailNetYear">&mdash;</span></div>
-      <p class="result-note">Deze berekening is een indicatie.</p>
-    </div>
-  </div>
-
+<BaseLayout title={title} description={description} containerClass="container-wide">
   <AdSlot slot="1234567898" format="auto" style="min-height:280px" />
 
-  <div class="calculator-card">
+  <CalculatorShell title="Bruto netto 2026 berekenen" subtitle="Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in en zie direct een indicatie van je nettoloon.">
+    <InputPanel title="Jouw situatie" slot="input">
+      <div class="form-group">
+        <label for="grossSalary">Bruto maandsalaris</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="grossSalary" value={defaultGross} min="0" step="1" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pensionAmount">Pensioenpremie per maand <span class="hint">(werknemersdeel)</span></label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="pensionAmount" value={defaultPension} min="0" step="1" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="toggle-row">
+          <span class="toggle-label">Loonheffingskorting toepassen</span>
+          <label class="toggle" for="loonheffingskorting">
+            <input type="checkbox" id="loonheffingskorting" checked={defaultLhk} />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken netto</button>
+      <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0).</p>
+    </InputPanel>
+
+    <ResultPanel
+      slot="result"
+      title="Netto salaris"
+      heroLabel="Jouw netto salaris per maand"
+      heroValue={formatEuro(initialResult.netMonthly, 0)}
+      badge="Indicatie"
+    >
+      <div class="result-row"><span class="label">Bruto maandsalaris</span><span class="value" id="detailGross">{formatEuro(defaultGross, 0)}</span></div>
+      <div class="result-row"><span class="label">Vakantiegeld (8%)</span><span class="value" id="detailHoliday">{formatEuro(initialResult.breakdown.holidayPay, 0)}</span></div>
+      <div class="result-row"><span class="label">Pensioenpremie per jaar</span><span class="value" id="detailPension">{formatEuro(initialResult.breakdown.pensionAmount, 0)}</span></div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Belastbaar jaarinkomen</span><span class="value" id="detailTaxable">{formatEuro(initialResult.taxableIncome, 0)}</span></div>
+      <div class="result-row"><span class="label">Inkomstenbelasting</span><span class="value" id="detailTax">{formatEuro(initialResult.incomeTax, 0)}</span></div>
+      <div class="result-row"><span class="label">Heffingskortingen</span><span class="value" id="detailCredits">{formatEuro(initialResult.totalCredits, 0)}</span></div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Netto per jaar</span><span class="value" id="detailNetYear">{formatEuro(initialResult.netYearly, 0)}</span></div>
+    </ResultPanel>
+
+    <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
+
+    <SourceCards title="Bronnen" items={sources} slot="sources" />
+
+    <FaqAccordion title="Veelgestelde vragen" items={faq} slot="faq" />
+
+    <ToolFooter
+      slot="footer"
+      disclaimer="Deze berekening is een indicatie op basis van de ingevoerde gegevens en de bekende belastingtarieven van 2026. Je loonstrook kan afwijken door pensioen, cao, werkgever, bijzondere beloningen en persoonlijke situatie. Gebruik de uitkomst als richtlijn, niet als definitief bedrag. Raadpleeg bij belangrijke financiële beslissingen een financieel adviseur."
+      lastUpdated={lastUpdated}
+    />
+  </CalculatorShell>
+
+  <AdSlot slot="1234567899" format="auto" style="min-height:280px" />
+
+  <div class="calculator-card calc-content" id="calculator-content">
+    <span class="badge-indicatie">Indicatie</span>
+    <p>Wil je weten wat er overblijft van je bruto salaris in 2026? Onze bruto-netto calculator rekent direct voor je uit wat je netto inkomen per maand ongeveer is. Gebruik de slider bovenaan de pagina om je bruto maandsalaris, pensioenpremie en loonheffingskorting in te stellen.</p>
+
     <h2>Wat is bruto en netto salaris?</h2>
-    <p><strong>Bruto salaris</strong> is het bedrag dat je werkgever aan jou toekent, v&oacute;&oacute;r aftrek van loonheffing en sociale premies. <strong>Netto salaris</strong> is het bedrag dat je uiteindelijk op je bankrekening ontvangt. Het verschil ontstaat door:</p>
-    <ul>
-      <li><strong>Loonbelasting en premies volksverzekeringen</strong> — samen de loonheffing genoemd</li>
-      <li><strong>Pensioenpremie</strong> — je eigen bijdrage aan je pensioenopbouw</li>
-      <li><strong>Heffingskortingen</strong> — kortingen op de loonheffing, zoals algemene heffingskorting en arbeidskorting</li>
-    </ul>
-    <p>Hoeveel je netto overhoudt verschilt per persoon. Daarom is deze calculator een indicatie.</p>
+    <h3>Bruto salaris</h3>
+    <p>Je bruto salaris is het bedrag dat je werkgever je betaalt voor je werk, inclusief vakantiegeld. In Nederland is vakantiegeld meestal 8% van je jaarsalaris. Wanneer je bruto maandsalaris € 3.000 is, bedraagt je bruto-jaarsalaris inclusief vakantiegeld € 38.880 (12 maanden + 8% vakantiegeld).</p>
+
+    <h3>Netto salaris</h3>
+    <p>Je netto salaris is het bedrag dat daadwerkelijk op je bankrekening komt. Hiervan worden loonheffingen, premies voor sociale verzekeringen, pensioenpremie en eventuele andere inhoudingen afgetrokken. Ook worden belastingkortingen zoals de algemene heffingskorting en arbeidskorting verrekend.</p>
 
     <h2>Hoe wordt je netto salaris berekend?</h2>
-    <p>Deze rekenwijze volgt de methode die ook op loonstroken wordt toegepast:</p>
-    <ol>
-      <li><strong>Bruto jaarsalaris:</strong> je bruto maandsalaris &times; 12,96 (12 maanden + 8% vakantiegeld)</li>
-      <li><strong>Pensioenpremie aftrekken:</strong> je maandelijkse pensioenpremie &times; 12, afgetrokken van je bruto jaarsalaris</li>
-      <li><strong>Belastbaar jaarinkomen:</strong> bruto jaarsalaris minus pensioenpremie</li>
-      <li><strong>Inkomstenbelasting:</strong> het belastbaar inkomen wordt belast via de Box 1-schijven van 2026</li>
-      <li><strong>Heffingskortingen:</strong> algemene heffingskorting en arbeidskorting worden afgetrokken van de belasting</li>
-      <li><strong>Netto per maand:</strong> het resultaat gedeeld door 12 geeft een indicatie van je maandelijkse nettoloon</li>
-    </ol>
+    <h3>Stap 1: bruto jaarsalaris berekenen</h3>
+    <p>We rekenen eerst je bruto jaarinkomen uit. In de meeste gevallen is dat je bruto maandsalaris × 12,96 (12 maanden + 8% vakantiegeld).</p>
 
-    <h3>Tarieven 2026 (Box 1, onder AOW-leeftijd)</h3>
-    <ul>
-      <li><strong>Schijf 1:</strong> t/m &euro;38.883 &mdash; 35,75%</li>
-      <li><strong>Schijf 2:</strong> &euro;38.883 t/m &euro;78.426 &mdash; 37,56%</li>
-      <li><strong>Schijf 3:</strong> vanaf &euro;78.426 &mdash; 49,50%</li>
-      <li><strong>Algemene heffingskorting:</strong> max &euro;3.115 (afbouw vanaf &euro;29.736)</li>
-      <li><strong>Arbeidskorting:</strong> max &euro;5.685 (5 schijven, afbouw vanaf &euro;45.592)</li>
-    </ul>
+    <h3>Stap 2: pensioen en andere aftrekposten</h3>
+    <p>Vervolgens trekken we de pensioenpremie af die jij als werknemer betaalt. Deze wordt ingehouden op je bruto loon. Andere aftrekposten, zoals reiskostenvergoedingen of speciale regelingen, vallen buiten deze algemene berekening.</p>
+
+    <h3>Stap 3: inkomstenbelasting</h3>
+    <p>Over je belastbare inkomen betaal je inkomstenbelasting volgens de Box 1 tarieven van 2026.</p>
+
+    <h3>Stap 4: heffingskortingen</h3>
+    <p>Als je recht hebt op loonheffingskorting, verrekent je werkgever de algemene heffingskorting en arbeidskorting. Dit verlaagt de te betalen belasting.</p>
+
+    <h3>Stap 5: netto inkomen</h3>
+    <p>Je netto inkomen is je bruto jaarsalaris minus pensioen, minus inkomstenbelasting, plus heffingskortingen. Deze calculator toont het resultaat per maand en per jaar.</p>
+
+    <h2>Tarieven 2026</h2>
+    <p>Voor 2026 gelden de volgende Box 1 tarieven (inkomstenbelasting):</p>
+    <table class="rate-table">
+      <thead>
+        <tr><th>Schijf</th><th>Inkomen</th><th>Tarief</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Tot € 38.441</td><td>35,75%</td></tr>
+        <tr><td>2</td><td>€ 38.441 - € 75.518</td><td>37,56%</td></tr>
+        <tr><td>3</td><td>Boven € 75.518</td><td>49,50%</td></tr>
+      </tbody>
+    </table>
+    <p>De percentages gelden voor mensen die de AOW-leeftijd nog niet hebben bereikt. Boven de 65 jaar gelden vaak lagere tarieven.</p>
 
     <h2>Factoren die je nettoloon beïnvloeden</h2>
-    <p>Naast je bruto salaris en loonheffingskorting spelen meerdere factoren een rol:</p>
-    <ul>
-      <li><strong>Pensioenregeling:</strong> elke werkgever heeft een eigen pensioenregeling. Jouw bijdrage verlaagt je belastbaar inkomen.</li>
-      <li><strong>CAO-afspraken:</strong> je cao kan extra's bevatten zoals een dertiende maand, bonusregeling of bovenwettelijk verlof.</li>
-      <li><strong>Bijtelling auto van de zaak:</strong> als je een leaseauto priv&eacute; gebruikt, wordt een bijtelling bij je belastbaar inkomen opgeteld.</li>
-      <li><strong>Andere inkomsten:</strong> zoals freelance-inkomsten, huurinkomsten of alimentatie kunnen je belastingdruk verhogen.</li>
-      <li><strong>Aftrekposten:</strong> zoals hypotheekrenteaftrek, studiekosten of zorgkosten verlagen je belastbaar inkomen.</li>
-      <li><strong>Loonheffingskorting bij meerdere werkgevers:</strong> je kunt deze korting maar bij &eacute;&eacute;n werkgever tegelijk laten toepassen.</li>
+    <ul class="calc-list">
+      <li><strong>Bruto salaris:</strong> hoe hoger het brutoloon, hoe meer belasting je betaalt.</li>
+      <li><strong>Pensioenpremie:</strong> een hogere werknemersbijdrage verlaagt je belastbare inkomen.</li>
+      <li><strong>Loonheffingskorting:</strong> met deze korting houd je meer netto over.</li>
+      <li><strong>Vakantiegeld:</strong> 8% vakantiegeld telt mee in je jaarsalaris.</li>
+      <li><strong>Bijtelling:</strong> een lease-auto of andere vergoedingen kunnen je belastbaar inkomen verhogen.</li>
+      <li><strong>Extra inkomsten:</strong> een tweede baan of bonus kan je in een hogere belastingschijf plaatsen.</li>
     </ul>
 
     <h2>Voorbeeldberekeningen</h2>
-
-    <h3>Voorbeeld 1: modaal inkomen met pensioenpremie</h3>
-    <p>Stel, je verdient <strong>&euro;3.000 bruto per maand</strong>, betaalt &euro;150 pensioenpremie per maand en hebt loonheffingskorting:</p>
-    <ul>
-      <li>Bruto jaarsalaris = &euro;3.000 &times; 12,96 = <strong>&euro;38.880</strong></li>
-      <li>Pensioenpremie per jaar = &euro;150 &times; 12 = <strong>&euro;1.800</strong></li>
-      <li>Belastbaar inkomen = &euro;38.880 &minus; &euro;1.800 = <strong>&euro;37.080</strong></li>
-      <li>Belasting: &euro;37.080 &times; 35,75% = <strong>&euro;13.256</strong></li>
-      <li>AHK: &euro;3.115 &minus; 6,398% &times; (&euro;37.080 &minus; &euro;29.736) = <strong>circa &euro;2.645</strong></li>
-      <li>AK: &euro;5.300 + 1,950% &times; (&euro;37.080 &minus; &euro;25.845) = <strong>circa &euro;5.519</strong></li>
-      <li>Heffingskortingen: <strong>&euro;8.164</strong></li>
-      <li>Netto per jaar: <strong>circa &euro;31.988</strong></li>
-      <li>Netto per maand: <strong>circa &euro;2.666</strong></li>
-    </ul>
-
-    <h3>Voorbeeld 2: bovenmodaal met hogere pensioenpremie</h3>
-    <p>Stel, je verdient <strong>&euro;4.000 bruto per maand</strong>, betaalt &euro;200 pensioenpremie per maand en hebt loonheffingskorting:</p>
-    <ul>
-      <li>Bruto jaarsalaris = &euro;4.000 &times; 12,96 = <strong>&euro;51.840</strong></li>
-      <li>Pensioenpremie per jaar = &euro;200 &times; 12 = <strong>&euro;2.400</strong></li>
-      <li>Belastbaar inkomen = &euro;51.840 &minus; &euro;2.400 = <strong>&euro;49.440</strong></li>
-      <li>Belasting: &euro;38.883 &times; 35,75% + (&euro;49.440 &minus; &euro;38.883) &times; 37,56% = <strong>&euro;17.863</strong></li>
-      <li>AHK: &euro;3.115 &minus; 6,398% &times; (&euro;49.440 &minus; &euro;29.736) = <strong>circa &euro;1.854</strong></li>
-      <li>AK: &euro;5.685 &minus; 6,510% &times; (&euro;49.440 &minus; &euro;45.592) = <strong>circa &euro;5.435</strong></li>
-      <li>Heffingskortingen: <strong>&euro;7.289</strong></li>
-      <li>Netto per jaar: <strong>circa &euro;38.866</strong></li>
-      <li>Netto per maand: <strong>circa &euro;3.239</strong></li>
-    </ul>
-
-    <h3>Voorbeeld 3: zonder loonheffingskorting</h3>
-    <p>Stel, je verdient <strong>&euro;2.500 bruto per maand</strong>, hebt geen pensioenpremie en g&eacute;&eacute;n loonheffingskorting (bijvoorbeeld bij een tweede werkgever):</p>
-    <ul>
-      <li>Bruto jaarsalaris = &euro;2.500 &times; 12,96 = <strong>&euro;32.400</strong></li>
-      <li>Pensioenpremie per jaar = <strong>&euro;0</strong></li>
-      <li>Belastbaar inkomen = <strong>&euro;32.400</strong></li>
-      <li>Belasting: &euro;32.400 &times; 35,75% = <strong>&euro;11.583</strong></li>
-      <li>Heffingskortingen: <strong>&euro;0</strong> (geen loonheffingskorting)</li>
-      <li>Netto per jaar: <strong>circa &euro;20.817</strong></li>
-      <li>Netto per maand: <strong>circa &euro;1.735</strong></li>
-    </ul>
+    <p>Onderstaande voorbeelden geven een indicatie op basis van 2026 tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
+    <div class="example-grid">
+      <div class="example-card">
+        <strong>€ 2.500 bruto</strong>
+        <p>Netto per maand: circa € 2.240</p>
+      </div>
+      <div class="example-card">
+        <strong>€ 3.500 bruto</strong>
+        <p>Netto per maand: circa € 2.760</p>
+      </div>
+      <div class="example-card">
+        <strong>€ 5.000 bruto</strong>
+        <p>Netto per maand: circa € 3.490</p>
+      </div>
+    </div>
 
     <h2>Veelgemaakte fouten</h2>
-    <ul>
-      <li><strong>Vakantiegeld vergeten:</strong> je bruto jaarsalaris is niet je maandsalaris &times; 12, maar &times; 12,96 vanwege het wettelijke vakantiegeld van 8%.</li>
-      <li><strong>Loonheffingskorting bij meerdere werkgevers:</strong> pas de loonheffingskorting maar bij &eacute;&eacute;n werkgever toe. Bij een tweede baan moet je deze uitzetten, anders betaal je te weinig belasting en moet je bijbetalen bij je aangifte.</li>
-      <li><strong>Pensioenpremie niet meerekenen:</strong> je pensioenbijdrage gaat van je brutoloon af. Dit verlaagt je belastbaar inkomen en dus ook je belasting.</li>
-      <li><strong>Alleen naar het maandbedrag kijken:</strong> bonussen, vakantiegeld, dertiende maand en overwerk kunnen je jaarinkomen flink verhogen, waardoor je in een hogere belastingschijf terecht kunt komen.</li>
+    <ul class="calc-list">
+      <li><strong>Geen vakantiegeld meerekenen:</strong> je bruto-jaarsalaris is inclusief 8% vakantiegeld.</li>
+      <li><strong>Pensioen vergeten:</strong> de werknemersbijdrage wordt afgetrokken vóór de belasting.</li>
+      <li><strong>Loonheffingskorting onterecht dubbel toegepast:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
+      <li><strong>Extra inkomsten negeren:</strong> verdien je meer? Dan verandert je belastingschijf en korting.</li>
     </ul>
-
-    <h2>Veelgestelde vragen</h2>
-
-    <h3>Waarom is dit een indicatie?</h3>
-    <p>Je nettoloon hangt af van veel persoonlijke factoren: je specifieke pensioenregeling, cao-afspraken, eventuele bijtelling van een leaseauto, andere inkomsten en aftrekposten zoals hypotheekrente. Zonder deze gegevens is elke berekening een benadering.</p>
-
-    <h3>Wat is het verschil tussen bruto en netto?</h3>
-    <p>Bruto is het salaris dat in je arbeidscontract staat, v&oacute;&oacute;r alle inhoudingen. Netto is het bedrag dat je daadwerkelijk op je rekening krijgt. Het verschil bestaat uit loonheffing (loonbelasting + premies volksverzekeringen), inkomensafhankelijke bijdrage Zorgverzekeringswet en je eigen pensioenbijdrage.</p>
-
-    <h3>Hoe werkt loonheffingskorting?</h3>
-    <p>Loonheffingskorting is een korting op de loonheffing. Deze bestaat uit de algemene heffingskorting en de arbeidskorting. Je werkgever past de korting automatisch toe als jij aangeeft dat je hiervoor in aanmerking komt. Je kunt de loonheffingskorting maar bij &eacute;&eacute;n werkgever tegelijk laten toepassen.</p>
-
-    <h3>Waarom kan mijn loonstrook afwijken?</h3>
-    <p>Je loonstrook kan afwijken door pensioen, cao, werkgever, bijzondere beloningen en persoonlijke situatie. Denk aan een dertiende maand, bonus, overwerktoeslag, onregelmatigheidstoeslag, bijtelling auto of een eigen bijdrage voor je zorgverzekering.</p>
-
-    <h3>Wordt pensioenpremie meegenomen?</h3>
-    <p>Ja. Je maandelijkse pensioenpremie (het werknemersdeel) wordt afgetrokken van je bruto jaarinkomen v&oacute;&oacute;r de belastingberekening. Hierdoor betaal je minder inkomstenbelasting.</p>
-
-    <h2>Bronnen en informatie</h2>
-    <ul>
-      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Belastingdienst — Box 1 tarieven 2026</a></li>
-      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">Belastingdienst — Algemene heffingskorting 2026</a></li>
-      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">Belastingdienst — Arbeidskorting 2026</a></li>
-      <li><a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/personeel-en-loon/content/hulpmiddel-loonbelastingtabellen" target="_blank" rel="noopener">Belastingdienst — Loonbelastingtabellen</a></li>
-    </ul>
-
-    <p class="disclaimer">Deze berekening is een indicatie op basis van de ingevoerde gegevens en de bekende belastingtarieven van 2026. Je loonstrook kan afwijken door pensioen, cao, werkgever, bijzondere beloningen en persoonlijke situatie. Gebruik de uitkomst als richtlijn, niet als definitief bedrag. Raadpleeg bij belangrijke financi&euml;le beslissingen een financieel adviseur.</p>
-    <p class="last-updated">Laatst bijgewerkt: 26 juni 2026</p>
   </div>
 
   <CrossSellCards
     title="Ook handig om te berekenen"
     items={[
-      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Bereken een indicatie van je nettoloon." },
-      { href: "/toeslagen-calculator/", title: "Toeslagen Calculator", description: "Bekijk of inkomen invloed kan hebben op mogelijke toeslagen." },
-      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Bereken een indicatie van uurtarief en netto inkomen." },
-      { href: "/hypotheek-calculator/", title: "Hypotheek Calculator", description: "Maak een indicatie van hypotheek en maandlasten." },
+      { title: "Salaris vergelijken", description: "Bereken netto bij een ander bruto bedrag.", href: "/salaris-calculator/", accent: "#2563eb" },
+      { title: "Hoeveel hypotheek kan ik krijgen?", description: "Indicatie op basis van je inkomen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+      { title: "Wat moet ik als ZZP'er vragen?", description: "Van gewenst netto naar uurtarief.", href: "/zzp-calculator/", accent: "#7c3aed" },
     ]}
   />
 </BaseLayout>
 
 <script>
   import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
-  import { formatEuroHtml } from "../lib/format/currency";
+  import { formatEuro } from "../lib/format/currency";
 
   const grossInput = document.getElementById("grossSalary") as HTMLInputElement;
   const pensionInput = document.getElementById("pensionAmount") as HTMLInputElement;
   const lhCheckbox = document.getElementById("loonheffingskorting") as HTMLInputElement;
-  const resultDiv = document.getElementById("result") as HTMLDivElement;
+  const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
+  const errorBox = document.getElementById("calcError") as HTMLElement;
+  const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
+
+  const detailGross = document.getElementById("detailGross")!;
+  const detailHoliday = document.getElementById("detailHoliday")!;
+  const detailPension = document.getElementById("detailPension")!;
+  const detailTaxable = document.getElementById("detailTaxable")!;
+  const detailTax = document.getElementById("detailTax")!;
+  const detailCredits = document.getElementById("detailCredits")!;
+  const detailNetYear = document.getElementById("detailNetYear")!;
+
+  function updateUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const gross = parseFloat(grossInput.value) || 0;
+    const pension = parseFloat(pensionInput.value) || 0;
+
+    if (gross > 0) params.set("bruto", gross.toString());
+    else params.delete("bruto");
+
+    if (pension > 0) params.set("pensioen", pension.toString());
+    else params.delete("pensioen");
+
+    params.set("lhk", lhCheckbox.checked ? "1" : "0");
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }
 
   function calculate() {
-    const grossMonthly = parseFloat(grossInput.value);
-    const pensionAmount = parseFloat(pensionInput.value) || 0;
+    const gross = parseFloat(grossInput.value);
+    const pension = parseFloat(pensionInput.value) || 0;
     const hasLHK = lhCheckbox.checked;
-    const errorBox = document.getElementById("calcError") as HTMLElement;
 
-    if (isNaN(grossMonthly) || grossMonthly <= 0) { resultDiv.style.display = "none"; errorBox.style.display = "block"; return; }
+    if (!Number.isFinite(gross) || gross <= 0) {
+      errorBox.style.display = "block";
+      hero.textContent = "—";
+      detailGross.textContent = "—";
+      detailHoliday.textContent = "—";
+      detailPension.textContent = "—";
+      detailTaxable.textContent = "—";
+      detailTax.textContent = "—";
+      detailCredits.textContent = "—";
+      detailNetYear.textContent = "—";
+      return;
+    }
+
     errorBox.style.display = "none";
 
     const result = calculateNetIncomeEstimate2026({
-      grossMonthlySalary: grossMonthly,
-      pensionAmount,
+      grossMonthlySalary: gross,
+      pensionAmount: pension,
       applyLoonheffingskorting: hasLHK,
     });
 
-    if (!result.valid) { resultDiv.style.display = "none"; errorBox.style.display = "block"; return; }
+    if (!result.valid) {
+      errorBox.style.display = "block";
+      hero.textContent = "—";
+      return;
+    }
 
-    resultDiv.style.display = "block";
+    hero.textContent = formatEuro(result.netMonthly, 0);
+    detailGross.textContent = formatEuro(gross, 0);
+    detailHoliday.textContent = formatEuro(result.breakdown.holidayPay, 0);
+    detailPension.textContent = formatEuro(result.breakdown.pensionAmount, 0);
+    detailTaxable.textContent = formatEuro(result.taxableIncome, 0);
+    detailTax.textContent = formatEuro(result.incomeTax, 0);
+    detailCredits.textContent = formatEuro(result.totalCredits, 0);
+    detailNetYear.textContent = formatEuro(result.netYearly, 0);
 
-    document.getElementById("resultNetto")!.innerHTML = formatEuroHtml(result.netMonthly, 2);
-    document.getElementById("detailGross")!.innerHTML = formatEuroHtml(grossMonthly, 2);
-    document.getElementById("detailHoliday")!.innerHTML = formatEuroHtml(result.breakdown.holidayPay, 2);
-    document.getElementById("detailPension")!.innerHTML = formatEuroHtml(result.breakdown.pensionAmount, 2);
-    document.getElementById("detailTaxable")!.innerHTML = formatEuroHtml(result.taxableIncome, 2);
-    document.getElementById("detailTax")!.innerHTML = formatEuroHtml(result.incomeTax, 2);
-    document.getElementById("detailCredits")!.innerHTML = formatEuroHtml(result.totalCredits, 2);
-    document.getElementById("detailNetYear")!.innerHTML = formatEuroHtml(result.netYearly, 2);
+    updateUrl();
   }
+
+  function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const gross = params.get("bruto");
+    const pension = params.get("pensioen");
+    const lhk = params.get("lhk");
+
+    if (gross !== null) grossInput.value = gross;
+    if (pension !== null) pensionInput.value = pension;
+    if (lhk !== null) lhCheckbox.checked = lhk === "1";
+  }
+
+  applyUrlParams();
+  calculate();
 
   grossInput.addEventListener("input", calculate);
   pensionInput.addEventListener("input", calculate);
   lhCheckbox.addEventListener("change", calculate);
-  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
-  calculate();
+  berekenBtn.addEventListener("click", calculate);
 </script>
 
 <style>
-  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
-  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
-  ul, ol { margin: 0.5rem 0; padding-left: 1.25rem; }
-  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
-  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
-  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
-  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+  .badge-indicatie {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content {
+    padding: 1.5rem;
+  }
+
+  .calc-content h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-content h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .calc-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-content ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .rate-table th,
+  .rate-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--color-border);
+  }
+
+  .rate-table th {
+    background: var(--color-primary-light);
+    font-weight: 700;
+  }
+
+  .rate-table tr:nth-child(even) {
+    background: var(--color-surface);
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .example-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+
+  .example-card strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .example-card p {
+    margin-bottom: 0;
+  }
+
+  .calc-error {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .result-row .label {
+    color: var(--color-text-muted);
+  }
+
+  .result-row .value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .result-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.35rem 0;
+  }
 </style>

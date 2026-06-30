@@ -3,6 +3,16 @@
 ## 2026-06-30
 
 **Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 078 — Bruto-netto 2026 gemigreerd naar App Shell
+**Details:** `src/pages/bruto-netto-2026.astro` volledig herschreven naar de nieuwe app/tool shell: `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. De calculator toont direct een server-side berekende indicatie (€ 3.000 bruto, € 150 pensioen, loonheffingskorting aan). URL state toegevoegd met query parameters `bruto`, `pensioen` en `lhk`; bij wijziging van input wordt de URL via `history.replaceState` bijgewerkt. Use cases "Wat kun je hiermee?" linken naar toeslagen, hypotheek, salaris en ZZP calculators. Bronnen en FAQ zijn verplaatst naar de shell zodat het resultaat bij de tool blijft. Oorspronkelijke SEO-content (wat is bruto/netto, berekeningsstappen, tarieven, factoren, voorbeelden, veelgemaakte fouten) is behouden in een server-rendered contentblok. AdSense-plaatsing: advertenties alleen buiten de input/result flow, nooit tussen input en resultaat. Demo-pagina `/demo/calculator-shell/` voorzien van `noindex,nofollow` meta via nieuwe `noindex` prop op `BaseLayout`; `public/robots.txt` uitgebreid met `Disallow: /demo/`; `astro.config.mjs` sitemap filter zodat `/demo/` pagina's niet in de sitemap terechtkomen. `FaqAccordion` component aangepast zodat antwoorden HTML mogen bevatten (`set:html`). Geen wijzigingen aan andere calculatorpagina's, engines, Knowledge Objects, FiscalMesh/Atlas, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-06-30
+
+**Type:** Technisch/Architectuur
 **Wijziging:** Atlas v2 Sprint 077 — Calculator App Component Library v0.1
 **Details:** Eerste herbruikbare app/tool componenten gebouwd in `src/components/calculator/`: `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `FaqAccordion.astro`, `ToolFooter.astro`. Componenten zijn mobile-first, generiek voor bruto-netto, toeslagen, hypotheek, BTW en ZZP, server-rendered waar nodig, en houden rekening met SEO/AdSense randvoorwaarden (geen advertenties tussen invoer en resultaat). Demo-pagina aangemaakt op `src/pages/demo/calculator-shell.astro` (URL `/demo/calculator-shell/`) met een bruto-netto voorbeeld: vraag "Wat houd ik netto over?", input card met bruto maandsalaris, result card met voorbeeld netto bedrag, use cases (toeslagen, hypotheek, ZZP), FAQ accordion, bronnen en footer. Documentatie toegevoegd: `docs/product/07-CALCULATOR-COMPONENT-LIBRARY-v0.1.md`; `docs/product/04-FIRST-IMPLEMENTATION-PLAN.md` bijgewerkt met status update. Geen bestaande calculatorpagina's gewijzigd; geen SEO-content, calculatorlogica, engines, FiscalMesh/Atlas, Knowledge Objects, `.env`, deploy, npm ci, node_modules verwijdering of dependencies aangeraakt. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
 **Status:** In ontwikkeling

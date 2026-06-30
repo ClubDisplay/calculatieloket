@@ -18,7 +18,7 @@ const { title = "Veelgestelde vragen", items } = Astro.props;
     {items.map((item, index) => (
       <details class="calc-faq-item" open={index === 0}>
         <summary class="calc-faq-question">{item.question}</summary>
-        <div class="calc-faq-answer">{item.answer}</div>
+        <div class="calc-faq-answer" set:html={item.answer} />
       </details>
     ))}
   </div>
