@@ -3,6 +3,16 @@
 ## 2026-06-30
 
 **Type:** Technisch/Architectuur
+**Wijziging:** Repository public gemaakt + branch protection nu afgedwongen
+**Details:** De GitHub repository `ClubDisplay/calculatieloket` is van privé naar public gezet via **Settings > General > Danger zone > Change repository visibility**. Daardoor wordt de branch protection regel voor `main` (require PR + require status check `Atlas CI / Run Atlas CI checks`) technisch afgedwongen. De documentatie is bijgewerkt: `docs/v2/ci/01-BRANCH-PROTECTION.md` en `docs/v2/ci/03-GITHUB-ACTIVATION-RUNBOOK.md` bevatten nu een waarschuwing dat gratis privé-repositories op persoonlijke accounts branch protection niet afdwingen; `docs/v2/03-RULE-ENGINE.md`, `src/lib/rules/README.md` en `src/lib/knowledge/README.md` status headers en roadmap bullets bijgewerkt naar "Public Repository + Branch Protection Enforced". Geen wijzigingen aan websitepagina's, calculatorpagina's, Knowledge Objects, UI/SEO-content, runtime code, engines, Rule Resolver, `.env`, deploy, secrets of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 15 pagina's, sitemap met 15 HTTPS-URL's, geen TypeScript-fouten.
+
+---
+
+## 2026-06-30
+
+**Type:** Technisch/Architectuur
 **Wijziging:** Atlas v2 — GitHub Activation Runbook + CI docs index + GitHub activation executed
 **Details:** Nieuwe documentatie `docs/v2/ci/03-GITHUB-ACTIVATION-RUNBOOK.md` aangemaakt en bijgewerkt na praktische activatie. Bevat een stap-voor-stap runbook met exacte terminalcommando's om de lokale Atlas repository veilig naar GitHub te pushen en Atlas CI live te activeren. Aangepast: SSH wordt nu aanbevolen; HTTPS vereist een Personal Access Token met minimaal de scopes `repo` en `workflow`; troubleshooting toegevoegd voor `workflow` scope errors, `Host key verification failed`, en `Device not configured` / credentials prompt. Ook `docs/v2/ci/README.md` aangemaakt als index voor de vier CI-handleidingen. `docs/v2/ci/00-GITHUB-READINESS.md` bijgewerkt met een authenticatie-sectie (SSH vs HTTPS + token scopes). `docs/v2/ci/01-BRANCH-PROTECTION.md` bijgewerkt met notitie dat de PR-check naam `Atlas CI / Run Atlas CI checks (pull_request)` toont, maar in branch protection de naam zonder `(pull_request)` gebruikt moet worden. GitHub activatie succesvol uitgevoerd: repository gepusht naar `https://github.com/ClubDisplay/calculatieloket` via SSH (`git@github.com:ClubDisplay/calculatieloket.git`); initiële commit hash `a89cd90`; test branch `test/ci-status` gepusht; test PR geopend; Atlas CI check `Atlas CI / Run Atlas CI checks` groen in 22s. `docs/v2/03-RULE-ENGINE.md`, `src/lib/rules/README.md` en `src/lib/knowledge/README.md` bijgewerkt: status headers Sprint 075 en verwijzingen naar `docs/v2/ci/README.md` en `03-GITHUB-ACTIVATION-RUNBOOK.md`. Geen wijzigingen aan websitepagina's, calculatorpagina's, Knowledge Objects, UI/SEO-content, runtime code, engines, Rule Resolver, `.env`, deploy, secrets of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
 **Status:** In ontwikkeling

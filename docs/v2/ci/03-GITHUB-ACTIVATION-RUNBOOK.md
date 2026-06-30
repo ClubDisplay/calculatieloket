@@ -168,10 +168,12 @@ Samenvatting:
 3. Vink aan:
    - **Require a pull request before merging**
    - **Require status checks to pass before merging**
-   - Status check: `Atlas CI / Run Atlas CI checks`
+   - Status check: `Atlas CI / Run Atlas CI checks` (in de dropdown kan deze ook alleen als `Run Atlas CI checks` verschijnen)
    - **Require branches to be up to date before merging** (aanbevolen)
 
 > Let op: de status check naam is pas beschikbaar nadat de workflow minstens één keer heeft gedraaid. Gebruik hiervoor stap 9.
+
+> Let op: op een gratis privé-repository wordt de branch protection regel **niet afgedwongen** totdat je de repository public maakt. Zie [01-BRANCH-PROTECTION.md](01-BRANCH-PROTECTION.md) voor details.
 
 ---
 

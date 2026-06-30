@@ -18,11 +18,13 @@ Stel in voor branch pattern `main`:
   - [ ] **Require approvals**: minimaal 1 (optioneel, afhankelijk van teamgrootte)
   - [ ] **Dismiss stale PR approvals when new commits are pushed** (aanbevolen)
 - [ ] **Require status checks to pass before merging**
-  - Status check: `Atlas CI / Run Atlas CI checks`
+  - Status check: `Atlas CI / Run Atlas CI checks` (in de dropdown kan deze ook verschijnen als alleen `Run Atlas CI checks`)
   - In de PR zelf toont de check de naam `Atlas CI / Run Atlas CI checks (pull_request)`; in branch protection selecteer je de naam **zonder** `(pull_request)`.
 - [ ] **Require branches to be up to date before merging** (aanbevolen)
 - [ ] **Restrict pushes that create files larger than 100 MB** (GitHub default)
 - [ ] **Do not allow bypassing the above settings** (optioneel; alleen als Barry zelf geen directe push naar `main` wil doen)
+
+> **Belangrijk:** Op een gratis **privé-repository** wordt de branch protection regel **niet afgedwongen** totdat je de repository **public** maakt of upgrade naar GitHub Pro/Team/Enterprise. Je ziet dan de melding **“Not enforced”**. Maak de repo public via **Settings > General > Danger zone > Change repository visibility** als je wilt dat de regel technisch wordt afgedwongen. Op een public repository werkt de regel meteen.
 
 ---
 
