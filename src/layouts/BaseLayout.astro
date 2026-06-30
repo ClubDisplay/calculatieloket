@@ -4,6 +4,7 @@ import CookieConsent from "../components/CookieConsent.astro";
 
 const { title, description } = Astro.props;
 const containerClass = Astro.props.containerClass ?? "container";
+const noindex = Astro.props.noindex ?? false;
 const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
 const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
 const canonical = new URL(Astro.url.pathname, "https://calculatieloket.nl").href;
@@ -35,6 +36,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="TRZKC7ND9bcmpINNlT34pqz7ZpoI5C_xIXV-Ypg903c" />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/logo_Calculatieloket.png" />
 
     <script is:inline>

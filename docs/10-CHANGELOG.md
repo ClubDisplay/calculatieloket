@@ -20,13 +20,24 @@
 11. [2026-06-30](#2026-06-30)
 12. [2026-06-30](#2026-06-30)
 13. [2026-06-30](#2026-06-30)
-14. [2026-06-29](#2026-06-29)
-15. [2026-06-27](#2026-06-27)
-16. [2026-06-26](#2026-06-26)
+14. [2026-06-30](#2026-06-30)
+15. [2026-06-29](#2026-06-29)
+16. [2026-06-27](#2026-06-27)
+17. [2026-06-26](#2026-06-26)
 
-17. [2026-06-30](#2026-06-30)
 18. [2026-06-30](#2026-06-30)
 19. [2026-06-30](#2026-06-30)
+20. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-06-30
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 078 — Bruto-netto 2026 gemigreerd naar App Shell
+**Details:** `src/pages/bruto-netto-2026.astro` volledig herschreven naar de nieuwe app/tool shell: `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. De calculator toont direct een server-side berekende indicatie (€ 3.000 bruto, € 150 pensioen, loonheffingskorting aan). URL state toegevoegd met query parameters `bruto`, `pensioen` en `lhk`; bij wijziging van input wordt de URL via `history.replaceState` bijgewerkt. Use cases "Wat kun je hiermee?" linken naar toeslagen, hypotheek, salaris en ZZP calculators. Bronnen en FAQ zijn verplaatst naar de shell zodat het resultaat bij de tool blijft. Oorspronkelijke SEO-content (wat is bruto/netto, berekeningsstappen, tarieven, factoren, voorbeelden, veelgemaakte fouten) is behouden in een server-rendered contentblok. AdSense-plaatsing: advertenties alleen buiten de input/result flow, nooit tussen input en resultaat. Demo-pagina `/demo/calculator-shell/` voorzien van `noindex,nofollow` meta via nieuwe `noindex` prop op `BaseLayout`; `public/robots.txt` uitgebreid met `Disallow: /demo/`; `astro.config.mjs` sitemap filter zodat `/demo/` pagina's niet in de sitemap terechtkomen. `FaqAccordion` component aangepast zodat antwoorden HTML mogen bevatten (`set:html`). Geen wijzigingen aan andere calculatorpagina's, engines, Knowledge Objects, FiscalMesh/Atlas, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

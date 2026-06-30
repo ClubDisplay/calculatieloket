@@ -33,6 +33,18 @@ Ze staan in `src/components/calculator/` en zijn visueel getest via de demo-pagi
 
 ---
 
+## Status update: v0.1 bruto-netto-2026 migration afgerond
+
+Sprint 078 heeft `src/pages/bruto-netto-2026.astro` gemigreerd naar de app/tool shell:
+
+- Inputvelden (`?bruto`, `?pensioen`, `?lhk`), resultaat, use cases, FAQ, bronnen en disclaimer zitten in `CalculatorShell`.
+- URL state wordt bijgewerkt via `history.replaceState`; bestaande links blijven werken.
+- SEO-content (uitleg, tarieven, voorbeelden, veelgemaakte fouten) is behouden en server-rendered.
+- Advertenties staan buiten de input/result flow; er is nooit een advertentie tussen invoer en resultaat.
+- De demo-pagina `/demo/calculator-shell/` is voorzien van `noindex,nofollow`, uitgesloten van `robots.txt` en uit de sitemap gefilterd.
+
+---
+
 ## Aanbevolen eerste calculator: `bruto-netto-2026`
 
 **Waarom deze?**
