@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="calc-input-panel">
+  {title && <h2 class="calc-input-panel-title">{title}</h2>}
+  <div class="calc-input-panel-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .calc-input-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .calc-input-panel-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .calc-input-panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  disclaimer?: string;
+  lastUpdated?: string;
+}
+
+const {
+  disclaimer = "Deze berekening is een indicatie. Controleer belangrijke bedragen altijd via officiële bronnen of een financieel adviseur.",
+  lastUpdated,
+} = Astro.props;
+---
+
+<div class="calc-tool-footer">
+  <p class="calc-tool-footer-disclaimer">{disclaimer}</p>
+  {lastUpdated && (
+    <p class="calc-tool-footer-updated">Laatst bijgewerkt: {lastUpdated}</p>
+  )}
+</div>
+
+<style>
+  .calc-tool-footer {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .calc-tool-footer-disclaimer {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .calc-tool-footer-updated {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+  }
+</style>

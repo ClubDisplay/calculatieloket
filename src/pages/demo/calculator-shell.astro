@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CalculatorShell from "../../components/calculator/CalculatorShell.astro";
+import InputPanel from "../../components/calculator/InputPanel.astro";
+import ResultPanel from "../../components/calculator/ResultPanel.astro";
+import UseCasesPanel from "../../components/calculator/UseCasesPanel.astro";
+import FaqAccordion from "../../components/calculator/FaqAccordion.astro";
+import ToolFooter from "../../components/calculator/ToolFooter.astro";
+import SourceCards from "../../components/SourceCards.astro";
+
+const title = "Demo — Calculator App Shell";
+const description = "Interne demo van de nieuwe Calculatieloket app/tool shell met een bruto-netto voorbeeld.";
+const lastUpdated = "30 juni 2026";
+
+const useCases = [
+  {
+    title: "Kan ik toeslag krijgen?",
+    description: "Bekijk of jouw inkomen recht geeft op huur- of zorgtoeslag.",
+    href: "/toeslagen-calculator/",
+    accent: "#059669",
+  },
+  {
+    title: "Hoeveel hypotheek kan ik krijgen?",
+    description: "Vind een indicatie op basis van je bruto inkomen.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+  {
+    title: "Wat moet ik als ZZP’er vragen?",
+    description: "Reken terug van gewenst netto naar benodigd uurtarief.",
+    href: "/zzp-calculator/",
+    accent: "#7c3aed",
+  },
+];
+
+const sources = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 1 tarieven 2026",
+    description: "Actuele tarieven en schijven voor de inkomstenbelasting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Algemene heffingskorting 2026",
+    description: "Tabel en maximale bedragen voor de algemene heffingskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Arbeidskorting 2026",
+    description: "Tabel en maximale bedragen voor de arbeidskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+  },
+];
+
+const faq = [
+  {
+    question: "Waarom is dit een indicatie?",
+    answer: "Je nettoloon hangt af van je specifieke pensioenregeling, cao, eventuele bijtelling, andere inkomsten en aftrekposten. Deze calculator houdt daarom alleen de belangrijkste standaardfactoren in.",
+  },
+  {
+    question: "Hoe wordt het bruto-jaarsalaris berekend?",
+    answer: "We rekenen 12,96 maanden uit: 12 maanden salaris plus 8% vakantiegeld. Pensioenpremie wordt eerst afgetrokken vóór de belastingberekening.",
+  },
+  {
+    question: "Wat is loonheffingskorting?",
+    answer: "Loonheffingskorting is de combinatie van algemene heffingskorting en arbeidskorting. Je werkgever past deze toe als je dat aangeeft. Je kunt deze korting maar bij één werkgever tegelijk laten toepassen.",
+  },
+];
+
+const initialGross = 3500;
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <CalculatorShell title="Wat houd ik netto over?" subtitle="Vul je bruto maandsalaris in en zie direct een indicatie.">
+    <InputPanel title="Jouw situatie" slot="input">
+      <div class="form-group">
+        <label for="demoGross">Bruto maandsalaris</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="demoGross" value={initialGross} min="0" step="100" />
+        </div>
+      </div>
+      <button id="demoCalculate" class="btn btn-primary btn-lg" style="width: 100%;">Bereken netto</button>
+    </InputPanel>
+
+    <ResultPanel
+      title="Netto per maand"
+      heroLabel="Jouw netto salaris"
+      heroValue="&euro; 2.970"
+      badge="Indicatie"
+      slot="result"
+    >
+      <div class="result-row"><span class="label">Bruto jaarsalaris</span><span class="value" id="demoGrossYear">&euro; 45.360</span></div>
+      <div class="result-row"><span class="label">Inkomstenbelasting</span><span class="value" id="demoTax">&euro; 15.545</span></div>
+      <div class="result-row"><span class="label">Heffingskortingen</span><span class="value" id="demoCredits">&euro; 7.289</span></div>
+      <div class="result-divider"></div>
+      <div class="result-row"><span class="label">Netto per jaar</span><span class="value" id="demoNetYear">&euro; 35.605</span></div>
+    </ResultPanel>
+
+    <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
+
+    <SourceCards title="Bronnen" items={sources} slot="sources" />
+
+    <FaqAccordion title="Veelgestelde vragen" items={faq} slot="faq" />
+
+    <ToolFooter
+      slot="footer"
+      disclaimer="Deze demo is een indicatie op basis van 2026-tarieven. Gebruik de uitkomst als richtlijn, niet als definitief bedrag. Raadpleeg bij belangrijke financiële beslissingen een financieel adviseur."
+      lastUpdated={lastUpdated}
+    />
+  </CalculatorShell>
+</BaseLayout>
+
+<script>
+  import { calculateNetIncomeEstimate2026 } from "../../lib/calculators/tax";
+  import { formatEuro } from "../../lib/format/currency";
+
+  const grossInput = document.getElementById("demoGross") as HTMLInputElement;
+  const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
+  const grossYearEl = document.getElementById("demoGrossYear")!;
+  const taxEl = document.getElementById("demoTax")!;
+  const creditsEl = document.getElementById("demoCredits")!;
+  const netYearEl = document.getElementById("demoNetYear")!;
+  const button = document.getElementById("demoCalculate")!;
+
+  function update() {
+    const gross = parseFloat(grossInput.value) || 0;
+    const result = calculateNetIncomeEstimate2026({
+      grossMonthlySalary: gross,
+      pensionRate: 0,
+      applyLoonheffingskorting: true,
+    });
+
+    if (!result.valid) {
+      hero.textContent = "—";
+      grossYearEl.textContent = "—";
+      taxEl.textContent = "—";
+      creditsEl.textContent = "—";
+      netYearEl.textContent = "—";
+      return;
+    }
+
+    const grossYear = gross * 12.96;
+    hero.textContent = formatEuro(result.netMonthly, 0);
+    grossYearEl.textContent = formatEuro(grossYear, 0);
+    taxEl.textContent = formatEuro(result.incomeTax, 0);
+    creditsEl.textContent = formatEuro(result.totalCredits, 0);
+    netYearEl.textContent = formatEuro(result.netYearly, 0);
+  }
+
+  grossInput.addEventListener("input", update);
+  button.addEventListener("click", update);
+  update();
+</script>
