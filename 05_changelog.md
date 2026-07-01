@@ -3,6 +3,16 @@
 ## 2026-07-01
 
 **Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 082 — Hypotheek Calculator App Shell Migration
+**Details:** `src/pages/hypotheek-calculator.astro` gemigreerd naar de app/tool shell. Gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. Inputvelden: bruto jaarinkomen, hypotheekrente, looptijd (10/20/30 jaar), partner toggle en partner inkomen. Resultaat direct zichtbaar bij laden: maximaal hypotheekbedrag, inkomensfactor, bruto maandlasten, netto maandlasten (incl. hypotheekrenteaftrek) en totale rentekosten. URL state toegevoegd: `?inkomen`, `?rente`, `?looptijd`, `?partner`, `?partnerInkomen`. Quick income chips: € 40.000, € 50.000, € 60.000, € 70.000, € 80.000. Kopieer-link knop en dynamische vervolgstappen (bruto-netto, salaris, toeslagen, ZZP). `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: uitleg en uitgangspunten. Disclaimer en bronnen via `ToolFooter` / `SourceCards`. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Geen wijzigingen aan de `mortgage` engine, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-01
+
+**Type:** Technisch/Architectuur
 **Wijziging:** Atlas v2 Sprint 081 — Salaris Calculator App Shell Migration
 **Details:** `src/pages/salaris-calculator.astro` volledig gemigreerd naar de app/tool shell. Gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. Input: bruto maandsalaris, pensioenpercentage (werknemersdeel) en loonheffingskorting toggle. Resultaat is direct zichtbaar bij laden (€ 3.500 bruto, 5% pensioen, LHK aan). URL state toegevoegd: `?bruto`, `?pensioen` (percentage), `?lhk` (1 of 0). Quick amount chips: € 2.500, 3.000, 3.500, 4.000, 5.000. Kopieer-link knop in `ResultPanel` actions slot. Effectief belastingtarief + compacte 2026 belastingschijven-tabel in resultaat. Dynamische vervolgstappen: Bruto-netto 2026, Toeslagen, Hypotheek, ZZP. `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: intro, uitleg, voorbeeldberekening, tarieventabel. Disclaimer en laatst-bijgewerkt via `ToolFooter`. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Geen wijzigingen aan calculatorlogica, engines, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
 **Status:** In ontwikkeling

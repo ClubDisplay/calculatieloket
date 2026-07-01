@@ -106,17 +106,25 @@ Toepassen shell op `salaris-calculator.astro`:
 - Pensioenpercentage als input (versus vast bedrag in bruto-netto-2026).
 - Alle P0 UX elementen uit Sprint 080 ook op salaris-calculator toegepast.
 
-### Sprint 082 (huidige aanbeveling)
-Uitrollen naar `hypotheek-calculator.astro` en P1 polish afronden:
+### Sprint 082 (afgerond)
+Uitrollen naar `hypotheek-calculator.astro`:
 
-9. #10 HowTo schema (op `bruto-netto-2026` en/of `salaris-calculator`)
+- Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`.
+- Input: bruto jaarinkomen, rente, looptijd, partner inkomen.
+- Resultaat direct zichtbaar: max hypotheek, bruto/netto maandlasten, rentekosten.
+- URL state, quick chips, copy link, dynamische use cases, FAQ/BreadcrumbList schema.
+
+### Sprint 083 (huidige aanbeveling)
+P1 polish afronden op de inkomenscalculators:
+
+9. #10 HowTo schema (op `bruto-netto-2026`, `salaris-calculator` en/of `hypotheek-calculator`)
 10. #12 Bronnen onder resultaat
 11. #13 LHK vergelijking
 12. #14 People also ask content
 13. #15 Contextuele interne links
 14. #16 Sticky resultaat hero
 
-### Direct na Sprint 082 (P1 sprints)
+### Direct na Sprint 083 (P1 sprints)
 15. #18 AdSense A/B test
 16. #19 Inputvelden full-width + 16px font op mobiel
 

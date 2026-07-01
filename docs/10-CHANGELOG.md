@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-2. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
+1. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+2. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+3. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 3. [2026-06-30](#2026-06-30)
 4. [2026-06-30](#2026-06-30)
 5. [2026-06-30](#2026-06-30)
@@ -30,6 +31,16 @@
 20. [2026-06-30](#2026-06-30)
 21. [2026-06-30](#2026-06-30)
 22. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-01 — Sprint 082
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 082 — Hypotheek Calculator App Shell Migration
+**Details:** `src/pages/hypotheek-calculator.astro` gemigreerd naar de app/tool shell. Gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. Inputvelden: bruto jaarinkomen, hypotheekrente, looptijd (10/20/30 jaar), partner toggle en partner inkomen. Resultaat direct zichtbaar bij laden: maximaal hypotheekbedrag, inkomensfactor, bruto maandlasten, netto maandlasten (incl. hypotheekrenteaftrek) en totale rentekosten. URL state toegevoegd: `?inkomen`, `?rente`, `?looptijd`, `?partner`, `?partnerInkomen`. Quick income chips: € 40.000, € 50.000, € 60.000, € 70.000, € 80.000. Kopieer-link knop en dynamische vervolgstappen (bruto-netto, salaris, toeslagen, ZZP). `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: uitleg en uitgangspunten. Disclaimer en bronnen via `ToolFooter` / `SourceCards`. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Geen wijzigingen aan de `mortgage` engine, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
