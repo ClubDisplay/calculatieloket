@@ -7,13 +7,11 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-2. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-3. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-4. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-3. [2026-06-30](#2026-06-30)
-4. [2026-06-30](#2026-06-30)
-5. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+2. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+3. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+4. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+5. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 6. [2026-06-30](#2026-06-30)
 7. [2026-06-30](#2026-06-30)
 8. [2026-06-30](#2026-06-30)
@@ -25,13 +23,24 @@
 14. [2026-06-30](#2026-06-30)
 15. [2026-06-30](#2026-06-30)
 16. [2026-06-30](#2026-06-30)
-17. [2026-06-29](#2026-06-29)
-18. [2026-06-27](#2026-06-27)
-19. [2026-06-26](#2026-06-26)
-
-20. [2026-06-30](#2026-06-30)
-21. [2026-06-30](#2026-06-30)
+17. [2026-06-30](#2026-06-30)
+18. [2026-06-30](#2026-06-30)
+19. [2026-06-29](#2026-06-29)
+20. [2026-06-27](#2026-06-27)
+21. [2026-06-26](#2026-06-26)
 22. [2026-06-30](#2026-06-30)
+23. [2026-06-30](#2026-06-30)
+24. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 086
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 086 — ZZP Calculator App Shell Migration
+**Details:** `src/pages/zzp-calculator.astro` gemigreerd naar de Calculator App Shell. De pagina gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro`, `ToolFooter.astro` en `FinancialJourney.astro`. Input: gewenst netto inkomen per maand, factureerbare dagen per jaar, uren per dag, zakelijke kosten per maand, pensioenreservering per maand, en toggles voor zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling. Resultaat direct zichtbaar bij laden: benodigd uurtarief, benodigde jaaromzet (excl. btw), netto doel per maand, zakelijke kosten per jaar, pensioenopbouw per jaar, ondernemersaftrek + MKB-vrijstelling, belastingindicatie, netto na belasting en netto na pensioen per jaar. De berekening gebruikt de bestaande `calculateZzpReverse()` functie zonder wijzigingen aan de ZZP engine. URL state toegevoegd: `?netto`, `?dagen`, `?uren`, `?kosten`, `?pensioen`, `?zelfstandigenaftrek`, `?startersaftrek`, `?mkb`. Quick chips: € 2.500, € 3.000, € 3.500, € 4.000, € 5.000. Kopieer-link knop in `ResultPanel` actions slot. Financial Journey toont vijf vervolgstappen: BTW berekenen, bruto-netto vergelijken, hypotheek berekenen, auto importkosten berekenen en toeslagen berekenen, met actuele omzet/inkomen parameters waar mogelijk. `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: uitleg, belangrijke aannames, bronnen en disclaimer. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Mobile-first page CSS voor 360/390/768px en desktop. Geen wijzigingen aan de `zzp` engine, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` bijgewerkt: Sprint 085 gemarkeerd als afgerond, Sprint 086 toegevoegd als huidige aanbeveling, "Wachten op Sprint 087". `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

@@ -1,7 +1,7 @@
 # 10 — Product Polish Backlog
 
 > **Doel:** Prioriteren van alle verbeterpunten voor `bruto-netto-2026.astro` zodat de pagina de beste Nederlandse bruto-netto calculator wordt.  
-> **Laatst bijgewerkt:** 2026-07-01  
+> **Laatst bijgewerkt:** 2026-07-02  
 > **Scope:** UX, conversie, vertrouwen, SEO, AdSense. Geen engine wijzigingen, geen nieuwe calculator, geen Knowledge Layer, geen deploy.
 
 ---
@@ -33,9 +33,17 @@ De P1 items (HowTo schema, bronnen onder resultaat, LHK vergelijking, People als
 
 Sprint 083 heeft de `toeslagen-calculator.astro` pagina gemigreerd naar de Calculator App Shell. Nieuw: de `FinancialJourney` component voor de “Je volgende stap”-sectie. P0/P1 polish voor bruto-netto blijft bewust uitgesteld tot na de huidige migratiesprint.
 
-### Update: Sprint 084 — BTW Calculator App Shell Migration (huidige aanbeveling)
+### Update: Sprint 084 — BTW Calculator App Shell Migration (afgerond)
 
-Sprint 084 migreert `btw-calculator.astro` naar de Calculator App Shell. Scope: alleen deze pagina, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
+Sprint 084 heeft `btw-calculator.astro` gemigreerd naar de Calculator App Shell. Scope: alleen deze pagina, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
+
+### Update: Sprint 085 — BTW Terugrekenen + Inclusief/Exclusief App Shell Migration (afgerond)
+
+Sprint 085 heeft `btw-terugrekenen.astro` en `btw-inclusief-exclusief.astro` gemigreerd naar de Calculator App Shell. Financial Journey verbindt het BTW-cluster onderling en naar ZZP uurtarief en auto importkosten.
+
+### Update: Sprint 086 — ZZP Calculator App Shell Migration (huidige aanbeveling)
+
+Sprint 086 migreert `zzp-calculator.astro` naar de Calculator App Shell. Scope: alleen deze pagina, gebruik bestaande `calculateZzpReverse()`, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
 
 ---
 
@@ -143,7 +151,7 @@ BTW Calculator App Shell Migration:
 - FAQPage + BreadcrumbList schema.
 - Geen advertentie tussen input en resultaat.
 
-### Sprint 085 (huidige aanbeveling)
+### Sprint 085 (afgerond)
 Complete BTW Experience — BTW Terugrekenen + BTW Inclusief/Exclusief App Shell Migration:
 
 - Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
@@ -155,7 +163,21 @@ Complete BTW Experience — BTW Terugrekenen + BTW Inclusief/Exclusief App Shell
 - FAQPage + BreadcrumbList schema.
 - Geen advertentie tussen input en resultaat; mobile-first polish.
 
-### Direct na Sprint 085 (P1 sprints)
+### Sprint 086 (huidige aanbeveling)
+ZZP Calculator App Shell Migration:
+
+- Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
+- Migreer `zzp-calculator.astro`.
+- Input: gewenst netto per maand, factureerbare dagen per jaar, uren per dag, zakelijke kosten, pensioenreservering, zelfstandigenaftrek, startersaftrek, MKB-winstvrijstelling.
+- Resultaat direct zichtbaar: benodigd uurtarief, benodigde jaaromzet, netto doel, kosten, pensioen, aftrekposten, belastingindicatie, netto na pensioen.
+- URL state: `?netto=`, `?dagen=`, `?uren=`, `?kosten=`, `?pensioen=`, `?zelfstandigenaftrek=`, `?startersaftrek=`, `?mkb=`.
+- Quick chips: €2.500, €3.000, €3.500, €4.000, €5.000.
+- Copy link, bronnen, bijgewerkt-badge, indicatie-badge.
+- Financial Journey links naar BTW, bruto-netto, hypotheek, auto import, toeslagen.
+- FAQPage + BreadcrumbList schema.
+- Geen advertentie tussen input en resultaat; mobile-first polish.
+
+### Direct na Sprint 086 (P1 sprints)
 Herpak de P1 polish items uit de backlog:
 
 - #10 HowTo schema op gemigreerde calculators
@@ -194,4 +216,4 @@ Herpak de P1 polish items uit de backlog:
 
 ---
 
-**Wachten op Sprint 086.**
+**Wachten op Sprint 087.**
