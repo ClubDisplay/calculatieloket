@@ -53,6 +53,10 @@ Sprint 087 bouwde een generieke, rule-based Financial Recommendation Engine in `
 
 Sprint 088 sluit de Recommendation Engine aan op alle 8 gemigreerde calculators: `bruto-netto-2026.astro`, `salaris-calculator.astro`, `hypotheek-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro` en `zzp-calculator.astro`. Elke pagina berekent nu server-side een initiële set recommendations en herberekent deze client-side bij elke inputwijziging. Handmatige `journeySteps` arrays en de statische `result-next-steps` links zijn verwijderd. De engine blijft rule-based, traceerbaar en testbaar; er zijn geen engine-, Knowledge- of Rule Resolver-wijzigingen.
 
+### Update: Sprint 089 — P1 Product Polish (afgerond)
+
+Sprint 089 rondt de P1 polish items af op alle 8 gemigreerde calculators. De gedeelde componenten `HowToSchema.astro` en `InlineSources.astro` zijn toegevoegd in `src/components/calculator/`. De pagina's `hypotheek-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro` en `zzp-calculator.astro` zijn voorzien van HowTo schema markup, inline bronnen onder het resultaat, contextuele interne links in de SEO-content en opgeruimde page-scoped CSS. `bruto-netto-2026.astro` en `salaris-calculator.astro` krijgen bovendien een live loonheffingskortingvergelijking (met/zonder korting) in het resultaat. Daarnaast is `src/styles/global.css` uitgebreid met mobiele input polish: 16px font-size en verbeterde spacing voor `.form-group-row`. Geen engine-, Knowledge- of Rule Resolver-wijzigingen; geen deploy.
+
 ---
 
 ## Legenda
@@ -196,18 +200,21 @@ Financial Recommendation Engine v1:
 - Documentatie: `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md`.
 - Geen engine/Knowledge/Rule Resolver wijzigingen; geen deploy.
 
-### Direct na Sprint 088 (P1 sprints)
+### Sprint 089 (afgerond)
 
-Herpak de P1 polish items uit de backlog:
+P1 items afgerond:
 
 - #10 HowTo schema op gemigreerde calculators
 - #12 Bronnen onder resultaat
-- #13 LHK vergelijking
-- #14 People also ask content
+- #13 LHK vergelijking (`bruto-netto-2026.astro` en `salaris-calculator.astro`)
 - #15 Contextuele interne links
+- #19 Inputvelden full-width + 16px font op mobiel
+
+Bewust niet meegenomen in Sprint 089 (blijven op backlog):
+
+- #14 People also ask content herstructurering
 - #16 Sticky resultaat hero
 - #18 AdSense A/B test
-- #19 Inputvelden full-width + 16px font op mobiel
 
 ### Q3/Q4 2026 (P2)
 17. #20 Visuele belastingverdeling
@@ -236,4 +243,4 @@ Herpak de P1 polish items uit de backlog:
 
 ---
 
-**Klaar voor Sprint 089 — P1 polish items.**
+**Sprint 089 afgerond. P2 items staan klaar voor Q3/Q4 2026.**
