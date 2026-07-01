@@ -7,15 +7,15 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
-2. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-3. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-4. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-5. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-6. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-7. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-8. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-9. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
+2. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+3. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+4. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+5. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+6. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+7. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+8. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+9. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 10. [2026-06-30](#2026-06-30)
 11. [2026-06-30](#2026-06-30)
 12. [2026-06-30](#2026-06-30)
@@ -34,6 +34,17 @@
 25. [2026-06-30](#2026-06-30)
 26. [2026-06-30](#2026-06-30)
 27. [2026-06-30](#2026-06-30)
+28. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 090
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 090 — Auto Importkosten Calculator App Shell Migration
+**Details:** `src/pages/auto-importkosten-berekenen.astro` gemigreerd naar de Calculator App Shell. De pagina gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro`, `ToolFooter.astro`, `FinancialJourney.astro`, `HowToSchema.astro` en `InlineSources.astro`. De berekening gebruikt de bestaande `calculateImportCosts()` zonder wijzigingen. Resultaat is direct zichtbaar bij laden (aankoopprijs € 15.000, bpm € 3.000, standaard importkosten). URL state toegevoegd: `?voertuig`, `?land`, `?aankoopprijs`, `?bpm`, `?rdw`, `?transport`, `?export`, `?keuring`, `?kenteken`, `?overig` en `?nl`. Quick-preset chips: "Lage kosten", "Gemiddeld", "Hoog". Kopieer-link knop in `ResultPanel` actions slot. `FinancialJourney` gebruikt de `steps` prop (de recommendation registry ondersteunt `auto-importkosten` nog niet; backward compatible met `steps`). `FAQPage`, `BreadcrumbList` en `HowTo` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: kostenposten, bpm-uitleg, btw-uitleg, import uit Duitsland/Frankrijk, camper aandachtspunten, voorbeeld, veelgemaakte fouten. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Mobile-first page CSS voor 360/390/768px en desktop. Geen wijzigingen aan de `import-costs` engine, Knowledge Objects, Rule Resolver, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
