@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateBtw } from "../lib/calculators/btw";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
@@ -147,6 +149,18 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <HowToSchema
+    slot="head"
+    name="BTW terugrekenen van inclusief naar exclusief"
+    description="Stappen om btw terug te rekenen van een inclusief bedrag naar een exclusief bedrag."
+    totalTime="PT30S"
+    steps={[
+      { name: "Vul het bedrag inclusief btw in", text: "Voer het totaalbedrag inclusief btw in." },
+      { name: "Kies het btw-tarief", text: "Selecteer 21%, 9% of 0% btw." },
+      { name: "Bekijk het exclusieve bedrag", text: "De calculator toont het bedrag exclusief btw en het btw-bedrag." },
+    ]}
+  />
+
   <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
 
   <CalculatorShell title="BTW terugrekenen" subtitle="Reken een bedrag inclusief btw om naar exclusief btw. Kies 21%, 9% of 0% en zie direct het resultaat.">
@@ -203,6 +217,8 @@ const breadcrumbSchema = {
 
       <FinancialJourney recommendations={initialRecommendations} />
 
+      <InlineSources title="Gebruikte bronnen" items={sources} />
+
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
@@ -226,6 +242,7 @@ const breadcrumbSchema = {
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Hoe werkt btw terugrekenen?</h2>
     <p>Bij btw terugrekenen wil je van een bedrag inclusief btw weten wat het bedrag exclusief btw is en hoeveel btw er in het totaalbedrag zit.</p>
+    <p>Wil je btw in beide richtingen berekenen? Gebruik dan de <a href="/btw-calculator/">BTW calculator</a> of de <a href="/btw-inclusief-exclusief/">btw inclusief/exclusief</a> tool. Ondernemers bekijken ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
     <p>Je kunt niet simpelweg het btw-percentage van het inclusief bedrag aftrekken. Het inclusief bedrag is namelijk al opgebouwd uit het bedrag exclusief btw plus de btw daarover. Daarom gebruik je een deling in plaats van een aftrekking.</p>
     <p>Stel, je hebt een factuur van &euro;121 inclusief 21% btw. Als je daar 21% van aftrekt (&euro;25,41), kom je uit op &euro;95,59. Dat klopt niet. Het juiste bedrag exclusief btw is &euro;100. Het verschil ontstaat doordat de 21% btw is berekend over het exclusieve bedrag, niet over het inclusieve bedrag.</p>
 
@@ -620,32 +637,6 @@ const breadcrumbSchema = {
 
   .copy-link-icon {
     font-size: 0.95rem;
-  }
-
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
-  }
-
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
   }
 
   .btw-nul-waarschuwing {

@@ -1,0 +1,85 @@
+---
+interface Item {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+}
+
+const { title = "Bronnen", items } = Astro.props;
+---
+
+<div class="calc-inline-sources">
+  <div class="calc-inline-sources-title">{title}</div>
+  <ul class="calc-inline-sources-list">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.href} target="_blank" rel="noopener" class="calc-inline-source-link">
+            <span class="calc-inline-source-label">{item.label}</span>
+            <span class="calc-inline-source-title">{item.title}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .calc-inline-sources {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .calc-inline-sources-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .calc-inline-sources-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .calc-inline-source-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .calc-inline-source-link:hover,
+  .calc-inline-source-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .calc-inline-source-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .calc-inline-source-title {
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+</style>

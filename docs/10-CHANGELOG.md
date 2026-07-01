@@ -7,14 +7,14 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-2. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-3. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-4. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-5. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-6. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-7. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-8. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+2. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+3. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+4. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+5. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+6. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+7. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+8. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 9. [2026-06-30](#2026-06-30)
 10. [2026-06-30](#2026-06-30)
 11. [2026-06-30](#2026-06-30)
@@ -33,6 +33,17 @@
 24. [2026-06-30](#2026-06-30)
 25. [2026-06-30](#2026-06-30)
 26. [2026-06-30](#2026-06-30)
+27. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 089
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 089 — P1 Product Polish
+**Details:** P1 product polish toegepast op alle 8 gemigreerde calculators. Gedeelde componenten toegevoegd: `src/components/calculator/HowToSchema.astro` (genereert `HowTo` JSON-LD schema markup) en `src/components/calculator/InlineSources.astro` (compacte bronvermelding direct onder het resultaat). Gewijzigde pagina's: `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro`, `src/pages/zzp-calculator.astro`, `src/pages/bruto-netto-2026.astro` en `src/pages/salaris-calculator.astro`. Per pagina: HowTo schema markup in de `head` slot, inline bronnen onder het resultaat, contextuele interne links in de SEO-content, opruiming van overbodige `.result-next-steps` CSS, en mobiele input polish via `src/styles/global.css` (16px font-size, `.form-group-row` responsive). `bruto-netto-2026.astro` en `salaris-calculator.astro` krijgen bovendien een live loonheffingskortingvergelijking: het resultaat toont naast de normale uitkomst ook het netto salaris zonder loonheffingskorting en het maandelijkse voordeel van de korting. Deze vergelijking wordt server-side geïnitialiseerd en client-side bijgewerkt bij elke inputwijziging. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` bijgewerkt: Sprint 089 gemarkeerd als afgerond, afgeronde P1 items afgestreept, openstaande P1 items (#14, #16, #18) terug naar backlog. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

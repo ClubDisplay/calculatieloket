@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateZzpReverse } from "../lib/calculators/zzp";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
@@ -154,6 +156,20 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <HowToSchema
+    slot="head"
+    name="ZZP uurtarief berekenen in 2026"
+    description="Stappen om als zzp'er je benodigde uurtarief en jaaromzet te berekenen."
+    totalTime="PT1M"
+    steps={[
+      { name: "Vul je gewenste netto inkomen in", text: "Voer in hoeveel netto je per maand wilt verdienen." },
+      { name: "Vul je werkdagen en uren in", text: "Geef het aantal factureerbare dagen per jaar en uren per dag op." },
+      { name: "Vul kosten en pensioen in", text: "Voer zakelijke kosten en pensioenreservering per maand in." },
+      { name: "Kies je aftrekposten", text: "Zet zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling aan of uit." },
+      { name: "Bekijk je uurtarief", text: "De calculator toont het benodigde uurtarief en jaaromzet." },
+    ]}
+  />
+
   <AdSlot slot="1234567896" format="auto" style="min-height:280px" />
 
   <CalculatorShell
@@ -271,6 +287,8 @@ const breadcrumbSchema = {
 
       <FinancialJourney recommendations={initialRecommendations} />
 
+      <InlineSources title="Gebruikte bronnen" items={sources} />
+
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
@@ -295,6 +313,7 @@ const breadcrumbSchema = {
 
     <h2 class="page-title">ZZP uurtarief berekenen</h2>
     <p>Deze ZZP calculator geeft een indicatie van je benodigde uurtarief en jaaromzet. De berekening houdt rekening met zakelijke kosten, pensioenreservering, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling. Het is een vereenvoudigde berekening op basis van de 2026 tarieven.</p>
+    <p>Wil je weten hoeveel btw je over je omzet betaalt? Gebruik de <a href="/btw-calculator/">BTW calculator</a>. Voor je inkomensvergelijking heb je de <a href="/bruto-netto-2026/">bruto-netto calculator</a>, <a href="/hypotheek-calculator/">hypotheek calculator</a> en <a href="/toeslagen-calculator/">toeslagen calculator</a>.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
     <p>De calculator werkt terugwaarts:</p>
@@ -513,32 +532,6 @@ const breadcrumbSchema = {
 
   .copy-link-icon {
     font-size: 0.95rem;
-  }
-
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
-  }
-
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
   }
 
   @media (max-width: 560px) {

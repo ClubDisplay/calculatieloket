@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateAllowances } from "../lib/calculators/allowances";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
@@ -152,6 +154,20 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <HowToSchema
+    slot="head"
+    name="Huurtoeslag en zorgtoeslag berekenen"
+    description="Stappen om een indicatie van je huur- en zorgtoeslag in 2026 te krijgen."
+    totalTime="PT1M"
+    steps={[
+      { name: "Vul je bruto jaarinkomen in", text: "Voer je bruto jaarinkomen in." },
+      { name: "Kies je huishouden", text: "Geef aan of je alleenstaand bent of met een partner woont." },
+      { name: "Vul eventueel partner inkomen in", text: "Als je een partner hebt, voer dan ook het bruto jaarinkomen in." },
+      { name: "Vul je maandelijkse huur in", text: "Voer de kale huur in, exclusief servicekosten." },
+      { name: "Bekijk je toeslag", text: "De calculator toont een indicatie van huurtoeslag en zorgtoeslag per maand." },
+    ]}
+  />
+
   <AdSlot slot="1234567896" format="auto" style="min-height:100px" />
 
   <CalculatorShell title="Toeslagen calculator 2026" subtitle="Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en huishouden.">
@@ -249,6 +265,8 @@ const breadcrumbSchema = {
 
       <FinancialJourney recommendations={initialRecommendations} />
 
+      <InlineSources title="Gebruikte bronnen" items={sources} />
+
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
@@ -272,6 +290,7 @@ const breadcrumbSchema = {
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Toeslagen calculator 2026</h2>
     <p>Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en situatie. Gebaseerd op de regels van 2026.</p>
+    <p>Wil je weten wat je <a href="/bruto-netto-2026/">netto overhoudt</a> van het inkomen waarover je toeslagen berekent, of bekijk je <a href="/hypotheek-calculator/">hypotheekindicatie</a> en <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
     <p>Deze calculator geeft een indicatie van huurtoeslag en zorgtoeslag op basis van de regels van 2026.</p>
@@ -700,37 +719,6 @@ const breadcrumbSchema = {
     font-size: 0.95rem;
   }
 
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
-  }
-
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
-  }
-
-  .form-group-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
 
   @media (max-width: 560px) {
     .calc-content {

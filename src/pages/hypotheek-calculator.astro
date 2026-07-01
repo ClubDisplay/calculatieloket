@@ -11,6 +11,8 @@ import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import { calculateMortgage } from "../lib/calculators/mortgage";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
@@ -143,6 +145,20 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <HowToSchema
+    slot="head"
+    name="Hypotheek berekenen op basis van inkomen"
+    description="Stappen om een indicatie van je maximale hypotheek en maandlasten te berekenen."
+    totalTime="PT1M"
+    steps={[
+      { name: "Vul je bruto jaarinkomen in", text: "Voer je bruto jaarinkomen in, inclusief vakantiegeld." },
+      { name: "Vul de hypotheekrente in", text: "Voer een actuele voorbeeldrente in, bijvoorbeeld 3,8%." },
+      { name: "Kies de looptijd", text: "Selecteer 10, 20 of 30 jaar." },
+      { name: "Voeg eventueel een partner inkomen toe", text: "Zet de partner-toggle aan en vul het tweede inkomen in." },
+      { name: "Bekijk je hypotheekindicatie", text: "De calculator toont het maximale hypotheekbedrag, bruto en netto maandlasten." },
+    ]}
+  />
+
   <AdSlot slot="1234567894" format="auto" style="min-height:100px" />
 
   <CalculatorShell title="Hypotheek calculator" subtitle="Bereken een indicatie van je maximale hypotheek en maandlasten op basis van je inkomen en rente.">
@@ -230,6 +246,7 @@ const breadcrumbSchema = {
       </button>
 
       <FinancialJourney recommendations={initialRecommendations} />
+      <InlineSources title="Gebruikte bronnen" items={sources} />
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -248,6 +265,7 @@ const breadcrumbSchema = {
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Hypotheek calculator</h2>
     <p>Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Gebruik deze calculator als startpunt; het is geen officiële hypotheekofferte.</p>
+    <p>Wil je weten hoeveel je <a href="/bruto-netto-2026/">netto overhoudt</a> van dit inkomen, of welk <a href="/zzp-calculator/">ZZP-uurtarief</a> je nodig hebt? Ook <a href="/toeslagen-calculator/">toeslagen</a> en je <a href="/salaris-calculator/">salaris</a> bereken je eenvoudig op Calculatieloket.nl.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
     <p>Deze calculator geeft een indicatie op basis van je inkomen, de ingevulde rente en de gekozen looptijd. Gebruikte uitgangspunten:</p>
@@ -630,32 +648,6 @@ const breadcrumbSchema = {
 
   .copy-link-icon {
     font-size: 0.95rem;
-  }
-
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
-  }
-
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
   }
 
   @media (max-width: 560px) {

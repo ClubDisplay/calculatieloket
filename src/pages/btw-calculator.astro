@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateBtw } from "../lib/calculators/btw";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
@@ -147,6 +149,18 @@ const breadcrumbSchema = {
 <BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <HowToSchema
+    slot="head"
+    name="BTW berekenen over een bedrag"
+    description="Stappen om btw te berekenen over een bedrag in 2026."
+    totalTime="PT30S"
+    steps={[
+      { name: "Vul het bedrag in", text: "Voer het bedrag in waarover je btw wilt berekenen." },
+      { name: "Kies het btw-tarief", text: "Selecteer 21%, 9% of 0% btw." },
+      { name: "Kies de richting", text: "Kies of je van exclusief naar inclusief wilt rekenen, of andersom." },
+      { name: "Bekijk het resultaat", text: "De calculator toont het bedrag exclusief, het btw-bedrag en het bedrag inclusief." },
+    ]}
+  />
 
   <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
 
@@ -211,6 +225,7 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Gebruikt tarief</span><span class="value" id="detailRate">{`${initialResult.rate}% btw`}</span></div>
 
       <FinancialJourney recommendations={initialRecommendations} />
+      <InlineSources title="Gebruikte bronnen" items={sources} />
 
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
@@ -235,6 +250,7 @@ const breadcrumbSchema = {
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Hoe werkt deze berekening?</h2>
     <p>De btw-calculator rekent op twee manieren:</p>
+    <p>Wil je hetzelfde bedrag <a href="/btw-terugrekenen/">terugrekenen van inclusief naar exclusief</a>, of tussen <a href="/btw-inclusief-exclusief/">exclusief en inclusief</a> wisselen? Ondernemers kunnen ook het <a href="/zzp-calculator/">ZZP-uurtarief</a> berekenen.</p>
     <ul class="calc-list">
       <li><strong>Exclusief &rarr; inclusief:</strong> btw = bedrag &times; (tarief &divide; 100). Het totaalbedrag inclusief btw is het oorspronkelijke bedrag plus de btw.</li>
       <li><strong>Inclusief &rarr; exclusief:</strong> bedrag exclusief = bedrag &divide; (1 + tarief &divide; 100). De btw is het verschil tussen het inclusieve bedrag en het exclusieve bedrag.</li>
@@ -624,32 +640,6 @@ const breadcrumbSchema = {
 
   .copy-link-icon {
     font-size: 0.95rem;
-  }
-
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
-  }
-
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
   }
 
   .btw-nul-waarschuwing {

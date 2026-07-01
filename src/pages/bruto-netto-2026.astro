@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
 import { formatEuro } from "../lib/format/currency";
 import { getRecommendations } from "../lib/recommendations/engine";
@@ -25,6 +27,12 @@ const initialResult = calculateNetIncomeEstimate2026({
   grossMonthlySalary: defaultGross,
   pensionAmount: defaultPension,
   applyLoonheffingskorting: defaultLhk,
+});
+
+const initialNoLhkResult = calculateNetIncomeEstimate2026({
+  grossMonthlySalary: defaultGross,
+  pensionAmount: defaultPension,
+  applyLoonheffingskorting: false,
 });
 
 const initialRecommendations = getRecommendations({
@@ -162,6 +170,20 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <HowToSchema
+    slot="head"
+    name="Bruto netto salaris berekenen in 2026"
+    description="Stappen om je netto salaris in 2026 te berekenen."
+    totalTime="PT1M"
+    steps={[
+      { name: "Vul je bruto maandsalaris in", text: "Voer je bruto maandsalaris in, inclusief vakantiegeld." },
+      { name: "Vul je pensioenpremie in", text: "Voer het werknemersdeel van je pensioenpremie per maand in." },
+      { name: "Pas loonheffingskorting toe", text: "Zet de loonheffingskorting aan als je deze bij je werkgever hebt." },
+      { name: "Bekijk je netto salaris", text: "De calculator toont je netto salaris per maand en per jaar." },
+      { name: "Vergelijk met en zonder korting", text: "Zie direct het verschil als je de loonheffingskorting niet zou toepassen." },
+    ]}
+  />
+
   <AdSlot slot="1234567898" format="auto" style="min-height:280px" />
 
   <CalculatorShell title="Bruto netto 2026 berekenen" subtitle="Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in en zie direct een indicatie van je nettoloon.">
@@ -238,12 +260,21 @@ const breadcrumbSchema = {
         <div class="result-bracket-row"><span class="label">Boven € 75.518</span><span class="value">49,50%</span></div>
       </div>
 
+      <div class="result-comparison" id="lhkComparison">
+        <div class="result-comparison-title">Loonheffingskorting</div>
+        <div class="result-row"><span class="label">Netto met korting</span><span class="value" id="detailNetWithLhk">{formatEuro(initialResult.netMonthly, 0)}</span></div>
+        <div class="result-row"><span class="label">Netto zonder korting</span><span class="value" id="detailNetWithoutLhk">{formatEuro(initialNoLhkResult.netMonthly, 0)}</span></div>
+        <div class="result-row result-row-total"><span class="label">Voordeel per maand</span><span class="value" id="detailLhkBenefit">{formatEuro(initialResult.netMonthly - initialNoLhkResult.netMonthly, 0)}</span></div>
+      </div>
+
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
       <FinancialJourney recommendations={initialRecommendations} />
+
+      <InlineSources title="Gebruikte bronnen" items={sources} />
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -264,6 +295,7 @@ const breadcrumbSchema = {
 
     <h2 class="page-title">Bruto netto 2026</h2>
     <p>Met deze bruto-netto calculator bereken je eenvoudig hoeveel je netto per maand (en per jaar) overhoudt in 2026. We gebruiken de actuele Box 1 inkomstenbelastingtarieven, vakantiegeld (8%), loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
+    <p>Wil je een ander bruto bedrag vergelijken? Gebruik de <a href="/salaris-calculator/">salaris calculator</a>. Voor je hypotheekindicatie, toeslagen of ZZP-uurtarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
 
     <h2>Tarieven 2026</h2>
     <p>Voor 2026 gelden de volgende Box 1 tarieven (inkomstenbelasting):</p>
@@ -350,6 +382,9 @@ const breadcrumbSchema = {
   const detailNetTax = document.getElementById("detailNetTax")!;
   const detailEffectiveRate = document.getElementById("detailEffectiveRate")!;
   const detailNetYear = document.getElementById("detailNetYear")!;
+  const detailNetWithLhk = document.getElementById("detailNetWithLhk")!;
+  const detailNetWithoutLhk = document.getElementById("detailNetWithoutLhk")!;
+  const detailLhkBenefit = document.getElementById("detailLhkBenefit")!;
 
   const formatNumber = (n: number, decimals = 0): string =>
     n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -410,6 +445,9 @@ const breadcrumbSchema = {
       detailNetTax.textContent = "—";
       detailEffectiveRate.textContent = "—";
       detailNetYear.textContent = "—";
+      detailNetWithLhk.textContent = "—";
+      detailNetWithoutLhk.textContent = "—";
+      detailLhkBenefit.textContent = "—";
       return;
     }
 
@@ -444,6 +482,15 @@ const breadcrumbSchema = {
     detailNetTax.textContent = formatEuro(netTax, 0);
     detailEffectiveRate.textContent = `${effectiveRate}%`;
     detailNetYear.textContent = formatEuro(result.netYearly, 0);
+
+    const resultNoLhk = calculateNetIncomeEstimate2026({
+      grossMonthlySalary: gross,
+      pensionAmount: pension,
+      applyLoonheffingskorting: false,
+    });
+    detailNetWithLhk.textContent = formatEuro(result.netMonthly, 0);
+    detailNetWithoutLhk.textContent = formatEuro(resultNoLhk.netMonthly, 0);
+    detailLhkBenefit.textContent = formatEuro(result.netMonthly - resultNoLhk.netMonthly, 0);
 
     updateUseCases(gross, result.netMonthly, result.netYearly, result.grossYearly);
 
@@ -790,30 +837,31 @@ const breadcrumbSchema = {
     color: var(--color-text);
   }
 
-  .result-next-steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
+  .result-comparison {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .result-comparison-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--color-text-muted);
-    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
   }
 
-  .result-next-steps-label {
-    font-weight: 600;
-    margin-right: 0.25rem;
+  .result-comparison .result-row {
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed var(--color-border);
   }
 
-  .result-next-steps a {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .result-next-steps a:hover,
-  .result-next-steps a:focus-visible {
-    text-decoration: underline;
+  .result-comparison .result-row:last-child {
+    border-bottom: none;
   }
 
   @media (max-width: 560px) {
