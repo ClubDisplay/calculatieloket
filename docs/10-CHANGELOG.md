@@ -7,16 +7,16 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
-2. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
-3. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-4. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-5. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-6. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-7. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-8. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-9. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-10. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
+2. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
+3. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+4. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+5. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+6. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+7. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+8. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+9. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+10. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 11. [2026-06-30](#2026-06-30)
 12. [2026-06-30](#2026-06-30)
 13. [2026-06-30](#2026-06-30)
@@ -35,6 +35,17 @@
 26. [2026-06-30](#2026-06-30)
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
+29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 091
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 091 — Auto Importkosten Recommendation Rules
+**Details:** `auto-importkosten` toegevoegd aan de Financial Recommendation Engine. Nieuwe rule file `src/lib/recommendations/rules/import-costs.ts` met rule set: BTW Calculator (altijd), Hypotheek/financiering bij `totalCost > 5000`, Bruto-netto 2026 bij lagere kosten, ZZP uurtarief (zakelijke context) en BPM uitleg via Belastingdienst. Geregistreerd in `src/lib/recommendations/registry.ts` als `"auto-importkosten": importCostsRules`. `src/pages/auto-importkosten-berekenen.astro` gemigreerd van statische `steps` naar dynamische `recommendations`: server-side `getRecommendations()` voor de initiële render en client-side `updateFinancialJourney()` bij elke inputwijziging. Tests uitgebreid in `tests/recommendations/recommendations.test.ts`: registry bevat `auto-importkosten`, BTW heeft priority 1, hypotheek bij hoge kosten, bruto-netto bij lage kosten, huidige calculator wordt gefilterd, zzp en bpm-uitleg zijn aanwezig. Documentatie bijgewerkt: `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md` (rule set, registry, Sprint 091 integratie, gerelateerde bestanden) en `docs/product/10-PRODUCT-POLISH-BACKLOG.md` (Sprint 091 update). Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

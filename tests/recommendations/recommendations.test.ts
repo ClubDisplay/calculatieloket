@@ -189,10 +189,66 @@ describe("Recommendation registry", () => {
       "hypotheek",
       "zzp",
       "toeslagen",
+      "auto-importkosten",
     ];
     for (const key of keys) {
       expect(recommendationRegistry[key]).toBeDefined();
       expect(typeof recommendationRegistry[key]).toBe("function");
     }
+  });
+});
+
+describe("Import costs rules", () => {
+  it("recommends btw as priority 1", () => {
+    const result = getRecommendations({
+      calculator: "auto-importkosten",
+      values: {},
+      result: { totalCost: 15000 },
+    });
+    expect(result[0].id).toBe("btw");
+    expect(result[0].priority).toBe(1);
+  });
+
+  it("recommends hypotheek when totalCost > 5000", () => {
+    const result = getRecommendations({
+      calculator: "auto-importkosten",
+      values: {},
+      result: { totalCost: 15000 },
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).toContain("hypotheek");
+    expect(ids).not.toContain("bruto-netto");
+  });
+
+  it("recommends bruto-netto when totalCost <= 5000", () => {
+    const result = getRecommendations({
+      calculator: "auto-importkosten",
+      values: {},
+      result: { totalCost: 3000 },
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).toContain("bruto-netto");
+    expect(ids).not.toContain("hypotheek");
+  });
+
+  it("does not recommend the current calculator", () => {
+    const result = getRecommendations({
+      calculator: "auto-importkosten",
+      values: {},
+      result: { totalCost: 15000 },
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).not.toContain("auto-importkosten");
+  });
+
+  it("includes zzp and bpm-uitleg recommendations", () => {
+    const result = getRecommendations({
+      calculator: "auto-importkosten",
+      values: {},
+      result: { totalCost: 15000 },
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).toContain("zzp");
+    expect(ids).toContain("bpm-uitleg");
   });
 });

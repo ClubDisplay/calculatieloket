@@ -86,6 +86,7 @@ export const recommendationRegistry: Record<string, RecommendationRule> = {
   "hypotheek": mortgageRules,
   "zzp": zzpRules,
   "toeslagen": allowancesRules,
+  "auto-importkosten": importCostsRules,
 };
 ```
 
@@ -153,6 +154,20 @@ Voor `toeslagen`.
 | `totalYearlyIncome < 35000` of `income < 35000` | Bruto-netto | 1 | laag inkomen |
 | altijd | Hypotheek | 2 | altijd relevant |
 | altijd | ZZP uurtarief | 3 | altijd relevant |
+
+### `src/lib/recommendations/rules/import-costs.ts`
+
+Voor `auto-importkosten`.
+
+| Conditie | Aanbeveling | Priority | Reason |
+|---|---|---|---|
+| altijd | BTW Calculator | 1 | altijd relevant |
+| `totalCost > 5000` | Hypotheek / financiering | 2 | hoge aanschafkosten |
+| `totalCost <= 5000` | Bruto-netto | 2 | altijd relevant |
+| altijd | ZZP uurtarief | 3 | zakelijke context |
+| altijd | BPM uitleg (Belastingdienst) | 4 | officiële bron |
+
+De huidige calculator `auto-importkosten` wordt door de engine automatisch uitgefilterd. De BTW- en ZZP-recommendations houden rekening met de totale importkosten door deze als query parameter mee te geven waar logisch.
 
 ---
 
@@ -268,6 +283,24 @@ Definition of Done Sprint 088:
 
 ---
 
+## Sprint 091 integratie (uitgevoerd)
+
+`auto-importkosten` is toegevoegd aan de Recommendation Engine.
+
+- Nieuwe rule file: `src/lib/recommendations/rules/import-costs.ts`.
+- Geregistreerd als `"auto-importkosten": importCostsRules` in `src/lib/recommendations/registry.ts`.
+- `src/pages/auto-importkosten-berekenen.astro` gebruikt nu `getRecommendations()` en `updateFinancialJourney()` in plaats van statische `steps`.
+- Regels: BTW Calculator (altijd), Hypotheek / financiering bij `totalCost > 5000`, anders Bruto-netto 2026, ZZP uurtarief (zakelijke context), BPM uitleg via Belastingdienst.
+- Tests toegevoegd in `tests/recommendations/recommendations.test.ts`.
+
+Definition of Done Sprint 091:
+
+- `auto-importkosten` gebruikt dynamische recommendations.
+- `npm run atlas:check` slaagt.
+- Geen engine, Knowledge Object, Rule Resolver of `.env` wijzigingen.
+
+---
+
 ## Risico’s / TODO’s
 
 - **Input normalisatie:** sommige calculators gebruiken andere key-namen (`nettoMonthly` vs `net`). De huidige helpers proberen meerdere varianten, maar langere termijn zou een `calculator → key mapping` beter zijn.
@@ -289,5 +322,6 @@ Definition of Done Sprint 088:
 - `src/lib/recommendations/rules/mortgage.ts`
 - `src/lib/recommendations/rules/zzp.ts`
 - `src/lib/recommendations/rules/allowances.ts`
+- `src/lib/recommendations/rules/import-costs.ts`
 - `src/components/calculator/FinancialJourney.astro`
 - `tests/recommendations/recommendations.test.ts`
