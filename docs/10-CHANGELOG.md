@@ -7,13 +7,13 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-2. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-3. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-4. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-5. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-6. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-7. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+2. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+3. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+4. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+5. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+6. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+7. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 8. [2026-06-30](#2026-06-30)
 9. [2026-06-30](#2026-06-30)
 10. [2026-06-30](#2026-06-30)
@@ -26,12 +26,23 @@
 17. [2026-06-30](#2026-06-30)
 18. [2026-06-30](#2026-06-30)
 19. [2026-06-30](#2026-06-30)
-20. [2026-06-29](#2026-06-29)
-21. [2026-06-27](#2026-06-27)
-22. [2026-06-26](#2026-06-26)
-23. [2026-06-30](#2026-06-30)
+20. [2026-06-30](#2026-06-30)
+21. [2026-06-29](#2026-06-29)
+22. [2026-06-27](#2026-06-27)
+23. [2026-06-26](#2026-06-26)
 24. [2026-06-30](#2026-06-30)
 25. [2026-06-30](#2026-06-30)
+26. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 088
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 088 — Recommendation Engine Integration
+**Details:** De rule-based Financial Recommendation Engine uit Sprint 087 is aangesloten op alle 8 gemigreerde calculators. Gewijzigde pagina’s: `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro` en `src/pages/zzp-calculator.astro`. Elke pagina berekent server-side een initiële `Recommendation[]` via `getRecommendations()` en geeft deze door aan `<FinancialJourney recommendations={...} />`. Bij inputwijzigingen wordt de set herberekend in de client via `getRecommendations()` en `updateFinancialJourney()` (`src/lib/recommendations/client.ts`). De handmatige `journeySteps` arrays in de BTW- en ZZP-pagina’s zijn verwijderd; de statische `result-next-steps` blokken in bruto-netto, salaris, hypotheek, toeslagen en BTW zijn vervangen door de recommendation-driven Financial Journey. `FinancialJourney.astro` blijft backward compatible met de `steps` prop. De engine, rule files, registry en helpers zijn ongewijzigd ten opzichte van Sprint 087; de integratie gebruikt bestaande `incomeRules`, `mortgageRules`, `btwRules`, `zzpRules` en `allowancesRules`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` bijgewerkt: Sprint 087 gemarkeerd als afgerond, Sprint 088 toegevoegd als afgerond, P1 polish items gepromoveerd tot volgende aanbeveling. `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md` bijgewerkt: Sprint 088 integratieplan gemarkeerd als uitgevoerd, `client.ts` toegevoegd aan gerelateerde bestanden. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

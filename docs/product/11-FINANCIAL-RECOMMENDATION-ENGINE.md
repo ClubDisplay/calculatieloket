@@ -244,27 +244,20 @@ Styling:
 
 ---
 
-## Sprint 088 integratieplan
+## Sprint 088 integratie (uitgevoerd)
 
-Doel: de Recommendation Engine daadwerkelijk aansluiten op alle gemigreerde calculators.
+De Recommendation Engine is aangesloten op alle 8 gemigreerde calculators.
 
-Stappen:
+Stappen die zijn uitgevoerd:
 
-1. **`bruto-netto-2026.astro`**
-   - Verzamel `values` (bruto, pensioen, lhk) en `result` (netto, belasting, etc.).
-   - Roep `getRecommendations()` aan en geef het resultaat door aan `<FinancialJourney recommendations={...} />`.
-2. **`salaris-calculator.astro`**
-   - Gebruik dezelfde `incomeRules` via `calculator: "salaris"`.
-3. **`hypotheek-calculator.astro`**
-   - Gebruik `mortgageRules` met partner-info.
-4. **`toeslagen-calculator.astro`**
-   - Gebruik `allowancesRules`.
-5. **`btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro`**
-   - Gebruik `btwRules`.
-6. **`zzp-calculator.astro`**
-   - Gebruik `zzpRules`.
-7. **Verwijder handmatige `journeySteps` arrays** uit de pagina’s waar recommendations de vervolgstappen overnemen.
-8. **Test visueel** dat de volgorde, links en reason-toelichting correct zijn op desktop én mobiel.
+1. **`bruto-netto-2026.astro`** — `incomeRules` via `calculator: "bruto-netto"`, waarden `grossMonthly`, `pensionAmount`, `lhk`.
+2. **`salaris-calculator.astro`** — `incomeRules` via `calculator: "salaris"`, waarden `grossMonthly`, `pensionRate`, `lhk`.
+3. **`hypotheek-calculator.astro`** — `mortgageRules` via `calculator: "hypotheek"`, waarden `totalYearlyIncome`, `partner`.
+4. **`toeslagen-calculator.astro`** — `allowancesRules` via `calculator: "toeslagen"`, waarde `totalYearlyIncome`.
+5. **`btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro`** — `btwRules` met `amount`, `rate`, `direction`.
+6. **`zzp-calculator.astro`** — `zzpRules` met `requiredYearlyRevenue`, `requiredHourlyRate`.
+7. **Handmatige `journeySteps` arrays en statische `result-next-steps` blokken verwijderd** uit de pagina’s waar recommendations de vervolgstappen overnemen.
+8. **Client-side updates** — elke pagina herberekent recommendations bij inputwijzigingen via `getRecommendations()` en `updateFinancialJourney()`.
 
 Definition of Done Sprint 088:
 
@@ -290,6 +283,7 @@ Definition of Done Sprint 088:
 - `src/lib/recommendations/helpers.ts`
 - `src/lib/recommendations/engine.ts`
 - `src/lib/recommendations/registry.ts`
+- `src/lib/recommendations/client.ts`
 - `src/lib/recommendations/rules/income.ts`
 - `src/lib/recommendations/rules/btw.ts`
 - `src/lib/recommendations/rules/mortgage.ts`

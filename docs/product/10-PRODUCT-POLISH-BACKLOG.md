@@ -45,9 +45,13 @@ Sprint 085 heeft `btw-terugrekenen.astro` en `btw-inclusief-exclusief.astro` gem
 
 Sprint 086 heeft `zzp-calculator.astro` gemigreerd naar de Calculator App Shell. Scope: alleen deze pagina, gebruik bestaande `calculateZzpReverse()`, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
 
-### Update: Sprint 087 — Financial Recommendation Engine v1 (huidige aanbeveling)
+### Update: Sprint 087 — Financial Recommendation Engine v1 (afgerond)
 
-Sprint 087 bouwt een generieke, rule-based Financial Recommendation Engine in `src/lib/recommendations/` en breidt `FinancialJourney.astro` uit zodat deze `recommendations` kan renderen. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy of bestaande calculatorpagina’s.
+Sprint 087 bouwde een generieke, rule-based Financial Recommendation Engine in `src/lib/recommendations/` en breidt `FinancialJourney.astro` uit zodat deze `recommendations` kan renderen. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy of bestaande calculatorpagina’s.
+
+### Update: Sprint 088 — Recommendation Engine Integration (afgerond)
+
+Sprint 088 sluit de Recommendation Engine aan op alle 8 gemigreerde calculators: `bruto-netto-2026.astro`, `salaris-calculator.astro`, `hypotheek-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro` en `zzp-calculator.astro`. Elke pagina berekent nu server-side een initiële set recommendations en herberekent deze client-side bij elke inputwijziging. Handmatige `journeySteps` arrays en de statische `result-next-steps` links zijn verwijderd. De engine blijft rule-based, traceerbaar en testbaar; er zijn geen engine-, Knowledge- of Rule Resolver-wijzigingen.
 
 ---
 
@@ -192,19 +196,8 @@ Financial Recommendation Engine v1:
 - Documentatie: `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md`.
 - Geen engine/Knowledge/Rule Resolver wijzigingen; geen deploy.
 
-### Direct na Sprint 087 (P1 sprints)
+### Direct na Sprint 088 (P1 sprints)
 
-1. Sprint 088: Recommendation Engine integreren in alle 8 gemigreerde calculators.
-2. Herpak daarna de P1 polish items:
-
-- #10 HowTo schema op gemigreerde calculators
-- #12 Bronnen onder resultaat
-- #13 LHK vergelijking
-- #14 People also ask content
-- #15 Contextuele interne links
-- #16 Sticky resultaat hero
-- #18 AdSense A/B test
-- #19 Inputvelden full-width + 16px font op mobiel
 Herpak de P1 polish items uit de backlog:
 
 - #10 HowTo schema op gemigreerde calculators
@@ -243,4 +236,4 @@ Herpak de P1 polish items uit de backlog:
 
 ---
 
-**Wachten op Sprint 088.**
+**Klaar voor Sprint 089 — P1 polish items.**

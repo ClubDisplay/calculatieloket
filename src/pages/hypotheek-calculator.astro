@@ -10,6 +10,8 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import { calculateMortgage } from "../lib/calculators/mortgage";
+import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Hypotheek Calculator 2026 — Indicatie maandlasten | Calculatieloket.nl";
@@ -27,6 +29,12 @@ const initialResult = calculateMortgage({
   termYears: defaultTerm,
   partnerIncome: defaultPartnerIncome,
   includePartner: defaultPartner,
+});
+
+const initialRecommendations = getRecommendations({
+  calculator: "hypotheek",
+  values: { totalYearlyIncome: initialResult.totalIncome, partner: defaultPartner },
+  result: initialResult,
 });
 
 const lastUpdated = "30 juni 2026";
@@ -221,13 +229,7 @@ const breadcrumbSchema = {
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
-      <div class="result-next-steps" slot="actions">
-        <span class="result-next-steps-label">Verder rekenen:</span>
-        <a href="/bruto-netto-2026/">Bruto-netto</a>
-        <a href="/salaris-calculator/">Salaris</a>
-        <a href="/toeslagen-calculator/">Toeslagen</a>
-        <a href="/zzp-calculator/">ZZP</a>
-      </div>
+      <FinancialJourney recommendations={initialRecommendations} />
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -269,6 +271,8 @@ const breadcrumbSchema = {
 <script>
   import { calculateMortgage } from "../lib/calculators/mortgage";
   import { formatEuro } from "../lib/format/currency";
+  import { getRecommendations } from "../lib/recommendations/engine";
+  import { updateFinancialJourney } from "../lib/recommendations/client";
 
   const incomeInput = document.getElementById("income") as HTMLInputElement;
   const rateInput = document.getElementById("rate") as HTMLInputElement;
@@ -279,6 +283,7 @@ const breadcrumbSchema = {
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
+  const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
   const detailTotalIncome = document.getElementById("detailTotalIncome")!;
   const detailIncomeFactor = document.getElementById("detailIncomeFactor")!;
@@ -368,6 +373,14 @@ const breadcrumbSchema = {
     detailTotalInterest.textContent = formatEuro(result.totalInterest, 0);
 
     updateUseCases(result.totalIncome);
+    if (financialJourney) {
+      const recs = getRecommendations({
+        calculator: "hypotheek",
+        values: { totalYearlyIncome: result.totalIncome, partner: partnerToggle.checked },
+        result,
+      });
+      updateFinancialJourney(financialJourney, recs);
+    }
     updateUrl();
   }
 
