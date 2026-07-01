@@ -27,7 +27,15 @@ Sprint 080 heeft de meeste P0 items uitgewerkt op `src/pages/bruto-netto-2026.as
 
 ### Nieuwe aanbeveling
 
-De P1 items (HowTo schema, bronnen onder resultaat, LHK vergelijking, People also ask content, contextuele interne links, sticky resultaat hero, AdSense A/B test) zijn nu de logische volgende stap na afronding van Sprint 080.
+De P1 items (HowTo schema, bronnen onder resultaat, LHK vergelijking, People also ask content, contextuele interne links, sticky resultaat hero, AdSense A/B test) blijven op de backlog staan. Ze worden opgepakt zodra de actieve migratiesprint (Sprint 084) is afgerond.
+
+### Update: Sprint 083 — Toeslagen App Shell Migration (afgerond)
+
+Sprint 083 heeft de `toeslagen-calculator.astro` pagina gemigreerd naar de Calculator App Shell. Nieuw: de `FinancialJourney` component voor de “Je volgende stap”-sectie. P0/P1 polish voor bruto-netto blijft bewust uitgesteld tot na de huidige migratiesprint.
+
+### Update: Sprint 084 — BTW Calculator App Shell Migration (huidige aanbeveling)
+
+Sprint 084 migreert `btw-calculator.astro` naar de Calculator App Shell. Scope: alleen deze pagina, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
 
 ---
 
@@ -114,19 +122,38 @@ Uitrollen naar `hypotheek-calculator.astro`:
 - Resultaat direct zichtbaar: max hypotheek, bruto/netto maandlasten, rentekosten.
 - URL state, quick chips, copy link, dynamische use cases, FAQ/BreadcrumbList schema.
 
-### Sprint 083 (huidige aanbeveling)
-P1 polish afronden op de inkomenscalculators:
+### Sprint 083 (afgerond)
+Uitrollen naar `toeslagen-calculator.astro`:
 
-9. #10 HowTo schema (op `bruto-netto-2026`, `salaris-calculator` en/of `hypotheek-calculator`)
-10. #12 Bronnen onder resultaat
-11. #13 LHK vergelijking
-12. #14 People also ask content
-13. #15 Contextuele interne links
-14. #16 Sticky resultaat hero
+- Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`.
+- Introductie van de `FinancialJourney` component voor “Je volgende stap”.
+- Input: bruto jaarinkomen, huur, huishouden, partner inkomen, vermogen, kinderen.
+- Resultaat direct zichtbaar: huurtoeslag + zorgtoeslag per maand/jaar.
+- URL state, quick chips, copy link, FAQ/BreadcrumbList schema.
 
-### Direct na Sprint 083 (P1 sprints)
-15. #18 AdSense A/B test
-16. #19 Inputvelden full-width + 16px font op mobiel
+### Sprint 084 (huidige aanbeveling)
+BTW Calculator App Shell Migration:
+
+- Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
+- Input: bedrag, btw-tarief (21%, 9%, 0%), richting (exclusief → inclusief / inclusief → exclusief).
+- Resultaat direct zichtbaar: bedrag exclusief, btw-bedrag, bedrag inclusief, gebruikt tarief.
+- URL state: `?bedrag=`, `?tarief=`, `?richting=`.
+- Quick chips: €100, €250, €500, €1000.
+- Copy link, bronnen, bijgewerkt-badge, indicatie-badge.
+- FAQPage + BreadcrumbList schema.
+- Geen advertentie tussen input en resultaat.
+
+### Direct na Sprint 084 (P1 sprints)
+Herpak de P1 polish items uit de backlog zodra de BTW migratie afgerond is:
+
+- #10 HowTo schema op gemigreerde calculators
+- #12 Bronnen onder resultaat
+- #13 LHK vergelijking
+- #14 People also ask content
+- #15 Contextuele interne links
+- #16 Sticky resultaat hero
+- #18 AdSense A/B test
+- #19 Inputvelden full-width + 16px font op mobiel
 
 ### Q3/Q4 2026 (P2)
 17. #20 Visuele belastingverdeling
@@ -155,4 +182,4 @@ P1 polish afronden op de inkomenscalculators:
 
 ---
 
-**Wachten op Sprint 080.**
+**Wachten op Sprint 085.**
