@@ -3,6 +3,16 @@
 ## 2026-07-02
 
 **Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 091 — Auto Importkosten Recommendation Rules
+**Details:** `auto-importkosten` toegevoegd aan de Financial Recommendation Engine. Nieuwe rule file `src/lib/recommendations/rules/import-costs.ts` met rule set: BTW Calculator (altijd), Hypotheek/financiering bij `totalCost > 5000`, Bruto-netto 2026 bij lagere kosten, ZZP uurtarief (zakelijke context) en BPM uitleg via Belastingdienst. Geregistreerd in `src/lib/recommendations/registry.ts` als `"auto-importkosten": importCostsRules`. `src/pages/auto-importkosten-berekenen.astro` gemigreerd van statische `steps` naar dynamische `recommendations`: server-side `getRecommendations()` voor de initiële render en client-side `updateFinancialJourney()` bij elke inputwijziging. Tests uitgebreid in `tests/recommendations/recommendations.test.ts`: registry bevat `auto-importkosten`, BTW heeft priority 1, hypotheek bij hoge kosten, bruto-netto bij lage kosten, huidige calculator wordt gefilterd, zzp en bpm-uitleg zijn aanwezig. Documentatie bijgewerkt: `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md` (rule set, registry, Sprint 091 integratie, gerelateerde bestanden) en `docs/product/10-PRODUCT-POLISH-BACKLOG.md` (Sprint 091 update). Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-02
+
+**Type:** Technisch/Architectuur
 **Wijziging:** Atlas v2 Sprint 090 — Auto Importkosten Calculator App Shell Migration
 **Details:** `src/pages/auto-importkosten-berekenen.astro` gemigreerd naar de Calculator App Shell. De pagina gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro`, `ToolFooter.astro`, `FinancialJourney.astro`, `HowToSchema.astro` en `InlineSources.astro`. De berekening gebruikt de bestaande `calculateImportCosts()` zonder wijzigingen. Resultaat is direct zichtbaar bij laden (aankoopprijs € 15.000, bpm € 3.000, standaard importkosten). URL state toegevoegd: `?voertuig`, `?land`, `?aankoopprijs`, `?bpm`, `?rdw`, `?transport`, `?export`, `?keuring`, `?kenteken`, `?overig` en `?nl`. Quick-preset chips: "Lage kosten", "Gemiddeld", "Hoog". Kopieer-link knop in `ResultPanel` actions slot. `FinancialJourney` gebruikt de `steps` prop (de recommendation registry ondersteunt `auto-importkosten` nog niet; backward compatible met `steps`). `FAQPage`, `BreadcrumbList` en `HowTo` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: kostenposten, bpm-uitleg, btw-uitleg, import uit Duitsland/Frankrijk, camper aandachtspunten, voorbeeld, veelgemaakte fouten. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Mobile-first page CSS voor 360/390/768px en desktop. Geen wijzigingen aan de `import-costs` engine, Knowledge Objects, Rule Resolver, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
 **Status:** In ontwikkeling

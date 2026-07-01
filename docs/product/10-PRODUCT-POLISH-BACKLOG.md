@@ -57,6 +57,10 @@ Sprint 088 sluit de Recommendation Engine aan op alle 8 gemigreerde calculators:
 
 Sprint 089 rondt de P1 polish items af op alle 8 gemigreerde calculators. De gedeelde componenten `HowToSchema.astro` en `InlineSources.astro` zijn toegevoegd in `src/components/calculator/`. De pagina's `hypotheek-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro` en `zzp-calculator.astro` zijn voorzien van HowTo schema markup, inline bronnen onder het resultaat, contextuele interne links in de SEO-content en opgeruimde page-scoped CSS. `bruto-netto-2026.astro` en `salaris-calculator.astro` krijgen bovendien een live loonheffingskortingvergelijking (met/zonder korting) in het resultaat. Daarnaast is `src/styles/global.css` uitgebreid met mobiele input polish: 16px font-size en verbeterde spacing voor `.form-group-row`. Geen engine-, Knowledge- of Rule Resolver-wijzigingen; geen deploy.
 
+### Update: Sprint 091 — Auto Importkosten Recommendation Rules (afgerond)
+
+Sprint 091 voegt `auto-importkosten` toe aan de Financial Recommendation Engine. Nieuwe rule file `src/lib/recommendations/rules/import-costs.ts` met regels voor BTW Calculator, Hypotheek/financiering bij hoge aanschafkosten (> € 5.000), Bruto-netto 2026 bij lagere kosten, ZZP uurtarief en BPM uitleg via de Belastingdienst. `src/lib/recommendations/registry.ts` is uitgebreid met `"auto-importkosten": importCostsRules`. `src/pages/auto-importkosten-berekenen.astro` gebruikt nu dynamische recommendations via `getRecommendations()` en `updateFinancialJourney()` in plaats van statische `steps`. Tests toegevoegd in `tests/recommendations/recommendations.test.ts`. Geen engine-, Knowledge- of Rule Resolver-wijzigingen; geen deploy.
+
 ---
 
 ## Legenda

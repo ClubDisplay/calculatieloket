@@ -13,6 +13,7 @@ import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import HowToSchema from "../components/calculator/HowToSchema.astro";
 import InlineSources from "../components/calculator/InlineSources.astro";
 import { calculateImportCosts } from "../lib/calculators/import-costs";
+import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Auto importkosten berekenen — Auto of camper importeren | Calculatieloket.nl";
@@ -41,6 +42,23 @@ const initialResult = calculateImportCosts({
   plateCosts: defaultPlateCosts,
   otherCosts: defaultOtherCosts,
   nlPrice: defaultNlPrice,
+});
+
+const initialRecommendations = getRecommendations({
+  calculator: "auto-importkosten",
+  values: {
+    vehicleType: defaultVehicleType,
+    purchasePrice: defaultPurchasePrice,
+    estimatedBpm: defaultEstimatedBpm,
+    rdwCosts: defaultRdwCosts,
+    transportCosts: defaultTransportCosts,
+    exportCosts: defaultExportCosts,
+    inspectionCosts: defaultInspectionCosts,
+    plateCosts: defaultPlateCosts,
+    otherCosts: defaultOtherCosts,
+    nlPrice: defaultNlPrice,
+  },
+  result: initialResult,
 });
 
 const lastUpdated = "1 juli 2026";
@@ -412,14 +430,7 @@ const breadcrumbSchema = {
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
-      <FinancialJourney
-        steps={[
-          { id: "btw", label: "BTW Calculator", description: "Reken btw over bedragen.", href: "/btw-calculator/" },
-          { id: "zzp", label: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.", href: "/zzp-calculator/" },
-          { id: "bruto-netto", label: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", href: "/bruto-netto-2026/" },
-          { id: "hypotheek", label: "Hypotheek Calculator", description: "Bereken een indicatie van je hypotheeklasten.", href: "/hypotheek-calculator/" },
-        ]}
-      />
+      <FinancialJourney recommendations={initialRecommendations} />
 
       <InlineSources title="Gebruikte bronnen" items={sources} />
     </ResultPanel>
@@ -533,6 +544,8 @@ const breadcrumbSchema = {
 <script>
   import { calculateImportCosts } from "../lib/calculators/import-costs";
   import { formatEuro } from "../lib/format/currency";
+  import { getRecommendations } from "../lib/recommendations/engine";
+  import { updateFinancialJourney } from "../lib/recommendations/client";
 
   const purchasePriceInput = document.getElementById("purchasePrice") as HTMLInputElement;
   const estimatedBpmInput = document.getElementById("estimatedBpm") as HTMLInputElement;
@@ -551,6 +564,7 @@ const breadcrumbSchema = {
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
   const comparisonSection = document.getElementById("comparisonSection") as HTMLElement;
+  const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
   const detailPurchase = document.getElementById("detailPurchase")!;
   const detailBpm = document.getElementById("detailBpm")!;
@@ -637,6 +651,15 @@ const breadcrumbSchema = {
       detailDifference.textContent = formatEuro(Math.abs(result.priceDifference ?? 0), 0);
     } else {
       comparisonSection.style.display = "none";
+    }
+
+    if (financialJourney) {
+      const recs = getRecommendations({
+        calculator: "auto-importkosten",
+        values: inputs,
+        result,
+      });
+      updateFinancialJourney(financialJourney, recs);
     }
 
     updateUrl();
