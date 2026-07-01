@@ -1,15 +1,16 @@
 # 10 — Changelog
 
 > **Doel:** Geconsolideerd changelog van alle releases. Dit is een synchrone kopie van `05_changelog.md` in de project-root.  
-> **Laatst bijgewerkt:** 2026-07-01
+> **Laatst bijgewerkt:** 2026-07-02
 
 ---
 
 ## Inhoudsopgave
 
-1. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-2. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-3. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
+1. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+2. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+3. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+4. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 3. [2026-06-30](#2026-06-30)
 4. [2026-06-30](#2026-06-30)
 5. [2026-06-30](#2026-06-30)
@@ -31,6 +32,16 @@
 20. [2026-06-30](#2026-06-30)
 21. [2026-06-30](#2026-06-30)
 22. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 085
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 085 — Complete BTW Experience: BTW Terugrekenen + BTW Inclusief/Exclusief App Shell Migration
+**Details:** `src/pages/btw-terugrekenen.astro` en `src/pages/btw-inclusief-exclusief.astro` gemigreerd naar de Calculator App Shell. Beide pagina's gebruiken `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro`, `ToolFooter.astro` en `FinancialJourney.astro`. `btw-terugrekenen` berekent altijd van inclusief naar exclusief; `btw-inclusief-exclusief` ondersteunt beide richtingen. Resultaat direct zichtbaar bij laden: bedrag exclusief, btw-bedrag, bedrag inclusief, gebruikt tarief. URL state toegevoegd: `?bedrag` en `?tarief` (beide pagina's), plus `?richting` voor `btw-inclusief-exclusief`. Quick chips: € 100, € 250, € 500, € 1000. Kopieer-link knop in beide `ResultPanel` actions slots. Financial Journey verbindt het BTW-cluster onderling en naar ZZP uurtarief en auto importkosten, met actuele bedrag/tarief parameters. `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: uitleg, voorbeelden, veelgemaakte fouten, bronnen. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Mobile-first page CSS voor 360/390/768px en desktop. Geen wijzigingen aan calculatorlogica, engines, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` bijgewerkt: Sprint 084 gemarkeerd als afgerond, Sprint 085 toegevoegd als huidige aanbeveling, "Wachten op Sprint 086". `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

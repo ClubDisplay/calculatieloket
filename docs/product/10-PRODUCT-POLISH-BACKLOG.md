@@ -27,7 +27,7 @@ Sprint 080 heeft de meeste P0 items uitgewerkt op `src/pages/bruto-netto-2026.as
 
 ### Nieuwe aanbeveling
 
-De P1 items (HowTo schema, bronnen onder resultaat, LHK vergelijking, People also ask content, contextuele interne links, sticky resultaat hero, AdSense A/B test) blijven op de backlog staan. Ze worden opgepakt zodra de actieve migratiesprint (Sprint 084) is afgerond.
+De P1 items (HowTo schema, bronnen onder resultaat, LHK vergelijking, People also ask content, contextuele interne links, sticky resultaat hero, AdSense A/B test) blijven op de backlog staan. Ze worden opgepakt zodra de actieve migratiesprint (Sprint 085) is afgerond.
 
 ### Update: Sprint 083 — Toeslagen App Shell Migration (afgerond)
 
@@ -131,7 +131,7 @@ Uitrollen naar `toeslagen-calculator.astro`:
 - Resultaat direct zichtbaar: huurtoeslag + zorgtoeslag per maand/jaar.
 - URL state, quick chips, copy link, FAQ/BreadcrumbList schema.
 
-### Sprint 084 (huidige aanbeveling)
+### Sprint 084 (afgerond)
 BTW Calculator App Shell Migration:
 
 - Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
@@ -143,8 +143,20 @@ BTW Calculator App Shell Migration:
 - FAQPage + BreadcrumbList schema.
 - Geen advertentie tussen input en resultaat.
 
-### Direct na Sprint 084 (P1 sprints)
-Herpak de P1 polish items uit de backlog zodra de BTW migratie afgerond is:
+### Sprint 085 (huidige aanbeveling)
+Complete BTW Experience — BTW Terugrekenen + BTW Inclusief/Exclusief App Shell Migration:
+
+- Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
+- Migreer `btw-terugrekenen.astro` (vaste richting: inclusief → exclusief) en `btw-inclusief-exclusief.astro` (twee richtingen).
+- URL state: `?bedrag=`, `?tarief=`, en voor inclusief/exclusief ook `?richting=`.
+- Quick chips: €100, €250, €500, €1000.
+- Copy link, bronnen, bijgewerkt-badge, indicatie-badge op beide pagina's.
+- Financial Journey links tussen alle BTW-pagina's, ZZP uurtarief en auto importkosten.
+- FAQPage + BreadcrumbList schema.
+- Geen advertentie tussen input en resultaat; mobile-first polish.
+
+### Direct na Sprint 085 (P1 sprints)
+Herpak de P1 polish items uit de backlog:
 
 - #10 HowTo schema op gemigreerde calculators
 - #12 Bronnen onder resultaat
@@ -182,4 +194,4 @@ Herpak de P1 polish items uit de backlog zodra de BTW migratie afgerond is:
 
 ---
 
-**Wachten op Sprint 085.**
+**Wachten op Sprint 086.**
