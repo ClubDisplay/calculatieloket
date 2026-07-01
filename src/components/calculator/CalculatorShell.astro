@@ -49,7 +49,7 @@ const { title, subtitle } = Astro.props;
 
   .calc-shell-grid {
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     grid-template-columns: 1fr;
   }
 
@@ -57,7 +57,18 @@ const { title, subtitle } = Astro.props;
   .calc-shell-side {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .calc-shell-grid {
+      gap: 1.5rem;
+    }
+
+    .calc-shell-main,
+    .calc-shell-side {
+      gap: 1.25rem;
+    }
   }
 
   @media (min-width: 900px) {

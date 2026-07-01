@@ -4,6 +4,7 @@ interface Item {
   description: string;
   href: string;
   accent?: string;
+  id?: string;
 }
 
 interface Props {
@@ -21,10 +22,11 @@ const { title = "Wat kun je hiermee?", items } = Astro.props;
       <a
         href={item.href}
         class="calc-use-cases-card"
+        data-usecase={item.id}
         style={item.accent ? `--uc-accent: ${item.accent}` : undefined}
       >
         <span class="calc-use-cases-card-title">{item.title}</span>
-        <span class="calc-use-cases-card-desc">{item.description}</span>
+        <span class="calc-use-cases-card-desc" data-template={item.description}>{item.description}</span>
         <span class="calc-use-cases-card-cta">Bekijk &rarr;</span>
       </a>
     ))}
