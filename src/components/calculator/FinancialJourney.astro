@@ -72,6 +72,8 @@ const defaultSteps: Step[] = [
 ];
 
 const steps = customSteps ?? defaultSteps;
+const MAX_RECOMMENDATIONS = 4;
+const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
 ---
 
 <div
@@ -85,8 +87,8 @@ const steps = customSteps ?? defaultSteps;
   <h3 class="calc-financial-journey-title">{title}</h3>
   <div class="calc-financial-journey-steps">
     {
-      recommendations && recommendations.length > 0 ? (
-        recommendations.map((rec) => (
+      displayRecommendations && displayRecommendations.length > 0 ? (
+        displayRecommendations.map((rec) => (
           <a href={rec.url} class="calc-financial-journey-step" data-step={rec.id}>
             <span class="step-check">✓</span>
             <span class="step-content">

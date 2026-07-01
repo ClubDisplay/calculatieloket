@@ -11,6 +11,7 @@ import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import { calculateBtw } from "../lib/calculators/btw";
+import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW inclusief en exclusief berekenen — 21%, 9% en 0% | Calculatieloket.nl";
@@ -24,6 +25,12 @@ const initialResult = calculateBtw({
   amount: defaultAmount,
   rate: defaultRate,
   direction: defaultDirection === "excl" ? "exclusive_to_inclusive" : "inclusive_to_exclusive",
+});
+
+const initialRecommendations = getRecommendations({
+  calculator: "btw-inclusief-exclusief",
+  values: { amount: defaultAmount, rate: defaultRate, direction: defaultDirection },
+  result: initialResult,
 });
 
 const heroLabel = defaultDirection === "excl" ? "Bedrag inclusief btw" : "Bedrag exclusief btw";
@@ -143,32 +150,6 @@ const breadcrumbSchema = {
   ],
 };
 
-const journeySteps = [
-  {
-    id: "btw-calculator",
-    label: "BTW Calculator",
-    description: "Reken met alle tarieven en richtingen.",
-    href: `/btw-calculator/?bedrag=${defaultAmount}&tarief=${defaultRate}&richting=${defaultDirection}`,
-  },
-  {
-    id: "btw-terugrekenen",
-    label: "BTW terugrekenen",
-    description: "Reken van inclusief naar exclusief btw.",
-    href: `/btw-terugrekenen/?bedrag=${initialResult.amountIncl}&tarief=${defaultRate}`,
-  },
-  {
-    id: "zzp",
-    label: "ZZP uurtarief berekenen",
-    description: "Hoeveel moet je als ZZP'er vragen?",
-    href: "/zzp-calculator/",
-  },
-  {
-    id: "import",
-    label: "Auto importkosten berekenen",
-    description: "Bereken importkosten voor auto of camper.",
-    href: "/auto-importkosten-berekenen/",
-  },
-];
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
@@ -237,20 +218,12 @@ const journeySteps = [
       <div class="result-divider"></div>
       <div class="result-row"><span class="label">Gebruikt tarief</span><span class="value" id="detailRate">{`${initialResult.rate}% btw`}</span></div>
 
-      <FinancialJourney steps={journeySteps} />
+      <FinancialJourney recommendations={initialRecommendations} />
 
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
-
-      <div class="result-next-steps" slot="actions">
-        <span class="result-next-steps-label">Verder rekenen:</span>
-        <a href="/btw-calculator/">BTW Calculator</a>
-        <a href="/btw-terugrekenen/">BTW terugrekenen</a>
-        <a href="/zzp-calculator/">ZZP</a>
-        <a href="/auto-importkosten-berekenen/">Auto import</a>
-      </div>
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -359,6 +332,8 @@ const journeySteps = [
 <script>
   import { calculateBtw } from "../lib/calculators/btw";
   import { formatEuro } from "../lib/format/currency";
+  import { getRecommendations } from "../lib/recommendations/engine";
+  import { updateFinancialJourney } from "../lib/recommendations/client";
 
   const amountInput = document.getElementById("amount") as HTMLInputElement;
   const hero = document.querySelector("[data-calc-result-hero]") as HTMLElement;
@@ -367,6 +342,7 @@ const journeySteps = [
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
+  const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
   const detailExcl = document.getElementById("detailExcl")!;
   const detailBtw = document.getElementById("detailBtw")!;
@@ -406,21 +382,6 @@ const journeySteps = [
     });
   }
 
-  function updateFinancialJourney(amount: number, rate: number, direction: "excl" | "incl", result: { amountIncl: number }) {
-    const journey = document.querySelector(".calc-financial-journey") as HTMLElement;
-    if (!journey) return;
-
-    const incl = direction === "excl" ? result.amountIncl : amount;
-    const btwCalculator = journey.querySelector('[data-step="btw-calculator"]') as HTMLAnchorElement;
-    const terugrekenen = journey.querySelector('[data-step="btw-terugrekenen"]') as HTMLAnchorElement;
-
-    if (btwCalculator) {
-      btwCalculator.href = `/btw-calculator/?bedrag=${amount}&tarief=${rate}&richting=${direction}`;
-    }
-    if (terugrekenen) {
-      terugrekenen.href = `/btw-terugrekenen/?bedrag=${incl}&tarief=${rate}`;
-    }
-  }
 
   function updateUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -463,7 +424,14 @@ const journeySteps = [
     detailRate.textContent = `${result.rate}% btw`;
 
     updateUseCases(amount, rate, direction, result);
-    updateFinancialJourney(amount, rate, direction, result);
+    if (financialJourney) {
+      const recs = getRecommendations({
+        calculator: "btw-inclusief-exclusief",
+        values: { amount, rate, direction },
+        result,
+      });
+      updateFinancialJourney(financialJourney, recs);
+    }
     updateUrl();
   }
 

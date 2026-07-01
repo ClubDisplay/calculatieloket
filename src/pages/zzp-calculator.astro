@@ -11,6 +11,7 @@ import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import { calculateZzpReverse } from "../lib/calculators/zzp";
+import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "ZZP Calculator 2026 — Uurtarief en netto inkomen | Calculatieloket.nl";
@@ -34,6 +35,12 @@ const initialResult = calculateZzpReverse({
   applySelfEmployedDeduction: defaultZa,
   applyStarterDeduction: defaultStarter,
   applyMkbExemption: defaultMkb,
+});
+
+const initialRecommendations = getRecommendations({
+  calculator: "zzp",
+  values: { requiredYearlyRevenue: initialResult.requiredYearlyRevenue, requiredHourlyRate: initialResult.requiredHourlyRate },
+  result: initialResult,
 });
 
 const lastUpdated = "2 juli 2026";
@@ -141,38 +148,6 @@ const breadcrumbSchema = {
   ],
 };
 
-const journeySteps = [
-  {
-    id: "btw",
-    label: "BTW berekenen",
-    description: "Reken btw over de benodigde jaaromzet.",
-    href: `/btw-calculator/?bedrag=${Math.round(initialResult.requiredYearlyRevenue)}&tarief=21&richting=excl`,
-  },
-  {
-    id: "bruto-netto",
-    label: "Bruto-netto vergelijken",
-    description: "Vergelijk de benodigde omzet met een bruto salaris in loondienst.",
-    href: `/bruto-netto-2026/?bruto=${Math.round(initialResult.requiredYearlyRevenue / 12)}`,
-  },
-  {
-    id: "hypotheek",
-    label: "Hypotheek berekenen",
-    description: "Wat kan je lenen met deze inkomensindicatie?",
-    href: `/hypotheek-calculator/?inkomen=${Math.round(initialResult.requiredYearlyRevenue)}`,
-  },
-  {
-    id: "auto-import",
-    label: "Auto importkosten berekenen",
-    description: "Bereken de kosten voor het importeren van een zakelijke auto.",
-    href: "/auto-importkosten-berekenen/",
-  },
-  {
-    id: "toeslagen",
-    label: "Toeslagen berekenen",
-    description: "Check of je recht hebt op huur- of zorgtoeslag.",
-    href: `/toeslagen-calculator/?inkomen=${Math.round(initialResult.requiredYearlyRevenue)}`,
-  },
-];
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
@@ -294,20 +269,12 @@ const journeySteps = [
       <div class="result-row"><span class="label">Netto na belasting (indicatie)</span><span class="value" id="detailNetProfit">{formatEuro(initialResult.netProfit, 0)}</span></div>
       <div class="result-row"><span class="label">Netto na pensioen per jaar</span><span class="value" id="detailNetAfterPension">{formatEuro(initialResult.netAfterPension, 0)}</span></div>
 
-      <FinancialJourney steps={journeySteps} />
+      <FinancialJourney recommendations={initialRecommendations} />
 
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
-
-      <div class="result-next-steps" slot="actions">
-        <span class="result-next-steps-label">Verder rekenen:</span>
-        <a href="/bruto-netto-2026/">Bruto-netto</a>
-        <a href="/salaris-calculator/">Salaris</a>
-        <a href="/hypotheek-calculator/">Hypotheek</a>
-        <a href="/auto-importkosten-berekenen/">Auto import</a>
-      </div>
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -597,6 +564,8 @@ const journeySteps = [
 <script>
   import { calculateZzpReverse } from "../lib/calculators/zzp";
   import { formatEuro } from "../lib/format/currency";
+  import { getRecommendations } from "../lib/recommendations/engine";
+  import { updateFinancialJourney } from "../lib/recommendations/client";
 
   const netInput = document.getElementById("desiredNet") as HTMLInputElement;
   const daysInput = document.getElementById("billableDays") as HTMLInputElement;
@@ -620,14 +589,7 @@ const journeySteps = [
 
   const errorEl = document.getElementById("calcError") as HTMLElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
-
-  const journeyLinks = {
-    btw: document.querySelector('[data-step="btw"]') as HTMLAnchorElement,
-    "bruto-netto": document.querySelector('[data-step="bruto-netto"]') as HTMLAnchorElement,
-    hypotheek: document.querySelector('[data-step="hypotheek"]') as HTMLAnchorElement,
-    "auto-import": document.querySelector('[data-step="auto-import"]') as HTMLAnchorElement,
-    toeslagen: document.querySelector('[data-step="toeslagen"]') as HTMLAnchorElement,
-  };
+  const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
   function getInputs() {
     const net = parseFloat(netInput.value) || 0;
@@ -674,9 +636,16 @@ const journeySteps = [
     detailNetProfit.textContent = formatEuro(result.netProfit, 0);
     detailNetAfterPension.textContent = formatEuro(result.netAfterPension, 0);
 
-    updateUrl(inputs);
-    updateJourney(result.requiredYearlyRevenue);
     updateUseCases(result.requiredYearlyRevenue);
+    if (financialJourney) {
+      const recs = getRecommendations({
+        calculator: "zzp",
+        values: { requiredYearlyRevenue: result.requiredYearlyRevenue, requiredHourlyRate: result.requiredHourlyRate },
+        result,
+      });
+      updateFinancialJourney(financialJourney, recs);
+    }
+    updateUrl(inputs);
   }
 
   function updateUrl(inputs: ReturnType<typeof getInputs>) {
@@ -718,23 +687,6 @@ const journeySteps = [
     setToggle("zelfstandigenaftrek", zaInput);
     setToggle("startersaftrek", starterInput);
     setToggle("mkb", mkbInput);
-  }
-
-  function updateJourney(revenue: number) {
-    const yearly = Math.round(revenue);
-    const monthly = Math.round(revenue / 12);
-    if (journeyLinks.btw) {
-      journeyLinks.btw.href = `/btw-calculator/?bedrag=${yearly}&tarief=21&richting=excl`;
-    }
-    if (journeyLinks["bruto-netto"]) {
-      journeyLinks["bruto-netto"].href = `/bruto-netto-2026/?bruto=${monthly}`;
-    }
-    if (journeyLinks.hypotheek) {
-      journeyLinks.hypotheek.href = `/hypotheek-calculator/?inkomen=${yearly}`;
-    }
-    if (journeyLinks.toeslagen) {
-      journeyLinks.toeslagen.href = `/toeslagen-calculator/?inkomen=${yearly}`;
-    }
   }
 
   function updateUseCases(omzet: number) {

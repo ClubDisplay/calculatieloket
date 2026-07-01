@@ -1,15 +1,11 @@
 import type { RecommendationInput, Recommendation } from "../types";
-import { findNumber, findBoolean } from "../helpers";
+import { findNumberAnywhere, findBooleanAnywhere, buildUrl } from "../helpers";
+import { formatEuro } from "../../format/currency";
 
 export function mortgageRules(input: RecommendationInput): Recommendation[] {
-  const income = findNumber(input.result, [
-    "totalYearlyIncome",
-    "income",
-    "yearlyIncome",
-    "brutoJaarinkomen",
-    "bruto",
-  ]);
-  const partner = findBoolean(input.values, ["partner"]) ?? findBoolean(input.result, ["partner"]);
+  const income = findNumberAnywhere(input, ["totalYearlyIncome", "income", "yearlyIncome", "brutoJaarinkomen"]);
+  const partner = findBooleanAnywhere(input, ["partner"]);
+  const estimatedMonthly = income !== undefined ? Math.round(income / 12) : undefined;
 
   const recs: Recommendation[] = [];
 
@@ -28,8 +24,10 @@ export function mortgageRules(input: RecommendationInput): Recommendation[] {
     recs.push({
       id: "bruto-netto",
       title: "Bruto netto 2026",
-      description: "Bereken een indicatie van je nettoloon.",
-      url: "/bruto-netto-2026/",
+      description: estimatedMonthly
+        ? `Vergelijk een bruto maandinkomen van ${formatEuro(estimatedMonthly)} met het netto loon in loondienst.`
+        : "Bereken een indicatie van je nettoloon.",
+      url: buildUrl("/bruto-netto-2026/", { bruto: estimatedMonthly }),
       priority: 2,
       reason: "partner inkomen",
     });
@@ -39,16 +37,20 @@ export function mortgageRules(input: RecommendationInput): Recommendation[] {
     {
       id: "toeslagen",
       title: "Toeslagen berekenen",
-      description: "Check of je recht hebt op huur- of zorgtoeslag.",
-      url: "/toeslagen-calculator/",
+      description: income
+        ? `Controleer of je met een inkomen van ${formatEuro(income)} recht hebt op toeslagen.`
+        : "Check of je recht hebt op huur- of zorgtoeslag.",
+      url: buildUrl("/toeslagen-calculator/", { inkomen: income }),
       priority: 3,
       reason: "altijd relevant",
     },
     {
       id: "salaris",
       title: "Salaris Calculator",
-      description: "Vergelijk bruto en netto.",
-      url: "/salaris-calculator/",
+      description: estimatedMonthly
+        ? `Vergelijk ${formatEuro(estimatedMonthly)} bruto als loondienst salaris.`
+        : "Vergelijk bruto en netto.",
+      url: buildUrl("/salaris-calculator/", { bruto: estimatedMonthly }),
       priority: 4,
       reason: "altijd relevant",
     },

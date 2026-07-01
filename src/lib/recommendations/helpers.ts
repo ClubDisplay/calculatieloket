@@ -49,3 +49,33 @@ export function findBoolean(record: Record<string, unknown>, keys: string[]): bo
   }
   return undefined;
 }
+
+import type { RecommendationInput } from "./types";
+
+/**
+ * Try to read a number from values or result, in that order.
+ */
+export function findNumberAnywhere(input: RecommendationInput, keys: string[]): number | undefined {
+  return findNumber(input.values, keys) ?? findNumber(input.result, keys);
+}
+
+/**
+ * Try to read a boolean from values or result, in that order.
+ */
+export function findBooleanAnywhere(input: RecommendationInput, keys: string[]): boolean | undefined {
+  return findBoolean(input.values, keys) ?? findBoolean(input.result, keys);
+}
+
+/**
+ * Build a URL with query parameters. Undefined / empty values are omitted.
+ */
+export function buildUrl(base: string, params: Record<string, string | number | undefined>): string {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== null && value !== "") {
+      query.set(key, String(value));
+    }
+  }
+  const queryString = query.toString();
+  return queryString ? `${base}?${queryString}` : base;
+}

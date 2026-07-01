@@ -11,6 +11,7 @@ import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import { calculateAllowances } from "../lib/calculators/allowances";
+import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Toeslagen Calculator 2026 — Zorgtoeslag en huurtoeslag indicatie | Calculatieloket.nl";
@@ -28,6 +29,12 @@ const initialResult = calculateAllowances({
   partnerIncome: defaultPartnerIncome,
   isCouple: defaultIsCouple,
   rent: defaultRent,
+});
+
+const initialRecommendations = getRecommendations({
+  calculator: "toeslagen",
+  values: { totalYearlyIncome: initialResult.totalIncome },
+  result: initialResult,
 });
 
 const totalMonthlyBenefit = initialResult.rentBenefit + initialResult.zorgBenefit;
@@ -240,26 +247,13 @@ const breadcrumbSchema = {
         <div class="result-row"><span class="label">Max. zorgtoeslag (samen)</span><span class="value">€ 2.963/jaar</span></div>
       </div>
 
-      <FinancialJourney
-        income={defaultIncome}
-        partnerIncome={defaultPartnerIncome}
-        totalIncome={initialResult.totalIncome}
-        rent={defaultRent}
-        isCouple={defaultIsCouple}
-      />
+      <FinancialJourney recommendations={initialRecommendations} />
 
       <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
-      <div class="result-next-steps" slot="actions">
-        <span class="result-next-steps-label">Verder rekenen:</span>
-        <a href="/bruto-netto-2026/">Bruto-netto</a>
-        <a href="/salaris-calculator/">Salaris</a>
-        <a href="/hypotheek-calculator/">Hypotheek</a>
-        <a href="/zzp-calculator/">ZZP</a>
-      </div>
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -300,6 +294,8 @@ const breadcrumbSchema = {
 <script>
   import { calculateAllowances } from "../lib/calculators/allowances";
   import { formatEuro } from "../lib/format/currency";
+  import { getRecommendations } from "../lib/recommendations/engine";
+  import { updateFinancialJourney } from "../lib/recommendations/client";
 
   const incomeInput = document.getElementById("income") as HTMLInputElement;
   const rentInput = document.getElementById("rent") as HTMLInputElement;
@@ -311,6 +307,7 @@ const breadcrumbSchema = {
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
+  const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
   const detailIncome = document.getElementById("detailIncome")!;
   const detailHousehold = document.getElementById("detailHousehold")!;
@@ -342,27 +339,6 @@ const breadcrumbSchema = {
       });
       desc.textContent = text;
     });
-  }
-
-  function updateFinancialJourney(income: number, partnerIncome: number, totalIncome: number, isCouple: boolean) {
-    const journey = document.querySelector(".calc-financial-journey") as HTMLElement;
-    if (!journey) return;
-
-    const brutoMonthly = income > 0 ? Math.round(income / 12) : 0;
-    const totalIncomeValue = totalIncome > 0 ? totalIncome : income + partnerIncome;
-
-    const nettoStep = journey.querySelector('[data-step="netto"]') as HTMLAnchorElement;
-    const hypotheekStep = journey.querySelector('[data-step="hypotheek"]') as HTMLAnchorElement;
-
-    if (nettoStep) {
-      nettoStep.href = brutoMonthly > 0 ? `/salaris-calculator/?bruto=${brutoMonthly}` : "/salaris-calculator/";
-    }
-    if (hypotheekStep) {
-      hypotheekStep.href =
-        totalIncomeValue > 0
-          ? `/hypotheek-calculator/?inkomen=${totalIncomeValue}&partner=${isCouple ? 1 : 0}&partnerInkomen=${partnerIncome}`
-          : "/hypotheek-calculator/";
-    }
   }
 
   function updateUrl() {
@@ -435,7 +411,14 @@ const breadcrumbSchema = {
     detailTotalYearly.textContent = formatEuro(totalYearly, 0);
 
     updateUseCases(income, result.totalIncome);
-    updateFinancialJourney(income, partnerIncome, result.totalIncome, isCouple);
+    if (financialJourney) {
+      const recs = getRecommendations({
+        calculator: "toeslagen",
+        values: { totalYearlyIncome: result.totalIncome },
+        result,
+      });
+      updateFinancialJourney(financialJourney, recs);
+    }
     updateUrl();
   }
 
