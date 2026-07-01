@@ -2,122 +2,450 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
+import CalculatorShell from "../components/calculator/CalculatorShell.astro";
+import InputPanel from "../components/calculator/InputPanel.astro";
+import ResultPanel from "../components/calculator/ResultPanel.astro";
+import UseCasesPanel from "../components/calculator/UseCasesPanel.astro";
+import FaqAccordion from "../components/calculator/FaqAccordion.astro";
+import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
+import FinancialJourney from "../components/calculator/FinancialJourney.astro";
+import HowToSchema from "../components/calculator/HowToSchema.astro";
+import InlineSources from "../components/calculator/InlineSources.astro";
+import { calculateImportCosts } from "../lib/calculators/import-costs";
+import { formatEuro } from "../lib/format/currency";
+
+const title = "Auto importkosten berekenen — Auto of camper importeren | Calculatieloket.nl";
+const description = "Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten.";
+
+const defaultVehicleType = "auto";
+const defaultPurchaseCountry = "Duitsland";
+const defaultPurchasePrice = 15000;
+const defaultEstimatedBpm = 3000;
+const defaultRdwCosts = 150;
+const defaultTransportCosts = 400;
+const defaultExportCosts = 150;
+const defaultInspectionCosts = 150;
+const defaultPlateCosts = 50;
+const defaultOtherCosts = 100;
+const defaultNlPrice = 0;
+
+const initialResult = calculateImportCosts({
+  vehicleType: defaultVehicleType,
+  purchasePrice: defaultPurchasePrice,
+  estimatedBpm: defaultEstimatedBpm,
+  rdwCosts: defaultRdwCosts,
+  transportCosts: defaultTransportCosts,
+  exportCosts: defaultExportCosts,
+  inspectionCosts: defaultInspectionCosts,
+  plateCosts: defaultPlateCosts,
+  otherCosts: defaultOtherCosts,
+  nlPrice: defaultNlPrice,
+});
+
+const lastUpdated = "1 juli 2026";
+
+const quickPresets = [
+  {
+    label: "Lage kosten",
+    data: {
+      purchasePrice: 10000,
+      estimatedBpm: 2000,
+      rdwCosts: 100,
+      transportCosts: 200,
+      exportCosts: 100,
+      inspectionCosts: 100,
+      plateCosts: 50,
+      otherCosts: 50,
+    },
+  },
+  {
+    label: "Gemiddeld",
+    data: {
+      purchasePrice: 15000,
+      estimatedBpm: 3000,
+      rdwCosts: 150,
+      transportCosts: 400,
+      exportCosts: 150,
+      inspectionCosts: 150,
+      plateCosts: 50,
+      otherCosts: 100,
+    },
+  },
+  {
+    label: "Hoog",
+    data: {
+      purchasePrice: 30000,
+      estimatedBpm: 6000,
+      rdwCosts: 300,
+      transportCosts: 800,
+      exportCosts: 300,
+      inspectionCosts: 300,
+      plateCosts: 100,
+      otherCosts: 300,
+    },
+  },
+];
+
+const useCases = [
+  {
+    id: "btw",
+    title: "BTW Calculator",
+    description: "Reken btw over bedragen.",
+    href: "/btw-calculator/",
+    accent: "#2563eb",
+  },
+  {
+    id: "zzp",
+    title: "ZZP Calculator",
+    description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.",
+    href: "/zzp-calculator/",
+    accent: "#7c3aed",
+  },
+  {
+    id: "bruto-netto",
+    title: "Bruto netto 2026",
+    description: "Bereken een indicatie van je nettoloon in 2026.",
+    href: "/bruto-netto-2026/",
+    accent: "#2563eb",
+  },
+  {
+    id: "hypotheek",
+    title: "Hypotheek Calculator",
+    description: "Bereken een indicatie van je hypotheeklasten.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+];
+
+const sources = [
+  {
+    label: "RDW",
+    title: "Voertuig invoeren vanuit een Europees land",
+    description: "Stappen en eisen voor het invoeren van een voertuig uit de EU.",
+    href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa",
+  },
+  {
+    label: "RDW",
+    title: "Invoeren, exporteren of doorvoeren",
+    description: "Overzicht van de RDW-procedures rond in- en uitvoer van voertuigen.",
+    href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Bpm",
+    description: "Algemene informatie over de bpm bij voertuigen.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Aangifte bpm bij aanvraag Nederlands kenteken",
+    description: "Hoe je bpm-aangifte doet bij een aanvraag voor een Nederlands kenteken.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Hoe kan ik de bpm berekenen?",
+    description: "Uitleg over het berekenen van de bpm.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Bpm berekenen voor een personenauto",
+    description: "Berekeningswijze van de bpm voor personenauto's.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Hoe bereken ik de bpm voor een kampeerauto?",
+    description: "Berekeningswijze van de bpm voor kampeerauto's.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen",
+  },
+  {
+    label: "Rijksoverheid",
+    title: "Auto uit het buitenland importeren",
+    description: "Algemene uitleg over het importeren van een auto naar Nederland.",
+    href: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren",
+  },
+];
+
+const faq = [
+  {
+    question: "Wat kost een auto importeren naar Nederland?",
+    answer: "De kosten vari&euml;ren sterk per voertuig. Naast de aankoopprijs moet je rekening houden met bpm, RDW-kosten, transport, exportkenteken, keuring en kentekenplaten. Gebruik de calculator bovenaan deze pagina voor een indicatie.",
+  },
+  {
+    question: "Hoe bereken je importkosten voor een auto?",
+    answer: "Tel de aankoopprijs, geschatte bpm, RDW-kosten, transport, exportkenteken, aankoopkeuring, kentekenplaten en overige kosten bij elkaar op. De bpm moet je apart inschatten via de offici&euml;le tool van de Belastingdienst.",
+  },
+  {
+    question: "Moet ik bpm betalen bij auto importeren?",
+    answer: "Ja, bij het importeren van een personenauto, motor of camper naar Nederland moet je in de meeste gevallen bpm betalen. De hoogte hangt af van het type voertuig en de CO2-uitstoot. Voor elektrische auto's geldt een vrijstelling.",
+  },
+  {
+    question: "Kan ik de bpm automatisch berekenen?",
+    answer: "Deze calculator berekent de bpm niet automatisch. Je vult zelf een geschatte bpm in. Gebruik de <a href=\"https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen\" target=\"_blank\" rel=\"noopener\">offici&euml;le bpm-tool van de Belastingdienst</a> voor een nauwkeurige berekening.",
+  },
+  {
+    question: "Wat kost een camper importeren?",
+    answer: "De kosten voor het importeren van een camper zijn vergelijkbaar met een auto, maar de bpm wordt anders berekend. Ook kunnen RDW-eisen afwijken. Raadpleeg de Belastingdienst-pagina over bpm voor kampeerauto's.",
+  },
+  {
+    question: "Is een auto importeren uit Duitsland altijd goedkoper?",
+    answer: "Niet altijd. Hoewel de aankoopprijs in Duitsland vaak lager ligt, kunnen bpm, transport en keuringskosten het voordeel tenietdoen. Maak altijd een volledige kostenindicatie voordat je een aankoopbeslissing neemt.",
+  },
+  {
+    question: "Hoe zit het met btw bij import uit de EU?",
+    answer: "Bij aankoop van een particulier in de EU betaal je meestal geen btw bij import. Bij aankoop via een buitenlands bedrijf kunnen btw-regels anders uitpakken. Raadpleeg de Belastingdienst voor jouw specifieke situatie.",
+  },
+  {
+    question: "Kan ik deze berekening gebruiken voor een aankoopbeslissing?",
+    answer: "Deze berekening is een indicatie. Gebruik hem als hulpmiddel, maar doe altijd een offici&euml;le bpm-berekening en raadpleeg de RDW en Belastingdienst voor actuele tarieven en regels.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calculatieloket.nl/",
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Auto importkosten",
+      "item": "https://calculatieloket.nl/auto-importkosten-berekenen/",
+    },
+  ],
+};
 ---
 
-<BaseLayout
-  title="Auto importkosten berekenen — indicatie voor auto of camper importeren"
-  description="Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten."
->
-  <h1 class="page-title">Auto importkosten berekenen</h1>
-  <p class="page-subtitle">
-    Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. De uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen.
-  </p>
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <HowToSchema
+    slot="head"
+    name="Auto importkosten berekenen"
+    description="Stappen om een indicatie te krijgen van de kosten voor het importeren van een auto of camper naar Nederland."
+    totalTime="PT2M"
+    steps={[
+      { name: "Kies voertuigtype en aankoopland", text: "Selecteer auto of camper en het land waar je het voertuig koopt." },
+      { name: "Vul de aankoopprijs in", text: "Voer het bedrag in dat je in het buitenland voor het voertuig betaalt." },
+      { name: "Vul de geschatte bpm in", text: "Gebruik de officiële bpm-tool van de Belastingdienst om een inschatting te maken." },
+      { name: "Vul transport, RDW en keuringskosten in", text: "Voer de verwachte kosten voor transport, kenteken, keuring en exportkenteken in." },
+      { name: "Bekijk de totale importkosten", text: "De calculator toont een indicatie van de totale kosten, inclusief een vergelijking met een Nederlandse prijs." },
+    ]}
+  />
 
   <AdSlot slot="1234567899" format="auto" style="min-height:100px" />
 
-  <div class="calculator-card calc-modern">
-    <div class="calc-fields">
-    <p class="calc-group-title">Voertuig</p>
-    <div class="form-group">
-      <label>Voertuigtype</label>
-      <div class="radio-group" id="vehicleType">
-        <button data-type="auto" class="active">Auto</button>
-        <button data-type="camper">Camper</button>
+  <CalculatorShell
+    title="Auto importkosten berekenen"
+    subtitle="Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland."
+  >
+    <InputPanel title="Jouw situatie" slot="input">
+      <p class="calc-group-title">Voertuig</p>
+
+      <div class="form-group">
+        <label>Voertuigtype</label>
+        <div class="radio-group" id="vehicleType">
+          <button type="button" data-type="auto" class={defaultVehicleType === "auto" ? "active" : ""}>Auto</button>
+          <button type="button" data-type="camper" class={defaultVehicleType === "camper" ? "active" : ""}>Camper</button>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>Aankoopland</label>
-      <select id="purchaseCountry">
-        <option value="Duitsland">Duitsland</option>
-        <option value="Frankrijk">Frankrijk</option>
-        <option value="België">België</option>
-        <option value="Spanje">Spanje</option>
-        <option value="Anders">Anders</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="purchaseCountry">Aankoopland</label>
+        <select id="purchaseCountry">
+          <option value="Duitsland" selected={defaultPurchaseCountry === "Duitsland"}>Duitsland</option>
+          <option value="Frankrijk" selected={defaultPurchaseCountry === "Frankrijk"}>Frankrijk</option>
+          <option value="België" selected={defaultPurchaseCountry === "België"}>België</option>
+          <option value="Spanje" selected={defaultPurchaseCountry === "Spanje"}>Spanje</option>
+          <option value="Anders" selected={defaultPurchaseCountry === "Anders"}>Anders</option>
+        </select>
+      </div>
 
-    <p class="calc-group-title">Aankoop en bpm</p>
-    <div class="form-group">
-      <label for="purchasePrice">Aankoopprijs buitenland</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="purchasePrice" placeholder="Bijv. 15000" min="0" step="1" value="15000" /></div>
-    </div>
+      <p class="calc-group-title">Aankoop en bpm</p>
 
-    <div class="form-group">
-      <label for="estimatedBpm">Geschatte bpm <span class="hint">(zelf invullen)</span></label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="estimatedBpm" placeholder="Bijv. 3000" min="0" step="1" value="3000" /></div>
-    </div>
-    <p class="calc-field-hint">Bpm wordt niet automatisch berekend. Controleer de <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" target="_blank" rel="noopener">bpm-informatie van de Belastingdienst</a>.</p>
+      <div class="form-group">
+        <label for="purchasePrice">Aankoopprijs buitenland</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="purchasePrice" value={defaultPurchasePrice} min="0" step="1" />
+        </div>
+      </div>
 
-    <p class="calc-group-title">Importkosten</p>
-    <div class="form-group">
-      <label for="rdwCosts">RDW-/kenteken-/keuringskosten</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="rdwCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
-    </div>
+      <div class="form-group">
+        <label for="estimatedBpm">Geschatte bpm <span class="hint">(zelf invullen)</span></label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="estimatedBpm" value={defaultEstimatedBpm} min="0" step="1" />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="transportCosts">Transport- of ophaalkosten</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="transportCosts" placeholder="Bijv. 400" min="0" step="1" value="400" /></div>
-    </div>
+      <p class="calc-field-hint">Bpm wordt niet automatisch berekend. Controleer de <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" target="_blank" rel="noopener">bpm-informatie van de Belastingdienst</a>.</p>
 
-    <div class="form-group">
-      <label for="exportCosts">Exportkenteken / tijdelijke verzekering</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="exportCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
-    </div>
+      <p class="calc-group-title">Importkosten</p>
 
-    <div class="form-group">
-      <label for="inspectionCosts">Aankoopkeuring</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="inspectionCosts" placeholder="Bijv. 150" min="0" step="1" value="150" /></div>
-    </div>
+      <div class="form-group">
+        <label for="rdwCosts">RDW-/kenteken-/keuringskosten</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="rdwCosts" value={defaultRdwCosts} min="0" step="1" />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="plateCosts">Kentekenplaten</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="plateCosts" placeholder="Bijv. 50" min="0" step="1" value="50" /></div>
-    </div>
+      <div class="form-group">
+        <label for="transportCosts">Transport- of ophaalkosten</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="transportCosts" value={defaultTransportCosts} min="0" step="1" />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="otherCosts">Overige kosten</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="otherCosts" placeholder="Bijv. 100" min="0" step="1" value="100" /></div>
-    </div>
+      <div class="form-group">
+        <label for="exportCosts">Exportkenteken / tijdelijke verzekering</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="exportCosts" value={defaultExportCosts} min="0" step="1" />
+        </div>
+      </div>
 
-    <p class="calc-group-title">Vergelijking met Nederlandse prijs</p>
-    <div class="form-group">
-      <label for="nlPrice">Vergelijkbare Nederlandse prijs <span class="hint">(optioneel)</span></label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="nlPrice" placeholder="Bijv. 21000" min="0" step="1" value="" /></div>
-    </div>
-    </div>
+      <div class="form-group">
+        <label for="inspectionCosts">Aankoopkeuring</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="inspectionCosts" value={defaultInspectionCosts} min="0" step="1" />
+        </div>
+      </div>
 
-    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken importkosten</button>
-    <p class="calc-error" id="calcError" style="display:none;">Vul een geldige aankoopprijs in (hoger dan 0).</p>
+      <div class="form-group">
+        <label for="plateCosts">Kentekenplaten</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="plateCosts" value={defaultPlateCosts} min="0" step="1" />
+        </div>
+      </div>
 
-    <div class="result-box" id="result" style="display:none;">
-      <h3>Totale importkosten <span class="badge-indicatie">Indicatie</span></h3>
-      <div class="result-value" id="resultTotal">&mdash;</div>
+      <div class="form-group">
+        <label for="otherCosts">Overige kosten</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="otherCosts" value={defaultOtherCosts} min="0" step="1" />
+        </div>
+      </div>
+
+      <p class="calc-group-title">Vergelijking met Nederlandse prijs</p>
+      <div class="form-group">
+        <label for="nlPrice">Vergelijkbare Nederlandse prijs <span class="hint">(optioneel)</span></label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="nlPrice" value={defaultNlPrice || ""} min="0" step="1" />
+        </div>
+      </div>
+
+      <div class="quick-chips">
+        <span class="quick-chips-label">Snel scenario:</span>
+        {quickPresets.map((preset) => (
+          <button type="button" class="quick-chip" data-preset={JSON.stringify(preset.data)}>
+            {preset.label}
+          </button>
+        ))}
+      </div>
+
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken importkosten</button>
+      <p class="calc-error" id="calcError" style="display:none;">Vul een geldige aankoopprijs in (hoger dan 0).</p>
+
+      <p class="bpm-waarschuwing">Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer altijd de offici&euml;le informatie van RDW en Belastingdienst.</p>
+    </InputPanel>
+
+    <ResultPanel
+      slot="result"
+      title="Importkosten indicatie"
+      heroLabel="Totale importkosten"
+      heroValue={formatEuro(initialResult.totalCost, 0)}
+      heroSubtext="Indicatie op basis van ingevoerde kosten"
+      badge="Indicatie"
+    >
+      <div class="result-meta">
+        <span class="meta-badge">Bijgewerkt: 2026</span>
+        <span class="meta-badge">Bron: RDW / Belastingdienst</span>
+      </div>
+
+      <div class="result-row"><span class="label">Aankoopprijs buitenland</span><span class="value" id="detailPurchase">{formatEuro(initialResult.purchasePrice, 0)}</span></div>
+      <div class="result-row"><span class="label">Geschatte bpm</span><span class="value" id="detailBpm">{formatEuro(initialResult.estimatedBpm, 0)}</span></div>
+      <div class="result-row"><span class="label">RDW/kenteken/keuring</span><span class="value" id="detailRdw">{formatEuro(initialResult.rdwCosts, 0)}</span></div>
+      <div class="result-row"><span class="label">Transport/ophalen</span><span class="value" id="detailTransport">{formatEuro(initialResult.transportCosts, 0)}</span></div>
+      <div class="result-row"><span class="label">Exportkenteken/verzekering</span><span class="value" id="detailExport">{formatEuro(initialResult.exportCosts, 0)}</span></div>
+      <div class="result-row"><span class="label">Aankoopkeuring</span><span class="value" id="detailInspection">{formatEuro(initialResult.inspectionCosts, 0)}</span></div>
+      <div class="result-row"><span class="label">Kentekenplaten</span><span class="value" id="detailPlates">{formatEuro(initialResult.plateCosts, 0)}</span></div>
+      <div class="result-row"><span class="label">Overige kosten</span><span class="value" id="detailOther">{formatEuro(initialResult.otherCosts, 0)}</span></div>
       <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Aankoopprijs buitenland</span><span class="value" id="detailPurchase">&mdash;</span></div>
-      <div class="result-row"><span class="label">Geschatte bpm</span><span class="value" id="detailBpm">&mdash;</span></div>
-      <div class="result-row"><span class="label">RDW/kenteken/keuring</span><span class="value" id="detailRdw">&mdash;</span></div>
-      <div class="result-row"><span class="label">Transport/ophalen</span><span class="value" id="detailTransport">&mdash;</span></div>
-      <div class="result-row"><span class="label">Exportkenteken/verzekering</span><span class="value" id="detailExport">&mdash;</span></div>
-      <div class="result-row"><span class="label">Aankoopkeuring</span><span class="value" id="detailInspection">&mdash;</span></div>
-      <div class="result-row"><span class="label">Kentekenplaten</span><span class="value" id="detailPlates">&mdash;</span></div>
-      <div class="result-row"><span class="label">Overige kosten</span><span class="value" id="detailOther">&mdash;</span></div>
-      <div class="result-divider" id="comparisonDivider" style="display:none;"></div>
-      <div class="result-row" id="comparisonRow" style="display:none;"><span class="label">Vergelijkbare NL prijs</span><span class="value" id="detailNlPrice">&mdash;</span></div>
-      <div class="result-row" id="differenceRow" style="display:none;"><span class="label" id="differenceLabel">Verschil</span><span class="value" id="detailDifference">&mdash;</span></div>
-      <p class="result-note">Deze berekening is een indicatie.</p>
-    </div>
+      <div class="result-row result-row-total"><span class="label">Totaal</span><span class="value" id="detailTotal">{formatEuro(initialResult.totalCost, 0)}</span></div>
 
-    <p class="bpm-waarschuwing" style="margin-top:1rem;">Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer altijd de offici&euml;le informatie van RDW en Belastingdienst.</p>
-  </div>
+      <div id="comparisonSection" style={initialResult.nlPrice && initialResult.nlPrice > 0 ? undefined : "display:none;"}>
+        <div class="result-divider"></div>
+        <div class="result-row"><span class="label">Vergelijkbare NL prijs</span><span class="value" id="detailNlPrice">{formatEuro(initialResult.nlPrice ?? 0, 0)}</span></div>
+        <div class="result-row"><span class="label" id="differenceLabel">{initialResult.differenceLabel ?? "Verschil"}</span><span class="value" id="detailDifference">{formatEuro(Math.abs(initialResult.priceDifference ?? 0), 0)}</span></div>
+      </div>
 
-  <AdSlot slot="1234567900" format="auto" style="min-height:280px" />
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+        <span class="copy-link-icon">🔗</span>
+        <span class="copy-link-text">Deel deze berekening</span>
+      </button>
 
-  <div class="calculator-card">
+      <FinancialJourney
+        steps={[
+          { id: "btw", label: "BTW Calculator", description: "Reken btw over bedragen.", href: "/btw-calculator/" },
+          { id: "zzp", label: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.", href: "/zzp-calculator/" },
+          { id: "bruto-netto", label: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", href: "/bruto-netto-2026/" },
+          { id: "hypotheek", label: "Hypotheek Calculator", description: "Bereken een indicatie van je hypotheeklasten.", href: "/hypotheek-calculator/" },
+        ]}
+      />
+
+      <InlineSources title="Gebruikte bronnen" items={sources} />
+    </ResultPanel>
+
+    <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
+
+    <SourceCards title="Bronnen" items={sources} slot="sources" />
+
+    <FaqAccordion title="Veelgestelde vragen" items={faq} slot="faq" />
+
+    <ToolFooter
+      slot="footer"
+      disclaimer="Deze berekening is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer belangrijke bedragen altijd via de officiële bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist."
+      lastUpdated={lastUpdated}
+    />
+  </CalculatorShell>
+
+  <div class="calculator-card calc-content" id="calculator-content">
+    <p class="badge-indicatie">Indicatie 2026</p>
+
+    <h2 class="page-title">Auto importkosten berekenen</h2>
+    <p>Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. De uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Gebruik ook de <a href="/btw-calculator/">BTW Calculator</a>, <a href="/zzp-calculator/">ZZP Calculator</a>, <a href="/bruto-netto-2026/">bruto-netto calculator</a> of <a href="/hypotheek-calculator/">hypotheek calculator</a>.</p>
+
     <h2>Welke kosten betaal je bij auto importeren?</h2>
     <p>Bij het importeren van een auto of camper naar Nederland komen meerdere kostenposten kijken. Hieronder een overzicht:</p>
-    <ul>
+    <ul class="calc-list">
       <li><strong>Aankoopprijs:</strong> het bedrag dat je in het buitenland betaalt voor het voertuig.</li>
       <li><strong>Bpm:</strong> de belasting van personenauto's en motorrijwielen. Dit kan een forse kostenpost zijn, afhankelijk van het voertuigtype en de CO2-uitstoot.</li>
       <li><strong>RDW-keuring/kenteken:</strong> na import moet het voertuig gekeurd worden door de RDW en op Nederlands kenteken worden gezet.</li>
@@ -130,7 +458,7 @@ import SourceCards from "../components/SourceCards.astro";
 
     <h2>Hoe zit het met bpm bij import?</h2>
     <p>Bpm (belasting van personenauto's en motorrijwielen) kan een grote kostenpost zijn bij het importeren van een auto. De hoogte hangt af van:</p>
-    <ul>
+    <ul class="calc-list">
       <li>Het type voertuig (personenauto, camper, motor)</li>
       <li>De CO2-uitstoot (voor personenauto's)</li>
       <li>De catalogusprijs en leeftijd van het voertuig</li>
@@ -139,7 +467,7 @@ import SourceCards from "../components/SourceCards.astro";
 
     <h2>Hoe zit het met btw bij import?</h2>
     <p>Bij de import van een voertuig uit een ander EU-land is de btw-situatie afhankelijk van de verkoper en de leeftijd van het voertuig:</p>
-    <ul>
+    <ul class="calc-list">
       <li>Bij aankoop van een <strong>particulier</strong> in de EU betaal je meestal geen btw in het land van aankoop en ook niet bij import in Nederland.</li>
       <li>Bij aankoop van een <strong>bedrijf</strong> kunnen btw-regels anders uitpakken, vooral bij nieuwe of bijna nieuwe voertuigen.</li>
       <li>Bij <strong>gebruikte voertuigen</strong> kan de margeregeling van toepassing zijn.</li>
@@ -148,7 +476,7 @@ import SourceCards from "../components/SourceCards.astro";
 
     <h2>Auto importeren uit Duitsland of Frankrijk</h2>
     <p>Duitsland en Frankrijk zijn populaire landen om een auto te importeren. De aankoopprijs kan daar lager lijken, maar de totale importkosten bepalen of het echt interessant is. Controleer altijd:</p>
-    <ul>
+    <ul class="calc-list">
       <li>De geschatte bpm via de offici&euml;le Belastingdienst-tool</li>
       <li>Transportkosten: Duitsland is dichterbij dan Frankrijk, dus transport kan goedkoper zijn</li>
       <li>Keuringseisen: elk land heeft eigen technische eisen; controleer of het voertuig aan de Nederlandse eisen voldoet</li>
@@ -158,7 +486,7 @@ import SourceCards from "../components/SourceCards.astro";
 
     <h2>Camper importeren: extra aandachtspunten</h2>
     <p>Voor campers en kampeerauto's gelden bij import extra regels:</p>
-    <ul>
+    <ul class="calc-list">
       <li>De bpm voor campers wordt anders berekend dan voor personenauto's</li>
       <li>De RDW-keuring kan aanvullende eisen stellen aan de inrichting van de camper</li>
       <li>Controleer of het voertuig voldoet aan de Nederlandse definitie van een kampeerauto</li>
@@ -167,7 +495,7 @@ import SourceCards from "../components/SourceCards.astro";
 
     <h2>Voorbeeld importkosten berekenen</h2>
     <p>Stel, je koopt een auto in Duitsland voor <strong>&euro;15.000</strong>. Hieronder een voorbeeld van de totale importkosten:</p>
-    <ul>
+    <ul class="calc-list">
       <li>Aankoopprijs Duitsland: <strong>&euro;15.000</strong></li>
       <li>Geschatte bpm: <strong>&euro;3.000</strong></li>
       <li>RDW/kenteken/keuring: <strong>&euro;150</strong></li>
@@ -180,7 +508,7 @@ import SourceCards from "../components/SourceCards.astro";
     <p><strong>Totale importkosten: circa &euro;19.000</strong> (indicatie).</p>
 
     <h2>Veelgemaakte fouten bij auto importeren</h2>
-    <ul>
+    <ul class="calc-list">
       <li><strong>Alleen naar de aankoopprijs kijken:</strong> de totale kosten kunnen flink oplopen door bpm, transport, keuring en administratie.</li>
       <li><strong>Bpm onderschatten:</strong> de bpm kan hoger uitvallen dan verwacht, vooral bij auto's met een hoge CO2-uitstoot.</li>
       <li><strong>Camperregels gelijkstellen aan gewone auto's:</strong> voor campers gelden andere bpm-berekeningen en RDW-eisen.</li>
@@ -189,148 +517,457 @@ import SourceCards from "../components/SourceCards.astro";
       <li><strong>Geen aankoopkeuring doen:</strong> een technische keuring voorkomt verrassingen achteraf.</li>
       <li><strong>Denken dat importeren altijd goedkoper is:</strong> de totale kosten kunnen tegenvallen. Bereken vooraf een indicatie.</li>
     </ul>
-
-    <h2>Veelgestelde vragen</h2>
-
-    <h3>Wat kost een auto importeren naar Nederland?</h3>
-    <p>De kosten vari&euml;ren sterk per voertuig. Naast de aankoopprijs moet je rekening houden met bpm, RDW-kosten, transport, exportkenteken, keuring en kentekenplaten. Gebruik de calculator bovenaan deze pagina voor een indicatie.</p>
-
-    <h3>Hoe bereken je importkosten voor een auto?</h3>
-    <p>Tel de aankoopprijs, geschatte bpm, RDW-kosten, transport, exportkenteken, aankoopkeuring, kentekenplaten en overige kosten bij elkaar op. De bpm moet je apart inschatten via de offici&euml;le tool van de Belastingdienst.</p>
-
-    <h3>Moet ik bpm betalen bij auto importeren?</h3>
-    <p>Ja, bij het importeren van een personenauto, motor of camper naar Nederland moet je in de meeste gevallen bpm betalen. De hoogte hangt af van het type voertuig en de CO2-uitstoot. Voor elektrische auto's geldt een vrijstelling.</p>
-
-    <h3>Kan ik de bpm automatisch berekenen?</h3>
-    <p>Deze calculator berekent de bpm niet automatisch. Je vult zelf een geschatte bpm in. Gebruik de <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" target="_blank" rel="noopener">offici&euml;le bpm-tool van de Belastingdienst</a> voor een nauwkeurige berekening.</p>
-
-    <h3>Wat kost een camper importeren?</h3>
-    <p>De kosten voor het importeren van een camper zijn vergelijkbaar met een auto, maar de bpm wordt anders berekend. Ook kunnen RDW-eisen afwijken. Raadpleeg de Belastingdienst-pagina over bpm voor kampeerauto's.</p>
-
-    <h3>Is een auto importeren uit Duitsland altijd goedkoper?</h3>
-    <p>Niet altijd. Hoewel de aankoopprijs in Duitsland vaak lager ligt, kunnen bpm, transport en keuringskosten het voordeel tenietdoen. Maak altijd een volledige kostenindicatie voordat je een aankoopbeslissing neemt.</p>
-
-    <h3>Hoe zit het met btw bij import uit de EU?</h3>
-    <p>Bij aankoop van een particulier in de EU betaal je meestal geen btw bij import. Bij aankoop via een buitenlands bedrijf kunnen btw-regels anders uitpakken. Raadpleeg de Belastingdienst voor jouw specifieke situatie.</p>
-
-    <h3>Kan ik deze berekening gebruiken voor een aankoopbeslissing?</h3>
-    <p>Deze berekening is een indicatie. Gebruik hem als hulpmiddel, maar doe altijd een offici&euml;le bpm-berekening en raadpleeg de RDW en Belastingdienst voor actuele tarieven en regels.</p>
-
-    <SourceCards
-      title="Bronnen en informatie"
-      items={[
-        { label: "RDW", title: "Voertuig invoeren vanuit een Europees land", description: "Stappen en eisen voor het invoeren van een voertuig uit de EU.", href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa" },
-        { label: "RDW", title: "Invoeren, exporteren of doorvoeren", description: "Overzicht van de RDW-procedures rond in- en uitvoer van voertuigen.", href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren" },
-        { label: "Belastingdienst", title: "Bpm", description: "Algemene informatie over de bpm bij voertuigen.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/bpm" },
-        { label: "Belastingdienst", title: "Aangifte bpm bij aanvraag Nederlands kenteken", description: "Hoe je bpm-aangifte doet bij een aanvraag voor een Nederlands kenteken.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/online-aangifte-bpm" },
-        { label: "Belastingdienst", title: "Hoe kan ik de bpm berekenen?", description: "Uitleg over het berekenen van de bpm.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen" },
-        { label: "Belastingdienst", title: "Bpm berekenen voor een personenauto", description: "Berekeningswijze van de bpm voor personenauto's.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/personenauto-bpm-tarief-berekenen" },
-        { label: "Belastingdienst", title: "Hoe bereken ik de bpm voor een kampeerauto?", description: "Berekeningswijze van de bpm voor kampeerauto's.", href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/kampeerauto-bpm-tarief-berekenen" },
-        { label: "Rijksoverheid", title: "Auto uit het buitenland importeren", description: "Algemene uitleg over het importeren van een auto naar Nederland.", href: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren" },
-      ]}
-    />
-
-    <p class="disclaimer">Deze berekening is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer belangrijke bedragen altijd via de offici&euml;le bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist.</p>
-    <p class="last-updated">Laatst bijgewerkt: 26 juni 2026</p>
   </div>
 
   <CrossSellCards
     title="Ook handig om te berekenen"
     items={[
-      { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen." },
-      { href: "/btw-inclusief-exclusief/", title: "Btw inclusief en exclusief", description: "Reken bedragen met en zonder btw om." },
-      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten." },
-      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026." },
+      { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen.", accent: "#2563eb" },
+      { href: "/btw-inclusief-exclusief/", title: "Btw inclusief en exclusief", description: "Reken bedragen met en zonder btw om.", accent: "#2563eb" },
+      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.", accent: "#7c3aed" },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026.", accent: "#2563eb" },
     ]}
   />
 </BaseLayout>
 
 <script>
   import { calculateImportCosts } from "../lib/calculators/import-costs";
-  import { formatEuroHtml } from "../lib/format/currency";
+  import { formatEuro } from "../lib/format/currency";
+
+  const purchasePriceInput = document.getElementById("purchasePrice") as HTMLInputElement;
+  const estimatedBpmInput = document.getElementById("estimatedBpm") as HTMLInputElement;
+  const rdwCostsInput = document.getElementById("rdwCosts") as HTMLInputElement;
+  const transportCostsInput = document.getElementById("transportCosts") as HTMLInputElement;
+  const exportCostsInput = document.getElementById("exportCosts") as HTMLInputElement;
+  const inspectionCostsInput = document.getElementById("inspectionCosts") as HTMLInputElement;
+  const plateCostsInput = document.getElementById("plateCosts") as HTMLInputElement;
+  const otherCostsInput = document.getElementById("otherCosts") as HTMLInputElement;
+  const nlPriceInput = document.getElementById("nlPrice") as HTMLInputElement;
+  const purchaseCountryInput = document.getElementById("purchaseCountry") as HTMLSelectElement;
+  const vehicleTypeGroup = document.getElementById("vehicleType") as HTMLElement;
+
+  const hero = document.querySelector("[data-calc-result-hero]") as HTMLElement;
+  const errorBox = document.getElementById("calcError") as HTMLElement;
+  const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
+  const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
+  const comparisonSection = document.getElementById("comparisonSection") as HTMLElement;
+
+  const detailPurchase = document.getElementById("detailPurchase")!;
+  const detailBpm = document.getElementById("detailBpm")!;
+  const detailRdw = document.getElementById("detailRdw")!;
+  const detailTransport = document.getElementById("detailTransport")!;
+  const detailExport = document.getElementById("detailExport")!;
+  const detailInspection = document.getElementById("detailInspection")!;
+  const detailPlates = document.getElementById("detailPlates")!;
+  const detailOther = document.getElementById("detailOther")!;
+  const detailTotal = document.getElementById("detailTotal")!;
+  const detailNlPrice = document.getElementById("detailNlPrice")!;
+  const detailDifference = document.getElementById("detailDifference")!;
+  const differenceLabel = document.getElementById("differenceLabel")!;
 
   let vehicleType = "auto";
-  const resultDiv = document.getElementById("result") as HTMLDivElement;
-  const errorBox = document.getElementById("calcError") as HTMLElement;
-  const comparisonDivider = document.getElementById("comparisonDivider") as HTMLDivElement;
-  const comparisonRow = document.getElementById("comparisonRow") as HTMLDivElement;
-  const differenceRow = document.getElementById("differenceRow") as HTMLDivElement;
 
-  function parseValue(id: string): number { return parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0; }
+  function getInputs() {
+    return {
+      vehicleType,
+      purchasePrice: parseFloat(purchasePriceInput.value) || 0,
+      estimatedBpm: parseFloat(estimatedBpmInput.value) || 0,
+      rdwCosts: parseFloat(rdwCostsInput.value) || 0,
+      transportCosts: parseFloat(transportCostsInput.value) || 0,
+      exportCosts: parseFloat(exportCostsInput.value) || 0,
+      inspectionCosts: parseFloat(inspectionCostsInput.value) || 0,
+      plateCosts: parseFloat(plateCostsInput.value) || 0,
+      otherCosts: parseFloat(otherCostsInput.value) || 0,
+      nlPrice: parseFloat(nlPriceInput.value) || 0,
+    };
+  }
+
+  function updateUrl() {
+    const inputs = getInputs();
+    const url = new URL(window.location.href);
+
+    url.searchParams.set("voertuig", inputs.vehicleType);
+    url.searchParams.set("land", purchaseCountryInput.value);
+
+    const setParam = (name: string, value: number) => {
+      if (value > 0) url.searchParams.set(name, String(value));
+      else url.searchParams.delete(name);
+    };
+
+    setParam("aankoopprijs", inputs.purchasePrice);
+    setParam("bpm", inputs.estimatedBpm);
+    setParam("rdw", inputs.rdwCosts);
+    setParam("transport", inputs.transportCosts);
+    setParam("export", inputs.exportCosts);
+    setParam("keuring", inputs.inspectionCosts);
+    setParam("kenteken", inputs.plateCosts);
+    setParam("overig", inputs.otherCosts);
+    setParam("nl", inputs.nlPrice);
+
+    window.history.replaceState({}, "", url.toString());
+  }
 
   function calculate() {
-    const result = calculateImportCosts({
-      vehicleType,
-      purchasePrice: parseValue("purchasePrice"),
-      estimatedBpm: parseValue("estimatedBpm"),
-      rdwCosts: parseValue("rdwCosts"),
-      transportCosts: parseValue("transportCosts"),
-      exportCosts: parseValue("exportCosts"),
-      inspectionCosts: parseValue("inspectionCosts"),
-      plateCosts: parseValue("plateCosts"),
-      otherCosts: parseValue("otherCosts"),
-      nlPrice: parseValue("nlPrice"),
-    });
+    const inputs = getInputs();
+    const result = calculateImportCosts(inputs);
 
     if (!result.valid) {
-      resultDiv.style.display = "none";
       errorBox.style.display = "block";
+      hero.textContent = "—";
       return;
     }
 
     errorBox.style.display = "none";
 
-    resultDiv.style.display = "block";
-    document.getElementById("resultTotal")!.innerHTML = formatEuroHtml(result.totalCost, 2);
-    document.getElementById("detailPurchase")!.innerHTML = formatEuroHtml(result.purchasePrice, 2);
-    document.getElementById("detailBpm")!.innerHTML = formatEuroHtml(result.estimatedBpm, 2);
-    document.getElementById("detailRdw")!.innerHTML = formatEuroHtml(result.rdwCosts, 2);
-    document.getElementById("detailTransport")!.innerHTML = formatEuroHtml(result.transportCosts, 2);
-    document.getElementById("detailExport")!.innerHTML = formatEuroHtml(result.exportCosts, 2);
-    document.getElementById("detailInspection")!.innerHTML = formatEuroHtml(result.inspectionCosts, 2);
-    document.getElementById("detailPlates")!.innerHTML = formatEuroHtml(result.plateCosts, 2);
-    document.getElementById("detailOther")!.innerHTML = formatEuroHtml(result.otherCosts, 2);
+    hero.textContent = formatEuro(result.totalCost, 0);
+    detailPurchase.textContent = formatEuro(result.purchasePrice, 0);
+    detailBpm.textContent = formatEuro(result.estimatedBpm, 0);
+    detailRdw.textContent = formatEuro(result.rdwCosts, 0);
+    detailTransport.textContent = formatEuro(result.transportCosts, 0);
+    detailExport.textContent = formatEuro(result.exportCosts, 0);
+    detailInspection.textContent = formatEuro(result.inspectionCosts, 0);
+    detailPlates.textContent = formatEuro(result.plateCosts, 0);
+    detailOther.textContent = formatEuro(result.otherCosts, 0);
+    detailTotal.textContent = formatEuro(result.totalCost, 0);
 
-    if (result.nlPrice !== undefined && result.nlPrice > 0) {
-      comparisonDivider.style.display = "block";
-      comparisonRow.style.display = "flex";
-      differenceRow.style.display = "flex";
-      document.getElementById("detailNlPrice")!.innerHTML = formatEuroHtml(result.nlPrice, 2);
-      document.getElementById("differenceLabel")!.innerHTML = result.differenceLabel ?? "Verschil";
-      document.getElementById("detailDifference")!.innerHTML = formatEuroHtml(Math.abs(result.priceDifference ?? 0), 2);
+    if (result.nlPrice && result.nlPrice > 0) {
+      comparisonSection.style.display = "block";
+      detailNlPrice.textContent = formatEuro(result.nlPrice, 0);
+      differenceLabel.textContent = result.differenceLabel ?? "Verschil";
+      detailDifference.textContent = formatEuro(Math.abs(result.priceDifference ?? 0), 0);
     } else {
-      comparisonDivider.style.display = "none";
-      comparisonRow.style.display = "none";
-      differenceRow.style.display = "none";
+      comparisonSection.style.display = "none";
+    }
+
+    updateUrl();
+  }
+
+  function applyUrlParams() {
+    const url = new URL(window.location.href);
+    const setValue = (param: string, input: HTMLInputElement) => {
+      const value = url.searchParams.get(param);
+      if (value !== null) input.value = value;
+    };
+
+    setValue("aankoopprijs", purchasePriceInput);
+    setValue("bpm", estimatedBpmInput);
+    setValue("rdw", rdwCostsInput);
+    setValue("transport", transportCostsInput);
+    setValue("export", exportCostsInput);
+    setValue("keuring", inspectionCostsInput);
+    setValue("kenteken", plateCostsInput);
+    setValue("overig", otherCostsInput);
+    setValue("nl", nlPriceInput);
+
+    const land = url.searchParams.get("land");
+    if (land !== null) purchaseCountryInput.value = land;
+
+    const voertuig = url.searchParams.get("voertuig");
+    if (voertuig === "auto" || voertuig === "camper") {
+      vehicleType = voertuig;
+      document.querySelectorAll("#vehicleType button").forEach((b) => {
+        const btn = b as HTMLButtonElement;
+        btn.classList.toggle("active", btn.dataset.type === vehicleType);
+      });
     }
   }
 
-  document.querySelectorAll("input").forEach(el => {
-    el.addEventListener("input", calculate);
-    el.addEventListener("change", calculate);
+  function initVehicleType() {
+    vehicleTypeGroup.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
+      if (!btn || !btn.dataset.type) return;
+      document.querySelectorAll("#vehicleType button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      vehicleType = btn.dataset.type;
+      calculate();
+    });
+  }
+
+  function initPresetChips() {
+    document.querySelectorAll(".quick-chip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const preset = (btn as HTMLElement).dataset.preset;
+        if (!preset) return;
+        const data = JSON.parse(preset);
+        purchasePriceInput.value = data.purchasePrice ?? 0;
+        estimatedBpmInput.value = data.estimatedBpm ?? 0;
+        rdwCostsInput.value = data.rdwCosts ?? 0;
+        transportCostsInput.value = data.transportCosts ?? 0;
+        exportCostsInput.value = data.exportCosts ?? 0;
+        inspectionCostsInput.value = data.inspectionCosts ?? 0;
+        plateCostsInput.value = data.plateCosts ?? 0;
+        otherCostsInput.value = data.otherCosts ?? 0;
+        calculate();
+      });
+    });
+  }
+
+  function initCopyLink() {
+    copyLinkBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const textEl = copyLinkBtn.querySelector(".copy-link-text") as HTMLElement;
+        const originalText = textEl.textContent || "Deel deze berekening";
+        textEl.textContent = "Link gekopieerd";
+        copyLinkBtn.classList.add("copy-link-success");
+        setTimeout(() => {
+          textEl.textContent = originalText;
+          copyLinkBtn.classList.remove("copy-link-success");
+        }, 2000);
+      } catch (err) {
+        console.error("Kon link niet kopiëren", err);
+      }
+    });
+  }
+
+  applyUrlParams();
+  initVehicleType();
+  initPresetChips();
+  initCopyLink();
+
+  [
+    purchasePriceInput,
+    estimatedBpmInput,
+    rdwCostsInput,
+    transportCostsInput,
+    exportCostsInput,
+    inspectionCostsInput,
+    plateCostsInput,
+    otherCostsInput,
+    nlPriceInput,
+  ].forEach((input) => {
+    input.addEventListener("input", calculate);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        calculate();
+        input.blur();
+      }
+    });
   });
 
-  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
-
-  document.getElementById("vehicleType")!.addEventListener("click", (e) => {
-    const btn = (e.target as HTMLElement).closest("button");
-    if (!btn) return;
-    document.querySelectorAll("#vehicleType button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    vehicleType = btn.dataset.type!;
-  });
+  purchaseCountryInput.addEventListener("change", calculate);
+  berekenBtn.addEventListener("click", calculate);
 
   calculate();
 </script>
 
 <style>
-  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
-  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
-  ul, ol { margin: 0.5rem 0; padding-left: 1.25rem; }
-  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
-  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
-  .result-note { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.75rem; }
-  .bpm-waarschuwing { background: #fff8e1; border: 1px solid #f9a825; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.9rem; color: #795548; }
-  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
-  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+  .badge-indicatie {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content {
+    padding: 1.5rem;
+  }
+
+  .calc-content h2,
+  .calc-content .page-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-content .page-title {
+    font-size: 1.75rem;
+    margin-top: 0;
+  }
+
+  .calc-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-content ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .calc-group-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin: 0.25rem 0 0.25rem;
+  }
+
+  .calc-field-hint {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: -0.4rem 0 0.25rem;
+  }
+
+  .calc-error {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  .bpm-waarschuwing {
+    background: #fff8e1;
+    border: 1px solid #f9a825;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #795548;
+    margin-top: 1rem;
+  }
+
+  .result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .result-row .label {
+    color: var(--color-text-muted);
+  }
+
+  .result-row .value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .result-row-total .label {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .result-row-total .value {
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
+  .result-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.35rem 0;
+  }
+
+  .quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: -0.25rem 0 0.75rem;
+  }
+
+  .quick-chips-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .quick-chip {
+    appearance: none;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .quick-chip:hover,
+  .quick-chip:focus-visible {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .copy-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .copy-link-btn:hover,
+  .copy-link-btn:focus-visible {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .copy-link-success {
+    background: var(--color-success-bg, #dcfce7) !important;
+    color: var(--color-success, #166534) !important;
+    border-color: var(--color-success, #166534) !important;
+  }
+
+  .copy-link-icon {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 560px) {
+    .calc-content {
+      padding: 1rem;
+    }
+
+    .calc-content .page-title {
+      font-size: 1.5rem;
+    }
+
+    .quick-chips {
+      gap: 0.3rem;
+    }
+
+    .quick-chip {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+    }
+  }
 </style>
