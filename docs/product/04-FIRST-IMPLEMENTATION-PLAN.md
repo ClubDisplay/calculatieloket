@@ -173,11 +173,28 @@ Pas de nieuwe componenten toe op `bruto-netto-2026.astro`:
 
 **Resultaat:** zie status update “Sprint 081 salaris-calculator migration afgerond” hierboven.
 
-### Stap 6 — Uitrollen naar overige calculators (Sprint 082+)
+## Status update: Sprint 082 hypotheek-calculator migration afgerond
+
+Sprint 082 heeft `src/pages/hypotheek-calculator.astro` gemigreerd naar de app/tool shell:
+
+- Hergebruikt `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion` en `ToolFooter`.
+- Inputvelden: bruto jaarinkomen, hypotheekrente, looptijd (10/20/30 jaar), partner toggle, partner inkomen.
+- Resultaat direct zichtbaar bij laden: maximaal hypotheekbedrag, bruto/netto maandlasten, totale rentekosten, inkomensfactor.
+- URL state: `?inkomen`, `?rente`, `?looptijd`, `?partner`, `?partnerInkomen`.
+- Quick income chips: € 40.000, € 50.000, € 60.000, € 70.000, € 80.000.
+- Kopieer-link knop en dynamische vervolgstappen (bruto-netto, salaris, toeslagen, ZZP).
+- `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot.
+- SEO-content behouden: uitleg en uitgangspunten. Disclaimer en bronnen via `ToolFooter` / `SourceCards`.
+- Geen advertentie tussen input en resultaat.
+- Geen wijziging aan de `mortgage` engine, Knowledge Objects of andere pagina’s.
+
+---
+
+### Stap 6 — Uitrollen naar overige calculators (Sprint 082+) ✅ hypotheek afgerond
 
 Volgorde:
 
-1. `hypotheek-calculator.astro` — resultaat is al zichtbaar, dus snel te converteren.
+1. ✅ `hypotheek-calculator.astro` — resultaat is al zichtbaar, dus snel te converteren.
 2. `btw-calculator.astro` — eenvoudige invoer, goed voor patroonvalidatie.
 3. `toeslagen-calculator.astro` — dubbele resultaten vragen om specifieke aanpak.
 4. `zzp-calculator.astro` — veel invoervelden, eventueel stapsgewijs opdelen.

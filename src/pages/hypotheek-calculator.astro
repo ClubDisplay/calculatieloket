@@ -2,108 +2,335 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
+import CalculatorShell from "../components/calculator/CalculatorShell.astro";
+import InputPanel from "../components/calculator/InputPanel.astro";
+import ResultPanel from "../components/calculator/ResultPanel.astro";
+import UseCasesPanel from "../components/calculator/UseCasesPanel.astro";
+import FaqAccordion from "../components/calculator/FaqAccordion.astro";
+import ToolFooter from "../components/calculator/ToolFooter.astro";
+import SourceCards from "../components/SourceCards.astro";
+import { calculateMortgage } from "../lib/calculators/mortgage";
+import { formatEuro } from "../lib/format/currency";
+
+const title = "Hypotheek Calculator 2026 — Indicatie maandlasten | Calculatieloket.nl";
+const description = "Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Geen officiële hypotheekofferte.";
+
+const defaultIncome = 60000;
+const defaultRate = 3.8;
+const defaultTerm = 30;
+const defaultPartner = false;
+const defaultPartnerIncome = 40000;
+
+const initialResult = calculateMortgage({
+  income: defaultIncome,
+  interestRate: defaultRate,
+  termYears: defaultTerm,
+  partnerIncome: defaultPartnerIncome,
+  includePartner: defaultPartner,
+});
+
+const lastUpdated = "30 juni 2026";
+
+const quickIncomeAmounts = [40000, 50000, 60000, 70000, 80000];
+
+const useCases = [
+  {
+    id: "bruto-netto",
+    title: "Bruto-netto 2026",
+    description: "Bereken je netto salaris bij een bruto inkomen van {{inkomen}}.",
+    href: "/bruto-netto-2026/",
+    accent: "#2563eb",
+  },
+  {
+    id: "salaris",
+    title: "Salaris calculator",
+    description: "Vergelijk bruto en netto op basis van {{inkomen}} per jaar.",
+    href: "/salaris-calculator/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "toeslagen",
+    title: "Toeslagen berekenen",
+    description: "Check of je recht hebt op huur- of zorgtoeslag met dit inkomen.",
+    href: "/toeslagen-calculator/",
+    accent: "#059669",
+  },
+  {
+    id: "zzp",
+    title: "ZZP uurtarief berekenen",
+    description: "Bereken het benodigde uurtarief om dit inkomen als ZZP'er te halen.",
+    href: "/zzp-calculator/",
+    accent: "#7c3aed",
+  },
+];
+
+const sources = [
+  {
+    label: "Onafhankelijke bron",
+    title: "Nibud — Budgetvoorlichting",
+    description: "Informatie over verantwoord lenen en hypotheeklasten.",
+    href: "https://www.nibud.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Hypotheek",
+    description: "Algemene informatie over hypotheken en regelgeving.",
+    href: "https://www.rijksoverheid.nl/hypotheek",
+  },
+];
+
+const faq = [
+  {
+    question: "Is dit een officiële hypotheekofferte?",
+    answer: "Nee, dit is een indicatie. Een geldverstrekker gebruikt eigen acceptatieregels en kijkt naar veel meer factoren: studieschuld, BKR-registratie, gezinssituatie, rentevaste periode, energieprestatie, vaste lasten, en of je een koop- of huurhuis hebt.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto en netto maandlasten?",
+    answer: "Bruto is wat je aan de bank betaalt. Netto is na verrekening van de belastingteruggave via hypotheekrenteaftrek.",
+  },
+  {
+    question: "Welke rol speelt rente?",
+    answer: "Een lagere rente betekent lagere maandlasten en een hoger leenbedrag. Bij een hogere rente daalt het maximale hypotheekbedrag.",
+  },
+  {
+    question: "Waarom kan mijn hypotheekindicatie afwijken?",
+    answer: "Banken hanteren specifieke normen en modellen (Nibud). Vooral een studieschuld, BKR-registratie en alimentatie wegen zwaar mee. Gebruik deze calculator alleen als startpunt.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calculatieloket.nl/",
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Hypotheek Calculator",
+      "item": "https://calculatieloket.nl/hypotheek-calculator/",
+    },
+  ],
+};
 ---
 
-<BaseLayout
-  title="Hypotheek Calculator — Indicatie maandlasten en hypotheek"
-  description="Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Geen officiële hypotheekofferte."
->
-  <h1 class="page-title">Hypotheek Calculator</h1>
-  <p class="page-subtitle">
-    Indicatie van hypotheekbedrag en maandlasten op basis van je inkomen en rente.
-  </p>
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <AdSlot slot="1234567894" format="auto" style="min-height:100px" />
 
-  <div class="calculator-card calc-modern">
-    <div class="calc-fields">
-    <div class="form-group">
-      <label for="income">Bruto jaarinkomen</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="income" placeholder="Bijv. 70000" min="0" step="100" value="60000" /></div>
-    </div>
-    <div class="form-group">
-      <label for="rate">Hypotheekrente <span class="hint">(voorbeeldrente)</span></label>
-      <div class="input-suffix"><input type="number" id="rate" placeholder="Bijv. 3.8" min="0" max="15" step="0.1" value="3.8" /><span class="suffix">%</span></div>
-    </div>
-    <div class="form-group">
-      <label>Looptijd</label>
-      <div class="radio-group" id="termGroup">
-        <button data-term="10">10 jaar</button><button data-term="20">20 jaar</button><button data-term="30" class="active">30 jaar</button>
+  <CalculatorShell title="Hypotheek calculator" subtitle="Bereken een indicatie van je maximale hypotheek en maandlasten op basis van je inkomen en rente.">
+    <InputPanel title="Jouw situatie" slot="input">
+      <div class="form-group">
+        <label for="income">Bruto jaarinkomen</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="income" value={defaultIncome} min="0" step="100" />
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="toggle-row"><span class="toggle-label">Tweede inkomen meerekenen</span><label class="toggle"><input type="checkbox" id="partnerToggle" /><span class="slider"></span></label></div>
-    </div>
-    <div class="form-group" id="partnerGroup" style="display:none;">
-      <label for="partnerIncome">Bruto jaarinkomen partner</label>
-      <div class="input-prefix"><span class="prefix">&euro;</span><input type="number" id="partnerIncome" placeholder="Bijv. 40000" min="0" step="100" value="40000" /></div>
-    </div>
-    </div>
 
-    <button id="berekenBtn" class="btn btn-primary btn-lg calc-btn">Bereken hypotheek</button>
-    <p class="calc-error" id="calcError" style="display:none;">Vul een geldig inkomen en rente in (hoger dan 0).</p>
+      <div class="quick-chips">
+        <span class="quick-chips-label">Snel inkomen:</span>
+        {quickIncomeAmounts.map((amount) => (
+          <button type="button" class="quick-chip" data-amount={amount}>
+            &euro; {amount.toLocaleString("nl-NL")}
+          </button>
+        ))}
+      </div>
 
-    <div class="result-box" id="result">
-      <h3>Hypotheekindicatie <span class="badge-indicatie">Indicatie</span></h3>
-      <div class="result-value" id="resultMaxMortgage">&mdash;</div>
+      <div class="form-group">
+        <label for="rate">Hypotheekrente <span class="hint">(voorbeeldrente)</span></label>
+        <div class="input-suffix">
+          <input type="number" id="rate" value={defaultRate} min="0" max="15" step="0.1" />
+          <span class="suffix">%</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Looptijd</label>
+        <div class="radio-group" id="termGroup">
+          <button type="button" data-term="10" class={defaultTerm === 10 ? "active" : ""}>10 jaar</button>
+          <button type="button" data-term="20" class={defaultTerm === 20 ? "active" : ""}>20 jaar</button>
+          <button type="button" data-term="30" class={defaultTerm === 30 ? "active" : ""}>30 jaar</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="toggle-row">
+          <span class="toggle-label">Tweede inkomen meerekenen</span>
+          <label class="toggle" for="partnerToggle">
+            <input type="checkbox" id="partnerToggle" checked={defaultPartner} />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" id="partnerGroup" style={defaultPartner ? undefined : "display:none;"}>
+        <label for="partnerIncome">Bruto jaarinkomen partner</label>
+        <div class="input-prefix">
+          <span class="prefix">&euro;</span>
+          <input type="number" id="partnerIncome" value={defaultPartnerIncome} min="0" step="100" />
+        </div>
+      </div>
+
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken hypotheek</button>
+      <p class="calc-error" id="calcError" style="display:none;">Vul een geldig inkomen en rente in (hoger dan 0).</p>
+    </InputPanel>
+
+    <ResultPanel
+      slot="result"
+      title="Hypotheekindicatie"
+      heroLabel="Maximaal hypotheekbedrag"
+      heroValue={formatEuro(initialResult.maxMortgage, 0)}
+      heroSubtext="Indicatie op basis van 2026-rente"
+      badge="Indicatie"
+    >
+      <div class="result-meta">
+        <span class="meta-badge">Bijgewerkt: 2026</span>
+        <span class="meta-badge">Bron: Nibud / Rijksoverheid</span>
+      </div>
+
+      <div class="result-row"><span class="label">Totaal bruto jaarinkomen</span><span class="value" id="detailTotalIncome">{formatEuro(initialResult.totalIncome, 0)}</span></div>
+      <div class="result-row"><span class="label">Inkomensfactor</span><span class="value" id="detailIncomeFactor">{initialResult.incomeFactor.toFixed(2).replace(".", ",")}</span></div>
       <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Hypotheekbedrag (indicatie)</span><span class="value" id="detailMaxMortgage">&mdash;</span></div>
-      <div class="result-row"><span class="label">Bruto maandlasten</span><span class="value" id="detailMonthly">&mdash;</span></div>
-      <div class="result-row"><span class="label">Netto maandlasten <span class="hint">(incl. hypotheekrenteaftrek)</span></span><span class="value" id="detailNetMonthly">&mdash;</span></div>
-      <div class="result-row"><span class="label">Totale rentekosten</span><span class="value" id="detailTotalInterest">&mdash;</span></div>
-      <p class="result-note">Deze berekening is een indicatie.</p>
-    </div>
-  </div>
+      <div class="result-row"><span class="label">Hypotheekbedrag (indicatie)</span><span class="value" id="detailMaxMortgage">{formatEuro(initialResult.maxMortgage, 0)}</span></div>
+      <div class="result-row"><span class="label">Bruto maandlasten</span><span class="value" id="detailMonthly">{formatEuro(initialResult.monthlyPayment, 0)}</span></div>
+      <div class="result-row"><span class="label">Netto maandlasten <span class="hint">(incl. hypotheekrenteaftrek)</span></span><span class="value" id="detailNetMonthly">{formatEuro(initialResult.netMonthlyPayment, 0)}</span></div>
+      <div class="result-row"><span class="label">Totale rentekosten</span><span class="value" id="detailTotalInterest">{formatEuro(initialResult.totalInterest, 0)}</span></div>
 
-  <div class="calculator-card">
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+        <span class="copy-link-icon">🔗</span>
+        <span class="copy-link-text">Deel deze berekening</span>
+      </button>
+
+      <div class="result-next-steps" slot="actions">
+        <span class="result-next-steps-label">Verder rekenen:</span>
+        <a href="/bruto-netto-2026/">Bruto-netto</a>
+        <a href="/salaris-calculator/">Salaris</a>
+        <a href="/toeslagen-calculator/">Toeslagen</a>
+        <a href="/zzp-calculator/">ZZP</a>
+      </div>
+    </ResultPanel>
+
+    <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
+
+    <SourceCards title="Bronnen" items={sources} slot="sources" />
+
+    <FaqAccordion title="Veelgestelde vragen" items={faq} slot="faq" />
+
+    <ToolFooter
+      slot="footer"
+      disclaimer="Deze berekening is geen officiële hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een officiële berekening aan bij een hypotheekadviseur."
+      lastUpdated={lastUpdated}
+    />
+  </CalculatorShell>
+
+  <div class="calculator-card calc-content" id="calculator-content">
+    <h2 class="page-title">Hypotheek calculator</h2>
+    <p>Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Gebruik deze calculator als startpunt; het is geen officiële hypotheekofferte.</p>
+
     <h2>Hoe werkt deze berekening?</h2>
     <p>Deze calculator geeft een indicatie op basis van je inkomen, de ingevulde rente en de gekozen looptijd. Gebruikte uitgangspunten:</p>
-    <ul>
-      <li>Inkomen &times; factor (afhankelijk van rente)</li>
-      <li>Annu&iuml;taire aflossing</li>
+    <ul class="calc-list">
+      <li>Inkomen × factor (afhankelijk van rente)</li>
+      <li>Annuïtaire aflossing</li>
       <li>Hypotheekrenteaftrek tegen 37,56% (2026)</li>
     </ul>
-
-    <h2>Veelgestelde vragen</h2>
-    <h3>Is dit een offici&euml;le hypotheekofferte?</h3>
-    <p>Nee, dit is een indicatie. Een geldverstrekker gebruikt eigen acceptatieregels en kijkt naar veel meer factoren: studieschuld, BKR-registratie, gezinssituatie, rentevaste periode, energieprestatie, vaste lasten, en of je een koop- of huurhuis hebt.</p>
-    <h3>Wat is het verschil tussen bruto en netto maandlasten?</h3>
-    <p>Bruto is wat je aan de bank betaalt. Netto is na verrekening van de belastingteruggave via hypotheekrenteaftrek.</p>
-    <h3>Welke rol speelt rente?</h3>
-    <p>Een lagere rente betekent lagere maandlasten en een hoger leenbedrag. Bij een hogere rente daalt het maximale hypotheekbedrag.</p>
-    <h3>Waarom kan mijn hypotheekindicatie afwijken?</h3>
-    <p>Banken hanteren specifieke normen en modellen (Nibud). Vooral een studieschuld, BKR-registratie en alimentatie wegen zwaar mee. Gebruik deze calculator alleen als startpunt.</p>
-
-    <h2>Bronnen en informatie</h2>
-    <ul>
-      <li><a href="https://www.nibud.nl" target="_blank" rel="noopener">Nibud — Budgetvoorlichting</a></li>
-      <li><a href="https://www.rijksoverheid.nl/hypotheek" target="_blank" rel="noopener">Rijksoverheid — Hypotheek</a></li>
-    </ul>
-
-    <p class="disclaimer">Deze berekening is geen offici&euml;le hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een offici&euml;le berekening aan bij een hypotheekadviseur.</p>
-    <p class="last-updated">Laatst bijgewerkt: 12 juni 2026</p>
   </div>
 
   <CrossSellCards
     title="Ook handig om te berekenen"
     items={[
-      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026." },
-      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Bereken een indicatie van bruto naar netto." },
-      { href: "/toeslagen-calculator/", title: "Toeslagen Calculator", description: "Bekijk mogelijke invloed van inkomen op toeslagen." },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026.", accent: "#2563eb" },
+      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Bereken een indicatie van bruto naar netto.", accent: "#3b82f6" },
+      { href: "/toeslagen-calculator/", title: "Toeslagen Calculator", description: "Bekijk mogelijke invloed van inkomen op toeslagen.", accent: "#059669" },
     ]}
   />
 </BaseLayout>
 
 <script>
   import { calculateMortgage } from "../lib/calculators/mortgage";
-  import { formatEuroHtml } from "../lib/format/currency";
+  import { formatEuro } from "../lib/format/currency";
 
   const incomeInput = document.getElementById("income") as HTMLInputElement;
   const rateInput = document.getElementById("rate") as HTMLInputElement;
   const partnerToggle = document.getElementById("partnerToggle") as HTMLInputElement;
   const partnerGroup = document.getElementById("partnerGroup") as HTMLDivElement;
   const partnerIncomeInput = document.getElementById("partnerIncome") as HTMLInputElement;
+  const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
+  const errorBox = document.getElementById("calcError") as HTMLElement;
+  const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
+  const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
+
+  const detailTotalIncome = document.getElementById("detailTotalIncome")!;
+  const detailIncomeFactor = document.getElementById("detailIncomeFactor")!;
+  const detailMaxMortgage = document.getElementById("detailMaxMortgage")!;
+  const detailMonthly = document.getElementById("detailMonthly")!;
+  const detailNetMonthly = document.getElementById("detailNetMonthly")!;
+  const detailTotalInterest = document.getElementById("detailTotalInterest")!;
+
   let termYears = 30;
+
+  const formatNumber = (n: number, decimals = 0): string =>
+    n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  function updateUseCases(income: number) {
+    const replacements: Record<string, string> = {
+      "{{inkomen}}": formatNumber(income, 0),
+    };
+
+    document.querySelectorAll("[data-usecase]").forEach((card) => {
+      const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
+      if (!desc) return;
+      const template = desc.dataset.template;
+      if (!template) return;
+      let text = template;
+      Object.entries(replacements).forEach(([key, value]) => {
+        text = text.replaceAll(key, value);
+      });
+      desc.textContent = text;
+    });
+  }
+
+  function updateUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const income = parseFloat(incomeInput.value) || 0;
+    const rate = parseFloat(rateInput.value) || 0;
+    const partnerIncome = parseFloat(partnerIncomeInput.value) || 0;
+
+    if (income > 0) params.set("inkomen", income.toString());
+    else params.delete("inkomen");
+
+    if (rate >= 0) params.set("rente", rate.toString());
+    else params.delete("rente");
+
+    params.set("looptijd", termYears.toString());
+    params.set("partner", partnerToggle.checked ? "1" : "0");
+
+    if (partnerToggle.checked && partnerIncome > 0) params.set("partnerInkomen", partnerIncome.toString());
+    else params.delete("partnerInkomen");
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }
 
   function calculate() {
     const income = parseFloat(incomeInput.value) || 0;
@@ -118,38 +345,322 @@ import CrossSellCards from "../components/CrossSellCards.astro";
       includePartner: partnerToggle.checked,
     });
 
-    const errorBox = document.getElementById("calcError") as HTMLElement;
     if (!result.valid) {
-      ["resultMaxMortgage","detailMaxMortgage","detailMonthly","detailNetMonthly","detailTotalInterest"].forEach(id => document.getElementById(id)!.innerHTML = "&mdash;");
       errorBox.style.display = "block";
+      hero.textContent = "—";
+      detailTotalIncome.textContent = "—";
+      detailIncomeFactor.textContent = "—";
+      detailMaxMortgage.textContent = "—";
+      detailMonthly.textContent = "—";
+      detailNetMonthly.textContent = "—";
+      detailTotalInterest.textContent = "—";
       return;
     }
+
     errorBox.style.display = "none";
-    document.getElementById("resultMaxMortgage")!.innerHTML = formatEuroHtml(result.maxMortgage, 0);
-    document.getElementById("detailMaxMortgage")!.innerHTML = formatEuroHtml(result.maxMortgage, 0);
-    document.getElementById("detailMonthly")!.innerHTML = formatEuroHtml(result.monthlyPayment, 0);
-    document.getElementById("detailNetMonthly")!.innerHTML = formatEuroHtml(result.netMonthlyPayment, 0);
-    document.getElementById("detailTotalInterest")!.innerHTML = formatEuroHtml(result.totalInterest, 0);
+
+    hero.textContent = formatEuro(result.maxMortgage, 0);
+    detailTotalIncome.textContent = formatEuro(result.totalIncome, 0);
+    detailIncomeFactor.textContent = result.incomeFactor.toFixed(2).replace(".", ",");
+    detailMaxMortgage.textContent = formatEuro(result.maxMortgage, 0);
+    detailMonthly.textContent = formatEuro(result.monthlyPayment, 0);
+    detailNetMonthly.textContent = formatEuro(result.netMonthlyPayment, 0);
+    detailTotalInterest.textContent = formatEuro(result.totalInterest, 0);
+
+    updateUseCases(result.totalIncome);
+    updateUrl();
   }
+
+  function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const income = params.get("inkomen");
+    const rate = params.get("rente");
+    const term = params.get("looptijd");
+    const partner = params.get("partner");
+    const partnerIncome = params.get("partnerInkomen");
+
+    if (income !== null) incomeInput.value = income;
+    if (rate !== null) rateInput.value = rate;
+    if (partner !== null) partnerToggle.checked = partner === "1";
+    if (partnerIncome !== null) partnerIncomeInput.value = partnerIncome;
+
+    if (term !== null) {
+      const termValue = parseInt(term, 10);
+      if ([10, 20, 30].includes(termValue)) {
+        termYears = termValue;
+      }
+    }
+
+    document.querySelectorAll("#termGroup button").forEach((btn) => {
+      const button = btn as HTMLButtonElement;
+      const active = parseInt(button.dataset.term!, 10) === termYears;
+      button.classList.toggle("active", active);
+    });
+  }
+
+  function initQuickChips() {
+    document.querySelectorAll(".quick-chip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const amount = (btn as HTMLElement).dataset.amount;
+        if (amount) {
+          incomeInput.value = amount;
+          incomeInput.focus();
+          calculate();
+        }
+      });
+    });
+  }
+
+  function initCopyLink() {
+    copyLinkBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const textEl = copyLinkBtn.querySelector(".copy-link-text") as HTMLElement;
+        const originalText = textEl.textContent || "Deel deze berekening";
+        textEl.textContent = "Link gekopieerd";
+        copyLinkBtn.classList.add("copy-link-success");
+        setTimeout(() => {
+          textEl.textContent = originalText;
+          copyLinkBtn.classList.remove("copy-link-success");
+        }, 2000);
+      } catch (err) {
+        console.error("Kon link niet kopiëren", err);
+      }
+    });
+  }
+
+  function initTermButtons() {
+    document.getElementById("termGroup")!.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
+      if (!btn) return;
+      document.querySelectorAll("#termGroup button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      termYears = parseInt(btn.dataset.term!, 10);
+      calculate();
+    });
+  }
+
+  function initPartnerToggle() {
+    partnerToggle.addEventListener("change", () => {
+      partnerGroup.style.display = partnerToggle.checked ? "block" : "none";
+      calculate();
+    });
+  }
+
+  applyUrlParams();
+  calculate();
+  initQuickChips();
+  initCopyLink();
+  initTermButtons();
+  initPartnerToggle();
+
   incomeInput.addEventListener("input", calculate);
   rateInput.addEventListener("input", calculate);
   partnerIncomeInput.addEventListener("input", calculate);
-  document.getElementById("berekenBtn")!.addEventListener("click", calculate);
-  partnerToggle.addEventListener("change", () => { partnerGroup.style.display = partnerToggle.checked ? "block" : "none"; calculate(); });
-  document.getElementById("termGroup")!.addEventListener("click", (e) => {
-    const btn = (e.target as HTMLElement).closest("button"); if (!btn) return;
-    document.querySelectorAll("#termGroup button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active"); termYears = parseInt(btn.dataset.term!); calculate();
+  berekenBtn.addEventListener("click", calculate);
+  incomeInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      calculate();
+      incomeInput.blur();
+    }
   });
-  calculate();
 </script>
 
 <style>
-  h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
-  h3 { font-size: 1rem; margin: 1rem 0 0.35rem; }
-  ul { margin: 0.5rem 0; padding-left: 1.25rem; }
-  li { margin-bottom: 0.35rem; font-size: 0.95rem; }
-  .badge-indicatie { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--color-primary); background: var(--color-primary-light); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
-  .disclaimer { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
-  .last-updated { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+  .calc-content {
+    padding: 1.5rem;
+  }
+
+  .calc-content h2,
+  .calc-content .page-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-content .page-title {
+    font-size: 1.75rem;
+    margin-top: 0;
+  }
+
+  .calc-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-content ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .calc-error {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  .result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .result-row .label {
+    color: var(--color-text-muted);
+  }
+
+  .result-row .value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .result-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.35rem 0;
+  }
+
+  .quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: -0.25rem 0 0.75rem;
+  }
+
+  .quick-chips-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .quick-chip {
+    appearance: none;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .quick-chip:hover,
+  .quick-chip:focus-visible {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .copy-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .copy-link-btn:hover,
+  .copy-link-btn:focus-visible {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .copy-link-success {
+    background: var(--color-success-bg, #dcfce7) !important;
+    color: var(--color-success, #166534) !important;
+    border-color: var(--color-success, #166534) !important;
+  }
+
+  .copy-link-icon {
+    font-size: 0.95rem;
+  }
+
+  .result-next-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .result-next-steps-label {
+    font-weight: 600;
+    margin-right: 0.25rem;
+  }
+
+  .result-next-steps a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .result-next-steps a:hover,
+  .result-next-steps a:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 560px) {
+    .calc-content {
+      padding: 1rem;
+    }
+
+    .calc-content .page-title {
+      font-size: 1.5rem;
+    }
+
+    .quick-chips {
+      gap: 0.3rem;
+    }
+
+    .quick-chip {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+    }
+  }
 </style>
