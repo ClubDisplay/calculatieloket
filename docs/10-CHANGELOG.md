@@ -7,12 +7,12 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-2. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-3. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-4. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-5. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-6. [2026-06-30](#2026-06-30)
+1. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+2. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+3. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+4. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+5. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+6. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 7. [2026-06-30](#2026-06-30)
 8. [2026-06-30](#2026-06-30)
 9. [2026-06-30](#2026-06-30)
@@ -25,12 +25,23 @@
 16. [2026-06-30](#2026-06-30)
 17. [2026-06-30](#2026-06-30)
 18. [2026-06-30](#2026-06-30)
-19. [2026-06-29](#2026-06-29)
-20. [2026-06-27](#2026-06-27)
-21. [2026-06-26](#2026-06-26)
-22. [2026-06-30](#2026-06-30)
+19. [2026-06-30](#2026-06-30)
+20. [2026-06-29](#2026-06-29)
+21. [2026-06-27](#2026-06-27)
+22. [2026-06-26](#2026-06-26)
 23. [2026-06-30](#2026-06-30)
 24. [2026-06-30](#2026-06-30)
+25. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 087
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 087 — Financial Recommendation Engine v1
+**Details:** Nieuwe rule-based recommendation laag toegevoegd in `src/lib/recommendations/`. Bestanden: `types.ts`, `helpers.ts`, `engine.ts`, `registry.ts` en rule files `income.ts`, `btw.ts`, `mortgage.ts`, `zzp.ts`, `allowances.ts`. Centrale API `getRecommendations(input)` leest regels uit `recommendationRegistry`, sorteert op `priority` oplopend, dedupliceert op `id` en filtert de huidige calculator eruit. Regels dekken alle 8 gemigreerde calculators: `bruto-netto`/`salaris` (income), `hypotheek` (mortgage), BTW-cluster (`btw`, `btw-terugrekenen`, `btw-inclusief-exclusief`), `zzp` en `toeslagen`. Voorbeeldregels: laag netto inkomen → toeslagen; hoog netto inkomen → hypotheek; hoog uurtarief → hypotheek; partner inkomen → bruto-netto. `src/components/calculator/FinancialJourney.astro` uitgebreid met `recommendations` prop; blijft backward compatible met bestaande `steps` prop. Default income-based steps blijven werken als fallback. Nieuwe tests in `tests/recommendations/recommendations.test.ts` (17 tests): unknown calculator, priority sorting, deduplicatie, filtering van huidige calculator, income rules, BTW rules, mortgage rules, ZZP rules, allowances rules, registry keys. Nieuwe documentatie `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md` met doel, architectuur, types, registry, rule files, uitbreidingsinstructie, gebruiksvoorbeelden, FinancialJourney integratie en Sprint 088 integratieplan. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` bijgewerkt: Sprint 086 afgerond, Sprint 087 huidige aanbeveling, "Wachten op Sprint 088". Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

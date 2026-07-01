@@ -6,9 +6,19 @@ interface Step {
   href: string;
 }
 
+interface Recommendation {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  priority: number;
+  reason: string;
+}
+
 interface Props {
   title?: string;
   steps?: Step[];
+  recommendations?: Recommendation[];
   income?: number;
   partnerIncome?: number;
   totalIncome?: number;
@@ -19,6 +29,7 @@ interface Props {
 const {
   title = "Je volgende stap",
   steps: customSteps,
+  recommendations,
   income = 0,
   partnerIncome = 0,
   totalIncome = 0,
@@ -74,15 +85,28 @@ const steps = customSteps ?? defaultSteps;
   <h3 class="calc-financial-journey-title">{title}</h3>
   <div class="calc-financial-journey-steps">
     {
-      steps.map((step) => (
-        <a href={step.href} class="calc-financial-journey-step" data-step={step.id}>
-          <span class="step-check">✓</span>
-          <span class="step-content">
-            <span class="step-label">{step.label}</span>
-            <span class="step-desc">{step.description}</span>
-          </span>
-        </a>
-      ))
+      recommendations && recommendations.length > 0 ? (
+        recommendations.map((rec) => (
+          <a href={rec.url} class="calc-financial-journey-step" data-step={rec.id}>
+            <span class="step-check">✓</span>
+            <span class="step-content">
+              <span class="step-label">{rec.title}</span>
+              <span class="step-desc">{rec.description}</span>
+              <span class="step-reason">{rec.reason}</span>
+            </span>
+          </a>
+        ))
+      ) : (
+        steps.map((step) => (
+          <a href={step.href} class="calc-financial-journey-step" data-step={step.id}>
+            <span class="step-check">✓</span>
+            <span class="step-content">
+              <span class="step-label">{step.label}</span>
+              <span class="step-desc">{step.description}</span>
+            </span>
+          </a>
+        ))
+      )
     }
   </div>
 </div>
@@ -167,5 +191,11 @@ const steps = customSteps ?? defaultSteps;
   .step-desc {
     font-size: 0.8rem;
     color: var(--color-text-muted);
+  }
+
+  .step-reason {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-style: italic;
   }
 </style>

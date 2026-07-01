@@ -41,9 +41,13 @@ Sprint 084 heeft `btw-calculator.astro` gemigreerd naar de Calculator App Shell.
 
 Sprint 085 heeft `btw-terugrekenen.astro` en `btw-inclusief-exclusief.astro` gemigreerd naar de Calculator App Shell. Financial Journey verbindt het BTW-cluster onderling en naar ZZP uurtarief en auto importkosten.
 
-### Update: Sprint 086 — ZZP Calculator App Shell Migration (huidige aanbeveling)
+### Update: Sprint 086 — ZZP Calculator App Shell Migration (afgerond)
 
-Sprint 086 migreert `zzp-calculator.astro` naar de Calculator App Shell. Scope: alleen deze pagina, gebruik bestaande `calculateZzpReverse()`, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
+Sprint 086 heeft `zzp-calculator.astro` gemigreerd naar de Calculator App Shell. Scope: alleen deze pagina, gebruik bestaande `calculateZzpReverse()`, geen engine- of Knowledge Layer-wijzigingen, geen deploy.
+
+### Update: Sprint 087 — Financial Recommendation Engine v1 (huidige aanbeveling)
+
+Sprint 087 bouwt een generieke, rule-based Financial Recommendation Engine in `src/lib/recommendations/` en breidt `FinancialJourney.astro` uit zodat deze `recommendations` kan renderen. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy of bestaande calculatorpagina’s.
 
 ---
 
@@ -163,7 +167,7 @@ Complete BTW Experience — BTW Terugrekenen + BTW Inclusief/Exclusief App Shell
 - FAQPage + BreadcrumbList schema.
 - Geen advertentie tussen input en resultaat; mobile-first polish.
 
-### Sprint 086 (huidige aanbeveling)
+### Sprint 086 (afgerond)
 ZZP Calculator App Shell Migration:
 
 - Hergebruik `CalculatorShell`, `InputPanel`, `ResultPanel`, `UseCasesPanel`, `SourceCards`, `FaqAccordion`, `ToolFooter`, `FinancialJourney`.
@@ -177,7 +181,30 @@ ZZP Calculator App Shell Migration:
 - FAQPage + BreadcrumbList schema.
 - Geen advertentie tussen input en resultaat; mobile-first polish.
 
-### Direct na Sprint 086 (P1 sprints)
+### Sprint 087 (huidige aanbeveling)
+Financial Recommendation Engine v1:
+
+- Nieuwe `src/lib/recommendations/` laag: `types.ts`, `engine.ts`, `registry.ts`, `helpers.ts`.
+- Rule files: `income.ts`, `btw.ts`, `mortgage.ts`, `zzp.ts`, `allowances.ts`.
+- Engine API: `getRecommendations(input)` sorteert, dedupliceert en filtert de huidige calculator.
+- `FinancialJourney.astro` accepteert nu `recommendations` prop; backward compatible met `steps`.
+- Tests in `tests/recommendations/` dekken engine, regels, registry, prioriteit, deduplicatie en filtering.
+- Documentatie: `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md`.
+- Geen engine/Knowledge/Rule Resolver wijzigingen; geen deploy.
+
+### Direct na Sprint 087 (P1 sprints)
+
+1. Sprint 088: Recommendation Engine integreren in alle 8 gemigreerde calculators.
+2. Herpak daarna de P1 polish items:
+
+- #10 HowTo schema op gemigreerde calculators
+- #12 Bronnen onder resultaat
+- #13 LHK vergelijking
+- #14 People also ask content
+- #15 Contextuele interne links
+- #16 Sticky resultaat hero
+- #18 AdSense A/B test
+- #19 Inputvelden full-width + 16px font op mobiel
 Herpak de P1 polish items uit de backlog:
 
 - #10 HowTo schema op gemigreerde calculators
@@ -216,4 +243,4 @@ Herpak de P1 polish items uit de backlog:
 
 ---
 
-**Wachten op Sprint 087.**
+**Wachten op Sprint 088.**
