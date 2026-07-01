@@ -25,30 +25,41 @@ const initialResult = calculateNetIncomeEstimate2026({
   applyLoonheffingskorting: defaultLhk,
 });
 
+const initialNetTax = Math.max(0, initialResult.incomeTax - initialResult.totalCredits);
+const initialEffectiveRate = initialResult.grossYearly > 0
+  ? ((initialNetTax / initialResult.grossYearly) * 100).toFixed(1).replace(".", ",")
+  : "0,0";
+
 const lastUpdated = "30 juni 2026";
+
+const quickAmounts = [2500, 3000, 3500, 4000, 5000];
 
 const useCases = [
   {
+    id: "toeslagen",
     title: "Toeslagen berekenen",
-    description: "Bekijk of jouw inkomen recht geeft op huur- of zorgtoeslag.",
+    description: "Met een netto jaarinkomen van {{netto_jaar}} kun je checken of je recht hebt op huur- of zorgtoeslag.",
     href: "/toeslagen-calculator/",
     accent: "#059669",
   },
   {
+    id: "hypotheek",
     title: "Hypotheek berekenen",
-    description: "Vind een indicatie op basis van je bruto inkomen.",
+    description: "Op basis van een bruto jaarinkomen van {{bruto_jaar}} bekijk je een hypotheekindicatie.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
   {
+    id: "salaris",
     title: "Salaris vergelijken",
-    description: "Vergelijk bruto en netto op de salaris calculator.",
+    description: "Vergelijk bruto {{bruto}} met netto {{netto}} op de salaris calculator.",
     href: "/salaris-calculator/",
     accent: "#2563eb",
   },
   {
+    id: "zzp",
     title: "ZZP uurtarief berekenen",
-    description: "Reken terug van gewenst netto naar benodigd uurtarief.",
+    description: "Om {{netto}} netto per maand als ZZP'er te halen, bereken je het benodigde uurtarief.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
   },
@@ -100,10 +111,49 @@ const faq = [
     question: "Welke tarieven gelden in 2026?",
     answer: "In 2026 zijn er twee Box 1 schijven: 35,75% over inkomen tot € 38.441, en 37,56% over inkomen van € 38.441 tot € 75.518. Boven de € 75.518 geldt 49,50%. De algemene heffingskorting is maximaal € 3.115 en loopt af vanaf € 29.736. De arbeidskorting loopt op tot maximaal € 5.685.",
   },
+  {
+    question: "Wat verandert er als ik mijn salaris verhoog?",
+    answer: "Hoger salaris betekent meer inkomstenbelasting over de extra euro's. In 2026 betaal je over inkomen boven € 75.518 49,50% inkomstenbelasting. Boven bepaalde grenzen loopt de arbeidskorting ook sneller af, waardoor de netto winst per extra bruto euro kleiner wordt.",
+  },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calculatieloket.nl/",
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Bruto netto 2026",
+      "item": "https://calculatieloket.nl/bruto-netto-2026/",
+    },
+  ],
+};
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
   <AdSlot slot="1234567898" format="auto" style="min-height:280px" />
 
   <CalculatorShell title="Bruto netto 2026 berekenen" subtitle="Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in en zie direct een indicatie van je nettoloon.">
@@ -114,6 +164,15 @@ const faq = [
           <span class="prefix">&euro;</span>
           <input type="number" id="grossSalary" value={defaultGross} min="0" step="1" />
         </div>
+      </div>
+
+      <div class="quick-chips">
+        <span class="quick-chips-label">Snel kiezen:</span>
+        {quickAmounts.map((amount) => (
+          <button type="button" class="quick-chip" data-amount={amount}>
+            &euro; {amount.toLocaleString("nl-NL")}
+          </button>
+        ))}
       </div>
 
       <div class="form-group">
@@ -143,17 +202,46 @@ const faq = [
       title="Netto salaris"
       heroLabel="Jouw netto salaris per maand"
       heroValue={formatEuro(initialResult.netMonthly, 0)}
+      heroSubtext="Indicatie op basis van 2026-tarieven"
       badge="Indicatie"
     >
+      <div class="result-meta">
+        <span class="meta-badge">Bijgewerkt: 2026</span>
+        <span class="meta-badge">Bron: Belastingdienst</span>
+      </div>
+
       <div class="result-row"><span class="label">Bruto maandsalaris</span><span class="value" id="detailGross">{formatEuro(defaultGross, 0)}</span></div>
+      <div class="result-row"><span class="label">Bruto jaarsalaris (incl. 8% vakantiegeld)</span><span class="value" id="detailGrossYear">{formatEuro(initialResult.grossYearly, 0)}</span></div>
       <div class="result-row"><span class="label">Vakantiegeld (8%)</span><span class="value" id="detailHoliday">{formatEuro(initialResult.breakdown.holidayPay, 0)}</span></div>
       <div class="result-row"><span class="label">Pensioenpremie per jaar</span><span class="value" id="detailPension">{formatEuro(initialResult.breakdown.pensionAmount, 0)}</span></div>
       <div class="result-divider"></div>
       <div class="result-row"><span class="label">Belastbaar jaarinkomen</span><span class="value" id="detailTaxable">{formatEuro(initialResult.taxableIncome, 0)}</span></div>
       <div class="result-row"><span class="label">Inkomstenbelasting</span><span class="value" id="detailTax">{formatEuro(initialResult.incomeTax, 0)}</span></div>
       <div class="result-row"><span class="label">Heffingskortingen</span><span class="value" id="detailCredits">{formatEuro(initialResult.totalCredits, 0)}</span></div>
+      <div class="result-row"><span class="label">Loonheffing na kortingen</span><span class="value" id="detailNetTax">{formatEuro(initialNetTax, 0)}</span></div>
+      <div class="result-row"><span class="label">Effectief belastingtarief</span><span class="value" id="detailEffectiveRate">{initialEffectiveRate}%</span></div>
       <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Netto per jaar</span><span class="value" id="detailNetYear">{formatEuro(initialResult.netYearly, 0)}</span></div>
+      <div class="result-row result-row-total"><span class="label">Netto per jaar</span><span class="value" id="detailNetYear">{formatEuro(initialResult.netYearly, 0)}</span></div>
+
+      <div class="result-brackets" id="resultBrackets">
+        <div class="result-brackets-title">Belastingschijven 2026</div>
+        <div class="result-bracket-row"><span class="label">Tot € 38.441</span><span class="value">35,75%</span></div>
+        <div class="result-bracket-row"><span class="label">€ 38.441 – € 75.518</span><span class="value">37,56%</span></div>
+        <div class="result-bracket-row"><span class="label">Boven € 75.518</span><span class="value">49,50%</span></div>
+      </div>
+
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+        <span class="copy-link-icon">🔗</span>
+        <span class="copy-link-text">Deel deze berekening</span>
+      </button>
+
+      <div class="result-next-steps" slot="actions">
+        <span class="result-next-steps-label">Verder rekenen:</span>
+        <a href="/toeslagen-calculator/">Toeslagen</a>
+        <a href="/hypotheek-calculator/">Hypotheek</a>
+        <a href="/salaris-calculator/">Salaris</a>
+        <a href="/zzp-calculator/">ZZP</a>
+      </div>
     </ResultPanel>
 
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
@@ -169,34 +257,11 @@ const faq = [
     />
   </CalculatorShell>
 
-  <AdSlot slot="1234567899" format="auto" style="min-height:280px" />
-
   <div class="calculator-card calc-content" id="calculator-content">
-    <span class="badge-indicatie">Indicatie</span>
-    <p>Wil je weten wat er overblijft van je bruto salaris in 2026? Onze bruto-netto calculator rekent direct voor je uit wat je netto inkomen per maand ongeveer is. Gebruik de slider bovenaan de pagina om je bruto maandsalaris, pensioenpremie en loonheffingskorting in te stellen.</p>
+    <p class="badge-indicatie">Indicatie 2026</p>
 
-    <h2>Wat is bruto en netto salaris?</h2>
-    <h3>Bruto salaris</h3>
-    <p>Je bruto salaris is het bedrag dat je werkgever je betaalt voor je werk, inclusief vakantiegeld. In Nederland is vakantiegeld meestal 8% van je jaarsalaris. Wanneer je bruto maandsalaris € 3.000 is, bedraagt je bruto-jaarsalaris inclusief vakantiegeld € 38.880 (12 maanden + 8% vakantiegeld).</p>
-
-    <h3>Netto salaris</h3>
-    <p>Je netto salaris is het bedrag dat daadwerkelijk op je bankrekening komt. Hiervan worden loonheffingen, premies voor sociale verzekeringen, pensioenpremie en eventuele andere inhoudingen afgetrokken. Ook worden belastingkortingen zoals de algemene heffingskorting en arbeidskorting verrekend.</p>
-
-    <h2>Hoe wordt je netto salaris berekend?</h2>
-    <h3>Stap 1: bruto jaarsalaris berekenen</h3>
-    <p>We rekenen eerst je bruto jaarinkomen uit. In de meeste gevallen is dat je bruto maandsalaris × 12,96 (12 maanden + 8% vakantiegeld).</p>
-
-    <h3>Stap 2: pensioen en andere aftrekposten</h3>
-    <p>Vervolgens trekken we de pensioenpremie af die jij als werknemer betaalt. Deze wordt ingehouden op je bruto loon. Andere aftrekposten, zoals reiskostenvergoedingen of speciale regelingen, vallen buiten deze algemene berekening.</p>
-
-    <h3>Stap 3: inkomstenbelasting</h3>
-    <p>Over je belastbare inkomen betaal je inkomstenbelasting volgens de Box 1 tarieven van 2026.</p>
-
-    <h3>Stap 4: heffingskortingen</h3>
-    <p>Als je recht hebt op loonheffingskorting, verrekent je werkgever de algemene heffingskorting en arbeidskorting. Dit verlaagt de te betalen belasting.</p>
-
-    <h3>Stap 5: netto inkomen</h3>
-    <p>Je netto inkomen is je bruto jaarsalaris minus pensioen, minus inkomstenbelasting, plus heffingskortingen. Deze calculator toont het resultaat per maand en per jaar.</p>
+    <h2 class="page-title">Bruto netto 2026</h2>
+    <p>Met deze bruto-netto calculator bereken je eenvoudig hoeveel je netto per maand (en per jaar) overhoudt in 2026. We gebruiken de actuele Box 1 inkomstenbelastingtarieven, vakantiegeld (8%), loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
 
     <h2>Tarieven 2026</h2>
     <p>Voor 2026 gelden de volgende Box 1 tarieven (inkomstenbelasting):</p>
@@ -268,14 +333,42 @@ const faq = [
   const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
+  const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
 
   const detailGross = document.getElementById("detailGross")!;
+  const detailGrossYear = document.getElementById("detailGrossYear")!;
   const detailHoliday = document.getElementById("detailHoliday")!;
   const detailPension = document.getElementById("detailPension")!;
   const detailTaxable = document.getElementById("detailTaxable")!;
   const detailTax = document.getElementById("detailTax")!;
   const detailCredits = document.getElementById("detailCredits")!;
+  const detailNetTax = document.getElementById("detailNetTax")!;
+  const detailEffectiveRate = document.getElementById("detailEffectiveRate")!;
   const detailNetYear = document.getElementById("detailNetYear")!;
+
+  const formatNumber = (n: number, decimals = 0): string =>
+    n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  function updateUseCases(gross: number, netMonthly: number, netYearly: number, grossYearly: number) {
+    const replacements: Record<string, string> = {
+      "{{bruto}}": formatNumber(gross, 0),
+      "{{bruto_jaar}}": formatNumber(grossYearly, 0),
+      "{{netto}}": formatNumber(netMonthly, 0),
+      "{{netto_jaar}}": formatNumber(netYearly, 0),
+    };
+
+    document.querySelectorAll("[data-usecase]").forEach((card) => {
+      const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
+      if (!desc) return;
+      const template = desc.dataset.template;
+      if (!template) return;
+      let text = template;
+      Object.entries(replacements).forEach(([key, value]) => {
+        text = text.replaceAll(key, value);
+      });
+      desc.textContent = text;
+    });
+  }
 
   function updateUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -303,11 +396,14 @@ const faq = [
       errorBox.style.display = "block";
       hero.textContent = "—";
       detailGross.textContent = "—";
+      detailGrossYear.textContent = "—";
       detailHoliday.textContent = "—";
       detailPension.textContent = "—";
       detailTaxable.textContent = "—";
       detailTax.textContent = "—";
       detailCredits.textContent = "—";
+      detailNetTax.textContent = "—";
+      detailEffectiveRate.textContent = "—";
       detailNetYear.textContent = "—";
       return;
     }
@@ -326,15 +422,25 @@ const faq = [
       return;
     }
 
+    const netTax = Math.max(0, result.incomeTax - result.totalCredits);
+    const effectiveRate =
+      result.grossYearly > 0
+        ? ((netTax / result.grossYearly) * 100).toFixed(1).replace(".", ",")
+        : "0,0";
+
     hero.textContent = formatEuro(result.netMonthly, 0);
     detailGross.textContent = formatEuro(gross, 0);
+    detailGrossYear.textContent = formatEuro(result.grossYearly, 0);
     detailHoliday.textContent = formatEuro(result.breakdown.holidayPay, 0);
     detailPension.textContent = formatEuro(result.breakdown.pensionAmount, 0);
     detailTaxable.textContent = formatEuro(result.taxableIncome, 0);
     detailTax.textContent = formatEuro(result.incomeTax, 0);
     detailCredits.textContent = formatEuro(result.totalCredits, 0);
+    detailNetTax.textContent = formatEuro(netTax, 0);
+    detailEffectiveRate.textContent = `${effectiveRate}%`;
     detailNetYear.textContent = formatEuro(result.netYearly, 0);
 
+    updateUseCases(gross, result.netMonthly, result.netYearly, result.grossYearly);
     updateUrl();
   }
 
@@ -349,13 +455,53 @@ const faq = [
     if (lhk !== null) lhCheckbox.checked = lhk === "1";
   }
 
+  function initQuickChips() {
+    document.querySelectorAll(".quick-chip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const amount = (btn as HTMLElement).dataset.amount;
+        if (amount) {
+          grossInput.value = amount;
+          grossInput.focus();
+          calculate();
+        }
+      });
+    });
+  }
+
+  function initCopyLink() {
+    copyLinkBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const textEl = copyLinkBtn.querySelector(".copy-link-text") as HTMLElement;
+        const originalText = textEl.textContent || "Deel deze berekening";
+        textEl.textContent = "Link gekopieerd";
+        copyLinkBtn.classList.add("copy-link-success");
+        setTimeout(() => {
+          textEl.textContent = originalText;
+          copyLinkBtn.classList.remove("copy-link-success");
+        }, 2000);
+      } catch (err) {
+        console.error("Kon link niet kopiëren", err);
+      }
+    });
+  }
+
   applyUrlParams();
   calculate();
+  initQuickChips();
+  initCopyLink();
 
   grossInput.addEventListener("input", calculate);
   pensionInput.addEventListener("input", calculate);
   lhCheckbox.addEventListener("change", calculate);
   berekenBtn.addEventListener("click", calculate);
+  grossInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      calculate();
+      grossInput.blur();
+    }
+  });
 </script>
 
 <style>
@@ -376,12 +522,20 @@ const faq = [
     padding: 1.5rem;
   }
 
-  .calc-content h2 {
+  .calc-content h1,
+  .calc-content h2,
+  .calc-content .page-title {
     font-size: 1.3rem;
     font-weight: 700;
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
     color: var(--color-text);
+  }
+
+  .calc-content h1,
+  .calc-content .page-title {
+    font-size: 1.75rem;
+    margin-top: 0;
   }
 
   .calc-content h3 {
@@ -463,6 +617,27 @@ const faq = [
     margin-top: 0.25rem;
   }
 
+  .result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+  }
+
   .result-row {
     display: flex;
     justify-content: space-between;
@@ -479,9 +654,170 @@ const faq = [
     color: var(--color-text);
   }
 
+  .result-row-total .label {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .result-row-total .value {
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
   .result-divider {
     height: 1px;
     background: var(--color-border);
     margin: 0.35rem 0;
+  }
+
+  .quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: -0.25rem 0 0.75rem;
+  }
+
+  .quick-chips-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .quick-chip {
+    appearance: none;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .quick-chip:hover,
+  .quick-chip:focus-visible {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .copy-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .copy-link-btn:hover,
+  .copy-link-btn:focus-visible {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .copy-link-success {
+    background: var(--color-success-bg, #dcfce7) !important;
+    color: var(--color-success, #166534) !important;
+    border-color: var(--color-success, #166534) !important;
+  }
+
+  .copy-link-icon {
+    font-size: 0.95rem;
+  }
+
+  .result-brackets {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .result-brackets-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .result-bracket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .result-bracket-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-bracket-row .label {
+    color: var(--color-text-muted);
+  }
+
+  .result-bracket-row .value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .result-next-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .result-next-steps-label {
+    font-weight: 600;
+    margin-right: 0.25rem;
+  }
+
+  .result-next-steps a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .result-next-steps a:hover,
+  .result-next-steps a:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 560px) {
+    .calc-content {
+      padding: 1rem;
+    }
+
+    .calc-content h1,
+    .calc-content .page-title {
+      font-size: 1.5rem;
+    }
+
+    .quick-chips {
+      gap: 0.3rem;
+    }
+
+    .quick-chip {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+    }
   }
 </style>

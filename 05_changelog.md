@@ -1,5 +1,35 @@
 # Changelog — Calculatieloket.nl
 
+## 2026-07-01
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 081 — Salaris Calculator App Shell Migration
+**Details:** `src/pages/salaris-calculator.astro` volledig gemigreerd naar de app/tool shell. Gebruikt `CalculatorShell.astro`, `InputPanel.astro`, `ResultPanel.astro`, `UseCasesPanel.astro`, `SourceCards.astro`, `FaqAccordion.astro` en `ToolFooter.astro`. Input: bruto maandsalaris, pensioenpercentage (werknemersdeel) en loonheffingskorting toggle. Resultaat is direct zichtbaar bij laden (€ 3.500 bruto, 5% pensioen, LHK aan). URL state toegevoegd: `?bruto`, `?pensioen` (percentage), `?lhk` (1 of 0). Quick amount chips: € 2.500, 3.000, 3.500, 4.000, 5.000. Kopieer-link knop in `ResultPanel` actions slot. Effectief belastingtarief + compacte 2026 belastingschijven-tabel in resultaat. Dynamische vervolgstappen: Bruto-netto 2026, Toeslagen, Hypotheek, ZZP. `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: intro, uitleg, voorbeeldberekening, tarieventabel. Disclaimer en laatst-bijgewerkt via `ToolFooter`. Geen advertentie tussen input en resultaat; advertentie staat boven de tool. Geen wijzigingen aan calculatorlogica, engines, Knowledge Objects, FiscalMesh/Atlas, andere calculatorpagina’s, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-01
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 080 — Bruto Netto WOW Polish
+**Details:** `src/pages/bruto-netto-2026.astro` verder gepolijst op basis van de concurrentiebenchmark en product backlog. Toegevoegd: dynamische use cases (`UseCasesPanel` met `id` + `data-template`; `{{bruto}}`, `{{netto}}`, `{{bruto_jaar}}`, `{{netto_jaar}}` worden client-side vervangen bij elke inputwijziging), “Kopieer link” knop in `ResultPanel` actions slot (kopieert huidige URL met parameters naar klembord), effectief belastingtarief + compacte 2026 belastingschijven-tabel in resultaat, `FAQPage` en `BreadcrumbList` JSON-LD schema markup via `BaseLayout` head slot, “Bijgewerkt: 2026” / “Bron: Belastingdienst” meta-badges direct onder de hero, quick-amount chips (€ 2.500, 3.000, 3.500, 4.000, 5.000), mobile-first page CSS, “Verder rekenen” links in het resultaat, en Enter-key trigger op het bruto inputveld. `UseCasesPanel.astro` uitgebreid met `data-template` attribuut zodat de originele beschrijvingstemplate bewaard blijft voor dynamische updates. De bovenste AdSlot is bewust niet verwijderd; A/B-test wordt aanbevolen zodra traffic data beschikbaar is. Geen wijzigingen aan andere calculatorpagina’s, engines, Knowledge Objects, FiscalMesh/Atlas, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-06-30
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 079 — Competitive UX Benchmark + Product Polish
+**Details:** Concurrentie-analyse uitgevoerd voor Nederlandse bruto-netto calculators: `BerekenHet.nl`, `Loonwijzer.nl` (via `wageindicator.org` omdat `loonwijzer.nl` bot-verkeer blokkeert), `SalarisNetto.nl` en `Nibud.nl`. Productdocumentatie aangemaakt in `docs/product/`: `08-COMPETITIVE-BENCHMARK.md` (benchmark + objectieve scorekaart op 12 criteria: snelheid, eenvoud, mobiel/desktop UX, resultaatpresentatie, betrouwbaarheid, uitleg, FAQ, advertenties, vervolgacties, interne links, SEO), `09-BRUTO-NETTO-UX-REVIEW.md` (sterke/zwakke punten van de huidige `bruto-netto-2026.astro` + 28 concrete verbeterpunten + 7 quick wins), `10-PRODUCT-POLISH-BACKLOG.md` (backlog met 25 items verdeeld over P0, P1, P2). Belangrijkste conclusie: SalarisNetto is op dit moment de sterkste calculator-concurrent qua snelheid/eenvoud; Nibud wint op vertrouwen/uitleg; BerekenHet en Loonwijzer zijn uitgebreider maar minder converterend. Grootste kansen voor Calculatieloket: dynamische use cases, deel-link, effectief belastingtarief + schijven, FAQ/BreadcrumbList schema, mobiele viewport-optimalisatie, bovenste advertentie testen/verwijderen, betrouwbaarheidsversterking. Geen wijzigingen aan calculatorpagina's, engines, Knowledge Objects, FiscalMesh/Atlas, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 16 pagina's, sitemap met 15 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
 ## 2026-06-30
 
 **Type:** Technisch/Architectuur

@@ -39,6 +39,8 @@ const jsonLd = {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/logo_Calculatieloket.png" />
 
+    <slot name="head" />
+
     <script is:inline>
       if (location.hostname.includes("pages.dev")) {
         const meta = document.createElement("meta");
