@@ -2,6 +2,16 @@
 
 ## 2026-07-03
 
+**Type:** Product/Strategie
+**Wijziging:** Atlas v2 Sprint 095 — FiscalMesh Product Roadmap 1.0
+**Details:** Centraal roadmap-document toegevoegd in `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`. Het document legt de strategische koers van Calculatieloket / FiscalMesh definitief vast en wordt leidend voor alle volgende Product Completion sprints. Bevat missie, visie (Product Completion → Dashboard → Agents → International Expansion), uitgebreide beschrijving van fase 1 t/m 4, Definition of Done per calculator (18 criteria), Platform Definition of Done voor homepage, hub, categorieën, navigatie, search, footer, header, dashboard, Knowledge Layer, Recommendation Engine en CI/CD, non-negotiables (geen agents voor Product Completion, geen internationale uitrol voor Nederland referentieproduct), Quality Rules, Sprint Governance-formulier, Product Scoreboard en afsluitend leidend principe. Geen code-wijzigingen: geen Astro pagina's, calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, deploy of dependencies aangeraakt. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md` verwijst naar de roadmap, `05_changelog.md` en `docs/10-CHANGELOG.md` bevatten deze entry. `npm run atlas:check` is niet beïnvloed; alle 17 pagina's en 219 tests blijven ongewijzigd.
+**Status:** In ontwikkeling
+**Build:** Geen build-impact; 17 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
+---
+
+## 2026-07-03
+
 **Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 093 — Homepage App Experience v1
 **Details:** Herontwerp van `src/pages/index.astro` tot een financiële startpagina. Hero met H1 "Wat wil je berekenen?", zoekveld om calculators te filteren, en cluster-chips (Alle, Populair, Inkomen, Wonen, Ondernemen, Belasting, Auto). Hoofdgrid toont 10 actiegerichte calculator cards: Bruto netto 2026, Salaris calculator, Vakantiegeld calculator, Toeslagen calculator, Hypotheek calculator, BTW calculator, BTW terugrekenen, BTW inclusief/exclusief, ZZP calculator en Auto importkosten berekenen. Elke card bevat titel, vraag, belofte, badge (Populair/Nieuw/Voor ondernemers) en CTA "Bereken direct". Secties "Begin met je inkomen" (Bruto netto, Vakantiegeld, Toeslagen, Hypotheek, ZZP) en "Voor ondernemers" (BTW, BTW terugrekenen, ZZP, Auto importkosten) gebruiken `CrossSellCards`. SEO versterkt: title en meta description aangepast, één H1, `WebSite` + `SearchAction` JSON-LD schema in `head` slot, interne links naar alle calculators, behouden FAQ en trustband. AdSense-advertentie (`AdSlot`) bewust pas ná de eerste toolsectie geplaatst. Mobile-first CSS: 1 kolom op 360/390px, 2 kolommen op tablet, 3 kolommen op desktop; grote tap targets (cluster-chips, cards, zoekveld). Client-side filter werkt op server-rendered cards; alle links blijven zichtbaar zonder JavaScript. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, shared components (alleen hergebruik `CrossSellCards`), `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.

@@ -1,10 +1,28 @@
 # 10 — Product Polish Backlog
 
 > **Doel:** Prioriteren van alle verbeterpunten voor `bruto-netto-2026.astro` zodat de pagina de beste Nederlandse bruto-netto calculator wordt.  
-> **Laatst bijgewerkt:** 2026-07-02  
-> **Scope:** UX, conversie, vertrouwen, SEO, AdSense. Geen engine wijzigingen, geen nieuwe calculator, geen Knowledge Layer, geen deploy.
+> **Laatst bijgewerkt:** 2026-07-03  
+> **Scope:** UX, conversie, vertrouwen, SEO, AdSense. Geen engine wijzigingen, geen nieuwe calculator, geen Knowledge Layer, geen deploy. Vanaf Sprint 095 is dit document onderdeel van het grotere Product Completion raamwerk dat wordt vastgelegd in `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`.
 
 ---
+
+## Update: Sprint 095 — FiscalMesh Product Roadmap 1.0
+
+Sprint 095 legt de strategische koers van Calculatieloket / FiscalMesh definitief vast in een centraal roadmap-document. Dit is **geen** code-sprint: er zijn geen Astro-pagina's, engines, Knowledge Objects, Rule Resolver-wijzigingen, recommendation-wijzigingen, dependencies of deploy-stappen. Alleen documentatie is gewijzigd.
+
+Nieuw document: `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md` bevat:
+- Missie: Calculatieloket als beste financiële platform van Europa, FiscalMesh als engine achter alle landen.
+- Visie: Product Completion → Dashboard → Agents → International Expansion.
+- Fases 1 t/m 4 met uitgebreide beschrijving, voorwaarden en eindtoestanden.
+- Definition of Done per calculator (18 criteria, waaronder App Shell, Recommendation Engine, Mobile/Desktop UX, SEO, FAQ, Schema, Sources, Examples, URL State, Copy Link, Financial Journey, Accessibility, Performance, Analytics, AdSense, Internal Links, CI Green).
+- Platform Definition of Done voor homepage, calculator hub, categoriepagina's, navigatie, search, footer, header, dashboard, Knowledge Layer, Recommendation Engine en CI/CD.
+- Non-negotiables: geen agents voor Product Completion, geen internationale uitrol voor Nederland referentieproduct.
+- Quality Rules: iedere sprint moet UX, SEO, performance, content, interne links, schaalbaarheid of onderhoudbaarheid verbeteren.
+- Sprint Governance: iedere sprint krijgt Doel, Waarom, Definition of Done, Acceptatiecriteria, Risico's, Volgende sprint.
+- Product Scoreboard met huidige status per land en per calculator.
+- Sluit af met het leidend principe voor alle volgende Product Completion sprints.
+
+Bijkomende wijzigingen: `05_changelog.md` en `docs/10-CHANGELOG.md` zijn bijgewerkt met deze Sprint 095 entry. `docs/product/10-PRODUCT-POLISH-BACKLOG.md` verwijst voortaan naar `00-FISCALMESH-PRODUCT-ROADMAP.md` als leidend document.
 
 ## Update: Sprint 080 — Bruto Netto WOW Polish
 

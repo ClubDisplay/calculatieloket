@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
-2. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
+1. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
+2. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
+3. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
 3. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
 3. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
 3. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
@@ -38,6 +39,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 095
+
+**Type:** Product/Strategie
+**Wijziging:** Atlas v2 Sprint 095 — FiscalMesh Product Roadmap 1.0
+**Details:** Centraal roadmap-document toegevoegd in `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`. Het document legt de strategische koers van Calculatieloket / FiscalMesh definitief vast en wordt leidend voor alle volgende Product Completion sprints. Bevat missie, visie (Product Completion → Dashboard → Agents → International Expansion), uitgebreide beschrijving van fase 1 t/m 4, Definition of Done per calculator (18 criteria), Platform Definition of Done voor homepage, hub, categorieën, navigatie, search, footer, header, dashboard, Knowledge Layer, Recommendation Engine en CI/CD, non-negotiables (geen agents voor Product Completion, geen internationale uitrol voor Nederland referentieproduct), Quality Rules, Sprint Governance-formulier, Product Scoreboard en afsluitend leidend principe. Geen code-wijzigingen: geen Astro pagina's, calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, deploy of dependencies aangeraakt. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md` verwijst naar de roadmap, `05_changelog.md` en `docs/10-CHANGELOG.md` bevatten deze entry. `npm run atlas:check` is niet beïnvloed; alle 17 pagina's en 219 tests blijven ongewijzigd.
+**Status:** In ontwikkeling
+**Build:** Geen build-impact; 17 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 
 ---
 
