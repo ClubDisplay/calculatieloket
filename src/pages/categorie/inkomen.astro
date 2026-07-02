@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryHero from "../../components/category/CategoryHero.astro";
+import CategoryGrid from "../../components/category/CategoryGrid.astro";
+import CategoryIntro from "../../components/category/CategoryIntro.astro";
+import CategoryFaq from "../../components/category/CategoryFaq.astro";
+import CategorySources from "../../components/category/CategorySources.astro";
+import RelatedCategories from "../../components/category/RelatedCategories.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import { icons, categoryList } from "../../lib/category-icons";
+
+const title = "Inkomen berekenen | Bruto netto, salaris, toeslagen, vakantiegeld";
+const description = "Bereken gratis je bruto-netto salaris, vakantiegeld, toeslagen en meer. Snel inzicht in je inkomen voor 2026, gebaseerd op officiële bronnen.";
+
+const calculators = [
+  {
+    title: "Bruto netto 2026",
+    href: "/bruto-netto-2026/",
+    description: "Wat houd je netto over van je bruto salaris in 2026?",
+    badge: "Populair",
+    icon: icons.euro,
+    accent: "#2563eb",
+  },
+  {
+    title: "Salaris calculator",
+    href: "/salaris-calculator/",
+    description: "Vergelijk bruto bedragen en zie direct het netto effect.",
+    icon: icons.euro,
+    accent: "#2563eb",
+  },
+  {
+    title: "Vakantiegeld calculator",
+    href: "/vakantiegeld-calculator/",
+    description: "Hoeveel vakantiegeld houd je netto over na inhoudingen?",
+    badge: "Nieuw",
+    icon: icons.sun,
+    accent: "#0891b2",
+  },
+  {
+    title: "Toeslagen calculator",
+    href: "/toeslagen-calculator/",
+    description: "Bereken snel je huur- en zorgtoeslag op basis van inkomen.",
+    badge: "Populair",
+    icon: icons.money,
+    accent: "#059669",
+  },
+];
+
+const faq = [
+  {
+    question: "Wat is het verschil tussen bruto en netto inkomen?",
+    answer: "<p>Bruto inkomen is het bedrag dat je werkgever betaalt voordat belastingen en premies worden ingehouden. Netto is het bedrag dat daadwerkelijk op je rekening komt. Het verschil wordt bepaald door loonheffing, premies volksverzekeringen, pensioen en loonheffingskorting.</p>",
+  },
+  {
+    question: "Hoe wordt loonheffing berekend?",
+    answer: "<p>De Belastingdienst hanteert voor 2026 vier Box 1 schijven. Over het eerste deel betaal je 35,75%, daarna 37,56% en vanaf een bepaald inkomen 49,50%. De loonheffingskorting verlaagt de af te dragen loonheffing.</p>",
+  },
+  {
+    question: "Waarom is de loonheffingskorting belangrijk?",
+    answer: "<p>De algemene heffingskorting is een vermindering van je belasting. In 2026 bedraagt deze maximaal € 3.115. De arbeidskorting kan oplopen tot € 5.685. Onze calculators tonen het verschil met en zonder deze kortingen.</p>",
+  },
+  {
+    question: "Hoeveel vakantiegeld krijg ik?",
+    answer: "<p>In Nederland heb je wettelijk recht op minimaal 8% van je bruto jaarsalaris aan vakantiegeld. Sommige cao's of arbeidsovereenkomsten hanteren een hoger percentage. De netto-uitkering hangt af van je belastingtarief.</p>",
+  },
+  {
+    question: "Hoe weet ik of ik recht heb op toeslagen?",
+    answer: "<p>Huurtoeslag en zorgtoeslag hangen af van je inkomen, vermogen, huurprijs en huishoudensamenstelling. Onze <a href=\"/toeslagen-calculator/\">toeslagen calculator</a> geeft een indicatie op basis van de 2026 regels.</p>",
+  },
+];
+
+const sources = [
+  {
+    label: "Belastingdienst",
+    title: "Loonheffingstabel 2026",
+    description: "Officiële tarieven, heffingskortingen en rekenregels voor loonheffing.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Dienst Toeslagen",
+    title: "Toeslagen 2026",
+    description: "Informatie over huurtoeslag, zorgtoeslag en de bijbehorende inkomensgrenzen.",
+    href: "https://www.toeslagen.nl",
+  },
+  {
+    label: "Rijksoverheid",
+    title: "Minimumloon en vakantiegeld",
+    description: "Wettelijke regels rond minimumloon, vakantiegeld en arbeidsvoorwaarden.",
+    href: "https://www.rijksoverheid.nl",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Inkomen", item: "https://calculatieloket.nl/categorie/inkomen/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Inkomen berekenen",
+  url: "https://calculatieloket.nl/categorie/inkomen/",
+  description: "Overzicht van calculators voor bruto-netto, salaris, vakantiegeld en toeslagen.",
+  hasPart: calculators.map((c) => ({
+    "@type": "WebPage",
+    name: c.title,
+    url: `https://calculatieloket.nl${c.href}`,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <CategoryHero
+    title="Inkomen berekenen"
+    subtitle="Snel inzicht in bruto, netto, toeslagen en vakantiegeld"
+    intro="Je inkomen is het startpunt van vrijwel elke financiële keuze. Of je nu wilt weten wat je netto overhoudt van je bruto salaris, hoeveel vakantiegeld je krijgt, of welke toeslagen je kunt ontvangen: onze inkomenscalculators geven een directe indicatie. Alle berekeningen zijn gebaseerd op de actuele 2026 tarieven van de Belastingdienst, Dienst Toeslagen en Rijksoverheid."
+  />
+
+  <CategoryGrid title="Calculators voor inkomen" items={calculators} />
+
+  <AdSlot slot="1234567894" format="auto" style="min-height:120px" />
+
+  <CategoryIntro title="Alles over inkomen berekenen">
+    <p>
+      Inkomensberekeningen helpen je om je financiële situatie te overzien. Het bruto bedrag op je arbeidsovereenkomst is niet hetzelfde als het bedrag dat elke maand op je rekening komt. De Belastingdienst rekent eerst loonheffing over je salaris, waarna premies voor volksverzekeringen en eventuele pensioenbijdragen worden verrekend. De algemene heffingskorting en arbeidskorting verlagen het uiteindelijke bedrag dat je moet betalen.
+    </p>
+    <p>
+      Naast je vaste salaris speelt vakantiegeld een grote rol. De meeste werknemers in Nederland krijgen minimaal 8% vakantiegeld. Dit bedrag wordt vaak maandelijks of jaarlijks uitbetaald. Omdat ook het vakantiegeld wordt belast, is het nettobedrag lager dan je op basis van het bruto percentage zou verwachten. Onze <a href="/vakantiegeld-calculator/">vakantiegeld calculator</a> rekent dit direct voor je uit.
+    </p>
+    <p>
+      Vanuit de overheid zijn er diverse toeslagen beschikbaar om de woon- en zorgkosten te drukken. Of je hiervoor in aanmerking komt, hangt af van je inkomen, vermogen, huurprijs en huishoudensamenstelling. Deze toeslagen kunnen een aanzienlijk verschil maken in je beschikbare inkomen. Met de <a href="/toeslagen-calculator/">toeslagen calculator</a> bekijk je snel of je recht hebt op huur- en zorgtoeslag.
+    </p>
+    <p>
+      Door de verschillende calculators te combineren krijg je een completer beeld. Begin bijvoorbeeld met je bruto-netto salaris, bekijk het effect van de loonheffingskorting en kijk vervolgens wat dit betekent voor je toeslagen of hypotheek. Zo maak je bewustere financiële keuzes, zonder dat je zelf ingewikkelde spreadsheets hoeft te bouwen.
+    </p>
+  </CategoryIntro>
+
+  <CategoryFaq title="Veelgestelde vragen over inkomen" items={faq} />
+
+  <CategorySources title="Officiële bronnen" items={sources} />
+
+  <RelatedCategories current="Inkomen" categories={categoryList} />
+</BaseLayout>

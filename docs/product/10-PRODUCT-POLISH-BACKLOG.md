@@ -6,6 +6,31 @@
 
 ---
 
+## Update: Sprint 096 — Category Experience v1 (afgerond)
+
+Sprint 096 bouwt de eerste complete categoriepagina's voor Calculatieloket.nl, als onderdeel van Product Completion uit de FiscalMesh Product Roadmap. Vijf nieuwe pagina's in `src/pages/categorie/`:
+
+- `/categorie/inkomen/` — Bruto netto, Salaris, Vakantiegeld, Toeslagen.
+- `/categorie/belasting/` — BTW calculator, BTW terugrekenen, BTW inclusief/exclusief.
+- `/categorie/wonen/` — Hypotheek calculator.
+- `/categorie/ondernemen/` — ZZP calculator, Auto importkosten.
+- `/categorie/auto/` — Auto importkosten.
+
+Iedere pagina bevat een hero, calculator grid in homepage-stijl, 300–500 woorden unieke server-rendered content, minimaal 5 FAQ-items via `FaqAccordion`, officiële bronnen via `SourceCards`, gerelateerde categorieën en interne links. SEO: unieke title/meta description, canonical, exact één H1, `BreadcrumbList`, `CollectionPage` en `FAQPage` schema. Mobile-first CSS: 1 kolom op mobiel, 2 op tablet, 3–4 op desktop. AdSense alleen ná de eerste calculatorsectie.
+
+Nieuwe herbruikbare componenten in `src/components/category/`:
+
+- `CategoryHero.astro`
+- `CategoryIntro.astro`
+- `CategoryGrid.astro`
+- `CategoryFaq.astro`
+- `CategorySources.astro`
+- `RelatedCategories.astro`
+
+Daarnaast een gedeeld icon- en categorie-helper bestand `src/lib/category-icons.ts` zodat de pagina's consistent blijven.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt; build telt 22 pagina's.
+
 ## Update: Sprint 095 — FiscalMesh Product Roadmap 1.0
 
 Sprint 095 legt de strategische koers van Calculatieloket / FiscalMesh definitief vast in een centraal roadmap-document. Dit is **geen** code-sprint: er zijn geen Astro-pagina's, engines, Knowledge Objects, Rule Resolver-wijzigingen, recommendation-wijzigingen, dependencies of deploy-stappen. Alleen documentatie is gewijzigd.

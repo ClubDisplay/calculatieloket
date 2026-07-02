@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="cat-intro" aria-labelledby="catIntroTitle">
+  <h2 id="catIntroTitle" class="cat-intro-title">{title}</h2>
+  <div class="cat-intro-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .cat-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .cat-intro-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .cat-intro-body {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .cat-intro-body :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .cat-intro-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .cat-intro-body :global(h3) {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .cat-intro-body :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .cat-intro-body :global(a:hover) {
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .cat-intro-title {
+      font-size: 1.15rem;
+    }
+  }
+</style>

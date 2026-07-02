@@ -2,6 +2,16 @@
 
 ## 2026-07-03
 
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 096 — Category Experience v1
+**Details:** Vijf nieuwe categoriepagina's gebouwd in `src/pages/categorie/`: inkomen, belasting, wonen, ondernemen en auto. Iedere pagina bevat een hero, calculator grid in homepage-stijl, 300–500 woorden unieke server-rendered content, minimaal 5 FAQ-items via `FaqAccordion`, officiële bronnen via `SourceCards`, gerelateerde categorieën en interne links. Nieuwe herbruikbare componenten in `src/components/category/`: `CategoryHero.astro`, `CategoryIntro.astro`, `CategoryGrid.astro`, `CategoryFaq.astro`, `CategorySources.astro` en `RelatedCategories.astro`. Gedeeld helper bestand `src/lib/category-icons.ts` voor iconen en categorielijst. SEO per pagina: unieke title/meta description, canonical, exact één H1, `BreadcrumbList`, `CollectionPage` en `FAQPage` JSON-LD schema. Mobile-first CSS: 1 kolom op mobiel, 2 op tablet, 3–4 op desktop; grote klikvlakken. AdSense (`AdSlot`) alleen ná de eerste calculatorsectie. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
 **Type:** Product/Strategie
 **Wijziging:** Atlas v2 Sprint 095 — FiscalMesh Product Roadmap 1.0
 **Details:** Centraal roadmap-document toegevoegd in `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`. Het document legt de strategische koers van Calculatieloket / FiscalMesh definitief vast en wordt leidend voor alle volgende Product Completion sprints. Bevat missie, visie (Product Completion → Dashboard → Agents → International Expansion), uitgebreide beschrijving van fase 1 t/m 4, Definition of Done per calculator (18 criteria), Platform Definition of Done voor homepage, hub, categorieën, navigatie, search, footer, header, dashboard, Knowledge Layer, Recommendation Engine en CI/CD, non-negotiables (geen agents voor Product Completion, geen internationale uitrol voor Nederland referentieproduct), Quality Rules, Sprint Governance-formulier, Product Scoreboard en afsluitend leidend principe. Geen code-wijzigingen: geen Astro pagina's, calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, deploy of dependencies aangeraakt. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md` verwijst naar de roadmap, `05_changelog.md` en `docs/10-CHANGELOG.md` bevatten deze entry. `npm run atlas:check` is niet beïnvloed; alle 17 pagina's en 219 tests blijven ongewijzigd.

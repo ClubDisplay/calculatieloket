@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryHero from "../../components/category/CategoryHero.astro";
+import CategoryGrid from "../../components/category/CategoryGrid.astro";
+import CategoryIntro from "../../components/category/CategoryIntro.astro";
+import CategoryFaq from "../../components/category/CategoryFaq.astro";
+import CategorySources from "../../components/category/CategorySources.astro";
+import RelatedCategories from "../../components/category/RelatedCategories.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import { icons, categoryList } from "../../lib/category-icons";
+
+const title = "Wonen berekenen | Hypotheek, maandlasten en lenen";
+const description = "Bereken je maximale hypotheek, bruto en netto maandlasten, en totale rentekosten. Gebaseerd op de actuele 2026 regels.";
+
+const calculators = [
+  {
+    title: "Hypotheek calculator",
+    href: "/hypotheek-calculator/",
+    description: "Wat kan je maximaal lenen en wat zijn je maandlasten?",
+    badge: "Populair",
+    icon: icons.house,
+    accent: "#d97706",
+  },
+];
+
+const faq = [
+  {
+    question: "Hoeveel hypotheek kan ik krijgen?",
+    answer: "<p>De maximale hypotheek hangt af van je bruto jaarinkomen, eventueel partnerinkomen, de hypotheekrente en de looptijd. De inkomensfactor geeft aan hoeveel je mag lenen ten opzichte van je inkomen. Onze calculator toont direct een indicatie.</p>",
+  },
+  {
+    question: "Wat is de inkomensfactor?",
+    answer: "<p>De inkomensfactor is de verhouding tussen je bruto jaarinkomen en het maximale hypotheekbedrag. Deze factor wordt beïnvloed door de rente en de looptijd. Een lagere rente of kortere looptijd kan leiden tot een hogere maximale lening.</p>",
+  },
+  {
+    question: "Hoe werkt de hypotheekrenteaftrek?",
+    answer: "<p>De hypotheekrenteaftrek verlaagt je belastbaar inkomen uit werk en woning. In 2026 loopt het maximale aftrektarief geleidelijk terug. De calculator toont naast de bruto maandlasten ook een netto indicatie, rekening houdend met deze aftrek.</p>",
+  },
+  {
+    question: "Welke looptijd kan ik kiezen?",
+    answer: "<p>De meeste hypotheken hebben een looptijd van 20 of 30 jaar. Een kortere looptijd geeft hogere maandlasten maar lagere totale rentekosten. Een langere looptijd doet het omgekeerde. De calculator laat de effecten van 10, 20 en 30 jaar zien.</p>",
+  },
+  {
+    question: "Zijn de maandlasten een indicatie?",
+    answer: "<p>Ja. De bruto maandlast is gebaseerd op de rente en looptijd. De netto maandlast is een indicatie op basis van de hypotheekrenteaftrek. Je werkelijke situatie kan afwijken door eigen risico's, bankvoorwaarden en eventuele extra kosten.</p>",
+  },
+];
+
+const sources = [
+  {
+    label: "Belastingdienst",
+    title: "Hypotheekrenteaftrek 2026",
+    description: "Actuele regels en tarieven voor de aftrek van hypotheekrente.",
+    href: "https://www.belastingdienst.nl/hypotheekrenteaftrek",
+  },
+  {
+    label: "Nederlandse Vereniging van Banken",
+    title: "Hypotheeknormen",
+    description: "Informatie over lenen, inkomensnormen en verantwoord krediet.",
+    href: "https://www.nvb.nl",
+  },
+  {
+    label: "Rijksoverheid",
+    title: "Koopwoning en hypotheek",
+    description: "Overzicht van regels voor koopwoningen, hypotheken en overdrachtsbelasting.",
+    href: "https://www.rijksoverheid.nl/hypotheek",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Wonen", item: "https://calculatieloket.nl/categorie/wonen/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Wonen berekenen",
+  url: "https://calculatieloket.nl/categorie/wonen/",
+  description: "Overzicht van calculators voor hypotheek, wonen en maandlasten.",
+  hasPart: calculators.map((c) => ({
+    "@type": "WebPage",
+    name: c.title,
+    url: `https://calculatieloket.nl${c.href}`,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <CategoryHero
+    title="Wonen berekenen"
+    subtitle="Hypotheek, maandlasten en wat je kunt lenen"
+    intro="Een huis kopen is een van de grootste financiële beslissingen in je leven. Onze wonencategorie helpt je om inzicht te krijgen in je mogelijkheden. Met de hypotheek calculator zie je direct hoeveel je maximaal kunt lenen, wat je bruto en netto maandlasten zijn, en hoeveel rente je over de hele looptijd betaalt."
+  />
+
+  <CategoryGrid title="Calculators voor wonen" items={calculators} />
+
+  <AdSlot slot="1234567896" format="auto" style="min-height:120px" />
+
+  <CategoryIntro title="Alles over wonen berekenen">
+    <p>
+      Bij het kopen van een wonen komt veel kijken. Naast de aankoopprijs en eventuele verbouwingskosten, moet je ook denken aan de hypotheek, de rente, de looptijd en de maandlasten. De hoogte van je hypotheek wordt vooral bepaald door je inkomen. Banken hanteren een inkomensfactor die aangeeft hoeveel je mag lenen. Deze factor is afhankelijk van de rente: bij een lagere rente mag je doorgaans meer lenen dan bij een hogere rente.
+    </p>
+    <p>
+      De bruto maandlast bestaat uit rente en aflossing. Bij een annuïteitenhypotheek betaal je elke maand hetzelfde bedrag, waarbij het deel rente afneemt en het deel aflossing toeneemt. De netto maandlast wordt beïnvloed door de hypotheekrenteaftrek. In 2026 loopt het maximale aftrektarief verder terug, waardoor de netto maandlast iets hoger kan uitvallen dan in eerdere jaren.
+    </p>
+    <p>
+      Onze <a href="/hypotheek-calculator/">hypotheek calculator</a> rekent alle scenario's voor je door. Je voert je bruto jaarinkomen, de rente, de looptijd en eventueel partnerinkomen in. Het resultaat toont direct het maximale hypotheekbedrag, de inkomensfactor, de bruto maandlast, de netto maandlast en de totale rentekosten over de gekozen looptijd.
+    </p>
+    <p>
+      Het is belangrijk om te beseffen dat de calculator een indicatie geeft. De daadwerkelijke hypotheek hangt af van je persoonlijke situatie, de kredietverstrekker en eventuele overige leningen. Gebruik de uitkomst als startpunt voor een gesprek met een hypotheekadviseur.
+    </p>
+  </CategoryIntro>
+
+  <CategoryFaq title="Veelgestelde vragen over wonen" items={faq} />
+
+  <CategorySources title="Officiële bronnen" items={sources} />
+
+  <RelatedCategories current="Wonen" categories={categoryList} />
+</BaseLayout>

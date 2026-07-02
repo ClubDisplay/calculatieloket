@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryHero from "../../components/category/CategoryHero.astro";
+import CategoryGrid from "../../components/category/CategoryGrid.astro";
+import CategoryIntro from "../../components/category/CategoryIntro.astro";
+import CategoryFaq from "../../components/category/CategoryFaq.astro";
+import CategorySources from "../../components/category/CategorySources.astro";
+import RelatedCategories from "../../components/category/RelatedCategories.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import { icons, categoryList } from "../../lib/category-icons";
+
+const title = "Belasting berekenen | BTW, tarieven en omrekenen";
+const description = "Bereken eenvoudig BTW, exclusief naar inclusief, inclusief naar exclusief. Gebaseerd op de actuele Nederlandse tarieven van de Belastingdienst.";
+
+const calculators = [
+  {
+    title: "BTW calculator",
+    href: "/btw-calculator/",
+    description: "Bereken 21%, 9% of 0% btw, exclusief en inclusief.",
+    badge: "Populair",
+    icon: icons.calc,
+    accent: "#2563eb",
+  },
+  {
+    title: "BTW terugrekenen",
+    href: "/btw-terugrekenen/",
+    description: "Reken snel een inclusief bedrag om naar exclusief.",
+    icon: icons.percent,
+    accent: "#2563eb",
+  },
+  {
+    title: "BTW inclusief/exclusief",
+    href: "/btw-inclusief-exclusief/",
+    description: "Omrekenen in beide richtingen met alle gangbare tarieven.",
+    icon: icons.switch,
+    accent: "#2563eb",
+  },
+];
+
+const faq = [
+  {
+    question: "Welke btw-tarieven gelden er in Nederland?",
+    answer: "<p>In 2026 gelden in Nederland drie btw-tarieven: 21% (hoog tarief), 9% (laag tarief) en 0% (vrijgesteld). Het hoge tarief geldt voor de meeste goederen en diensten. Het lage tarief geldt onder andere voor voedsel, medicijnen, boeken en arbeid voor woningonderhoud.</p>",
+  },
+  {
+    question: "Hoe reken ik exclusief btw om naar inclusief?",
+    answer: "<p>Vermenigvuldig het exclusieve bedrag met 1,21 voor het hoge tarief of 1,09 voor het lage tarief. Het verschil tussen het inclusieve en exclusieve bedrag is het btw-bedrag. Onze <a href=\"/btw-calculator/\">BTW calculator</a> doet dit direct voor je.</p>",
+  },
+  {
+    question: "Wanneer moet ik btw berekenen?",
+    answer: "<p>Ondernemers moeten btw berekenen over hun omzet en aftrekken over hun inkoop. Consumenten zien btw doorgaans verrekend in de prijs. Bij het importeren van goederen, zoals een auto, kan ook btw of bpm van toepassing zijn.</p>",
+  },
+  {
+    question: "Wat is het verschil tussen btw-terugrekenen en btw-inclusief/exclusief?",
+    answer: "<p>BTW terugrekenen rekent altijd van een inclusief bedrag naar exclusief. De btw-inclusief/exclusief calculator kan beide kanten op en biedt meer flexibiliteit in richting en tarief.</p>",
+  },
+  {
+    question: "Is de btw-uitkomst een indicatie?",
+    answer: "<p>De rekenregels van de btw zijn exact, maar de uiteindelijke aangifte kan afhangen van specifieke situaties, vrijstellingen of teruggaafregels. Gebruik de uitkomst als hulpmiddel en controleer bij twijfel de aangifte in het btw-portaal van de Belastingdienst.</p>",
+  },
+];
+
+const sources = [
+  {
+    label: "Belastingdienst",
+    title: "BTW tarieven 2026",
+    description: "Overzicht van hoge, lage en nul-tarief btw in Nederland.",
+    href: "https://www.belastingdienst.nl/btw",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Berekenen en aangifte btw",
+    description: "Handleiding voor het berekenen, betalen en terugvragen van btw.",
+    href: "https://www.belastingdienst.nl/btw/",
+  },
+  {
+    label: "Rijksoverheid",
+    title: "Btw voor ondernemers",
+    description: "Algemene informatie over btw voor ondernemers en consumenten.",
+    href: "https://www.rijksoverheid.nl/btw",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Belasting", item: "https://calculatieloket.nl/categorie/belasting/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Belasting berekenen",
+  url: "https://calculatieloket.nl/categorie/belasting/",
+  description: "Overzicht van BTW calculators voor consumenten en ondernemers.",
+  hasPart: calculators.map((c) => ({
+    "@type": "WebPage",
+    name: c.title,
+    url: `https://calculatieloket.nl${c.href}`,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <CategoryHero
+    title="Belasting berekenen"
+    subtitle="BTW, tarieven en omrekenen voor 2026"
+    intro="Iedereen komt dagelijks in aanraking met belasting, zeker als je ondernemer bent of een grote aankoop doet. Onze belastingcalculators helpen je om btw snel en correct uit te rekenen. Of je nu exclusief naar inclusief wilt rekenen, of andersom: je ziet direct het btw-bedrag en het totaalbedrag."
+  />
+
+  <CategoryGrid title="Calculators voor belasting" items={calculators} />
+
+  <AdSlot slot="1234567895" format="auto" style="min-height:120px" />
+
+  <CategoryIntro title="Alles over btw berekenen">
+    <p>
+      De omzetbelasting, veelal btw genoemd, is een belasting over de waarde van goederen en diensten. In Nederland betaal je voor de meeste producten 21% btw. Voor een aantal specifieke producten en diensten geldt het verlaagde tarief van 9%. Er zijn ook situaties waarin 0% btw van toepassing is, bijvoorbeeld bij bepaalde exporttransacties.
+    </p>
+    <p>
+      Voor ondernemers is btw een belangrijk administratief onderdeel. Je rekent btw door aan je klanten en vraagt btw terug op je zakelijke kosten. Het verschil moet je periodiek aangeven bij de Belastingdienst. Onze <a href="/btw-calculator/">BTW calculator</a> biedt een snelle manier om btw-bedragen te berekenen zonder dat je zelf het rekenprogramma hoeft te openen.
+    </p>
+    <p>
+      Consumenten zien btw meestal al verrekend in de prijs. Toch kan het handig zijn om achterwaarts te rekenen. Stel dat je een factuur ontvangt met alleen een inclusief bedrag, dan wil je soms weten wat het exclusieve bedrag en het btw-gedeelte zijn. Met de <a href="/btw-terugrekenen/">BTW terugrekenen</a> tool bereken je dit in één klik.
+    </p>
+    <p>
+      De <a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief</a> calculator geeft je de meeste flexibiliteit. Je kiest zelf de richting en het tarief. Dit is vooral handig als je regelmatig tussen verschillende scenario's schakelt, bijvoorbeeld bij het voorbereiden van offertes of het controleren van inkopen.
+    </p>
+  </CategoryIntro>
+
+  <CategoryFaq title="Veelgestelde vragen over belasting" items={faq} />
+
+  <CategorySources title="Officiële bronnen" items={sources} />
+
+  <RelatedCategories current="Belasting" categories={categoryList} />
+</BaseLayout>

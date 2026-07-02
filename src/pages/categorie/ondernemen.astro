@@ -1,0 +1,146 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryHero from "../../components/category/CategoryHero.astro";
+import CategoryGrid from "../../components/category/CategoryGrid.astro";
+import CategoryIntro from "../../components/category/CategoryIntro.astro";
+import CategoryFaq from "../../components/category/CategoryFaq.astro";
+import CategorySources from "../../components/category/CategorySources.astro";
+import RelatedCategories from "../../components/category/RelatedCategories.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import { icons, categoryList } from "../../lib/category-icons";
+
+const title = "Ondernemen berekenen | ZZP uurtarief, btw en importkosten";
+const description = "Bereken je zzp uurtarief, btw en auto importkosten voor je onderneming. Snelle indicaties gebaseerd op officiële bronnen.";
+
+const calculators = [
+  {
+    title: "ZZP calculator",
+    href: "/zzp-calculator/",
+    description: "Van gewenst netto inkomen naar benodigd uurtarief.",
+    badge: "Voor ondernemers",
+    icon: icons.person,
+    accent: "#7c3aed",
+  },
+  {
+    title: "Auto importkosten berekenen",
+    href: "/auto-importkosten-berekenen/",
+    description: "Bereken bpm, RDW, transport en totale importkosten.",
+    badge: "Nieuw",
+    icon: icons.car,
+    accent: "#0891b2",
+  },
+];
+
+const faq = [
+  {
+    question: "Hoe bepaal ik mijn zzp uurtarief?",
+    answer: "<p>Je uurtarief moet je gewenste netto inkomen, zakelijke kosten, pensioenreservering, vakantiedagen, ziektekosten en belasting dekken. Onze <a href=\"/zzp-calculator/\">ZZP calculator</a> rekent dit vanuit je netto doel terug naar een benodigd uurtarief.</p>",
+  },
+  {
+    question: "Welke kosten moet ik meenemen?",
+    answer: "<p>Denk aan zakelijke verzekeringen, administratie, telefoon, internet, vervoer, gereedschap, marketing en eventuele huur van werkruimte. Ook pensioenopbouw en reserves voor vakantie en ziekte horen bij een realistisch uurtarief.</p>",
+  },
+  {
+    question: "Hoeveel btw moet ik als ondernemer berekenen?",
+    answer: "<p>Over de meeste goederen en diensten reken je 21% btw. Sommige diensten vallen onder het 9% tarief. Je betaalt het verschil tussen de btw die je hebt ontvangen en de btw die je zelf hebt betaald. Onze <a href=\"/btw-calculator/\">BTW calculator</a> helpt je bij het berekenen.</p>",
+  },
+  {
+    question: "Wat kost een auto importeren voor mijn zaak?",
+    answer: "<p>Bij het importeren van een auto betaal je onder andere bpm, btw, kosten voor het kenteken, RDW-keuring, transport en eventuele kosten voor het aanpassen van verlichting. Onze <a href=\"/auto-importkosten-berekenen/\">importkosten calculator</a> somt deze posten voor je op.</p>",
+  },
+  {
+    question: "Hoeveel uren moet ik factureren?",
+    answer: "<p>Het aantal factureerbare uren is meestal lager dan een fulltime jaar. Reken met vakantiedagen, ziekte, administratie, acquisitie en niet-factureerbare werkzaamheden. De ZZP calculator houdt hier rekening mee via het aantal factureerbare dagen per jaar.</p>",
+  },
+];
+
+const sources = [
+  {
+    label: "Belastingdienst",
+    title: "ZZP en ondernemers",
+    description: "Informatie over ondernemersaftrek, btw en aangifte voor zzp'ers.",
+    href: "https://www.belastingdienst.nl/zzp",
+  },
+  {
+    label: "KVK",
+    title: "Ondernemen in Nederland",
+    description: "Praktische informatie voor startende en bestaande ondernemers.",
+    href: "https://www.kvk.nl",
+  },
+  {
+    label: "Belastingdienst",
+    title: "Bpm en auto importeren",
+    description: "Regels en tarieven voor bpm bij het importeren van voertuigen.",
+    href: "https://www.belastingdienst.nl/bpm",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Ondernemen", item: "https://calculatieloket.nl/categorie/ondernemen/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Ondernemen berekenen",
+  url: "https://calculatieloket.nl/categorie/ondernemen/",
+  description: "Overzicht van calculators voor zzp'ers, ondernemers en importkosten.",
+  hasPart: calculators.map((c) => ({
+    "@type": "WebPage",
+    name: c.title,
+    url: `https://calculatieloket.nl${c.href}`,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <CategoryHero
+    title="Ondernemen berekenen"
+    subtitle="ZZP uurtarief, btw en zakelijke importkosten"
+    intro="Als ondernemer moet je veel financiële ballen hoog houden. Van je uurtarief tot de btw en van zakelijke aankopen tot importkosten. Onze calculators voor ondernemers geven je snel inzicht in de belangrijkste cijfers, zodat je met een gerust hart zakelijke beslissingen kunt nemen."
+  />
+
+  <CategoryGrid title="Calculators voor ondernemers" items={calculators} />
+
+  <AdSlot slot="1234567897" format="auto" style="min-height:120px" />
+
+  <CategoryIntro title="Alles over ondernemen berekenen">
+    <p>
+      Een van de eerste vragen die beginnende zzp'ers hebben, is: wat moet ik vragen per uur? Het antwoord hangt af van veel factoren. Je netto doelinkomen is slechts het begin. Je moet ook zakelijke kosten, pensioenreservering, vakantiedagen, ziektekosten, administratie en belastingen meenemen. Bovendien is het aantal uren dat je daadwerkelijk kunt factureren vaak lager dan 40 uur per week.
+    </p>
+    <p>
+      Onze <a href="/zzp-calculator/">ZZP calculator</a> rekent al deze factoren voor je door. Je vult je gewenste netto inkomen per maand in, het aantal factureerbare dagen per jaar, het aantal uren per dag, je zakelijke kosten en je pensioenreservering. Het resultaat toont het benodigde uurtarief, de benodigde jaaromzet, een belastingindicatie en het netto inkomen na pensioenopbouw.
+    </p>
+    <p>
+      Daarnaast kom je als ondernemer regelmatig in aanraking met btw. Of je nu een factuur stuurt of een zakelijke aanschaf doet, btw speelt een rol. Onze <a href="/btw-calculator/">BTW calculator</a> maakt het eenvoudig om btw-bedragen correct te berekenen, inclusief het verlaagde 9% tarief.
+    </p>
+    <p>
+      Voor ondernemers die een auto importeren, biedt de <a href="/auto-importkosten-berekenen/">auto importkosten calculator</a> helderheid. Deze tool somt de verwachte kosten op, waaronder bpm, RDW-kosten, keuring, kenteken, transport en overige kosten. Zo voorkom je verrassingen bij het importeren van een zakelijke auto.
+    </p>
+  </CategoryIntro>
+
+  <CategoryFaq title="Veelgestelde vragen over ondernemen" items={faq} />
+
+  <CategorySources title="Officiële bronnen" items={sources} />
+
+  <RelatedCategories current="Ondernemen" categories={categoryList} />
+</BaseLayout>
