@@ -118,7 +118,7 @@ const faqSchema = {
     intro="Het importeren van een auto lijkt eenvoudig, maar er komen meer kosten bij kijken dan je op het eerste gezicht zou denken. Onze auto-categorie helpt je om alle kostenposten in kaart te brengen. Van aankoopprijs tot bpm, van transport tot keuring: je ziet direct wat de totale importkosten ongeveer zijn."
   />
 
-  <CategoryGrid title="Calculators voor auto" items={calculators} />
+  <CategoryGrid title="Calculators voor auto" items={calculators} analyticsCategory="auto-page" />
 
   <AdSlot slot="1234567898" format="auto" style="min-height:120px" />
 
@@ -141,5 +141,5 @@ const faqSchema = {
 
   <CategorySources title="Officiële bronnen" items={sources} />
 
-  <RelatedCategories current="Auto" categories={categoryList} />
+  <RelatedCategories current="Auto" categories={categoryList} analyticsCategory="auto-page" />
 </BaseLayout>

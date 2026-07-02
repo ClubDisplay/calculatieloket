@@ -141,7 +141,7 @@ const faqSchema = {
     intro="Je inkomen is het startpunt van vrijwel elke financiële keuze. Of je nu wilt weten wat je netto overhoudt van je bruto salaris, hoeveel vakantiegeld je krijgt, of welke toeslagen je kunt ontvangen: onze inkomenscalculators geven een directe indicatie. Alle berekeningen zijn gebaseerd op de actuele 2026 tarieven van de Belastingdienst, Dienst Toeslagen en Rijksoverheid."
   />
 
-  <CategoryGrid title="Calculators voor inkomen" items={calculators} />
+  <CategoryGrid title="Calculators voor inkomen" items={calculators} analyticsCategory="inkomen-page" />
 
   <AdSlot slot="1234567894" format="auto" style="min-height:120px" />
 
@@ -164,5 +164,5 @@ const faqSchema = {
 
   <CategorySources title="Officiële bronnen" items={sources} />
 
-  <RelatedCategories current="Inkomen" categories={categoryList} />
+  <RelatedCategories current="Inkomen" categories={categoryList} analyticsCategory="inkomen-page" />
 </BaseLayout>

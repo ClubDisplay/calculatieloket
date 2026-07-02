@@ -12,12 +12,25 @@ const {
   categoryLink,
   categoryLabel,
 } = Astro.props;
+
+const categorySlug = categoryLabel
+  ? categoryLabel.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
+  : "";
 ---
 
 <div class="calc-tool-footer">
   {categoryLink && categoryLabel && (
     <p class="calc-tool-footer-category">
-      Bekijk meer calculators in de categorie <a href={categoryLink}>{categoryLabel}</a>.
+      Bekijk meer calculators in de categorie{" "}
+      <a
+        href={categoryLink}
+        data-analytics="tool-footer-category-link"
+        data-analytics-category="calculator-page"
+        data-analytics-action="click"
+        data-analytics-label={categorySlug}
+      >
+        {categoryLabel}
+      </a>.
     </p>
   )}
   <p class="calc-tool-footer-disclaimer">{disclaimer}</p>

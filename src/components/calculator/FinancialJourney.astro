@@ -89,7 +89,15 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
     {
       displayRecommendations && displayRecommendations.length > 0 ? (
         displayRecommendations.map((rec) => (
-          <a href={rec.url} class="calc-financial-journey-step" data-step={rec.id}>
+          <a
+            href={rec.url}
+            class="calc-financial-journey-step"
+            data-step={rec.id}
+            data-analytics="financial-journey-link"
+            data-analytics-category="calculator-page"
+            data-analytics-action="click"
+            data-analytics-label={rec.id}
+          >
             <span class="step-check">✓</span>
             <span class="step-content">
               <span class="step-label">{rec.title}</span>
@@ -100,7 +108,15 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
         ))
       ) : (
         steps.map((step) => (
-          <a href={step.href} class="calc-financial-journey-step" data-step={step.id}>
+          <a
+            href={step.href}
+            class="calc-financial-journey-step"
+            data-step={step.id}
+            data-analytics="financial-journey-link"
+            data-analytics-category="calculator-page"
+            data-analytics-action="click"
+            data-analytics-label={step.id}
+          >
             <span class="step-check">✓</span>
             <span class="step-content">
               <span class="step-label">{step.label}</span>

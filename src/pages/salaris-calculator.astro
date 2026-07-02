@@ -198,7 +198,7 @@ const breadcrumbSchema = {
       <div class="quick-chips">
         <span class="quick-chips-label">Snel kiezen:</span>
         {quickAmounts.map((amount) => (
-          <button type="button" class="quick-chip" data-amount={amount}>
+          <button type="button" class="quick-chip" data-amount={amount} data-analytics="quick-chip" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={amount}>
             &euro; {amount.toLocaleString("nl-NL")}
           </button>
         ))}
@@ -222,7 +222,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken netto</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken netto</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0).</p>
     </InputPanel>
 
@@ -266,7 +266,7 @@ const breadcrumbSchema = {
         <div class="result-row result-row-total"><span class="label">Voordeel per maand</span><span class="value" id="detailLhkBenefit">{formatEuro(initialResult.netMonthly - initialNoLhkResult.netMonthly, 0)}</span></div>
       </div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>

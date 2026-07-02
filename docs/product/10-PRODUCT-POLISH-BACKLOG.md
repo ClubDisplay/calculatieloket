@@ -6,6 +6,19 @@
 
 ---
 
+## Update: Sprint 100 — Analytics Ready Foundation (afgerond)
+
+Sprint 100 legt de markup-basis voor toekomstige analytics. Er worden nog geen tracking scripts, cookies, event listeners of externe providers toegevoegd; alleen gestandaardiseerde `data-analytics-*` attributen op interactieve elementen, zodat elke toekomstige analytics-integratie één uniforme selector-conventie kan gebruiken.
+
+Wijzigingen:
+
+- **Nieuwe documentatie**: `docs/product/12-ANALYTICS-READY-FOUNDATION.md` definieert de conventie: `data-analytics="<type>"`, `data-analytics-category="<context>"`, `data-analytics-action="<actie>"`, `data-analytics-label="<id>"`. Bevat de volledige element inventory en implementatie regels.
+- **Gedeelde componenten**: attributen toegevoegd aan `src/layouts/BaseLayout.astro` (header/footer links), `src/components/Breadcrumbs.astro`, `src/components/category/CategoryGrid.astro` (met `analyticsCategory` prop), `src/components/category/RelatedCategories.astro` (met `analyticsCategory` prop), `src/components/CrossSellCards.astro` (met `analyticsCategory` prop), `src/components/calculator/FinancialJourney.astro`, `src/components/calculator/ToolFooter.astro` en `src/components/calculator/UseCasesPanel.astro`.
+- **Homepage (`src/pages/index.astro`)**: attributen op zoekveld, cluster-chips, calculator cards, quick-start keuze-pillen, categorie links en cross-sell cards.
+- **Categoriepagina’s**: `CategoryGrid` en `RelatedCategories` krijgen per pagina een specifieke `analyticsCategory` (`inkomen-page`, `belasting-page`, `wonen-page`, `ondernemen-page`, `auto-page`) zodat klikken herleidbaar zijn naar de broncategorie.
+- **10 calculatorpagina’s**: attributen toegevoegd op CTA-knoppen, quick-chips, kopieer-link knoppen, radio-button groepen (tarief, richting, looptijd, voertuigtype, huishouden), toggles (ZZP aftrekposten) en select velden (aankoopland). Gewijzigde pagina’s: `bruto-netto-2026.astro`, `salaris-calculator.astro`, `vakantiegeld-calculator.astro`, `toeslagen-calculator.astro`, `hypotheek-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro`, `zzp-calculator.astro` en `auto-importkosten-berekenen.astro`.
+- Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 099 — Breadcrumb Consistency + Homepage Search URL State (afgerond)
 
 Sprint 099 maakt de navigatie-consistentie compleet door breadcrumbs toe te voegen aan alle categoriepagina’s en de homepage-zoekterm deelbaar te maken via URL-state.

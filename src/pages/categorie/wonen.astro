@@ -118,7 +118,7 @@ const faqSchema = {
     intro="Een huis kopen is een van de grootste financiële beslissingen in je leven. Onze wonencategorie helpt je om inzicht te krijgen in je mogelijkheden. Met de hypotheek calculator zie je direct hoeveel je maximaal kunt lenen, wat je bruto en netto maandlasten zijn, en hoeveel rente je over de hele looptijd betaalt."
   />
 
-  <CategoryGrid title="Calculators voor wonen" items={calculators} />
+  <CategoryGrid title="Calculators voor wonen" items={calculators} analyticsCategory="wonen-page" />
 
   <AdSlot slot="1234567896" format="auto" style="min-height:120px" />
 
@@ -141,5 +141,5 @@ const faqSchema = {
 
   <CategorySources title="Officiële bronnen" items={sources} />
 
-  <RelatedCategories current="Wonen" categories={categoryList} />
+  <RelatedCategories current="Wonen" categories={categoryList} analyticsCategory="wonen-page" />
 </BaseLayout>

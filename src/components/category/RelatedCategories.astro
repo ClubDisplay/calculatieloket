@@ -9,9 +9,10 @@ interface Props {
   current?: string;
   categories: Category[];
   title?: string;
+  analyticsCategory?: string;
 }
 
-const { current, categories, title = "Gerelateerde categorieën" } = Astro.props;
+const { current, categories, title = "Gerelateerde categorieën", analyticsCategory = "category-page" } = Astro.props;
 const related = current ? categories.filter((c) => c.id !== current) : categories;
 ---
 
@@ -19,7 +20,14 @@ const related = current ? categories.filter((c) => c.id !== current) : categorie
   <h2 id="catRelatedTitle" class="cat-related-title">{title}</h2>
   <div class="cat-related-grid">
     {related.map((cat) => (
-      <a href={cat.href} class="cat-related-card">
+      <a
+        href={cat.href}
+        class="cat-related-card"
+        data-analytics="category-card"
+        data-analytics-category={analyticsCategory}
+        data-analytics-action="click"
+        data-analytics-label={cat.id}
+      >
         <span class="cat-related-label">{cat.label}</span>
         <span class="cat-related-arrow" aria-hidden="true">&rarr;</span>
       </a>

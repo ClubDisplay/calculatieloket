@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { title = "Wat kun je hiermee?", items } = Astro.props;
+const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
 ---
 
 <section class="calc-use-cases">
@@ -24,6 +25,10 @@ const { title = "Wat kun je hiermee?", items } = Astro.props;
         class="calc-use-cases-card"
         data-usecase={item.id}
         style={item.accent ? `--uc-accent: ${item.accent}` : undefined}
+        data-analytics="use-case-link"
+        data-analytics-category="calculator-page"
+        data-analytics-action="click"
+        data-analytics-label={item.id || slugify(item.href)}
       >
         <span class="calc-use-cases-card-title">{item.title}</span>
         <span class="calc-use-cases-card-desc" data-template={item.description}>{item.description}</span>

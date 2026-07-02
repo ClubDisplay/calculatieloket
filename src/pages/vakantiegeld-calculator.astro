@@ -211,7 +211,7 @@ const breadcrumbSchema = {
       <div class="quick-chips">
         <span class="quick-chips-label">Snel kiezen:</span>
         {quickAmounts.map((amount) => (
-          <button type="button" class="quick-chip" data-amount={amount}>
+          <button type="button" class="quick-chip" data-amount={amount} data-analytics="quick-chip" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={amount}>
             &euro; {amount.toLocaleString("nl-NL")}
           </button>
         ))}
@@ -243,7 +243,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken vakantiegeld</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken vakantiegeld</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0) en een percentage tussen 0 en 100.</p>
     </InputPanel>
 
@@ -271,7 +271,7 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Netto per jaar met vakantiegeld</span><span class="value" id="detailTotalNet">{initialResult.valid ? formatEuro(initialResult.breakdown.totalNetYearly, 0) : "—"}</span></div>
       <div class="result-row"><span class="label">Netto per jaar zonder vakantiegeld</span><span class="value" id="detailNoVacationNet">{initialResult.valid ? formatEuro(initialResult.breakdown.noVacationNetYearly, 0) : "—"}</span></div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>

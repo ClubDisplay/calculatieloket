@@ -132,7 +132,7 @@ const faqSchema = {
     intro="Iedereen komt dagelijks in aanraking met belasting, zeker als je ondernemer bent of een grote aankoop doet. Onze belastingcalculators helpen je om btw snel en correct uit te rekenen. Of je nu exclusief naar inclusief wilt rekenen, of andersom: je ziet direct het btw-bedrag en het totaalbedrag."
   />
 
-  <CategoryGrid title="Calculators voor belasting" items={calculators} />
+  <CategoryGrid title="Calculators voor belasting" items={calculators} analyticsCategory="belasting-page" />
 
   <AdSlot slot="1234567895" format="auto" style="min-height:120px" />
 
@@ -155,5 +155,5 @@ const faqSchema = {
 
   <CategorySources title="Officiële bronnen" items={sources} />
 
-  <RelatedCategories current="Belasting" categories={categoryList} />
+  <RelatedCategories current="Belasting" categories={categoryList} analyticsCategory="belasting-page" />
 </BaseLayout>

@@ -11,9 +11,11 @@ interface Item {
 interface Props {
   title: string;
   items: Item[];
+  analyticsCategory?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, items, analyticsCategory = "category-page" } = Astro.props;
+const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
 ---
 
 <section class="cat-grid-section" aria-labelledby="catGridTitle">
@@ -24,6 +26,10 @@ const { title, items } = Astro.props;
         href={item.href}
         class="cat-card"
         style={`--cat-accent: ${item.accent}`}
+        data-analytics="category-calculator-card"
+        data-analytics-category={analyticsCategory}
+        data-analytics-action="click"
+        data-analytics-label={slugify(item.href)}
       >
         <span class="cat-card-icon" set:html={item.icon} />
         <div class="cat-card-body">
