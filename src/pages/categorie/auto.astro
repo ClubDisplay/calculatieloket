@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryHero from "../../components/category/CategoryHero.astro";
+import CategoryGrid from "../../components/category/CategoryGrid.astro";
+import CategoryIntro from "../../components/category/CategoryIntro.astro";
+import CategoryFaq from "../../components/category/CategoryFaq.astro";
+import CategorySources from "../../components/category/CategorySources.astro";
+import RelatedCategories from "../../components/category/RelatedCategories.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import { icons, categoryList } from "../../lib/category-icons";
+
+const title = "Auto berekenen | Importkosten, bpm en RDW";
+const description = "Bereken wat het importeren van een auto kost inclusief bpm, RDW, transport, keuring en kenteken. Gebaseerd op officiële bronnen.";
+
+const calculators = [
+  {
+    title: "Auto importkosten berekenen",
+    href: "/auto-importkosten-berekenen/",
+    description: "Alle kosten voor het importeren van een auto op een rij.",
+    badge: "Nieuw",
+    icon: icons.car,
+    accent: "#0891b2",
+  },
+];
+
+const faq = [
+  {
+    question: "Welke kosten komen er kijken bij auto importeren?",
+    answer: "<p>De belangrijkste kosten zijn de aankoopprijs, bpm, btw, RDW-kosten, keuring, kenteken, transport naar Nederland en eventuele kosten voor aanpassingen aan de verlichting of uitlaat. Onze <a href=\"/auto-importkosten-berekenen/\">importkosten calculator</a> somt deze posten voor je op.</p>",
+  },
+  {
+    question: "Hoe hoog is de bpm?",
+    answer: "<p>De bpm (belasting van personenauto's en motorrijwielen) is gebaseerd op de CO2-uitstoot, het gewicht of de cataloguswaarde van de auto, afhankelijk van het type voertuig. De Belastingdienst biedt een rekenhulp om de bpm te berekenen. Onze calculator geeft een indicatie op basis van de door jou ingevoerde bpm.</p>",
+  },
+  {
+    question: "Wat doet de RDW bij import?",
+    answer: "<p>De RDW keurt geïmporteerde auto's om te controleren of ze voldoen aan de Nederlandse veiligheids- en milieueisen. Ook wordt het voertuig geregistreerd en krijgt het een Nederlands kenteken. De kosten voor keuring en kenteken zijn onderdeel van de totale importkosten.</p>",
+  },
+  {
+    question: "Moet een geïmporteerde auto worden gekeurd?",
+    answer: "<p>Ja, bijna iedere geïmporteerde auto moet worden gekeurd voordat deze op Nederlands kenteken kan worden gezet. Soms zijn aanpassingen nodig, bijvoorbeeld aan de verlichting of het uitlaatsysteem. Deze kosten zijn variabel en hangen af van het land van herkomst en het type auto.</p>",
+  },
+  {
+    question: "Is het voordeliger om zelf te importeren?",
+    answer: "<p>Dat hangt af van de aankoopprijs, de bpm, de transportkosten en de eventuele aanpassingskosten. In sommige gevallen is importeren voordeliger, in andere gevallen niet. Onze calculator geeft een totaaloverzicht zodat je de opties kunt vergelijken.</p>",
+  },
+];
+
+const sources = [
+  {
+    label: "Belastingdienst",
+    title: "Bpm berekenen",
+    description: "Rekenhulp en regels voor de belasting op personenauto's en motorrijwielen.",
+    href: "https://www.belastingdienst.nl/bpm",
+  },
+  {
+    label: "RDW",
+    title: "Voertuig importeren",
+    description: "Informatie over keuring, kenteken en registratie van geïmporteerde voertuigen.",
+    href: "https://www.rdw.nl",
+  },
+  {
+    label: "RVO",
+    title: "Auto importeren uit EU of daarbuiten",
+    description: "Praktische informatie over invoer, douane en typegoedkeuring.",
+    href: "https://www.rvo.nl",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Auto", item: "https://calculatieloket.nl/categorie/auto/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Auto berekenen",
+  url: "https://calculatieloket.nl/categorie/auto/",
+  description: "Overzicht van calculators voor auto importkosten, bpm en RDW.",
+  hasPart: calculators.map((c) => ({
+    "@type": "WebPage",
+    name: c.title,
+    url: `https://calculatieloket.nl${c.href}`,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <CategoryHero
+    title="Auto berekenen"
+    subtitle="Importkosten, bpm, RDW en keuring"
+    intro="Het importeren van een auto lijkt eenvoudig, maar er komen meer kosten bij kijken dan je op het eerste gezicht zou denken. Onze auto-categorie helpt je om alle kostenposten in kaart te brengen. Van aankoopprijs tot bpm, van transport tot keuring: je ziet direct wat de totale importkosten ongeveer zijn."
+  />
+
+  <CategoryGrid title="Calculators voor auto" items={calculators} />
+
+  <AdSlot slot="1234567898" format="auto" style="min-height:120px" />
+
+  <CategoryIntro title="Alles over auto importeren berekenen">
+    <p>
+      Steeds meer mensen overwegen om een auto uit het buitenland te importeren. De aankoopprijs lijkt vaak aantrekkelijk, maar pas na het optellen van alle kosten ontstaat er een eerlijk vergelijkingsplaatje. De belangrijkste kostenposten zijn de bpm, de btw, RDW-kosten, keuring, kenteken en transport. Afhankelijk van het land van herkomst kunnen ook aanpassingskosten voor verlichting of uitlaat meespelen.
+    </p>
+    <p>
+      De bpm is de belasting op personenauto's en motorrijwielen. De hoogte wordt bepaald door de CO2-uitstoot, het gewicht of de cataloguswaarde van de auto. De Belastingdienst biedt een officiële rekenhulp, maar in onze <a href="/auto-importkosten-berekenen/">auto importkosten calculator</a> kun je de bpm direct meenemen in het totaalplaatje.
+    </p>
+    <p>
+      De RDW speelt een belangrijke rol bij de import. Elke geïmporteerde auto moet worden gekeurd voordat deze op Nederlands kenteken kan worden gezet. De keuring controleert of het voertuig voldoet aan de Nederlandse veiligheids- en milieueisen. Soms zijn aanpassingen nodig, bijvoorbeeld aan de koplampen of het uitlaatsysteem. Deze kosten kunnen oplopen, vooral bij auto's uit landen buiten de Europese Unie.
+    </p>
+    <p>
+      Of importeren voordelig uitpakt, hangt af van de specifieke situatie. Een goedkopere aanschafprijs kan worden tenietgedaan door hoge bpm of transportkosten. Onze calculator geeft een helder overzicht van alle kostenposten, zodat je een weloverwogen beslissing kunt nemen. Vergeet niet om ook het onderhoudsverleden, de garantie en de restwaarde mee te wegen.
+    </p>
+  </CategoryIntro>
+
+  <CategoryFaq title="Veelgestelde vragen over auto importeren" items={faq} />
+
+  <CategorySources title="Officiële bronnen" items={sources} />
+
+  <RelatedCategories current="Auto" categories={categoryList} />
+</BaseLayout>

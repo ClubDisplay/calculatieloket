@@ -1,0 +1,40 @@
+---
+import SourceCards from "../SourceCards.astro";
+
+interface Item {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+}
+
+const { title = "Bronnen", items } = Astro.props;
+---
+
+<section class="cat-sources" aria-label={title}>
+  <SourceCards title={title} items={items} />
+</section>
+
+<style>
+  .cat-sources {
+    margin-bottom: 1.5rem;
+  }
+
+  .cat-sources :global(.srcc-title) {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .cat-sources :global(.srcc-title) {
+      font-size: 1.15rem;
+    }
+  }
+</style>

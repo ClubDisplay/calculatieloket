@@ -1,0 +1,19 @@
+export const icons: Record<string, string> = {
+  euro: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">€</text></svg>`,
+  money: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 11h2M18 17h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  sun: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="2"/><path d="M14 4V2M14 26V24M4 14H2M26 14H24M6.343 6.343 4.929 4.929M23.071 23.071l-1.414-1.414M6.343 21.657 4.929 23.071M23.071 4.929l-1.414 1.414" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  house: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 12L14 4L25 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="13" width="12" height="11" rx="1" stroke="currentColor" stroke-width="2"/><rect x="12" y="18" width="4" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg>`,
+  calc: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="3" width="24" height="22" rx="3" stroke="currentColor" stroke-width="2"/><line x1="9" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="19" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  percent: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 20 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  switch: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M9 14h10M9 14l-3-3M9 14l-3 3M19 14l3-3M19 14l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  person: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  car: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+};
+
+export const categoryList = [
+  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/" },
+  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/" },
+  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/" },
+  { id: "Auto", label: "Auto", href: "/categorie/auto/" },
+];
