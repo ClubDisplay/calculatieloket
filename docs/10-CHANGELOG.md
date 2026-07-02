@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
-2. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+1. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
+2. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+3. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
 3. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
 3. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
 3. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
@@ -46,6 +47,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 103
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 103 — Product & UX Review v1
+**Details:** Platform-wide product- en UX-review uitgevoerd vanuit 5 perspectieven (UX Designer, Product Owner, SEO-specialist, Google Quality Rater, eerste bezoeker). Nieuw document `docs/product/14-PRODUCT-UX-REVIEW-v1.md` met 12-categorie scorecard (gemiddelde 8.0/10), per-pagina first-visitor journey, concurrentievergelijking met SalarisNetto, BerekenHet, Nibud en Loonwijzer, top 25 verbeterpunten (P0/P1/P2), top 10 user-happiness UX items, risico's en voorstel voor Sprint 104. Scorecard: 9× groen, 2× geel, 0× rood. Gele vlaggen: advertenties/afleiding (top-ad eet eerste viewport) en first impression/trust (sociale proof mist nog). P0-items: Lighthouse audit, meta descriptions statische pagina's, trust badges, top-ad evaluatie, viewport optimalisatie, consistente resultaatpresentatie, copy-link consistentie, quick chips, trust bar, search empty state. Advies: Product Completion is technisch af; Sprint 104 richt zich op Lighthouse, trust bar en content. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` is niet beïnvloed; 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
