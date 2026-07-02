@@ -266,7 +266,54 @@ Aangeraden prioriteit: **optie 1** (productwaarde) of, indien kwaliteitsscore pr
 
 ---
 
-## 9. Checklist
+## 9. Sprint 110 — Full Calculator Coverage & Accessibility Fixes
+
+### 9.1 Gekozen aanpak
+
+- `scripts/lighthouse-audit.mjs` uitgebreid van 6 naar **13 pagina's**: homepage, calculator hub, één categoriepagina en alle 10 calculators (Bruto netto 2026, Salaris, Vakantiegeld, Toeslagen, Hypotheek, BTW, BTW terugrekenen, BTW inclusief/exclusief, ZZP, Auto importkosten).
+- Stabiliteit toegevoegd door iedere pagina **3 keer** te meten en de **median score** per categorie te rapporteren. Aantal runs is configureerbaar via `LIGHTHOUSE_RUNS` omgevariabele.
+- Quick-chip groepen voorzien van een expliciet label (`aria-labelledby="quickChipsLabel"`) en `role="group"` op alle 10 calculatorpagina's.
+- Accessibility drempel gehaald op alle pagina's door twee kleine fixes op `src/pages/auto-importkosten-berekenen.astro`:
+  - `.calc-field-hint a` krijgt `text-decoration: underline` zodat links in de hint niet alleen op kleur herkenbaar zijn.
+  - `.result-row .label` krijgt een donkerder contrastkleur (`#4b5563`) op de lichtblauwe resultaatachtergrond.
+- Geen nieuwe dependencies, geen wijzigingen aan engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard of Agents.
+
+### 9.2 Gemeten scores (lokaal, zonder AdSense, 3 runs median)
+
+| Pagina | Performance | Accessibility | Best Practices | SEO | Status |
+|--------|-------------|---------------|----------------|-----|--------|
+| Homepage | 99 | 100 | 100 | 100 | ✅ |
+| Calculator hub | 100 | 100 | 100 | 100 | ✅ |
+| Categorie Inkomen | 100 | 100 | 100 | 100 | ✅ |
+| Bruto netto 2026 | 99 | 97 | 100 | 100 | ✅ |
+| Salaris calculator | 99 | 97 | 100 | 100 | ✅ |
+| Vakantiegeld calculator | 99 | 96 | 100 | 100 | ✅ |
+| Toeslagen calculator | 99 | 96 | 100 | 100 | ✅ |
+| Hypotheek calculator | 99 | 96 | 100 | 100 | ✅ |
+| BTW calculator | 99 | 96 | 100 | 100 | ✅ |
+| BTW terugrekenen | 99 | 96 | 100 | 100 | ✅ |
+| BTW inclusief/exclusief | 99 | 96 | 100 | 100 | ✅ |
+| ZZP calculator | 99 | 96 | 100 | 100 | ✅ |
+| Auto importkosten | 99 | 97 | 100 | 100 | ✅ |
+
+### 9.3 Bevindingen
+
+- **Alle pagina's halen de drempels** (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95).
+- **Performance** is stabiel hoog (99–100), ondanks incidentele fluctuatie per run. De median-berekening dempt deze ruis.
+- **Accessibility** is nu overal ≥ 95. De laagste scores (96) blijven bestaan op calculators met licht-grijze labels in het resultaat; deze zijn bewust niet opgelost omdat ze de drempel niet in de weg staan en een grotere herziening van gedeelde componenten zou vereisen.
+- **Best Practices** en **SEO** zijn 100 op alle pagina's.
+- **Geen productiewijzigingen**; de meetmethode blijft lokaal tegen de statische build.
+
+### 9.4 Gewijzigde bestanden
+
+- `scripts/lighthouse-audit.mjs` — uitgebreide `PAGES` array, median scoring, `LIGHTHOUSE_RUNS` configuratie.
+- `src/pages/auto-importkosten-berekenen.astro` — contrast- en link-distinguishability fixes.
+- Alle 10 calculatorpagina's — quick-chip `role="group"` + `aria-labelledby` label.
+- `reports/lighthouse-audit-report.json` en `.md` — gegenereerd bij iedere audit run.
+
+---
+
+## 10. Checklist
 
 ### Sprint 106
 - [x] `npm run build` slaagt
@@ -289,6 +336,16 @@ Aangeraden prioriteit: **optie 1** (productwaarde) of, indien kwaliteitsscore pr
 - [x] `npm run atlas:check` slaagt
 - [x] Documentatie bijgewerkt
 
+### Sprint 110
+- [x] Audit uitgebreid naar 13 pagina’s (homepage, hub, categorie, 10 calculators)
+- [x] Median scoring over 3 runs per pagina, configureerbaar via `LIGHTHOUSE_RUNS`
+- [x] Quick-chip groepen hebben expliciet `aria-labelledby` label
+- [x] Auto importkosten accessibility gefixt (link underline + resultaat-label contrast)
+- [x] Alle pagina’s halen de drempels
+- [x] Geen nieuwe dependencies, geen engine-wijzigingen, geen `.env` of deploy
+- [x] `npm run atlas:check` slaagt
+- [x] Documentatie bijgewerkt
+
 ---
 
-> **Laatst bijgewerkt:** 2026-07-02
+> **Laatst bijgewerkt:** 2026-07-02 (Sprint 110 update)

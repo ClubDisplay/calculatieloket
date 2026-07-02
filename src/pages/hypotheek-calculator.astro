@@ -179,8 +179,8 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <div class="quick-chips">
-        <span class="quick-chips-label">Snel inkomen:</span>
+      <div class="quick-chips" role="group" aria-labelledby="quickChipsLabel">
+        <span class="quick-chips-label" id="quickChipsLabel">Snel inkomen:</span>
         {quickIncomeAmounts.map((amount) => (
           <button type="button" class="quick-chip" data-amount={amount} data-analytics="quick-chip" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={amount}>
             &euro; {amount.toLocaleString("nl-NL")}
