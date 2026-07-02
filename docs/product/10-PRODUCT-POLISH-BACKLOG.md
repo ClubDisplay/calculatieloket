@@ -6,6 +6,23 @@
 
 ---
 
+## Update: Sprint 107 — Calculator Hub v1 (afgerond)
+
+Sprint 107 bouwt `/calculators/` als centrale overzichtspagina voor alle calculators. Geen wijzigingen aan engines, Knowledge Objects, Rule Resolver of Recommendation Engine.
+
+Wijzigingen:
+
+- **Nieuwe pagina**: `src/pages/calculators.astro` — Calculator Hub met alle 11 calculator cards (10 unieke tools, Auto importkosten staat zowel onder Ondernemen als Auto). Cards zijn gegroepeerd per categorie: Inkomen (4), Belasting (3), Wonen (1), Ondernemen (2), Auto (1).
+- **Progressive enhancement**: client-side zoekfilter op titel, omschrijving en categorie. Zonder JavaScript blijven alle calculators zichtbaar; met JavaScript worden niet-matchende cards en lege categorieën verborgen. Zoekveld heeft `aria-live` hint en "Geen resultaten"-melding.
+- **SEO**: title "Alle calculators | Calculatieloket.nl", meta description 159 tekens, canonical, exact één H1, server-rendered links. BreadcrumbList en CollectionPage schema toegevoegd; de CollectionPage `mainEntity` bevat alle 11 calculators als `ItemList`.
+- **Navigatie**: links naar `/calculators/` toegevoegd aan homepage (onder categorie-chips), header (naast Home) en footer (bovenaan "Alle calculators" kolom).
+- **Mobile-first**: 1 kolom op mobiel, 2 op tablet, 3 op desktop, 4 op brede desktops. Gebruikt herbruikte `CategoryGrid` component met pagina-specifieke CSS override.
+- **Advertentie**: AdSlot pas ná de calculatorsecties, nooit boven hero of eerste categorie.
+- **P1 quick win**: OG/schema logo geoptimaliseerd. Oude 768 KB `logo_Calculatieloket.png` (1448×1086) vervangen door 94 KB `logo_Calculatieloket-og.png` (400×300). `BaseLayout.astro`, `AGENTS.md`, `docs/v2/04-GENERATOR.md` en `docs/v2/06-PRODUCTS-ON-ATLAS.md` bijgewerkt. Oude ongebruikte `logo_Calculatieloket.png` verwijderd.
+- **Documentatie bijgewerkt**: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 106 — Lighthouse & Core Web Vitals Excellence v1 (afgerond)
 
 Sprint 106 meet en verbetert de technische kwaliteit van de belangrijkste pagina's. Er worden geen nieuwe features gebouwd.
@@ -20,7 +37,7 @@ Wijzigingen:
   - Opruimen: `public/logo-calculatieloket-header-tight.png` en `src/layouts/BaseLayout.astro.bak` verwijderd.
 - **Nieuwe documentatie**: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md` met build-statistieken, per-pagina bevindingen, quick wins, openstaande P1/P2 punten, risico's en advies voor Sprint 107.
 - **Geen wijzigingen aan**: calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. Geen grote redesigns, geen Lighthouse CI dependency.
-- **Openstaande punten**: OG/schema logo (768 KB) optimaliseren, Lighthouse meting in echte browser opzetten, AdSense CLS-risico documenteren, ClientRouter overhead monitoren.
+- **Openstaande punten**: OG/schema logo (768 KB) geoptimaliseerd in Sprint 107; Lighthouse meting in echte browser opzetten, AdSense CLS-risico documenteren, ClientRouter overhead monitoren.
 
 `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 

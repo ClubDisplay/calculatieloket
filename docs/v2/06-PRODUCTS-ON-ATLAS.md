@@ -33,8 +33,9 @@ id: calculatieloket.nl
 name: Calculatieloket
 brand:
   primary_color: "#2563eb"
-  logo: "/logo_Calculatieloket.png"
-  favicon: "/favicon.ico"
+  logo: "/logo_Calculatieloket-og.png"
+  favicon: "/favicon.svg"
+  favicon_fallback: "/favicon.ico"
 default_locale: nl-NL
 supported_locales:
   - nl-NL

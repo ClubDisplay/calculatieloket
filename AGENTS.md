@@ -32,7 +32,10 @@ src/
   styles/
     global.css                   # All site styling (CSS custom properties)
 public/
-  logo_Calculatieloket.png       # Site logo & favicon
+  favicon.svg                    # SVG favicon (4 KB)
+  favicon.ico                    # ICO favicon fallback (4 KB)
+  logo-calculatieloket-header.png # Header logo (560×145, 52 KB)
+  logo_Calculatieloket-og.png    # OG image + schema logo (400×300, ~94 KB)
   robots.txt                     # Points to sitemap-index.xml
 ```
 
