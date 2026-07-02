@@ -403,8 +403,20 @@ const websiteSchema = {
   const cards = Array.from(grid.querySelectorAll(".hp-card")) as HTMLElement[];
   const noResults = document.getElementById("hpNoResults") as HTMLElement;
 
+  function updateSearchUrl(term: string) {
+    const url = new URL(window.location.href);
+    if (term) {
+      url.searchParams.set("q", term);
+    } else {
+      url.searchParams.delete("q");
+    }
+    window.history.replaceState({}, "", url.toString());
+  }
+
   function filterCards() {
-    const term = searchInput.value.trim().toLowerCase();
+    const rawTerm = searchInput.value.trim();
+    const term = rawTerm.toLowerCase();
+    updateSearchUrl(rawTerm);
 
     let visibleCount = 0;
     cards.forEach((card) => {
@@ -422,6 +434,14 @@ const websiteSchema = {
     });
 
     noResults.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  // Initialize search from URL
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialQuery = initialParams.get("q") || "";
+  if (initialQuery) {
+    searchInput.value = initialQuery;
+    filterCards();
   }
 
   searchInput.addEventListener("input", filterCards);

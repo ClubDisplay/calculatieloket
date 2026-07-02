@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import CategoryHero from "../../components/category/CategoryHero.astro";
 import CategoryGrid from "../../components/category/CategoryGrid.astro";
 import CategoryIntro from "../../components/category/CategoryIntro.astro";
@@ -127,6 +128,12 @@ const faqSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Categorieën", href: "/#categorieen" },
+    { label: "Inkomen", current: true },
+  ]} />
 
   <CategoryHero
     title="Inkomen berekenen"
