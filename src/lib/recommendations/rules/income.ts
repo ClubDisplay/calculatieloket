@@ -11,8 +11,10 @@ export function incomeRules(input: RecommendationInput): Recommendation[] {
     {
       id: "vakantiegeld",
       title: "Vakantiegeld berekenen",
-      description: "Binnenkort beschikbaar.",
-      url: "#",
+      description: grossMonthly
+        ? `Bereken hoeveel vakantiegeld je netto krijgt bij een bruto maandsalaris van ${formatEuro(grossMonthly)}.`
+        : "Bereken hoeveel vakantiegeld je netto krijgt.",
+      url: buildUrl("/vakantiegeld-calculator/", { bruto: grossMonthly }),
       priority: 3,
       reason: "relevant bij loon",
     },

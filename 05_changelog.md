@@ -1,5 +1,15 @@
 # Changelog — Calculatieloket.nl
 
+## 2026-07-03
+
+**Type:** Technisch/Architectuur
+**Wijziging:** Atlas v2 Sprint 092 — Vakantiegeld Calculator
+**Details:** Nieuwe calculator `src/pages/vakantiegeld-calculator.astro` gebouwd in de App Shell. Input: bruto maandsalaris, vakantiegeldpercentage, pensioenpremie per maand en loonheffingskorting toggle. Resultaat direct zichtbaar bij laden: bruto vakantiegeld, geschatte inhouding, netto vakantiegeld, effectief tarief, netto per jaar met/zonder vakantiegeld. De berekening gebruikt de nieuwe engine `src/lib/calculators/vacation-pay.ts`, die de bestaande `tax.ts` engine hergebruikt door een totaalscenario mét vakantiegeld te vergelijken met een zonder-vakantiegeld-scenario. URL state toegevoegd: `?bruto`, `?percentage`, `?pensioen`, `?lhk`. Quick chips: € 2.500, € 3.000, € 3.500, € 4.000, € 5.000. Kopieer-link knop in `ResultPanel`. `FAQPage`, `BreadcrumbList` en `HowTo` JSON-LD schema markup via `BaseLayout` head slot. SEO-content behouden: werking vakantiegeld, voorbeeldberekening, belasting, uitbetaling, veelgemaakte fouten. Vakantiegeld toegevoegd aan de Financial Recommendation Engine via `src/lib/recommendations/rules/vacation-pay.ts` en geregistreerd als `"vakantiegeld": vacationPayRules` in `src/lib/recommendations/registry.ts`. Recommendations op de vakantiegeld pagina: Bruto-netto 2026, Salaris, Toeslagen, Hypotheek, ZZP. De `vakantiegeld` placeholder in `src/lib/recommendations/rules/income.ts` en de default step in `src/components/calculator/FinancialJourney.astro` zijn vervangen door een werkende link naar `/vakantiegeld-calculator/`. Tests toegevoegd in `tests/calculators/vacation-pay.test.ts` (8 tests) en `tests/recommendations/recommendations.test.ts` (4 extra tests). Catalogus bijgewerkt in `docs/catalog/calculators.yml`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md` en `docs/product/11-FINANCIAL-RECOMMENDATION-ENGINE.md`. Geen wijzigingen aan bestaande calculator engines, Knowledge Objects, Rule Resolver, `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 17 pagina's, sitemap met 16 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
 ## 2026-07-02
 
 **Type:** Technisch/Architectuur

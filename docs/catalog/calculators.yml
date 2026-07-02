@@ -260,3 +260,35 @@ calculators:
     last_review: "2026-06-30"
     owner: "Barry"
     notes: "Gemigreerd naar src/lib/calculators/import-costs.ts"
+
+  # ---------------------------------------------------------------------------
+  # CLUSTER: Salaris / Vakantiegeld
+  # ---------------------------------------------------------------------------
+  - id: "vakantiegeld-calculator"
+    slug: "/vakantiegeld-calculator/"
+    title: "Vakantiegeld Calculator"
+    category: "salaris"
+    subcategory: "vakantiegeld"
+    priority: 3
+    status: "live"
+    search_volume: 0
+    keyword_difficulty: 0
+    commercial_value: 0
+    estimated_rpm: 0
+    cluster: "salaris"
+    official_sources:
+      - name: "Belastingdienst — Box 1 tarieven"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1"
+      - name: "Belastingdienst — Algemene heffingskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026"
+      - name: "Belastingdienst — Arbeidskorting 2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026"
+      - name: "Rijksoverheid — Vakantiegeld"
+        url: "https://www.rijksoverheid.nl/onderwerpen/vakantiegeld"
+    schema: "faq,howto,breadcrumb"
+    component_version: "2.0"
+    engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/vacation-pay.ts
+    content_version: "1.0"
+    last_review: "2026-07-02"
+    owner: "Barry"
+    notes: "Nieuwe calculator gebouwd in src/lib/calculators/vacation-pay.ts; hergebruikt bestaande tax engine."
