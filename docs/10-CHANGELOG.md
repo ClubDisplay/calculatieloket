@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
-2. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
+1. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
+2. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
+3. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
 3. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
 3. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
 4. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
@@ -37,6 +38,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 093
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 093 — Homepage App Experience v1
+**Details:** Herontwerp van `src/pages/index.astro` tot een financiële startpagina. Hero met H1 "Wat wil je berekenen?", zoekveld om calculators te filteren, en cluster-chips (Alle, Populair, Inkomen, Wonen, Ondernemen, Belasting, Auto). Hoofdgrid toont 10 actiegerichte calculator cards: Bruto netto 2026, Salaris calculator, Vakantiegeld calculator, Toeslagen calculator, Hypotheek calculator, BTW calculator, BTW terugrekenen, BTW inclusief/exclusief, ZZP calculator en Auto importkosten berekenen. Elke card bevat titel, vraag, belofte, badge (Populair/Nieuw/Voor ondernemers) en CTA "Bereken direct". Secties "Begin met je inkomen" (Bruto netto, Vakantiegeld, Toeslagen, Hypotheek, ZZP) en "Voor ondernemers" (BTW, BTW terugrekenen, ZZP, Auto importkosten) gebruiken `CrossSellCards`. SEO versterkt: title en meta description aangepast, één H1, `WebSite` + `SearchAction` JSON-LD schema in `head` slot, interne links naar alle calculators, behouden FAQ en trustband. AdSense-advertentie (`AdSlot`) bewust pas ná de eerste toolsectie geplaatst. Mobile-first CSS: 1 kolom op 360/390px, 2 kolommen op tablet, 3 kolommen op desktop; grote tap targets (cluster-chips, cards, zoekveld). Client-side filter werkt op server-rendered cards; alle links blijven zichtbaar zonder JavaScript. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, shared components (alleen hergebruik `CrossSellCards`), `.env`, deploy, `npm ci`, `rm -rf node_modules` of dependencies. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` uitgevoerd; alle zeven stappen slagen.
+**Status:** In ontwikkeling
+**Build:** 17 pagina's, sitemap met 16 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
