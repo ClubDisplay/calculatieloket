@@ -161,9 +161,9 @@ Details:
 ## 8. PR URL + CI-status
 
 - **Branch:** `feat/sprint-104-trust-system`
-- **Commit:** `feat: add trust system across calculators`
-- **PR:** (wordt geopend na push)
-- **CI-status:** `Atlas CI / Run Atlas CI checks` — groen.
+- **Commit:** `feat: add trust system across calculators` (`89807f6`)
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/29
+- **CI-status:** `Atlas CI / Run Atlas CI checks` — groen in 22s.
 
 ---
 
