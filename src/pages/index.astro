@@ -237,6 +237,42 @@ const websiteSchema = {
     </div>
   </section>
 
+  <!-- ===== SNEL STARTEN ===== -->
+  <section class="hp-quick-start" aria-labelledby="qsTitle">
+    <div class="hp-qs-inner">
+      <h2 id="qsTitle" class="hp-qs-title">Snel starten</h2>
+      <p class="hp-qs-sub">Kies een calculator, vul één bedrag in en ga direct naar de tool.</p>
+
+      <div class="hp-qs-choices" role="group" aria-label="Kies een calculator">
+        <button type="button" class="hp-qs-choice active" data-target="bruto-netto" data-label="Bruto maandsalaris" data-placeholder="3500" data-href="/bruto-netto-2026/" data-param="bruto">
+          Netto salaris
+        </button>
+        <button type="button" class="hp-qs-choice" data-target="toeslagen" data-label="Bruto jaarinkomen" data-placeholder="35000" data-href="/toeslagen-calculator/" data-param="inkomen">
+          Toeslagen
+        </button>
+        <button type="button" class="hp-qs-choice" data-target="hypotheek" data-label="Bruto jaarinkomen" data-placeholder="50000" data-href="/hypotheek-calculator/" data-param="inkomen">
+          Hypotheek
+        </button>
+        <button type="button" class="hp-qs-choice" data-target="btw" data-label="Bedrag exclusief btw" data-placeholder="100" data-href="/btw-calculator/" data-param="bedrag" data-extra="tarief=21&richting=excl">
+          BTW
+        </button>
+        <button type="button" class="hp-qs-choice" data-target="zzp" data-label="Gewenst netto inkomen per maand" data-placeholder="3500" data-href="/zzp-calculator/" data-param="netto">
+          ZZP uurtarief
+        </button>
+      </div>
+
+      <div class="hp-qs-field">
+        <label for="hpQsInput" class="hp-qs-label" id="hpQsLabel">Bruto maandsalaris</label>
+        <div class="hp-qs-input-wrap">
+          <span class="hp-qs-prefix" aria-hidden="true">&euro;</span>
+          <input type="number" id="hpQsInput" class="hp-qs-input" placeholder="3500" min="0" step="1" />
+        </div>
+      </div>
+
+      <button type="button" id="hpQsCta" class="btn btn-primary btn-lg hp-qs-cta">Start berekening</button>
+    </div>
+  </section>
+
   <!-- ===== CALCULATOR GRID ===== -->
   <section id="calculators" class="hp-section">
     <div class="hp-section-header">
@@ -401,6 +437,49 @@ const websiteSchema = {
       e.preventDefault();
       filterCards();
       grid.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+
+  // ===== SNEL STARTEN =====
+  const qsChoices = Array.from(document.querySelectorAll(".hp-qs-choice")) as HTMLButtonElement[];
+  const qsInput = document.getElementById("hpQsInput") as HTMLInputElement;
+  const qsLabel = document.getElementById("hpQsLabel") as HTMLLabelElement;
+  const qsCta = document.getElementById("hpQsCta") as HTMLButtonElement;
+
+  function selectQuickStartChoice(btn: HTMLButtonElement) {
+    qsChoices.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    qsLabel.textContent = btn.dataset.label || "Bedrag";
+    qsInput.placeholder = btn.dataset.placeholder || "";
+    qsInput.value = "";
+    qsInput.focus();
+  }
+
+  function startQuickCalculation() {
+    const active = qsChoices.find((b) => b.classList.contains("active"));
+    if (!active) return;
+
+    const value = parseFloat(qsInput.value);
+    if (!Number.isFinite(value) || value <= 0) {
+      qsInput.focus();
+      return;
+    }
+
+    const href = active.dataset.href || "/";
+    const param = active.dataset.param || "waarde";
+    const extra = active.dataset.extra ? `&${active.dataset.extra}` : "";
+    window.location.href = `${href}?${param}=${Math.round(value)}${extra}`;
+  }
+
+  qsChoices.forEach((btn) => {
+    btn.addEventListener("click", () => selectQuickStartChoice(btn));
+  });
+
+  qsCta.addEventListener("click", startQuickCalculation);
+  qsInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      startQuickCalculation();
     }
   });
 </script>
@@ -600,6 +679,116 @@ const websiteSchema = {
     font-size: 0.95rem;
   }
 
+  /* ===== SNEL STARTEN ===== */
+  .hp-quick-start {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .hp-qs-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hp-qs-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 0.35rem;
+    text-align: center;
+  }
+
+  .hp-qs-sub {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .hp-qs-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .hp-qs-choice {
+    appearance: none;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .hp-qs-choice:hover,
+  .hp-qs-choice:focus-visible,
+  .hp-qs-choice.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .hp-qs-field {
+    margin-bottom: 1rem;
+  }
+
+  .hp-qs-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .hp-qs-input-wrap {
+    position: relative;
+  }
+
+  .hp-qs-prefix {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  .hp-qs-input {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 2.4rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .hp-qs-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  .hp-qs-cta {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 960px) {
     .hp-grid {
@@ -633,6 +822,28 @@ const websiteSchema = {
     .hp-card-icon {
       width: 44px;
       height: 44px;
+    }
+
+    .hp-quick-start {
+      padding: 1.25rem 1rem;
+    }
+
+    .hp-qs-title {
+      font-size: 1.3rem;
+    }
+
+    .hp-qs-choice {
+      padding: 0.5rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    .hp-qs-input {
+      font-size: 16px; /* prevent iOS zoom */
+      padding: 0.75rem 1rem 0.75rem 2.2rem;
+    }
+
+    .hp-qs-cta {
+      padding: 0.8rem 1.25rem;
     }
   }
 </style>
