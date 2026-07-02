@@ -180,19 +180,26 @@ const websiteSchema = {
 
         <div class="hp-search-wrap">
           <label for="hpSearch" class="visually-hidden">Zoek een calculator</label>
-          <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, btw, hypotheek..." autocomplete="off" />
+          <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, btw, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
           <span class="hp-search-icon" aria-hidden="true">🔍</span>
         </div>
 
         <div class="hp-cluster-row" aria-label="Categorieën">
           {categoryLinks.map((cat) => (
-            <a href={cat.href} class="hp-cluster-chip">
+            <a
+              href={cat.href}
+              class="hp-cluster-chip"
+              data-analytics="category-chip"
+              data-analytics-category="homepage"
+              data-analytics-action="click"
+              data-analytics-label={cat.id}
+            >
               {cat.label}
             </a>
           ))}
         </div>
         <p class="hp-categories-link">
-          <a href="#categorieen">Bekijk alle categorieën</a>
+          <a href="#categorieen" data-analytics="category-overview-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="categorieen">Bekijk alle categorieën</a>
         </p>
 
         <div class="hero-trust">
@@ -248,19 +255,19 @@ const websiteSchema = {
       <p class="hp-qs-sub">Kies een calculator, vul één bedrag in en ga direct naar de tool.</p>
 
       <div class="hp-qs-choices" role="group" aria-label="Kies een calculator">
-        <button type="button" class="hp-qs-choice active" data-target="bruto-netto" data-label="Bruto maandsalaris" data-placeholder="3500" data-href="/bruto-netto-2026/" data-param="bruto">
+        <button type="button" class="hp-qs-choice active" data-target="bruto-netto" data-label="Bruto maandsalaris" data-placeholder="3500" data-href="/bruto-netto-2026/" data-param="bruto" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="bruto-netto">
           Netto salaris
         </button>
-        <button type="button" class="hp-qs-choice" data-target="toeslagen" data-label="Bruto jaarinkomen" data-placeholder="35000" data-href="/toeslagen-calculator/" data-param="inkomen">
+        <button type="button" class="hp-qs-choice" data-target="toeslagen" data-label="Bruto jaarinkomen" data-placeholder="35000" data-href="/toeslagen-calculator/" data-param="inkomen" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="toeslagen">
           Toeslagen
         </button>
-        <button type="button" class="hp-qs-choice" data-target="hypotheek" data-label="Bruto jaarinkomen" data-placeholder="50000" data-href="/hypotheek-calculator/" data-param="inkomen">
+        <button type="button" class="hp-qs-choice" data-target="hypotheek" data-label="Bruto jaarinkomen" data-placeholder="50000" data-href="/hypotheek-calculator/" data-param="inkomen" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="hypotheek">
           Hypotheek
         </button>
-        <button type="button" class="hp-qs-choice" data-target="btw" data-label="Bedrag exclusief btw" data-placeholder="100" data-href="/btw-calculator/" data-param="bedrag" data-extra="tarief=21&richting=excl">
+        <button type="button" class="hp-qs-choice" data-target="btw" data-label="Bedrag exclusief btw" data-placeholder="100" data-href="/btw-calculator/" data-param="bedrag" data-extra="tarief=21&richting=excl" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="btw">
           BTW
         </button>
-        <button type="button" class="hp-qs-choice" data-target="zzp" data-label="Gewenst netto inkomen per maand" data-placeholder="3500" data-href="/zzp-calculator/" data-param="netto">
+        <button type="button" class="hp-qs-choice" data-target="zzp" data-label="Gewenst netto inkomen per maand" data-placeholder="3500" data-href="/zzp-calculator/" data-param="netto" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="zzp">
           ZZP uurtarief
         </button>
       </div>
@@ -273,7 +280,7 @@ const websiteSchema = {
         </div>
       </div>
 
-      <button type="button" id="hpQsCta" class="btn btn-primary btn-lg hp-qs-cta">Start berekening</button>
+      <button type="button" id="hpQsCta" class="btn btn-primary btn-lg hp-qs-cta" data-analytics="quick-start-cta" data-analytics-category="quick-start" data-analytics-action="click" data-analytics-label="start-berekening">Start berekening</button>
     </div>
   </section>
 
@@ -293,6 +300,10 @@ const websiteSchema = {
           data-title={card.title.toLowerCase()}
           data-keywords={card.keywords.toLowerCase()}
           style={`--hp-accent: ${card.accent}`}
+          data-analytics="calculator-card"
+          data-analytics-category="homepage"
+          data-analytics-action="click"
+          data-analytics-label={card.id}
         >
           <span class="hp-card-icon" set:html={card.icon} />
           <div class="hp-card-body">
@@ -316,7 +327,7 @@ const websiteSchema = {
       <h2 id="catSectionTitle" class="section-heading">Categorieën</h2>
       <p class="section-sub">Kies een onderwerp en ontdek alle relevante calculators.</p>
     </div>
-    <RelatedCategories title="Categorieën" categories={categoryList} />
+    <RelatedCategories title="Categorieën" analyticsCategory="homepage" categories={categoryList} />
   </section>
 
   <AdSlot slot="1234567893" format="auto" style="min-height:120px" />
@@ -324,6 +335,7 @@ const websiteSchema = {
   <!-- ===== BEGIN MET JE INKOMEN ===== -->
   <CrossSellCards
     title="Begin met je inkomen"
+    analyticsCategory="homepage"
     items={incomeCards.map((card) => ({
       href: card.href,
       title: card.title,
@@ -335,6 +347,7 @@ const websiteSchema = {
   <!-- ===== VOOR ONDERNEMERS ===== -->
   <CrossSellCards
     title="Voor ondernemers"
+    analyticsCategory="homepage"
     items={entrepreneurCards.map((card) => ({
       href: card.href,
       title: card.title,

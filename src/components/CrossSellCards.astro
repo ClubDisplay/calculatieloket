@@ -9,9 +9,11 @@ interface Item {
 interface Props {
   title: string;
   items: Item[];
+  analyticsCategory?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, items, analyticsCategory = "calculator-page" } = Astro.props;
+const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
 ---
 
 <section class="xsell">
@@ -22,6 +24,10 @@ const { title, items } = Astro.props;
         href={item.href}
         class="xsell-card"
         style={item.accent ? `--xsell-accent:${item.accent}` : undefined}
+        data-analytics="cross-sell-card"
+        data-analytics-category={analyticsCategory}
+        data-analytics-action="click"
+        data-analytics-label={slugify(item.href)}
       >
         <span class="xsell-card-title">{item.title}</span>
         <span class="xsell-card-desc">{item.description}</span>

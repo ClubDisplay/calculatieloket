@@ -79,7 +79,15 @@ const jsonLd = {
   <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="/" class="site-brand" aria-label="Calculatieloket.nl home">
+        <a
+          href="/"
+          class="site-brand"
+          aria-label="Calculatieloket.nl home"
+          data-analytics="header-link"
+          data-analytics-category="header"
+          data-analytics-action="click"
+          data-analytics-label="home"
+        >
           <img
             src="/logo-calculatieloket-header-tight.png"
             alt="Calculatieloket.nl"
@@ -87,34 +95,136 @@ const jsonLd = {
           />
         </a>
 
-        <button class="site-nav-toggle" id="siteNavToggle" type="button" aria-expanded="false" aria-controls="siteNavMenu" aria-label="Menu openen">
+        <button
+          class="site-nav-toggle"
+          id="siteNavToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="siteNavMenu"
+          aria-label="Menu openen"
+          data-analytics="header-menu-toggle"
+          data-analytics-category="header"
+          data-analytics-action="click"
+          data-analytics-label="menu"
+        >
           <span class="site-nav-burger" aria-hidden="true"></span>
         </button>
 
         <nav class="site-nav" id="siteNavMenu" aria-label="Hoofdnavigatie">
           <div class="site-nav-section">
-            <a href="/" class="site-nav-link">Home</a>
+            <a
+              href="/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="home"
+            >
+              Home
+            </a>
           </div>
           <div class="site-nav-section site-nav-dropdown">
-            <button type="button" class="site-nav-dropdown-toggle" id="siteNavDropdownToggle" aria-expanded="false" aria-controls="siteNavDropdown">
+            <button
+              type="button"
+              class="site-nav-dropdown-toggle"
+              id="siteNavDropdownToggle"
+              aria-expanded="false"
+              aria-controls="siteNavDropdown"
+              data-analytics="header-dropdown-toggle"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="categories"
+            >
               Categorieën
             </button>
             <div class="site-nav-dropdown-menu" id="siteNavDropdown">
               {categoryList.map((cat) => (
-                <a href={cat.href} class="site-nav-dropdown-link">{cat.label}</a>
+                <a
+                  href={cat.href}
+                  class="site-nav-dropdown-link"
+                  data-analytics="header-link"
+                  data-analytics-category="header"
+                  data-analytics-action="click"
+                  data-analytics-label={cat.id}
+                >
+                  {cat.label}
+                </a>
               ))}
             </div>
           </div>
           <div class="site-nav-section">
-            <a href="/btw-calculator/" class="site-nav-link">BTW</a>
-            <a href="/salaris-calculator/" class="site-nav-link">Salaris</a>
-            <a href="/hypotheek-calculator/" class="site-nav-link">Hypotheek</a>
-            <a href="/zzp-calculator/" class="site-nav-link">ZZP</a>
-            <a href="/toeslagen-calculator/" class="site-nav-link">Toeslagen</a>
+            <a
+              href="/btw-calculator/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="btw"
+            >
+              BTW
+            </a>
+            <a
+              href="/salaris-calculator/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="salaris"
+            >
+              Salaris
+            </a>
+            <a
+              href="/hypotheek-calculator/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="hypotheek"
+            >
+              Hypotheek
+            </a>
+            <a
+              href="/zzp-calculator/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="zzp"
+            >
+              ZZP
+            </a>
+            <a
+              href="/toeslagen-calculator/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="toeslagen"
+            >
+              Toeslagen
+            </a>
           </div>
           <div class="site-nav-section">
-            <a href="/over-ons/" class="site-nav-link">Over ons</a>
-            <a href="/contact/" class="site-nav-link">Contact</a>
+            <a
+              href="/over-ons/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="over-ons"
+            >
+              Over ons
+            </a>
+            <a
+              href="/contact/"
+              class="site-nav-link"
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="contact"
+            >
+              Contact
+            </a>
           </div>
         </nav>
       </div>
@@ -130,31 +240,143 @@ const jsonLd = {
           <h3 class="footer-title">Categorieën</h3>
           <div class="footer-links">
             {categoryList.map((cat) => (
-              <a href={cat.href}>{cat.label}</a>
+              <a
+                href={cat.href}
+                data-analytics="footer-link"
+                data-analytics-category="footer"
+                data-analytics-action="click"
+                data-analytics-label={cat.id}
+              >
+                {cat.label}
+              </a>
             ))}
           </div>
         </div>
         <div class="footer-col">
           <h3 class="footer-title">Alle calculators</h3>
           <div class="footer-links">
-            <a href="/bruto-netto-2026/">Bruto netto 2026</a>
-            <a href="/salaris-calculator/">Salaris</a>
-            <a href="/vakantiegeld-calculator/">Vakantiegeld</a>
-            <a href="/toeslagen-calculator/">Toeslagen</a>
-            <a href="/hypotheek-calculator/">Hypotheek</a>
-            <a href="/btw-calculator/">BTW</a>
-            <a href="/zzp-calculator/">ZZP</a>
-            <a href="/auto-importkosten-berekenen/">Auto importkosten</a>
+            <a
+              href="/bruto-netto-2026/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="bruto-netto-2026"
+            >
+              Bruto netto 2026
+            </a>
+            <a
+              href="/salaris-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="salaris"
+            >
+              Salaris
+            </a>
+            <a
+              href="/vakantiegeld-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="vakantiegeld"
+            >
+              Vakantiegeld
+            </a>
+            <a
+              href="/toeslagen-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="toeslagen"
+            >
+              Toeslagen
+            </a>
+            <a
+              href="/hypotheek-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="hypotheek"
+            >
+              Hypotheek
+            </a>
+            <a
+              href="/btw-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="btw"
+            >
+              BTW
+            </a>
+            <a
+              href="/zzp-calculator/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="zzp"
+            >
+              ZZP
+            </a>
+            <a
+              href="/auto-importkosten-berekenen/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="auto-importkosten"
+            >
+              Auto importkosten
+            </a>
           </div>
         </div>
         <div class="footer-col">
           <h3 class="footer-title">Calculatieloket</h3>
           <div class="footer-links">
-            <a href="/privacy/">Privacy</a>
-            <a href="/cookies/">Cookies</a>
-            <a href="/disclaimer/">Disclaimer</a>
-            <a href="/over-ons/">Over ons</a>
-            <a href="/contact/">Contact</a>
+            <a
+              href="/privacy/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="privacy"
+            >
+              Privacy
+            </a>
+            <a
+              href="/cookies/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="cookies"
+            >
+              Cookies
+            </a>
+            <a
+              href="/disclaimer/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="disclaimer"
+            >
+              Disclaimer
+            </a>
+            <a
+              href="/over-ons/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="over-ons"
+            >
+              Over ons
+            </a>
+            <a
+              href="/contact/"
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="contact"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>

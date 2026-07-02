@@ -126,7 +126,7 @@ const faqSchema = {
     intro="Als ondernemer moet je veel financiële ballen hoog houden. Van je uurtarief tot de btw en van zakelijke aankopen tot importkosten. Onze calculators voor ondernemers geven je snel inzicht in de belangrijkste cijfers, zodat je met een gerust hart zakelijke beslissingen kunt nemen."
   />
 
-  <CategoryGrid title="Calculators voor ondernemers" items={calculators} />
+  <CategoryGrid title="Calculators voor ondernemers" items={calculators} analyticsCategory="ondernemen-page" />
 
   <AdSlot slot="1234567897" format="auto" style="min-height:120px" />
 
@@ -149,5 +149,5 @@ const faqSchema = {
 
   <CategorySources title="Officiële bronnen" items={sources} />
 
-  <RelatedCategories current="Ondernemen" categories={categoryList} />
+  <RelatedCategories current="Ondernemen" categories={categoryList} analyticsCategory="ondernemen-page" />
 </BaseLayout>

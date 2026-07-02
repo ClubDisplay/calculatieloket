@@ -195,7 +195,7 @@ const breadcrumbSchema = {
       <div class="quick-chips">
         <span class="quick-chips-label">Snel kiezen:</span>
         {quickNetAmounts.map((amount) => (
-          <button type="button" class="quick-chip" data-amount={amount}>
+          <button type="button" class="quick-chip" data-amount={amount} data-analytics="quick-chip" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={amount}>
             &euro; {amount.toLocaleString("nl-NL")}
           </button>
         ))}
@@ -239,7 +239,7 @@ const breadcrumbSchema = {
         <div class="toggle-row">
           <span class="toggle-label">Zelfstandigenaftrek toepassen</span>
           <label class="toggle" for="selfEmployedDeduction">
-            <input type="checkbox" id="selfEmployedDeduction" checked={defaultZa} />
+            <input type="checkbox" id="selfEmployedDeduction" checked={defaultZa} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="zelfstandigenaftrek" />
             <span class="slider"></span>
           </label>
         </div>
@@ -249,7 +249,7 @@ const breadcrumbSchema = {
         <div class="toggle-row">
           <span class="toggle-label">Startersaftrek toepassen</span>
           <label class="toggle" for="starterDeduction">
-            <input type="checkbox" id="starterDeduction" checked={defaultStarter} />
+            <input type="checkbox" id="starterDeduction" checked={defaultStarter} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="startersaftrek" />
             <span class="slider"></span>
           </label>
         </div>
@@ -259,13 +259,13 @@ const breadcrumbSchema = {
         <div class="toggle-row">
           <span class="toggle-label">MKB-winstvrijstelling toepassen</span>
           <label class="toggle" for="mkbExemption">
-            <input type="checkbox" id="mkbExemption" checked={defaultMkb} />
+            <input type="checkbox" id="mkbExemption" checked={defaultMkb} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="mkb-winstvrijstelling" />
             <span class="slider"></span>
           </label>
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken uurtarief</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken uurtarief</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig netto inkomen, aantal dagen en uren per dag in.</p>
     </InputPanel>
 
@@ -296,7 +296,7 @@ const breadcrumbSchema = {
 
       <InlineSources title="Gebruikte bronnen" items={sources} />
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>

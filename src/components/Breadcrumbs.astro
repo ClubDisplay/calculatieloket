@@ -7,9 +7,15 @@ interface Item {
 
 interface Props {
   items: Item[];
+  analyticsCategory?: string;
 }
 
-const { items } = Astro.props;
+const { items, analyticsCategory = "breadcrumb" } = Astro.props;
+const slugify = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
 ---
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -17,9 +23,29 @@ const { items } = Astro.props;
     {items.map((item, index) => (
       <li class="breadcrumbs-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
         {item.current ? (
-          <span class="breadcrumbs-current" aria-current="page" itemprop="name">{item.label}</span>
+          <span
+            class="breadcrumbs-current"
+            aria-current="page"
+            itemprop="name"
+            data-analytics="breadcrumb-link"
+            data-analytics-category={analyticsCategory}
+            data-analytics-action="click"
+            data-analytics-label={slugify(item.label)}
+          >
+            {item.label}
+          </span>
         ) : (
-          <a href={item.href} class="breadcrumbs-link" itemprop="item" itemscope itemtype="https://schema.org/Thing">
+          <a
+            href={item.href}
+            class="breadcrumbs-link"
+            itemprop="item"
+            itemscope
+            itemtype="https://schema.org/Thing"
+            data-analytics="breadcrumb-link"
+            data-analytics-category={analyticsCategory}
+            data-analytics-action="click"
+            data-analytics-label={slugify(item.label)}
+          >
             <span itemprop="name">{item.label}</span>
             <meta itemprop="url" content={item.href} />
           </a>

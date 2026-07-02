@@ -1,5 +1,15 @@
 # Changelog — Calculatieloket.nl
 
+## 2026-07-02
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 100 — Analytics Ready Foundation
+**Details:** Analytics-ready markup toegevoegd zonder tracking scripts, cookies, event listeners of externe providers. Nieuwe conventie documentatie in `docs/product/12-ANALYTICS-READY-FOUNDATION.md`: `data-analytics`, `data-analytics-category`, `data-analytics-action`, `data-analytics-label`. Gedeelde componenten voorzien van data-attributen: `BaseLayout` (header/footer links), `Breadcrumbs`, `CategoryGrid` (met `analyticsCategory` prop), `RelatedCategories` (met `analyticsCategory` prop), `CrossSellCards` (met `analyticsCategory` prop), `FinancialJourney`, `ToolFooter` en `UseCasesPanel`. Homepage (`src/pages/index.astro`) attributen op zoekveld, cluster-chips, calculator cards, quick-start keuze-pillen, categorie links en cross-sell cards. Categoriepagina’s (`categorie/inkomen.astro`, `belasting.astro`, `wonen.astro`, `ondernemen.astro`, `auto.astro`) gebruiken per pagina een specifieke `analyticsCategory` voor `CategoryGrid` en `RelatedCategories`. Alle 10 calculatorpagina’s krijgen attributen op CTA-knoppen, quick-chips, kopieer-link knoppen, radio-button groepen (tarief, richting, looptijd, voertuigtype, huishouden), toggles (ZZP aftrekposten) en select velden (aankoopland). Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
 ## 2026-07-03
 
 **Type:** Product/UX

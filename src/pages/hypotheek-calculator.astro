@@ -181,7 +181,7 @@ const breadcrumbSchema = {
       <div class="quick-chips">
         <span class="quick-chips-label">Snel inkomen:</span>
         {quickIncomeAmounts.map((amount) => (
-          <button type="button" class="quick-chip" data-amount={amount}>
+          <button type="button" class="quick-chip" data-amount={amount} data-analytics="quick-chip" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={amount}>
             &euro; {amount.toLocaleString("nl-NL")}
           </button>
         ))}
@@ -198,9 +198,9 @@ const breadcrumbSchema = {
       <div class="form-group">
         <label>Looptijd</label>
         <div class="radio-group" id="termGroup">
-          <button type="button" data-term="10" class={defaultTerm === 10 ? "active" : ""}>10 jaar</button>
-          <button type="button" data-term="20" class={defaultTerm === 20 ? "active" : ""}>20 jaar</button>
-          <button type="button" data-term="30" class={defaultTerm === 30 ? "active" : ""}>30 jaar</button>
+          <button type="button" data-term="10" class={defaultTerm === 10 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-10">10 jaar</button>
+          <button type="button" data-term="20" class={defaultTerm === 20 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-20">20 jaar</button>
+          <button type="button" data-term="30" class={defaultTerm === 30 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-30">30 jaar</button>
         </div>
       </div>
 
@@ -222,7 +222,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%">Bereken hypotheek</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken hypotheek</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig inkomen en rente in (hoger dan 0).</p>
     </InputPanel>
 
@@ -247,7 +247,7 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Netto maandlasten <span class="hint">(incl. hypotheekrenteaftrek)</span></span><span class="value" id="detailNetMonthly">{formatEuro(initialResult.netMonthlyPayment, 0)}</span></div>
       <div class="result-row"><span class="label">Totale rentekosten</span><span class="value" id="detailTotalInterest">{formatEuro(initialResult.totalInterest, 0)}</span></div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions">
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
         <span class="copy-link-icon">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
