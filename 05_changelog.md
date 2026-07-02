@@ -3,6 +3,16 @@
 ## 2026-07-02
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 101 — Performance & Accessibility Excellence v1
+**Details:** Performance-, accessibility- en mobile-UX quick wins op het bestaande platform. Skip link toegevoegd in `src/layouts/BaseLayout.astro` ("Spring naar inhoud", target `main id="main-content"`). Consistente `:focus-visible` stijl voor links, buttons, inputs, selects, summaries en focusbare elementen in `src/styles/global.css`; custom toggle switch krijgt zichtbare focus ring. `prefers-reduced-motion: reduce` media query schakelt animaties/transities uit, ook in `src/components/CookieConsent.astro`. `aria-current="page"` toegevoegd aan actieve links in header en footer. Mobiele menu toggle krijgt zichtbare focus ring, dynamisch `aria-label` (openen/sluiten) en sluit met `Escape`. Logo in `BaseLayout` krijgt `width`/`height`, `loading="eager"` en `decoding="async"` voor minder CLS. Oude, door `BaseLayout` overschreven `.site-header`/`.site-header-inner`/`.site-nav` CSS verwijderd uit `global.css`. FAQ summary focus stijl toegevoegd in `FaqAccordion.astro`. Homepage zoekresultaten "geen resultaten" krijgen `aria-live="polite"`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-02
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 100 — Analytics Ready Foundation
 **Details:** Analytics-ready markup toegevoegd zonder tracking scripts, cookies, event listeners of externe providers. Nieuwe conventie documentatie in `docs/product/12-ANALYTICS-READY-FOUNDATION.md`: `data-analytics`, `data-analytics-category`, `data-analytics-action`, `data-analytics-label`. Gedeelde componenten voorzien van data-attributen: `BaseLayout` (header/footer links), `Breadcrumbs`, `CategoryGrid` (met `analyticsCategory` prop), `RelatedCategories` (met `analyticsCategory` prop), `CrossSellCards` (met `analyticsCategory` prop), `FinancialJourney`, `ToolFooter` en `UseCasesPanel`. Homepage (`src/pages/index.astro`) attributen op zoekveld, cluster-chips, calculator cards, quick-start keuze-pillen, categorie links en cross-sell cards. Categoriepagina’s (`categorie/inkomen.astro`, `belasting.astro`, `wonen.astro`, `ondernemen.astro`, `auto.astro`) gebruiken per pagina een specifieke `analyticsCategory` voor `CategoryGrid` en `RelatedCategories`. Alle 10 calculatorpagina’s krijgen attributen op CTA-knoppen, quick-chips, kopieer-link knoppen, radio-button groepen (tarief, richting, looptijd, voertuigtype, huishouden), toggles (ZZP aftrekposten) en select velden (aankoopland). Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling

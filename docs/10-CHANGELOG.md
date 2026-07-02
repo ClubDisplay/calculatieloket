@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
-2. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
+1. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+2. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
+3. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
 3. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
 3. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
 3. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
@@ -44,6 +45,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 101
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 101 — Performance & Accessibility Excellence v1
+**Details:** Performance-, accessibility- en mobile-UX quick wins op het bestaande platform. Skip link toegevoegd in `src/layouts/BaseLayout.astro` ("Spring naar inhoud", target `main id="main-content"`). Consistente `:focus-visible` stijl voor links, buttons, inputs, selects, summaries en focusbare elementen in `src/styles/global.css`; custom toggle switch krijgt zichtbare focus ring. `prefers-reduced-motion: reduce` media query schakelt animaties/transities uit, ook in `src/components/CookieConsent.astro`. `aria-current="page"` toegevoegd aan actieve links in header en footer. Mobiele menu toggle krijgt zichtbare focus ring, dynamisch `aria-label` (openen/sluiten) en sluit met `Escape`. Logo in `BaseLayout` krijgt `width`/`height`, `loading="eager"` en `decoding="async"` voor minder CLS. Oude, door `BaseLayout` overschreven `.site-header`/`.site-header-inner`/`.site-nav` CSS verwijderd uit `global.css`. FAQ summary focus stijl toegevoegd in `FaqAccordion.astro`. Homepage zoekresultaten "geen resultaten" krijgen `aria-live="polite"`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
