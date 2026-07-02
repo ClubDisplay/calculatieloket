@@ -6,6 +6,20 @@
 
 ---
 
+## Update: Sprint 099 — Breadcrumb Consistency + Homepage Search URL State (afgerond)
+
+Sprint 099 maakt de navigatie-consistentie compleet door breadcrumbs toe te voegen aan alle categoriepagina’s en de homepage-zoekterm deelbaar te maken via URL-state.
+
+Wijzigingen:
+
+- **Categoriepagina’s**: visuele breadcrumbs toegevoegd boven de hero in `src/pages/categorie/inkomen.astro`, `src/pages/categorie/belasting.astro`, `src/pages/categorie/wonen.astro`, `src/pages/categorie/ondernemen.astro` en `src/pages/categorie/auto.astro`. Patroon: `Home > Categorieën > <Categorie>`. `Categorieën` linkt naar `/#categorieen` op de homepage. Huidige categorie heeft `aria-current="page"`. Zelfde styling als calculator breadcrumbs.
+- **Homepage (`src/pages/index.astro`)**: geen breadcrumb toegevoegd (semantisch niet nodig op root). Wel is de zoekfilter nu URL-gestuurd:
+  - Bij typen wordt `?q=<zoekterm>` bijgewerkt via `history.replaceState`.
+  - Bij laden met `?q=...` wordt het zoekveld gevuld en de filter direct toegepast.
+  - Bij leegmaken wordt de queryparameter verwijderd.
+  - Zonder JavaScript blijven alle calculatorcards zichtbaar.
+- Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 098 — Visual Breadcrumbs + Codebase Cleanup (afgerond)
 
 Sprint 098 voegt zichtbare breadcrumbs toe aan alle calculatorpagina’s en ruimt oude back-upbestanden op. Doel: betere gebruikersnavigatie, interne links, SEO topic clusters en onderhoudbaarheid.

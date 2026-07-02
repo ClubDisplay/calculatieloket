@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
-2. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+1. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
+2. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
+3. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
 3. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
 3. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
 3. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
@@ -42,6 +43,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 099
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 099 — Breadcrumb Consistency + Homepage Search URL State
+**Details:** Navigatie-consistentie compleet gemaakt. Categoriepagina’s krijgen visuele breadcrumbs `Home > Categorieën > <Categorie>` boven de hero: Inkomen, Belasting, Wonen, Ondernemen en Auto. `Categorieën` linkt naar `/#categorieen` op de homepage; huidige categorie heeft `aria-current="page"`; zelfde styling als calculator breadcrumbs. Homepage krijgt geen extra breadcrumb (root). Homepage zoekfilter is nu URL-gestuurd: bij typen wordt `?q=<zoekterm>` bijgewerkt via `history.replaceState`; bij laden met `?q=...` wordt het zoekveld gevuld en filter direct toegepast; bij leegmaken wordt de queryparameter verwijderd. Zonder JavaScript blijven alle calculatorcards zichtbaar. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

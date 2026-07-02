@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 099 — Breadcrumb Consistency + Homepage Search URL State
+**Details:** Navigatie-consistentie compleet gemaakt. Categoriepagina’s krijgen visuele breadcrumbs `Home > Categorieën > <Categorie>` boven de hero: Inkomen, Belasting, Wonen, Ondernemen en Auto. `Categorieën` linkt naar `/#categorieen` op de homepage; huidige categorie heeft `aria-current="page"`; zelfde styling als calculator breadcrumbs. Homepage krijgt geen extra breadcrumb (root). Homepage zoekfilter is nu URL-gestuurd: bij typen wordt `?q=<zoekterm>` bijgewerkt via `history.replaceState`; bij laden met `?q=...` wordt het zoekveld gevuld en filter direct toegepast; bij leegmaken wordt de queryparameter verwijderd. Zonder JavaScript blijven alle calculatorcards zichtbaar. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 098 — Visual Breadcrumbs + Codebase Cleanup
 **Details:** Nieuwe herbruikbare component `src/components/Breadcrumbs.astro` toegevoegd. Breadcrumbs zijn zichtbaar boven de calculator-shell op alle 10 calculatorpagina’s: `Home > Categorie > Calculator` (bijvoorbeeld `Home > Inkomen > Bruto netto 2026`, `Home > Belasting > BTW calculator`, `Home > Wonen > Hypotheek calculator`, `Home > Ondernemen > ZZP calculator`, `Home > Auto > Auto importkosten berekenen`). Component gebruikt `<nav aria-label="Breadcrumb">`, `<ol>` lijst, `aria-current="page"` op de huidige pagina, en microdata. Bestaande `BreadcrumbList` JSON-LD schema blijft behouden. Exact één H1 per pagina blijft intact; alle breadcrumbs zijn server-rendered. Styling is rustig, compact en mobile-first. Oude back-up map `src/pages/_bak/` verwijderd; inhoud was niet meer in gebruik. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling
