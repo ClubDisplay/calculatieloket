@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 105 — Content Excellence & Topic Authority v1
+**Details:** Alle 21 publieke pagina's gebracht naar één uniforme redactionele kwaliteitsstandaard. Nieuwe documentatie `docs/product/16-CONTENT-QUALITY-STANDARD-v1.md` definieert de vereiste structuur per calculatorpagina, meta description-standaard (120–160 tekens), content-richtlijnen, en sjablonen voor categorie- en statische pagina's. Meta descriptions aangepast op alle 21 publieke pagina's (homepage, 10 calculators, 5 categorieën, 5 statische pagina's). Alle 10 calculatorpagina's gecontroleerd op structuur (intro, calculator, resultaat, TrustPanel, waarom vertrouwen, praktijkvoorbeeld, veelgemaakte fouten, FAQ, bronnen, disclaimer, gerelateerde calculators). `hypotheek-calculator.astro` kreeg een uitgebreide content-uitbreiding (hoe de berekening werkt, waarom je deze kunt vertrouwen, concreet voorbeeld, veelgemaakte fouten). De overige 9 calculators kregen de sectie "Waarom kun je deze berekening vertrouwen?" met verwijzingen naar officiële bronnen; waar relevant aangevuld met voorbeeld en veelgemaakte fouten. Categoriepagina's en statische pagina's kregen geoptimaliseerde meta descriptions. Geen fake content, testimonials, sterren of nep badges. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 104 — Trust & Credibility Excellence v1
 **Details:** Uniform Trust System toegevoegd aan alle 10 calculatorpagina's. Nieuwe component `src/components/calculator/TrustPanel.astro` met badges (Gebaseerd op officiële bronnen, Jaarlijks gecontroleerd, Indicatieve berekening, Laatste update, Redactie: Calculatieloket.nl), compacte uitleg en anchor-link naar bronnen. `src/components/SourceCards.astro` krijgt optionele `id` prop. TrustPanel staat in de `result`-slot direct onder `ResultPanel` op alle calculators: bruto-netto-2026, salaris, hypotheek, toeslagen, btw, btw-terugrekenen, btw-inclusief-exclusief, zzp, auto-importkosten en vakantiegeld. Statische pagina's over-ons, contact, disclaimer, privacy en cookies krijgen verlengde meta descriptions (120–160 tekens) en trust-secties. `src/layouts/BaseLayout.astro` footer bottom toont subtiel "Gebaseerd op officiële bronnen". Geen Google Reviews, sterren, testimonials of nep badges. Nieuwe documentatie `docs/product/15-TRUST-SYSTEM-v1.md`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling

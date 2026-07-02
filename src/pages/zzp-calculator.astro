@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "ZZP Calculator 2026 — Uurtarief en netto inkomen | Calculatieloket.nl";
-const description = "Bereken als zzp'er in 2026 je benodigde uurtarief, jaaromzet, inkomstenbelastingindicatie, ondernemersaftrek, MKB-winstvrijstelling en netto inkomen.";
+const description = "Bereken als zzp'er in 2026 je benodigde uurtarief, jaaromzet, inkomstenbelasting en netto inkomen. Inclusief ondernemersaftrek en MKB-winstvrijstelling.";
 
 const defaultNet = 4000;
 const defaultDays = 210;
@@ -325,6 +325,9 @@ const breadcrumbSchema = {
     <p>Deze ZZP calculator geeft een indicatie van je benodigde uurtarief en jaaromzet. De berekening houdt rekening met zakelijke kosten, pensioenreservering, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling. Het is een vereenvoudigde berekening op basis van de 2026 tarieven.</p>
     <p>Wil je weten hoeveel btw je over je omzet betaalt? Gebruik de <a href="/btw-calculator/">BTW calculator</a>. Voor je inkomensvergelijking heb je de <a href="/bruto-netto-2026/">bruto-netto calculator</a>, <a href="/hypotheek-calculator/">hypotheek calculator</a> en <a href="/toeslagen-calculator/">toeslagen calculator</a>.</p>
 
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>De calculator gebruigt de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026" target="_blank" rel="noopener">zelfstandigenaftrek</a> en <a href="https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/" target="_blank" rel="noopener">MKB-winstvrijstelling</a> voor 2026. De uitkomst is een indicatie: je exacte belasting hangt af van aftrekposten, investeringen, de <em>fiscalist regel</em> en persoonlijke situatie.</p>
+
     <h2>Hoe werkt deze berekening?</h2>
     <p>De calculator werkt terugwaarts:</p>
     <ol class="calc-list">
@@ -345,6 +348,24 @@ const breadcrumbSchema = {
     </ul>
 
     <p>Let op: dit is een indicatie. Fiscale regels kunnen afhankelijk zijn van je exacte situatie, bijvoorbeeld de <strong>fiscalist regel</strong> of specifieke aftrekposten. Raadpleeg bij twijfel een accountant of belastingadviseur.</p>
+
+    <h2>Praktijkvoorbeeld</h2>
+    <p>Stel, je wilt <strong>€ 4.000 netto</strong> per maand verdienen. Je rekent met 210 factureerbare dagen, 8 uur per dag, € 300 zakelijke kosten per maand en € 500 pensioenreservering per maand. Met zelfstandigenaftrek en MKB-winstvrijstelling ingeschakeld, geeft de calculator een indicatie van:</p>
+    <ul class="calc-list">
+      <li><strong>Benodigde jaaromzet:</strong> circa € 90.000 (exclusief btw).</li>
+      <li><strong>Benodigd uurtarief:</strong> circa € 54 per uur.</li>
+      <li><strong>Belastingindicatie:</strong> afhankelijk van de exacte aftrekposten en Box 1 tarieven.</li>
+    </ul>
+    <p>Zonder zelfstandigenaftrek of MKB-winstvrijstelling stijgt het benodigde uurtarief. Proef verschillende instellingen om je eigen situatie in te schatten.</p>
+
+    <h2>Veelgemaakte fouten</h2>
+    <ul class="calc-list">
+      <li><strong>Te veel factureerbare uren aannemen:</strong> vakantie, ziekte, administratie en acquisitie verlagen het aantal uren dat je kunt declareren.</li>
+      <li><strong>Zakelijke kosten onderschatten:</strong> verzekeringen, accountantskosten, gereedschap en marketing tellen mee.</li>
+      <li><strong>Pensioen vergeten:</strong> als zzp'er bouw je zelf pensioen op; dit kost structureel geld.</li>
+      <li><strong>Netto salaris gelijkstellen aan winst:</strong> je betaalt belasting over de winst, niet over de omzet.</li>
+      <li><strong>Startersaftrek altijd toepassen:</strong> deze geldt alleen in de eerste jaren van je onderneming en onder voorwaarden.</li>
+    </ul>
 
     <h2>Bronnen en informatie</h2>
     <p>De ZZP berekening is gebaseerd op de tarieven en heffingskortingen van de Belastingdienst voor 2026. Voor meer informatie over zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling, zie de officiële website van de <a href="https://www.belastingdienst.nl" target="_blank" rel="noopener">Belastingdienst</a> en <a href="https://ondernemersplein.overheid.nl" target="_blank" rel="noopener">Ondernemersplein</a>.</p>

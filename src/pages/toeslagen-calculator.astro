@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Toeslagen Calculator 2026 — Zorgtoeslag en huurtoeslag indicatie | Calculatieloket.nl";
-const description = "Bereken een indicatie van zorgtoeslag en huurtoeslag op basis van inkomen, huur en huishouden. Gebaseerd op regels 2026 van Dienst Toeslagen.";
+const description = "Bereken een indicatie van zorgtoeslag en huurtoeslag voor 2026 op basis van inkomen, huur en huishouden. Gebaseerd op regels van Dienst Toeslagen.";
 
 const defaultIncome = 28000;
 const defaultRent = 700;
@@ -302,11 +302,31 @@ const breadcrumbSchema = {
     <p>Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en situatie. Gebaseerd op de regels van 2026.</p>
     <p>Wil je weten wat je <a href="/bruto-netto-2026/">netto overhoudt</a> van het inkomen waarover je toeslagen berekent, of bekijk je <a href="/hypotheek-calculator/">hypotheekindicatie</a> en <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
 
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>Deze calculator gebruikt de publieke <a href="https://www.toeslagen.nl/huurtoeslag" target="_blank" rel="noopener">huurtoeslag</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag" target="_blank" rel="noopener">zorgtoeslag</a> regels van Dienst Toeslagen en de Belastingdienst. De uitkomst is een indicatie: je werkelijke toeslag wordt bepaald aan de hand van je definitieve toetsingsinkomen, vermogen en huishouden.</p>
+
     <h2>Hoe werkt deze berekening?</h2>
     <p>Deze calculator geeft een indicatie van huurtoeslag en zorgtoeslag op basis van de regels van 2026.</p>
     <ul class="calc-list">
       <li><strong>Huurtoeslag:</strong> vanaf 2026 kan je huur niet meer 'te hoog' zijn om huurtoeslag aan te vragen. De rekengrenzen (€ 932,93 voor 21+) tellen nog wel mee voor de hoogte. Vermogensgrens: € 38.479 (alleen) / € 76.958 (samen).</li>
       <li><strong>Zorgtoeslag:</strong> maximaal € 1.550/jaar (circa € 129/maand) voor alleenstaanden, € 2.963/jaar (circa € 247/maand) met partner. Inkomensgrens € 40.857 (alleen) / € 51.142 (samen). Vermogensgrens: € 146.011 (alleen) / € 184.633 (samen).</li>
+    </ul>
+
+    <h2>Praktijkvoorbeeld</h2>
+    <p>Stel, je bent alleenstaand, hebt een bruto jaarinkomen van <strong>€ 28.000</strong> en betaalt <strong>€ 700</strong> kale huur per maand. De calculator geeft dan een indicatie van:</p>
+    <ul class="calc-list">
+      <li><strong>Huurtoeslag:</strong> circa € 95 per maand (afhankelijk van de exacte huur en inkomen).</li>
+      <li><strong>Zorgtoeslag:</strong> circa € 129 per maand (maximaal voor alleenstaanden in 2026).</li>
+      <li><strong>Totaal:</strong> circa € 224 per maand aan toeslagen.</li>
+    </ul>
+    <p>Met een partner en een gezamenlijk inkomen verandert zowel de huurtoeslag als de zorgtoeslag. Probeer verschillende scenario's uit met de slider en quick chips.</p>
+
+    <h2>Veelgemaakte fouten</h2>
+    <ul class="calc-list">
+      <li><strong>Vermogen negeren:</strong> spaargeld en beleggingen tellen mee en kunnen je toeslag verlagen of uitsluiten.</li>
+      <li><strong>Huur inclusief servicekosten invullen:</strong> huurtoeslag is gebaseerd op de kale huur, exclusief servicekosten.</li>
+      <li><strong>Partnerinkomen vergeten:</strong> het inkomen van je toeslagpartner telt mee.</li>
+      <li><strong>Indicatie als definitief zien:</strong> pas na afloop van het jaar volgt de definitieve berekening op basis van je werkelijke inkomen.</li>
     </ul>
   </div>
 

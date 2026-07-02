@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW terugrekenen — van inclusief naar exclusief | Calculatieloket.nl";
-const description = "Reken eenvoudig btw terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw en zie direct het bedrag exclusief btw en het btw-bedrag.";
+const description = "Reken btw terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw en zie direct het exclusieve bedrag en het btw-bedrag. Gebaseerd op officiële tarieven.";
 
 const defaultAmount = 121;
 const defaultRate = 21;
@@ -250,8 +250,12 @@ const breadcrumbSchema = {
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">Hoe werkt btw terugrekenen?</h2>
+    <h2 class="page-title">BTW terugrekenen</h2>
     <p>Bij btw terugrekenen wil je van een bedrag inclusief btw weten wat het bedrag exclusief btw is en hoeveel btw er in het totaalbedrag zit.</p>
+    <p>Wil je btw in beide richtingen berekenen? Gebruik dan de <a href="/btw-calculator/">BTW calculator</a> of de <a href="/btw-inclusief-exclusief/">btw inclusief/exclusief</a> tool. Ondernemers bekijken ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
+
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>Deze calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst (21%, 9% en 0%). De formule is wiskundig exact: exclusief = inclusief ÷ (1 + tarief).
     <p>Wil je btw in beide richtingen berekenen? Gebruik dan de <a href="/btw-calculator/">BTW calculator</a> of de <a href="/btw-inclusief-exclusief/">btw inclusief/exclusief</a> tool. Ondernemers bekijken ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
     <p>Je kunt niet simpelweg het btw-percentage van het inclusief bedrag aftrekken. Het inclusief bedrag is namelijk al opgebouwd uit het bedrag exclusief btw plus de btw daarover. Daarom gebruik je een deling in plaats van een aftrekking.</p>
     <p>Stel, je hebt een factuur van &euro;121 inclusief 21% btw. Als je daar 21% van aftrekt (&euro;25,41), kom je uit op &euro;95,59. Dat klopt niet. Het juiste bedrag exclusief btw is &euro;100. Het verschil ontstaat doordat de 21% btw is berekend over het exclusieve bedrag, niet over het inclusieve bedrag.</p>

@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Salaris Calculator 2026 — Bruto naar netto | Calculatieloket.nl";
-const description = "Bereken je nettosalaris in 2026. Vul bruto loon, pensioenpercentage en loonheffingskorting in en zie direct een indicatie van je nettoloon per maand.";
+const description = "Bereken je nettosalaris in 2026. Vul bruto loon, pensioenpercentage en loonheffingskorting in voor een directe netto-indicatie per maand. Gebaseerd op Belastingdienst tarieven.";
 
 const defaultGross = 3500;
 const defaultPensionRate = 5;
@@ -297,6 +297,9 @@ const breadcrumbSchema = {
     <p>Met deze salaris calculator bereken je eenvoudig hoeveel je netto per maand (en per jaar) overhoudt in 2026. We gebruiken de actuele Box 1 inkomstenbelastingtarieven, vakantiegeld (8%), loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
     <p>Wil je een uitgebreidere bruto-netto berekening met een vast pensioenbedrag? Gebruik de <a href="/bruto-netto-2026/">bruto-netto calculator</a>. Voor je hypotheek, toeslagen of ZZP-tarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
 
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>De berekening gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> voor 2026. Je kunt je pensioenpremie als percentage invoeren, waardoor je snel verschillende bruto bedragen kunt vergelijken. De uitkomst is een indicatie.</p>
+
     <h2>Hoe werkt deze berekening?</h2>
     <p>Deze bruto-netto indicatie berekent je netto salaris op basis van:</p>
     <ul class="calc-list">
@@ -333,6 +336,14 @@ const breadcrumbSchema = {
       </tbody>
     </table>
     <p>Algemene heffingskorting: max € 3.115 · Arbeidskorting: max € 5.685.</p>
+
+    <h2>Veelgemaakte fouten</h2>
+    <ul class="calc-list">
+      <li><strong>Pensioenpercentage verwarren:</strong> alleen het werknemersdeel van je pensioenpremie telt mee. De werkgeversbijdrage betaalt je werkgever.</li>
+      <li><strong>Loonheffingskorting dubbel toepassen:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
+      <li><strong>Netto als definitief loon zien:</strong> cao, bonus, bijtelling auto en extra inkomsten kunnen je loonstrook beïnvloeden.</li>
+      <li><strong>Bruto jaarsalaris vergeten:</strong> vakantiegeld (8%) telt mee in de jaarberekening.</li>
+    </ul>
   </div>
 
   <CrossSellCards

@@ -6,6 +6,25 @@
 
 ---
 
+## Update: Sprint 105 — Content Excellence & Topic Authority v1 (afgerond)
+
+Sprint 105 brengt alle publieke pagina's naar één uniforme redactionele kwaliteitsstandaard. Deze sprint bouwt geen nieuwe functionaliteit, maar verhoogt de kwaliteit van content, SEO en E-E-A-T.
+
+Wijzigingen:
+
+- **Nieuwe documentatie**: `docs/product/16-CONTENT-QUALITY-STANDARD-v1.md` definieert de uniforme structuur voor calculatorpagina's, meta descriptions, content kwaliteit, categoriepagina's en statische pagina's.
+- **Meta descriptions**: alle 21 publieke pagina's gecontroleerd en bijgewerkt naar 120–160 tekens. Belangrijkste zoekwoorden staan vooraan, zonder keyword stuffing.
+- **Calculatorpagina's**: alle 10 calculators gecontroleerd op de vereiste structuur (intro, calculator, resultaat, TrustPanel, waarom vertrouwen, praktijkvoorbeeld, veelgemaakte fouten, FAQ, bronnen, disclaimer, gerelateerde calculators). Ontbrekende secties zijn toegevoegd:
+  - `hypotheek-calculator.astro`: uitgebreide SEO-content met hoe de berekening werkt, waarom je deze kunt vertrouwen, een concreet voorbeeld en veelgemaakte fouten.
+  - `bruto-netto-2026.astro`, `salaris-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro`, `btw-terugrekenen.astro`, `btw-inclusief-exclusief.astro`, `zzp-calculator.astro`, `auto-importkosten-berekenen.astro`, `vakantiegeld-calculator.astro`: sectie "Waarom kun je deze berekening vertrouwen?" toegevoegd, met verwijzingen naar officiële bronnen.
+  - `salaris-calculator.astro`, `toeslagen-calculator.astro`, `btw-calculator.astro` en `zzp-calculator.astro`: aangevuld met extra praktijkvoorbeeld en/of veelgemaakte fouten.
+- **Categoriepagina's**: meta descriptions geoptimaliseerd; pagina's verwijzen al naar calculators, gerelateerde categorieën en homepage via `CategoryGrid`, `RelatedCategories` en breadcrumbs.
+- **Statische pagina's**: meta descriptions geoptimaliseerd; inhoud blijft beknopt en professioneel.
+- **Interne links**: gerelateerde calculators en officiële bronnen versterkt in SEO-content.
+- **Geen fake content**: geen kunstmatige tekst, nep testimonials, sterren of badges. Alleen inhoud die daadwerkelijk waarde toevoegt.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 104 — Trust & Credibility Excellence v1 (afgerond)
 
 Sprint 104 versterkt het vertrouwen (E-E-A-T) van Calculatieloket.nl zonder nieuwe functionaliteit toe te voegen. Een uniform Trust System wordt toegevoegd aan alle 10 calculatorpagina's en de 5 statische pagina's worden professioneler en vertrouwelijker gemaakt.

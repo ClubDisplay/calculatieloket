@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW inclusief en exclusief berekenen — 21%, 9% en 0% | Calculatieloket.nl";
-const description = "Bereken eenvoudig btw inclusief of exclusief. Kies 21%, 9% of 0% btw en krijg een duidelijke indicatie van het bedrag inclusief btw, exclusief btw en het btw-bedrag.";
+const description = "Bereken btw inclusief en exclusief met 21%, 9% of 0% tarief. Zie direct bedrag exclusief, btw-bedrag en inclusief. Gebaseerd op Belastingdienst tarieven.";
 
 const defaultAmount = 100;
 const defaultRate = 21;
@@ -267,10 +267,13 @@ const breadcrumbSchema = {
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">Wat is het verschil tussen inclusief en exclusief btw?</h2>
+    <h2 class="page-title">BTW inclusief en exclusief</h2>
     <p><strong>Exclusief btw</strong> is het bedrag zonder btw. Dit is het nettobedrag dat een bedrijf ontvangt voor een product of dienst. <strong>Inclusief btw</strong> is het bedrag met btw erbij — dit is wat de klant uiteindelijk betaalt. Het <strong>btw-bedrag</strong> is het verschil tussen het inclusieve en het exclusieve bedrag.</p>
     <p>Wil je snel <a href="/btw-terugrekenen/">btw terugrekenen</a> van inclusief naar exclusief, of alle tarieven in één keer zien in de <a href="/btw-calculator/">BTW calculator</a>? Voor ondernemers is er ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
     <p>Bedrijven werken in hun administratie en offertes vaak met bedragen exclusief btw, terwijl consumenten in winkels en webshops meestal prijzen inclusief btw zien. Het is daarom handig om snel tussen beide te kunnen wisselen.</p>
+
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>Deze calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst (21%, 9% en 0%). De formule werkt in beide richtingen en is wiskundig exact voor het ingevoerde bedrag.</p>
 
     <h2>Formules voor inclusief en exclusief btw</h2>
 
