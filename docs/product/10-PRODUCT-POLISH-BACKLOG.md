@@ -6,6 +6,22 @@
 
 ---
 
+## Update: Sprint 108 — Lighthouse Quality Monitoring v1 (afgerond)
+
+Sprint 108 voegt lichte kwaliteitsmonitoring toe voor performance, accessibility, best practices en SEO. Geen productfeatures, geen engine-wijzigingen.
+
+Wijzigingen:
+
+- **Dependency**: `lighthouse` toegevoegd als devDependency. Motivatie: dit is de lichtste manier om programmatisch Lighthouse-scores te meten in een headless browser zonder zware extra tooling.
+- **Nieuw script**: `scripts/lighthouse-audit.mjs` start een statische server op `dist/`, draait Lighthouse op 6 pagina's (`/`, `/calculators/`, `/bruto-netto-2026/`, `/categorie/inkomen/`, `/btw-calculator/`, `/zzp-calculator/`), controleert drempels en genereert console summary plus JSON/Markdown rapport in `reports/`.
+- **Npm script**: `npm run audit:lighthouse` (voert eerst `npm run build` uit).
+- **Drempels**: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95.
+- **Resultaten (lokaal, zonder AdSense)**: Calculator hub haalt alle drempels (99/96/100/100). Homepage performance scoort 68 (AdSense + ClientRouter). Calculatorpagina's scoren 82–91 op accessibility; Best Practices en SEO zijn overal 100.
+- **CI-integratie**: extra stap toegevoegd aan `.github/workflows/atlas-ci.yml` met `continue-on-error: true`, zodat monitoring niet de workflow blokkeert. Rapporten worden geüpload als artifact.
+- **Documentatie bijgewerkt**: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md` uitgebreid met Sprint 108 meting, resultaten, CI-integratie en dependency-motivatie. `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md` bijgewerkt.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy. `npm ci` is niet handmatig uitgevoerd; `npm install --save-dev lighthouse` is gebruikt om de devDependency toe te voegen. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 107 — Calculator Hub v1 (afgerond)
 
 Sprint 107 bouwt `/calculators/` als centrale overzichtspagina voor alle calculators. Geen wijzigingen aan engines, Knowledge Objects, Rule Resolver of Recommendation Engine.

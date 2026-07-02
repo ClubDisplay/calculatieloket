@@ -35,10 +35,14 @@ jobs:
             --report reports/atlas-check-report.md \
             --json-report reports/atlas-check-report.json
 
-      - name: Upload Atlas CI reports
+      - name: Run Lighthouse audit
+        run: node scripts/lighthouse-audit.mjs
+        continue-on-error: true
+
+      - name: Upload CI reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: atlas-check-reports
+          name: ci-reports
           path: reports/
           if-no-files-found: ignore

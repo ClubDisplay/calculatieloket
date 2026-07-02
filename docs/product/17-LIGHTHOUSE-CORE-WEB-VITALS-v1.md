@@ -1,24 +1,27 @@
 # 17 — Lighthouse & Core Web Vitals Excellence v1
 
-> **Sprint:** 106 — Atlas v2  
+> **Sprints:** 106 (statische audit + quick wins) en 108 (Lighthouse monitoring) — Atlas v2  
 > **Doel:** Technische kwaliteit meten en verbeteren op de belangrijkste pagina’s: performance, accessibility, SEO, best practices en Core Web Vitals-signalen.  
-> **Scope:** GEEN nieuwe features, GEEN wijzigingen aan engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard of Agents.  
-> **Datum:** 2026-07-02
+> **Scope:** GEEN nieuwe productfeatures, GEEN wijzigingen aan engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard of Agents.  
+> **Datum:** 2026-07-02 (Sprint 106), 2026-07-02 (Sprint 108 update)
 
 ---
 
 ## 1. Auditaanpak
 
-**Tooling:** geen nieuwe dependencies. Lighthouse is niet geïnstalleerd in dit project en we voegen het niet toe. Deze sprint gebruikt een **statische productie-audit** op basis van `npm run build` en inspectie van `dist/`.
+**Tooling:**
+
+- **Sprint 106:** geen nieuwe dependencies. Statische productie-audit op basis van `npm run build` en inspectie van `dist/`.
+- **Sprint 108:** `lighthouse` toegevoegd als devDependency. Nieuw script `npm run audit:lighthouse` draait Lighthouse in een headless Chrome tegen de lokale statische build. Rapportage in console, JSON (`reports/lighthouse-audit-report.json`) en Markdown (`reports/lighthouse-audit-report.md`).
 
 **Gecontroleerde pagina’s:**
 
 | # | Pagina | URL | Reden |
 |---|--------|-----|-------|
 | 1 | Homepage | `/` | Hoogste verkeer, belangrijkste first impression |
-| 2 | Bruto-netto 2026 | `/bruto-netto-2026/` | Populairste calculator |
-| 3 | Categorie Inkomen | `/categorie/inkomen/` | Voorbeeld categoriepagina |
-| 4 | /calculators/ | n.v.t. | Deze route bestaat niet in de huidige site |
+| 2 | Calculator hub | `/calculators/` | Centrale overzichtspagina (toegevoegd in Sprint 107) |
+| 3 | Bruto-netto 2026 | `/bruto-netto-2026/` | Populairste calculator |
+| 4 | Categorie Inkomen | `/categorie/inkomen/` | Voorbeeld categoriepagina |
 | 5 | BTW calculator | `/btw-calculator/` | Voorbeeld BTW-pagina |
 | 6 | ZZP calculator | `/zzp-calculator/` | Voorbeeld ZZP-pagina |
 
@@ -53,7 +56,7 @@ dist/_astro/                  244 KB
   overige per-pagina CSS/JS    ~8 KB per pagina
 
 dist/logo-calculatieloket-header.png    52 KB
-dist/logo_Calculatieloket.png           768 KB  (alleen OG/schema, niet page-load)
+dist/logo_Calculatieloket-og.png         94 KB  (OG/schema, niet page-load)
 dist/favicon.svg                         4 KB
 dist/favicon.ico                         4 KB
 ```
@@ -168,13 +171,13 @@ dist/favicon.ico                         4 KB
 
 ## 5. Openstaande P1/P2 performance/accessibility punten
 
-### P1 — Image optimization OG/schema logo
+### P1 — Image optimization OG/schema logo ✅ (opgelost in Sprint 107)
 
-- `logo_Calculatieloket.png` is 768 KB en 1448×1086. Het wordt gebruikt voor `og:image` en WebSite JSON-LD logo. Browsers laden dit niet op page-load, maar crawlers/sociale netwerken doen dat wel. Aanbeveling: optimaliseer naar 512×512 of 1200×630 PNG/WebP (maximaal 100 KB).
+- `logo_Calculatieloket.png` (768 KB, 1448×1086) is vervangen door `logo_Calculatieloket-og.png` (94 KB, 400×300). Dit is niet ideaal voor social platforms (aanbevolen 1200×630), maar wel een significante reductie. Voor verdere optimalisatie: crop/resize naar 1200×630 of gebruik WebP.
 
-### P1 — Lighthouse meten in echte browser
+### P1 — Lighthouse meten in echte browser ✅ (opgelost in Sprint 108)
 
-- Deze sprint is een **statische audit**. Voor betrouwbare scores moet Sprint 107 of een aparte setup Lighthouse of Chrome DevTools Protocol gebruiken in een headless browser. Dat vereist een CI-wijziging of lokale tooling (bijv. `lighthouse-cli`, `playwright` + `lighthouse`, of Chrome DevTools MCP).
+- `lighthouse` is toegevoegd als devDependency. `npm run audit:lighthouse` meet de 6 doelpagina's headless in Chrome en genereert rapporten. CI-stap is toegevoegd aan `.github/workflows/atlas-ci.yml` met `continue-on-error: true`.
 
 ### P2 — AdSense CLS-risico
 
@@ -196,10 +199,10 @@ dist/favicon.ico                         4 KB
 
 ## 6. Risico’s / TODO’s
 
-1. **Geen gemeten Lighthouse-scores.** Deze sprint geeft schattingen op basis van statische inspectie. Daadwerkelijke mobiele scores kunnen lager zijn door netwerklatentie, CPU-throttling en AdSense.
+1. **Lighthouse-scores zijn lokaal gemeten.** Mobiele scores op tragere hardware en productie met AdSense kunnen lager zijn.
 2. **AdSense niet actief in deze build.** Productiescores met advertenties kunnen significant afwijken.
-3. **OG-image grootte.** Niet kritiek voor page-load, maar wel voor Best Practices in social crawlers.
-4. **Category-pagina’s staan niet in de legacy audit.** De statische audit van Sprint 102 scant 16 pagina’s en niet de 5 `/categorie/*` routes. Deze pagina’s zijn handmatig gecontroleerd.
+3. **OG-image 400×300** is kleiner dan aanbevolen voor social platforms. Social previews kunnen minder scherp zijn.
+4. **Accessibility drempel (95)** wordt niet gehaald op calculatorpagina's. Deze punten zijn bewust niet in deze sprint opgelost; monitoring is het doel.
 
 ---
 
@@ -215,17 +218,76 @@ Aangeraden prioriteit: **optie 1** (productwaarde) of, indien kwaliteitsscore pr
 
 ---
 
-## 8. Checklist
+## 8. Sprint 108 — Lighthouse Quality Monitoring v1
 
+### 8.1 Gekozen aanpak
+
+- `lighthouse` (v12+) toegevoegd als **devDependency**. Dit is de lichtste manier om programmatisch Lighthouse-audits te draaien zonder zware extra tooling als LHCI of Playwright.
+- `chrome-launcher` (meegeleverd met `lighthouse`) zoekt automatisch naar een Chrome/Chromium binary.
+- Het script `scripts/lighthouse-audit.mjs` start een eigen statische Node-server op `dist/`, draait Lighthouse op 6 pagina's, checkt drempels en schrijft rapporten.
+- Npm script: `npm run audit:lighthouse` (voert eerst `npm run build` uit).
+
+### 8.2 Drempels
+
+| Categorie | Drempel |
+|-----------|---------|
+| Performance | 90 |
+| Accessibility | 95 |
+| Best Practices | 95 |
+| SEO | 95 |
+
+### 8.3 Gemeten scores (lokaal, zonder AdSense)
+
+| Pagina | Performance | Accessibility | Best Practices | SEO | Status |
+|--------|-------------|---------------|----------------|-----|--------|
+| Homepage | 68 | 96 | 100 | 100 | ❌ |
+| Calculator hub | 99 | 96 | 100 | 100 | ✅ |
+| Bruto netto 2026 | 99 | 83 | 100 | 100 | ❌ |
+| Categorie Inkomen | 100 | 91 | 100 | 100 | ❌ |
+| BTW calculator | 99 | 88 | 100 | 100 | ❌ |
+| ZZP calculator | 100 | 82 | 100 | 100 | ❌ |
+
+### 8.4 Belangrijkste bevindingen
+
+- **Performance** is over het algemeen uitstekend, behalve op de homepage (68). De homepage laadt het AdSense-script (`adsbygoogle.js`) en de Astro `ClientRouter` in de head; dit drukt de score. In productie zal AdSense en eventuele advertentie-assets de score verder beïnvloeden.
+- **Accessibility** scoort onder de drempel op alle calculatorpagina's. Meestvoorkomende oorzaken: kleurcontrast op badges/secondary text, labels op aangepaste toggles, en/of focus/hover-toestanden van icon-only elementen. Deze punten zijn niet in deze sprint opgelost; monitoring is het doel.
+- **Best Practices** en **SEO** zijn perfect (100) op alle 6 pagina's.
+
+### 8.5 CI-integratie
+
+- De audit is toegevoegd aan `.github/workflows/atlas-ci.yml` als extra stap **na** `npm run atlas:check`.
+- De stap gebruikt `continue-on-error: true`, zodat Lighthouse-failures de workflow niet blokkeren. Het blijft een monitoring-tool, geen harde gate.
+- Rapporten worden geüpload als artifact in de `reports/` map, samen met de Atlas-rapporten.
+- Op GitHub Actions is Chrome vooraf geïnstalleerd op `ubuntu-latest`; `chrome-launcher` vindt deze binary.
+
+### 8.6 Dependency-motivatie
+
+`lighthouse` is toegevoegd als devDependency omdat het de enige lichte manier is om de gewenste scores (Performance, Accessibility, Best Practices, SEO) headless te meten. Alternatieven (LHCI, Playwright) zijn zwaarder en vereisen meer configuratie. De package is alleen nodig voor development/CI en komt niet in de productiebuild terecht.
+
+---
+
+## 9. Checklist
+
+### Sprint 106
 - [x] `npm run build` slaagt
 - [x] Productiebuild geïnspecteerd (`dist/`)
 - [x] 6 doelpagina’s gecontroleerd
 - [x] Quick wins veilig doorgevoerd (favicon, header logo, opruimen)
 - [x] Geen wijzigingen aan engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard of Agents
-- [x] Geen nieuwe dependencies, geen `npm ci`, geen `rm -rf node_modules`, geen deploy, geen `.env` wijzigingen
 - [x] Documentatie aangemaakt: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md`
 - [x] Backlog en changelogs bijgewerkt
 - [x] `npm run atlas:check` slaagt
+
+### Sprint 108
+- [x] `lighthouse` toegevoegd als devDependency
+- [x] `npm run audit:lighthouse` script beschikbaar
+- [x] Script controleert 6 doelpagina’s
+- [x] Drempels ingesteld: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95
+- [x] Console summary + JSON/Markdown rapport in `reports/`
+- [x] CI-stap toegevoegd met `continue-on-error: true`
+- [x] Geen productiewijzigingen, geen engine-wijzigingen, geen `.env` of deploy
+- [x] `npm run atlas:check` slaagt
+- [x] Documentatie bijgewerkt
 
 ---
 
