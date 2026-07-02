@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
-2. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
+1. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+2. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+3. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
 3. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
 3. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
 3. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
@@ -45,6 +46,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-02 — Sprint 102
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 102 — Platform Quality Audit v1
+**Details:** Volledige kwaliteitsaudit op het bestaande platform. Nieuw document `docs/product/13-PLATFORM-QUALITY-AUDIT-v1.md` met scorecard (10× groen, 1× geel, 0× rood), per-pagina resultaten, P0/P1/P2 backlog, risico’s en advies voor Sprint 103. Nieuw audit script `scripts/audit-static-site.mjs` (geen dependencies) scannt `dist/` op H1, canonical, title/description, robots, JSON-LD schema, breadcrumbs, skip link, focus-visible, aria-current, mobiel menu, ad-containers en analytics attributen. Quick win: breadcrumbs en `BreadcrumbList` schema toegevoegd aan statische pagina’s `contact.astro`, `cookies.astro`, `disclaimer.astro`, `over-ons.astro` en `privacy.astro`. 21 publieke pagina’s gescand; allemaal exact één H1, canonical, title/meta description en schema. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

@@ -3,6 +3,16 @@
 ## 2026-07-02
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 102 — Platform Quality Audit v1
+**Details:** Volledige kwaliteitsaudit op het bestaande platform. Nieuw document `docs/product/13-PLATFORM-QUALITY-AUDIT-v1.md` met scorecard (10× groen, 1× geel, 0× rood), per-pagina resultaten, P0/P1/P2 backlog, risico’s en advies voor Sprint 103. Nieuw audit script `scripts/audit-static-site.mjs` (geen dependencies) scannt `dist/` op H1, canonical, title/description, robots, JSON-LD schema, breadcrumbs, skip link, focus-visible, aria-current, mobiel menu, ad-containers en analytics attributen. Quick win: breadcrumbs en `BreadcrumbList` schema toegevoegd aan statische pagina’s `contact.astro`, `cookies.astro`, `disclaimer.astro`, `over-ons.astro` en `privacy.astro`. 21 publieke pagina’s gescand; allemaal exact één H1, canonical, title/meta description en schema. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-02
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 101 — Performance & Accessibility Excellence v1
 **Details:** Performance-, accessibility- en mobile-UX quick wins op het bestaande platform. Skip link toegevoegd in `src/layouts/BaseLayout.astro` ("Spring naar inhoud", target `main id="main-content"`). Consistente `:focus-visible` stijl voor links, buttons, inputs, selects, summaries en focusbare elementen in `src/styles/global.css`; custom toggle switch krijgt zichtbare focus ring. `prefers-reduced-motion: reduce` media query schakelt animaties/transities uit, ook in `src/components/CookieConsent.astro`. `aria-current="page"` toegevoegd aan actieve links in header en footer. Mobiele menu toggle krijgt zichtbare focus ring, dynamisch `aria-label` (openen/sluiten) en sluit met `Escape`. Logo in `BaseLayout` krijgt `width`/`height`, `loading="eager"` en `decoding="async"` voor minder CLS. Oude, door `BaseLayout` overschreven `.site-header`/`.site-header-inner`/`.site-nav` CSS verwijderd uit `global.css`. FAQ summary focus stijl toegevoegd in `FaqAccordion.astro`. Homepage zoekresultaten "geen resultaten" krijgen `aria-live="polite"`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling
