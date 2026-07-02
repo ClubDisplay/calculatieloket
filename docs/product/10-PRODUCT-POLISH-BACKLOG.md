@@ -6,6 +6,20 @@
 
 ---
 
+## Update: Sprint 097 — Category Navigation Integration v1 (afgerond)
+
+Sprint 097 maakt de categoriepagina’s uit Sprint 096 vindbaar en bruikbaar binnen de hele site. Verbeterde interne links, SEO topic clusters, gebruikersnavigatie en Product Completion.
+
+Wijzigingen:
+
+- **Homepage (`src/pages/index.astro`)**: cluster-chips zijn nu links naar de vijf categoriepagina’s. Link "Bekijk alle categorieën" scrollt naar een nieuwe categorieën-sectie. Zoekveld filtert nog steeds de calculator grid. Categorieën-sectie hergebruikt `RelatedCategories`.
+- **Header (`src/layouts/BaseLayout.astro`)**: toegevoegd: mobiel hamburger-menu, desktop dropdown "Categorieën" met links naar alle categoriepagina’s, behoud van bestaande calculatorlinks. Navigatie is server-rendered; mobiel geen horizontale scroll.
+- **Footer (`src/layouts/BaseLayout.astro`)**: opgedeeld in drie kolommen met categorie-links, alle calculators, en site-links. Categorie-links en "Alle calculators" toegevoegd.
+- **Calculatorpagina’s**: `ToolFooter` component uitgebreid met `categoryLink` en `categoryLabel` props. Alle 10 calculatorpagina’s krijgen een subtiele link "Bekijk meer calculators in de categorie [X]" naar de juiste categoriepagina.
+- **Componenten**: `RelatedCategories.astro` krijgt optionele `title` prop en optionele `current` prop zodat het ook als algemene categorielijst gebruikt kan worden. `ToolFooter.astro` ondersteunt nu categorie-links.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt; 22 pagina's, 219 tests, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 096 — Category Experience v1 (afgerond)
 
 Sprint 096 bouwt de eerste complete categoriepagina's voor Calculatieloket.nl, als onderdeel van Product Completion uit de FiscalMesh Product Roadmap. Vijf nieuwe pagina's in `src/pages/categorie/`:

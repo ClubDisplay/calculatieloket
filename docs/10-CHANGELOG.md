@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
-2. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
+1. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+2. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
+3. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
 3. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
 3. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
 3. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
@@ -40,6 +41,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 097
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 097 — Category Navigation Integration v1
+**Details:** Categoriepagina’s uit Sprint 096 zijn nu volledig geïntegreerd in de site-navigatie. Homepage: cluster-chips zijn klikbare links naar `/categorie/inkomen/`, `/categorie/belasting/`, `/categorie/wonen/`, `/categorie/ondernemen/` en `/categorie/auto/`; link "Bekijk alle categorieën" scrollt naar nieuwe categorieën-sectie; zoekveld filtert nog steeds de calculator grid. Header (`src/layouts/BaseLayout.astro`): mobiel hamburger-menu, desktop dropdown "Categorieën", behoud van bestaande calculatorlinks. Footer: drie kolommen met categorie-links, alle calculators en site-links. Calculatorpagina’s: `ToolFooter` component uitgebreid met `categoryLink`/`categoryLabel`; alle 10 calculatorpagina’s tonen subtiele link "Bekijk meer calculators in de categorie [X]". `RelatedCategories.astro` krijgt optionele `title` en `current` props voor hergebruik als algemene categorielijst. Interne links zijn server-rendered, anchor-teksten beschrijvend, exact één H1 per pagina behouden, mobiel geen horizontale scroll, AdSense niet verplaatst boven primaire navigatie/tool. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

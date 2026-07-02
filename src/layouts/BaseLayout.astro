@@ -1,6 +1,7 @@
 ---
 import ClientRouter from "astro/components/ClientRouter.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import { categoryList } from "../lib/category-icons";
 
 const { title, description } = Astro.props;
 const containerClass = Astro.props.containerClass ?? "container";
@@ -86,12 +87,35 @@ const jsonLd = {
           />
         </a>
 
-        <nav class="site-nav" aria-label="Hoofdnavigatie">
-          <a href="/btw-calculator/">BTW</a>
-          <a href="/salaris-calculator/">Salaris</a>
-          <a href="/hypotheek-calculator/">Hypotheek</a>
-          <a href="/zzp-calculator/">ZZP</a>
-          <a href="/toeslagen-calculator/">Toeslagen</a>
+        <button class="site-nav-toggle" id="siteNavToggle" type="button" aria-expanded="false" aria-controls="siteNavMenu" aria-label="Menu openen">
+          <span class="site-nav-burger" aria-hidden="true"></span>
+        </button>
+
+        <nav class="site-nav" id="siteNavMenu" aria-label="Hoofdnavigatie">
+          <div class="site-nav-section">
+            <a href="/" class="site-nav-link">Home</a>
+          </div>
+          <div class="site-nav-section site-nav-dropdown">
+            <button type="button" class="site-nav-dropdown-toggle" id="siteNavDropdownToggle" aria-expanded="false" aria-controls="siteNavDropdown">
+              Categorieën
+            </button>
+            <div class="site-nav-dropdown-menu" id="siteNavDropdown">
+              {categoryList.map((cat) => (
+                <a href={cat.href} class="site-nav-dropdown-link">{cat.label}</a>
+              ))}
+            </div>
+          </div>
+          <div class="site-nav-section">
+            <a href="/btw-calculator/" class="site-nav-link">BTW</a>
+            <a href="/salaris-calculator/" class="site-nav-link">Salaris</a>
+            <a href="/hypotheek-calculator/" class="site-nav-link">Hypotheek</a>
+            <a href="/zzp-calculator/" class="site-nav-link">ZZP</a>
+            <a href="/toeslagen-calculator/" class="site-nav-link">Toeslagen</a>
+          </div>
+          <div class="site-nav-section">
+            <a href="/over-ons/" class="site-nav-link">Over ons</a>
+            <a href="/contact/" class="site-nav-link">Contact</a>
+          </div>
         </nav>
       </div>
     </header>
@@ -101,21 +125,313 @@ const jsonLd = {
       </div>
     </main>
     <footer>
-      <div class="container">
-        <div class="footer-links">
-          <a href="/privacy/">Privacy</a>
-          <a href="/cookies/">Cookies</a>
-          <a href="/disclaimer/">Disclaimer</a>
-          <a href="/over-ons/">Over ons</a>
-          <a href="/contact/">Contact</a>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h3 class="footer-title">Categorieën</h3>
+          <div class="footer-links">
+            {categoryList.map((cat) => (
+              <a href={cat.href}>{cat.label}</a>
+            ))}
+          </div>
         </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Alle calculators</h3>
+          <div class="footer-links">
+            <a href="/bruto-netto-2026/">Bruto netto 2026</a>
+            <a href="/salaris-calculator/">Salaris</a>
+            <a href="/vakantiegeld-calculator/">Vakantiegeld</a>
+            <a href="/toeslagen-calculator/">Toeslagen</a>
+            <a href="/hypotheek-calculator/">Hypotheek</a>
+            <a href="/btw-calculator/">BTW</a>
+            <a href="/zzp-calculator/">ZZP</a>
+            <a href="/auto-importkosten-berekenen/">Auto importkosten</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Calculatieloket</h3>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy</a>
+            <a href="/cookies/">Cookies</a>
+            <a href="/disclaimer/">Disclaimer</a>
+            <a href="/over-ons/">Over ons</a>
+            <a href="/contact/">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
         <p>&copy; {new Date().getFullYear()} Calculatieloket.nl &mdash; Snelle, duidelijke online calculators</p>
       </div>
     </footer>
     <CookieConsent />
+
+    <script>
+      const toggle = document.getElementById("siteNavToggle") as HTMLButtonElement | null;
+      const menu = document.getElementById("siteNavMenu") as HTMLElement | null;
+      const dropdownToggle = document.getElementById("siteNavDropdownToggle") as HTMLButtonElement | null;
+      const dropdownMenu = document.getElementById("siteNavDropdown") as HTMLElement | null;
+
+      if (toggle && menu) {
+        toggle.addEventListener("click", () => {
+          const expanded = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!expanded));
+          menu.classList.toggle("is-open", !expanded);
+        });
+
+        menu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            toggle.setAttribute("aria-expanded", "false");
+            menu.classList.remove("is-open");
+          });
+        });
+      }
+
+      if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener("click", () => {
+          const expanded = dropdownToggle.getAttribute("aria-expanded") === "true";
+          dropdownToggle.setAttribute("aria-expanded", String(!expanded));
+          dropdownMenu.classList.toggle("is-open", !expanded);
+        });
+
+        document.addEventListener("click", (e) => {
+          const target = e.target as Node;
+          if (!dropdownToggle.contains(target) && !dropdownMenu.contains(target)) {
+            dropdownToggle.setAttribute("aria-expanded", "false");
+            dropdownMenu.classList.remove("is-open");
+          }
+        });
+      }
+    </script>
   </body>
 </html>
 
 <style is:global>
   @import "../styles/global.css";
+</style>
+
+<style>
+  /* ===== HEADER NAVIGATION ===== */
+  .site-header-inner {
+    position: relative;
+  }
+
+  .site-nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .site-nav-burger,
+  .site-nav-burger::before,
+  .site-nav-burger::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  .site-nav-burger {
+    position: relative;
+  }
+
+  .site-nav-burger::before,
+  .site-nav-burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .site-nav-burger::before {
+    top: -6px;
+  }
+
+  .site-nav-burger::after {
+    top: 6px;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .site-nav-section {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .site-nav-link,
+  .site-nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .site-nav-link:hover,
+  .site-nav-link:focus-visible,
+  .site-nav-dropdown-toggle:hover,
+  .site-nav-dropdown-toggle:focus-visible {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .site-nav-dropdown {
+    position: relative;
+  }
+
+  .site-nav-dropdown-toggle::after {
+    content: " ▼";
+    font-size: 0.65rem;
+    margin-left: 0.25rem;
+  }
+
+  .site-nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    min-width: 180px;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+  }
+
+  .site-nav-dropdown.is-open .site-nav-dropdown-menu,
+  .site-nav-dropdown:hover .site-nav-dropdown-menu,
+  .site-nav-dropdown:focus-within .site-nav-dropdown-menu {
+    display: flex;
+  }
+
+  .site-nav-dropdown-link {
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .site-nav-dropdown-link:hover,
+  .site-nav-dropdown-link:focus-visible {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .footer-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover,
+  .footer-links a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-bottom p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 720px) {
+    .site-nav-toggle {
+      display: flex;
+    }
+
+    .site-nav {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+    }
+
+    .site-nav.is-open {
+      display: flex;
+    }
+
+    .site-nav-section {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+    }
+
+    .site-nav-dropdown-toggle {
+      display: none;
+    }
+
+    .site-nav-dropdown-menu {
+      display: flex;
+      position: static;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      gap: 0.25rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 1rem;
+    }
+  }
 </style>

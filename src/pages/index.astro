@@ -2,9 +2,19 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
+import RelatedCategories from "../components/category/RelatedCategories.astro";
+import { categoryList } from "../lib/category-icons";
 
 const title = "Calculatieloket.nl | Gratis calculators voor salaris, toeslagen, hypotheek, btw, zzp en meer";
 const description = "Snel inzicht in salaris, toeslagen, hypotheek, btw, zzp en auto importkosten. Gratis calculators, geen account, gebaseerd op officiële bronnen.";
+
+const categoryLinks = [
+  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/" },
+  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/" },
+  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/" },
+  { id: "Auto", label: "Auto", href: "/categorie/auto/" },
+];
 
 const icons: Record<string, string> = {
   euro: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">€</text></svg>`,
@@ -18,15 +28,6 @@ const icons: Record<string, string> = {
   car: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
 };
 
-const clusters = [
-  { id: "all", label: "Alle" },
-  { id: "Populair", label: "Populair" },
-  { id: "Inkomen", label: "Inkomen" },
-  { id: "Wonen", label: "Wonen" },
-  { id: "Ondernemen", label: "Ondernemen" },
-  { id: "Belasting", label: "Belasting" },
-  { id: "Auto", label: "Auto" },
-];
 
 const cards = [
   {
@@ -183,13 +184,16 @@ const websiteSchema = {
           <span class="hp-search-icon" aria-hidden="true">🔍</span>
         </div>
 
-        <div class="hp-cluster-row" id="hpClusterRow" aria-label="Filter calculators">
-          {clusters.map((cluster) => (
-            <button type="button" class="hp-cluster-chip" data-cluster={cluster.id} aria-pressed={cluster.id === "all" ? "true" : "false"}>
-              {cluster.label}
-            </button>
+        <div class="hp-cluster-row" aria-label="Categorieën">
+          {categoryLinks.map((cat) => (
+            <a href={cat.href} class="hp-cluster-chip">
+              {cat.label}
+            </a>
           ))}
         </div>
+        <p class="hp-categories-link">
+          <a href="#categorieen">Bekijk alle categorieën</a>
+        </p>
 
         <div class="hero-trust">
           <div class="hero-trust-item">
@@ -307,6 +311,14 @@ const websiteSchema = {
     <p class="hp-no-results" id="hpNoResults" style="display:none;">Geen calculator gevonden. Probeer een andere zoekterm of filter.</p>
   </section>
 
+  <section id="categorieen" class="hp-section" aria-labelledby="catSectionTitle">
+    <div class="hp-section-header">
+      <h2 id="catSectionTitle" class="section-heading">Categorieën</h2>
+      <p class="section-sub">Kies een onderwerp en ontdek alle relevante calculators.</p>
+    </div>
+    <RelatedCategories title="Categorieën" categories={categoryList} />
+  </section>
+
   <AdSlot slot="1234567893" format="auto" style="min-height:120px" />
 
   <!-- ===== BEGIN MET JE INKOMEN ===== -->
@@ -387,49 +399,30 @@ const websiteSchema = {
 
 <script>
   const searchInput = document.getElementById("hpSearch") as HTMLInputElement;
-  const clusterRow = document.getElementById("hpClusterRow") as HTMLElement;
   const grid = document.getElementById("hpGrid") as HTMLElement;
   const cards = Array.from(grid.querySelectorAll(".hp-card")) as HTMLElement[];
   const noResults = document.getElementById("hpNoResults") as HTMLElement;
-  const clusterButtons = Array.from(clusterRow.querySelectorAll(".hp-cluster-chip")) as HTMLButtonElement[];
-
-  let activeCluster = "all";
 
   function filterCards() {
     const term = searchInput.value.trim().toLowerCase();
 
     let visibleCount = 0;
     cards.forEach((card) => {
-      const cardClusters = (card.dataset.clusters || "").split(",");
       const title = (card.dataset.title || "").toLowerCase();
       const keywords = (card.dataset.keywords || "").toLowerCase();
 
-      const matchesCluster = activeCluster === "all" || cardClusters.includes(activeCluster);
       const matchesSearch =
         term === "" ||
         title.includes(term) ||
         keywords.includes(term) ||
         card.textContent?.toLowerCase().includes(term);
 
-      const visible = matchesCluster && matchesSearch;
-      card.style.display = visible ? "" : "none";
-      if (visible) visibleCount++;
+      card.style.display = matchesSearch ? "" : "none";
+      if (matchesSearch) visibleCount++;
     });
 
     noResults.style.display = visibleCount === 0 ? "block" : "none";
   }
-
-  clusterButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      activeCluster = btn.dataset.cluster || "all";
-      clusterButtons.forEach((b) => b.setAttribute("aria-pressed", "false"));
-      btn.setAttribute("aria-pressed", "true");
-      filterCards();
-      if (window.location.hash !== "#calculators") {
-        grid.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
 
   searchInput.addEventListener("input", filterCards);
   searchInput.addEventListener("keydown", (e) => {
@@ -523,7 +516,23 @@ const websiteSchema = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hp-categories-link {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hp-categories-link a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .hp-categories-link a:hover,
+  .hp-categories-link a:focus-visible {
+    text-decoration: none;
   }
 
   .hp-cluster-chip {
