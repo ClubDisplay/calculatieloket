@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
-2. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
+1. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
+2. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+3. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
 3. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
 3. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
 3. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
@@ -41,6 +42,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 098
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 098 — Visual Breadcrumbs + Codebase Cleanup
+**Details:** Nieuwe herbruikbare component `src/components/Breadcrumbs.astro` toegevoegd. Breadcrumbs zijn zichtbaar boven de calculator-shell op alle 10 calculatorpagina’s: `Home > Categorie > Calculator` (bijvoorbeeld `Home > Inkomen > Bruto netto 2026`, `Home > Belasting > BTW calculator`, `Home > Wonen > Hypotheek calculator`, `Home > Ondernemen > ZZP calculator`, `Home > Auto > Auto importkosten berekenen`). Component gebruikt `<nav aria-label="Breadcrumb">`, `<ol>` lijst, `aria-current="page"` op de huidige pagina, en microdata. Bestaande `BreadcrumbList` JSON-LD schema blijft behouden. Exact één H1 per pagina blijft intact; alle breadcrumbs zijn server-rendered. Styling is rustig, compact en mobile-first. Oude back-up map `src/pages/_bak/` verwijderd; inhoud was niet meer in gebruik. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

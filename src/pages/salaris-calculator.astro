@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -177,6 +178,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567891" format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Inkomen", href: "/categorie/inkomen/" },
+    { label: "Salaris calculator", current: true },
+  ]} />
 
   <CalculatorShell title="Salaris calculator 2026" subtitle="Vul je bruto maandsalaris, pensioenpercentage en loonheffingskorting in en zie direct een indicatie van je nettoloon.">
     <InputPanel title="Jouw situatie" slot="input">

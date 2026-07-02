@@ -1,0 +1,77 @@
+---
+interface Item {
+  label: string;
+  href?: string;
+  current?: boolean;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs-list">
+    {items.map((item, index) => (
+      <li class="breadcrumbs-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+        {item.current ? (
+          <span class="breadcrumbs-current" aria-current="page" itemprop="name">{item.label}</span>
+        ) : (
+          <a href={item.href} class="breadcrumbs-link" itemprop="item" itemscope itemtype="https://schema.org/Thing">
+            <span itemprop="name">{item.label}</span>
+            <meta itemprop="url" content={item.href} />
+          </a>
+        )}
+        <meta itemprop="position" content={String(index + 1)} />
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumbs-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .breadcrumbs-item:not(:last-child)::after {
+    content: ">";
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .breadcrumbs-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .breadcrumbs-link:hover,
+  .breadcrumbs-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .breadcrumbs-current {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+</style>

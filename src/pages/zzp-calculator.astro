@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -171,6 +172,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567896" format="auto" style="min-height:280px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Ondernemen", href: "/categorie/ondernemen/" },
+    { label: "ZZP calculator", current: true },
+  ]} />
 
   <CalculatorShell
     title="ZZP uurtarief berekenen"
