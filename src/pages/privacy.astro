@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Privacybeleid", item: "https://calculatieloket.nl/privacy/" },
+  ],
+};
 ---
 
 <BaseLayout
   title="Privacybeleid - Calculatieloket.nl"
   description="Privacybeleid van Calculatieloket.nl: welke gegevens we wel en niet verzamelen, hoe we met cookies omgaan en hoe Google AdSense werkt."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Privacybeleid", current: true },
+    ]}
+    analyticsCategory="site-page"
+  />
+
   <h1 class="page-title">Privacybeleid</h1>
   <p class="page-subtitle">Laatst bijgewerkt: 12 juni 2026</p>
 

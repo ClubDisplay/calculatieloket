@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Over ons", item: "https://calculatieloket.nl/over-ons/" },
+  ],
+};
 ---
 
 <BaseLayout
   title="Over Calculatieloket - Gratis online calculators"
   description="Over Calculatieloket.nl: wie we zijn, wat we doen en waarom we gratis calculators aanbieden voor de Nederlandse markt."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Over ons", current: true },
+    ]}
+    analyticsCategory="site-page"
+  />
+
   <h1 class="page-title">Over Calculatieloket.nl</h1>
   <p class="page-subtitle">Gratis, snel en duidelijk rekenen. Zonder account, zonder opslag van je calculatorinvoer.</p>
 

@@ -6,6 +6,17 @@
 
 ---
 
+## Update: Sprint 102 — Platform Quality Audit v1 (afgerond)
+
+Sprint 102 voert een volledige kwaliteitsaudit uit op het bestaande Calculatieloket-platform en lost veilige quick wins op. Doel: objectief bepalen waar Product Completion nog rood/geel/groen is.
+
+Wijzigingen:
+
+- **Nieuwe audit documentatie**: `docs/product/13-PLATFORM-QUALITY-AUDIT-v1.md` bevat de volledige scorecard, per-pagina resultaten, bevindingen, P0/P1/P2 backlog, risico’s en advies voor Sprint 103.
+- **Audit script**: `scripts/audit-static-site.mjs` toegevoegd — geen dependencies, scannt `dist/` op H1-count, canonical, title/description, robots, JSON-LD schema, breadcrumbs, skip link, focus-visible, aria-current, mobile menu, ad-containers en analytics attributen.
+- **Quick win**: breadcrumbs + `BreadcrumbList` schema toegevoegd aan statische sitepagina’s (`contact.astro`, `cookies.astro`, `disclaimer.astro`, `over-ons.astro`, `privacy.astro`). Deze pagina’s misten nog visuele navigatie boven de H1.
+- **Audit resultaat**: 21 publieke pagina’s gescand. 10 kwaliteitsdomeinen groen, 1 geel (content quality / meta description lengte statische pagina’s), 0 rood. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 101 — Performance & Accessibility Excellence v1 (afgerond)
 
 Sprint 101 brengt Calculatieloket van “goed” naar “uitstekend” op performance, mobile UX en accessibility. Er zijn geen nieuwe features gebouwd, geen engines gewijzigd en geen redesigns uitgevoerd; alleen veilige quick wins op markup, CSS en client-side gedrag.

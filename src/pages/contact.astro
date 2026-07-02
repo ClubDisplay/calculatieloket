@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Contact", item: "https://calculatieloket.nl/contact/" },
+  ],
+};
 ---
 
 <BaseLayout
   title="Contact - Calculatieloket.nl"
   description="Contact opnemen met Calculatieloket.nl. Heb je een vraag, suggestie of opmerking over onze calculators? Laat het ons weten."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Contact", current: true },
+    ]}
+    analyticsCategory="site-page"
+  />
+
   <h1 class="page-title">Contact</h1>
   <p class="page-subtitle">Heb je een vraag, suggestie of opmerking? We horen het graag.</p>
 
