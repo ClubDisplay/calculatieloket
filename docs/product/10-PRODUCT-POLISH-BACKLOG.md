@@ -6,6 +6,24 @@
 
 ---
 
+## Update: Sprint 106 — Lighthouse & Core Web Vitals Excellence v1 (afgerond)
+
+Sprint 106 meet en verbetert de technische kwaliteit van de belangrijkste pagina's. Er worden geen nieuwe features gebouwd.
+
+Wijzigingen:
+
+- **Statische productie-audit**: `npm run build` uitgevoerd; `dist/` geïnspecteerd op HTML/CSS/JS-gewicht, render-blocking resources, afbeeldingen, accessibility en SEO-signalen. Lighthouse is niet geïnstalleerd en niet toegevoegd.
+- **Gevolgde pagina's**: homepage `/`, `/bruto-netto-2026/`, `/categorie/inkomen/`, `/btw-calculator/`, `/zzp-calculator/`. `/calculators/` bestaat niet als route.
+- **Quick wins doorgevoerd**:
+  - Favicon: vervangen van 768 KB `logo_Calculatieloket.png` naar 4 KB SVG (`/favicon.svg`) met 4 KB ICO fallback (`/favicon.ico`).
+  - Header-logo: verkleind van 132 KB (1271×329) naar 52 KB (560×145); bijgewerkt in `src/layouts/BaseLayout.astro` met correcte width/height.
+  - Opruimen: `public/logo-calculatieloket-header-tight.png` en `src/layouts/BaseLayout.astro.bak` verwijderd.
+- **Nieuwe documentatie**: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md` met build-statistieken, per-pagina bevindingen, quick wins, openstaande P1/P2 punten, risico's en advies voor Sprint 107.
+- **Geen wijzigingen aan**: calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. Geen grote redesigns, geen Lighthouse CI dependency.
+- **Openstaande punten**: OG/schema logo (768 KB) optimaliseren, Lighthouse meting in echte browser opzetten, AdSense CLS-risico documenteren, ClientRouter overhead monitoren.
+
+`npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 105 — Content Excellence & Topic Authority v1 (afgerond)
 
 Sprint 105 brengt alle publieke pagina's naar één uniforme redactionele kwaliteitsstandaard. Deze sprint bouwt geen nieuwe functionaliteit, maar verhoogt de kwaliteit van content, SEO en E-E-A-T.

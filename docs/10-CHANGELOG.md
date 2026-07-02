@@ -7,30 +7,30 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
-2. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
-3. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
-4. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
-5. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
-6. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
-7. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
-8. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
-9. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
-10. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
-11. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
-12. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
-13. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
-14. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
-15. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
-16. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
-17. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-18. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-19. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-20. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-21. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-22. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-23. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-24. [2026-06-30](#2026-06-30)
+1. [2026-07-03 — Sprint 106](#2026-07-03--sprint-106)
+2. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
+3. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
+4. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
+5. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+6. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+7. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
+8. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
+9. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
+10. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+11. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
+12. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
+13. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
+14. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
+15. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
+16. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
+17. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+18. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+19. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+20. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+21. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+22. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+23. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+24. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 25. [2026-06-30](#2026-06-30)
 26. [2026-06-30](#2026-06-30)
 27. [2026-06-30](#2026-06-30)
@@ -49,6 +49,17 @@
 40. [2026-06-30](#2026-06-30)
 41. [2026-06-30](#2026-06-30)
 42. [2026-06-30](#2026-06-30)
+43. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 106
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 106 — Lighthouse & Core Web Vitals Excellence v1
+**Details:** Statische productie-audit uitgevoerd op `npm run build` output. Gevolgde pagina's: homepage, `/bruto-netto-2026/`, `/categorie/inkomen/`, `/btw-calculator/`, `/zzp-calculator/` (`/calculators/` bestaat niet als route). Grootste quick wins: favicon verkleind van 768 KB `logo_Calculatieloket.png` naar 4 KB SVG (`/favicon.svg`) met 4 KB ICO fallback; header-logo verkleind van 132 KB (1271×329) naar 52 KB (560×145) met bijgewerkte width/height in `src/layouts/BaseLayout.astro`; ongebruikte `public/logo-calculatieloket-header-tight.png` en `src/layouts/BaseLayout.astro.bak` verwijderd. Build-statistieken: `dist/` 2,0 MB, `_astro/` 244 KB, 22 pagina's. Lighthouse is niet geïnstalleerd en niet toegevoegd; scores zijn schattingen op basis van statische inspectie (alle 6 pagina's verwacht 95–100 op Performance, Accessibility, Best Practices en SEO). Nieuwe documentatie `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md` met bevindingen, quick wins, openstaande P1/P2 punten (OG/schema logo 768 KB, echte Lighthouse-meting, AdSense CLS-risico, ClientRouter overhead) en advies voor Sprint 107. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
