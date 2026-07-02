@@ -6,6 +6,22 @@
 
 ---
 
+## Update: Sprint 104 — Trust & Credibility Excellence v1 (afgerond)
+
+Sprint 104 versterkt het vertrouwen (E-E-A-T) van Calculatieloket.nl zonder nieuwe functionaliteit toe te voegen. Een uniform Trust System wordt toegevoegd aan alle 10 calculatorpagina's en de 5 statische pagina's worden professioneler en vertrouwelijker gemaakt.
+
+Wijzigingen:
+
+- **Nieuwe component**: `src/components/calculator/TrustPanel.astro` — gedeelde trust-panel met badges ("Gebaseerd op officiële bronnen", "Jaarlijks gecontroleerd", "Indicatieve berekening", "Laatste update", "Redactie: Calculatieloket.nl"), compacte uitleg "Waarom kun je deze berekening vertrouwen?" (4 bullets) en anchor-link "Bekijk gebruikte bronnen" naar de bronnen-sectie.
+- **SourceCards uitgebreid**: `src/components/SourceCards.astro` accepteert nu een optionele `id` prop zodat TrustPanel er naartoe kan scrollen.
+- **Alle 10 calculatorpagina's**: TrustPanel toegevoegd in de `result`-slot direct onder `ResultPanel`, boven use cases/bronnen/FAQ. `SourceCards` krijgt `id="calculator-sources"`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver of Recommendation Engine.
+- **5 statische pagina's**: meta descriptions verlengd naar 120–160 tekens en trust-secties toegevoegd aan `over-ons.astro`, `contact.astro`, `disclaimer.astro`, `privacy.astro` en `cookies.astro`.
+- **Footer**: subtiele trust-mention "Gebaseerd op officiële bronnen" toegevoegd aan `BaseLayout.astro` footer bottom.
+- **Geen fake trust signals**: geen Google Reviews, sterren, testimonials of nep badges. Alleen echte, controleerbare informatie.
+- **Nieuwe documentatie**: `docs/product/15-TRUST-SYSTEM-v1.md` bevat de volledige rapportage, gewijzigde bestanden, werking, checks, atlas:check resultaat, risico's en advies voor Sprint 105.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 103 — Product & UX Review v1 (afgerond)
 
 Sprint 103 voert een platform-wide product- en UX-review uit vanuit 5 perspectieven: UX Designer, Product Owner, SEO-specialist, Google Quality Rater en eerste bezoeker. Doel: bepalen welke laatste verbeteringen nodig zijn voor Product Completion.

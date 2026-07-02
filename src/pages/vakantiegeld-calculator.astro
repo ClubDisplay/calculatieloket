@@ -10,6 +10,7 @@ import UseCasesPanel from "../components/calculator/UseCasesPanel.astro";
 import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
+import TrustPanel from "../components/calculator/TrustPanel.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import HowToSchema from "../components/calculator/HowToSchema.astro";
 import InlineSources from "../components/calculator/InlineSources.astro";
@@ -281,9 +282,11 @@ const breadcrumbSchema = {
       <InlineSources title="Gebruikte bronnen" items={sources} />
     </ResultPanel>
 
+    <TrustPanel slot="result" lastUpdated={lastUpdated} sourcesId="calculator-sources" />
+
     <UseCasesPanel title="Wat kun je hiermee?" items={useCases} slot="useCases" />
 
-    <SourceCards title="Bronnen" items={sources} slot="sources" />
+    <SourceCards id="calculator-sources" title="Bronnen" items={sources} slot="sources" />
 
     <FaqAccordion title="Veelgestelde vragen" items={faq} slot="faq" />
 

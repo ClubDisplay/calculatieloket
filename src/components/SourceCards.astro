@@ -9,12 +9,13 @@ interface Item {
 interface Props {
   title: string;
   items: Item[];
+  id?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, items, id } = Astro.props;
 ---
 
-<section class="srcc">
+<section class="srcc" id={id}>
   <h2 class="srcc-title">{title}</h2>
   <div class="srcc-grid">
     {items.map((item) => (
