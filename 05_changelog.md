@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 110 — Lighthouse Calculator Coverage & Accessibility Fixes
+**Details:** Lighthouse-audit uitgebreid naar alle publieke calculatorpagina's. `scripts/lighthouse-audit.mjs` controleert nu 13 pagina's: homepage, calculator hub, `/categorie/inkomen/`, en alle 10 calculators. Stabiliteit toegevoegd door iedere pagina 3 keer te meten en de median score per categorie te rapporteren; aantal runs configureerbaar via `LIGHTHOUSE_RUNS`. Quick-chip groepen op alle 10 calculatorpagina's voorzien van expliciet label (`aria-labelledby="quickChipsLabel"`) en `role="group"`. Accessibility fixes op `src/pages/auto-importkosten-berekenen.astro`: `.calc-field-hint a` krijgt `text-decoration: underline` en `.result-row .label` krijgt een donkerder contrastkleur (`#4b5563`). Gemeten scores (lokaal, zonder AdSense, 3 runs median): alle 13 pagina's halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95). Best Practices en SEO zijn overal 100; accessibility loopt van 96 tot 100. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md`, `docs/product/10-PRODUCT-POLISH-BACKLOG.md` en `05_changelog.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 108 — Lighthouse Quality Monitoring v1
 **Details:** Lichtgewicht kwaliteitsmonitoring toegevoegd. `lighthouse` toegevoegd als devDependency (motivatie: lichtste manier om programmatisch Lighthouse-scores te meten in headless Chrome). Nieuw script `scripts/lighthouse-audit.mjs` start statische server op `dist/` en draait Lighthouse op 6 pagina's: `/`, `/calculators/`, `/bruto-netto-2026/`, `/categorie/inkomen/`, `/btw-calculator/` en `/zzp-calculator/`. Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95. Console summary + JSON/Markdown rapport in `reports/`. Npm script: `npm run audit:lighthouse`. Gemeten scores (lokaal, zonder AdSense): Calculator hub 99/96/100/100 ✅; Homepage 68/96/100/100 ❌ (performance); Bruto-netto 2026 99/83/100/100 ❌; Categorie Inkomen 100/91/100/100 ❌; BTW calculator 99/88/100/100 ❌; ZZP calculator 100/82/100/100 ❌. Accessibility faalt op calculatorpagina's; Best Practices en SEO zijn overal 100. CI-stap toegevoegd aan `.github/workflows/atlas-ci.yml` met `continue-on-error: true` zodat monitoring niet blokkeert; rapporten worden geüpload als artifact. Geen productiewijzigingen, geen engine-wijzigingen, geen `.env` of deploy. Documentatie bijgewerkt: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md`, `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling

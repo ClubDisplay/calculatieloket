@@ -388,8 +388,8 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <div class="quick-chips">
-        <span class="quick-chips-label">Snel scenario:</span>
+      <div class="quick-chips" role="group" aria-labelledby="quickChipsLabel">
+        <span class="quick-chips-label" id="quickChipsLabel">Snel scenario:</span>
         {quickPresets.map((preset) => (
           <button type="button" class="quick-chip" data-preset={JSON.stringify(preset.data)} data-analytics="quick-preset" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label={preset.label}>
             {preset.label}
@@ -868,6 +868,10 @@ const breadcrumbSchema = {
     margin: -0.4rem 0 0.25rem;
   }
 
+  .calc-field-hint a {
+    text-decoration: underline;
+  }
+
   .calc-error {
     color: #b91c1c;
     font-size: 0.9rem;
@@ -913,7 +917,7 @@ const breadcrumbSchema = {
   }
 
   .result-row .label {
-    color: var(--color-text-muted);
+    color: #4b5563;
   }
 
   .result-row .value {

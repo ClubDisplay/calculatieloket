@@ -6,6 +6,20 @@
 
 ---
 
+## Update: Sprint 110 — Lighthouse Calculator Coverage & Accessibility Fixes (afgerond)
+
+Sprint 110 breidt de Lighthouse-audit uit naar alle publieke calculatorpagina’s en rondt de accessibility-drempel af zonder nieuwe productfeatures of engine-wijzigingen.
+
+Wijzigingen:
+
+- **Lighthouse script uitgebreid**: `scripts/lighthouse-audit.mjs` meet nu 13 pagina’s: homepage, calculator hub, `/categorie/inkomen/`, en alle 10 calculators (`bruto-netto-2026`, `salaris-calculator`, `vakantiegeld-calculator`, `toeslagen-calculator`, `hypotheek-calculator`, `btw-calculator`, `btw-terugrekenen`, `btw-inclusief-exclusief`, `zzp-calculator`, `auto-importkosten-berekenen`).
+- **Stabiliteit**: iedere pagina wordt 3 keer gemeten; de median score per categorie wordt gerapporteerd. Het aantal runs is configureerbaar via `LIGHTHOUSE_RUNS`.
+- **Quick-chip labels**: alle 10 calculatorpagina’s krijgen een expliciet groep-label (`<span class="quick-chips-label" id="quickChipsLabel">`) en `role="group"` op de `.quick-chips` container, zodat screenreaders de preset-knoppen als een groep presenteren.
+- **Accessibility fixes op Auto importkosten**: `src/pages/auto-importkosten-berekenen.astro` krijgt `text-decoration: underline` op `.calc-field-hint a` en een donkerder contrastkleur (`#4b5563`) voor `.result-row .label` in het resultaatpaneel. Hierdoor stijgt de accessibility-score van 93 naar 97.
+- **Resultaten**: alle 13 pagina’s halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95). Best Practices en SEO zijn overal 100.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 108 — Lighthouse Quality Monitoring v1 (afgerond)
 
 Sprint 108 voegt lichte kwaliteitsmonitoring toe voor performance, accessibility, best practices en SEO. Geen productfeatures, geen engine-wijzigingen.

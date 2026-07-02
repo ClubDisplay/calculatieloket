@@ -5,8 +5,13 @@
  * Draait Lighthouse op een lokaal statisch preview-server tegen de productiebuild
  * in dist/. Genereert een console summary en een Markdown rapport in reports/.
  *
+ * Elke pagina wordt meerdere keren gemeten (default 3) en de median score per
+ * categorie wordt gerapporteerd. Dit vermindert de impact van incidentele
+ * fluctuatie in CPU/netwerk simulatie.
+ *
  * Gebruik:
  *   npm run audit:lighthouse
+ *   LIGHTHOUSE_RUNS=5 npm run audit:lighthouse
  *
  * Vereisten:
  *   - Chrome/Chromium moet beschikbaar zijn (chrome-launcher zoekt automatisch).
@@ -30,11 +35,20 @@ const JSON_FILE = "lighthouse-audit-report.json";
 const PAGES = [
   { path: "/", label: "Homepage" },
   { path: "/calculators/", label: "Calculator hub" },
-  { path: "/bruto-netto-2026/", label: "Bruto netto 2026" },
   { path: "/categorie/inkomen/", label: "Categorie Inkomen" },
+  { path: "/bruto-netto-2026/", label: "Bruto netto 2026" },
+  { path: "/salaris-calculator/", label: "Salaris calculator" },
+  { path: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator" },
+  { path: "/toeslagen-calculator/", label: "Toeslagen calculator" },
+  { path: "/hypotheek-calculator/", label: "Hypotheek calculator" },
   { path: "/btw-calculator/", label: "BTW calculator" },
+  { path: "/btw-terugrekenen/", label: "BTW terugrekenen" },
+  { path: "/btw-inclusief-exclusief/", label: "BTW inclusief/exclusief" },
   { path: "/zzp-calculator/", label: "ZZP calculator" },
+  { path: "/auto-importkosten-berekenen/", label: "Auto importkosten" },
 ];
+
+const RUNS_PER_PAGE = parseInt(process.env.LIGHTHOUSE_RUNS || "3", 10);
 
 const THRESHOLDS = {
   performance: 90,
@@ -115,6 +129,14 @@ async function startServer() {
   return server;
 }
 
+function median(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0
+    ? Math.round((sorted[mid - 1] + sorted[mid]) / 2)
+    : sorted[mid];
+}
+
 async function runLighthouse(chrome, page) {
   const url = `${BASE_URL}${page.path}`;
   const options = {
@@ -124,18 +146,25 @@ async function runLighthouse(chrome, page) {
     port: chrome.port,
   };
 
-  const runnerResult = await lighthouse(url, options);
-  const lhr = runnerResult.lhr;
+  const runs = [];
+  for (let i = 0; i < RUNS_PER_PAGE; i++) {
+    const runnerResult = await lighthouse(url, options);
+    runs.push(runnerResult.lhr);
+  }
+
+  // Gebruik de laatste run voor eventuele debugging; rapporteer median scores.
+  const lhr = runs[runs.length - 1];
+  const scores = Object.fromEntries(
+    Object.keys(THRESHOLDS).map((key) => [
+      key,
+      median(runs.map((run) => Math.round(run.categories[key].score * 100))),
+    ])
+  );
 
   return {
     page,
     url,
-    scores: Object.fromEntries(
-      Object.keys(THRESHOLDS).map((key) => [
-        key,
-        Math.round(lhr.categories[key].score * 100),
-      ])
-    ),
+    scores,
     lhr,
   };
 }
@@ -266,7 +295,7 @@ async function main() {
     server = await startServer();
     chrome = await chromeLauncher.launch({ chromeFlags: ["--headless", "--no-sandbox"] });
 
-    console.log(`\n🔍 Lighthouse audit op ${PAGES.length} pagina's...`);
+    console.log(`\n🔍 Lighthouse audit op ${PAGES.length} pagina's (${RUNS_PER_PAGE} run${RUNS_PER_PAGE === 1 ? "" : "s"} per pagina, median score)...`);
     const results = [];
     for (const page of PAGES) {
       process.stdout.write(`   ${page.label} ... `);
