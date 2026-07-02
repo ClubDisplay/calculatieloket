@@ -59,7 +59,8 @@ const { title = "Veelgestelde vragen", items } = Astro.props;
     transition: background 0.15s;
   }
 
-  .calc-faq-question:hover {
+  .calc-faq-question:hover,
+  .calc-faq-question:focus-visible {
     background: var(--color-primary-light);
   }
 

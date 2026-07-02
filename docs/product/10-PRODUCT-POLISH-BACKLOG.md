@@ -6,6 +6,30 @@
 
 ---
 
+## Update: Sprint 101 — Performance & Accessibility Excellence v1 (afgerond)
+
+Sprint 101 brengt Calculatieloket van “goed” naar “uitstekend” op performance, mobile UX en accessibility. Er zijn geen nieuwe features gebouwd, geen engines gewijzigd en geen redesigns uitgevoerd; alleen veilige quick wins op markup, CSS en client-side gedrag.
+
+Wijzigingen:
+
+- **Skip link**: `src/layouts/BaseLayout.astro` krijgt een "Spring naar inhoud" link voor toetsenbordnavigatie, zichtbaar bij focus en met target `main id="main-content"`.
+- **Consistente focus indicators**: `src/styles/global.css` krijgt een generieke `:focus-visible` regel voor links, buttons, inputs, selects, summaries en focusbare elementen. De custom toggle switch krijgt een zichtbare focus ring op de slider.
+- **Reduced motion**: `prefers-reduced-motion: reduce` media query in `src/styles/global.css` schakelt animaties/transities uit. De cookie banner (`src/components/CookieConsent.astro`) respecteert dit ook.
+- **Header/footer navigatie**: `aria-current="page"` toegevoegd aan actieve links in hoofdnavigatie en footer op basis van `Astro.url.pathname`. Mobiele menu toggle krijgt een zichtbare focus ring, dynamisch `aria-label` (openen/sluiten) en sluit met `Escape`.
+- **Logo optimalisatie**: `width` en `height` attributen, `loading="eager"` en `decoding="async"` toegevoegd aan het logo in `BaseLayout` om CLS te verminderen.
+- **CSS cleanup**: oude, door `BaseLayout` overschreven `.site-header`, `.site-header-inner` en `.site-nav` regels verwijderd uit `src/styles/global.css`, waardoor de stylesheet smaller en minder conflictgevoelig wordt.
+- **FAQ focus**: `summary:focus-visible` stijl toegevoegd in `src/components/calculator/FaqAccordion.astro`.
+- **Homepage zoekfeedback**: `aria-live="polite"` en `aria-atomic="true"` toegevoegd aan het "Geen resultaten" bericht in `src/pages/index.astro`.
+- Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
+Bewust open / niet meegenomen (geschikt voor latere Lighthouse/product audit):
+- Volledige Lighthouse audit met CI-koppeling.
+- Lazy loading van onder-the-fold afbeeldingen (momenteel geen afbeeldingen onder the fold).
+- Font subsetting (systeemfont stack).
+- Service worker / asset caching strategie.
+- Uitgebreide focus trap voor mobiel menu.
+- `aria-label` op individuele radio-button groepen per calculator (visueel label is aanwezig; grotere refactor dan deze sprint toelaat).
+
 ## Update: Sprint 100 — Analytics Ready Foundation (afgerond)
 
 Sprint 100 legt de markup-basis voor toekomstige analytics. Er worden nog geen tracking scripts, cookies, event listeners of externe providers toegevoegd; alleen gestandaardiseerde `data-analytics-*` attributen op interactieve elementen, zodat elke toekomstige analytics-integratie één uniforme selector-conventie kan gebruiken.

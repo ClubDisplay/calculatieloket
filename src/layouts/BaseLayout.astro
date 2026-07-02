@@ -9,6 +9,12 @@ const noindex = Astro.props.noindex ?? false;
 const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
 const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
 const canonical = new URL(Astro.url.pathname, "https://calculatieloket.nl").href;
+const pathname = Astro.url.pathname;
+const isCurrentPage = (href: string) => {
+  if (href === "/") return pathname === "/";
+  const base = href.replace(/\/$/, "");
+  return pathname === base + "/" || pathname.startsWith(base + "/");
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -77,6 +83,7 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Spring naar inhoud</a>
     <header class="site-header">
       <div class="site-header-inner">
         <a
@@ -92,6 +99,10 @@ const jsonLd = {
             src="/logo-calculatieloket-header-tight.png"
             alt="Calculatieloket.nl"
             class="site-logo"
+            width="1271"
+            height="329"
+            loading="eager"
+            decoding="async"
           />
         </a>
 
@@ -115,6 +126,7 @@ const jsonLd = {
             <a
               href="/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -142,6 +154,7 @@ const jsonLd = {
                 <a
                   href={cat.href}
                   class="site-nav-dropdown-link"
+                  aria-current={isCurrentPage(cat.href) ? "page" : undefined}
                   data-analytics="header-link"
                   data-analytics-category="header"
                   data-analytics-action="click"
@@ -156,6 +169,7 @@ const jsonLd = {
             <a
               href="/btw-calculator/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/btw-calculator/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -166,6 +180,7 @@ const jsonLd = {
             <a
               href="/salaris-calculator/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/salaris-calculator/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -176,6 +191,7 @@ const jsonLd = {
             <a
               href="/hypotheek-calculator/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/hypotheek-calculator/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -186,6 +202,7 @@ const jsonLd = {
             <a
               href="/zzp-calculator/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/zzp-calculator/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -196,6 +213,7 @@ const jsonLd = {
             <a
               href="/toeslagen-calculator/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/toeslagen-calculator/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -208,6 +226,7 @@ const jsonLd = {
             <a
               href="/over-ons/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -218,6 +237,7 @@ const jsonLd = {
             <a
               href="/contact/"
               class="site-nav-link"
+              aria-current={isCurrentPage("/contact/") ? "page" : undefined}
               data-analytics="header-link"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -229,7 +249,7 @@ const jsonLd = {
         </nav>
       </div>
     </header>
-    <main>
+    <main id="main-content">
       <div class={containerClass}>
         <slot />
       </div>
@@ -242,6 +262,7 @@ const jsonLd = {
             {categoryList.map((cat) => (
               <a
                 href={cat.href}
+                aria-current={isCurrentPage(cat.href) ? "page" : undefined}
                 data-analytics="footer-link"
                 data-analytics-category="footer"
                 data-analytics-action="click"
@@ -257,6 +278,7 @@ const jsonLd = {
           <div class="footer-links">
             <a
               href="/bruto-netto-2026/"
+              aria-current={isCurrentPage("/bruto-netto-2026/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -266,6 +288,7 @@ const jsonLd = {
             </a>
             <a
               href="/salaris-calculator/"
+              aria-current={isCurrentPage("/salaris-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -275,6 +298,7 @@ const jsonLd = {
             </a>
             <a
               href="/vakantiegeld-calculator/"
+              aria-current={isCurrentPage("/vakantiegeld-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -284,6 +308,7 @@ const jsonLd = {
             </a>
             <a
               href="/toeslagen-calculator/"
+              aria-current={isCurrentPage("/toeslagen-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -293,6 +318,7 @@ const jsonLd = {
             </a>
             <a
               href="/hypotheek-calculator/"
+              aria-current={isCurrentPage("/hypotheek-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -302,6 +328,7 @@ const jsonLd = {
             </a>
             <a
               href="/btw-calculator/"
+              aria-current={isCurrentPage("/btw-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -311,6 +338,7 @@ const jsonLd = {
             </a>
             <a
               href="/zzp-calculator/"
+              aria-current={isCurrentPage("/zzp-calculator/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -320,6 +348,7 @@ const jsonLd = {
             </a>
             <a
               href="/auto-importkosten-berekenen/"
+              aria-current={isCurrentPage("/auto-importkosten-berekenen/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -334,6 +363,7 @@ const jsonLd = {
           <div class="footer-links">
             <a
               href="/privacy/"
+              aria-current={isCurrentPage("/privacy/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -343,6 +373,7 @@ const jsonLd = {
             </a>
             <a
               href="/cookies/"
+              aria-current={isCurrentPage("/cookies/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -352,6 +383,7 @@ const jsonLd = {
             </a>
             <a
               href="/disclaimer/"
+              aria-current={isCurrentPage("/disclaimer/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -361,6 +393,7 @@ const jsonLd = {
             </a>
             <a
               href="/over-ons/"
+              aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -370,6 +403,7 @@ const jsonLd = {
             </a>
             <a
               href="/contact/"
+              aria-current={isCurrentPage("/contact/") ? "page" : undefined}
               data-analytics="footer-link"
               data-analytics-category="footer"
               data-analytics-action="click"
@@ -396,12 +430,14 @@ const jsonLd = {
         toggle.addEventListener("click", () => {
           const expanded = toggle.getAttribute("aria-expanded") === "true";
           toggle.setAttribute("aria-expanded", String(!expanded));
+          toggle.setAttribute("aria-label", !expanded ? "Menu sluiten" : "Menu openen");
           menu.classList.toggle("is-open", !expanded);
         });
 
         menu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () => {
             toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Menu openen");
             menu.classList.remove("is-open");
           });
         });
@@ -422,6 +458,19 @@ const jsonLd = {
           }
         });
       }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        if (toggle && menu && toggle.getAttribute("aria-expanded") === "true") {
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Menu openen");
+          menu.classList.remove("is-open");
+        }
+        if (dropdownToggle && dropdownMenu && dropdownToggle.getAttribute("aria-expanded") === "true") {
+          dropdownToggle.setAttribute("aria-expanded", "false");
+          dropdownMenu.classList.remove("is-open");
+        }
+      });
     </script>
   </body>
 </html>
@@ -448,6 +497,11 @@ const jsonLd = {
     background: var(--color-surface);
     color: var(--color-text);
     cursor: pointer;
+  }
+
+  .site-nav-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .site-nav-burger,

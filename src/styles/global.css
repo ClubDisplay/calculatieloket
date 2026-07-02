@@ -42,6 +42,45 @@ body {
   min-height: 100vh;
 }
 
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid white;
+  outline-offset: -2px;
+}
+
+/* Consistent focus indicator for interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Focus indicator for custom toggle slider */
+.toggle input:focus-visible + .slider {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -63,33 +102,11 @@ a:hover {
   padding: 0 1.5rem;
 }
 
-.site-header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.site-header-inner {
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  min-height: 56px;
-  padding: 8px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-}
-
 .site-brand {
   display: inline-flex;
   align-items: center;
-  flex: 0 0 auto;
   text-decoration: none;
   line-height: 0;
-  margin: 0;
-  padding: 0;
 }
 
 .site-brand:hover {
@@ -102,71 +119,6 @@ a:hover {
   height: auto;
   max-width: 100%;
   object-fit: contain;
-  margin: 0;
-  padding: 0;
-}
-
-.site-nav {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex: 0 1 auto;
-}
-
-.site-nav a {
-  text-decoration: none;
-  color: var(--color-text-muted);
-  font-weight: 500;
-  white-space: nowrap;
-  font-size: 0.875rem;
-  padding: 4px 0;
-  transition: color 0.15s;
-}
-
-.site-nav a:hover,
-.site-nav a:focus-visible {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-@media (max-width: 760px) {
-  .site-header-inner {
-    min-height: 52px;
-    padding: 10px 16px 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .site-brand {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .site-logo {
-    width: min(220px, 70vw);
-    height: auto;
-  }
-
-  .site-nav {
-    width: 100%;
-    margin-left: 0;
-    justify-content: center;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-  }
-}
-
-@media (max-width: 420px) {
-  .site-logo {
-    width: min(200px, 65vw);
-  }
-
-  .site-nav {
-    justify-content: flex-start;
-  }
 }
 
 main {
@@ -708,4 +660,16 @@ footer {
   border-radius: 4px;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+/* Respect user motion preferences and improve perceived performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
