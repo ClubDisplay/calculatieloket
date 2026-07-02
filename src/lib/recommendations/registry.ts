@@ -5,6 +5,7 @@ import { mortgageRules } from "./rules/mortgage";
 import { zzpRules } from "./rules/zzp";
 import { allowancesRules } from "./rules/allowances";
 import { importCostsRules } from "./rules/import-costs";
+import { vacationPayRules } from "./rules/vacation-pay";
 
 export const recommendationRegistry: Record<string, RecommendationRule> = {
   "bruto-netto": incomeRules,
@@ -16,4 +17,5 @@ export const recommendationRegistry: Record<string, RecommendationRule> = {
   zzp: zzpRules,
   toeslagen: allowancesRules,
   "auto-importkosten": importCostsRules,
+  vakantiegeld: vacationPayRules,
 };

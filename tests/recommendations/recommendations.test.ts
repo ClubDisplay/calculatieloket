@@ -190,6 +190,7 @@ describe("Recommendation registry", () => {
       "zzp",
       "toeslagen",
       "auto-importkosten",
+      "vakantiegeld",
     ];
     for (const key of keys) {
       expect(recommendationRegistry[key]).toBeDefined();
@@ -250,5 +251,54 @@ describe("Import costs rules", () => {
     const ids = result.map((r) => r.id);
     expect(ids).toContain("zzp");
     expect(ids).toContain("bpm-uitleg");
+  });
+});
+
+describe("Vacation pay rules", () => {
+  it("recommends bruto-netto as priority 1", () => {
+    const result = getRecommendations({
+      calculator: "vakantiegeld",
+      values: { grossMonthlySalary: 3000 },
+      result: {},
+    });
+    expect(result[0].id).toBe("bruto-netto");
+    expect(result[0].priority).toBe(1);
+    expect(result[0].url).toContain("bruto=3000");
+  });
+
+  it("includes all expected follow-up calculators", () => {
+    const result = getRecommendations({
+      calculator: "vakantiegeld",
+      values: { grossMonthlySalary: 3000 },
+      result: { netVacationPay: 1700 },
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).toContain("bruto-netto");
+    expect(ids).toContain("salaris");
+    expect(ids).toContain("toeslagen");
+    expect(ids).toContain("hypotheek");
+    expect(ids).toContain("zzp");
+  });
+
+  it("does not recommend the current calculator", () => {
+    const result = getRecommendations({
+      calculator: "vakantiegeld",
+      values: { grossMonthlySalary: 3000 },
+      result: {},
+    });
+    const ids = result.map((r) => r.id);
+    expect(ids).not.toContain("vakantiegeld");
+  });
+
+  it("includes gross yearly income in toeslagen and hypotheek urls", () => {
+    const result = getRecommendations({
+      calculator: "vakantiegeld",
+      values: { grossMonthlySalary: 3000 },
+      result: {},
+    });
+    const toeslagen = result.find((r) => r.id === "toeslagen");
+    const hypotheek = result.find((r) => r.id === "hypotheek");
+    expect(toeslagen?.url).toContain("inkomen=36000");
+    expect(hypotheek?.url).toContain("inkomen=36000");
   });
 });

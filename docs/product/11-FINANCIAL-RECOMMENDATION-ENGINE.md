@@ -2,7 +2,7 @@
 
 > **Doel:** Een generieke, rule-based aanbevelingslaag bovenop bestaande calculator-resultaten, zodat elke calculator automatisch relevante vervolgstappen toont.  
 > **Niet in scope:** AI, chatbot, engine-wijzigingen, Knowledge Layer-wijzigingen, Rule Resolver-wijzigingen, deploy, `.env`.  
-> **Laatst bijgewerkt:** 2026-07-02
+> **Laatst bijgewerkt:** 2026-07-03
 
 ---
 
@@ -87,6 +87,7 @@ export const recommendationRegistry: Record<string, RecommendationRule> = {
   "zzp": zzpRules,
   "toeslagen": allowancesRules,
   "auto-importkosten": importCostsRules,
+  "vakantiegeld": vacationPayRules,
 };
 ```
 
@@ -104,7 +105,7 @@ Voor `bruto-netto` en `salaris`.
 |---|---|---|---|
 | `nettoMonthly < 2500` | Toeslagen | 1 | laag netto inkomen |
 | `nettoMonthly > 3200` | Hypotheek | 1 | hoog netto inkomen |
-| altijd | Vakantiegeld | 3 | relevant bij loon |
+| altijd | Vakantiegeld | 3 | relevant bij loon; linkt naar `/vakantiegeld-calculator/` |
 | altijd | Salaris vergelijken | 4 | altijd relevant |
 | altijd | ZZP uurtarief | 5 | altijd relevant |
 
@@ -168,6 +169,20 @@ Voor `auto-importkosten`.
 | altijd | BPM uitleg (Belastingdienst) | 4 | officiële bron |
 
 De huidige calculator `auto-importkosten` wordt door de engine automatisch uitgefilterd. De BTW- en ZZP-recommendations houden rekening met de totale importkosten door deze als query parameter mee te geven waar logisch.
+
+### `src/lib/recommendations/rules/vacation-pay.ts`
+
+Voor `vakantiegeld`.
+
+| Conditie | Aanbeveling | Priority | Reason |
+|---|---|---|---|
+| altijd | Bruto-netto 2026 | 1 | altijd relevant |
+| altijd | Salaris vergelijken | 2 | altijd relevant |
+| altijd | Toeslagen | 3 | altijd relevant |
+| altijd | Hypotheek | 4 | altijd relevant |
+| altijd | ZZP uurtarief | 5 | altijd relevant |
+
+De regels lezen `grossMonthlySalary` en `netVacationPay` uit `values`/`result`. De bruto-netto, toeslagen en hypotheek recommendations passen het jaarinkomen (`× 12`) als query parameter door.
 
 ---
 
@@ -301,12 +316,33 @@ Definition of Done Sprint 091:
 
 ---
 
+## Sprint 092 integratie (uitgevoerd)
+
+`vakantiegeld` is toegevoegd als nieuwe calculator en is aangesloten op de Recommendation Engine.
+
+- Nieuwe engine: `src/lib/calculators/vacation-pay.ts` (hergebruikt de bestaande `tax.ts` engine).
+- Nieuwe pagina: `src/pages/vakantiegeld-calculator.astro`.
+- Nieuwe rule file: `src/lib/recommendations/rules/vacation-pay.ts`.
+- Geregistreerd als `"vakantiegeld": vacationPayRules` in `src/lib/recommendations/registry.ts`.
+- `src/pages/vakantiegeld-calculator.astro` berekent server-side een initiële `Recommendation[]` via `getRecommendations()` en herberekent deze client-side bij elke inputwijziging via `updateFinancialJourney()`.
+- De placeholder `vakantiegeld` recommendation in `src/lib/recommendations/rules/income.ts` en de default step in `src/components/calculator/FinancialJourney.astro` zijn vervangen door een werkende link naar `/vakantiegeld-calculator/`.
+- Regels op de vakantiegeld pagina: Bruto-netto 2026, Salaris vergelijken, Toeslagen, Hypotheek, ZZP uurtarief.
+- Tests toegevoegd in `tests/calculators/vacation-pay.test.ts` en `tests/recommendations/recommendations.test.ts`.
+
+Definition of Done Sprint 092:
+
+- `vakantiegeld` calculator is live, gebruikt de App Shell en de Recommendation Engine.
+- `npm run atlas:check` slaagt.
+- Geen engine-, Knowledge Object-, Rule Resolver- of `.env` wijzigingen.
+
+---
+
 ## Risico’s / TODO’s
 
 - **Input normalisatie:** sommige calculators gebruiken andere key-namen (`nettoMonthly` vs `net`). De huidige helpers proberen meerdere varianten, maar langere termijn zou een `calculator → key mapping` beter zijn.
 - **URL parameters:** in Sprint 088 kunnen recommendations rijkere URLs krijgen (bijv. `?bruto=...` of `?inkomen=...`). De engine houdt nu nog geen state over, dat is de verantwoordelijkheid van de caller.
 - **Nieuwe calculators:** een `calculator` die niet in de registry staat, krijgt lege recommendations. De pagina valt dan terug op default steps of handmatige steps.
-- **Vakantiegeld placeholder:** de `vakantiegeld` recommendation verwijst naar `#` omdat de calculator nog niet bestaat. Zodra die pagina beschikbaar is, URL aanpassen.
+- **Vakantiegeld placeholder:** opgelost in Sprint 092. De `vakantiegeld` recommendation en de default step in `FinancialJourney` linken nu naar `/vakantiegeld-calculator/`.
 
 ---
 
@@ -323,5 +359,7 @@ Definition of Done Sprint 091:
 - `src/lib/recommendations/rules/zzp.ts`
 - `src/lib/recommendations/rules/allowances.ts`
 - `src/lib/recommendations/rules/import-costs.ts`
+- `src/lib/recommendations/rules/vacation-pay.ts`
 - `src/components/calculator/FinancialJourney.astro`
 - `tests/recommendations/recommendations.test.ts`
+- `src/pages/vakantiegeld-calculator.astro`
