@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 104 — Trust & Credibility Excellence v1
+**Details:** Uniform Trust System toegevoegd aan alle 10 calculatorpagina's. Nieuwe component `src/components/calculator/TrustPanel.astro` met badges (Gebaseerd op officiële bronnen, Jaarlijks gecontroleerd, Indicatieve berekening, Laatste update, Redactie: Calculatieloket.nl), compacte uitleg en anchor-link naar bronnen. `src/components/SourceCards.astro` krijgt optionele `id` prop. TrustPanel staat in de `result`-slot direct onder `ResultPanel` op alle calculators: bruto-netto-2026, salaris, hypotheek, toeslagen, btw, btw-terugrekenen, btw-inclusief-exclusief, zzp, auto-importkosten en vakantiegeld. Statische pagina's over-ons, contact, disclaimer, privacy en cookies krijgen verlengde meta descriptions (120–160 tekens) en trust-secties. `src/layouts/BaseLayout.astro` footer bottom toont subtiel "Gebaseerd op officiële bronnen". Geen Google Reviews, sterren, testimonials of nep badges. Nieuwe documentatie `docs/product/15-TRUST-SYSTEM-v1.md`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 103 — Product & UX Review v1
 **Details:** Platform-wide product- en UX-review uitgevoerd vanuit 5 perspectieven (UX Designer, Product Owner, SEO-specialist, Google Quality Rater, eerste bezoeker). Nieuw document `docs/product/14-PRODUCT-UX-REVIEW-v1.md` met 12-categorie scorecard (gemiddelde 8.0/10), per-pagina first-visitor journey, concurrentievergelijking met SalarisNetto, BerekenHet, Nibud en Loonwijzer, top 25 verbeterpunten (P0/P1/P2), top 10 user-happiness UX items, risico's en voorstel voor Sprint 104. Scorecard: 9× groen, 2× geel, 0× rood. Gele vlaggen: advertenties/afleiding (top-ad eet eerste viewport) en first impression/trust (sociale proof mist nog). P0-items: Lighthouse audit, meta descriptions statische pagina's, trust badges, top-ad evaluatie, viewport optimalisatie, consistente resultaatpresentatie, copy-link consistentie, quick chips, trust bar, search empty state. Advies: Product Completion is technisch af; Sprint 104 richt zich op Lighthouse, trust bar en content. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` is niet beïnvloed; 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling

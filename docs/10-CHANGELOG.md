@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
-2. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+1. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
+2. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
+3. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
 3. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
 3. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
 3. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
@@ -47,6 +48,16 @@
 27. [2026-06-30](#2026-06-30)
 28. [2026-06-30](#2026-06-30)
 29. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 104
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 104 — Trust & Credibility Excellence v1
+**Details:** Uniform Trust System toegevoegd aan alle 10 calculatorpagina's. Nieuwe component `src/components/calculator/TrustPanel.astro` met badges (Gebaseerd op officiële bronnen, Jaarlijks gecontroleerd, Indicatieve berekening, Laatste update, Redactie: Calculatieloket.nl), compacte uitleg en anchor-link naar bronnen. `src/components/SourceCards.astro` krijgt optionele `id` prop. TrustPanel staat in de `result`-slot direct onder `ResultPanel` op alle calculators: bruto-netto-2026, salaris, hypotheek, toeslagen, btw, btw-terugrekenen, btw-inclusief-exclusief, zzp, auto-importkosten en vakantiegeld. Statische pagina's over-ons, contact, disclaimer, privacy en cookies krijgen verlengde meta descriptions (120–160 tekens) en trust-secties. `src/layouts/BaseLayout.astro` footer bottom toont subtiel "Gebaseerd op officiële bronnen". Geen Google Reviews, sterren, testimonials of nep badges. Nieuwe documentatie `docs/product/15-TRUST-SYSTEM-v1.md`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 

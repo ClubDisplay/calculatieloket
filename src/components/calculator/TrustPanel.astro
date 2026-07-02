@@ -1,0 +1,120 @@
+---
+interface Props {
+  lastUpdated?: string;
+  sourcesId?: string;
+}
+
+const {
+  lastUpdated = "2026",
+  sourcesId = "calculator-sources",
+} = Astro.props;
+
+const bullets = [
+  "Officiële overheidsbronnen",
+  "Jaarlijks gecontroleerd",
+  "Transparante rekenmethode",
+  "Regelmatig bijgewerkt",
+];
+---
+
+<section class="calc-trust-panel" aria-label="Waarom je deze berekening kunt vertrouwen">
+  <div class="calc-trust-badges">
+    <span class="calc-trust-badge">Gebaseerd op officiële bronnen</span>
+    <span class="calc-trust-badge">Jaarlijks gecontroleerd</span>
+    <span class="calc-trust-badge">Indicatieve berekening</span>
+    {lastUpdated && <span class="calc-trust-badge">Laatste update: {lastUpdated}</span>}
+    <span class="calc-trust-badge">Redactie: Calculatieloket.nl</span>
+  </div>
+
+  <h2 class="calc-trust-title">Waarom kun je deze berekening vertrouwen?</h2>
+  <ul class="calc-trust-list">
+    {bullets.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <a
+    href={`#${sourcesId}`}
+    class="btn btn-secondary calc-trust-button"
+    data-analytics="trust-panel-link"
+    data-analytics-category="calculator-page"
+    data-analytics-action="click"
+    data-analytics-label="bekijk-bronnen"
+  >
+    Bekijk gebruikte bronnen
+  </a>
+</section>
+
+<style>
+  .calc-trust-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+
+  .calc-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  .calc-trust-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .calc-trust-list {
+    margin: 0 0 0.75rem 1.1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .calc-trust-list li {
+    margin-bottom: 0.2rem;
+  }
+
+  .calc-trust-button {
+    display: inline-flex;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .calc-trust-panel {
+      padding: 0.9rem 1rem;
+    }
+
+    .calc-trust-badges {
+      gap: 0.3rem;
+    }
+
+    .calc-trust-badge {
+      font-size: 0.6rem;
+      padding: 0.2rem 0.4rem;
+    }
+
+    .calc-trust-title {
+      font-size: 0.95rem;
+    }
+
+    .calc-trust-list {
+      font-size: 0.85rem;
+    }
+  }
+</style>
