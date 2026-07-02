@@ -26,10 +26,10 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "Calculatieloket.nl",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://calculatieloket.nl/logo_Calculatieloket.png",
-    },
+      logo: {
+        "@type": "ImageObject",
+        url: "https://calculatieloket.nl/logo_Calculatieloket-og.png",
+      },
   },
 };
 ---
@@ -63,7 +63,7 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/logo_Calculatieloket.png" />
+    <meta property="og:image" content="/logo_Calculatieloket-og.png" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -134,6 +134,17 @@ const jsonLd = {
               data-analytics-label="home"
             >
               Home
+            </a>
+            <a
+              href="/calculators/"
+              class="site-nav-link"
+              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+              data-analytics="header-link"
+              data-analytics-category="header"
+              data-analytics-action="click"
+              data-analytics-label="calculators"
+            >
+              Calculators
             </a>
           </div>
           <div class="site-nav-section site-nav-dropdown">
@@ -277,6 +288,16 @@ const jsonLd = {
         <div class="footer-col">
           <h3 class="footer-title">Alle calculators</h3>
           <div class="footer-links">
+            <a
+              href="/calculators/"
+              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="calculators-hub"
+            >
+              Bekijk alle calculators
+            </a>
             <a
               href="/bruto-netto-2026/"
               aria-current={isCurrentPage("/bruto-netto-2026/") ? "page" : undefined}

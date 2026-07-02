@@ -1,0 +1,358 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CategoryHero from "../components/category/CategoryHero.astro";
+import CategoryGrid from "../components/category/CategoryGrid.astro";
+import RelatedCategories from "../components/category/RelatedCategories.astro";
+import AdSlot from "../components/AdSlot.astro";
+import { icons, categoryList } from "../lib/category-icons";
+
+const title = "Alle calculators | Calculatieloket.nl";
+const description = "Ontdek alle 11 gratis calculators van Calculatieloket.nl. Van inkomen, belasting en wonen tot ondernemen en auto. Snel, duidelijk en gebaseerd op officiële bronnen.";
+
+const calculatorGroups = [
+  {
+    category: "Inkomen",
+    accent: "#2563eb",
+    items: [
+      {
+        title: "Bruto netto 2026",
+        href: "/bruto-netto-2026/",
+        description: "Wat houd je netto over van je bruto salaris in 2026?",
+        badge: "Populair",
+        icon: icons.euro,
+        accent: "#2563eb",
+      },
+      {
+        title: "Salaris calculator",
+        href: "/salaris-calculator/",
+        description: "Vergelijk bruto bedragen en zie direct het netto effect.",
+        icon: icons.money,
+        accent: "#2563eb",
+      },
+      {
+        title: "Vakantiegeld calculator",
+        href: "/vakantiegeld-calculator/",
+        description: "Hoeveel vakantiegeld houd je netto over na inhoudingen?",
+        badge: "Nieuw",
+        icon: icons.sun,
+        accent: "#0891b2",
+      },
+      {
+        title: "Toeslagen calculator",
+        href: "/toeslagen-calculator/",
+        description: "Bereken snel je huur- en zorgtoeslag op basis van inkomen.",
+        badge: "Populair",
+        icon: icons.money,
+        accent: "#059669",
+      },
+    ],
+  },
+  {
+    category: "Belasting",
+    accent: "#2563eb",
+    items: [
+      {
+        title: "BTW calculator",
+        href: "/btw-calculator/",
+        description: "Bereken 21%, 9% of 0% btw, exclusief en inclusief.",
+        badge: "Populair",
+        icon: icons.calc,
+        accent: "#2563eb",
+      },
+      {
+        title: "BTW terugrekenen",
+        href: "/btw-terugrekenen/",
+        description: "Reken snel een inclusief bedrag om naar exclusief.",
+        icon: icons.percent,
+        accent: "#2563eb",
+      },
+      {
+        title: "BTW inclusief/exclusief",
+        href: "/btw-inclusief-exclusief/",
+        description: "Omrekenen in beide richtingen met alle gangbare tarieven.",
+        icon: icons.switch,
+        accent: "#2563eb",
+      },
+    ],
+  },
+  {
+    category: "Wonen",
+    accent: "#d97706",
+    items: [
+      {
+        title: "Hypotheek calculator",
+        href: "/hypotheek-calculator/",
+        description: "Wat kan je maximaal lenen en wat zijn je maandlasten?",
+        badge: "Populair",
+        icon: icons.house,
+        accent: "#d97706",
+      },
+    ],
+  },
+  {
+    category: "Ondernemen",
+    accent: "#7c3aed",
+    items: [
+      {
+        title: "ZZP calculator",
+        href: "/zzp-calculator/",
+        description: "Van gewenst netto inkomen naar benodigd uurtarief.",
+        badge: "Voor ondernemers",
+        icon: icons.person,
+        accent: "#7c3aed",
+      },
+      {
+        title: "Auto importkosten berekenen",
+        href: "/auto-importkosten-berekenen/",
+        description: "Bereken bpm, RDW, transport en totale importkosten.",
+        badge: "Nieuw",
+        icon: icons.car,
+        accent: "#0891b2",
+      },
+    ],
+  },
+  {
+    category: "Auto",
+    accent: "#0891b2",
+    items: [
+      {
+        title: "Auto importkosten berekenen",
+        href: "/auto-importkosten-berekenen/",
+        description: "Alle kosten voor het importeren van een auto op een rij.",
+        badge: "Nieuw",
+        icon: icons.car,
+        accent: "#0891b2",
+      },
+    ],
+  },
+];
+
+const allCalculators = calculatorGroups.flatMap((group) => group.items);
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Alle calculators", item: "https://calculatieloket.nl/calculators/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Alle calculators",
+  url: "https://calculatieloket.nl/calculators/",
+  description,
+  inLanguage: "nl-NL",
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Calculatieloket.nl",
+    url: "https://calculatieloket.nl/",
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: allCalculators.map((calc, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: calc.title,
+      url: `https://calculatieloket.nl${calc.href}`,
+    })),
+  },
+};
+
+const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
+---
+
+<BaseLayout {title} {description}>
+  <script type="application/ld+json" slot="head" set:html={schemaJson} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Alle calculators", current: true },
+    ]}
+    analyticsCategory="calculator-hub"
+  />
+
+  <CategoryHero
+    title="Alle calculators"
+    subtitle="Vind de juiste rekentool voor jouw situatie"
+    intro="Bekijk alle calculators van Calculatieloket.nl, geordend per categorie. Van bruto-netto en toeslagen tot hypotheek, btw, zzp en auto importeren. Iedere tool is gratis, vraagt geen account en is gebaseerd op officiële bronnen."
+  />
+
+  <section class="hub-search" aria-label="Zoek calculators">
+    <label for="calcSearch" class="visually-hidden">Zoek een calculator</label>
+    <div class="hub-search-wrap">
+      <span class="hub-search-icon" aria-hidden="true">🔍</span>
+      <input
+        type="text"
+        id="calcSearch"
+        class="hub-search-input"
+        placeholder="Zoek bijvoorbeeld: salaris, btw, hypotheek..."
+        autocomplete="off"
+        data-analytics="calculator-hub-search"
+        data-analytics-category="calculator-hub"
+        data-analytics-action="input"
+        data-analytics-label="search"
+      />
+    </div>
+    <p class="hub-search-hint" aria-live="polite" id="calcSearchHint">Typ een zoekwoord om calculators te filteren.</p>
+  </section>
+
+  <div class="hub-groups">
+    {calculatorGroups.map((group) => (
+      <CategoryGrid
+        title={group.category}
+        items={group.items}
+        analyticsCategory="calculator-hub"
+      />
+    ))}
+  </div>
+
+  <p class="hub-no-results" id="calcNoResults" style="display: none;">
+    Geen calculators gevonden voor dit zoekwoord. <a href="/calculators/">Toon alle calculators</a>.
+  </p>
+
+  <AdSlot slot="1234567892" format="auto" style="min-height:120px" />
+
+  <RelatedCategories
+    categories={categoryList}
+    title="Bekijk calculators per categorie"
+    analyticsCategory="calculator-hub"
+  />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("calcSearch") as HTMLInputElement | null;
+      const hint = document.getElementById("calcSearchHint");
+      const noResults = document.getElementById("calcNoResults");
+      const sections = document.querySelectorAll(".cat-grid-section");
+
+      if (!input || sections.length === 0) return;
+
+      const updateFilter = () => {
+        const query = input.value.toLowerCase().trim();
+        let totalVisible = 0;
+
+        sections.forEach((section) => {
+          const sectionTitle = section.querySelector(".cat-grid-section-title")?.textContent?.toLowerCase() || "";
+          const cards = section.querySelectorAll(".cat-card");
+          const sectionMatches = query.length === 0 || sectionTitle.includes(query);
+          let visibleCount = 0;
+
+          cards.forEach((card) => {
+            const text = card.textContent?.toLowerCase() || "";
+            const match = query.length === 0 || sectionMatches || text.includes(query);
+            (card as HTMLElement).style.display = match ? "" : "none";
+            if (match) visibleCount++;
+          });
+
+          (section as HTMLElement).style.display = visibleCount > 0 ? "" : "none";
+          totalVisible += visibleCount;
+        });
+
+        if (hint) {
+          if (query.length === 0) {
+            hint.textContent = "Typ een zoekwoord om calculators te filteren.";
+          } else if (totalVisible === 0) {
+            hint.textContent = "Geen resultaten gevonden.";
+          } else {
+            hint.textContent = `${totalVisible} calculator${totalVisible === 1 ? "" : "s"} gevonden.`;
+          }
+        }
+
+        if (noResults) {
+          noResults.style.display = totalVisible === 0 && query.length > 0 ? "block" : "none";
+        }
+      };
+
+      input.addEventListener("input", updateFilter);
+      updateFilter();
+    });
+  </script>
+
+  <style>
+    .hub-search {
+      margin-bottom: 1.5rem;
+    }
+
+    .hub-search-wrap {
+      position: relative;
+      max-width: 480px;
+    }
+
+    .hub-search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .hub-search-input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 2.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hub-search-input:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-color: var(--color-primary);
+    }
+
+    .hub-search-hint {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .hub-no-results {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      color: var(--color-text);
+    }
+
+    .hub-no-results a {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .hub-groups :global(.cat-grid) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+      .hub-groups :global(.cat-grid) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hub-groups :global(.cat-grid) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hub-groups :global(.cat-grid) {
+        grid-template-columns: 1fr;
+      }
+
+      .hub-search-input {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</BaseLayout>
