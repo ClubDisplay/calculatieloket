@@ -122,9 +122,9 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: var(--cat-accent, var(--color-primary));
+    color: var(--color-text);
     background: var(--color-primary-light);
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--cat-accent, var(--color-primary));
     padding: 1px 6px;
     border-radius: 6px;
   }
@@ -138,7 +138,7 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
   .cat-card-cta {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--cat-accent, var(--color-primary));
+    color: var(--color-text);
     margin-top: 0.25rem;
   }
 

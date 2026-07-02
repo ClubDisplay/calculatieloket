@@ -192,12 +192,12 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <label>BTW-tarief</label>
-        <div class="radio-group" id="btwRate">
-          <button type="button" data-rate="21" class={defaultRate === 21 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-21">21%</button>
-          <button type="button" data-rate="9" class={defaultRate === 9 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-9">9%</button>
-          <button type="button" data-rate="0" class={defaultRate === 0 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-0">0%</button>
+        <div class="radio-group" id="btwRate" role="group" aria-label="BTW-tarief" aria-describedby="btwRateHint">
+          <button type="button" data-rate="21" class={defaultRate === 21 ? "active" : ""} aria-pressed={defaultRate === 21 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-21">21%</button>
+          <button type="button" data-rate="9" class={defaultRate === 9 ? "active" : ""} aria-pressed={defaultRate === 9 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-9">9%</button>
+          <button type="button" data-rate="0" class={defaultRate === 0 ? "active" : ""} aria-pressed={defaultRate === 0 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-0">0%</button>
         </div>
-        <p class="btw-nul-waarschuwing">0% btw geldt alleen in specifieke situaties, zoals internationale handel. Controleer altijd of je dit tarief mag toepassen.</p>
+        <p class="btw-nul-waarschuwing" id="btwRateHint">0% btw geldt alleen in specifieke situaties, zoals internationale handel. Controleer altijd of je dit tarief mag toepassen.</p>
       </div>
 
       <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken btw terug</button>
@@ -227,8 +227,8 @@ const breadcrumbSchema = {
 
       <InlineSources title="Gebruikte bronnen" items={sources} />
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
@@ -429,7 +429,9 @@ const breadcrumbSchema = {
       rate = parseInt(tarief, 10);
       document.querySelectorAll("#btwRate button").forEach((btn) => {
         const button = btn as HTMLButtonElement;
-        button.classList.toggle("active", button.dataset.rate === tarief);
+        const isActive = button.dataset.rate === tarief;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
     }
   }
@@ -469,8 +471,12 @@ const breadcrumbSchema = {
     document.getElementById("btwRate")!.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
       if (!btn) return;
-      document.querySelectorAll("#btwRate button").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll("#btwRate button").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       rate = parseInt(btn.dataset.rate!, 10);
       calculate();
     });
@@ -525,6 +531,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ul {

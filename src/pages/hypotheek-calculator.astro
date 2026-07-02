@@ -198,18 +198,18 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <label>Looptijd</label>
-        <div class="radio-group" id="termGroup">
-          <button type="button" data-term="10" class={defaultTerm === 10 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-10">10 jaar</button>
-          <button type="button" data-term="20" class={defaultTerm === 20 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-20">20 jaar</button>
-          <button type="button" data-term="30" class={defaultTerm === 30 ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-30">30 jaar</button>
+        <div class="radio-group" id="termGroup" role="group" aria-label="Looptijd">
+          <button type="button" data-term="10" class={defaultTerm === 10 ? "active" : ""} aria-pressed={defaultTerm === 10 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-10">10 jaar</button>
+          <button type="button" data-term="20" class={defaultTerm === 20 ? "active" : ""} aria-pressed={defaultTerm === 20 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-20">20 jaar</button>
+          <button type="button" data-term="30" class={defaultTerm === 30 ? "active" : ""} aria-pressed={defaultTerm === 30 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="term-30">30 jaar</button>
         </div>
       </div>
 
       <div class="form-group">
         <div class="toggle-row">
-          <span class="toggle-label">Tweede inkomen meerekenen</span>
+          <span class="toggle-label" id="toggleLabel-partnerToggle">Tweede inkomen meerekenen</span>
           <label class="toggle" for="partnerToggle">
-            <input type="checkbox" id="partnerToggle" checked={defaultPartner} />
+            <input type="checkbox" id="partnerToggle" checked={defaultPartner} aria-labelledby="toggleLabel-partnerToggle" />
             <span class="slider"></span>
           </label>
         </div>
@@ -248,8 +248,8 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Netto maandlasten <span class="hint">(incl. hypotheekrenteaftrek)</span></span><span class="value" id="detailNetMonthly">{formatEuro(initialResult.netMonthlyPayment, 0)}</span></div>
       <div class="result-row"><span class="label">Totale rentekosten</span><span class="value" id="detailTotalInterest">{formatEuro(initialResult.totalInterest, 0)}</span></div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
@@ -458,6 +458,7 @@ const breadcrumbSchema = {
       const button = btn as HTMLButtonElement;
       const active = parseInt(button.dataset.term!, 10) === termYears;
       button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
     });
   }
 
@@ -496,8 +497,12 @@ const breadcrumbSchema = {
     document.getElementById("termGroup")!.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
       if (!btn) return;
-      document.querySelectorAll("#termGroup button").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll("#termGroup button").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       termYears = parseInt(btn.dataset.term!, 10);
       calculate();
     });
@@ -554,6 +559,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ul {

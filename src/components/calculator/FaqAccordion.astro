@@ -93,4 +93,12 @@ const { title = "Veelgestelde vragen", items } = Astro.props;
   .calc-faq-answer :global(p:last-child) {
     margin-bottom: 0;
   }
+
+  .calc-faq-answer :global(a) {
+    text-decoration: underline;
+  }
+
+  .calc-faq-answer :global(a:hover) {
+    text-decoration: none;
+  }
 </style>
