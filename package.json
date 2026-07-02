@@ -19,7 +19,8 @@
     "qa:rules": "node scripts/qa-rule-resolver.mjs",
     "rule:impact": "node scripts/rule-impact.mjs",
     "knowledge:changelog": "node scripts/knowledge-changelog.mjs",
-    "atlas:check": "node scripts/atlas-ci-check.mjs"
+    "atlas:check": "node scripts/atlas-ci-check.mjs",
+    "audit:lighthouse": "npm run build && node scripts/lighthouse-audit.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "js-yaml": "^5.2.0",
+    "lighthouse": "^13.4.0",
     "vitest": "^4.1.9"
   }
 }
