@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Auto importkosten berekenen — Auto of camper importeren | Calculatieloket.nl";
-const description = "Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief aankoopprijs, bpm, RDW, transport en overige kosten.";
+const description = "Bereken een indicatie van de kosten om een auto of camper te importeren naar Nederland. Inclusief bpm, RDW, transport, keuring en kenteken.";
 
 const defaultVehicleType = "auto";
 const defaultPurchaseCountry = "Duitsland";
@@ -463,6 +463,9 @@ const breadcrumbSchema = {
 
     <h2 class="page-title">Auto importkosten berekenen</h2>
     <p>Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. De uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Gebruik ook de <a href="/btw-calculator/">BTW Calculator</a>, <a href="/zzp-calculator/">ZZP Calculator</a>, <a href="/bruto-netto-2026/">bruto-netto calculator</a> of <a href="/hypotheek-calculator/">hypotheek calculator</a>.</p>
+
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>Deze calculator somt alle bekende kostenposten op die bij auto importeren komen kijken, waaronder bpm, RDW, keuring, kenteken en transport. De bronnen zijn de <a href="https://www.belastingdienst.nl/bpm" target="_blank" rel="noopener">Belastingdienst</a> en de <a href="https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa" target="_blank" rel="noopener">RDW</a>. De bpm moet je zelf inschatten via de officiële bpm-tool; de calculator geeft daarom een indicatie.</p>
 
     <h2>Welke kosten betaal je bij auto importeren?</h2>
     <p>Bij het importeren van een auto of camper naar Nederland komen meerdere kostenposten kijken. Hieronder een overzicht:</p>

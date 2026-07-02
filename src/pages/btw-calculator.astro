@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW Calculator — Bereken 21%, 9% en 0% btw | Calculatieloket.nl";
-const description = "Bereken direct btw inclusief of exclusief. Reken met 21%, 9% of 0% btw en bekijk het bedrag exclusief, het btw-bedrag en het bedrag inclusief. Geheel gratis en anoniem.";
+const description = "Bereken btw inclusief of exclusief met 21%, 9% of 0% tarief. Zie direct bedrag exclusief, btw-bedrag en inclusief. Gebaseerd op Belastingdienst tarieven.";
 
 const defaultAmount = 100;
 const defaultRate = 21;
@@ -258,9 +258,14 @@ const breadcrumbSchema = {
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">Hoe werkt deze berekening?</h2>
-    <p>De btw-calculator rekent op twee manieren:</p>
+    <h2 class="page-title">BTW Calculator</h2>
+    <p>De btw-calculator rekent op twee manieren: van exclusief naar inclusief en andersom. Kies het tarief dat van toepassing is (21%, 9% of 0%) en zie direct het btw-bedrag en het totaalbedrag.</p>
     <p>Wil je hetzelfde bedrag <a href="/btw-terugrekenen/">terugrekenen van inclusief naar exclusief</a>, of tussen <a href="/btw-inclusief-exclusief/">exclusief en inclusief</a> wisselen? Ondernemers kunnen ook het <a href="/zzp-calculator/">ZZP-uurtarief</a> berekenen.</p>
+
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>De calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst. De berekening is wiskundig exact voor het ingevoerde bedrag en tarief. Let op: het 0%-tarief geldt alleen in specifieke situaties.</p>
+
+    <h2>Hoe werkt deze berekening?</h2>
     <ul class="calc-list">
       <li><strong>Exclusief &rarr; inclusief:</strong> btw = bedrag &times; (tarief &divide; 100). Het totaalbedrag inclusief btw is het oorspronkelijke bedrag plus de btw.</li>
       <li><strong>Inclusief &rarr; exclusief:</strong> bedrag exclusief = bedrag &divide; (1 + tarief &divide; 100). De btw is het verschil tussen het inclusieve bedrag en het exclusieve bedrag.</li>
@@ -280,6 +285,14 @@ const breadcrumbSchema = {
 
     <h2>Bronnen en informatie</h2>
     <p>De btw-tarieven zijn vastgesteld door de Nederlandse Belastingdienst. Voor de meest actuele informatie, zie <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst — BTW-tarief</a>.</p>
+
+    <h2>Veelgemaakte fouten</h2>
+    <ul class="calc-list">
+      <li><strong>21% van het inclusieve bedrag aftrekken:</strong> btw terugrekenen doe je door te delen, niet door een percentage af te trekken.</li>
+      <li><strong>Verkeerd tarief gebruiken:</strong> controleer of 21%, 9% of 0% van toepassing is op jouw product of dienst.</li>
+      <li><strong>0% btw verwarren met vrijgesteld:</strong> bij 0% breng je wel 0% btw in rekening en vermeld je dit op de factuur; bij een vrijstelling doe je dat niet.</li>
+      <li><strong>Afrondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine afrondingsverschillen ontstaan.</li>
+    </ul>
   </div>
 
   <CrossSellCards

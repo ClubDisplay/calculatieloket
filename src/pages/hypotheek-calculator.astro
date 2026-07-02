@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "Hypotheek Calculator 2026 — Indicatie maandlasten | Calculatieloket.nl";
-const description = "Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Geen officiële hypotheekofferte.";
+const description = "Bereken een indicatie van je maximale hypotheek, maandlasten en totale rentekosten op basis van je inkomen en rente. Geen officiële offerte.";
 
 const defaultIncome = 60000;
 const defaultRate = 3.8;
@@ -274,15 +274,37 @@ const breadcrumbSchema = {
 
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Hypotheek calculator</h2>
-    <p>Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Gebruik deze calculator als startpunt; het is geen officiële hypotheekofferte.</p>
+    <p>Bereken een indicatie van je maximale hypotheek, bruto en netto maandlasten, en totale rentekosten op basis van je inkomen en de hypotheekrente. Gebruik deze calculator als startpunt voor een gesprek met een hypotheekadviseur; het is geen officiële hypotheekofferte.</p>
     <p>Wil je weten hoeveel je <a href="/bruto-netto-2026/">netto overhoudt</a> van dit inkomen, of welk <a href="/zzp-calculator/">ZZP-uurtarief</a> je nodig hebt? Ook <a href="/toeslagen-calculator/">toeslagen</a> en je <a href="/salaris-calculator/">salaris</a> bereken je eenvoudig op Calculatieloket.nl.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
-    <p>Deze calculator geeft een indicatie op basis van je inkomen, de ingevulde rente en de gekozen looptijd. Gebruikte uitgangspunten:</p>
+    <p>Deze calculator geeft een indicatie op basis van je bruto jaarinkomen, de ingevulde rente en de gekozen looptijd. De gebruikte uitgangspunten zijn:</p>
     <ul class="calc-list">
-      <li>Inkomen × factor (afhankelijk van rente)</li>
-      <li>Annuïtaire aflossing</li>
-      <li>Hypotheekrenteaftrek tegen 37,56% (2026)</li>
+      <li><strong>Inkomensfactor:</strong> afhankelijk van de rente, bepaalt hoeveel je mag lenen ten opzichte van je inkomen.</li>
+      <li><strong>Annuïtaire aflossing:</strong> elke maand betaal je een vast bedrag aan rente en aflossing.</li>
+      <li><strong>Hypotheekrenteaftrek:</strong> in 2026 wordt deze verder afgebouwd; de calculator toont een netto indicatie.</li>
+    </ul>
+
+    <h2>Waarom kun je deze berekening vertrouwen?</h2>
+    <p>De calculator gebruigt een algemeen geaccepteerde inkomensfactor en annuïtaire formule. De bronnen zijn het <a href="https://www.nibud.nl" target="_blank" rel="noopener">Nibud</a> en de <a href="https://www.rijksoverheid.nl/hypotheek" target="_blank" rel="noopener">Rijksoverheid</a>. We vermelden altijd dat de uitkomst een indicatie is, omdat geldverstrekkers eigen acceptatieregels hanteren.</p>
+
+    <h2>Voorbeeldberekening</h2>
+    <p>Stel, je hebt een bruto jaarinkomen van <strong>€ 60.000</strong>, de rente is <strong>3,8%</strong> en de looptijd is <strong>30 jaar</strong>. De calculator toont dan:</p>
+    <ul class="calc-list">
+      <li>Een indicatief maximaal hypotheekbedrag van ongeveer <strong>€ 340.000</strong>.</li>
+      <li>Bruto maandlasten van circa <strong>€ 1.580</strong>.</li>
+      <li>Netto maandlasten (na renteaftrek) van circa <strong>€ 1.200</strong> als indicatie.</li>
+      <li>Totale rentekosten over 30 jaar van ongeveer <strong>€ 230.000</strong>.</li>
+    </ul>
+    <p>Met een partnerinkomen van € 40.000 stijgt het maximale hypotheekbedrag aanzienlijk, maar ook de maandlasten. Pas de rente en looptijd aan om scenario's te vergelijken.</p>
+
+    <h2>Veelgemaakte fouten</h2>
+    <ul class="calc-list">
+      <li><strong>Inkomen exclusief vakantiegeld gebruiken:</strong> voor de hypotheekindicatie reken je met bruto jaarinkomen inclusief vakantiegeld.</li>
+      <li><strong>Te lage rente invoeren:</strong> een lagere rente geeft hogere leencapaciteit, maar de werkelijke rente kan anders zijn.</li>
+      <li><strong>Partnerinkomen vergeten:</strong> zet de toggle aan als je een tweede inkomen wilt meerekenen.</li>
+      <li><strong>Denken dat dit een offerte is:</strong> banken kijken ook naar studieschuld, BKR, gezinssituatie en vaste lasten.</li>
+      <li><strong>Netto maandlast als zekerheid zien:</strong> hypotheekrenteaftrek kan wijzigen; de netto indicatie is geen garantie.</li>
     </ul>
   </div>
 
