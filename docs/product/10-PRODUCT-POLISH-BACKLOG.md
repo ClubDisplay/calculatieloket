@@ -6,6 +6,20 @@
 
 ---
 
+## Update: Sprint 103 — Product & UX Review v1 (afgerond)
+
+Sprint 103 voert een platform-wide product- en UX-review uit vanuit 5 perspectieven: UX Designer, Product Owner, SEO-specialist, Google Quality Rater en eerste bezoeker. Doel: bepalen welke laatste verbeteringen nodig zijn voor Product Completion.
+
+Wijzigingen:
+
+- **Nieuwe documentatie**: `docs/product/14-PRODUCT-UX-REVIEW-v1.md` bevat de volledige review: 12-categorie scorecard (gemiddelde 8.0/10), per-pagina first-visitor journey, concurrentievergelijking, top 25 verbeterpunten (P0/P1/P2), top 10 user-happiness UX items, risico's en voorstel voor Sprint 104.
+- **Scorecard**: 9× groen, 2× geel, 0× rood. Gele vlaggen: advertenties/afleiding (top-ad eet eerste viewport) en first impression/trust (sociale proof mist nog).
+- **Top 25 verbeterpunten**: P0 richt zich op Lighthouse audit, meta descriptions statische pagina's, trust badges, top-ad evaluatie, viewport optimalisatie, consistente resultaatpresentatie, copy-link consistentie, quick chips, trust bar en search empty state. P1 richt zich op sticky result hero, scenario slider, visuele belastingverdeling, People also ask structuur, interne links, Lighthouse CI, AdSense A/B test, categorie content, FAQ schema en meta descriptions. P2 richt zich op ratings, 2025 vs 2026 toggle, meertaligheid, FiscalMesh Agent UX Designer en Core Web Vitals dashboard.
+- **Top 10 user-happiness items**: 8 zijn al geïmplementeerd (instant antwoord, live URL, quick chips, copy link feedback, verder rekenen met cijfers, geen iOS zoom, skip link/focus, breadcrumbs). 2 zijn voorgesteld voor Sprint 104: trust badge naast resultaat en sticky netto hero op mobiel.
+- **Advies**: Product Completion is technisch af. Sprint 104 kan de laatste P0-items opruimen: Lighthouse audit + fixes, meta descriptions, trust bar.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` is niet beïnvloed; 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 102 — Platform Quality Audit v1 (afgerond)
 
 Sprint 102 voert een volledige kwaliteitsaudit uit op het bestaande Calculatieloket-platform en lost veilige quick wins op. Doel: objectief bepalen waar Product Completion nog rood/geel/groen is.
