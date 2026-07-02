@@ -2,15 +2,24 @@
 interface Props {
   disclaimer?: string;
   lastUpdated?: string;
+  categoryLink?: string;
+  categoryLabel?: string;
 }
 
 const {
   disclaimer = "Deze berekening is een indicatie. Controleer belangrijke bedragen altijd via officiële bronnen of een financieel adviseur.",
   lastUpdated,
+  categoryLink,
+  categoryLabel,
 } = Astro.props;
 ---
 
 <div class="calc-tool-footer">
+  {categoryLink && categoryLabel && (
+    <p class="calc-tool-footer-category">
+      Bekijk meer calculators in de categorie <a href={categoryLink}>{categoryLabel}</a>.
+    </p>
+  )}
   <p class="calc-tool-footer-disclaimer">{disclaimer}</p>
   {lastUpdated && (
     <p class="calc-tool-footer-updated">Laatst bijgewerkt: {lastUpdated}</p>
@@ -22,6 +31,22 @@ const {
     margin-top: 2rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--color-border);
+  }
+
+  .calc-tool-footer-category {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-tool-footer-category a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .calc-tool-footer-category a:hover {
+    text-decoration: none;
   }
 
   .calc-tool-footer-disclaimer {

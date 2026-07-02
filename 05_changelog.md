@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 097 — Category Navigation Integration v1
+**Details:** Categoriepagina’s uit Sprint 096 zijn nu volledig geïntegreerd in de site-navigatie. Homepage: cluster-chips zijn klikbare links naar `/categorie/inkomen/`, `/categorie/belasting/`, `/categorie/wonen/`, `/categorie/ondernemen/` en `/categorie/auto/`; link "Bekijk alle categorieën" scrollt naar nieuwe categorieën-sectie; zoekveld filtert nog steeds de calculator grid. Header (`src/layouts/BaseLayout.astro`): mobiel hamburger-menu, desktop dropdown "Categorieën", behoud van bestaande calculatorlinks. Footer: drie kolommen met categorie-links, alle calculators en site-links. Calculatorpagina’s: `ToolFooter` component uitgebreid met `categoryLink`/`categoryLabel`; alle 10 calculatorpagina’s tonen subtiele link "Bekijk meer calculators in de categorie [X]". `RelatedCategories.astro` krijgt optionele `title` en `current` props voor hergebruik als algemene categorielijst. Interne links zijn server-rendered, anchor-teksten beschrijvend, exact één H1 per pagina behouden, mobiel geen horizontale scroll, AdSense niet verplaatst boven primaire navigatie/tool. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 096 — Category Experience v1
 **Details:** Vijf nieuwe categoriepagina's gebouwd in `src/pages/categorie/`: inkomen, belasting, wonen, ondernemen en auto. Iedere pagina bevat een hero, calculator grid in homepage-stijl, 300–500 woorden unieke server-rendered content, minimaal 5 FAQ-items via `FaqAccordion`, officiële bronnen via `SourceCards`, gerelateerde categorieën en interne links. Nieuwe herbruikbare componenten in `src/components/category/`: `CategoryHero.astro`, `CategoryIntro.astro`, `CategoryGrid.astro`, `CategoryFaq.astro`, `CategorySources.astro` en `RelatedCategories.astro`. Gedeeld helper bestand `src/lib/category-icons.ts` voor iconen en categorielijst. SEO per pagina: unieke title/meta description, canonical, exact één H1, `BreadcrumbList`, `CollectionPage` en `FAQPage` JSON-LD schema. Mobile-first CSS: 1 kolom op mobiel, 2 op tablet, 3–4 op desktop; grote klikvlakken. AdSense (`AdSlot`) alleen ná de eerste calculatorsectie. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling

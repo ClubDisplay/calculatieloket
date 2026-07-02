@@ -6,16 +6,17 @@ interface Category {
 }
 
 interface Props {
-  current: string;
+  current?: string;
   categories: Category[];
+  title?: string;
 }
 
-const { current, categories } = Astro.props;
-const related = categories.filter((c) => c.id !== current);
+const { current, categories, title = "Gerelateerde categorieën" } = Astro.props;
+const related = current ? categories.filter((c) => c.id !== current) : categories;
 ---
 
 <section class="cat-related" aria-labelledby="catRelatedTitle">
-  <h2 id="catRelatedTitle" class="cat-related-title">Gerelateerde categorieën</h2>
+  <h2 id="catRelatedTitle" class="cat-related-title">{title}</h2>
   <div class="cat-related-grid">
     {related.map((cat) => (
       <a href={cat.href} class="cat-related-card">
