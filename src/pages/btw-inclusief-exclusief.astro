@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -172,6 +173,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Belasting", href: "/categorie/belasting/" },
+    { label: "BTW inclusief/exclusief", current: true },
+  ]} />
 
   <CalculatorShell title="BTW inclusief en exclusief" subtitle="Bereken een bedrag van exclusief btw naar inclusief btw, of reken terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw.">
     <InputPanel title="Jouw bedrag" slot="input">

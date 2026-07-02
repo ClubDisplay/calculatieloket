@@ -6,6 +6,28 @@
 
 ---
 
+## Update: Sprint 098 — Visual Breadcrumbs + Codebase Cleanup (afgerond)
+
+Sprint 098 voegt zichtbare breadcrumbs toe aan alle calculatorpagina’s en ruimt oude back-upbestanden op. Doel: betere gebruikersnavigatie, interne links, SEO topic clusters en onderhoudbaarheid.
+
+Wijzigingen:
+
+- **Nieuwe component**: `src/components/Breadcrumbs.astro` — herbruikbaar, compact, mobile-first, met `<nav aria-label="Breadcrumb">`, `<ol>` lijst, `aria-current="page"` op de huidige pagina, en ingebouwde microdata (`itemscope`, `itemprop="itemListElement"`).
+- **Alle 10 calculatorpagina’s**: boven de `CalculatorShell` wordt een breadcrumb getoond:
+  - `Home > Inkomen > Bruto netto 2026`
+  - `Home > Inkomen > Salaris calculator`
+  - `Home > Inkomen > Vakantiegeld calculator`
+  - `Home > Inkomen > Toeslagen calculator`
+  - `Home > Wonen > Hypotheek calculator`
+  - `Home > Belasting > BTW calculator`
+  - `Home > Belasting > BTW terugrekenen`
+  - `Home > Belasting > BTW inclusief/exclusief`
+  - `Home > Ondernemen > ZZP calculator`
+  - `Home > Auto > Auto importkosten berekenen`
+- **Bestaande BreadcrumbList JSON-LD** op de calculatorpagina’s blijft behouden.
+- **Cleanup**: `src/pages/_bak/` verwijderd. De map bevatte alleen oude back-uppagina’s van calculators, contact, cookies, disclaimer, over-ons en privacy die niet meer in gebruik waren.
+- **Geen wijzigingen** aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 097 — Category Navigation Integration v1 (afgerond)
 
 Sprint 097 maakt de categoriepagina’s uit Sprint 096 vindbaar en bruikbaar binnen de hele site. Verbeterde interne links, SEO topic clusters, gebruikersnavigatie en Product Completion.

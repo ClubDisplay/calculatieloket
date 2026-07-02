@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -160,6 +161,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567894" format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Wonen", href: "/categorie/wonen/" },
+    { label: "Hypotheek calculator", current: true },
+  ]} />
 
   <CalculatorShell title="Hypotheek calculator" subtitle="Bereken een indicatie van je maximale hypotheek en maandlasten op basis van je inkomen en rente.">
     <InputPanel title="Jouw situatie" slot="input">

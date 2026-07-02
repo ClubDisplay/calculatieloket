@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -169,6 +170,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567896" format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Inkomen", href: "/categorie/inkomen/" },
+    { label: "Toeslagen calculator", current: true },
+  ]} />
 
   <CalculatorShell title="Toeslagen calculator 2026" subtitle="Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en huishouden.">
     <InputPanel title="Jouw situatie" slot="input">

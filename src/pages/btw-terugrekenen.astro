@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -162,6 +163,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Belasting", href: "/categorie/belasting/" },
+    { label: "BTW terugrekenen", current: true },
+  ]} />
 
   <CalculatorShell title="BTW terugrekenen" subtitle="Reken een bedrag inclusief btw om naar exclusief btw. Kies 21%, 9% of 0% en zie direct het resultaat.">
     <InputPanel title="Jouw bedrag" slot="input">

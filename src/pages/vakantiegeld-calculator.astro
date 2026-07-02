@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
@@ -190,6 +191,12 @@ const breadcrumbSchema = {
   />
 
   <AdSlot slot="1234567900" format="auto" style="min-height:280px" />
+
+  <Breadcrumbs items={[
+    { label: "Home", href: "/" },
+    { label: "Inkomen", href: "/categorie/inkomen/" },
+    { label: "Vakantiegeld calculator", current: true },
+  ]} />
 
   <CalculatorShell title="Vakantiegeld berekenen" subtitle="Vul je bruto maandsalaris, vakantiegeldpercentage, pensioenpremie en loonheffingskorting in en zie direct een indicatie van je netto vakantiegeld.">
     <InputPanel title="Jouw situatie" slot="input">

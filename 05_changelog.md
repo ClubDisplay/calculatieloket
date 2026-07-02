@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 098 — Visual Breadcrumbs + Codebase Cleanup
+**Details:** Nieuwe herbruikbare component `src/components/Breadcrumbs.astro` toegevoegd. Breadcrumbs zijn zichtbaar boven de calculator-shell op alle 10 calculatorpagina’s: `Home > Categorie > Calculator` (bijvoorbeeld `Home > Inkomen > Bruto netto 2026`, `Home > Belasting > BTW calculator`, `Home > Wonen > Hypotheek calculator`, `Home > Ondernemen > ZZP calculator`, `Home > Auto > Auto importkosten berekenen`). Component gebruikt `<nav aria-label="Breadcrumb">`, `<ol>` lijst, `aria-current="page"` op de huidige pagina, en microdata. Bestaande `BreadcrumbList` JSON-LD schema blijft behouden. Exact één H1 per pagina blijft intact; alle breadcrumbs zijn server-rendered. Styling is rustig, compact en mobile-first. Oude back-up map `src/pages/_bak/` verwijderd; inhoud was niet meer in gebruik. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 22 pagina's, sitemap met 21 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 097 — Category Navigation Integration v1
 **Details:** Categoriepagina’s uit Sprint 096 zijn nu volledig geïntegreerd in de site-navigatie. Homepage: cluster-chips zijn klikbare links naar `/categorie/inkomen/`, `/categorie/belasting/`, `/categorie/wonen/`, `/categorie/ondernemen/` en `/categorie/auto/`; link "Bekijk alle categorieën" scrollt naar nieuwe categorieën-sectie; zoekveld filtert nog steeds de calculator grid. Header (`src/layouts/BaseLayout.astro`): mobiel hamburger-menu, desktop dropdown "Categorieën", behoud van bestaande calculatorlinks. Footer: drie kolommen met categorie-links, alle calculators en site-links. Calculatorpagina’s: `ToolFooter` component uitgebreid met `categoryLink`/`categoryLabel`; alle 10 calculatorpagina’s tonen subtiele link "Bekijk meer calculators in de categorie [X]". `RelatedCategories.astro` krijgt optionele `title` en `current` props voor hergebruik als algemene categorielijst. Interne links zijn server-rendered, anchor-teksten beschrijvend, exact één H1 per pagina behouden, mobiel geen horizontale scroll, AdSense niet verplaatst boven primaire navigatie/tool. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, `.env`, deploy, dependencies of `npm ci`. Documentatie bijgewerkt: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 22 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling
