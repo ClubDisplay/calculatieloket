@@ -55,7 +55,7 @@ const { title, heroValue, heroLabel = "Resultaat", heroSubtext, badge = "Indicat
   .calc-result-panel-label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text-muted);
+    color: #4b5563;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -82,9 +82,15 @@ const { title, heroValue, heroLabel = "Resultaat", heroSubtext, badge = "Indicat
 
   .calc-result-panel-subtext {
     font-size: 0.9rem;
-    color: var(--color-text-muted);
+    color: #4b5563;
     margin-bottom: 1rem;
     line-height: 1.5;
+  }
+
+  .calc-result-panel .result-row .label,
+  .calc-result-panel .result-bracket-row .label,
+  .calc-result-panel .result-comparison .result-row .label {
+    color: #4b5563;
   }
 
   @media (max-width: 480px) {

@@ -201,9 +201,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <label>Huishouden</label>
-        <div class="radio-group" id="household">
-          <button type="button" data-type="single" class={!defaultIsCouple ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="single">Alleenstaand</button>
-          <button type="button" data-type="couple" class={defaultIsCouple ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="couple">Met partner</button>
+        <div class="radio-group" id="household" role="group" aria-label="Huishouden">
+          <button type="button" data-type="single" class={!defaultIsCouple ? "active" : ""} aria-pressed={!defaultIsCouple ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="single">Alleenstaand</button>
+          <button type="button" data-type="couple" class={defaultIsCouple ? "active" : ""} aria-pressed={defaultIsCouple ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="couple">Met partner</button>
         </div>
       </div>
 
@@ -275,8 +275,8 @@ const breadcrumbSchema = {
 
       <InlineSources title="Gebruikte bronnen" items={sources} />
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
@@ -486,7 +486,9 @@ const breadcrumbSchema = {
       household = partner === "1" ? "couple" : "single";
       document.querySelectorAll("#household button").forEach((btn) => {
         const button = btn as HTMLButtonElement;
-        button.classList.toggle("active", button.dataset.type === household);
+        const isActive = button.dataset.type === household;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
       partnerIncomeGroup.style.display = household === "couple" ? "block" : "none";
     }
@@ -530,8 +532,12 @@ const breadcrumbSchema = {
     document.getElementById("household")!.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
       if (!btn) return;
-      document.querySelectorAll("#household button").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll("#household button").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       household = btn.dataset.type as "single" | "couple";
       partnerIncomeGroup.style.display = household === "couple" ? "block" : "none";
       calculate();
@@ -594,6 +600,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ul {

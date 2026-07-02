@@ -238,9 +238,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <div class="toggle-row">
-          <span class="toggle-label">Zelfstandigenaftrek toepassen</span>
+          <span class="toggle-label" id="toggleLabel-selfEmployedDeduction">Zelfstandigenaftrek toepassen</span>
           <label class="toggle" for="selfEmployedDeduction">
-            <input type="checkbox" id="selfEmployedDeduction" checked={defaultZa} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="zelfstandigenaftrek" />
+            <input type="checkbox" id="selfEmployedDeduction" checked={defaultZa} aria-labelledby="toggleLabel-selfEmployedDeduction" data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="zelfstandigenaftrek" />
             <span class="slider"></span>
           </label>
         </div>
@@ -248,9 +248,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <div class="toggle-row">
-          <span class="toggle-label">Startersaftrek toepassen</span>
+          <span class="toggle-label" id="toggleLabel-starterDeduction">Startersaftrek toepassen</span>
           <label class="toggle" for="starterDeduction">
-            <input type="checkbox" id="starterDeduction" checked={defaultStarter} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="startersaftrek" />
+            <input type="checkbox" id="starterDeduction" checked={defaultStarter} aria-labelledby="toggleLabel-starterDeduction" data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="startersaftrek" />
             <span class="slider"></span>
           </label>
         </div>
@@ -258,9 +258,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <div class="toggle-row">
-          <span class="toggle-label">MKB-winstvrijstelling toepassen</span>
+          <span class="toggle-label" id="toggleLabel-mkbExemption">MKB-winstvrijstelling toepassen</span>
           <label class="toggle" for="mkbExemption">
-            <input type="checkbox" id="mkbExemption" checked={defaultMkb} data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="mkb-winstvrijstelling" />
+            <input type="checkbox" id="mkbExemption" checked={defaultMkb} aria-labelledby="toggleLabel-mkbExemption" data-analytics="toggle" data-analytics-category="calculator-page" data-analytics-action="change" data-analytics-label="mkb-winstvrijstelling" />
             <span class="slider"></span>
           </label>
         </div>
@@ -297,8 +297,8 @@ const breadcrumbSchema = {
 
       <InlineSources title="Gebruikte bronnen" items={sources} />
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
     </ResultPanel>
@@ -414,6 +414,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ol,

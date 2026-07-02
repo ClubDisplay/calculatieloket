@@ -223,9 +223,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <div class="toggle-row">
-          <span class="toggle-label">Loonheffingskorting toepassen</span>
+          <span class="toggle-label" id="toggleLabel-loonheffingskorting">Loonheffingskorting toepassen</span>
           <label class="toggle" for="loonheffingskorting">
-            <input type="checkbox" id="loonheffingskorting" checked={defaultLhk} />
+            <input type="checkbox" id="loonheffingskorting" checked={defaultLhk} aria-labelledby="toggleLabel-loonheffingskorting" />
             <span class="slider"></span>
           </label>
         </div>
@@ -275,8 +275,8 @@ const breadcrumbSchema = {
         <div class="result-row result-row-total"><span class="label">Voordeel per maand</span><span class="value" id="detailLhkBenefit">{formatEuro(initialResult.netMonthly - initialNoLhkResult.netMonthly, 0)}</span></div>
       </div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
@@ -626,6 +626,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ul {

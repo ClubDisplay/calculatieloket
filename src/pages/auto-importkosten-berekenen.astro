@@ -292,9 +292,9 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <label>Voertuigtype</label>
-        <div class="radio-group" id="vehicleType">
-          <button type="button" data-type="auto" class={defaultVehicleType === "auto" ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="vehicle-auto">Auto</button>
-          <button type="button" data-type="camper" class={defaultVehicleType === "camper" ? "active" : ""} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="vehicle-camper">Camper</button>
+        <div class="radio-group" id="vehicleType" role="group" aria-label="Voertuigtype">
+          <button type="button" data-type="auto" class={defaultVehicleType === "auto" ? "active" : ""} aria-pressed={defaultVehicleType === "auto" ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="vehicle-auto">Auto</button>
+          <button type="button" data-type="camper" class={defaultVehicleType === "camper" ? "active" : ""} aria-pressed={defaultVehicleType === "camper" ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="vehicle-camper">Camper</button>
         </div>
       </div>
 
@@ -433,8 +433,8 @@ const breadcrumbSchema = {
         <div class="result-row"><span class="label" id="differenceLabel">{initialResult.differenceLabel ?? "Verschil"}</span><span class="value" id="detailDifference">{formatEuro(Math.abs(initialResult.priceDifference ?? 0), 0)}</span></div>
       </div>
 
-      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link">
-        <span class="copy-link-icon">🔗</span>
+      <button class="copy-link-btn" id="copyLinkBtn" type="button" slot="actions" data-analytics="copy-link" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="copy-link" aria-label="Deel deze berekening">
+        <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
 
@@ -703,7 +703,9 @@ const breadcrumbSchema = {
       vehicleType = voertuig;
       document.querySelectorAll("#vehicleType button").forEach((b) => {
         const btn = b as HTMLButtonElement;
-        btn.classList.toggle("active", btn.dataset.type === vehicleType);
+        const isActive = btn.dataset.type === vehicleType;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
     }
   }
@@ -712,8 +714,12 @@ const breadcrumbSchema = {
     vehicleTypeGroup.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
       if (!btn || !btn.dataset.type) return;
-      document.querySelectorAll("#vehicleType button").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll("#vehicleType button").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       vehicleType = btn.dataset.type;
       calculate();
     });
@@ -825,6 +831,14 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
   }
 
   .calc-content ul {
