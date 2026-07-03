@@ -20,6 +20,22 @@ Wijzigingen:
 
 Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 
+## Update: Sprint 111 — Product Completion Board v1 (afgerond)
+
+Sprint 111 maakt één centrale statusdocument dat exact laat zien wat nog nodig is vóór Calculatieloket 1.0. Het is een pure documentatie-sprint; er is geen code gewijzigd.
+
+Wijzigingen:
+
+- **Nieuw document**: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md` bevat:
+  - Product Completion status per 12 domeinen (Platform, Calculator Experience, SEO, Content, Trust, Accessibility, Performance, Analytics-ready, AdSense-ready, Dashboard, Agents, Internationalisering) met score, groen/geel/rood status, af/ontbreekt, blocker en aanbevolen actie.
+  - Calculator Completion Matrix voor alle 10 unieke calculators op 14 criteria (App Shell, URL State, Recommendations, TrustPanel, Sources, FAQ, Schema, Breadcrumbs, Analytics, Accessibility ≥95, Lighthouse thresholds, Content, Interne links). Totaal: 140/140 ✅.
+  - P0/P1/P2 backlog: P0 is volledig af (7/7), wat betekent dat Calculatieloket 1.0 technisch en productmatig klaar is. Dashboard, Agents en internationalisering zijn expliciet P2/buiten 1.0.
+  - Duidelijk oordeel: technisch klaar voor 1.0 (met voorbehoud productie-AdSense), productmatig klaar, niets meer nodig vóór Dashboard/Agents.
+  - Advies Sprint 112: *Production Readiness & Verification* — OG-image optimaliseren, productie Lighthouse baseline, AdSense final check, release-tag voorbereiden, board afsluiten.
+- **Documentatie bijgewerkt**: `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`.
+
+Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+
 ## Update: Sprint 108 — Lighthouse Quality Monitoring v1 (afgerond)
 
 Sprint 108 voegt lichte kwaliteitsmonitoring toe voor performance, accessibility, best practices en SEO. Geen productfeatures, geen engine-wijzigingen.
