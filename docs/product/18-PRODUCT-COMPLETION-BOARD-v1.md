@@ -1,6 +1,6 @@
 # 18 — Product Completion Board v1
 
-> **Sprint:** 111
+> **Sprint:** 112
 > **Doel:** Één centrale statuspagina die exact laat zien wat nog nodig is vóór Calculatieloket 1.0.
 > **Scope:** Alleen documentatie. Geen code, geen engines, geen Knowledge Objects, geen Rule Resolver, geen Recommendation Engine, geen deploy, geen dependencies.
 > **Datum:** 2026-07-03
@@ -12,12 +12,12 @@
 
 | Vraag | Oordeel |
 |---|---|
-| Is Calculatieloket **technisch** klaar voor 1.0? | **Ja**, met voorbehoud (lokaal gemeten; productie met AdSense moet nog geverifieerd). |
+| Is Calculatieloket **technisch** klaar voor 1.0? | **Ja**. Lokale CI groen, Lighthouse groen, AdSense laadt alleen na consent, OG-image is 1200×630. |
 | Is Calculatieloket **productmatig** klaar voor 1.0? | **Ja**. Alle P0-items voor de publieke site zijn af. |
 | Moet er nog iets vóór Dashboard / Agents? | **Nee**. Dashboard, Agents en internationalisering zijn expliciet buiten scope van 1.0. |
-| Aanbevolen Sprint 112 | **Production Readiness & Verification** — AdSense-integratie final checken, OG-image optimaliseren, productie Lighthouse baseline meten, en een release/tag voorbereiden. |
+| Aanbevolen Sprint 113 | **Release & Launch Readiness** — tag `v1.0.0`, finale deploy-check, analytics-provider kiezen, eventuele AdSense A/B-test voorbereiden. |
 
-**Overall 1.0 readiness:** 94/100 (groen).
+**Overall 1.0 readiness:** 95/100 (groen).
 
 ---
 
@@ -39,7 +39,7 @@
 
 | Score | Status | Af | Ontbreekt | Blocker | Aanbevolen actie |
 |---:|:---:|---|---|---|---|
-| 96 | 🟢 Groen | Unieke title/description per pagina (120–160 tekens), canonical, BreadcrumbList, FAQPage, HowTo, CollectionPage, WebSite + SearchAction schema, exact één H1, server-rendered links. | OG-image is 400×300; social platforms prefereren 1200×630. | Nee | Optimaliseer OG-image naar 1200×630 WebP/PNG. |
+| 97 | 🟢 Groen | Unieke title/description per pagina (120–160 tekens), canonical, BreadcrumbList, FAQPage, HowTo, CollectionPage, WebSite + SearchAction schema, exact één H1, server-rendered links. OG-image 1200×630 PNG + WebP met absolute URL, width/height, alt, og:url, og:site_name, og:locale, twitter:card summary_large_image. | Geen P0-tekorten. | Nee | Monitor social snippet previews na launch. |
 
 ### 1.4 Content
 
@@ -63,7 +63,7 @@
 
 | Score | Status | Af | Ontbreekt | Blocker | Aanbevolen actie |
 |---:|:---:|---|---|---|---|
-| 92 | 🟢 Groen | Lokale Lighthouse performance 99–100 op alle 13 pagina’s; favicon 4 KB, header logo 52 KB, ClientRouter deferred, ad-containers hebben reservering. | Productie-scores met AdSense zijn niet gemeten; advertenties kunnen CLS/LCP beïnvloeden. | Nee | Meet productiebaseline na AdSense-activatie; pas indien nodig ad-formaten/reserveringen aan. |
+| 92 | 🟢 Groen | Lokale Lighthouse performance 99–100 op alle 13 pagina’s; favicon 4 KB, header logo 52 KB, ClientRouter deferred, ad-containers hebben reservering. Productiebaseline gemeten: zonder ads en met ads-enabled (consent nog niet gegeven) identiek 100/100. | Werkelijke AdSense-rendering (met echt advertentiemateriaal) kan pas in productie gemeten worden; geen CLS waargenomen in lokale metingen. | Nee | Monitor Core Web Vitals in productie na launch; pas ad-formaten/reserveringen aan indien CLS > 0.1. |
 
 ### 1.8 Analytics-ready
 
@@ -75,7 +75,7 @@
 
 | Score | Status | Af | Ontbreekt | Blocker | Aanbevolen actie |
 |---:|:---:|---|---|---|---|
-| 88 | 🟡 Geel | `AdSlot` component, cookie-consent banner, AdSense script injectie na consent, `adsbygoogle` pushes, ad-containers met `min-width`/`min-height`. | Productie-inkomsten/performance niet gevalideerd; ad-posities niet A/B-getest. | Nee | Finaliseer AdSense-configuratie; monitor viewability, CLS en RPM na launch. |
+| 90 | 🟢 Groen | `AdSlot` component, cookie-consent banner, AdSense script injectie na consent, `adsbygoogle` pushes, ad-containers met `min-width`/`min-height`. BaseLayout injecteert AdSense script niet meer zelf; alleen `CookieConsent` laadt het na accept. | Productie-inkomsten/echte advertenties niet gevalideerd; ad-posities niet A/B-getest. | Nee | Monitor viewability, CLS, RPM en consent-rate na launch; overweeg A/B-test ad-posities. |
 
 ### 1.10 Dashboard
 
