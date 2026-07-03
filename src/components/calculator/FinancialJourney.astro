@@ -1,4 +1,6 @@
 ---
+import { icons } from "../../lib/category-icons";
+
 interface Step {
   id: string;
   label: string;
@@ -74,6 +76,18 @@ const defaultSteps: Step[] = [
 const steps = customSteps ?? defaultSteps;
 const MAX_RECOMMENDATIONS = 4;
 const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
+
+function iconFor(id: string | undefined, title: string): string {
+  const key = `${id || ""} ${title}`.toLowerCase();
+  if (key.includes("vakantiegeld") || key.includes("vakantie") || key.includes("vakantie")) return icons.sun;
+  if (key.includes("hypotheek") || key.includes("wonen") || key.includes("huis")) return icons.house;
+  if (key.includes("salaris") || key.includes("netto") || key.includes("bruto") || key.includes("loon")) return icons.money;
+  if (key.includes("zzp") || key.includes("ondernemen") || key.includes("bedrijf") || key.includes("zzp'er")) return icons.person;
+  if (key.includes("auto") || key.includes("import") || key.includes("car") || key.includes("voertuig")) return icons.car;
+  if (key.includes("btw") || key.includes("tarief") || key.includes("percent") || key.includes("percentage")) return icons.percent;
+  if (key.includes("toeslagen") || key.includes("zorgtoeslag") || key.includes("huurtoeslag")) return icons.house;
+  return icons.calc;
+}
 ---
 
 <div
@@ -98,12 +112,13 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
             data-analytics-action="click"
             data-analytics-label={rec.id}
           >
-            <span class="step-check">✓</span>
+            <span class="step-icon" aria-hidden="true" set:html={iconFor(rec.id, rec.title)} />
             <span class="step-content">
               <span class="step-label">{rec.title}</span>
               <span class="step-desc">{rec.description}</span>
-              <span class="step-reason">{rec.reason}</span>
+              {rec.reason && <span class="step-reason">{rec.reason}</span>}
             </span>
+            <span class="step-arrow" aria-hidden="true">→</span>
           </a>
         ))
       ) : (
@@ -117,11 +132,12 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
             data-analytics-action="click"
             data-analytics-label={step.id}
           >
-            <span class="step-check">✓</span>
+            <span class="step-icon" aria-hidden="true" set:html={iconFor(step.id, step.label)} />
             <span class="step-content">
               <span class="step-label">{step.label}</span>
               <span class="step-desc">{step.description}</span>
             </span>
+            <span class="step-arrow" aria-hidden="true">→</span>
           </a>
         ))
       )
@@ -129,18 +145,18 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
   </div>
 </div>
 
-<style>
+<style is:global>
   .calc-financial-journey {
-    margin-top: 0.75rem;
+    margin-top: 1rem;
     padding: 1rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border-radius: 16px;
   }
 
   .calc-financial-journey-title {
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 0.75rem;
     color: var(--color-text);
   }
@@ -153,13 +169,13 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
 
   .calc-financial-journey-step {
     display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    padding: 0.7rem;
-    border-radius: var(--radius);
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem;
+    border-radius: 12px;
     text-decoration: none;
     color: inherit;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
     border: 1px solid transparent;
   }
 
@@ -167,26 +183,32 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
   .calc-financial-journey-step:focus-visible {
     background: var(--color-primary-light);
     border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
   }
 
-  .step-check {
+  .step-icon {
     flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999px;
-    background: var(--color-primary);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
+    border-radius: 10px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .step-icon :global(svg) {
+    width: 24px;
+    height: 24px;
   }
 
   .step-content {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .step-label {
@@ -198,11 +220,25 @@ const displayRecommendations = recommendations?.slice(0, MAX_RECOMMENDATIONS);
   .step-desc {
     font-size: 0.8rem;
     color: var(--color-text-muted);
+    line-height: 1.4;
   }
 
   .step-reason {
     font-size: 0.75rem;
     color: var(--color-text-muted);
     font-style: italic;
+  }
+
+  .step-arrow {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .calc-financial-journey-step:hover .step-arrow,
+  .calc-financial-journey-step:focus-visible .step-arrow {
+    color: var(--color-primary);
+    transform: translateX(3px);
   }
 </style>

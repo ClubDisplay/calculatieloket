@@ -1,4 +1,6 @@
 ---
+import { icons } from "../lib/category-icons";
+
 interface Item {
   href: string;
   title: string;
@@ -14,6 +16,18 @@ interface Props {
 
 const { title, items, analyticsCategory = "calculator-page" } = Astro.props;
 const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
+
+function iconFor(item: Item): string {
+  const key = `${item.title} ${item.href}`.toLowerCase();
+  if (key.includes("hypotheek") || key.includes("wonen") || key.includes("huis")) return icons.house;
+  if (key.includes("salaris") || key.includes("netto") || key.includes("bruto") || key.includes("loon")) return icons.money;
+  if (key.includes("zzp") || key.includes("ondernemen") || key.includes("bedrijf")) return icons.person;
+  if (key.includes("auto") || key.includes("import") || key.includes("car")) return icons.car;
+  if (key.includes("btw") || key.includes("tarief") || key.includes("percent")) return icons.percent;
+  if (key.includes("vakantiegeld") || key.includes("vakantie")) return icons.sun;
+  if (key.includes("toeslagen") || key.includes("zorgtoeslag")) return icons.house;
+  return icons.calc;
+}
 ---
 
 <section class="xsell">
@@ -29,9 +43,10 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
         data-analytics-action="click"
         data-analytics-label={slugify(item.href)}
       >
+        <span class="xsell-icon" aria-hidden="true" set:html={iconFor(item)} />
         <span class="xsell-card-title">{item.title}</span>
         <span class="xsell-card-desc">{item.description}</span>
-        <span class="xsell-card-cta">Bekijk &rarr;</span>
+        <span class="xsell-card-cta">Bekijk <span aria-hidden="true">→</span></span>
       </a>
     ))}
   </div>
@@ -39,12 +54,12 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
 
 <style>
   .xsell {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
   }
 
   .xsell-title {
     font-size: 1.15rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1rem;
     color: var(--color-text);
   }
@@ -72,7 +87,24 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
   .xsell-card:focus-visible {
     border-color: var(--xsell-accent, var(--color-primary));
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
-    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .xsell-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--color-primary-light);
+    color: var(--xsell-accent, var(--color-primary));
+    margin-bottom: 0.25rem;
+  }
+
+  .xsell-icon :global(svg) {
+    width: 24px;
+    height: 24px;
   }
 
   .xsell-card-title {
@@ -91,8 +123,8 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
   .xsell-card-cta {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text);
-    margin-top: 0.15rem;
+    color: var(--xsell-accent, var(--color-primary));
+    margin-top: 0.25rem;
   }
 
   @media (max-width: 560px) {
