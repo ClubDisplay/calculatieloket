@@ -12,7 +12,7 @@ const canonical = new URL(Astro.url.pathname, "https://calculatieloket.nl").href
 const pathname = Astro.url.pathname;
 const isCurrentPage = (href: string) => {
   if (href === "/") return pathname === "/";
-  const base = href.replace(/\/$/, "");
+  const base = href.replace(/\/+$/, "");
   return pathname === base + "/" || pathname.startsWith(base + "/");
 };
 
@@ -128,37 +128,97 @@ const jsonLd = {
         </button>
 
         <nav class="site-nav" id="siteNavMenu" aria-label="Hoofdnavigatie">
-          <div class="site-nav-section">
-            <a
-              href="/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="home"
-            >
-              Home
-            </a>
-            <a
-              href="/calculators/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
-              data-analytics="header-link"
+          <a
+            href="/"
+            class="site-nav-link"
+            aria-current={isCurrentPage("/") ? "page" : undefined}
+            data-analytics="header-link"
+            data-analytics-category="header"
+            data-analytics-action="click"
+            data-analytics-label="home"
+          >
+            Home
+          </a>
+
+          <div class="site-nav-dropdown" data-nav="calculators">
+            <button
+              type="button"
+              class="site-nav-dropdown-toggle"
+              id="calcDropdownToggle"
+              aria-expanded="false"
+              aria-controls="calcDropdownMenu"
+              aria-haspopup="menu"
+              data-analytics="header-dropdown-toggle"
               data-analytics-category="header"
               data-analytics-action="click"
               data-analytics-label="calculators"
             >
               Calculators
-            </a>
+            </button>
+            <div
+              class="site-nav-dropdown-menu site-nav-megamenu"
+              id="calcDropdownMenu"
+              role="menu"
+              aria-label="Calculators submenu"
+            >
+              <div class="megamenu-col" role="group" aria-label="Ontdekken">
+                <h3 class="megamenu-title">Ontdekken</h3>
+                <a
+                  href="/calculators/"
+                  class="site-nav-dropdown-link"
+                  aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+                  data-analytics="header-link"
+                  data-analytics-category="header"
+                  data-analytics-action="click"
+                  data-analytics-label="popular-calculators"
+                >
+                  Populaire calculators
+                </a>
+                <a
+                  href="/calculators/"
+                  class="site-nav-dropdown-link"
+                  aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+                  data-analytics="header-link"
+                  data-analytics-category="header"
+                  data-analytics-action="click"
+                  data-analytics-label="new-calculators"
+                >
+                  Nieuw
+                </a>
+                <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
+                  Calculator Explorer (binnenkort)
+                </span>
+              </div>
+              <div class="megamenu-col" role="group" aria-label="Alle categorieën">
+                <h3 class="megamenu-title">Alle categorieën</h3>
+                {categoryList.map((cat) => (
+                  <a
+                    href={cat.href}
+                    class="site-nav-dropdown-link"
+                    aria-current={isCurrentPage(cat.href) ? "page" : undefined}
+                    data-analytics="header-link"
+                    data-analytics-category="header"
+                    data-analytics-action="click"
+                    data-analytics-label={cat.id}
+                  >
+                    {cat.label}
+                  </a>
+                ))}
+                <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
+                  Toeslagen (binnenkort)
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="site-nav-section site-nav-dropdown">
+
+          <div class="site-nav-dropdown" data-nav="categories">
             <button
               type="button"
               class="site-nav-dropdown-toggle"
-              id="siteNavDropdownToggle"
+              id="catDropdownToggle"
               aria-expanded="false"
-              aria-controls="siteNavDropdown"
+              aria-controls="catDropdownMenu"
+              aria-haspopup="menu"
               data-analytics="header-dropdown-toggle"
               data-analytics-category="header"
               data-analytics-action="click"
@@ -166,7 +226,12 @@ const jsonLd = {
             >
               Categorieën
             </button>
-            <div class="site-nav-dropdown-menu" id="siteNavDropdown">
+            <div
+              class="site-nav-dropdown-menu"
+              id="catDropdownMenu"
+              role="menu"
+              aria-label="Categorieën submenu"
+            >
               {categoryList.map((cat) => (
                 <a
                   href={cat.href}
@@ -180,89 +245,27 @@ const jsonLd = {
                   {cat.label}
                 </a>
               ))}
+              <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
+                Toeslagen (binnenkort)
+              </span>
             </div>
           </div>
-          <div class="site-nav-section">
-            <a
-              href="/btw-calculator/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/btw-calculator/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="btw"
-            >
-              BTW
-            </a>
-            <a
-              href="/salaris-calculator/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/salaris-calculator/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="salaris"
-            >
-              Salaris
-            </a>
-            <a
-              href="/hypotheek-calculator/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/hypotheek-calculator/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="hypotheek"
-            >
-              Hypotheek
-            </a>
-            <a
-              href="/zzp-calculator/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/zzp-calculator/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="zzp"
-            >
-              ZZP
-            </a>
-            <a
-              href="/toeslagen-calculator/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/toeslagen-calculator/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="toeslagen"
-            >
-              Toeslagen
-            </a>
-          </div>
-          <div class="site-nav-section">
-            <a
-              href="/over-ons/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="over-ons"
-            >
-              Over ons
-            </a>
-            <a
-              href="/contact/"
-              class="site-nav-link"
-              aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-              data-analytics="header-link"
-              data-analytics-category="header"
-              data-analytics-action="click"
-              data-analytics-label="contact"
-            >
-              Contact
-            </a>
-          </div>
+
+          <span class="site-nav-link site-nav-placeholder" aria-disabled="true">
+            Kennisbank (binnenkort)
+          </span>
+
+          <a
+            href="/over-ons/"
+            class="site-nav-link"
+            aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
+            data-analytics="header-link"
+            data-analytics-category="header"
+            data-analytics-action="click"
+            data-analytics-label="over"
+          >
+            Over
+          </a>
         </nav>
       </div>
     </header>
@@ -273,6 +276,34 @@ const jsonLd = {
     </main>
     <footer>
       <div class="container footer-grid">
+        <div class="footer-col">
+          <h3 class="footer-title">Calculators</h3>
+          <div class="footer-links">
+            <a
+              href="/calculators/"
+              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="popular-calculators"
+            >
+              Populaire calculators
+            </a>
+            <a
+              href="/calculators/"
+              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="new-calculators"
+            >
+              Nieuw
+            </a>
+            <span class="footer-placeholder" aria-disabled="true">
+              Calculator Explorer (binnenkort)
+            </span>
+          </div>
+        </div>
         <div class="footer-col">
           <h3 class="footer-title">Categorieën</h3>
           <div class="footer-links">
@@ -288,106 +319,45 @@ const jsonLd = {
                 {cat.label}
               </a>
             ))}
+            <span class="footer-placeholder" aria-disabled="true">
+              Toeslagen (binnenkort)
+            </span>
           </div>
         </div>
         <div class="footer-col">
-          <h3 class="footer-title">Alle calculators</h3>
+          <h3 class="footer-title">Informatie</h3>
           <div class="footer-links">
-            <a
-              href="/calculators/"
-              aria-current={isCurrentPage("/calculators/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="calculators-hub"
-            >
-              Bekijk alle calculators
-            </a>
-            <a
-              href="/bruto-netto-2026/"
-              aria-current={isCurrentPage("/bruto-netto-2026/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="bruto-netto-2026"
-            >
-              Bruto netto 2026
-            </a>
-            <a
-              href="/salaris-calculator/"
-              aria-current={isCurrentPage("/salaris-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="salaris"
-            >
-              Salaris
-            </a>
-            <a
-              href="/vakantiegeld-calculator/"
-              aria-current={isCurrentPage("/vakantiegeld-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="vakantiegeld"
-            >
-              Vakantiegeld
-            </a>
-            <a
-              href="/toeslagen-calculator/"
-              aria-current={isCurrentPage("/toeslagen-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="toeslagen"
-            >
-              Toeslagen
-            </a>
-            <a
-              href="/hypotheek-calculator/"
-              aria-current={isCurrentPage("/hypotheek-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="hypotheek"
-            >
-              Hypotheek
-            </a>
-            <a
-              href="/btw-calculator/"
-              aria-current={isCurrentPage("/btw-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="btw"
-            >
-              BTW
-            </a>
-            <a
-              href="/zzp-calculator/"
-              aria-current={isCurrentPage("/zzp-calculator/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="zzp"
-            >
-              ZZP
-            </a>
-            <a
-              href="/auto-importkosten-berekenen/"
-              aria-current={isCurrentPage("/auto-importkosten-berekenen/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="auto-importkosten"
-            >
-              Auto importkosten
-            </a>
+            <span class="footer-placeholder" aria-disabled="true">
+              Kennisbank (binnenkort)
+            </span>
+            <span class="footer-placeholder" aria-disabled="true">
+              Nieuws (binnenkort)
+            </span>
           </div>
         </div>
         <div class="footer-col">
-          <h3 class="footer-title">Calculatieloket</h3>
+          <h3 class="footer-title">Bedrijf</h3>
           <div class="footer-links">
+            <a
+              href="/over-ons/"
+              aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="over-ons"
+            >
+              Over ons
+            </a>
+            <a
+              href="/contact/"
+              aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+              data-analytics="footer-link"
+              data-analytics-category="footer"
+              data-analytics-action="click"
+              data-analytics-label="contact"
+            >
+              Contact
+            </a>
             <a
               href="/privacy/"
               aria-current={isCurrentPage("/privacy/") ? "page" : undefined}
@@ -418,26 +388,6 @@ const jsonLd = {
             >
               Disclaimer
             </a>
-            <a
-              href="/over-ons/"
-              aria-current={isCurrentPage("/over-ons/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="over-ons"
-            >
-              Over ons
-            </a>
-            <a
-              href="/contact/"
-              aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-              data-analytics="footer-link"
-              data-analytics-category="footer"
-              data-analytics-action="click"
-              data-analytics-label="contact"
-            >
-              Contact
-            </a>
           </div>
         </div>
       </div>
@@ -450,53 +400,68 @@ const jsonLd = {
     <script>
       const toggle = document.getElementById("siteNavToggle") as HTMLButtonElement | null;
       const menu = document.getElementById("siteNavMenu") as HTMLElement | null;
-      const dropdownToggle = document.getElementById("siteNavDropdownToggle") as HTMLButtonElement | null;
-      const dropdownMenu = document.getElementById("siteNavDropdown") as HTMLElement | null;
+      const dropdowns = document.querySelectorAll(".site-nav-dropdown");
+      const dropdownToggles = document.querySelectorAll(".site-nav-dropdown-toggle");
+
+      function closeAllDropdowns() {
+        dropdowns.forEach((dropdown) => {
+          dropdown.classList.remove("is-open");
+          const t = dropdown.querySelector(".site-nav-dropdown-toggle") as HTMLButtonElement | null;
+          if (t) t.setAttribute("aria-expanded", "false");
+        });
+      }
 
       if (toggle && menu) {
         toggle.addEventListener("click", () => {
           const expanded = toggle.getAttribute("aria-expanded") === "true";
-          toggle.setAttribute("aria-expanded", String(!expanded));
-          toggle.setAttribute("aria-label", !expanded ? "Menu sluiten" : "Menu openen");
-          menu.classList.toggle("is-open", !expanded);
+          const open = !expanded;
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "Menu sluiten" : "Menu openen");
+          toggle.classList.toggle("is-open", open);
+          menu.classList.toggle("is-open", open);
+          if (!open) closeAllDropdowns();
         });
 
         menu.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", () => {
             toggle.setAttribute("aria-expanded", "false");
             toggle.setAttribute("aria-label", "Menu openen");
+            toggle.classList.remove("is-open");
             menu.classList.remove("is-open");
+            closeAllDropdowns();
           });
         });
       }
 
-      if (dropdownToggle && dropdownMenu) {
-        dropdownToggle.addEventListener("click", () => {
+      dropdownToggles.forEach((dropdownToggle) => {
+        dropdownToggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const parent = dropdownToggle.closest(".site-nav-dropdown") as HTMLElement;
           const expanded = dropdownToggle.getAttribute("aria-expanded") === "true";
-          dropdownToggle.setAttribute("aria-expanded", String(!expanded));
-          dropdownMenu.classList.toggle("is-open", !expanded);
-        });
-
-        document.addEventListener("click", (e) => {
-          const target = e.target as Node;
-          if (!dropdownToggle.contains(target) && !dropdownMenu.contains(target)) {
-            dropdownToggle.setAttribute("aria-expanded", "false");
-            dropdownMenu.classList.remove("is-open");
+          const open = !expanded;
+          if (open) {
+            closeAllDropdowns();
           }
+          parent.classList.toggle("is-open", open);
+          dropdownToggle.setAttribute("aria-expanded", String(open));
         });
-      }
+      });
+
+      document.addEventListener("click", (e) => {
+        const target = e.target as Node;
+        const insideDropdown = Array.from(dropdowns).some((d) => d.contains(target));
+        if (!insideDropdown) closeAllDropdowns();
+      });
 
       document.addEventListener("keydown", (e) => {
         if (e.key !== "Escape") return;
         if (toggle && menu && toggle.getAttribute("aria-expanded") === "true") {
           toggle.setAttribute("aria-expanded", "false");
           toggle.setAttribute("aria-label", "Menu openen");
+          toggle.classList.remove("is-open");
           menu.classList.remove("is-open");
         }
-        if (dropdownToggle && dropdownMenu && dropdownToggle.getAttribute("aria-expanded") === "true") {
-          dropdownToggle.setAttribute("aria-expanded", "false");
-          dropdownMenu.classList.remove("is-open");
-        }
+        closeAllDropdowns();
       });
     </script>
   </body>
@@ -507,9 +472,13 @@ const jsonLd = {
 </style>
 
 <style>
-  /* ===== HEADER NAVIGATION ===== */
+  /* ===== HEADER ===== */
   .site-header-inner {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .site-nav-toggle {
@@ -560,13 +529,19 @@ const jsonLd = {
     top: 6px;
   }
 
-  .site-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+  .site-nav-toggle.is-open .site-nav-burger {
+    background: transparent;
   }
 
-  .site-nav-section {
+  .site-nav-toggle.is-open .site-nav-burger::before {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .site-nav-toggle.is-open .site-nav-burger::after {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .site-nav {
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -578,13 +553,14 @@ const jsonLd = {
     align-items: center;
     padding: 0.55rem 0.75rem;
     border-radius: 8px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
     background: transparent;
     border: none;
     cursor: pointer;
+    line-height: 1.4;
   }
 
   .site-nav-link:hover,
@@ -593,6 +569,18 @@ const jsonLd = {
   .site-nav-dropdown-toggle:focus-visible {
     background: var(--color-primary-light);
     color: var(--color-primary);
+  }
+
+  .site-nav-placeholder {
+    color: var(--color-text-muted);
+    cursor: default;
+    opacity: 0.75;
+  }
+
+  .site-nav-placeholder:hover,
+  .site-nav-placeholder:focus-visible {
+    background: transparent;
+    color: var(--color-text-muted);
   }
 
   .site-nav-dropdown {
@@ -621,10 +609,28 @@ const jsonLd = {
     z-index: 100;
   }
 
-  .site-nav-dropdown.is-open .site-nav-dropdown-menu,
-  .site-nav-dropdown:hover .site-nav-dropdown-menu,
-  .site-nav-dropdown:focus-within .site-nav-dropdown-menu {
+  .site-nav-megamenu {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    min-width: 420px;
+    padding: 1rem;
+  }
+
+  .megamenu-col {
     display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .megamenu-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.25rem;
+    padding: 0 0.25rem;
   }
 
   .site-nav-dropdown-link {
@@ -642,6 +648,31 @@ const jsonLd = {
     color: var(--color-primary);
   }
 
+  .site-nav-dropdown-link.site-nav-placeholder {
+    color: var(--color-text-muted);
+    cursor: default;
+  }
+
+  .site-nav-dropdown-link.site-nav-placeholder:hover,
+  .site-nav-dropdown-link.site-nav-placeholder:focus-visible {
+    background: transparent;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 721px) {
+    .site-nav-dropdown:hover .site-nav-dropdown-menu,
+    .site-nav-dropdown:focus-within .site-nav-dropdown-menu,
+    .site-nav-dropdown.is-open .site-nav-dropdown-menu {
+      display: flex;
+    }
+
+    .site-nav-dropdown:hover .site-nav-megamenu,
+    .site-nav-dropdown:focus-within .site-nav-megamenu,
+    .site-nav-dropdown.is-open .site-nav-megamenu {
+      display: grid;
+    }
+  }
+
   /* ===== FOOTER ===== */
   footer {
     background: var(--color-surface);
@@ -652,7 +683,7 @@ const jsonLd = {
 
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     max-width: var(--max-width-wide);
     margin: 0 auto;
@@ -690,6 +721,12 @@ const jsonLd = {
     text-decoration: underline;
   }
 
+  .footer-placeholder {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    opacity: 0.75;
+  }
+
   .footer-bottom {
     max-width: var(--max-width-wide);
     margin: 0 auto;
@@ -705,6 +742,12 @@ const jsonLd = {
     margin: 0 auto;
   }
 
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 720px) {
     .site-nav-toggle {
       display: flex;
@@ -718,7 +761,7 @@ const jsonLd = {
       right: 0;
       flex-direction: column;
       align-items: stretch;
-      gap: 0.5rem;
+      gap: 0.25rem;
       padding: 1rem;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
@@ -731,23 +774,46 @@ const jsonLd = {
       display: flex;
     }
 
-    .site-nav-section {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.25rem;
+    .site-nav-link,
+    .site-nav-dropdown-toggle {
+      padding: 0.75rem 0.5rem;
+      justify-content: space-between;
+      width: 100%;
     }
 
     .site-nav-dropdown-toggle {
-      display: none;
+      display: flex;
     }
 
     .site-nav-dropdown-menu {
-      display: flex;
+      display: none;
       position: static;
       box-shadow: none;
       border: none;
-      padding: 0;
+      padding: 0 0 0 1rem;
       gap: 0.25rem;
+      background: transparent;
+    }
+
+    .site-nav-dropdown.is-open .site-nav-dropdown-menu {
+      display: flex;
+    }
+
+    .site-nav-megamenu {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      min-width: auto;
+      padding: 0 0 0 1rem;
+    }
+
+    .megamenu-title {
+      display: none;
+    }
+
+    .megamenu-col + .megamenu-col {
+      border-top: 1px solid var(--color-border);
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
     }
 
     .footer-grid {

@@ -8,7 +8,7 @@
 
 | | |
 |---|---|
-| **Laatste sprint** | Sprint 115 — UX Foundation (Information Architecture) |
+| **Laatste sprint** | Sprint 116 — Navigation v2 (in review) |
 | **Huidige versie** | v1.0.0 |
 | **Main commit** | `b076155` |
 | **Calculators** | 10 uniek (hub toont 11 cards) |
@@ -21,7 +21,7 @@
 | **Open blockers** | Geen |
 | **Huidige focus** | UX Excellence |
 | **Laatste ontwerpdocument** | `docs/product/UX_MASTERPLAN.md` |
-| **Eerstvolgende sprint** | Sprint 116 — Navigation v2 |
+| **Eerstvolgende sprint** | Sprint 117 — Terminologie & Homepage v2 |
 
 ---
 
@@ -34,15 +34,15 @@
 | Homepage | 100 | 100 | 100 | 100 |
 | Calculator hub | 100 | 100 | 100 | 100 |
 | Categorie Inkomen | 100 | 100 | 100 | 100 |
-| Bruto netto 2026 | 99 | 97 | 100 | 100 |
-| Salaris calculator | 99 | 97 | 100 | 100 |
-| Vakantiegeld calculator | 99 | 96 | 100 | 100 |
+| Bruto netto 2026 | 100 | 97 | 100 | 100 |
+| Salaris calculator | 100 | 97 | 100 | 100 |
+| Vakantiegeld calculator | 100 | 96 | 100 | 100 |
 | Toeslagen calculator | 100 | 96 | 100 | 100 |
-| Hypotheek calculator | 99 | 96 | 100 | 100 |
-| BTW calculator | 99 | 96 | 100 | 100 |
-| BTW terugrekenen | 99 | 96 | 100 | 100 |
-| BTW inclusief/exclusief | 99 | 96 | 100 | 100 |
-| ZZP calculator | 99 | 96 | 100 | 100 |
+| Hypotheek calculator | 100 | 96 | 100 | 100 |
+| BTW calculator | 100 | 96 | 100 | 100 |
+| BTW terugrekenen | 100 | 96 | 100 | 100 |
+| BTW inclusief/exclusief | 100 | 96 | 100 | 100 |
+| ZZP calculator | 100 | 96 | 100 | 100 |
 | Auto importkosten | 100 | 97 | 100 | 100 |
 
 Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95.
@@ -100,15 +100,23 @@ P2 (na stabiele 1.0):
 
 ## Eerstvolgende sprint
 
-**Sprint 116 — Navigation v2**
+**Sprint 117 — Terminologie & Homepage v2**
 
-Doel: de site-navigatie (header, mobile menu, footer, breadcrumbs) herbouwen volgens `docs/product/UX_MASTERPLAN.md` zodat deze geschikt is voor 500+ calculators.
+Doel: de site-terminologie verschuiven van tool-centrisch naar gebruikersvraag-centrisch, en de Homepage v2 als portal bouwen.
 
-1. Header v2 met dropdowns: Home, Calculators, Categorieën, Kennisbank, Nieuws.
-2. Mobile hamburger menu met zoek, Calculators, Categorieën, Kennisbank, Nieuws, Over/Contact.
-3. Footer v2 met dynamische categoriekolommen, Explorer-link en Kennisbank/Over.
-4. Breadcrumbs consistent voor Explorer, categorieën en calculators.
-5. Geen directe calculator-links meer in header; geen handmatige "Alle calculators"-lijst in footer.
+### Sprint 117-notes
+
+- **Terminologie verschuiven van "calculator" naar gebruikerstaal:**
+  - "Berekeningen"
+  - "Financiële tools"
+  - "Zoek een berekening of onderwerp"
+  - "Waar wil je hulp bij?"
+- **Niet de tool centraal zetten, maar de vraag van de gebruiker.**
+- **Homepage zoekroute centraal maken.**
+- **Zoeken vanaf elke pagina onderzoeken** (header zoekicoon vs. homepage zoekbalk).
+- **Dubbele mobile categorieën vereenvoudigen** — categorieën alleen onder "Categorieën", niet ook nog eens onder "Calculators".
+- **Populair / Nieuw-logica oplossen** — aparte logica/pagina’s of één duidelijke route.
+- **Homepage v2 als portal bouwen** volgens `docs/product/UX_MASTERPLAN.md`.
 
 ---
 
