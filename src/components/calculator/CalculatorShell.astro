@@ -163,6 +163,18 @@ const { title, subtitle } = Astro.props;
       }
       primaryChipInput.addEventListener('input', syncChipSelection);
       syncChipSelection();
+
+      // Sync active state immediately when a chip is clicked/tapped,
+      // because the page click handlers set the value without firing input events.
+      amountChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          // Let the page's own click handler update the value first, then sync.
+          setTimeout(() => {
+            primaryChipInput.value = chip.dataset.amount || primaryChipInput.value;
+            syncChipSelection();
+          }, 0);
+        });
+      });
     }
 
     // Subtle result reveal on the first deliberate user action (Enter or calculate)
