@@ -172,74 +172,76 @@ const websiteSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(websiteSchema)} />
 
   <!-- ===== HERO ===== -->
-  <section class="hero-home">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <h1 class="hero-home-title">Wat wil je berekenen?</h1>
-        <p class="hero-home-sub">Snel inzicht in salaris, toeslagen, hypotheek, btw, zzp en meer. Gratis, zonder account en gebaseerd op officiële bronnen.</p>
+  <section class="home-hero" slot="hero">
+    <div class="home-hero-inner">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-home-title">Wat wil je berekenen?</h1>
+          <p class="hero-home-sub">Snel inzicht in salaris, toeslagen, hypotheek, btw, zzp en meer. Gratis, zonder account en gebaseerd op officiële bronnen.</p>
 
-        <div class="hp-search-wrap">
-          <label for="hpSearch" class="visually-hidden">Zoek een calculator</label>
-          <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, btw, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
-          <span class="hp-search-icon" aria-hidden="true">🔍</span>
-        </div>
+          <div class="hp-search-wrap">
+            <label for="hpSearch" class="visually-hidden">Zoek een calculator</label>
+            <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, btw, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
+            <span class="hp-search-icon" aria-hidden="true">🔍</span>
+          </div>
 
-        <div class="hp-cluster-row" aria-label="Categorieën">
-          {categoryLinks.map((cat) => (
-            <a
-              href={cat.href}
-              class="hp-cluster-chip"
-              data-analytics="category-chip"
-              data-analytics-category="homepage"
-              data-analytics-action="click"
-              data-analytics-label={cat.id}
-            >
-              {cat.label}
-            </a>
-          ))}
-        </div>
-        <p class="hp-categories-link">
-          <a href="/calculators/" data-analytics="calculator-hub-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="calculator-hub">Bekijk alle calculators</a>
-          <span aria-hidden="true"> · </span>
-          <a href="#categorieen" data-analytics="category-overview-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="categorieen">Bekijk alle categorieën</a>
-        </p>
+          <div class="hp-cluster-row" aria-label="Categorieën">
+            {categoryLinks.map((cat) => (
+              <a
+                href={cat.href}
+                class="hp-cluster-chip"
+                data-analytics="category-chip"
+                data-analytics-category="homepage"
+                data-analytics-action="click"
+                data-analytics-label={cat.id}
+              >
+                {cat.label}
+              </a>
+            ))}
+          </div>
+          <p class="hp-categories-link">
+            <a href="/calculators/" data-analytics="calculator-hub-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="calculator-hub">Bekijk alle calculators</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#categorieen" data-analytics="category-overview-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="categorieen">Bekijk alle categorieën</a>
+          </p>
 
-        <div class="hero-trust">
-          <div class="hero-trust-item">
-            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Gratis</span>
-          </div>
-          <div class="hero-trust-item">
-            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Geen account</span>
-          </div>
-          <div class="hero-trust-item">
-            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Geen opslag van je invoer</span>
-          </div>
-          <div class="hero-trust-item">
-            <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Uitkomst is een indicatie</span>
+          <div class="hero-trust">
+            <div class="hero-trust-item">
+              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Gratis</span>
+            </div>
+            <div class="hero-trust-item">
+              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Geen account</span>
+            </div>
+            <div class="hero-trust-item">
+              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Geen opslag van je invoer</span>
+            </div>
+            <div class="hero-trust-item">
+              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Uitkomst is een indicatie</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="hero-right" aria-hidden="true">
-        <div class="hero-dashboard">
-          <div class="hero-dash-card dash-btw">
-            <span class="hd-label">€121 incl. BTW</span>
-            <span class="hd-result">→ €100 excl.</span>
-          </div>
-          <div class="hero-dash-card dash-salar">
-            <span class="hd-label">Bruto €3.500</span>
-            <span class="hd-result">→ netto indicatie</span>
-          </div>
-          <div class="hero-dash-card dash-zzp">
-            <span class="hd-label">ZZP uurtarief</span>
-            <span class="hd-result">indicatie op maat</span>
-          </div>
-          <div class="hero-dash-card dash-toeslag">
-            <span class="hd-label">Huursubsidie</span>
-            <span class="hd-result">zorgtoeslag indicatie</span>
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-dashboard">
+            <div class="hero-dash-card dash-btw">
+              <span class="hd-label">€121 incl. BTW</span>
+              <span class="hd-result">→ €100 excl.</span>
+            </div>
+            <div class="hero-dash-card dash-salar">
+              <span class="hd-label">Bruto €3.500</span>
+              <span class="hd-result">→ netto indicatie</span>
+            </div>
+            <div class="hero-dash-card dash-zzp">
+              <span class="hd-label">ZZP uurtarief</span>
+              <span class="hd-result">indicatie op maat</span>
+            </div>
+            <div class="hero-dash-card dash-toeslag">
+              <span class="hd-label">Huursubsidie</span>
+              <span class="hd-result">zorgtoeslag indicatie</span>
+            </div>
           </div>
         </div>
       </div>
@@ -510,12 +512,17 @@ const websiteSchema = {
 
 <style>
   /* ===== HERO & SECTION POLISH ===== */
-  .hero-home {
+  .home-hero {
+    width: 100%;
+    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
     padding: 3rem 0 2.5rem;
     margin-bottom: 2.5rem;
-    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
-    border-radius: 24px;
-    border: 1px solid var(--color-border);
+  }
+
+  .home-hero-inner {
+    max-width: var(--max-width-wide);
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .hero-grid {
@@ -523,8 +530,6 @@ const websiteSchema = {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 2.5rem;
     align-items: center;
-    max-width: 1080px;
-    margin: 0 auto;
   }
 
   .hero-left {
@@ -1083,9 +1088,12 @@ const websiteSchema = {
   }
 
   @media (max-width: 640px) {
-    .hero-home {
-      padding: 2rem 1rem 1.5rem;
-      border-radius: 16px;
+    .home-hero {
+      padding: 2rem 0 1.5rem;
+    }
+
+    .home-hero-inner {
+      padding: 0 1rem;
     }
 
     .hero-home-title {
