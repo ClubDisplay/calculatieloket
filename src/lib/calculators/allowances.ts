@@ -240,8 +240,9 @@ function invalidAllowanceResult(error: string): AllowanceResult {
  */
 export function calculateAllowances(input: AllowanceInput): AllowanceResult {
   const income = Number.isFinite(input.income) ? input.income : 0;
-  const partnerIncome = Number.isFinite(input.partnerIncome) ? (input.partnerIncome ?? 0) : 0;
+  const rawPartnerIncome = Number.isFinite(input.partnerIncome) ? (input.partnerIncome ?? 0) : 0;
   const isCouple = input.isCouple === true;
+  const partnerIncome = isCouple ? rawPartnerIncome : 0;
   const totalIncome = income + partnerIncome;
   const rent = Number.isFinite(input.rent) ? (input.rent ?? 0) : 0;
 
