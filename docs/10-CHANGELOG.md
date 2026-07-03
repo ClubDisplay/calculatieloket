@@ -7,38 +7,38 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 116](#2026-07-03--sprint-116)
-2. [2026-07-03 — Sprint 115](#2026-07-03--sprint-115)
-3. [2026-07-03 — Sprint 112](#2026-07-03--sprint-112)
-4. [2026-07-03 — Sprint 111](#2026-07-03--sprint-111)
-5. [2026-07-03 — Sprint 110](#2026-07-03--sprint-110)
-6. [2026-07-03 — Sprint 108](#2026-07-03--sprint-108)
-7. [2026-07-03 — Sprint 107](#2026-07-03--sprint-107)
-8. [2026-07-03 — Sprint 106](#2026-07-03--sprint-106)
-9. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
-10. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
-11. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
-12. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
-13. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
-14. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
-15. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
-16. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
-17. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
-18. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
-19. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
-20. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
-21. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
-22. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
-23. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
-24. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
-25. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-26. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-27. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-28. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-29. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-30. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-31. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-32. [2026-06-30](#2026-06-30)
+1. [2026-07-03 — Sprint 117A](#2026-07-03--sprint-117a)
+2. [2026-07-03 — Sprint 117](#2026-07-03--sprint-117)
+3. [2026-07-03 — Sprint 116](#2026-07-03--sprint-116)
+4. [2026-07-03 — Sprint 115](#2026-07-03--sprint-115)
+5. [2026-07-03 — Sprint 112](#2026-07-03--sprint-112)
+6. [2026-07-03 — Sprint 111](#2026-07-03--sprint-111)
+7. [2026-07-03 — Sprint 110](#2026-07-03--sprint-110)
+8. [2026-07-03 — Sprint 108](#2026-07-03--sprint-108)
+9. [2026-07-03 — Sprint 107](#2026-07-03--sprint-107)
+10. [2026-07-03 — Sprint 106](#2026-07-03--sprint-106)
+11. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
+12. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
+13. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+14. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+15. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
+16. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
+17. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
+18. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+19. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
+20. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
+21. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
+22. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
+23. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
+24. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
+25. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+26. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+27. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+28. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+29. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+30. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+31. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+32. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 33. [2026-06-30](#2026-06-30)
 34. [2026-06-30](#2026-06-30)
 35. [2026-06-30](#2026-06-30)
@@ -47,16 +47,38 @@
 38. [2026-06-30](#2026-06-30)
 39. [2026-06-30](#2026-06-30)
 40. [2026-06-30](#2026-06-30)
-41. [2026-06-29](#2026-06-29)
-42. [2026-06-27](#2026-06-27)
-43. [2026-06-26](#2026-06-26)
-44. [2026-06-30](#2026-06-30)
+41. [2026-06-30](#2026-06-30)
+42. [2026-06-29](#2026-06-29)
+43. [2026-06-27](#2026-06-27)
+44. [2026-06-26](#2026-06-26)
 45. [2026-06-30](#2026-06-30)
 46. [2026-06-30](#2026-06-30)
 47. [2026-06-30](#2026-06-30)
 48. [2026-06-30](#2026-06-30)
 49. [2026-06-30](#2026-06-30)
 50. [2026-06-30](#2026-06-30)
+51. [2026-06-30](#2026-06-30)
+52. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 117A
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 117A — Homepage UX Iteration
+**Details:** UX-iteratie op `src/pages/index.astro` binnen dezelfde branch/PR als Sprint 117. Doel: de homepage korter, rustiger en gerichter maken zodat een gebruiker binnen 10 seconden bij de juiste berekening is. Hero herontworpen naar single-column, gecentreerde layout met kalme titel "Krijg inzicht in je financiële vraag" en subtitel. Zoekbalk dominant gemaakt als pill-shaped input. Aantal populaire berekeningen teruggebracht van 8 naar 6 compacte cards zonder badge-noise. Categorieën compacter opgemaakt als zes strakke kaarten met rustige lijn-iconen zonder achtergrondkleur of beschrijvingstekst. Verwijderd uit de homepage: hero-dashboard preview cards, uitgebreide "Waarom Calculatieloket?" trust-band, volledige "Snel starten" module en twee FAQ-items (teruggebracht naar 3). Trust gecomprimeerd tot één regel onder de zoekbalk: "Gratis · Geen account · Geen opslag · Officiële bronnen". Copy verder verschoven van "calculator" naar "berekening / vraag / inzicht": sectietitel "Meestgezocht", CTA "Alle berekeningen", FAQ "Zijn de berekeningen gratis?", etc. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, internationalisering, calculators, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen. `npm run audit:lighthouse` slaagt: alle 13 gemonitorde pagina's halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95), met median scores 99/100/100/100 op homepage, calculator hub en categoriepagina.
+**Status:** In review
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03 — Sprint 117
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 117 — Homepage v2 / User Intent Portal
+**Details:** Homepage volledig herontworpen van calculator-catalogus naar gebruikersvraag-portal in `src/pages/index.astro`. Terminologie op de homepage verschoven van "calculator" naar gebruikerstaal ("Waar wil je hulp bij?", "Populaire berekeningen", "financiële tools", "Zoek een berekening of onderwerp"). Hero v2 met vraaggerichte titel, compacte quick-chips en centrale zoekroute. "Alle calculators"-grid vervangen door "Populaire berekeningen" met maximaal 8 cards. Nieuwe categorieën-sectie "Waar gaat je vraag over?" met zes kaarten: Inkomen, Belasting, Wonen, Ondernemen, Auto en Toeslagen. Snel-starten module compacter gemaakt en onder de categorieën geplaatst. Trust-sectie gecompresseerd en FAQ lager op de pagina gehouden. Interne links naar `/calculators/` en alle categoriepagina's behouden. Verwijderd uit de homepage: hardcoded cross-sell blokken "Begin met je inkomen" en "Voor ondernemers", de statische `RelatedCategories` sectie en het volledige 10-card grid. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, internationalisering, calculators, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen. `npm run audit:lighthouse` slaagt: alle 13 gemonitorde pagina's halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95), met median scores 99/100/100/100 op homepage, calculator hub en categoriepagina.
+**Status:** In review
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
