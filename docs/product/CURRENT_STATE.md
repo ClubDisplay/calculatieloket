@@ -21,7 +21,7 @@
 | **Open blockers** | Geen |
 | **Huidige focus** | UX Excellence |
 | **Laatste ontwerpdocument** | `docs/product/UX_MASTERPLAN.md` |
-| **Eerstvolgende sprint** | Wacht op opdracht |
+| **Eerstvolgende sprint** | Sprint 117 — Terminologie & Homepage v2 |
 
 ---
 
@@ -100,9 +100,23 @@ P2 (na stabiele 1.0):
 
 ## Eerstvolgende sprint
 
-**Wacht op opdracht.**
+**Sprint 117 — Terminologie & Homepage v2**
 
-Sprint 116 — Navigation v2 is geïmplementeerd in branch `feat/sprint-116-navigation-v2` en wacht op review/goedkeuring. Na merge kan de volgende UX-sprint opgepakt worden, bijvoorbeeld Calculator Explorer of Homepage v2.
+Doel: de site-terminologie verschuiven van tool-centrisch naar gebruikersvraag-centrisch, en de Homepage v2 als portal bouwen.
+
+### Sprint 117-notes
+
+- **Terminologie verschuiven van "calculator" naar gebruikerstaal:**
+  - "Berekeningen"
+  - "Financiële tools"
+  - "Zoek een berekening of onderwerp"
+  - "Waar wil je hulp bij?"
+- **Niet de tool centraal zetten, maar de vraag van de gebruiker.**
+- **Homepage zoekroute centraal maken.**
+- **Zoeken vanaf elke pagina onderzoeken** (header zoekicoon vs. homepage zoekbalk).
+- **Dubbele mobile categorieën vereenvoudigen** — categorieën alleen onder "Categorieën", niet ook nog eens onder "Calculators".
+- **Populair / Nieuw-logica oplossen** — aparte logica/pagina’s of één duidelijke route.
+- **Homepage v2 als portal bouwen** volgens `docs/product/UX_MASTERPLAN.md`.
 
 ---
 
