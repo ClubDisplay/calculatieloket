@@ -207,23 +207,19 @@ const websiteSchema = {
         <div class="hero-trust">
           <div class="hero-trust-item">
             <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="trust-full">Gratis</span>
-            <span class="trust-short">Gratis</span>
+            <span>Gratis</span>
           </div>
           <div class="hero-trust-item">
             <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="trust-full">Geen account</span>
-            <span class="trust-short">Geen account</span>
+            <span>Geen account</span>
           </div>
           <div class="hero-trust-item">
             <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="trust-full">Geen opslag van je invoer</span>
-            <span class="trust-short">Geen opslag</span>
+            <span>Geen opslag van je invoer</span>
           </div>
           <div class="hero-trust-item">
             <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="trust-full">Uitkomst is een indicatie</span>
-            <span class="trust-short">Indicatie</span>
+            <span>Uitkomst is een indicatie</span>
           </div>
         </div>
       </div>
@@ -513,6 +509,182 @@ const websiteSchema = {
 </script>
 
 <style>
+  /* ===== HERO & SECTION POLISH ===== */
+  .hero-home {
+    padding: 3rem 0 2.5rem;
+    margin-bottom: 2.5rem;
+    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.5rem;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .hero-home-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    color: var(--color-text);
+  }
+
+  .hero-home-sub {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  .hti-icon {
+    flex-shrink: 0;
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 340px;
+    transform: rotate(-2deg);
+  }
+
+  .hero-dash-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    font-size: 0.85rem;
+  }
+
+  .dash-btw { border-left: 4px solid #2563eb; }
+  .dash-salar { border-left: 4px solid #059669; }
+  .dash-zzp { border-left: 4px solid #7c3aed; }
+  .dash-toeslag { border-left: 4px solid #0891b2; }
+
+  .hd-label {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .hd-result {
+    color: var(--color-text-muted);
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .hp-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .hp-quick-start {
+    margin-bottom: 2.5rem;
+  }
+
+  .hp-card {
+    box-shadow: var(--shadow);
+  }
+
+  .trust-band {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .trust-band .section-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .trust-band-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .trust-band-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    background: var(--color-bg);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .tb-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-success);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .faq-section {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
   /* ===== HERO ADDITIONS ===== */
   .hp-search-wrap {
     position: relative;
@@ -888,6 +1060,75 @@ const websiteSchema = {
 
     .hp-qs-cta {
       padding: 0.8rem 1.25rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-right {
+      order: -1;
+    }
+
+    .hero-dashboard {
+      transform: none;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .trust-band-inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-home {
+      padding: 2rem 1rem 1.5rem;
+      border-radius: 16px;
+    }
+
+    .hero-home-title {
+      font-size: 1.8rem;
+    }
+
+    .hero-home-sub {
+      font-size: 1rem;
+    }
+
+    .hero-trust {
+      gap: 0.6rem 1rem;
+    }
+
+    .hero-trust-item {
+      font-size: 0.85rem;
+    }
+
+    .hero-dashboard {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .hero-dash-card {
+      padding: 0.8rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+    }
+
+    .trust-band {
+      padding: 1.5rem 1rem;
+    }
+
+    .trust-band-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .trust-band-item {
+      font-size: 0.9rem;
     }
   }
 </style>
