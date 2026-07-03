@@ -48,11 +48,11 @@ const { title } = Astro.props;
   }
 
   .calc-input-panel .form-group .hint {
-    display: block;
+    display: inline;
     font-size: 0.8rem;
     color: var(--color-text-muted);
     font-weight: 400;
-    margin-top: 0.35rem;
+    margin-left: 0.35rem;
   }
 
   .calc-input-panel input[type="number"],
@@ -226,6 +226,52 @@ const { title } = Astro.props;
     width: 100%;
   }
 
+  /* Active input label highlight */
+  .calc-input-panel .form-group:focus-within label {
+    color: var(--color-primary);
+  }
+
+  .calc-input-panel .form-group:focus-within .hint {
+    color: var(--color-primary-hover);
+  }
+
+  /* Premium focus ring for inputs */
+  .calc-input-panel input[type="number"]:focus-visible,
+  .calc-input-panel input[type="text"]:focus-visible,
+  .calc-input-panel select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  }
+
+  /* Pressed states */
+  .calc-input-panel .radio-group button:active {
+    transform: scale(0.97);
+  }
+
+  .calc-input-panel .quick-chip:active {
+    transform: scale(0.96);
+  }
+
+  .calc-input-panel .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Selected quick-chip state */
+  .calc-input-panel .quick-chip.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  }
+
+  .calc-input-panel .quick-chip.active:hover,
+  .calc-input-panel .quick-chip.active:focus-visible {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    color: white;
+  }
+
   @media (max-width: 480px) {
     .calc-input-panel {
       padding: 1.25rem;
@@ -245,6 +291,15 @@ const { title } = Astro.props;
 
     .calc-input-panel .radio-group button {
       width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calc-input-panel .radio-group button,
+    .calc-input-panel .quick-chip,
+    .calc-input-panel .btn-primary {
+      transition: none;
+      transform: none !important;
     }
   }
 </style>

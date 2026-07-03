@@ -62,21 +62,21 @@ const useCases = [
   {
     id: "hypotheek",
     title: "Hypotheek berekenen",
-    description: "Wat kan je lenen met een jaarinkomen van {{omzet}}?",
+    description: "Gebruik deze omzet als basis voor een hypotheekindicatie.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
   {
     id: "toeslagen",
     title: "Toeslagen berekenen",
-    description: "Check toeslagen op basis van {{omzet}} per jaar.",
+    description: "Check of je toeslagen kunt krijgen op basis van deze omzet.",
     href: "/toeslagen-calculator/",
     accent: "#059669",
   },
   {
     id: "auto-import",
     title: "Auto importkosten",
-    description: "Bereken importkosten voor een zakelijke auto of camper.",
+    description: "Bereken de kosten voor het importeren van een zakelijke auto of camper.",
     href: "/auto-importkosten-berekenen/",
     accent: "#7c3aed",
   },
@@ -100,23 +100,23 @@ const sources = [
 const faq = [
   {
     question: "Waarom is dit een indicatie?",
-    answer: "Dit is een schatting op basis van de meest voorkomende aannames voor ZZP'ers: factureerbare dagen, uren per dag, zakelijke kosten, pensioenreservering en de standaard aftrekposten. Je uiteindelijke netto inkomen kan afwijken door extra aftrekposten, investeringsaftrek, de <em>fiscalist regel</em>, meerdere opdrachtgevers of een andere rechtsvorm. Raadpleeg bij twijfel een accountant.",
+    answer: "We rekenen met gangbare aannames: factureerbare dagen, uren per dag, zakelijke kosten, pensioen en standaard aftrekposten. Je netto inkomen kan afwijken door extra aftrekposten, investeringen, meerdere opdrachtgevers of een andere rechtsvorm. Raadpleeg bij twijfel een accountant.",
   },
   {
     question: "Hoe werkt de ZZP calculator?",
-    answer: "De calculator werkt terugwaarts. Je vult in hoeveel netto je per maand wilt verdienen. Vervolgens berekenen we hoeveel bruto omzet je nodig hebt om dit te realiseren, rekening houdend met kosten, pensioen, inkomstenbelasting, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling.",
+    answer: "De calculator werkt terugwaarts. Je vult in hoeveel netto je per maand wilt verdienen. Vervolgens rekenen we uit hoeveel omzet je nodig hebt, rekening houdend met kosten, pensioen, belasting, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling.",
   },
   {
     question: "Wat is de zelfstandigenaftrek in 2026?",
-    answer: "In 2026 geldt een forfaitaire zelfstandigenaftrek. Deze verlaagt je belastbare winst. De startersaftrek is een extra aftrek in de eerste jaren van je onderneming. Beide zijn onder voorwaarden van toepassing.",
+    answer: "In 2026 verlaagt de zelfstandigenaftrek je belastbare winst. De startersaftrek is een extra korting in de eerste jaren van je onderneming. Beide gelden onder voorwaarden.",
   },
   {
     question: "Wat is de MKB-winstvrijstelling?",
-    answer: "De MKB-winstvrijstelling is een percentage van de winst dat niet belast wordt. Deze geldt voor kleine en middelgrote ondernemers en verlaagt de belastbare winst.",
+    answer: "Dit is een percentage van je winst dat niet belast wordt. De vrijstelling geldt voor kleine en middelgrote ondernemers en verlaagt de belasting.",
   },
   {
     question: "Wat betekent 'benodigd uurtarief'?",
-    answer: "Het benodigde uurtarief is het bedrag dat je gemiddeld per uur moet factureren (exclusief btw) om je gewenste netto inkomen per maand te bereiken.",
+    answer: "Het bedrag dat je gemiddeld per uur moet factureren (exclusief btw) om je gewenste netto inkomen per maand te halen.",
   },
 ];
 
@@ -181,12 +181,12 @@ const breadcrumbSchema = {
   ]} />
 
   <CalculatorShell
-    title="ZZP uurtarief berekenen"
-    subtitle="Reken als ZZP'er terug van je gewenste netto inkomen naar het benodigde uurtarief en jaaromzet. Inclusief zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling."
+    title="Bereken je uurtarief als ZZP'er"
+    subtitle="Vul in hoeveel netto je per maand wilt verdienen. De calculator rekent terug naar het benodigde uurtarief en jaaromzet."
   >
     <InputPanel title="Jouw situatie" slot="input">
       <div class="form-group">
-        <label for="desiredNet">Gewenst netto inkomen per maand</label>
+        <label for="desiredNet">Hoeveel netto wil je per maand?</label>
         <div class="input-prefix">
           <span class="prefix">&euro;</span>
           <input type="number" id="desiredNet" value={defaultNet} min="0" step="1" />
@@ -266,7 +266,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken uurtarief</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bekijk je uurtarief</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig netto inkomen, aantal dagen en uren per dag in.</p>
     </InputPanel>
 
@@ -275,7 +275,7 @@ const breadcrumbSchema = {
       title="Benodigd uurtarief"
       heroLabel="Benodigd uurtarief"
       heroValue={formatEuro(initialResult.requiredHourlyRate, 2)}
-      heroSubtext="Indicatie op basis van 2026-tarieven"
+      heroSubtext={`Voor ${formatEuro(defaultNet, 0)} netto per maand vraag je ongeveer ${formatEuro(initialResult.requiredHourlyRate, 2)} per uur.`}
       badge="Indicatie"
     >
       <div class="result-meta">
@@ -313,7 +313,7 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/ondernemen/" categoryLabel="Ondernemen"
       slot="footer"
-      disclaimer="Deze berekening is een indicatie op basis van de ingevoerde gegevens en de bekende belastingtarieven van 2026. Uiteindelijke bedragen kunnen afwijken door specifieke aftrekposten, investeringsaftrek, de fiscalist regel, pensioenconstructies en persoonlijke situatie. Gebruik de uitkomst als richtlijn, niet als definitief belastingbedrag. Raadpleeg bij belangrijke financiële beslissingen een accountant of belastingadviseur."
+      disclaimer="Deze uitkomst is een indicatie op basis van je invoer en de belastingtarieven van 2026. Bedragen kunnen afwijken door specifieke aftrekposten, investeringen, fiscale regels, pensioenconstructies en persoonlijke situatie. Gebruik de uitkomst als richtlijn. Bij belangrijke beslissingen raadpleeg je een accountant of belastingadviseur."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
@@ -322,11 +322,11 @@ const breadcrumbSchema = {
     <p class="badge-indicatie">Indicatie 2026</p>
 
     <h2 class="page-title">ZZP uurtarief berekenen</h2>
-    <p>Deze ZZP calculator geeft een indicatie van je benodigde uurtarief en jaaromzet. De berekening houdt rekening met zakelijke kosten, pensioenreservering, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling. Het is een vereenvoudigde berekening op basis van de 2026 tarieven.</p>
-    <p>Wil je weten hoeveel btw je over je omzet betaalt? Gebruik de <a href="/btw-calculator/">BTW calculator</a>. Voor je inkomensvergelijking heb je de <a href="/bruto-netto-2026/">bruto-netto calculator</a>, <a href="/hypotheek-calculator/">hypotheek calculator</a> en <a href="/toeslagen-calculator/">toeslagen calculator</a>.</p>
+    <p>Deze ZZP calculator geeft een indicatie van je benodigde uurtarief en jaaromzet. De berekening houdt rekening met zakelijke kosten, pensioenreservering, zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling.</p>
+    <p>Wil je weten hoeveel btw je over je omzet betaalt? Gebruik de <a href="/btw-calculator/">BTW-calculator</a>. Voor je inkomensvergelijking heb je de <a href="/bruto-netto-2026/">bruto-netto calculator</a>, <a href="/hypotheek-calculator/">hypotheekcalculator</a> en <a href="/toeslagen-calculator/">toeslagencalculator</a>.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
-    <p>De calculator gebruigt de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026" target="_blank" rel="noopener">zelfstandigenaftrek</a> en <a href="https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/" target="_blank" rel="noopener">MKB-winstvrijstelling</a> voor 2026. De uitkomst is een indicatie: je exacte belasting hangt af van aftrekposten, investeringen, de <em>fiscalist regel</em> en persoonlijke situatie.</p>
+    <p>De calculator gebruikt de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026" target="_blank" rel="noopener">zelfstandigenaftrek</a> en <a href="https://ondernemersplein.overheid.nl/subsidies-en-regelingen/mkb-winstvrijstelling/" target="_blank" rel="noopener">MKB-winstvrijstelling</a> voor 2026. De uitkomst is een indicatie: je exacte belasting hangt af van aftrekposten, investeringen, fiscale regels en persoonlijke situatie.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
     <p>De calculator werkt terugwaarts:</p>
@@ -339,24 +339,24 @@ const breadcrumbSchema = {
 
     <h3>Belangrijke aannames</h3>
     <ul class="calc-list">
-      <li>Je werkt 210 dagen per jaar.</li>
-      <li>Per dag reken je 8 uren.</li>
-      <li>Zakelijke kosten: € 300 per maand.</li>
-      <li>Pensioenreservering: € 500 per maand.</li>
-      <li>De zelfstandigenaftrek en MKB-winstvrijstelling worden toegepast.</li>
-      <li>De belasting wordt berekend volgens de Box 1 tarieven 2026.</li>
+      <li>210 factureerbare dagen per jaar.</li>
+      <li>8 uur per dag.</li>
+      <li>€ 300 zakelijke kosten per maand.</li>
+      <li>€ 500 pensioenreservering per maand.</li>
+      <li>Zelfstandigenaftrek en MKB-winstvrijstelling zijn van toepassing.</li>
+      <li>Belasting volgens de Box 1 tarieven 2026.</li>
     </ul>
 
-    <p>Let op: dit is een indicatie. Fiscale regels kunnen afhankelijk zijn van je exacte situatie, bijvoorbeeld de <strong>fiscalist regel</strong> of specifieke aftrekposten. Raadpleeg bij twijfel een accountant of belastingadviseur.</p>
+    <p>Let op: dit is een indicatie. Fiscale regels hangen af van je exacte situatie, zoals specifieke aftrekposten of de regels voor DGA. Raadpleeg bij twijfel een accountant of belastingadviseur.</p>
 
     <h2>Praktijkvoorbeeld</h2>
-    <p>Stel, je wilt <strong>€ 4.000 netto</strong> per maand verdienen. Je rekent met 210 factureerbare dagen, 8 uur per dag, € 300 zakelijke kosten per maand en € 500 pensioenreservering per maand. Met zelfstandigenaftrek en MKB-winstvrijstelling ingeschakeld, geeft de calculator een indicatie van:</p>
+    <p>Je wilt <strong>€ 4.000 netto</strong> per maand verdienen, met 210 dagen, 8 uur per dag, € 300 kosten en € 500 pensioen. Met zelfstandigenaftrek en MKB-winstvrijstelling geeft de calculator een indicatie van:</p>
     <ul class="calc-list">
       <li><strong>Benodigde jaaromzet:</strong> circa € 90.000 (exclusief btw).</li>
       <li><strong>Benodigd uurtarief:</strong> circa € 54 per uur.</li>
-      <li><strong>Belastingindicatie:</strong> afhankelijk van de exacte aftrekposten en Box 1 tarieven.</li>
+      <li><strong>Belastingindicatie:</strong> afhankelijk van de exacte aftrekposten.</li>
     </ul>
-    <p>Zonder zelfstandigenaftrek of MKB-winstvrijstelling stijgt het benodigde uurtarief. Proef verschillende instellingen om je eigen situatie in te schatten.</p>
+    <p>Zonder aftrekposten stijgt het uurtarief. Proef verschillende instellingen om je situatie in te schatten.</p>
 
     <h2>Veelgemaakte fouten</h2>
     <ul class="calc-list">
@@ -372,11 +372,11 @@ const breadcrumbSchema = {
   </div>
 
   <CrossSellCards
-    title="Ook handig om te berekenen"
+    title="Andere calculators die je helpen"
     items={[
       { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", accent: "#2563eb" },
       { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Vergelijk bruto en netto.", accent: "#3b82f6" },
-      { href: "/hypotheek-calculator/", title: "Hypotheek Calculator", description: "Maak een indicatie van maandlasten.", accent: "#d97706" },
+      { href: "/hypotheek-calculator/", title: "Hypotheek Calculator", description: "Bekijk een indicatie van maandlasten.", accent: "#d97706" },
       { href: "/auto-importkosten-berekenen/", title: "Auto importkosten", description: "Bereken importkosten voor een auto.", accent: "#7c3aed" },
     ]}
   />
@@ -609,6 +609,7 @@ const breadcrumbSchema = {
   const mkbInput = document.getElementById("mkbExemption") as HTMLInputElement;
 
   const hero = document.querySelector("[data-calc-result-hero]") as HTMLElement;
+  const heroSubtext = document.querySelector(".calc-result-panel-subtext") as HTMLElement;
 
   const detailNetGoal = document.getElementById("detailNetGoal") as HTMLElement;
   const detailRevenue = document.getElementById("detailRevenue") as HTMLElement;
@@ -659,6 +660,7 @@ const breadcrumbSchema = {
     });
 
     hero.textContent = formatEuro(result.requiredHourlyRate, 2);
+    heroSubtext.textContent = `Voor ${formatEuro(inputs.net, 0)} netto per maand vraag je ongeveer ${formatEuro(result.requiredHourlyRate, 2)} per uur.`;
     detailNetGoal.textContent = formatEuro(inputs.net, 0);
     detailRevenue.textContent = formatEuro(result.requiredYearlyRevenue, 0);
     detailCosts.textContent = formatEuro(result.yearlyCosts, 0);

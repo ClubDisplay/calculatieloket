@@ -56,28 +56,28 @@ const useCases = [
   {
     id: "toeslagen",
     title: "Toeslagen berekenen",
-    description: "Met een netto jaarinkomen van {{netto_jaar}} kun je checken of je recht hebt op huur- of zorgtoeslag.",
+    description: "Met {{netto_jaar}} netto per jaar check je of je huur- of zorgtoeslag kunt krijgen.",
     href: "/toeslagen-calculator/",
     accent: "#059669",
   },
   {
     id: "hypotheek",
     title: "Hypotheek berekenen",
-    description: "Op basis van een bruto jaarinkomen van {{bruto_jaar}} bekijk je een hypotheekindicatie.",
+    description: "Met {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
   {
     id: "salaris",
     title: "Salaris vergelijken",
-    description: "Vergelijk bruto {{bruto}} met netto {{netto}} op de salaris calculator.",
+    description: "Vergelijk bruto {{bruto}} met netto {{netto}} op de salariscalculator.",
     href: "/salaris-calculator/",
     accent: "#2563eb",
   },
   {
     id: "zzp",
     title: "ZZP uurtarief berekenen",
-    description: "Om {{netto}} netto per maand als ZZP'er te halen, bereken je het benodigde uurtarief.",
+    description: "Wil je {{netto}} netto per maand als ZZP'er verdienen? Bereken je uurtarief.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
   },
@@ -107,31 +107,31 @@ const sources = [
 const faq = [
   {
     question: "Waarom is dit een indicatie?",
-    answer: "Dit is een schatting op basis van de meest voorkomende aannames: een voltijds dienstverband, 8% vakantiegeld, een standaard pensioenpremie en de loonheffingskorting. Je uiteindelijke nettoloon kan afwijken door cao-afwijkingen, bijzondere beloningen, lease-auto bijtelling, tweede baan of extra aftrekposten. Gebruik de uitkomst als richtlijn, niet als definitieve loonstrook.",
+    answer: "We rekenen met de meest voorkomende aannames: voltijds, 8% vakantiegeld, een standaard pensioenpremie en loonheffingskorting. Je loonstrook kan afwijken door cao, lease-auto, tweede baan of extra aftrekposten. Gebruik de uitkomst als richtlijn.",
   },
   {
-    question: "Wat is het verschil tussen bruto en netto salaris?",
-    answer: "Bruto salaris is wat je werkgever je betaalt voor je werk, inclusief vakantiegeld. Netto salaris is het bedrag dat daadwerkelijk op je bankrekening komt, nadat inkomstenbelasting, premies en heffingskortingen zijn verrekend.",
+    question: "Wat is het verschil tussen bruto en netto?",
+    answer: "Bruto is wat je werkgever je betaalt, inclusief vakantiegeld. Netto is wat er daadwerkelijk op je rekening komt, na belasting en premies.",
   },
   {
     question: "Hoe werkt loonheffingskorting?",
-    answer: "Loonheffingskorting is de verzamelnaam voor de algemene heffingskorting en arbeidskorting. Als je deze toepast, betaal je minder belasting. Je kunt de loonheffingskorting maar bij één werkgever tegelijk laten toepassen. ZZP’ers en mensen met meerdere banen moeten hier extra op letten.",
+    answer: "Loonheffingskorting bestaat uit de algemene heffingskorting en arbeidskorting. Je betaalt hierdoor minder belasting. Je mag deze korting maar bij één werkgever tegelijk toepassen.",
   },
   {
     question: "Waarom kan mijn loonstrook afwijken?",
-    answer: "Je loonstrook kan afwijken door het soort pensioenfonds, extra verzekeringen via de werkgever, cao-regelingen, bijzondere beloningen, reiskostenvergoedingen, lease-auto bijtelling, of andere toeslagen en kortingen.",
+    answer: "Pensioenfonds, cao, bijzondere beloningen, reiskostenvergoeding, lease-auto bijtelling en andere toeslagen of kortingen beïnvloeden je netto loon.",
   },
   {
     question: "Wordt pensioenpremie meegenomen?",
-    answer: "Ja, je kunt je eigen werknemersbijdrage aan de pensioenpremie invullen. Deze wordt afgetrokken van je bruto inkomen voordat de belasting wordt berekend. De werkgeversbijdrage betaalt je werkgever zelf en zie je niet op je loonstrook.",
+    answer: "Ja, je kunt je werknemersdeel van de pensioenpremie invullen. Dat wordt afgetrokken van je bruto loon vóór de belasting. De werkgeversbijdrage zie je niet op je loonstrook.",
   },
   {
     question: "Welke tarieven gelden in 2026?",
-    answer: "In 2026 zijn er twee Box 1 schijven: 35,75% over inkomen tot € 38.441, en 37,56% over inkomen van € 38.441 tot € 75.518. Boven de € 75.518 geldt 49,50%. De algemene heffingskorting is maximaal € 3.115 en loopt af vanaf € 29.736. De arbeidskorting loopt op tot maximaal € 5.685.",
+    answer: "Over inkomen tot € 38.441 betaal je 35,75%. Van € 38.441 tot € 75.518 is dat 37,56%. Boven € 75.518 geldt 49,50%. De algemene heffingskorting is maximaal € 3.115, de arbeidskorting maximaal € 5.685.",
   },
   {
-    question: "Wat verandert er als ik mijn salaris verhoog?",
-    answer: "Hoger salaris betekent meer inkomstenbelasting over de extra euro's. In 2026 betaal je over inkomen boven € 75.518 49,50% inkomstenbelasting. Boven bepaalde grenzen loopt de arbeidskorting ook sneller af, waardoor de netto winst per extra bruto euro kleiner wordt.",
+    question: "Wat verandert er als mijn salaris stijgt?",
+    answer: "Je betaalt meer belasting over de extra euro's. Boven € 75.518 is dat 49,50%. Ook loopt de arbeidskorting sneller af, dus de netto winst per extra bruto euro wordt kleiner.",
   },
 ];
 
@@ -194,7 +194,7 @@ const breadcrumbSchema = {
     { label: "Bruto netto 2026", current: true },
   ]} />
 
-  <CalculatorShell title="Bruto netto 2026 berekenen" subtitle="Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in en zie direct een indicatie van je nettoloon.">
+  <CalculatorShell title="Bereken je netto salaris in 2026" subtitle="Vul je bruto loon, pensioenpremie en loonheffingskorting in. Zie direct hoeveel je netto per maand en per jaar overhoudt.">
     <InputPanel title="Jouw situatie" slot="input">
       <div class="form-group">
         <label for="grossSalary">Bruto maandsalaris</label>
@@ -231,7 +231,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken netto</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bekijk je netto salaris</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0).</p>
     </InputPanel>
 
@@ -240,7 +240,7 @@ const breadcrumbSchema = {
       title="Netto salaris"
       heroLabel="Jouw netto salaris per maand"
       heroValue={formatEuro(initialResult.netMonthly, 0)}
-      heroSubtext="Indicatie op basis van 2026-tarieven"
+      heroSubtext={`Je houdt ongeveer ${formatEuro(initialResult.netMonthly, 0)} netto per maand over.`}
       badge="Indicatie"
     >
       <div class="result-meta">
@@ -295,7 +295,7 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/inkomen/" categoryLabel="Inkomen"
       slot="footer"
-      disclaimer="Deze berekening is een indicatie op basis van de ingevoerde gegevens en de bekende belastingtarieven van 2026. Je loonstrook kan afwijken door pensioen, cao, werkgever, bijzondere beloningen en persoonlijke situatie. Gebruik de uitkomst als richtlijn, niet als definitief bedrag. Raadpleeg bij belangrijke financiële beslissingen een financieel adviseur."
+      disclaimer="Deze uitkomst is een indicatie op basis van je invoer en de belastingtarieven van 2026. Je loonstrook kan afwijken door pensioen, cao, werkgever, bijzondere beloningen en persoonlijke situatie. Gebruik de uitkomst als richtlijn. Bij belangrijke beslissingen raadpleeg je een adviseur."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
@@ -304,14 +304,14 @@ const breadcrumbSchema = {
     <p class="badge-indicatie">Indicatie 2026</p>
 
     <h2 class="page-title">Bruto netto 2026</h2>
-    <p>Met deze bruto-netto calculator bereken je eenvoudig hoeveel je netto per maand (en per jaar) overhoudt in 2026. We gebruiken de actuele Box 1 inkomstenbelastingtarieven, vakantiegeld (8%), loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
-    <p>Wil je een ander bruto bedrag vergelijken? Gebruik de <a href="/salaris-calculator/">salaris calculator</a>. Voor je hypotheekindicatie, toeslagen of ZZP-uurtarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
+    <p>Bereken eenvoudig hoeveel je netto per maand en per jaar overhoudt in 2026. We gebruiken de actuele Box 1 tarieven, 8% vakantiegeld, loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
+    <p>Wil je een ander bruto bedrag vergelijken? Gebruik de <a href="/salaris-calculator/">salariscalculator</a>. Voor je hypotheekindicatie, toeslagen of ZZP-uurtarief gebruik je de <a href="/hypotheek-calculator/">hypotheekcalculator</a>, <a href="/toeslagen-calculator/">toeslagencalculator</a> of <a href="/zzp-calculator/">ZZP-calculator</a>.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
-    <p>Deze calculator is gebaseerd op de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> van de Belastingdienst voor 2026. De uitkomst is een indicatie: je loonstrook kan afwijken door cao, pensioenregeling, bijtelling en andere persoonlijke factoren.</p>
+    <p>Deze calculator is gebaseerd op de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> van de Belastingdienst voor 2026. De uitkomst is een indicatie: je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>
 
     <h2>Tarieven 2026</h2>
-    <p>Voor 2026 gelden de volgende Box 1 tarieven (inkomstenbelasting):</p>
+    <p>Voor 2026 gelden deze Box 1 tarieven:</p>
     <table class="rate-table">
       <thead>
         <tr><th>Schijf</th><th>Inkomen</th><th>Tarief</th></tr>
@@ -335,7 +335,7 @@ const breadcrumbSchema = {
     </ul>
 
     <h2>Voorbeeldberekeningen</h2>
-    <p>Onderstaande voorbeelden geven een indicatie op basis van 2026 tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
+    <p>Indicatie op basis van 2026-tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
     <div class="example-grid">
       <div class="example-card">
         <strong>€ 2.500 bruto</strong>
@@ -355,17 +355,17 @@ const breadcrumbSchema = {
     <ul class="calc-list">
       <li><strong>Geen vakantiegeld meerekenen:</strong> je bruto-jaarsalaris is inclusief 8% vakantiegeld.</li>
       <li><strong>Pensioen vergeten:</strong> de werknemersbijdrage wordt afgetrokken vóór de belasting.</li>
-      <li><strong>Loonheffingskorting onterecht dubbel toegepast:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
-      <li><strong>Extra inkomsten negeren:</strong> verdien je meer? Dan verandert je belastingschijf en korting.</li>
+      <li><strong>Loonheffingskorting dubbel toegepast:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
+      <li><strong>Extra inkomsten negeren:</strong> meer verdienen betekent een andere belastingschijf en korting.</li>
     </ul>
   </div>
 
   <CrossSellCards
-    title="Ook handig om te berekenen"
+    title="Andere calculators die je helpen"
     items={[
       { title: "Salaris vergelijken", description: "Bereken netto bij een ander bruto bedrag.", href: "/salaris-calculator/", accent: "#2563eb" },
-      { title: "Hoeveel hypotheek kan ik krijgen?", description: "Indicatie op basis van je inkomen.", href: "/hypotheek-calculator/", accent: "#d97706" },
-      { title: "Wat moet ik als ZZP'er vragen?", description: "Van gewenst netto naar uurtarief.", href: "/zzp-calculator/", accent: "#7c3aed" },
+      { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen met dit inkomen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+      { title: "ZZP uurtarief", description: "Reken van gewenst netto naar uurtarief.", href: "/zzp-calculator/", accent: "#7c3aed" },
     ]}
   />
 </BaseLayout>
@@ -380,6 +380,7 @@ const breadcrumbSchema = {
   const pensionInput = document.getElementById("pensionAmount") as HTMLInputElement;
   const lhCheckbox = document.getElementById("loonheffingskorting") as HTMLInputElement;
   const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
+  const heroSubtext = document.querySelector(".calc-result-panel-subtext") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
@@ -448,6 +449,7 @@ const breadcrumbSchema = {
     if (!Number.isFinite(gross) || gross <= 0) {
       errorBox.style.display = "block";
       hero.textContent = "—";
+      heroSubtext.textContent = "—";
       detailGross.textContent = "—";
       detailGrossYear.textContent = "—";
       detailHoliday.textContent = "—";
@@ -475,6 +477,7 @@ const breadcrumbSchema = {
     if (!result.valid) {
       errorBox.style.display = "block";
       hero.textContent = "—";
+      heroSubtext.textContent = "—";
       return;
     }
 
@@ -485,6 +488,7 @@ const breadcrumbSchema = {
         : "0,0";
 
     hero.textContent = formatEuro(result.netMonthly, 0);
+    heroSubtext.textContent = `Je houdt ongeveer ${formatEuro(result.netMonthly, 0)} netto per maand over.`;
     detailGross.textContent = formatEuro(gross, 0);
     detailGrossYear.textContent = formatEuro(result.grossYearly, 0);
     detailHoliday.textContent = formatEuro(result.breakdown.holidayPay, 0);
