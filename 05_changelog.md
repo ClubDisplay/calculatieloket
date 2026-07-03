@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 116 — Navigation v2
+**Details:** Navigatie volledig herontworpen en geïmplementeerd in `src/layouts/BaseLayout.astro` als eerste stap van UX Excellence. Nieuwe hoofdnavigatie: Home, Calculators (dropdown/mega-menu), Categorieën (dropdown), Kennisbank (placeholder), Over. Calculators menu toont Populaire calculators, Nieuw, Calculator Explorer (placeholder) en een overzicht van alle categorieën. Categorieën menu toont Inkomen, Belasting, Wonen, Ondernemen, Auto en Toeslagen (placeholder). Mobiel hamburger menu is een overzichtelijk, maximaal twee niveaus diep accordeon zonder lange calculatorlijsten. Footer opnieuw gegroepeerd in vier kolommen: Calculators, Categorieën, Informatie, Bedrijf. Verwijderd uit header: directe links naar BTW, Salaris, Hypotheek, ZZP en Toeslagen. Verwijderd uit footer: statische "Alle calculators" lijst. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, internationalisering, calculators, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen. `npm run audit:lighthouse` slaagt: alle 13 gemonitorde pagina's halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95), met median scores 100/100/100/100 op homepage, calculator hub en categoriepagina.
+**Status:** In ontwikkeling
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 115 — UX Foundation (Information Architecture)
 **Details:** Nieuwe UX-strategie document `docs/product/UX_MASTERPLAN.md` opgesteld als leidend ontwerp voor de schaalvergroting van 10 naar 500+ calculators. Bevat: huidige analyse, nieuwe Information Architecture (IA), sitemap v2, Homepage v2, Calculator Explorer, Navigatie v2, Categorie-pagina v2, Calculatorpagina v2, Kennisbank & Nieuws, voorgestelde datastructuur (centraal calculator-register), implementatie-roadmap en wireframes. Buiten scope: nieuwe calculators, Dashboard, Agents, internationalisering, Rule Resolver, Knowledge Layer, engine/rekenkundige wijzigingen. Geen code-wijzigingen. Advies volgende sprint: Sprint 116 — Navigation v2. Documentatie bijgewerkt: `docs/product/UX_MASTERPLAN.md`, `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling
