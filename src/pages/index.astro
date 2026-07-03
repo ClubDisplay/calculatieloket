@@ -215,11 +215,27 @@ const quickLinks = [
     const searchData = (window as any).__SEARCH_INDEX__ || [];
     let results: any[] = [];
     let selectedIndex = -1;
+    let lastQuery = "";
 
     function escapeHtml(text: string) {
       const div = document.createElement("div");
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    function highlight(text: string, query: string) {
+      const escaped = escapeHtml(text);
+      const words = query
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter((w) => w.length >= 2);
+      if (!words.length) return escaped;
+      const pattern = new RegExp(
+        "(" + words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")",
+        "gi"
+      );
+      return escaped.replace(pattern, "<mark>$1</mark>");
     }
 
     function search(query: string) {
@@ -237,6 +253,22 @@ const quickLinks = [
           const url = item.url.toLowerCase();
           const keywords = item.keywords.map((k: string) => k.toLowerCase());
           const allText = [title, description, category, url, ...keywords].join(" ");
+
+          // Intent matching — highest priority
+          (item.intents || []).forEach((intent: string) => {
+            const intentNorm = intent.toLowerCase();
+            if (intentNorm === normalized) score += 200;
+            else if (intentNorm.includes(normalized)) score += 160;
+            else if (normalized.includes(intentNorm)) score += 140;
+            else {
+              const intentWords = intentNorm.split(/\s+/);
+              words.forEach((word: string) => {
+                if (intentWords.some((iw: string) => iw === word)) score += 80;
+                else if (intentWords.some((iw: string) => iw.startsWith(word))) score += 50;
+                else if (intentWords.some((iw: string) => iw.includes(word))) score += 30;
+              });
+            }
+          });
 
           if (allText.includes(normalized)) score += 10;
 
@@ -263,8 +295,21 @@ const quickLinks = [
     }
 
     function render() {
-      if (!results.length) {
+      const query = searchInput.value;
+      lastQuery = query;
+
+      if (!query.trim()) {
         resultsEl.hidden = true;
+        return;
+      }
+
+      if (!results.length) {
+        resultsEl.innerHTML = `
+          <div class="hp-search-no-results">
+            Geen resultaat gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.
+          </div>
+        `;
+        resultsEl.hidden = false;
         return;
       }
 
@@ -273,8 +318,8 @@ const quickLinks = [
           const selected = i === selectedIndex;
           return `
             <a href="${item.url}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
-              <div class="hp-search-result-title">${escapeHtml(item.title)}</div>
-              <div class="hp-search-result-meta">${escapeHtml(item.category)} · ${escapeHtml(item.description)}</div>
+              <div class="hp-search-result-title">${highlight(item.title, query)}</div>
+              <div class="hp-search-result-meta">${escapeHtml(item.category)} · ${highlight(item.description, query)}</div>
             </a>
           `;
         })
@@ -299,9 +344,19 @@ const quickLinks = [
     }
 
     function runSearch() {
-      results = search(searchInput.value);
+      const query = searchInput.value;
+      results = search(query);
       selectedIndex = results.length ? 0 : -1;
       render();
+    }
+
+    function openFirstResult() {
+      results = search(searchInput.value);
+      if (results.length) {
+        window.location.href = results[0].url;
+      } else {
+        render();
+      }
     }
 
     searchInput.addEventListener("input", runSearch);
@@ -311,9 +366,15 @@ const quickLinks = [
     });
 
     searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        openFirstResult();
+        return;
+      }
+
       if (resultsEl.hidden && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
         runSearch();
-        e.preventDefault();
+        if (!resultsEl.hidden) e.preventDefault();
         return;
       }
 
@@ -327,11 +388,6 @@ const quickLinks = [
         selectedIndex = (selectedIndex - 1 + results.length) % results.length;
         updateSelection();
         e.preventDefault();
-      } else if (e.key === "Enter") {
-        e.preventDefault();
-        if (selectedIndex >= 0 && results[selectedIndex]) {
-          window.location.href = results[selectedIndex].url;
-        }
       } else if (e.key === "Escape") {
         close();
         searchInput.blur();
@@ -713,6 +769,32 @@ const quickLinks = [
     font-size: 0.8rem;
     color: var(--color-text-muted);
     margin-top: 0.15rem;
+  }
+
+  .hp-search-result mark {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 700;
+    padding: 0 0.1rem;
+    border-radius: 3px;
+  }
+
+  .hp-search-no-results {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .hp-search-no-results a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .hp-search-no-results a:hover,
+  .hp-search-no-results a:focus-visible {
+    text-decoration: underline;
   }
 
   /* ===== RESPONSIVE ===== */
