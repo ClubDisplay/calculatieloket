@@ -1,4 +1,6 @@
 ---
+import { icons } from "../../lib/category-icons";
+
 interface Item {
   title: string;
   description: string;
@@ -14,6 +16,17 @@ interface Props {
 
 const { title = "Wat kun je hiermee?", items } = Astro.props;
 const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").replace(/\//g, "-");
+
+function iconFor(item: Item): string {
+  const key = `${item.id || ""} ${item.title} ${item.href}`.toLowerCase();
+  if (key.includes("hypotheek") || key.includes("wonen") || key.includes("huis") || key.includes("toeslagen")) return icons.house;
+  if (key.includes("salaris") || key.includes("netto") || key.includes("bruto") || key.includes("loon")) return icons.money;
+  if (key.includes("zzp") || key.includes("ondernemen") || key.includes("bedrijf")) return icons.person;
+  if (key.includes("auto") || key.includes("import") || key.includes("car")) return icons.car;
+  if (key.includes("btw") || key.includes("tarief") || key.includes("percent")) return icons.percent;
+  if (key.includes("vakantiegeld") || key.includes("vakantie")) return icons.sun;
+  return icons.calc;
+}
 ---
 
 <section class="calc-use-cases">
@@ -30,9 +43,10 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
         data-analytics-action="click"
         data-analytics-label={item.id || slugify(item.href)}
       >
+        <span class="calc-use-cases-icon" aria-hidden="true" set:html={iconFor(item)} />
         <span class="calc-use-cases-card-title">{item.title}</span>
         <span class="calc-use-cases-card-desc" data-template={item.description}>{item.description}</span>
-        <span class="calc-use-cases-card-cta">Bekijk &rarr;</span>
+        <span class="calc-use-cases-card-cta">Bekijk <span aria-hidden="true">→</span></span>
       </a>
     ))}
   </div>
@@ -41,7 +55,7 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
 <style>
   .calc-use-cases-title {
     font-size: 1.05rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 0.75rem;
     color: var(--color-text);
   }
@@ -72,6 +86,23 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
     transform: translateY(-1px);
   }
 
+  .calc-use-cases-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--color-primary-light);
+    color: var(--uc-accent, var(--color-primary));
+    margin-bottom: 0.25rem;
+  }
+
+  .calc-use-cases-icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
   .calc-use-cases-card-title {
     font-size: 0.95rem;
     font-weight: 700;
@@ -88,7 +119,7 @@ const slugify = (href: string) => href.replace(/^\//, "").replace(/\/$/, "").rep
   .calc-use-cases-card-cta {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--uc-accent, var(--color-primary));
     margin-top: 0.25rem;
   }
 </style>
