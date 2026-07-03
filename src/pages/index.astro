@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
+import { searchIndex } from "../lib/search-index";
 
 const title = "Calculatieloket.nl | Gratis berekeningen voor salaris, BTW, hypotheek en meer";
 const description = "Snel antwoord op jouw financiële vraag. Gratis berekeningen voor salaris, BTW, hypotheek, toeslagen, ZZP en auto-kosten. Geen account, gebaseerd op officiële bronnen.";
@@ -113,9 +114,14 @@ const quickLinks = [
 
       <div class="hp-search-wrap">
         <label for="hpSearch" class="visually-hidden">Zoek een berekening of onderwerp</label>
-        <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
+        <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" aria-controls="hpSearchResults" aria-autocomplete="list" />
         <span class="hp-search-icon" aria-hidden="true">🔍</span>
+        <div id="hpSearchResults" class="hp-search-results" role="listbox" aria-label="Zoekresultaten" hidden></div>
       </div>
+      <script type="application/json" id="search-data" set:html={JSON.stringify(searchIndex)}></script>
+      <script is:inline>
+        window.__SEARCH_INDEX__ = JSON.parse(document.getElementById('search-data').textContent);
+      </script>
 
       <div class="hero-trust">
         <span>Gratis</span>
@@ -163,7 +169,6 @@ const quickLinks = [
         </a>
       ))}
     </div>
-    <p class="hp-no-results" id="hpNoResults" aria-live="polite" aria-atomic="true" style="display:none;">Geen berekening gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.</p>
     <p class="hp-section-footer"><a href="/calculators/" data-analytics="view-all-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="all-calculators">Alle berekeningen</a></p>
   </section>
 
@@ -204,59 +209,205 @@ const quickLinks = [
 </BaseLayout>
 
 <script>
-  const searchInput = document.getElementById("hpSearch") as HTMLInputElement;
-  const grid = document.getElementById("popularGrid") as HTMLElement;
-  const cards = Array.from(grid.querySelectorAll(".hp-card")) as HTMLElement[];
-  const noResults = document.getElementById("hpNoResults") as HTMLElement;
+  (function () {
+    const searchInput = document.getElementById("hpSearch") as HTMLInputElement;
+    const resultsEl = document.getElementById("hpSearchResults") as HTMLElement;
+    const searchData = (window as any).__SEARCH_INDEX__ || [];
+    let results: any[] = [];
+    let selectedIndex = -1;
+    let lastQuery = "";
 
-  function updateSearchUrl(term: string) {
-    const url = new URL(window.location.href);
-    if (term) {
-      url.searchParams.set("q", term);
-    } else {
-      url.searchParams.delete("q");
+    function escapeHtml(text: string) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
     }
-    window.history.replaceState({}, "", url.toString());
-  }
 
-  function filterCards() {
-    const rawTerm = searchInput.value.trim();
-    const term = rawTerm.toLowerCase();
-    updateSearchUrl(rawTerm);
+    function highlight(text: string, query: string) {
+      const escaped = escapeHtml(text);
+      const words = query
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter((w) => w.length >= 2);
+      if (!words.length) return escaped;
+      const pattern = new RegExp(
+        "(" + words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")",
+        "gi"
+      );
+      return escaped.replace(pattern, "<mark>$1</mark>");
+    }
 
-    let visibleCount = 0;
-    cards.forEach((card) => {
-      const title = (card.dataset.title || "").toLowerCase();
-      const keywords = (card.dataset.keywords || "").toLowerCase();
+    function search(query: string) {
+      const normalized = query.toLowerCase().trim();
+      if (!normalized) return [];
+      const words = normalized.split(/\s+/).filter(Boolean);
 
-      const matchesSearch =
-        term === "" ||
-        title.includes(term) ||
-        keywords.includes(term) ||
-        card.textContent?.toLowerCase().includes(term);
+      return searchData
+        .map((item: any) => {
+          let score = 0;
+          const title = item.title.toLowerCase();
+          const titleWords = title.split(/\s+/);
+          const description = item.description.toLowerCase();
+          const category = item.category.toLowerCase();
+          const url = item.url.toLowerCase();
+          const keywords = item.keywords.map((k: string) => k.toLowerCase());
+          const allText = [title, description, category, url, ...keywords].join(" ");
 
-      card.style.display = matchesSearch ? "" : "none";
-      if (matchesSearch) visibleCount++;
+          // Intent matching — highest priority
+          (item.intents || []).forEach((intent: string) => {
+            const intentNorm = intent.toLowerCase();
+            if (intentNorm === normalized) score += 200;
+            else if (intentNorm.includes(normalized)) score += 160;
+            else if (normalized.includes(intentNorm)) score += 140;
+            else {
+              const intentWords = intentNorm.split(/\s+/);
+              words.forEach((word: string) => {
+                if (intentWords.some((iw: string) => iw === word)) score += 80;
+                else if (intentWords.some((iw: string) => iw.startsWith(word))) score += 50;
+                else if (intentWords.some((iw: string) => iw.includes(word))) score += 30;
+              });
+            }
+          });
+
+          if (allText.includes(normalized)) score += 10;
+
+          words.forEach((word: string) => {
+            if (titleWords.some((t: string) => t === word)) score += 120;
+            else if (titleWords.some((t: string) => t.startsWith(word))) score += 100;
+            else if (title.includes(word)) score += 70;
+
+            if (keywords.some((k: string) => k === word)) score += 90;
+            else if (keywords.some((k: string) => k.startsWith(word))) score += 60;
+            else if (keywords.some((k: string) => k.includes(word))) score += 50;
+
+            if (description.includes(word)) score += 30;
+            if (category.includes(word)) score += 20;
+            if (url.includes(word)) score += 20;
+          });
+
+          return { item, score };
+        })
+        .filter((r: any) => r.score > 0)
+        .sort((a: any, b: any) => b.score - a.score)
+        .slice(0, 6)
+        .map((r: any) => r.item);
+    }
+
+    function render() {
+      const query = searchInput.value;
+      lastQuery = query;
+
+      if (!query.trim()) {
+        resultsEl.hidden = true;
+        return;
+      }
+
+      if (!results.length) {
+        resultsEl.innerHTML = `
+          <div class="hp-search-no-results">
+            Geen resultaat gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.
+          </div>
+        `;
+        resultsEl.hidden = false;
+        return;
+      }
+
+      resultsEl.innerHTML = results
+        .map((item: any, i: number) => {
+          const selected = i === selectedIndex;
+          return `
+            <a href="${item.url}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
+              <div class="hp-search-result-title">${highlight(item.title, query)}</div>
+              <div class="hp-search-result-meta">${escapeHtml(item.category)} · ${highlight(item.description, query)}</div>
+            </a>
+          `;
+        })
+        .join("");
+      resultsEl.hidden = false;
+    }
+
+    function updateSelection() {
+      const items = resultsEl.querySelectorAll(".hp-search-result");
+      items.forEach((el, i) => {
+        el.classList.toggle("selected", i === selectedIndex);
+        el.setAttribute("aria-selected", String(i === selectedIndex));
+      });
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].scrollIntoView({ block: "nearest" });
+      }
+    }
+
+    function close() {
+      resultsEl.hidden = true;
+      selectedIndex = -1;
+    }
+
+    function runSearch() {
+      const query = searchInput.value;
+      results = search(query);
+      selectedIndex = results.length ? 0 : -1;
+      render();
+    }
+
+    function openFirstResult() {
+      results = search(searchInput.value);
+      if (results.length) {
+        window.location.href = results[0].url;
+      } else {
+        render();
+      }
+    }
+
+    searchInput.addEventListener("input", runSearch);
+
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.trim()) runSearch();
     });
 
-    noResults.style.display = visibleCount === 0 ? "block" : "none";
-  }
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        openFirstResult();
+        return;
+      }
 
-  const initialParams = new URLSearchParams(window.location.search);
-  const initialQuery = initialParams.get("q") || "";
-  if (initialQuery) {
-    searchInput.value = initialQuery;
-    filterCards();
-  }
+      if (resultsEl.hidden && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+        runSearch();
+        if (!resultsEl.hidden) e.preventDefault();
+        return;
+      }
 
-  searchInput.addEventListener("input", filterCards);
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      filterCards();
-      grid.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
+      if (resultsEl.hidden) return;
+
+      if (e.key === "ArrowDown") {
+        selectedIndex = (selectedIndex + 1) % results.length;
+        updateSelection();
+        e.preventDefault();
+      } else if (e.key === "ArrowUp") {
+        selectedIndex = (selectedIndex - 1 + results.length) % results.length;
+        updateSelection();
+        e.preventDefault();
+      } else if (e.key === "Escape") {
+        close();
+        searchInput.blur();
+      }
+    });
+
+    resultsEl.addEventListener("click", (e) => {
+      const result = (e.target as HTMLElement).closest(".hp-search-result") as HTMLElement | null;
+      if (result) {
+        const href = result.getAttribute("href");
+        if (href) window.location.href = href;
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!searchInput.contains(e.target as Node) && !resultsEl.contains(e.target as Node)) {
+        close();
+      }
+    });
+  })();
 </script>
 
 <style>
@@ -564,6 +715,86 @@ const quickLinks = [
 
   .faq-item p a {
     color: var(--color-primary);
+  }
+
+  /* ===== SEARCH RESULTS ===== */
+  .hp-search-results {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    max-height: 320px;
+    overflow-y: auto;
+    z-index: 50;
+    text-align: left;
+  }
+
+  .hp-search-results[hidden] {
+    display: none;
+  }
+
+  .hp-search-result {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.12s;
+  }
+
+  .hp-search-result:last-child {
+    border-bottom: none;
+  }
+
+  .hp-search-result:hover,
+  .hp-search-result.selected {
+    background: var(--color-primary-light);
+  }
+
+  .hp-search-result:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+
+  .hp-search-result-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .hp-search-result-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+
+  .hp-search-result mark {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 700;
+    padding: 0 0.1rem;
+    border-radius: 3px;
+  }
+
+  .hp-search-no-results {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .hp-search-no-results a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .hp-search-no-results a:hover,
+  .hp-search-no-results a:focus-visible {
+    text-decoration: underline;
   }
 
   /* ===== RESPONSIVE ===== */
