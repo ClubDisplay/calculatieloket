@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
 
-const title = "Calculatieloket.nl | Gratis financiële tools voor salaris, belasting, toeslagen en meer";
+const title = "Calculatieloket.nl | Gratis berekeningen voor salaris, BTW, hypotheek en meer";
 const description = "Snel antwoord op jouw financiële vraag. Gratis berekeningen voor salaris, BTW, hypotheek, toeslagen, ZZP en auto-kosten. Geen account, gebaseerd op officiële bronnen.";
 
 const websiteSchema = {
@@ -18,15 +18,12 @@ const websiteSchema = {
 };
 
 const icons: Record<string, string> = {
-  euro: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">€</text></svg>`,
-  money: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 11h2M18 17h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  sun: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="2"/><path d="M14 4V2M14 26V24M4 14H2M26 14H24M6.343 6.343 4.929 4.929M23.071 23.071l-1.414-1.414M6.343 21.657 4.929 23.071M23.071 4.929l-1.414 1.414" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  house: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 12L14 4L25 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="13" width="12" height="11" rx="1" stroke="currentColor" stroke-width="2"/><rect x="12" y="18" width="4" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg>`,
-  calc: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="3" width="24" height="22" rx="3" stroke="currentColor" stroke-width="2"/><line x1="9" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="19" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  percent: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 20 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  switch: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M9 14h10M9 14l-3-3M9 14l-3 3M19 14l3-3M19 14l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  person: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="currentColor" stroke-width="1.5"/></svg>`,
-  car: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+  euro: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">€</text></svg>`,
+  money: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 11h2M18 17h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  house: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M3 12L14 4L25 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="13" width="12" height="11" rx="1" stroke="currentColor" stroke-width="2"/><rect x="12" y="18" width="4" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg>`,
+  calc: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="2" y="3" width="24" height="22" rx="3" stroke="currentColor" stroke-width="2"/><line x1="9" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="19" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  person: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  car: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
 };
 
 const cards = [
@@ -34,144 +31,73 @@ const cards = [
     id: "bruto-netto",
     title: "Bruto netto 2026",
     href: "/bruto-netto-2026/",
-    clusters: ["Inkomen", "Populair"],
-    badge: "Populair",
-    icon: icons.euro,
-    accent: "#2563eb",
-    question: "Wat houd ik netto over in 2026?",
-    promise: "Gebaseerd op actuele Box 1 tarieven en heffingskortingen.",
     keywords: "bruto netto salaris inkomen loon 2026",
-  },
-  {
-    id: "salaris",
-    title: "Salaris calculator",
-    href: "/salaris-calculator/",
-    clusters: ["Inkomen"],
-    badge: null,
     icon: icons.euro,
     accent: "#2563eb",
-    question: "Hoeveel is mijn bruto salaris netto?",
-    promise: "Vergelijk verschillende bruto bedragen met pensioen.",
-    keywords: "salaris bruto netto loon inkomen",
-  },
-  {
-    id: "vakantiegeld",
-    title: "Vakantiegeld calculator",
-    href: "/vakantiegeld-calculator/",
-    clusters: ["Inkomen", "Populair"],
-    badge: "Nieuw",
-    icon: icons.sun,
-    accent: "#0891b2",
-    question: "Hoeveel vakantiegeld krijg ik netto?",
-    promise: "Bereken 8% of een afwijkend percentage na inhoudingen.",
-    keywords: "vakantiegeld netto bruto 8% vakantie geld",
-  },
-  {
-    id: "toeslagen",
-    title: "Toeslagen calculator",
-    href: "/toeslagen-calculator/",
-    clusters: ["Inkomen", "Populair"],
-    badge: "Populair",
-    icon: icons.money,
-    accent: "#059669",
-    question: "Heb ik recht op huur- of zorgtoeslag?",
-    promise: "Indicatie op basis van inkomen, huur en huishouden.",
-    keywords: "toeslagen huur zorg inkomen",
-  },
-  {
-    id: "hypotheek",
-    title: "Hypotheek calculator",
-    href: "/hypotheek-calculator/",
-    clusters: ["Wonen", "Populair"],
-    badge: "Populair",
-    icon: icons.house,
-    accent: "#d97706",
-    question: "Wat kan ik maximaal lenen?",
-    promise: "Bereken maandlasten en totale rentekosten.",
-    keywords: "hypotheek wonen lenen maandlasten",
+    question: "Wat houd ik netto over?",
   },
   {
     id: "btw",
-    title: "BTW calculator",
+    title: "BTW berekenen",
     href: "/btw-calculator/",
-    clusters: ["Belasting", "Populair"],
-    badge: "Populair",
+    keywords: "btw belasting 21% 9% berekenen inclusief exclusief",
     icon: icons.calc,
     accent: "#2563eb",
     question: "Hoeveel btw moet ik berekenen?",
-    promise: "21%, 9% of 0% tarief, exclusief ↔ inclusief.",
-    keywords: "btw belasting 21% 9% berekenen",
   },
   {
-    id: "btw-terugrekenen",
-    title: "BTW terugrekenen",
-    href: "/btw-terugrekenen/",
-    clusters: ["Belasting"],
-    badge: null,
-    icon: icons.percent,
-    accent: "#2563eb",
-    question: "Wat is het bedrag exclusief btw?",
-    promise: "Reken snel van inclusief naar exclusief.",
-    keywords: "btw terugrekenen inclusief exclusief",
+    id: "hypotheek",
+    title: "Hypotheek berekenen",
+    href: "/hypotheek-calculator/",
+    keywords: "hypotheek wonen lenen maandlasten",
+    icon: icons.house,
+    accent: "#d97706",
+    question: "Wat kan ik maximaal lenen?",
   },
   {
-    id: "btw-inclusief-exclusief",
-    title: "BTW inclusief/exclusief",
-    href: "/btw-inclusief-exclusief/",
-    clusters: ["Belasting"],
-    badge: null,
-    icon: icons.switch,
-    accent: "#2563eb",
-    question: "Omrekenen inclusief en exclusief btw?",
-    promise: "Beide richtingen en alle gangbare tarieven.",
-    keywords: "btw inclusief exclusief omrekenen",
+    id: "toeslagen",
+    title: "Toeslagen berekenen",
+    href: "/toeslagen-calculator/",
+    keywords: "toeslagen huur zorg inkomen",
+    icon: icons.money,
+    accent: "#059669",
+    question: "Heb ik recht op huur- of zorgtoeslag?",
   },
   {
     id: "zzp",
-    title: "ZZP calculator",
+    title: "ZZP uurtarief",
     href: "/zzp-calculator/",
-    clusters: ["Ondernemen", "Populair"],
-    badge: "Voor ondernemers",
+    keywords: "zzp uurtarief ondernemer freelancer inkomen",
     icon: icons.person,
     accent: "#7c3aed",
     question: "Wat moet ik als zzp'er vragen?",
-    promise: "Van gewenst netto inkomen naar uurtarief.",
-    keywords: "zzp uurtarief ondernemer freelancer",
   },
   {
     id: "auto-importkosten",
-    title: "Auto importkosten berekenen",
+    title: "Auto importkosten",
     href: "/auto-importkosten-berekenen/",
-    clusters: ["Auto", "Ondernemen"],
-    badge: "Nieuw",
+    keywords: "auto importkosten importeren bpm rdw",
     icon: icons.car,
     accent: "#0891b2",
     question: "Wat kost een auto importeren?",
-    promise: "Inclusief bpm, RDW, transport en keuring.",
-    keywords: "auto importkosten importeren bpm rdw",
   },
 ];
 
-const popularIds = ["bruto-netto", "salaris", "btw", "btw-terugrekenen", "hypotheek", "toeslagen", "zzp", "auto-importkosten"];
-const popularCards = popularIds
-  .map((id) => cards.find((c) => c.id === id))
-  .filter((c): c is typeof cards[number] => Boolean(c));
-
 const homeCategories = [
-  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/", icon: icons.euro, desc: "Salaris, bruto-netto, toeslagen, vakantiegeld" },
-  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/", icon: icons.calc, desc: "BTW, terugrekenen, inclusief/exclusief" },
-  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/", icon: icons.house, desc: "Hypotheek, huur, woningkosten" },
-  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/", icon: icons.person, desc: "ZZP, uurtarief, ondernemerskosten" },
-  { id: "Auto", label: "Auto", href: "/categorie/auto/", icon: icons.car, desc: "Importkosten, BPM, RDW" },
-  { id: "Toeslagen", label: "Toeslagen", href: "/toeslagen-calculator/", icon: icons.money, desc: "Huur- en zorgtoeslag indicatie" },
+  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/", icon: icons.euro },
+  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/", icon: icons.calc },
+  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/", icon: icons.house },
+  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/", icon: icons.person },
+  { id: "Auto", label: "Auto", href: "/categorie/auto/", icon: icons.car },
+  { id: "Toeslagen", label: "Toeslagen", href: "/toeslagen-calculator/", icon: icons.money },
 ];
 
 const quickLinks = [
   { label: "Netto salaris", href: "/bruto-netto-2026/" },
-  { label: "BTW berekenen", href: "/btw-calculator/" },
+  { label: "BTW", href: "/btw-calculator/" },
   { label: "Hypotheek", href: "/hypotheek-calculator/" },
   { label: "Toeslagen", href: "/toeslagen-calculator/" },
-  { label: "ZZP inkomen", href: "/zzp-calculator/" },
+  { label: "ZZP uurtarief", href: "/zzp-calculator/" },
   { label: "Auto import", href: "/auto-importkosten-berekenen/" },
 ];
 ---
@@ -179,84 +105,47 @@ const quickLinks = [
 <BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(websiteSchema)} />
 
-  <!-- ===== HERO v2 ===== -->
+  <!-- ===== HERO v3 ===== -->
   <section class="home-hero" slot="hero">
     <div class="home-hero-inner">
-      <div class="hero-grid">
-        <div class="hero-left">
-          <h1 class="hero-home-title">Waar wil je hulp bij?</h1>
-          <p class="hero-home-sub">Snel inzicht in salaris, belasting, toeslagen, hypotheek, wonen, ondernemen en auto-kosten.</p>
+      <h1 class="hero-home-title">Krijg inzicht in je financiële vraag</h1>
+      <p class="hero-home-sub">Zoek een berekening of kies een onderwerp. Binnen een paar klikken zie je een indicatie.</p>
 
-          <div class="hp-search-wrap">
-            <label for="hpSearch" class="visually-hidden">Zoek een berekening of onderwerp</label>
-            <input type="text" id="hpSearch" class="hp-search" placeholder="Zoek een berekening of onderwerp..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
-            <span class="hp-search-icon" aria-hidden="true">🔍</span>
-          </div>
+      <div class="hp-search-wrap">
+        <label for="hpSearch" class="visually-hidden">Zoek een berekening of onderwerp</label>
+        <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" />
+        <span class="hp-search-icon" aria-hidden="true">🔍</span>
+      </div>
 
-          <div class="hp-quick-chips" aria-label="Populaire berekeningen">
-            {quickLinks.map((link) => (
-              <a href={link.href} class="hp-cluster-chip" data-analytics="quick-start-chip" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label={link.label}>
-                {link.label}
-              </a>
-            ))}
-          </div>
+      <div class="hero-trust">
+        <span>Gratis</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>Geen account</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>Geen opslag</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>Officiële bronnen</span>
+      </div>
 
-          <div class="hero-trust">
-            <div class="hero-trust-item">
-              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Gratis</span>
-            </div>
-            <div class="hero-trust-item">
-              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Geen account</span>
-            </div>
-            <div class="hero-trust-item">
-              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Geen opslag van je invoer</span>
-            </div>
-            <div class="hero-trust-item">
-              <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Uitkomst is een indicatie</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-right" aria-hidden="true">
-          <div class="hero-dashboard">
-            <div class="hero-dash-card dash-btw">
-              <span class="hd-label">€121 incl. BTW</span>
-              <span class="hd-result">→ €100 excl.</span>
-            </div>
-            <div class="hero-dash-card dash-salar">
-              <span class="hd-label">Bruto €3.500</span>
-              <span class="hd-result">→ netto indicatie</span>
-            </div>
-            <div class="hero-dash-card dash-zzp">
-              <span class="hd-label">ZZP uurtarief</span>
-              <span class="hd-result">indicatie op maat</span>
-            </div>
-            <div class="hero-dash-card dash-toeslag">
-              <span class="hd-label">Huursubsidie</span>
-              <span class="hd-result">zorgtoeslag indicatie</span>
-            </div>
-          </div>
-        </div>
+      <div class="hp-quick-chips" aria-label="Populaire berekeningen">
+        {quickLinks.map((link) => (
+          <a href={link.href} class="hp-cluster-chip" data-analytics="quick-start-chip" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label={link.label}>
+            {link.label}
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ===== POPULAIRE BEREKENINGEN ===== -->
+  <!-- ===== MEESTGEZOCHT ===== -->
   <section id="populair" class="hp-section">
-    <div class="hp-section-header">
-      <h2 class="section-heading">Populaire berekeningen</h2>
-      <p class="section-sub">De meestgebruikte financiële tools van Calculatieloket.</p>
-    </div>
+    <h2 class="section-heading">Meestgezocht</h2>
 
     <div class="hp-grid" id="popularGrid">
-      {popularCards.map((card) => (
+      {cards.map((card) => (
         <a
           href={card.href}
           class="hp-card"
-          data-clusters={card.clusters.join(",")}
           data-title={card.title.toLowerCase()}
           data-keywords={card.keywords.toLowerCase()}
           style={`--hp-accent: ${card.accent}`}
@@ -267,35 +156,25 @@ const quickLinks = [
         >
           <span class="hp-card-icon" set:html={card.icon} />
           <div class="hp-card-body">
-            <h3 class="hp-card-title">
-              {card.title}
-              {card.badge && <span class="hp-card-badge">{card.badge}</span>}
-            </h3>
+            <h3 class="hp-card-title">{card.title}</h3>
             <p class="hp-card-question">{card.question}</p>
-            <p class="hp-card-promise">{card.promise}</p>
-            <span class="hp-card-cta">Bereken direct</span>
           </div>
           <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
         </a>
       ))}
     </div>
-    <p class="hp-no-results" id="hpNoResults" aria-live="polite" aria-atomic="true" style="display:none;">Geen populaire berekening gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.</p>
-    <p class="hp-section-footer"><a href="/calculators/" data-analytics="view-all-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="all-calculators">Bekijk alle berekeningen</a></p>
+    <p class="hp-no-results" id="hpNoResults" aria-live="polite" aria-atomic="true" style="display:none;">Geen berekening gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.</p>
+    <p class="hp-section-footer"><a href="/calculators/" data-analytics="view-all-link" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="all-calculators">Alle berekeningen</a></p>
   </section>
 
   <!-- ===== CATEGORIEËN ===== -->
   <section id="onderwerpen" class="hp-section">
-    <div class="hp-section-header">
-      <h2 class="section-heading">Waar gaat je vraag over?</h2>
-      <p class="section-sub">Kies een onderwerp en ontdek de bijbehorende berekeningen.</p>
-    </div>
-
+    <h2 class="section-heading">Waar gaat je vraag over?</h2>
     <div class="home-category-grid">
       {homeCategories.map((cat) => (
         <a href={cat.href} class="home-category-card" data-analytics="category-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label={cat.id}>
           <span class="home-category-icon" set:html={cat.icon} />
           <span class="home-category-label">{cat.label}</span>
-          <span class="home-category-desc">{cat.desc}</span>
         </a>
       ))}
     </div>
@@ -303,86 +182,23 @@ const quickLinks = [
 
   <AdSlot slot="1234567893" format="auto" style="min-height:120px" />
 
-  <!-- ===== SNEL STARTEN ===== -->
-  <section class="hp-quick-start" aria-labelledby="qsTitle">
-    <div class="hp-qs-inner">
-      <h2 id="qsTitle" class="hp-qs-title">Snel starten</h2>
-      <p class="hp-qs-sub">Kies een berekening, vul één bedrag in en ga direct naar de tool.</p>
-
-      <div class="hp-qs-choices" role="group" aria-label="Kies een berekening">
-        <button type="button" class="hp-qs-choice active" data-target="bruto-netto" data-label="Bruto maandsalaris" data-placeholder="3500" data-href="/bruto-netto-2026/" data-param="bruto" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="bruto-netto">Netto salaris</button>
-        <button type="button" class="hp-qs-choice" data-target="toeslagen" data-label="Bruto jaarinkomen" data-placeholder="35000" data-href="/toeslagen-calculator/" data-param="inkomen" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="toeslagen">Toeslagen</button>
-        <button type="button" class="hp-qs-choice" data-target="hypotheek" data-label="Bruto jaarinkomen" data-placeholder="50000" data-href="/hypotheek-calculator/" data-param="inkomen" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="hypotheek">Hypotheek</button>
-        <button type="button" class="hp-qs-choice" data-target="btw" data-label="Bedrag exclusief btw" data-placeholder="100" data-href="/btw-calculator/" data-param="bedrag" data-extra="tarief=21&richting=excl" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="btw">BTW</button>
-        <button type="button" class="hp-qs-choice" data-target="zzp" data-label="Gewenst netto inkomen per maand" data-placeholder="3500" data-href="/zzp-calculator/" data-param="netto" data-analytics="quick-start-choice" data-analytics-category="quick-start" data-analytics-action="select" data-analytics-label="zzp">ZZP uurtarief</button>
-      </div>
-
-      <div class="hp-qs-field">
-        <label for="hpQsInput" class="hp-qs-label" id="hpQsLabel">Bruto maandsalaris</label>
-        <div class="hp-qs-input-wrap">
-          <span class="hp-qs-prefix" aria-hidden="true">&euro;</span>
-          <input type="number" id="hpQsInput" class="hp-qs-input" placeholder="3500" min="0" step="1" />
-        </div>
-      </div>
-
-      <button type="button" id="hpQsCta" class="btn btn-primary btn-lg hp-qs-cta" data-analytics="quick-start-cta" data-analytics-category="quick-start" data-analytics-action="click" data-analytics-label="start-berekening">Start berekening</button>
-    </div>
-  </section>
-
-  <!-- ===== TRUSTBLOK ===== -->
-  <section id="waarom" class="trust-band">
-    <h2 class="section-heading">Waarom Calculatieloket?</h2>
-    <div class="trust-band-inner">
-      <div class="trust-band-item">
-        <span class="tb-check">&check;</span>
-        <span>Gratis te gebruiken</span>
-      </div>
-      <div class="trust-band-item">
-        <span class="tb-check">&check;</span>
-        <span>Geen account nodig</span>
-      </div>
-      <div class="trust-band-item">
-        <span class="tb-check">&check;</span>
-        <span>Geen opslag van je invoer</span>
-      </div>
-      <div class="trust-band-item">
-        <span class="tb-check">&check;</span>
-        <span>Gebaseerd op officiële bronnen</span>
-      </div>
-      <div class="trust-band-item">
-        <span class="tb-check">&check;</span>
-        <span>Uitkomsten zijn indicatief</span>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== FAQ ===== -->
   <section class="faq-section">
     <h2 class="section-heading">Veelgestelde vragen</h2>
 
     <details class="faq-item">
-      <summary>Zijn de calculators gratis?</summary>
-      <p>Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig en er zijn geen verborgen kosten.</p>
+      <summary>Zijn de berekeningen gratis?</summary>
+      <p>Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig.</p>
     </details>
 
     <details class="faq-item">
       <summary>Worden mijn gegevens opgeslagen?</summary>
-      <p>Nee. Alle berekeningen vinden plaats in je eigen browser. Wat je invult in een berekening wordt niet door ons opgeslagen of doorgestuurd. Lees meer in ons <a href="/privacy/">privacybeleid</a>.</p>
+      <p>Nee. Alles gebeurt in je eigen browser. Wat je invult wordt niet door ons opgeslagen. Lees meer in ons <a href="/privacy/">privacybeleid</a>.</p>
     </details>
 
     <details class="faq-item">
       <summary>Waarom is de uitkomst een indicatie?</summary>
-      <p>Onze tools gebruiken de officiële tarieven en regels, maar je persoonlijke situatie kan afwijken door factoren die wij niet kennen. Denk aan andere inkomsten, specifieke aftrekposten, vermogen of bijzondere regelingen. Gebruik de uitkomst als richtlijn, niet als definitief bedrag.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>Welke bronnen gebruikt Calculatieloket?</summary>
-      <p>We baseren onze berekeningen op informatie van de <a href="https://www.belastingdienst.nl">Belastingdienst</a>, <a href="https://www.toeslagen.nl">Dienst Toeslagen</a> en <a href="https://www.rijksoverheid.nl">Rijksoverheid</a>. Bij elke tool vermelden we de gebruikte bronnen.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>Kan ik de uitkomst gebruiken voor aangifte of aanvraag?</summary>
-      <p>De uitkomsten zijn indicatief. Gebruik ze als hulpmiddel, maar doe voor officiële zaken zoals belastingaangifte of toeslagaanvraag altijd een officiële proefberekening op de website van de Belastingdienst of Dienst Toeslagen. Raadpleeg bij twijfel een financieel adviseur.</p>
+      <p>We gebruiken officiële tarieven, maar je persoonlijke situatie kan afwijken. Gebruik de uitkomst als richtlijn.</p>
     </details>
   </section>
 </BaseLayout>
@@ -441,189 +257,97 @@ const quickLinks = [
       grid.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
-
-  // ===== SNEL STARTEN =====
-  const qsChoices = Array.from(document.querySelectorAll(".hp-qs-choice")) as HTMLButtonElement[];
-  const qsInput = document.getElementById("hpQsInput") as HTMLInputElement;
-  const qsLabel = document.getElementById("hpQsLabel") as HTMLLabelElement;
-  const qsCta = document.getElementById("hpQsCta") as HTMLButtonElement;
-
-  function selectQuickStartChoice(btn: HTMLButtonElement) {
-    qsChoices.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    qsLabel.textContent = btn.dataset.label || "Bedrag";
-    qsInput.placeholder = btn.dataset.placeholder || "";
-    qsInput.value = "";
-    qsInput.focus();
-  }
-
-  function startQuickCalculation() {
-    const active = qsChoices.find((b) => b.classList.contains("active"));
-    if (!active) return;
-
-    const value = parseFloat(qsInput.value);
-    if (!Number.isFinite(value) || value <= 0) {
-      qsInput.focus();
-      return;
-    }
-
-    const href = active.dataset.href || "/";
-    const param = active.dataset.param || "waarde";
-    const extra = active.dataset.extra ? `&${active.dataset.extra}` : "";
-    window.location.href = `${href}?${param}=${Math.round(value)}${extra}`;
-  }
-
-  qsChoices.forEach((btn) => {
-    btn.addEventListener("click", () => selectQuickStartChoice(btn));
-  });
-
-  qsCta.addEventListener("click", startQuickCalculation);
-  qsInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      startQuickCalculation();
-    }
-  });
 </script>
 
 <style>
-  /* ===== HERO v2 ===== */
+  /* ===== HERO v3 ===== */
   .home-hero {
     width: 100%;
-    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
-    padding: 3rem 0 2.5rem;
-    margin-bottom: 2.5rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    padding: 2.5rem 0 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .home-hero-inner {
-    max-width: var(--max-width-wide);
+    max-width: 680px;
     margin: 0 auto;
     padding: 0 1.5rem;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-
-  .hero-left {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    align-items: center;
+    gap: 1rem;
   }
 
   .hero-home-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.15;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
     color: var(--color-text);
   }
 
   .hero-home-sub {
-    font-size: 1.15rem;
+    font-size: 1rem;
     color: var(--color-text-muted);
-    line-height: 1.6;
-    max-width: 560px;
-  }
-
-  .hero-trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.25rem;
-  }
-
-  .hero-trust-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-  }
-
-  .hti-icon {
-    flex-shrink: 0;
-  }
-
-  .hero-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .hero-dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: 100%;
-    max-width: 340px;
-  }
-
-  .hero-dash-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 1rem 1.1rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 14px;
-    box-shadow: var(--shadow-md);
-    font-size: 0.85rem;
-  }
-
-  .dash-btw { border-left: 4px solid #2563eb; }
-  .dash-salar { border-left: 4px solid #059669; }
-  .dash-zzp { border-left: 4px solid #7c3aed; }
-  .dash-toeslag { border-left: 4px solid #0891b2; }
-
-  .hd-label {
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .hd-result {
-    color: var(--color-text-muted);
+    line-height: 1.5;
+    max-width: 480px;
   }
 
   .hp-search-wrap {
     position: relative;
-    max-width: 480px;
+    width: 100%;
+    max-width: 600px;
   }
 
   .hp-search {
     width: 100%;
-    padding: 0.9rem 1rem 0.9rem 2.6rem;
-    font-size: 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
+    padding: 1rem 1.25rem 1rem 3rem;
+    font-size: 1.1rem;
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
     background: var(--color-surface);
     color: var(--color-text);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
 
   .hp-search:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-primary-light);
+    box-shadow: 0 0 0 4px var(--color-primary-light), 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   .hp-search-icon {
     position: absolute;
-    left: 0.85rem;
+    left: 1.1rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.1rem;
-    opacity: 0.6;
+    font-size: 1.2rem;
+    opacity: 0.55;
     pointer-events: none;
+  }
+
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero-trust .dot {
+    opacity: 0.5;
   }
 
   .hp-quick-chips {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
+    margin-top: 0.25rem;
   }
 
   .hp-cluster-chip {
@@ -661,64 +385,53 @@ const quickLinks = [
 
   /* ===== SECTIONS ===== */
   .section-heading {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--color-text);
-    margin-bottom: 0.4rem;
-  }
-
-  .section-sub {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .hp-section {
-    margin-bottom: 2.5rem;
-  }
-
-  .hp-section-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   .hp-section-footer {
-    text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
   }
 
   .hp-section-footer a {
     color: var(--color-primary);
     font-weight: 600;
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   .hp-section-footer a:hover,
   .hp-section-footer a:focus-visible {
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   .hp-no-results {
     text-align: center;
-    padding: 1.5rem;
+    padding: 1rem;
     color: var(--color-text-muted);
     font-size: 0.95rem;
   }
 
   .hp-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
   .hp-card {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.85rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 14px;
-    padding: 1.25rem;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
     text-decoration: none;
     color: var(--color-text);
     transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
@@ -726,9 +439,8 @@ const quickLinks = [
   }
 
   .hp-card:hover {
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow);
     border-color: var(--hp-accent, var(--color-primary));
-    text-decoration: none;
     transform: translateY(-1px);
   }
 
@@ -736,9 +448,9 @@ const quickLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     flex-shrink: 0;
     color: var(--hp-accent, var(--color-primary));
     background: var(--color-primary-light);
@@ -749,57 +461,25 @@ const quickLinks = [
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.15rem;
   }
 
   .hp-card-title {
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--color-text);
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    flex-wrap: wrap;
-  }
-
-  .hp-card-badge {
-    display: inline-block;
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--color-text);
-    background: var(--color-primary-light);
-    border: 1px solid var(--hp-accent, var(--color-primary));
-    padding: 1px 6px;
-    border-radius: 6px;
   }
 
   .hp-card-question {
-    font-size: 0.82rem;
-    color: var(--color-text);
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .hp-card-promise {
     font-size: 0.8rem;
     color: var(--color-text-muted);
-    line-height: 1.45;
-  }
-
-  .hp-card-cta {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-top: 0.25rem;
+    line-height: 1.35;
   }
 
   .hp-card-arrow {
     font-size: 1.1rem;
     color: var(--color-text-muted);
     flex-shrink: 0;
-    margin-top: 0.15rem;
     transition: transform 0.15s, color 0.15s;
   }
 
@@ -812,28 +492,29 @@ const quickLinks = [
   .home-category-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .home-category-card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     gap: 0.5rem;
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.75rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 16px;
+    border-radius: 12px;
     text-decoration: none;
     color: var(--color-text);
-    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s;
   }
 
   .home-category-card:hover,
   .home-category-card:focus-visible {
-    box-shadow: var(--shadow);
     border-color: var(--color-primary);
+    background: var(--color-primary-light);
     transform: translateY(-1px);
   }
 
@@ -841,244 +522,86 @@ const quickLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    color: var(--color-text-muted);
+    transition: color 0.15s;
+  }
+
+  .home-category-card:hover .home-category-icon,
+  .home-category-card:focus-visible .home-category-icon {
     color: var(--color-primary);
-    background: var(--color-primary-light);
   }
 
   .home-category-label {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .home-category-desc {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    line-height: 1.4;
-  }
-
-  /* ===== SNEL STARTEN ===== */
-  .hp-quick-start {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-    box-shadow: var(--shadow);
-  }
-
-  .hp-qs-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .hp-qs-title {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--color-text);
-    margin-bottom: 0.35rem;
-    text-align: center;
-  }
-
-  .hp-qs-sub {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    text-align: center;
-    margin-bottom: 1.25rem;
-  }
-
-  .hp-qs-choices {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-
-  .hp-qs-choice {
-    appearance: none;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 0.55rem 1.1rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text);
-    background: var(--color-surface);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, color 0.15s;
-  }
-
-  .hp-qs-choice:hover,
-  .hp-qs-choice:focus-visible,
-  .hp-qs-choice.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary-light);
-    color: var(--color-primary);
-  }
-
-  .hp-qs-field {
-    margin-bottom: 1rem;
-  }
-
-  .hp-qs-label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 0.4rem;
-  }
-
-  .hp-qs-input-wrap {
-    position: relative;
-  }
-
-  .hp-qs-prefix {
-    position: absolute;
-    left: 0.9rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text-muted);
-    pointer-events: none;
-  }
-
-  .hp-qs-input {
-    width: 100%;
-    padding: 0.9rem 1rem 0.9rem 2.4rem;
-    font-size: 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    background: var(--color-surface);
-    color: var(--color-text);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
-
-  .hp-qs-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-primary-light);
-  }
-
-  .hp-qs-cta {
-    width: 100%;
-    padding: 0.9rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  /* ===== TRUST ===== */
-  .trust-band {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: 2rem 1.5rem;
-    margin-bottom: 2.5rem;
-    box-shadow: var(--shadow);
-  }
-
-  .trust-band .section-heading {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .trust-band-inner {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-  }
-
-  .trust-band-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 1rem;
-    background: var(--color-bg);
-    border-radius: 12px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .tb-check {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--color-success);
-    color: white;
     font-size: 0.85rem;
-    font-weight: 700;
-    flex-shrink: 0;
+    font-weight: 600;
   }
 
   /* ===== FAQ ===== */
   .faq-section {
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .faq-item {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .faq-item summary {
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
   }
 
   .faq-item p {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
   }
 
+  .faq-item p a {
+    color: var(--color-primary);
+  }
+
   /* ===== RESPONSIVE ===== */
-  @media (max-width: 1080px) {
+  @media (max-width: 900px) {
     .hp-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .home-category-grid {
       grid-template-columns: repeat(3, 1fr);
     }
-
-    .trust-band-inner {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (max-width: 960px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .hero-right {
-      order: -1;
-    }
-
-    .hero-dashboard {
-      max-width: 360px;
-      margin: 0 auto;
-    }
   }
 
   @media (max-width: 720px) {
-    .hp-search-wrap {
-      max-width: 100%;
+    .home-hero {
+      padding: 2rem 0 1.25rem;
+    }
+
+    .home-hero-inner {
+      padding: 0 1rem;
+    }
+
+    .hero-home-title {
+      font-size: 1.55rem;
+    }
+
+    .hero-home-sub {
+      font-size: 0.95rem;
     }
 
     .hp-search {
       font-size: 16px; /* prevent iOS zoom */
-      padding: 0.75rem 1rem 0.75rem 2.4rem;
+      padding: 0.85rem 1rem 0.85rem 2.6rem;
+    }
+
+    .hp-search-icon {
+      left: 0.9rem;
+      font-size: 1.1rem;
     }
 
     .hp-cluster-chip {
@@ -1091,12 +614,17 @@ const quickLinks = [
     }
 
     .hp-card {
-      padding: 1rem;
+      padding: 0.85rem 1rem;
     }
 
     .hp-card-icon {
-      width: 44px;
-      height: 44px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .hp-card-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
     .home-category-grid {
@@ -1104,82 +632,24 @@ const quickLinks = [
     }
 
     .home-category-card {
-      padding: 1rem 0.75rem;
+      padding: 0.85rem 0.5rem;
     }
 
-    .home-category-desc {
-      display: none;
+    .home-category-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
-    .hp-quick-start {
-      padding: 1.25rem 1rem;
-    }
-
-    .hp-qs-title {
-      font-size: 1.25rem;
-    }
-
-    .hp-qs-choice {
-      padding: 0.5rem 0.85rem;
-      font-size: 0.85rem;
-    }
-
-    .hp-qs-input {
-      font-size: 16px; /* prevent iOS zoom */
-      padding: 0.75rem 1rem 0.75rem 2.2rem;
-    }
-
-    .hp-qs-cta {
-      padding: 0.8rem 1.25rem;
-    }
-
-    .trust-band {
-      padding: 1.5rem 1rem;
-    }
-
-    .trust-band-inner {
-      grid-template-columns: 1fr;
-    }
-
-    .trust-band-item {
-      font-size: 0.9rem;
+    .home-category-label {
+      font-size: 0.8rem;
     }
 
     .section-heading {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
 
-    .hero-home {
-      padding: 2rem 0 1.5rem;
-    }
-
-    .home-hero-inner {
-      padding: 0 1rem;
-    }
-
-    .hero-home-title {
-      font-size: 1.8rem;
-    }
-
-    .hero-home-sub {
-      font-size: 1rem;
-    }
-
-    .hero-trust {
-      gap: 0.6rem 1rem;
-    }
-
-    .hero-trust-item {
-      font-size: 0.85rem;
-    }
-
-    .hero-dashboard {
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-
-    .hero-dash-card {
-      padding: 0.8rem;
+    .faq-item {
+      padding: 0.75rem 0.85rem;
     }
   }
 </style>

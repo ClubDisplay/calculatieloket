@@ -8,10 +8,10 @@
 
 | | |
 |---|---|
-| **Laatste sprint** | Sprint 117 — Homepage v2 / User Intent Portal (in review) |
+| **Laatste sprint** | Sprint 117A — Homepage UX Iteration (in review) |
 | **Huidige versie** | v1.0.0 |
 | **Main commit** | `1365a39` |
-| **Calculators** | 10 uniek (hub toont 11 cards) |
+| **Calculators** | 10 uniek (hub toont 11 cards; homepage toont 6) |
 | **Categoriepagina's** | 5 |
 | **Knowledge Objects** | 25 |
 | **Teststatus** | 219 passed, 0 failed |
@@ -100,23 +100,26 @@ P2 (na stabiele 1.0):
 
 ## Laatste sprint
 
-**Sprint 117 — Homepage v2 / User Intent Portal**
+**Sprint 117A — Homepage UX Iteration**
 
-Doel: de homepage ombouwen van een statische calculator-catalogus naar een gebruikersvraag-portal.
+Doel: de homepage verder stroomlijnen zodat een gebruiker binnen 10 seconden bij de juiste berekening is.
 
 ### Wat is opgeleverd
 
-- **Terminologie-shift:** op de homepage wordt "calculator" vervangen door "berekening", "financiële tool" en "Waar wil je hulp bij?".
-- **Hero v2:** nieuwe titel, vraaggerichte subtitel, centrale zoekbalk en compacte quick-chips (Netto salaris, BTW berekenen, Hypotheek, Toeslagen, ZZP inkomen, Auto import).
-- **Populaire berekeningen:** 8 cards in plaats van het volledige grid van 10 calculators; subtiele link naar `/calculators/`.
-- **Categorieën als discovery-laag:** "Waar gaat je vraag over?" met zes kaarten (Inkomen, Belasting, Wonen, Ondernemen, Auto, Toeslagen).
-- **Snel starten:** compacter gemaakt en verplaatst naar onder de categorieën, zodat het niet concurreert met de hero-zoekroute.
-- **Trust & FAQ:** behouden, gecompresseerd en lager op de pagina.
+- **Kortere pagina:** verwijderd: hero-dashboard preview cards, uitgebreide trust-band, volledige "Snel starten" module, 2 van de 5 FAQ-items. Minder scroll = sneller naar de juiste keuze.
+- **Rustiger hero:** single-column, gecentreerde layout met een kalme titel ("Krijg inzicht in je financiële vraag") en subtitel. Geen visuele ruis aan de zijkant.
+- **Dominante zoekbalk:** pill-shaped, full-width binnen de hero-container, met duidelijke focus-ring. Dat is het primaire startpunt.
+- **Maximaal 6 populaire berekeningen:** gereduceerd van 8 naar 6 compacte cards. Geen badge-noise, alleen een duidelijke vraag per card.
+- **Compacter categorieënblok:** zes categorieën in een strakke rij, met rustige lijn-iconen zonder achtergrondkleur en zonder beschrijvingstekst.
+- **FAQ minder dominant:** teruggebracht naar 3 essentiële vragen, compacter opgemaakt.
+- **Trust extreem compact:** samengeperst tot één regel onder de zoekbalk: "Gratis · Geen account · Geen opslag · Officiële bronnen".
+- **Copy-shift:** verder van "calculator" naar "berekening / vraag / inzicht": titel "Meestgezocht", CTA "Alle berekeningen", FAQ "Zijn de berekeningen gratis?", etc.
 - **Interne links:** `/calculators/` en alle categoriepagina's blijven bereikbaar.
 
 ### Status
 
 - Branch: `feat/sprint-117-homepage-v2`
+- PR: #43
 - `npm run atlas:check`: ✅
 - `npm run build`: ✅
 - `npm run audit:lighthouse`: ✅
