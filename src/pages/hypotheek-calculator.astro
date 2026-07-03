@@ -49,7 +49,7 @@ const useCases = [
   {
     id: "bruto-netto",
     title: "Bruto-netto 2026",
-    description: "Bereken je netto salaris bij een bruto inkomen van {{inkomen}}.",
+    description: "Bereken je netto salaris bij {{inkomen}} bruto per jaar.",
     href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
@@ -63,14 +63,14 @@ const useCases = [
   {
     id: "toeslagen",
     title: "Toeslagen berekenen",
-    description: "Check of je recht hebt op huur- of zorgtoeslag met dit inkomen.",
+    description: "Check of je huur- of zorgtoeslag kunt krijgen met dit inkomen.",
     href: "/toeslagen-calculator/",
     accent: "#059669",
   },
   {
     id: "zzp",
     title: "ZZP uurtarief berekenen",
-    description: "Bereken het benodigde uurtarief om dit inkomen als ZZP'er te halen.",
+    description: "Vind het uurtarief dat je als ZZP'er nodig hebt voor dit inkomen.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
   },
@@ -94,19 +94,19 @@ const sources = [
 const faq = [
   {
     question: "Is dit een officiële hypotheekofferte?",
-    answer: "Nee, dit is een indicatie. Een geldverstrekker gebruikt eigen acceptatieregels en kijkt naar veel meer factoren: studieschuld, BKR-registratie, gezinssituatie, rentevaste periode, energieprestatie, vaste lasten, en of je een koop- of huurhuis hebt.",
+    answer: "Nee, dit is een indicatie. Een geldverstrekker kijkt naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie, vaste lasten en meer.",
   },
   {
     question: "Wat is het verschil tussen bruto en netto maandlasten?",
-    answer: "Bruto is wat je aan de bank betaalt. Netto is na verrekening van de belastingteruggave via hypotheekrenteaftrek.",
+    answer: "Bruto is wat je aan de bank betaalt. Netto is na verrekening van de hypotheekrenteaftrek.",
   },
   {
     question: "Welke rol speelt rente?",
-    answer: "Een lagere rente betekent lagere maandlasten en een hoger leenbedrag. Bij een hogere rente daalt het maximale hypotheekbedrag.",
+    answer: "Een lagere rente betekent lagere maandlasten en een hoger leenbedrag. Een hogere rente doet het leenbedrag dalen.",
   },
   {
     question: "Waarom kan mijn hypotheekindicatie afwijken?",
-    answer: "Banken hanteren specifieke normen en modellen (Nibud). Vooral een studieschuld, BKR-registratie en alimentatie wegen zwaar mee. Gebruik deze calculator alleen als startpunt.",
+    answer: "Banken hanteren eigen normen en modellen. Vooral studieschuld, BKR en alimentatie wegen zwaar mee. Gebruik deze calculator als startpunt.",
   },
 ];
 
@@ -169,7 +169,7 @@ const breadcrumbSchema = {
     { label: "Hypotheek calculator", current: true },
   ]} />
 
-  <CalculatorShell title="Hypotheek calculator" subtitle="Bereken een indicatie van je maximale hypotheek en maandlasten op basis van je inkomen en rente.">
+  <CalculatorShell title="Bereken je hypotheekindicatie" subtitle="Vul je bruto jaarinkomen en de rente in. Zie direct hoeveel je maximaal kunt lenen en wat je maandlasten zijn.">
     <InputPanel title="Jouw situatie" slot="input">
       <div class="form-group">
         <label for="income">Bruto jaarinkomen</label>
@@ -223,7 +223,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken hypotheek</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bekijk je hypotheekindicatie</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig inkomen en rente in (hoger dan 0).</p>
     </InputPanel>
 
@@ -232,7 +232,7 @@ const breadcrumbSchema = {
       title="Hypotheekindicatie"
       heroLabel="Maximaal hypotheekbedrag"
       heroValue={formatEuro(initialResult.maxMortgage, 0)}
-      heroSubtext="Indicatie op basis van 2026-rente"
+      heroSubtext={`Met dit inkomen leen je ongeveer ${formatEuro(initialResult.maxMortgage, 0)}. Bruto maandlast: circa ${formatEuro(initialResult.monthlyPayment, 0)}.`}
       badge="Indicatie"
     >
       <div class="result-meta">
@@ -267,14 +267,14 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/wonen/" categoryLabel="Wonen"
       slot="footer"
-      disclaimer="Deze berekening is geen officiële hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een officiële berekening aan bij een hypotheekadviseur."
+      disclaimer="Dit is geen officiële hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een officiële berekening aan bij een adviseur."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Hypotheek calculator</h2>
-    <p>Bereken een indicatie van je maximale hypotheek, bruto en netto maandlasten, en totale rentekosten op basis van je inkomen en de hypotheekrente. Gebruik deze calculator als startpunt voor een gesprek met een hypotheekadviseur; het is geen officiële hypotheekofferte.</p>
+    <p>Bereken een indicatie van je maximale hypotheek, bruto en netto maandlasten, en totale rentekosten. Gebruik deze calculator als startpunt voor een gesprek met een adviseur; het is geen officiële offerte.</p>
     <p>Wil je weten hoeveel je <a href="/bruto-netto-2026/">netto overhoudt</a> van dit inkomen, of welk <a href="/zzp-calculator/">ZZP-uurtarief</a> je nodig hebt? Ook <a href="/toeslagen-calculator/">toeslagen</a> en je <a href="/salaris-calculator/">salaris</a> bereken je eenvoudig op Calculatieloket.nl.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
@@ -286,7 +286,7 @@ const breadcrumbSchema = {
     </ul>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
-    <p>De calculator gebruigt een algemeen geaccepteerde inkomensfactor en annuïtaire formule. De bronnen zijn het <a href="https://www.nibud.nl" target="_blank" rel="noopener">Nibud</a> en de <a href="https://www.rijksoverheid.nl/hypotheek" target="_blank" rel="noopener">Rijksoverheid</a>. We vermelden altijd dat de uitkomst een indicatie is, omdat geldverstrekkers eigen acceptatieregels hanteren.</p>
+    <p>De calculator gebruikt een algemeen geaccepteerde inkomensfactor en annuïtaire formule. De bronnen zijn het <a href="https://www.nibud.nl" target="_blank" rel="noopener">Nibud</a> en de <a href="https://www.rijksoverheid.nl/hypotheek" target="_blank" rel="noopener">Rijksoverheid</a>. We vermelden altijd dat de uitkomst een indicatie is, omdat geldverstrekkers eigen acceptatieregels hanteren.</p>
 
     <h2>Voorbeeldberekening</h2>
     <p>Stel, je hebt een bruto jaarinkomen van <strong>€ 60.000</strong>, de rente is <strong>3,8%</strong> en de looptijd is <strong>30 jaar</strong>. De calculator toont dan:</p>
@@ -309,11 +309,11 @@ const breadcrumbSchema = {
   </div>
 
   <CrossSellCards
-    title="Ook handig om te berekenen"
+    title="Andere calculators die je helpen"
     items={[
       { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026.", accent: "#2563eb" },
-      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Bereken een indicatie van bruto naar netto.", accent: "#3b82f6" },
-      { href: "/toeslagen-calculator/", title: "Toeslagen Calculator", description: "Bekijk mogelijke invloed van inkomen op toeslagen.", accent: "#059669" },
+      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Vergelijk bruto en netto.", accent: "#3b82f6" },
+      { href: "/toeslagen-calculator/", title: "Toeslagen Calculator", description: "Bekijk of je toeslagen kunt krijgen.", accent: "#059669" },
     ]}
   />
 </BaseLayout>
@@ -330,6 +330,7 @@ const breadcrumbSchema = {
   const partnerGroup = document.getElementById("partnerGroup") as HTMLDivElement;
   const partnerIncomeInput = document.getElementById("partnerIncome") as HTMLInputElement;
   const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
+  const heroSubtext = document.querySelector(".calc-result-panel-subtext") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
@@ -403,6 +404,7 @@ const breadcrumbSchema = {
     if (!result.valid) {
       errorBox.style.display = "block";
       hero.textContent = "—";
+      heroSubtext.textContent = "—";
       detailTotalIncome.textContent = "—";
       detailIncomeFactor.textContent = "—";
       detailMaxMortgage.textContent = "—";
@@ -415,6 +417,7 @@ const breadcrumbSchema = {
     errorBox.style.display = "none";
 
     hero.textContent = formatEuro(result.maxMortgage, 0);
+    heroSubtext.textContent = `Met dit inkomen leen je ongeveer ${formatEuro(result.maxMortgage, 0)}. Bruto maandlast: circa ${formatEuro(result.monthlyPayment, 0)}.`;
     detailTotalIncome.textContent = formatEuro(result.totalIncome, 0);
     detailIncomeFactor.textContent = result.incomeFactor.toFixed(2).replace(".", ",");
     detailMaxMortgage.textContent = formatEuro(result.maxMortgage, 0);

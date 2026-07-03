@@ -111,28 +111,28 @@ const useCases = [
   {
     id: "btw",
     title: "BTW Calculator",
-    description: "Reken btw over bedragen.",
+    description: "Reken btw over aankoopprijs en kosten.",
     href: "/btw-calculator/",
     accent: "#2563eb",
   },
   {
     id: "zzp",
     title: "ZZP Calculator",
-    description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.",
+    description: "Schat zakelijke kosten of je uurtarief.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
   },
   {
     id: "bruto-netto",
     title: "Bruto netto 2026",
-    description: "Bereken een indicatie van je nettoloon in 2026.",
+    description: "Bereken een indicatie van je nettoloon.",
     href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
   {
     id: "hypotheek",
     title: "Hypotheek Calculator",
-    description: "Bereken een indicatie van je hypotheeklasten.",
+    description: "Bereken een indicatie van je maandlasten.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
@@ -192,35 +192,35 @@ const sources = [
 const faq = [
   {
     question: "Wat kost een auto importeren naar Nederland?",
-    answer: "De kosten vari&euml;ren sterk per voertuig. Naast de aankoopprijs moet je rekening houden met bpm, RDW-kosten, transport, exportkenteken, keuring en kentekenplaten. Gebruik de calculator bovenaan deze pagina voor een indicatie.",
+    answer: "De kosten variëren per voertuig. Naast de aankoopprijs betaal je bpm, RDW-kosten, transport, exportkenteken, keuring en kentekenplaten. Gebruik de calculator voor een indicatie.",
   },
   {
     question: "Hoe bereken je importkosten voor een auto?",
-    answer: "Tel de aankoopprijs, geschatte bpm, RDW-kosten, transport, exportkenteken, aankoopkeuring, kentekenplaten en overige kosten bij elkaar op. De bpm moet je apart inschatten via de offici&euml;le tool van de Belastingdienst.",
+    answer: "Tel aankoopprijs, geschatte bpm, RDW-kosten, transport, exportkenteken, keuring, kentekenplaten en overige kosten op. De bpm schat je in via de officiële bpm-tool van de Belastingdienst.",
   },
   {
     question: "Moet ik bpm betalen bij auto importeren?",
-    answer: "Ja, bij het importeren van een personenauto, motor of camper naar Nederland moet je in de meeste gevallen bpm betalen. De hoogte hangt af van het type voertuig en de CO2-uitstoot. Voor elektrische auto's geldt een vrijstelling.",
+    answer: "In de meeste gevallen wel, voor personenauto's, motoren en campers. De hoogte hangt af van het type voertuig en de CO2-uitstoot. Elektrische auto's zijn vaak vrijgesteld.",
   },
   {
     question: "Kan ik de bpm automatisch berekenen?",
-    answer: "Deze calculator berekent de bpm niet automatisch. Je vult zelf een geschatte bpm in. Gebruik de <a href=\"https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen\" target=\"_blank\" rel=\"noopener\">offici&euml;le bpm-tool van de Belastingdienst</a> voor een nauwkeurige berekening.",
+    answer: "Deze calculator berekent de bpm niet automatisch. Vul zelf een geschatte bpm in en check deze met de <a href=\"https://www.belastingdienst.nl/wps/wcm/connect/nl/bpm/content/hoe-bpm-berekenen\" target=\"_blank\" rel=\"noopener\">bpm-tool van de Belastingdienst</a>.",
   },
   {
     question: "Wat kost een camper importeren?",
-    answer: "De kosten voor het importeren van een camper zijn vergelijkbaar met een auto, maar de bpm wordt anders berekend. Ook kunnen RDW-eisen afwijken. Raadpleeg de Belastingdienst-pagina over bpm voor kampeerauto's.",
+    answer: "Vergelijkbaar met een auto, maar de bpm wordt anders berekend en RDW-eisen kunnen afwijken. Raadpleeg de Belastingdienst-pagina over bpm voor kampeerauto's.",
   },
   {
     question: "Is een auto importeren uit Duitsland altijd goedkoper?",
-    answer: "Niet altijd. Hoewel de aankoopprijs in Duitsland vaak lager ligt, kunnen bpm, transport en keuringskosten het voordeel tenietdoen. Maak altijd een volledige kostenindicatie voordat je een aankoopbeslissing neemt.",
+    answer: "Niet altijd. De aankoopprijs kan lager zijn, maar bpm, transport en keuringskosten kunnen het voordeel tenietdoen. Maak eerst een volledige kostenindicatie.",
   },
   {
     question: "Hoe zit het met btw bij import uit de EU?",
-    answer: "Bij aankoop van een particulier in de EU betaal je meestal geen btw bij import. Bij aankoop via een buitenlands bedrijf kunnen btw-regels anders uitpakken. Raadpleeg de Belastingdienst voor jouw specifieke situatie.",
+    answer: "Bij aankoop bij een particulier in de EU betaal je meestal geen btw. Bij aankoop via een bedrijf kunnen de regels anders uitpakken. Check jouw situatie bij de Belastingdienst.",
   },
   {
     question: "Kan ik deze berekening gebruiken voor een aankoopbeslissing?",
-    answer: "Deze berekening is een indicatie. Gebruik hem als hulpmiddel, maar doe altijd een offici&euml;le bpm-berekening en raadpleeg de RDW en Belastingdienst voor actuele tarieven en regels.",
+    answer: "Gebruik deze uitkomst als hulpmiddel. Doe altijd een officiële bpm-berekening en raadpleeg RDW en Belastingdienst voor actuele tarieven en regels.",
   },
 ];
 
@@ -284,8 +284,8 @@ const breadcrumbSchema = {
   ]} />
 
   <CalculatorShell
-    title="Auto importkosten berekenen"
-    subtitle="Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland."
+    title="Bereken je importkosten"
+    subtitle="Vul aankoopprijs, bpm, transport en overige kosten in. Zie direct wat het importeren van je auto of camper ongeveer kost."
   >
     <InputPanel title="Jouw situatie" slot="input">
       <p class="calc-group-title">Voertuig</p>
@@ -312,7 +312,7 @@ const breadcrumbSchema = {
       <p class="calc-group-title">Aankoop en bpm</p>
 
       <div class="form-group">
-        <label for="purchasePrice">Aankoopprijs buitenland</label>
+        <label for="purchasePrice">Aankoopprijs in het buitenland</label>
         <div class="input-prefix">
           <span class="prefix">&euro;</span>
           <input type="number" id="purchasePrice" value={defaultPurchasePrice} min="0" step="1" />
@@ -320,7 +320,7 @@ const breadcrumbSchema = {
       </div>
 
       <div class="form-group">
-        <label for="estimatedBpm">Geschatte bpm <span class="hint">(zelf invullen)</span></label>
+        <label for="estimatedBpm">Geschatte bpm</label>
         <div class="input-prefix">
           <span class="prefix">&euro;</span>
           <input type="number" id="estimatedBpm" value={defaultEstimatedBpm} min="0" step="1" />
@@ -397,7 +397,7 @@ const breadcrumbSchema = {
         ))}
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken importkosten</button>
+      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bekijk je importkosten</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldige aankoopprijs in (hoger dan 0).</p>
 
       <p class="bpm-waarschuwing">Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer altijd de offici&euml;le informatie van RDW en Belastingdienst.</p>
@@ -408,7 +408,7 @@ const breadcrumbSchema = {
       title="Importkosten indicatie"
       heroLabel="Totale importkosten"
       heroValue={formatEuro(initialResult.totalCost, 0)}
-      heroSubtext="Indicatie op basis van ingevoerde kosten"
+      heroSubtext={`De import kost je ongeveer ${formatEuro(initialResult.totalCost, 0)} in totaal.`}
       badge="Indicatie"
     >
       <div class="result-meta">
@@ -453,7 +453,7 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/ondernemen/" categoryLabel="Ondernemen"
       slot="footer"
-      disclaimer="Deze berekening is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer belangrijke bedragen altijd via de officiële bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist."
+      disclaimer="Deze uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig verschillen. Controleer belangrijke bedragen via de officiële bronnen van RDW en Belastingdienst. Aan deze indicatie kunnen geen rechten worden ontleend. Raadpleeg bij twijfel een auto-importspecialist."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
@@ -462,7 +462,7 @@ const breadcrumbSchema = {
     <p class="badge-indicatie">Indicatie 2026</p>
 
     <h2 class="page-title">Auto importkosten berekenen</h2>
-    <p>Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. De uitkomst is een indicatie. Bpm, btw en keuringskosten kunnen per voertuig en situatie verschillen. Gebruik ook de <a href="/btw-calculator/">BTW Calculator</a>, <a href="/zzp-calculator/">ZZP Calculator</a>, <a href="/bruto-netto-2026/">bruto-netto calculator</a> of <a href="/hypotheek-calculator/">hypotheek calculator</a>.</p>
+    <p>Bereken een indicatie van de totale kosten voor het importeren van een auto of camper naar Nederland. Bpm, btw en keuringskosten kunnen per voertuig verschillen. Gebruik ook de <a href="/btw-calculator/">BTW-calculator</a>, <a href="/zzp-calculator/">ZZP-calculator</a>, <a href="/bruto-netto-2026/">bruto-netto calculator</a> of <a href="/hypotheek-calculator/">hypotheekcalculator</a>.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>Deze calculator somt alle bekende kostenposten op die bij auto importeren komen kijken, waaronder bpm, RDW, keuring, kenteken en transport. De bronnen zijn de <a href="https://www.belastingdienst.nl/bpm" target="_blank" rel="noopener">Belastingdienst</a> en de <a href="https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa" target="_blank" rel="noopener">RDW</a>. De bpm moet je zelf inschatten via de officiële bpm-tool; de calculator geeft daarom een indicatie.</p>
@@ -544,12 +544,12 @@ const breadcrumbSchema = {
   </div>
 
   <CrossSellCards
-    title="Ook handig om te berekenen"
+    title="Andere calculators die je helpen"
     items={[
       { href: "/btw-calculator/", title: "BTW Calculator", description: "Bereken btw over bedragen.", accent: "#2563eb" },
       { href: "/btw-inclusief-exclusief/", title: "Btw inclusief en exclusief", description: "Reken bedragen met en zonder btw om.", accent: "#2563eb" },
-      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Handig als je zakelijke kosten of uurtarief wilt inschatten.", accent: "#7c3aed" },
-      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon in 2026.", accent: "#2563eb" },
+      { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Schat zakelijke kosten of je uurtarief.", accent: "#7c3aed" },
+      { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", accent: "#2563eb" },
     ]}
   />
 </BaseLayout>
@@ -573,6 +573,7 @@ const breadcrumbSchema = {
   const vehicleTypeGroup = document.getElementById("vehicleType") as HTMLElement;
 
   const hero = document.querySelector("[data-calc-result-hero]") as HTMLElement;
+  const heroSubtext = document.querySelector(".calc-result-panel-subtext") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
@@ -641,12 +642,14 @@ const breadcrumbSchema = {
     if (!result.valid) {
       errorBox.style.display = "block";
       hero.textContent = "—";
+      heroSubtext.textContent = "—";
       return;
     }
 
     errorBox.style.display = "none";
 
     hero.textContent = formatEuro(result.totalCost, 0);
+    heroSubtext.textContent = `De import kost je ongeveer ${formatEuro(result.totalCost, 0)} in totaal.`;
     detailPurchase.textContent = formatEuro(result.purchasePrice, 0);
     detailBpm.textContent = formatEuro(result.estimatedBpm, 0);
     detailRdw.textContent = formatEuro(result.rdwCosts, 0);

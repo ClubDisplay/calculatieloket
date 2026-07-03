@@ -29,7 +29,7 @@ interface Props {
 }
 
 const {
-  title = "Je volgende stap",
+  title = "Wat wil je daarna doen?",
   steps: customSteps,
   recommendations,
   income = 0,
@@ -47,13 +47,13 @@ const defaultSteps: Step[] = [
   {
     id: "netto",
     label: "Netto salaris berekenen",
-    description: "Bekijk wat je netto overhoudt van dit inkomen.",
+    description: "Bereken je netto loon bij dit inkomen.",
     href: brutoMonthly > 0 ? `/salaris-calculator/?bruto=${brutoMonthly}` : "/salaris-calculator/",
   },
   {
     id: "hypotheek",
     label: "Hypotheek berekenen",
-    description: "Wat kan je lenen met dit jaarinkomen?",
+    description: "Bekijk hoeveel je kunt lenen.",
     href:
       totalIncomeValue > 0
         ? `/hypotheek-calculator/?inkomen=${totalIncomeValue}&partner=${isCouple ? 1 : 0}&partnerInkomen=${partnerIncome}`
@@ -62,13 +62,13 @@ const defaultSteps: Step[] = [
   {
     id: "zzp",
     label: "ZZP vergelijken",
-    description: "Hoeveel moet je als ZZP'er vragen?",
+    description: "Bereken je benodigde uurtarief.",
     href: "/zzp-calculator/",
   },
   {
     id: "vakantiegeld",
     label: "Vakantiegeld berekenen",
-    description: "Bereken hoeveel vakantiegeld je netto krijgt.",
+    description: "Bereken je netto vakantiegeld.",
     href: "/vakantiegeld-calculator/",
   },
 ];
