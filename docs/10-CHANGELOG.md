@@ -7,34 +7,34 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 108](#2026-07-03--sprint-108)
-2. [2026-07-03 — Sprint 107](#2026-07-03--sprint-107)
-3. [2026-07-03 — Sprint 106](#2026-07-03--sprint-106)
-4. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
-5. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
-6. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
-7. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
-8. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
-9. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
-10. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
-11. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
-12. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
-13. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
-14. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
-15. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
-16. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
-17. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
-18. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
-19. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
-20. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
-21. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
-22. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
-23. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
-24. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
-25. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
-26. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
-27. [2026-06-30](#2026-06-30)
-28. [2026-06-30](#2026-06-30)
+1. [2026-07-03 — Sprint 111](#2026-07-03--sprint-111)
+2. [2026-07-03 — Sprint 110](#2026-07-03--sprint-110)
+3. [2026-07-03 — Sprint 108](#2026-07-03--sprint-108)
+4. [2026-07-03 — Sprint 107](#2026-07-03--sprint-107)
+5. [2026-07-03 — Sprint 106](#2026-07-03--sprint-106)
+6. [2026-07-03 — Sprint 105](#2026-07-03--sprint-105)
+7. [2026-07-03 — Sprint 104](#2026-07-03--sprint-104)
+8. [2026-07-03 — Sprint 103](#2026-07-03--sprint-103)
+9. [2026-07-02 — Sprint 102](#2026-07-02--sprint-102)
+10. [2026-07-02 — Sprint 101](#2026-07-02--sprint-101)
+11. [2026-07-02 — Sprint 100](#2026-07-02--sprint-100)
+12. [2026-07-03 — Sprint 099](#2026-07-03--sprint-099)
+13. [2026-07-03 — Sprint 098](#2026-07-03--sprint-098)
+14. [2026-07-03 — Sprint 097](#2026-07-03--sprint-097)
+15. [2026-07-03 — Sprint 096](#2026-07-03--sprint-096)
+16. [2026-07-03 — Sprint 095](#2026-07-03--sprint-095)
+17. [2026-07-03 — Sprint 093](#2026-07-03--sprint-093)
+18. [2026-07-03 — Sprint 092](#2026-07-03--sprint-092)
+19. [2026-07-02 — Sprint 091](#2026-07-02--sprint-091)
+20. [2026-07-02 — Sprint 090](#2026-07-02--sprint-090)
+21. [2026-07-02 — Sprint 089](#2026-07-02--sprint-089)
+22. [2026-07-02 — Sprint 088](#2026-07-02--sprint-088)
+23. [2026-07-02 — Sprint 087](#2026-07-02--sprint-087)
+24. [2026-07-02 — Sprint 086](#2026-07-02--sprint-086)
+25. [2026-07-02 — Sprint 085](#2026-07-02--sprint-085)
+26. [2026-07-01 — Sprint 082](#2026-07-01--sprint-082)
+27. [2026-07-01 — Sprint 081](#2026-07-01--sprint-081)
+28. [2026-07-01 — Sprint 080](#2026-07-01--sprint-080)
 29. [2026-06-30](#2026-06-30)
 30. [2026-06-30](#2026-06-30)
 31. [2026-06-30](#2026-06-30)
@@ -42,16 +42,38 @@
 33. [2026-06-30](#2026-06-30)
 34. [2026-06-30](#2026-06-30)
 35. [2026-06-30](#2026-06-30)
-36. [2026-06-29](#2026-06-29)
-37. [2026-06-27](#2026-06-27)
-38. [2026-06-26](#2026-06-26)
-39. [2026-06-30](#2026-06-30)
-40. [2026-06-30](#2026-06-30)
+36. [2026-06-30](#2026-06-30)
+37. [2026-06-30](#2026-06-30)
+38. [2026-06-29](#2026-06-29)
+39. [2026-06-27](#2026-06-27)
+40. [2026-06-26](#2026-06-26)
 41. [2026-06-30](#2026-06-30)
 42. [2026-06-30](#2026-06-30)
 43. [2026-06-30](#2026-06-30)
 44. [2026-06-30](#2026-06-30)
 45. [2026-06-30](#2026-06-30)
+46. [2026-06-30](#2026-06-30)
+47. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-03 — Sprint 111
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 111 — Product Completion Board v1
+**Details:** Nieuw centraal statusdocument `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md` dat exact laat zien wat nog nodig is vóór Calculatieloket 1.0. Het document bevat Product Completion status per 12 domeinen (Platform, Calculator Experience, SEO, Content, Trust, Accessibility, Performance, Analytics-ready, AdSense-ready, Dashboard, Agents, Internationalisering) met score, groen/geel/rood status, af/ontbreekt, blocker en aanbevolen actie. Calculator Completion Matrix voor alle 10 unieke calculators op 14 criteria: App Shell, URL State, Recommendations, TrustPanel, Sources, FAQ, Schema, Breadcrumbs, Analytics attributes, Accessibility ≥95, Lighthouse thresholds, Content quality, Interne links. Totaal: 140/140 ✅. P0/P1/P2 backlog: P0 is volledig af (7/7), dus Calculatieloket 1.0 is technisch en productmatig klaar. Dashboard, Agents en internationalisering zijn expliciet P2/buiten 1.0. Duidelijk oordeel: technisch klaar voor 1.0 (met voorbehoud productie-AdSense), productmatig klaar, niets meer nodig vóór Dashboard/Agents. Advies Sprint 112: *Production Readiness & Verification* — OG-image optimaliseren, productie Lighthouse baseline, AdSense final check, release-tag voorbereiden, board afsluiten. Geen wijzigingen aan code, calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`, `docs/product/10-PRODUCT-POLISH-BACKLOG.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03 — Sprint 110
+
+**Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 110 — Lighthouse Calculator Coverage & Accessibility Fixes
+**Details:** Lighthouse-audit uitgebreid naar alle publieke calculatorpagina's. `scripts/lighthouse-audit.mjs` controleert nu 13 pagina's: homepage, calculator hub, `/categorie/inkomen/`, en alle 10 calculators. Stabiliteit toegevoegd door iedere pagina 3 keer te meten en de median score per categorie te rapporteren; aantal runs configureerbaar via `LIGHTHOUSE_RUNS`. Quick-chip groepen op alle 10 calculatorpagina's voorzien van expliciet label (`aria-labelledby="quickChipsLabel"`) en `role="group"`. Accessibility fixes op `src/pages/auto-importkosten-berekenen.astro`: `.calc-field-hint a` krijgt `text-decoration: underline` en `.result-row .label` krijgt een donkerder contrastkleur (`#4b5563`). Gemeten scores (lokaal, zonder AdSense, 3 runs median): alle 13 pagina's halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95). Best Practices en SEO zijn overal 100; accessibility loopt van 96 tot 100. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/17-LIGHTHOUSE-CORE-WEB-VITALS-v1.md`, `docs/product/10-PRODUCT-POLISH-BACKLOG.md` en `05_changelog.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
 
 ---
 
