@@ -5,6 +5,7 @@ export interface SearchItem {
   category: string;
   description: string;
   intents: string[];
+  icon: string;
 }
 
 export const searchIndex: SearchItem[] = [
@@ -15,6 +16,7 @@ export const searchIndex: SearchItem[] = [
     category: "Inkomen",
     description: "Bereken je netto salaris in 2026",
     intents: ["meer salaris", "loon", "netto loon", "bruto loon", "salaris berekenen", "inkomen"],
+    icon: "euro",
   },
   {
     title: "Salaris calculator",
@@ -23,6 +25,7 @@ export const searchIndex: SearchItem[] = [
     category: "Inkomen",
     description: "Vergelijk bruto bedragen en zie het netto effect",
     intents: ["meer salaris", "salaris", "salaris vergelijken"],
+    icon: "person",
   },
   {
     title: "Vakantiegeld calculator",
@@ -31,6 +34,7 @@ export const searchIndex: SearchItem[] = [
     category: "Inkomen",
     description: "Bereken je netto vakantiegeld",
     intents: ["vakantie", "vakantiegeld", "vakantie geld"],
+    icon: "money",
   },
   {
     title: "Toeslagen calculator",
@@ -39,6 +43,7 @@ export const searchIndex: SearchItem[] = [
     category: "Inkomen",
     description: "Bereken je huur- en zorgtoeslag",
     intents: ["zorgverzekering", "zorgtoeslag", "huurtoeslag", "zorg toeslag", "huur toeslag", "toeslag"],
+    icon: "money",
   },
   {
     title: "Hypotheek calculator",
@@ -47,6 +52,7 @@ export const searchIndex: SearchItem[] = [
     category: "Wonen",
     description: "Bereken wat je maximaal kunt lenen",
     intents: ["huis kopen", "eerste huis", "woning kopen", "huis", "woning", "hypotheek"],
+    icon: "house",
   },
   {
     title: "BTW calculator",
@@ -55,6 +61,7 @@ export const searchIndex: SearchItem[] = [
     category: "Belasting",
     description: "Bereken btw over een bedrag",
     intents: ["minder belasting", "btw", "belasting", "btw berekenen"],
+    icon: "calc",
   },
   {
     title: "BTW terugrekenen",
@@ -63,6 +70,7 @@ export const searchIndex: SearchItem[] = [
     category: "Belasting",
     description: "Reken een inclusief bedrag om naar exclusief",
     intents: ["minder belasting", "btw terugrekenen", "inclusief exclusief"],
+    icon: "calc",
   },
   {
     title: "BTW inclusief/exclusief",
@@ -71,6 +79,7 @@ export const searchIndex: SearchItem[] = [
     category: "Belasting",
     description: "Reken btw in beide richtingen",
     intents: ["minder belasting", "btw inclusief exclusief", "inclusief exclusief"],
+    icon: "calc",
   },
   {
     title: "ZZP calculator",
@@ -79,6 +88,7 @@ export const searchIndex: SearchItem[] = [
     category: "Ondernemen",
     description: "Bereken je benodigde uurtarief",
     intents: ["minder belasting", "zzper", "zzp", "zelfstandig", "ondernemer", "freelancer", "uurtarief"],
+    icon: "person",
   },
   {
     title: "Auto importkosten berekenen",
@@ -87,6 +97,7 @@ export const searchIndex: SearchItem[] = [
     category: "Auto",
     description: "Bereken de kosten van een auto importeren",
     intents: ["duitse auto", "auto uit duitsland", "auto importeren", "import auto"],
+    icon: "car",
   },
 ];
 
