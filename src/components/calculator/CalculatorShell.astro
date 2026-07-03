@@ -69,3 +69,124 @@ const { title, subtitle } = Astro.props;
     }
   }
 </style>
+
+<style is:global>
+  /* ===== Shared calculator micro-interactions ===== */
+
+  /* Skip the static hero flash and give results a calm, ordered hierarchy */
+  .calc-result-panel {
+    scroll-margin-top: 1rem;
+  }
+
+  .calc-input-panel .calc-error {
+    animation: errorIn 0.2s ease-out;
+  }
+
+  .calc-input-panel .calc-error[hidden],
+  .calc-input-panel .calc-error[style*="display:none"],
+  .calc-input-panel .calc-error[style*="display: none"] {
+    animation: none;
+  }
+
+  @keyframes errorIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Smooth, consistent focus for toggles and buttons across calculators */
+  .calc-input-panel .toggle input:focus-visible + .slider {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Respect reduced motion globally for all calculator transitions */
+  @media (prefers-reduced-motion: reduce) {
+    .calc-input-panel *,
+    .calc-result-panel *,
+    .calc-use-cases *,
+    .calc-trust-panel *,
+    .calc-faq *,
+    .calc-inline-sources *,
+    .calc-tool-footer *,
+    .xsell *,
+    .srcc * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function initCalculatorUX() {
+    const shell = document.querySelector('.calc-shell');
+    if (!shell) return;
+
+    const inputPanel = shell.querySelector('.calc-input-panel');
+    const resultPanel = shell.querySelector('.calc-result-panel');
+    const calculateBtn = shell.querySelector('.btn-primary[id="berekenBtn"]');
+    const form = inputPanel?.querySelector('.calc-input-panel-body');
+
+    // Ensure numeric keyboards and accessible invalid state on every calculator input
+    form?.querySelectorAll('input[type="number"], input[type="text"]').forEach((el) => {
+      const input = el as HTMLInputElement;
+      if (!input.hasAttribute('inputmode')) {
+        const step = input.getAttribute('step') || '1';
+        const isDecimal = step === '0.01' || step === '0.1' || step === '0.5';
+        input.setAttribute('inputmode', isDecimal ? 'decimal' : 'numeric');
+      }
+      if (!input.hasAttribute('autocomplete')) input.setAttribute('autocomplete', 'off');
+      if (!input.hasAttribute('aria-invalid')) input.setAttribute('aria-invalid', 'false');
+      input.addEventListener('blur', () => {
+        input.setAttribute('aria-invalid', input.checkValidity() ? 'false' : 'true');
+      });
+    });
+
+    // Keep quick-chips visually selected when they match the current value
+    const chipInputs = form?.querySelectorAll('input[type="number"], input[type="text"]');
+    const amountChips = form?.querySelectorAll('.quick-chip[data-amount]');
+    if (chipInputs && amountChips && amountChips.length > 0) {
+      const primaryChipInput = chipInputs[0] as HTMLInputElement;
+      function syncChipSelection() {
+        const value = primaryChipInput.value;
+        amountChips.forEach((el) => {
+          const chip = el as HTMLElement;
+          chip.classList.toggle('active', chip.dataset.amount === value);
+        });
+      }
+      primaryChipInput.addEventListener('input', syncChipSelection);
+      syncChipSelection();
+    }
+
+    // Subtle result reveal on the first deliberate user action (Enter or calculate)
+    let resultRevealed = false;
+    function revealResult() {
+      if (resultRevealed || !resultPanel) return;
+      resultRevealed = true;
+      resultPanel.classList.add('calc-result-reveal');
+      setTimeout(() => {
+        resultPanel.classList.remove('calc-result-reveal');
+      }, 200);
+    }
+
+    form?.querySelectorAll('input, select').forEach((el) => {
+      const field = el as HTMLElement;
+      field.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          field.blur();
+          (calculateBtn as HTMLElement | null)?.click();
+        }
+      });
+    });
+
+    calculateBtn?.addEventListener('click', revealResult);
+  })();
+</script>

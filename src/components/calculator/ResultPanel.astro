@@ -208,6 +208,35 @@ const { title, heroValue, heroLabel = "Resultaat", heroSubtext, badge = "Indicat
     border-color: #166534 !important;
   }
 
+  /* Result reveal animation (triggered once per session via calc-result-reveal) */
+  .calc-result-panel.calc-result-reveal {
+    animation: resultReveal 0.2s ease-out;
+  }
+
+  .calc-result-panel.calc-result-reveal .calc-result-panel-hero {
+    animation: resultHeroPulse 0.2s ease-out;
+  }
+
+  @keyframes resultReveal {
+    from {
+      opacity: 0.85;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes resultHeroPulse {
+    from {
+      transform: scale(0.98);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
   @media (max-width: 480px) {
     .calc-result-panel {
       padding: 1.25rem;
@@ -216,6 +245,14 @@ const { title, heroValue, heroLabel = "Resultaat", heroSubtext, badge = "Indicat
 
     .calc-result-panel-hero {
       font-size: clamp(2rem, 9vw, 2.75rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calc-result-panel.calc-result-reveal,
+    .calc-result-panel.calc-result-reveal .calc-result-panel-hero {
+      animation: none;
+      transform: none;
     }
   }
 </style>
