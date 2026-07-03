@@ -123,8 +123,13 @@ const quickLinks = [
 
       <div class="hp-search-wrap">
         <label for="hpSearch" class="visually-hidden">Zoek een berekening of onderwerp</label>
-        <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" aria-controls="hpSearchListbox" aria-autocomplete="list" />
-        <span class="hp-search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="hpSearch" class="hp-search" role="combobox" aria-haspopup="listbox" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" inputmode="search" enterkeyhint="search" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" aria-controls="hpSearchListbox" aria-autocomplete="list" aria-expanded="false" />
+        <span class="hp-search-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </span>
+        <button type="button" class="hp-search-clear" id="hpSearchClear" aria-label="Zoekopdracht wissen" tabindex="0" hidden>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
         <div id="hpSearchResults" class="hp-search-results" aria-label="Zoekresultaten" hidden>
           <div id="hpSearchListbox" class="hp-search-listbox" role="listbox" aria-label="Zoekresultaten"></div>
           <div class="hp-search-footer">
@@ -234,6 +239,7 @@ const quickLinks = [
     const resultsEl = document.getElementById("hpSearchResults") as HTMLElement;
     const listboxEl = document.getElementById("hpSearchListbox") as HTMLElement;
     const footerEl = resultsEl.querySelector(".hp-search-footer") as HTMLElement;
+    const clearBtn = document.getElementById("hpSearchClear") as HTMLButtonElement;
     const searchData = (window as any).__SEARCH_INDEX__ || [];
     const searchIcons = (window as any).__SEARCH_ICONS__ || {};
     let results: any[] = [];
@@ -324,6 +330,7 @@ const quickLinks = [
     function render() {
       const query = searchInput.value;
       lastQuery = query;
+      clearBtn.hidden = !query.trim();
 
       if (!query.trim()) {
         close();
@@ -351,7 +358,7 @@ const quickLinks = [
           const selected = i === selectedIndex;
           const iconSvg = getIcon(item.icon || item.category.toLowerCase());
           return `
-            <a href="${item.url}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
+            <a href="${item.url}" id="hp-search-opt-${i}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
               <span class="hp-search-result-icon" aria-hidden="true">${iconSvg}</span>
               <span class="hp-search-result-body">
                 <span class="hp-search-result-title">${highlight(item.title, query)}</span>
@@ -365,6 +372,7 @@ const quickLinks = [
           `;
         })
         .join("");
+      updateSelection();
       showResults();
     }
 
@@ -375,6 +383,7 @@ const quickLinks = [
         resultsEl.hidden = false;
         resultsEl.classList.add("hp-search-results--open");
       }
+      searchInput.setAttribute("aria-expanded", "true");
     }
 
     function updateSelection() {
@@ -385,6 +394,9 @@ const quickLinks = [
       });
       if (selectedIndex >= 0 && items[selectedIndex]) {
         items[selectedIndex].scrollIntoView({ block: "nearest" });
+        searchInput.setAttribute("aria-activedescendant", items[selectedIndex].id);
+      } else {
+        searchInput.removeAttribute("aria-activedescendant");
       }
     }
 
@@ -392,6 +404,9 @@ const quickLinks = [
       resultsEl.classList.remove("hp-search-results--open");
       resultsEl.hidden = true;
       selectedIndex = -1;
+      searchInput.setAttribute("aria-expanded", "false");
+      searchInput.removeAttribute("aria-activedescendant");
+      clearBtn.hidden = !searchInput.value.trim();
     }
 
     function runSearch() {
@@ -401,9 +416,14 @@ const quickLinks = [
       render();
     }
 
-    function openFirstResult() {
+    function openSelection() {
+      if (selectedIndex >= 0 && results[selectedIndex]) {
+        window.location.href = results[selectedIndex].url;
+        return;
+      }
       results = search(searchInput.value);
       if (results.length) {
+        selectedIndex = 0;
         window.location.href = results[0].url;
       } else {
         render();
@@ -419,7 +439,7 @@ const quickLinks = [
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        openFirstResult();
+        openSelection();
         return;
       }
 
@@ -439,10 +459,24 @@ const quickLinks = [
         selectedIndex = (selectedIndex - 1 + results.length) % results.length;
         updateSelection();
         e.preventDefault();
+      } else if (e.key === "Home") {
+        selectedIndex = 0;
+        updateSelection();
+        e.preventDefault();
+      } else if (e.key === "End") {
+        selectedIndex = results.length - 1;
+        updateSelection();
+        e.preventDefault();
       } else if (e.key === "Escape") {
         close();
         searchInput.blur();
       }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      runSearch();
+      searchInput.focus();
     });
 
     resultsEl.addEventListener("click", (e) => {
@@ -454,14 +488,14 @@ const quickLinks = [
     });
 
     document.addEventListener("click", (e) => {
-      if (!searchInput.contains(e.target as Node) && !resultsEl.contains(e.target as Node)) {
+      if (!searchInput.contains(e.target as Node) && !resultsEl.contains(e.target as Node) && !clearBtn.contains(e.target as Node)) {
         close();
       }
     });
   })();
 </script>
 
-<style>
+<style is:global>
   /* ===== HERO v3 ===== */
   .home-hero {
     width: 100%;
@@ -506,7 +540,7 @@ const quickLinks = [
 
   .hp-search {
     width: 100%;
-    padding: 1rem 1.25rem 1rem 3rem;
+    padding: 1rem 2.75rem 1rem 3rem;
     font-size: 1.1rem;
     border: 1.5px solid var(--color-border);
     border-radius: 999px;
@@ -514,6 +548,11 @@ const quickLinks = [
     color: var(--color-text);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .hp-search::-webkit-search-cancel-button,
+  .hp-search::-webkit-search-decoration {
+    display: none;
   }
 
   .hp-search:focus {
@@ -527,9 +566,48 @@ const quickLinks = [
     left: 1.1rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.2rem;
-    opacity: 0.55;
+    color: var(--color-text-muted);
+    opacity: 0.6;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hp-search-icon svg {
+    display: block;
+  }
+
+  .hp-search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .hp-search-clear[hidden] {
+    display: none;
+  }
+
+  .hp-search-clear svg {
+    display: block;
+  }
+
+  .hp-search-clear:hover,
+  .hp-search-clear:focus-visible {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
   .hero-trust {
@@ -821,7 +899,7 @@ const quickLinks = [
     text-decoration: none;
     color: var(--color-text);
     border-bottom: 1px solid var(--color-border);
-    transition: background 0.12s;
+    transition: background 0.12s, box-shadow 0.12s;
     outline: none;
   }
 
@@ -832,11 +910,16 @@ const quickLinks = [
   .hp-search-result:hover,
   .hp-search-result.selected {
     background: var(--color-primary-light);
+    box-shadow: inset 3px 0 0 0 var(--color-primary);
   }
 
   .hp-search-result:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: -2px;
+  }
+
+  .hp-search-result.selected:focus-visible {
+    outline-offset: 2px;
   }
 
   .hp-search-result-icon {
@@ -1004,12 +1087,17 @@ const quickLinks = [
 
     .hp-search {
       font-size: 16px; /* prevent iOS zoom */
-      padding: 0.85rem 1rem 0.85rem 2.6rem;
+      padding: 0.85rem 2.5rem 0.85rem 2.6rem;
     }
 
     .hp-search-icon {
       left: 0.9rem;
-      font-size: 1.1rem;
+    }
+
+    .hp-search-clear {
+      right: 0.6rem;
+      width: 28px;
+      height: 28px;
     }
 
     /* Mobile search dropdown */
