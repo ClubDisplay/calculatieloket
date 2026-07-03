@@ -281,6 +281,11 @@ const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
     .hub-search-wrap {
       position: relative;
       max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .hub-search {
+      text-align: center;
     }
 
     .hub-search-icon {
@@ -330,19 +335,7 @@ const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
     }
 
     .hub-groups :global(.cat-grid) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    @media (max-width: 1024px) {
-      .hub-groups :global(.cat-grid) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hub-groups :global(.cat-grid) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     }
 
     @media (max-width: 560px) {
