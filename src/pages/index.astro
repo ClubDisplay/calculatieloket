@@ -27,6 +27,15 @@ const icons: Record<string, string> = {
   car: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
 };
 
+const searchIcons: Record<string, string> = {
+  euro: icons.euro,
+  money: icons.money,
+  house: icons.house,
+  calc: icons.calc,
+  person: icons.person,
+  car: icons.car,
+};
+
 const cards = [
   {
     id: "bruto-netto",
@@ -114,13 +123,29 @@ const quickLinks = [
 
       <div class="hp-search-wrap">
         <label for="hpSearch" class="visually-hidden">Zoek een berekening of onderwerp</label>
-        <input type="text" id="hpSearch" class="hp-search" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" aria-controls="hpSearchResults" aria-autocomplete="list" />
-        <span class="hp-search-icon" aria-hidden="true">🔍</span>
-        <div id="hpSearchResults" class="hp-search-results" role="listbox" aria-label="Zoekresultaten" hidden></div>
+        <input type="search" id="hpSearch" class="hp-search" role="combobox" aria-haspopup="listbox" placeholder="Bijvoorbeeld: salaris, BTW, hypotheek..." autocomplete="off" inputmode="search" enterkeyhint="search" data-analytics="search-input" data-analytics-category="homepage" data-analytics-action="input" data-analytics-label="search" aria-controls="hpSearchListbox" aria-autocomplete="list" aria-expanded="false" />
+        <span class="hp-search-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </span>
+        <button type="button" class="hp-search-clear" id="hpSearchClear" aria-label="Zoekopdracht wissen" tabindex="0" hidden>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div id="hpSearchResults" class="hp-search-results" aria-label="Zoekresultaten" hidden>
+          <div id="hpSearchListbox" class="hp-search-listbox" role="listbox" aria-label="Zoekresultaten"></div>
+          <div class="hp-search-footer">
+            <a href="/calculators/" class="hp-search-footer-link">
+              Bekijk alle berekeningen <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
       <script type="application/json" id="search-data" set:html={JSON.stringify(searchIndex)}></script>
       <script is:inline>
         window.__SEARCH_INDEX__ = JSON.parse(document.getElementById('search-data').textContent);
+      </script>
+      <script type="application/json" id="search-icons" set:html={JSON.stringify(searchIcons)}></script>
+      <script is:inline>
+        window.__SEARCH_ICONS__ = JSON.parse(document.getElementById('search-icons').textContent);
       </script>
 
       <div class="hero-trust">
@@ -212,7 +237,11 @@ const quickLinks = [
   (function () {
     const searchInput = document.getElementById("hpSearch") as HTMLInputElement;
     const resultsEl = document.getElementById("hpSearchResults") as HTMLElement;
+    const listboxEl = document.getElementById("hpSearchListbox") as HTMLElement;
+    const footerEl = resultsEl.querySelector(".hp-search-footer") as HTMLElement;
+    const clearBtn = document.getElementById("hpSearchClear") as HTMLButtonElement;
     const searchData = (window as any).__SEARCH_INDEX__ || [];
+    const searchIcons = (window as any).__SEARCH_ICONS__ || {};
     let results: any[] = [];
     let selectedIndex = -1;
     let lastQuery = "";
@@ -221,6 +250,10 @@ const quickLinks = [
       const div = document.createElement("div");
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    function getIcon(key: string) {
+      return searchIcons[key] || searchIcons.calc || "";
     }
 
     function highlight(text: string, query: string) {
@@ -297,50 +330,83 @@ const quickLinks = [
     function render() {
       const query = searchInput.value;
       lastQuery = query;
+      clearBtn.hidden = !query.trim();
 
       if (!query.trim()) {
-        resultsEl.hidden = true;
+        close();
         return;
       }
 
       if (!results.length) {
-        resultsEl.innerHTML = `
-          <div class="hp-search-no-results">
-            Geen resultaat gevonden. <a href="/calculators/">Bekijk alle berekeningen</a>.
+        listboxEl.innerHTML = `
+          <div class="hp-search-empty">
+            <span class="hp-search-empty-icon" aria-hidden="true">🔍</span>
+            <p class="hp-search-empty-text">Geen passende berekening gevonden.</p>
+            <a href="/calculators/" class="hp-search-empty-link">
+              Bekijk alle berekeningen <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
         `;
-        resultsEl.hidden = false;
+        footerEl.hidden = true;
+        showResults();
         return;
       }
 
-      resultsEl.innerHTML = results
+      footerEl.hidden = false;
+      listboxEl.innerHTML = results
         .map((item: any, i: number) => {
           const selected = i === selectedIndex;
+          const iconSvg = getIcon(item.icon || item.category.toLowerCase());
           return `
-            <a href="${item.url}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
-              <div class="hp-search-result-title">${highlight(item.title, query)}</div>
-              <div class="hp-search-result-meta">${escapeHtml(item.category)} · ${highlight(item.description, query)}</div>
+            <a href="${item.url}" id="hp-search-opt-${i}" class="hp-search-result ${selected ? "selected" : ""}" role="option" data-index="${i}" aria-selected="${selected}">
+              <span class="hp-search-result-icon" aria-hidden="true">${iconSvg}</span>
+              <span class="hp-search-result-body">
+                <span class="hp-search-result-title">${highlight(item.title, query)}</span>
+                <span class="hp-search-result-meta">${highlight(item.description, query)}</span>
+              </span>
+              <span class="hp-search-result-actions">
+                <span class="hp-search-result-category">${escapeHtml(item.category)}</span>
+                <span class="hp-search-result-arrow" aria-hidden="true">&rarr;</span>
+              </span>
             </a>
           `;
         })
         .join("");
-      resultsEl.hidden = false;
+      updateSelection();
+      showResults();
+    }
+
+    function showResults() {
+      if (resultsEl.hidden) {
+        resultsEl.classList.remove("hp-search-results--open");
+        void resultsEl.offsetWidth;
+        resultsEl.hidden = false;
+        resultsEl.classList.add("hp-search-results--open");
+      }
+      searchInput.setAttribute("aria-expanded", "true");
     }
 
     function updateSelection() {
-      const items = resultsEl.querySelectorAll(".hp-search-result");
+      const items = listboxEl.querySelectorAll(".hp-search-result");
       items.forEach((el, i) => {
         el.classList.toggle("selected", i === selectedIndex);
         el.setAttribute("aria-selected", String(i === selectedIndex));
       });
       if (selectedIndex >= 0 && items[selectedIndex]) {
         items[selectedIndex].scrollIntoView({ block: "nearest" });
+        searchInput.setAttribute("aria-activedescendant", items[selectedIndex].id);
+      } else {
+        searchInput.removeAttribute("aria-activedescendant");
       }
     }
 
     function close() {
+      resultsEl.classList.remove("hp-search-results--open");
       resultsEl.hidden = true;
       selectedIndex = -1;
+      searchInput.setAttribute("aria-expanded", "false");
+      searchInput.removeAttribute("aria-activedescendant");
+      clearBtn.hidden = !searchInput.value.trim();
     }
 
     function runSearch() {
@@ -350,9 +416,14 @@ const quickLinks = [
       render();
     }
 
-    function openFirstResult() {
+    function openSelection() {
+      if (selectedIndex >= 0 && results[selectedIndex]) {
+        window.location.href = results[selectedIndex].url;
+        return;
+      }
       results = search(searchInput.value);
       if (results.length) {
+        selectedIndex = 0;
         window.location.href = results[0].url;
       } else {
         render();
@@ -368,7 +439,7 @@ const quickLinks = [
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        openFirstResult();
+        openSelection();
         return;
       }
 
@@ -388,10 +459,24 @@ const quickLinks = [
         selectedIndex = (selectedIndex - 1 + results.length) % results.length;
         updateSelection();
         e.preventDefault();
+      } else if (e.key === "Home") {
+        selectedIndex = 0;
+        updateSelection();
+        e.preventDefault();
+      } else if (e.key === "End") {
+        selectedIndex = results.length - 1;
+        updateSelection();
+        e.preventDefault();
       } else if (e.key === "Escape") {
         close();
         searchInput.blur();
       }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      runSearch();
+      searchInput.focus();
     });
 
     resultsEl.addEventListener("click", (e) => {
@@ -403,14 +488,14 @@ const quickLinks = [
     });
 
     document.addEventListener("click", (e) => {
-      if (!searchInput.contains(e.target as Node) && !resultsEl.contains(e.target as Node)) {
+      if (!searchInput.contains(e.target as Node) && !resultsEl.contains(e.target as Node) && !clearBtn.contains(e.target as Node)) {
         close();
       }
     });
   })();
 </script>
 
-<style>
+<style is:global>
   /* ===== HERO v3 ===== */
   .home-hero {
     width: 100%;
@@ -450,11 +535,12 @@ const quickLinks = [
     position: relative;
     width: 100%;
     max-width: 600px;
+    z-index: 50;
   }
 
   .hp-search {
     width: 100%;
-    padding: 1rem 1.25rem 1rem 3rem;
+    padding: 1rem 2.75rem 1rem 3rem;
     font-size: 1.1rem;
     border: 1.5px solid var(--color-border);
     border-radius: 999px;
@@ -462,6 +548,11 @@ const quickLinks = [
     color: var(--color-text);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .hp-search::-webkit-search-cancel-button,
+  .hp-search::-webkit-search-decoration {
+    display: none;
   }
 
   .hp-search:focus {
@@ -475,9 +566,48 @@ const quickLinks = [
     left: 1.1rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.2rem;
-    opacity: 0.55;
+    color: var(--color-text-muted);
+    opacity: 0.6;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hp-search-icon svg {
+    display: block;
+  }
+
+  .hp-search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .hp-search-clear[hidden] {
+    display: none;
+  }
+
+  .hp-search-clear svg {
+    display: block;
+  }
+
+  .hp-search-clear:hover,
+  .hp-search-clear:focus-visible {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
   .hero-trust {
@@ -718,6 +848,17 @@ const quickLinks = [
   }
 
   /* ===== SEARCH RESULTS ===== */
+  @keyframes hp-search-results-appear {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .hp-search-results {
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -725,25 +866,41 @@ const quickLinks = [
     right: 0;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: 18px;
     box-shadow: var(--shadow-lg);
-    max-height: 320px;
-    overflow-y: auto;
+    max-height: 360px;
+    overflow: hidden;
     z-index: 50;
     text-align: left;
+    display: flex;
+    flex-direction: column;
   }
 
   .hp-search-results[hidden] {
     display: none;
   }
 
+  .hp-search-results--open {
+    animation: hp-search-results-appear 0.18s ease-out;
+  }
+
+  .hp-search-listbox {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
   .hp-search-result {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 56px;
     padding: 0.75rem 1rem;
     text-decoration: none;
     color: var(--color-text);
     border-bottom: 1px solid var(--color-border);
-    transition: background 0.12s;
+    transition: background 0.12s, box-shadow 0.12s;
+    outline: none;
   }
 
   .hp-search-result:last-child {
@@ -753,6 +910,7 @@ const quickLinks = [
   .hp-search-result:hover,
   .hp-search-result.selected {
     background: var(--color-primary-light);
+    box-shadow: inset 3px 0 0 0 var(--color-primary);
   }
 
   .hp-search-result:focus-visible {
@@ -760,15 +918,77 @@ const quickLinks = [
     outline-offset: -2px;
   }
 
+  .hp-search-result.selected:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .hp-search-result-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .hp-search-result-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hp-search-result-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
   .hp-search-result-title {
     font-size: 0.95rem;
     font-weight: 600;
+    line-height: 1.3;
   }
 
   .hp-search-result-meta {
     font-size: 0.8rem;
     color: var(--color-text-muted);
-    margin-top: 0.15rem;
+    line-height: 1.35;
+  }
+
+  .hp-search-result-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .hp-search-result-category {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .hp-search-result-arrow {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .hp-search-result:hover .hp-search-result-arrow,
+  .hp-search-result.selected .hp-search-result-arrow {
+    color: var(--color-primary);
+    transform: translateX(3px);
   }
 
   .hp-search-result mark {
@@ -779,21 +999,61 @@ const quickLinks = [
     border-radius: 3px;
   }
 
-  .hp-search-no-results {
-    padding: 0.9rem 1rem;
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
+  .hp-search-footer {
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-border);
+    padding: 0.75rem 1rem;
     text-align: center;
+    background: var(--color-surface);
   }
 
-  .hp-search-no-results a {
-    color: var(--color-primary);
+  .hp-search-footer-link {
+    font-size: 0.85rem;
     font-weight: 600;
+    color: var(--color-primary);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
   }
 
-  .hp-search-no-results a:hover,
-  .hp-search-no-results a:focus-visible {
+  .hp-search-footer-link:hover,
+  .hp-search-footer-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .hp-search-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .hp-search-empty-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .hp-search-empty-text {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .hp-search-empty-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .hp-search-empty-link:hover,
+  .hp-search-empty-link:focus-visible {
     text-decoration: underline;
   }
 
@@ -827,12 +1087,67 @@ const quickLinks = [
 
     .hp-search {
       font-size: 16px; /* prevent iOS zoom */
-      padding: 0.85rem 1rem 0.85rem 2.6rem;
+      padding: 0.85rem 2.5rem 0.85rem 2.6rem;
     }
 
     .hp-search-icon {
       left: 0.9rem;
-      font-size: 1.1rem;
+    }
+
+    .hp-search-clear {
+      right: 0.6rem;
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Mobile search dropdown */
+    .hp-search-wrap {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: none;
+      padding: 0 1rem;
+    }
+
+    .hp-search-results {
+      left: 1rem;
+      right: 1rem;
+      border-radius: 16px;
+      max-height: 60vh;
+    }
+
+    .hp-search-result {
+      min-height: 60px;
+      padding: 0.85rem 1rem;
+      gap: 1rem;
+    }
+
+    .hp-search-result-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .hp-search-result-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .hp-search-result-title {
+      font-size: 1rem;
+    }
+
+    .hp-search-result-meta {
+      font-size: 0.85rem;
+    }
+
+    .hp-search-result-category {
+      font-size: 0.7rem;
+    }
+
+    .hp-search-footer,
+    .hp-search-empty {
+      padding: 1rem;
     }
 
     .hp-cluster-chip {
