@@ -1,15 +1,16 @@
 # CURRENT_STATE — Calculatieloket.nl
 
 > **Datum:** 2026-07-03  
-> **Laatst bijgewerkt:** 2026-07-03
+> **Laatst bijgewerkt:** 2026-07-03  
+> **Laatste ontwerpdocument:** `docs/product/UX_MASTERPLAN.md`
 
 ---
 
 | | |
 |---|---|
-| **Laatste sprint** | Sprint 112 — Production Readiness & Verification |
-| **Huidige versie** | Production Ready |
-| **Main commit** | `1fc8a43a1e3d41f09b2c48efbab7f744e0c653cc` |
+| **Laatste sprint** | Sprint 115 — UX Foundation (Information Architecture) |
+| **Huidige versie** | v1.0.0 |
+| **Main commit** | `b076155` |
 | **Calculators** | 10 uniek (hub toont 11 cards) |
 | **Categoriepagina's** | 5 |
 | **Knowledge Objects** | 25 |
@@ -17,8 +18,10 @@
 | **Atlas status** | ✅ Groen |
 | **Lighthouse status** | ✅ 13/13 pagina's halen drempels |
 | **Product Completion %** | 95% |
-| **Open blockers** | Geen voor 1.0 |
-| **Eerstvolgende sprint** | Sprint 113 — Version 1.0 Release |
+| **Open blockers** | Geen |
+| **Huidige focus** | UX Excellence |
+| **Laatste ontwerpdocument** | `docs/product/UX_MASTERPLAN.md` |
+| **Eerstvolgende sprint** | Sprint 116 — Navigation v2 |
 
 ---
 
@@ -97,15 +100,15 @@ P2 (na stabiele 1.0):
 
 ## Eerstvolgende sprint
 
-**Sprint 113 — Version 1.0 Release**
+**Sprint 116 — Navigation v2**
 
-Doel: formele 1.0 release voorbereiden en deployen.
+Doel: de site-navigatie (header, mobile menu, footer, breadcrumbs) herbouwen volgens `docs/product/UX_MASTERPLAN.md` zodat deze geschikt is voor 500+ calculators.
 
-1. Tag `v1.0.0` aanmaken.
-2. Finale deploy-check op Cloudflare Pages.
-3. Analytics-provider kiezen en voorbereiden.
-4. AdSense A/B-test plan klaarzetten.
-5. Product Completion Board afsluiten.
+1. Header v2 met dropdowns: Home, Calculators, Categorieën, Kennisbank, Nieuws.
+2. Mobile hamburger menu met zoek, Calculators, Categorieën, Kennisbank, Nieuws, Over/Contact.
+3. Footer v2 met dynamische categoriekolommen, Explorer-link en Kennisbank/Over.
+4. Breadcrumbs consistent voor Explorer, categorieën en calculators.
+5. Geen directe calculator-links meer in header; geen handmatige "Alle calculators"-lijst in footer.
 
 ---
 

@@ -3,6 +3,16 @@
 ## 2026-07-03
 
 **Type:** Product/UX
+**Wijziging:** Atlas v2 Sprint 115 — UX Foundation (Information Architecture)
+**Details:** Nieuwe UX-strategie document `docs/product/UX_MASTERPLAN.md` opgesteld als leidend ontwerp voor de schaalvergroting van 10 naar 500+ calculators. Bevat: huidige analyse, nieuwe Information Architecture (IA), sitemap v2, Homepage v2, Calculator Explorer, Navigatie v2, Categorie-pagina v2, Calculatorpagina v2, Kennisbank & Nieuws, voorgestelde datastructuur (centraal calculator-register), implementatie-roadmap en wireframes. Buiten scope: nieuwe calculators, Dashboard, Agents, internationalisering, Rule Resolver, Knowledge Layer, engine/rekenkundige wijzigingen. Geen code-wijzigingen. Advies volgende sprint: Sprint 116 — Navigation v2. Documentatie bijgewerkt: `docs/product/UX_MASTERPLAN.md`, `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
+**Status:** In ontwikkeling
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+
+---
+
+## 2026-07-03
+
+**Type:** Product/UX
 **Wijziging:** Atlas v2 Sprint 112 — Production Readiness & Verification
 **Details:** Laatste verfijningen voor Calculatieloket 1.0. Nieuwe Open Graph afbeelding `public/og-1200x630.png` (1200×630, 164 KB) en `public/og-1200x630.webp` (1200×630, 39 KB) gegenereerd. `src/layouts/BaseLayout.astro` bijgewerkt met absolute `og:image` (PNG), `og:image:width/height/alt`, `og:url`, `og:site_name`, `og:locale`, `twitter:card` (`summary_large_image`), `twitter:image` en `theme-color`. AdSense laadgedrag gecorrigeerd: `BaseLayout` injecteert het AdSense script niet meer in de `<head>`; alleen `CookieConsent.astro` laadt `adsbygoogle.js` nadat de gebruiker toestemming geeft (of herstelt een eerder geaccepteerde keuze uit `localStorage`). Puppeteer-verificatie bevestigt: banner zichtbaar zonder consent, geen AdSense script zonder acceptatie, script wel aanwezig na accept-knop of bij vooraf geaccepteerde keuze. Productie Lighthouse-baseline gemeten in twee configuraties: `PUBLIC_ADS_ENABLED=true` (consent niet gegeven) en `PUBLIC_ADS_ENABLED=false`; beide leveren identieke 100/100/100/100 scores op homepage, calculator hub en categoriepagina, en alle 13 gemonitorde pagina’s halen de drempels (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95). Overige productie-readiness checks (canonical, sitemap, robots.txt, favicon, structured data, breadcrumbs, analytics attributen, cookie consent) zijn gecontroleerd en groen. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, Dashboard, Agents, internationalisering, calculators, `.env`, deploy of dependencies. Documentatie bijgewerkt: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`, `docs/product/CURRENT_STATE.md`, `05_changelog.md` en `docs/10-CHANGELOG.md`. `npm run atlas:check` slaagt: 219 tests, 23 pagina's, 0 TypeScript-fouten, 2 verwachte draft waarschuwingen.
 **Status:** In ontwikkeling
