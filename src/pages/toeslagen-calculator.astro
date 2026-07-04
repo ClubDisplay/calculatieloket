@@ -25,8 +25,6 @@ const defaultIncome = 28000;
 const defaultRent = 700;
 const defaultIsCouple = false;
 const defaultPartnerIncome = 20000;
-const defaultVermogen = 0;
-const defaultKinderen = 0;
 
 const initialResult = calculateAllowances({
   income: defaultIncome,
@@ -110,8 +108,8 @@ const faq = [
     answer: "Je toeslagpartner is de persoon met wie je een gezamenlijk huishouden voert. Het inkomen van je toeslagpartner telt mee voor de berekening.",
   },
   {
-    question: "Waarom telt vermogen mee?",
-    answer: "Naast inkomen kijkt de Belastingdienst naar je vermogen (spaargeld, beleggingen). Deze calculator houdt hier nog geen rekening mee — dit kan invloed hebben op je mogelijke toeslag.",
+    question: "Waarom wordt vermogen niet gevraagd?",
+    answer: "Vermogen (spaargeld, beleggingen) kan invloed hebben op je toeslag. Deze eenvoudige indicatie houdt er geen rekening mee. Doe de officiële proefberekening op <a href=\"https://www.toeslagen.nl\" target=\"_blank\" rel=\"noopener\">Toeslagen.nl</a> voor een compleet beeld.",
   },
   {
     question: "Waarom kan het definitieve bedrag afwijken?",
@@ -180,7 +178,7 @@ const breadcrumbSchema = {
 
   <CalculatorShell title="Toeslagen calculator 2026" subtitle="Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en huishouden.">
     <InputPanel title="Jouw situatie" slot="input">
-      <p class="input-note">Vul je bruto jaarinkomen, huur en huishouden in. Vermogen en kinderen worden nog niet meegerekend in deze indicatie.</p>
+      <p class="input-note">Deze berekening geeft een eenvoudige indicatie. De officiële proefberekening van Dienst Toeslagen kijkt naar meer voorwaarden, zoals leeftijd, rekenhuur, vermogen en huishouden.</p>
 
       <div class="form-group">
         <label for="income">Bruto jaarinkomen</label>
@@ -223,20 +221,6 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <div class="form-group form-group-row">
-        <div>
-          <label for="vermogen">Vermogen <span class="hint">(spaargeld + beleggingen)</span></label>
-          <div class="input-prefix">
-            <span class="prefix">&euro;</span>
-            <input type="number" id="vermogen" value={defaultVermogen} min="0" step="100" />
-          </div>
-        </div>
-        <div>
-          <label for="kinderen">Kinderen</label>
-          <input type="number" id="kinderen" value={defaultKinderen} min="0" max="20" step="1" />
-        </div>
-      </div>
-
       <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bereken toeslagen</button>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig inkomen en huur in.</p>
     </InputPanel>
@@ -244,9 +228,9 @@ const breadcrumbSchema = {
     <ResultPanel
       slot="result"
       title="Toeslag indicatie"
-      heroLabel="Totale toeslag per maand"
+      heroLabel="Geschatte toeslag"
       heroValue={formatEuro(totalMonthlyBenefit, 0)}
-      heroSubtext="Huurtoeslag + zorgtoeslag"
+      heroSubtext="Eenvoudige indicatie per maand"
       badge="Indicatie"
     >
       <div class="result-meta">
@@ -261,8 +245,8 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Huurtoeslag per maand</span><span class="value" id="detailRentBenefit">{formatEuro(initialResult.rentBenefit, 0)}</span></div>
       <div class="result-row"><span class="label">Zorgtoeslag per maand</span><span class="value" id="detailZorgBenefit">{formatEuro(initialResult.zorgBenefit, 0)}</span></div>
       <div class="result-divider"></div>
-      <div class="result-row result-row-total"><span class="label">Totaal toeslag per maand</span><span class="value" id="detailTotalMonthly">{formatEuro(totalMonthlyBenefit, 0)}</span></div>
-      <div class="result-row result-row-total"><span class="label">Totaal toeslag per jaar</span><span class="value" id="detailTotalYearly">{formatEuro(totalYearlyBenefit, 0)}</span></div>
+      <div class="result-row result-row-total"><span class="label">Geschatte toeslag per maand</span><span class="value" id="detailTotalMonthly">{formatEuro(totalMonthlyBenefit, 0)}</span></div>
+      <div class="result-row result-row-total"><span class="label">Geschatte toeslag per jaar</span><span class="value" id="detailTotalYearly">{formatEuro(totalYearlyBenefit, 0)}</span></div>
 
       <div class="result-assumptions">
         <div class="result-assumptions-title">Gebruikte uitgangspunten</div>
@@ -292,7 +276,7 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/inkomen/" categoryLabel="Inkomen"
       slot="footer"
-      disclaimer="Deze berekening is een indicatie. Je werkelijke toeslag kan afwijken. Doe altijd de officiële proefberekening op Toeslagen.nl. Aan deze indicatie kunnen geen rechten worden ontleend."
+      disclaimer="Deze berekening geeft een eenvoudige indicatie. De officiële proefberekening van Dienst Toeslagen kijkt naar meer voorwaarden, zoals leeftijd, rekenhuur, vermogen en huishouden. Aan deze indicatie kunnen geen rechten worden ontleend."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
@@ -306,27 +290,22 @@ const breadcrumbSchema = {
     <p>Deze calculator gebruikt de publieke <a href="https://www.toeslagen.nl/huurtoeslag" target="_blank" rel="noopener">huurtoeslag</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag" target="_blank" rel="noopener">zorgtoeslag</a> regels van Dienst Toeslagen en de Belastingdienst. De uitkomst is een indicatie: je werkelijke toeslag wordt bepaald aan de hand van je definitieve toetsingsinkomen, vermogen en huishouden.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
-    <p>Deze calculator geeft een indicatie van huurtoeslag en zorgtoeslag op basis van de regels van 2026.</p>
+    <p>Deze calculator geeft een <strong>eenvoudige indicatie</strong> van huurtoeslag en zorgtoeslag op basis van enkele 2026-parameters. Deze versie houdt geen rekening met vermogen, kinderen, leeftijd of de exacte rekenhuur van de Dienst Toeslagen.</p>
     <ul class="calc-list">
-      <li><strong>Huurtoeslag:</strong> vanaf 2026 kan je huur niet meer 'te hoog' zijn om huurtoeslag aan te vragen. De rekengrenzen (€ 932,93 voor 21+) tellen nog wel mee voor de hoogte. Vermogensgrens: € 38.479 (alleen) / € 76.958 (samen).</li>
-      <li><strong>Zorgtoeslag:</strong> maximaal € 1.550/jaar (circa € 129/maand) voor alleenstaanden, € 2.963/jaar (circa € 247/maand) met partner. Inkomensgrens € 40.857 (alleen) / € 51.142 (samen). Vermogensgrens: € 146.011 (alleen) / € 184.633 (samen).</li>
+      <li><strong>Huurtoeslag:</strong> de indicatie gebruikt de rekengrens (€ 932,93) en een vereenvoudigde inkomensafhankelijke reductie. In de officiële berekening spelen ook leeftijd, huur en vermogen mee.</li>
+      <li><strong>Zorgtoeslag:</strong> maximaal € 1.550/jaar (circa € 129/maand) voor alleenstaanden, € 2.963/jaar (circa € 247/maand) met partner. Inkomensgrens € 40.857 (alleen) / € 51.142 (samen). Vermogen wordt in deze indicatie niet meegenomen.</li>
     </ul>
 
     <h2>Praktijkvoorbeeld</h2>
-    <p>Stel, je bent alleenstaand, hebt een bruto jaarinkomen van <strong>€ 28.000</strong> en betaalt <strong>€ 700</strong> kale huur per maand. De calculator geeft dan een indicatie van:</p>
-    <ul class="calc-list">
-      <li><strong>Huurtoeslag:</strong> circa € 95 per maand (afhankelijk van de exacte huur en inkomen).</li>
-      <li><strong>Zorgtoeslag:</strong> circa € 129 per maand (maximaal voor alleenstaanden in 2026).</li>
-      <li><strong>Totaal:</strong> circa € 224 per maand aan toeslagen.</li>
-    </ul>
-    <p>Met een partner en een gezamenlijk inkomen verandert zowel de huurtoeslag als de zorgtoeslag. Probeer verschillende scenario's uit met de slider en quick chips.</p>
+    <p>De hoogte van je toeslag hangt af van je inkomen, huur en huishouden. Stel, je bent alleenstaand met een bruto jaarinkomen van <strong>€ 15.000</strong> en betaalt <strong>€ 650</strong> kale huur per maand. Deze eenvoudige indicatie geeft dan bijvoorbeeld een huurtoeslag en zorgtoeslag. Voor je exacte situatie moet je altijd de officiële proefberekening op <a href="https://www.toeslagen.nl" target="_blank" rel="noopener">Toeslagen.nl</a> doen.</p>
+    <p>Met een partner en een gezamenlijk inkomen verandert zowel de huurtoeslag als de zorgtoeslag. Probeer verschillende scenario's uit met de quick chips.</p>
 
     <h2>Veelgemaakte fouten</h2>
     <ul class="calc-list">
-      <li><strong>Vermogen negeren:</strong> spaargeld en beleggingen tellen mee en kunnen je toeslag verlagen of uitsluiten.</li>
+      <li><strong>Deze indicatie als officiële berekening zien:</strong> dit is een eenvoudige indicatie. Doe altijd de officiële proefberekening op <a href="https://www.toeslagen.nl" target="_blank" rel="noopener">Toeslagen.nl</a>.</li>
       <li><strong>Huur inclusief servicekosten invullen:</strong> huurtoeslag is gebaseerd op de kale huur, exclusief servicekosten.</li>
-      <li><strong>Partnerinkomen vergeten:</strong> het inkomen van je toeslagpartner telt mee.</li>
-      <li><strong>Indicatie als definitief zien:</strong> pas na afloop van het jaar volgt de definitieve berekening op basis van je werkelijke inkomen.</li>
+      <li><strong>Partnerinkomen vergeten:</strong> het inkomen van je toeslagpartner telt mee als je een gezamenlijk huishouden hebt.</li>
+      <li><strong>Vermogen en kinderen niet meenemen:</strong> deze indicatie houdt er geen rekening mee, maar de officiële berekening wel.</li>
     </ul>
   </div>
 
@@ -350,8 +329,6 @@ const breadcrumbSchema = {
   const rentInput = document.getElementById("rent") as HTMLInputElement;
   const partnerIncomeInput = document.getElementById("partnerIncome") as HTMLInputElement;
   const partnerIncomeGroup = document.getElementById("partnerIncomeGroup") as HTMLDivElement;
-  const vermogenInput = document.getElementById("vermogen") as HTMLInputElement;
-  const kinderenInput = document.getElementById("kinderen") as HTMLInputElement;
   const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
   const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
@@ -395,8 +372,6 @@ const breadcrumbSchema = {
     const income = parseFloat(incomeInput.value) || 0;
     const rent = parseFloat(rentInput.value) || 0;
     const partnerIncome = parseFloat(partnerIncomeInput.value) || 0;
-    const vermogen = parseFloat(vermogenInput.value) || 0;
-    const kinderen = parseInt(kinderenInput.value, 10) || 0;
 
     if (income > 0) params.set("inkomen", income.toString());
     else params.delete("inkomen");
@@ -408,12 +383,6 @@ const breadcrumbSchema = {
 
     if (household === "couple" && partnerIncome > 0) params.set("partnerInkomen", partnerIncome.toString());
     else params.delete("partnerInkomen");
-
-    if (vermogen > 0) params.set("vermogen", vermogen.toString());
-    else params.delete("vermogen");
-
-    if (kinderen > 0) params.set("kinderen", kinderen.toString());
-    else params.delete("kinderen");
 
     const newUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState(null, "", newUrl);
@@ -477,8 +446,6 @@ const breadcrumbSchema = {
     const rent = params.get("huur");
     const partner = params.get("partner");
     const partnerIncome = params.get("partnerInkomen");
-    const vermogen = params.get("vermogen");
-    const kinderen = params.get("kinderen");
 
     if (income !== null) incomeInput.value = income;
     if (rent !== null) rentInput.value = rent;
@@ -493,8 +460,6 @@ const breadcrumbSchema = {
       partnerIncomeGroup.style.display = household === "couple" ? "block" : "none";
     }
     if (partnerIncome !== null) partnerIncomeInput.value = partnerIncome;
-    if (vermogen !== null) vermogenInput.value = vermogen;
-    if (kinderen !== null) kinderenInput.value = kinderen;
   }
 
   function initQuickChips() {
@@ -553,8 +518,6 @@ const breadcrumbSchema = {
   incomeInput.addEventListener("input", calculate);
   rentInput.addEventListener("input", calculate);
   partnerIncomeInput.addEventListener("input", calculate);
-  vermogenInput.addEventListener("input", calculate);
-  kinderenInput.addEventListener("input", calculate);
   berekenBtn.addEventListener("click", calculate);
   incomeInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {

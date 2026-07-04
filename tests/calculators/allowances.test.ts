@@ -168,5 +168,29 @@ describe("Allowance Engine v0.1", () => {
       expect(result.valid).toBe(false);
       expect(result.error).toBeTruthy();
     });
+
+    it("ignores partnerIncome when single", () => {
+      const alone = calculateAllowances({ income: 15000, partnerIncome: 50000, isCouple: false, rent: 650 });
+      expect(alone.totalIncome).toBe(15000);
+      expect(alone.rentBenefit).toBeGreaterThan(0);
+      expect(alone.zorgBenefit).toBeGreaterThan(0);
+    });
+
+    it("does not return 0 for a single low-income scenario due to ignored partnerIncome", () => {
+      const withoutPartner = calculateAllowances({ income: 15000, isCouple: false, rent: 650 });
+      const withPartner = calculateAllowances({ income: 15000, partnerIncome: 25000, isCouple: false, rent: 650 });
+      expect(withPartner.totalIncome).toBe(withoutPartner.totalIncome);
+      expect(withPartner.rentBenefit).toBe(withoutPartner.rentBenefit);
+      expect(withPartner.zorgBenefit).toBe(withoutPartner.zorgBenefit);
+      expect(withPartner.rentBenefit).toBeGreaterThan(0);
+      expect(withPartner.zorgBenefit).toBeGreaterThan(0);
+    });
+
+    it("still counts partnerIncome when couple", () => {
+      const alone = calculateAllowances({ income: 30000, isCouple: false, rent: 700 });
+      const couple = calculateAllowances({ income: 30000, partnerIncome: 10000, isCouple: true, rent: 700 });
+      expect(couple.totalIncome).toBe(40000);
+      expect(couple.totalIncome).not.toBe(alone.totalIncome);
+    });
   });
 });
