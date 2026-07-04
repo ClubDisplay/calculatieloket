@@ -68,13 +68,22 @@ const quickLinks = getQuickLinks();
       </script>
 
       <div class="hero-trust">
-        <span>Gratis</span>
-        <span class="dot" aria-hidden="true">·</span>
-        <span>Geen account</span>
-        <span class="dot" aria-hidden="true">·</span>
-        <span>Geen opslag</span>
-        <span class="dot" aria-hidden="true">·</span>
-        <span>Officiële bronnen</span>
+        <span class="hero-trust-item">
+          <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Gratis</span>
+        </span>
+        <span class="hero-trust-item">
+          <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Geen account</span>
+        </span>
+        <span class="hero-trust-item">
+          <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Geen opslag</span>
+        </span>
+        <span class="hero-trust-item">
+          <svg class="hti-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#059669" stroke-width="2"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Officiële bronnen</span>
+        </span>
       </div>
 
       <div class="hp-quick-chips" aria-label="Populaire berekeningen">
@@ -418,9 +427,9 @@ const quickLinks = getQuickLinks();
   /* ===== HERO v3 ===== */
   .home-hero {
     width: 100%;
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    padding: 2.5rem 0 1.5rem;
-    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+    padding: 3rem 0 2rem;
+    margin-bottom: 2rem;
     text-align: center;
     border-bottom: 1px solid var(--color-border);
   }
@@ -533,13 +542,21 @@ const quickLinks = getQuickLinks();
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.35rem 0.6rem;
+    gap: 0.5rem 0.9rem;
     font-size: 0.8rem;
     color: var(--color-text-muted);
   }
 
-  .hero-trust .dot {
-    opacity: 0.5;
+  .hero-trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+
+  .hti-icon {
+    display: block;
+    flex-shrink: 0;
   }
 
   .hp-quick-chips {
