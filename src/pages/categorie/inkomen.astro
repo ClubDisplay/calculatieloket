@@ -8,44 +8,17 @@ import CategoryFaq from "../../components/category/CategoryFaq.astro";
 import CategorySources from "../../components/category/CategorySources.astro";
 import RelatedCategories from "../../components/category/RelatedCategories.astro";
 import AdSlot from "../../components/AdSlot.astro";
-import { icons, categoryList } from "../../lib/category-icons";
+import {
+  getCategoryList,
+  getCalculatorsByCategory,
+  toCategoryGridItem,
+} from "../../lib/calculators/registry";
 
 const title = "Inkomen berekenen | Bruto netto, salaris, toeslagen, vakantiegeld";
 const description = "Bereken gratis je bruto-netto salaris, vakantiegeld en toeslagen voor 2026. Snel inzicht in je inkomen, gebaseerd op officiële bronnen.";
 
-const calculators = [
-  {
-    title: "Bruto netto 2026",
-    href: "/bruto-netto-2026/",
-    description: "Wat houd je netto over van je bruto salaris in 2026?",
-    badge: "Populair",
-    icon: icons.euro,
-    accent: "#2563eb",
-  },
-  {
-    title: "Salaris calculator",
-    href: "/salaris-calculator/",
-    description: "Vergelijk bruto bedragen en zie direct het netto effect.",
-    icon: icons.euro,
-    accent: "#2563eb",
-  },
-  {
-    title: "Vakantiegeld calculator",
-    href: "/vakantiegeld-calculator/",
-    description: "Hoeveel vakantiegeld houd je netto over na inhoudingen?",
-    badge: "Nieuw",
-    icon: icons.sun,
-    accent: "#0891b2",
-  },
-  {
-    title: "Toeslagen calculator",
-    href: "/toeslagen-calculator/",
-    description: "Bereken snel je huur- en zorgtoeslag op basis van inkomen.",
-    badge: "Populair",
-    icon: icons.money,
-    accent: "#059669",
-  },
-];
+const categoryList = getCategoryList();
+const calculators = getCalculatorsByCategory("Inkomen").map(toCategoryGridItem);
 
 const faq = [
   {
