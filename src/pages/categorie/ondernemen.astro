@@ -8,29 +8,17 @@ import CategoryFaq from "../../components/category/CategoryFaq.astro";
 import CategorySources from "../../components/category/CategorySources.astro";
 import RelatedCategories from "../../components/category/RelatedCategories.astro";
 import AdSlot from "../../components/AdSlot.astro";
-import { icons, categoryList } from "../../lib/category-icons";
+import {
+  getCategoryList,
+  getCalculatorsByCategory,
+  toCategoryGridItem,
+} from "../../lib/calculators/registry";
 
 const title = "Ondernemen berekenen | ZZP uurtarief, btw en importkosten";
 const description = "Bereken je ZZP uurtarief, btw en auto importkosten voor je onderneming. Snelle indicaties gebaseerd op officiële bronnen.";
 
-const calculators = [
-  {
-    title: "ZZP calculator",
-    href: "/zzp-calculator/",
-    description: "Van gewenst netto inkomen naar benodigd uurtarief.",
-    badge: "Voor ondernemers",
-    icon: icons.person,
-    accent: "#7c3aed",
-  },
-  {
-    title: "Auto importkosten berekenen",
-    href: "/auto-importkosten-berekenen/",
-    description: "Bereken bpm, RDW, transport en totale importkosten.",
-    badge: "Nieuw",
-    icon: icons.car,
-    accent: "#0891b2",
-  },
-];
+const categoryList = getCategoryList();
+const calculators = getCalculatorsByCategory("Ondernemen").map(toCategoryGridItem);
 
 const faq = [
   {

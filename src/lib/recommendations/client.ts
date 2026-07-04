@@ -1,18 +1,10 @@
 import type { Recommendation } from "./types";
-import { icons } from "../category-icons";
+import { getRecommendationIcon } from "../calculators/registry";
 
 export const MAX_RECOMMENDATIONS = 4;
 
 function iconFor(id: string, title: string): string {
-  const key = `${id} ${title}`.toLowerCase();
-  if (key.includes("vakantiegeld") || key.includes("vakantie")) return icons.sun;
-  if (key.includes("hypotheek") || key.includes("wonen") || key.includes("huis")) return icons.house;
-  if (key.includes("salaris") || key.includes("netto") || key.includes("bruto") || key.includes("loon")) return icons.money;
-  if (key.includes("zzp") || key.includes("ondernemen") || key.includes("bedrijf") || key.includes("zzp'er")) return icons.person;
-  if (key.includes("auto") || key.includes("import") || key.includes("car") || key.includes("voertuig")) return icons.car;
-  if (key.includes("btw") || key.includes("tarief") || key.includes("percent") || key.includes("percentage")) return icons.percent;
-  if (key.includes("toeslagen") || key.includes("zorgtoeslag") || key.includes("huurtoeslag")) return icons.house;
-  return icons.calc;
+  return getRecommendationIcon(id, title);
 }
 
 /**

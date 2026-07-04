@@ -1,7 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AdSlot from "../components/AdSlot.astro";
-import { searchIndex } from "../lib/search-index";
+import {
+  getSearchIndex,
+  getSearchIcons,
+  getFeaturedCards,
+  getHomeCategories,
+  getQuickLinks,
+} from "../lib/calculators/registry";
 
 const title = "Calculatieloket.nl | Gratis berekeningen voor salaris, BTW, hypotheek en meer";
 const description = "Snel antwoord op jouw financiële vraag. Gratis berekeningen voor salaris, BTW, hypotheek, toeslagen, ZZP en auto-kosten. Geen account, gebaseerd op officiële bronnen.";
@@ -18,98 +24,11 @@ const websiteSchema = {
   },
 };
 
-const icons: Record<string, string> = {
-  euro: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">€</text></svg>`,
-  money: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="2"/><path d="M8 11h2M18 17h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  house: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M3 12L14 4L25 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="13" width="12" height="11" rx="1" stroke="currentColor" stroke-width="2"/><rect x="12" y="18" width="4" height="6" rx="1" stroke="currentColor" stroke-width="2"/></svg>`,
-  calc: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="2" y="3" width="24" height="22" rx="3" stroke="currentColor" stroke-width="2"/><line x1="9" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="19" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  person: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="currentColor" stroke-width="1.5"/></svg>`,
-  car: `<svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
-};
-
-const searchIcons: Record<string, string> = {
-  euro: icons.euro,
-  money: icons.money,
-  house: icons.house,
-  calc: icons.calc,
-  person: icons.person,
-  car: icons.car,
-};
-
-const cards = [
-  {
-    id: "bruto-netto",
-    title: "Bruto netto 2026",
-    href: "/bruto-netto-2026/",
-    keywords: "bruto netto salaris inkomen loon 2026",
-    icon: icons.euro,
-    accent: "#2563eb",
-    question: "Wat houd ik netto over?",
-  },
-  {
-    id: "btw",
-    title: "BTW berekenen",
-    href: "/btw-calculator/",
-    keywords: "btw belasting 21% 9% berekenen inclusief exclusief",
-    icon: icons.calc,
-    accent: "#2563eb",
-    question: "Hoeveel btw moet ik berekenen?",
-  },
-  {
-    id: "hypotheek",
-    title: "Hypotheek berekenen",
-    href: "/hypotheek-calculator/",
-    keywords: "hypotheek wonen lenen maandlasten",
-    icon: icons.house,
-    accent: "#d97706",
-    question: "Wat kan ik maximaal lenen?",
-  },
-  {
-    id: "toeslagen",
-    title: "Toeslagen berekenen",
-    href: "/toeslagen-calculator/",
-    keywords: "toeslagen huur zorg inkomen",
-    icon: icons.money,
-    accent: "#059669",
-    question: "Heb ik recht op huur- of zorgtoeslag?",
-  },
-  {
-    id: "zzp",
-    title: "ZZP uurtarief",
-    href: "/zzp-calculator/",
-    keywords: "zzp uurtarief ondernemer freelancer inkomen",
-    icon: icons.person,
-    accent: "#7c3aed",
-    question: "Wat moet ik als zzp'er vragen?",
-  },
-  {
-    id: "auto-importkosten",
-    title: "Auto importkosten",
-    href: "/auto-importkosten-berekenen/",
-    keywords: "auto importkosten importeren bpm rdw",
-    icon: icons.car,
-    accent: "#0891b2",
-    question: "Wat kost een auto importeren?",
-  },
-];
-
-const homeCategories = [
-  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/", icon: icons.euro },
-  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/", icon: icons.calc },
-  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/", icon: icons.house },
-  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/", icon: icons.person },
-  { id: "Auto", label: "Auto", href: "/categorie/auto/", icon: icons.car },
-  { id: "Toeslagen", label: "Toeslagen", href: "/toeslagen-calculator/", icon: icons.money },
-];
-
-const quickLinks = [
-  { label: "Netto salaris", href: "/bruto-netto-2026/" },
-  { label: "BTW", href: "/btw-calculator/" },
-  { label: "Hypotheek", href: "/hypotheek-calculator/" },
-  { label: "Toeslagen", href: "/toeslagen-calculator/" },
-  { label: "ZZP uurtarief", href: "/zzp-calculator/" },
-  { label: "Auto import", href: "/auto-importkosten-berekenen/" },
-];
+const searchIndex = getSearchIndex();
+const searchIcons = getSearchIcons();
+const cards = getFeaturedCards();
+const homeCategories = getHomeCategories();
+const quickLinks = getQuickLinks();
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">

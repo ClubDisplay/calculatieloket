@@ -8,35 +8,17 @@ import CategoryFaq from "../../components/category/CategoryFaq.astro";
 import CategorySources from "../../components/category/CategorySources.astro";
 import RelatedCategories from "../../components/category/RelatedCategories.astro";
 import AdSlot from "../../components/AdSlot.astro";
-import { icons, categoryList } from "../../lib/category-icons";
+import {
+  getCategoryList,
+  getCalculatorsByCategory,
+  toCategoryGridItem,
+} from "../../lib/calculators/registry";
 
 const title = "Belasting berekenen | BTW, tarieven en omrekenen";
 const description = "Bereken eenvoudig btw inclusief en exclusief, inclusief naar exclusief. Gebaseerd op de actuele Nederlandse tarieven van de Belastingdienst.";
 
-const calculators = [
-  {
-    title: "BTW calculator",
-    href: "/btw-calculator/",
-    description: "Bereken 21%, 9% of 0% btw, exclusief en inclusief.",
-    badge: "Populair",
-    icon: icons.calc,
-    accent: "#2563eb",
-  },
-  {
-    title: "BTW terugrekenen",
-    href: "/btw-terugrekenen/",
-    description: "Reken snel een inclusief bedrag om naar exclusief.",
-    icon: icons.percent,
-    accent: "#2563eb",
-  },
-  {
-    title: "BTW inclusief/exclusief",
-    href: "/btw-inclusief-exclusief/",
-    description: "Omrekenen in beide richtingen met alle gangbare tarieven.",
-    icon: icons.switch,
-    accent: "#2563eb",
-  },
-];
+const categoryList = getCategoryList();
+const calculators = getCalculatorsByCategory("Belasting").map(toCategoryGridItem);
 
 const faq = [
   {

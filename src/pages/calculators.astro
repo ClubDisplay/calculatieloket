@@ -5,129 +5,16 @@ import CategoryHero from "../components/category/CategoryHero.astro";
 import CategoryGrid from "../components/category/CategoryGrid.astro";
 import RelatedCategories from "../components/category/RelatedCategories.astro";
 import AdSlot from "../components/AdSlot.astro";
-import { icons, categoryList } from "../lib/category-icons";
+import {
+  getCategoryList,
+  getCalculatorGroupsForHub,
+} from "../lib/calculators/registry";
 
 const title = "Alle calculators | Calculatieloket.nl";
-const description = "Ontdek alle 11 gratis calculators van Calculatieloket.nl. Van inkomen, belasting en wonen tot ondernemen en auto. Snel, duidelijk en gebaseerd op officiële bronnen.";
+const description = "Ontdek alle 10 gratis calculators van Calculatieloket.nl. Van inkomen, belasting en wonen tot ondernemen en auto. Snel, duidelijk en gebaseerd op officiële bronnen.";
 
-const calculatorGroups = [
-  {
-    category: "Inkomen",
-    accent: "#2563eb",
-    items: [
-      {
-        title: "Bruto netto 2026",
-        href: "/bruto-netto-2026/",
-        description: "Wat houd je netto over van je bruto salaris in 2026?",
-        badge: "Populair",
-        icon: icons.euro,
-        accent: "#2563eb",
-      },
-      {
-        title: "Salaris calculator",
-        href: "/salaris-calculator/",
-        description: "Vergelijk bruto bedragen en zie direct het netto effect.",
-        icon: icons.money,
-        accent: "#2563eb",
-      },
-      {
-        title: "Vakantiegeld calculator",
-        href: "/vakantiegeld-calculator/",
-        description: "Hoeveel vakantiegeld houd je netto over na inhoudingen?",
-        badge: "Nieuw",
-        icon: icons.sun,
-        accent: "#0891b2",
-      },
-      {
-        title: "Toeslagen calculator",
-        href: "/toeslagen-calculator/",
-        description: "Bereken snel je huur- en zorgtoeslag op basis van inkomen.",
-        badge: "Populair",
-        icon: icons.money,
-        accent: "#059669",
-      },
-    ],
-  },
-  {
-    category: "Belasting",
-    accent: "#2563eb",
-    items: [
-      {
-        title: "BTW calculator",
-        href: "/btw-calculator/",
-        description: "Bereken 21%, 9% of 0% btw, exclusief en inclusief.",
-        badge: "Populair",
-        icon: icons.calc,
-        accent: "#2563eb",
-      },
-      {
-        title: "BTW terugrekenen",
-        href: "/btw-terugrekenen/",
-        description: "Reken snel een inclusief bedrag om naar exclusief.",
-        icon: icons.percent,
-        accent: "#2563eb",
-      },
-      {
-        title: "BTW inclusief/exclusief",
-        href: "/btw-inclusief-exclusief/",
-        description: "Omrekenen in beide richtingen met alle gangbare tarieven.",
-        icon: icons.switch,
-        accent: "#2563eb",
-      },
-    ],
-  },
-  {
-    category: "Wonen",
-    accent: "#d97706",
-    items: [
-      {
-        title: "Hypotheek calculator",
-        href: "/hypotheek-calculator/",
-        description: "Wat kan je maximaal lenen en wat zijn je maandlasten?",
-        badge: "Populair",
-        icon: icons.house,
-        accent: "#d97706",
-      },
-    ],
-  },
-  {
-    category: "Ondernemen",
-    accent: "#7c3aed",
-    items: [
-      {
-        title: "ZZP calculator",
-        href: "/zzp-calculator/",
-        description: "Van gewenst netto inkomen naar benodigd uurtarief.",
-        badge: "Voor ondernemers",
-        icon: icons.person,
-        accent: "#7c3aed",
-      },
-      {
-        title: "Auto importkosten berekenen",
-        href: "/auto-importkosten-berekenen/",
-        description: "Bereken bpm, RDW, transport en totale importkosten.",
-        badge: "Nieuw",
-        icon: icons.car,
-        accent: "#0891b2",
-      },
-    ],
-  },
-  {
-    category: "Auto",
-    accent: "#0891b2",
-    items: [
-      {
-        title: "Auto importkosten berekenen",
-        href: "/auto-importkosten-berekenen/",
-        description: "Alle kosten voor het importeren van een auto op een rij.",
-        badge: "Nieuw",
-        icon: icons.car,
-        accent: "#0891b2",
-      },
-    ],
-  },
-];
-
+const categoryList = getCategoryList();
+const calculatorGroups = getCalculatorGroupsForHub();
 const allCalculators = calculatorGroups.flatMap((group) => group.items);
 
 const breadcrumbSchema = {

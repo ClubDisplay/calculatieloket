@@ -9,11 +9,3 @@ export const icons: Record<string, string> = {
   person: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 22c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="9" width="8" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="13" x2="24" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="17" x2="24" y2="17" stroke="currentColor" stroke-width="1.5"/></svg>`,
   car: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 17l1.8-5.2A2 2 0 0 1 7.7 10.4h12.6a2 2 0 0 1 1.9 1.4L24 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="17" width="22" height="4" rx="1.5" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="21.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
 };
-
-export const categoryList = [
-  { id: "Inkomen", label: "Inkomen", href: "/categorie/inkomen/" },
-  { id: "Wonen", label: "Wonen", href: "/categorie/wonen/" },
-  { id: "Ondernemen", label: "Ondernemen", href: "/categorie/ondernemen/" },
-  { id: "Belasting", label: "Belasting", href: "/categorie/belasting/" },
-  { id: "Auto", label: "Auto", href: "/categorie/auto/" },
-];

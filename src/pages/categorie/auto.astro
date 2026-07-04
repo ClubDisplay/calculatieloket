@@ -8,21 +8,17 @@ import CategoryFaq from "../../components/category/CategoryFaq.astro";
 import CategorySources from "../../components/category/CategorySources.astro";
 import RelatedCategories from "../../components/category/RelatedCategories.astro";
 import AdSlot from "../../components/AdSlot.astro";
-import { icons, categoryList } from "../../lib/category-icons";
+import {
+  getCategoryList,
+  getCalculatorsByCategory,
+  toCategoryGridItem,
+} from "../../lib/calculators/registry";
 
 const title = "Auto berekenen | Importkosten, bpm en RDW";
 const description = "Bereken wat het importeren van een auto of camper kost. Inclusief bpm, RDW, transport, keuring en kenteken. Gebaseerd op officiële bronnen.";
 
-const calculators = [
-  {
-    title: "Auto importkosten berekenen",
-    href: "/auto-importkosten-berekenen/",
-    description: "Alle kosten voor het importeren van een auto op een rij.",
-    badge: "Nieuw",
-    icon: icons.car,
-    accent: "#0891b2",
-  },
-];
+const categoryList = getCategoryList();
+const calculators = getCalculatorsByCategory("Auto").map(toCategoryGridItem);
 
 const faq = [
   {
