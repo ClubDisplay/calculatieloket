@@ -84,6 +84,16 @@ Leidend document: `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`.
 
 > Overzicht van de laatste drie productiewijzigingen. Details staan in `docs/product/CURRENT_STATE.md` en `docs/10-CHANGELOG.md`.
 
+### PR #60 — AdSense readiness: remove under-construction placeholders and add checklist
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/60
+- **Branch:** `fix/adsense-readiness-blockers`
+- **Status:** ⏳ Open ter review; niet gemerged of gedeployed
+- **Wat:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit header en footer van `src/layouts/BaseLayout.astro`, inclusief overbodige placeholder-CSS. `scripts/audit-content-safety.mjs` uitgebreid met automatische detectie van "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen. Nieuw document `docs/adsense-readiness-checklist.md` met de complete checklist voor AdSense-approval. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, advertentiecode, cookie/consent, SEO-copy, sitemap, robots of rekenlogica. `public/ads.txt` was reeds aanwezig en correct; na build ook in `dist/ads.txt` en bereikbaar in preview op `/ads.txt`.
+- **Tests:** 253/253 geslaagd.
+- **Build:** 23 pagina's, 0 TypeScript-fouten.
+- **Noot:** Niet deployen zonder expliciet akkoord. PR #59 (`seo/btw-cluster-content-quality`) blijft open maar mag niet gemerged/gedeployed worden in deze context.
+
 ### PR #56 — Live calculator button UX fix
 
 - **PR:** https://github.com/ClubDisplay/calculatieloket/pull/56

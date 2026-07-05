@@ -2,6 +2,19 @@
 
 ## 2026-07-05
 
+**Type:** Hotfix / AdSense Readiness
+**Wijziging:** PR #60 — AdSense readiness: remove under-construction placeholders and add checklist
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/60
+**Status:** ⏳ Open ter review; niet gemerged of gedeployed
+**Details:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit de header- en footer-navigatie in `src/layouts/BaseLayout.astro`, inclusief de overbodige placeholder-CSS. `scripts/audit-content-safety.mjs` uitgebreid met automatische detectie van "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen in zowel gerenderde HTML als paginabron. Nieuw document `docs/adsense-readiness-checklist.md` met de complete checklist voor AdSense-approval (ads.txt, geen placeholders, geen lege advertentiecontainers, content-kwaliteit, privacy/consent, technische output en handmatige AdSense-verificatie). Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, advertentiecode, cookie/consent, SEO-copy, sitemap, robots of rekenlogica. `public/ads.txt` was reeds aanwezig en correct; na build ook in `dist/ads.txt` en bereikbaar in preview op `/ads.txt`.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 253/253 geslaagd.
+**Atlas CI:** `npm run atlas:check` volledig groen.
+
+---
+
+## 2026-07-05
+
 **Type:** Hotfix / UX
 **Wijziging:** PR #56 — Live calculator button UX fix
 **PR:** https://github.com/ClubDisplay/calculatieloket/pull/56

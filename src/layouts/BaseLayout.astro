@@ -186,9 +186,6 @@ const jsonLd = {
                 >
                   Nieuw
                 </a>
-                <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
-                  Calculator Explorer (binnenkort)
-                </span>
               </div>
               <div class="megamenu-col" role="group" aria-label="Alle categorieën">
                 <h3 class="megamenu-title">Alle categorieën</h3>
@@ -205,9 +202,6 @@ const jsonLd = {
                     {cat.label}
                   </a>
                 ))}
-                <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
-                  Toeslagen (binnenkort)
-                </span>
               </div>
             </div>
           </div>
@@ -246,15 +240,8 @@ const jsonLd = {
                   {cat.label}
                 </a>
               ))}
-              <span class="site-nav-dropdown-link site-nav-placeholder" aria-disabled="true">
-                Toeslagen (binnenkort)
-              </span>
             </div>
           </div>
-
-          <span class="site-nav-link site-nav-placeholder" aria-disabled="true">
-            Kennisbank (binnenkort)
-          </span>
 
           <a
             href="/over-ons/"
@@ -301,9 +288,6 @@ const jsonLd = {
             >
               Nieuw
             </a>
-            <span class="footer-placeholder" aria-disabled="true">
-              Calculator Explorer (binnenkort)
-            </span>
           </div>
         </div>
         <div class="footer-col">
@@ -321,20 +305,11 @@ const jsonLd = {
                 {cat.label}
               </a>
             ))}
-            <span class="footer-placeholder" aria-disabled="true">
-              Toeslagen (binnenkort)
-            </span>
           </div>
         </div>
         <div class="footer-col">
           <h3 class="footer-title">Informatie</h3>
           <div class="footer-links">
-            <span class="footer-placeholder" aria-disabled="true">
-              Kennisbank (binnenkort)
-            </span>
-            <span class="footer-placeholder" aria-disabled="true">
-              Nieuws (binnenkort)
-            </span>
           </div>
         </div>
         <div class="footer-col">
@@ -581,18 +556,6 @@ const jsonLd = {
     color: var(--color-primary);
   }
 
-  .site-nav-placeholder {
-    color: var(--color-text-muted);
-    cursor: default;
-    opacity: 0.75;
-  }
-
-  .site-nav-placeholder:hover,
-  .site-nav-placeholder:focus-visible {
-    background: transparent;
-    color: var(--color-text-muted);
-  }
-
   .site-nav-dropdown {
     position: relative;
   }
@@ -658,17 +621,6 @@ const jsonLd = {
     color: var(--color-primary);
   }
 
-  .site-nav-dropdown-link.site-nav-placeholder {
-    color: var(--color-text-muted);
-    cursor: default;
-  }
-
-  .site-nav-dropdown-link.site-nav-placeholder:hover,
-  .site-nav-dropdown-link.site-nav-placeholder:focus-visible {
-    background: transparent;
-    color: var(--color-text-muted);
-  }
-
   @media (min-width: 721px) {
     .site-nav-dropdown:hover .site-nav-dropdown-menu,
     .site-nav-dropdown:focus-within .site-nav-dropdown-menu,
@@ -729,12 +681,6 @@ const jsonLd = {
   .footer-links a:focus-visible {
     color: var(--color-primary);
     text-decoration: underline;
-  }
-
-  .footer-placeholder {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    opacity: 0.75;
   }
 
   .footer-bottom {
