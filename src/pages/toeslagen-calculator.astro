@@ -41,6 +41,7 @@ const initialRecommendations = getRecommendations({
 
 const totalMonthlyBenefit = initialResult.rentBenefit + initialResult.zorgBenefit;
 const totalYearlyBenefit = totalMonthlyBenefit * 12;
+const zorgBenefitMonthly = initialResult.zorgBenefit;
 
 const lastUpdated = "30 juni 2026";
 
@@ -228,22 +229,23 @@ const breadcrumbSchema = {
     <ResultPanel
       slot="result"
       title="Toeslag indicatie"
-      heroLabel="Geschatte toeslag"
-      heroValue={formatEuro(totalMonthlyBenefit, 0)}
-      heroSubtext="Eenvoudige indicatie per maand"
+      heroLabel="Zorgtoeslag indicatie"
+      heroValue={formatEuro(zorgBenefitMonthly, 0)}
+      heroSubtext="Per maand (indicatie)"
       badge="Indicatie"
     >
       <div class="result-meta">
         <span class="meta-badge">Bijgewerkt: 2026</span>
-        <span class="meta-badge">Bron: Belastingdienst</span>
+        <span class="meta-badge">Bron: Dienst Toeslagen</span>
       </div>
 
       <div class="result-row"><span class="label">Bruto jaarinkomen</span><span class="value" id="detailIncome">{formatEuro(defaultIncome, 0)}</span></div>
       <div class="result-row"><span class="label">Huishouden</span><span class="value" id="detailHousehold">{defaultIsCouple ? "Met partner" : "Alleenstaand"}</span></div>
       <div class="result-row"><span class="label">Maandelijkse huur</span><span class="value" id="detailRent">{formatEuro(defaultRent, 0)}</span></div>
       <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Huurtoeslag per maand</span><span class="value" id="detailRentBenefit">{formatEuro(initialResult.rentBenefit, 0)}</span></div>
       <div class="result-row"><span class="label">Zorgtoeslag per maand</span><span class="value" id="detailZorgBenefit">{formatEuro(initialResult.zorgBenefit, 0)}</span></div>
+      <div class="result-row"><span class="label">Huurtoeslag per maand</span><span class="value" id="detailRentBenefit">{formatEuro(initialResult.rentBenefit, 0)}</span></div>
+      <p class="result-huurtoeslag-note" id="detailRentNote">Huurtoeslag is een vereenvoudigde indicatie. De officiële proefberekening van Dienst Toeslagen kijkt ook naar leeftijd, rekenhuur, vermogen en huishouden.</p>
       <div class="result-divider"></div>
       <div class="result-row result-row-total"><span class="label">Geschatte toeslag per maand</span><span class="value" id="detailTotalMonthly">{formatEuro(totalMonthlyBenefit, 0)}</span></div>
       <div class="result-row result-row-total"><span class="label">Geschatte toeslag per jaar</span><span class="value" id="detailTotalYearly">{formatEuro(totalYearlyBenefit, 0)}</span></div>
@@ -419,12 +421,12 @@ const breadcrumbSchema = {
     const totalMonthly = result.rentBenefit + result.zorgBenefit;
     const totalYearly = totalMonthly * 12;
 
-    hero.textContent = formatEuro(totalMonthly, 0);
+    hero.textContent = formatEuro(result.zorgBenefit, 0);
     detailIncome.textContent = formatEuro(income, 0);
     detailHousehold.textContent = isCouple ? "Met partner" : "Alleenstaand";
     detailRent.textContent = formatEuro(rent, 0);
-    detailRentBenefit.textContent = formatEuro(result.rentBenefit, 0);
     detailZorgBenefit.textContent = formatEuro(result.zorgBenefit, 0);
+    detailRentBenefit.textContent = formatEuro(result.rentBenefit, 0);
     detailTotalMonthly.textContent = formatEuro(totalMonthly, 0);
     detailTotalYearly.textContent = formatEuro(totalYearly, 0);
 
@@ -650,6 +652,17 @@ const breadcrumbSchema = {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
+  }
+
+  .result-huurtoeslag-note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: #fff8e1;
+    border: 1px solid #f9a825;
+    border-radius: var(--radius);
+    padding: 0.5rem 0.75rem;
+    margin: 0.35rem 0 0.5rem;
+    line-height: 1.5;
   }
 
   .result-assumptions-title {

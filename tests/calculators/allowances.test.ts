@@ -3,39 +3,10 @@ import { resolveRule } from "../../src/lib/rules/resolver";
 import {
   calculateRentBenefit,
   calculateZorgBenefit,
+  calculateHealthcareAllowance2026,
   calculateAllowances,
   type AllowanceInput,
 } from "../../src/lib/calculators/allowances";
-
-/**
- * Reference implementation that mirrors the inline toeslagen-calculator.astro
- * script. Used to verify the engine output stays within tolerance.
- */
-function referenceAllowances(input: AllowanceInput) {
-  const income = input.income;
-  const pi = input.partnerIncome ?? 0;
-  const rent = input.rent ?? 0;
-  const total = input.isCouple ? income + pi : income;
-  const isCouple = input.isCouple;
-
-  const maxRent = 932.93;
-  const incomeLimitRent = isCouple ? 43500 : 32500;
-  let rb = 0;
-  if (total <= incomeLimitRent) {
-    const baseBenefit = 425;
-    const ownPayment = Math.max(0, (total - (isCouple ? 21000 : 18000)) * 0.15);
-    rb = Math.round(Math.max(0, baseBenefit - ownPayment) * Math.min(rent, maxRent) / maxRent);
-  }
-
-  const incomeLimitZorg = isCouple ? 51142 : 40857;
-  let zb = 0;
-  if (total <= incomeLimitZorg) {
-    const reduction = Math.max(0, (total - (isCouple ? 26000 : 23000)) * 0.15);
-    zb = Math.round(Math.max(0, 131 - reduction));
-  }
-
-  return { rb, zb };
-}
 
 describe("Allowance Engine v0.1", () => {
   it("loads the health allowance parameters from the Knowledge Layer", () => {
@@ -49,8 +20,7 @@ describe("Allowance Engine v0.1", () => {
     expect(health).toBeDefined();
     expect(health?.id).toBe("nl.allowance.health.2026");
     expect(health?.data.income_limit_single).toBe(40857);
-    expect(health?.data.base_benefit).toBe(131);
-    expect(health?.data.reduction_rate).toBe(0.15);
+    expect(health?.data.income_limit_couple).toBe(51142);
   });
 
   it("loads the rent allowance parameters from the Knowledge Layer", () => {
@@ -84,21 +54,54 @@ describe("Allowance Engine v0.1", () => {
     });
   });
 
+  describe("calculateHealthcareAllowance2026", () => {
+    describe("single person (no toeslagpartner)", () => {
+      it.each([
+        [25000, 129],
+        [29500, 129],
+        [30000, 126],
+        [30500, 120],
+        [35000, 69],
+        [40500, 6],
+      ])("income %i -> monthly zorgtoeslag %i", (income, expected) => {
+        expect(calculateHealthcareAllowance2026(income, false)).toBe(expected);
+      });
+
+      it("returns 0 above the single income limit", () => {
+        expect(calculateHealthcareAllowance2026(41000, false)).toBe(0);
+        expect(calculateHealthcareAllowance2026(50000, false)).toBe(0);
+      });
+    });
+
+    describe("couple (with toeslagpartner)", () => {
+      it.each([
+        [25000, 246],
+        [30000, 243],
+        [35000, 186],
+        [50000, 15],
+        [51000, 3],
+      ])("joint income %i -> monthly zorgtoeslag %i", (income, expected) => {
+        expect(calculateHealthcareAllowance2026(income, true)).toBe(expected);
+      });
+
+      it("returns 0 above the couple income limit", () => {
+        expect(calculateHealthcareAllowance2026(52000, true)).toBe(0);
+        expect(calculateHealthcareAllowance2026(60000, true)).toBe(0);
+      });
+    });
+
+    it("returns 0 for invalid inputs", () => {
+      expect(calculateHealthcareAllowance2026(NaN, false)).toBe(0);
+      expect(calculateHealthcareAllowance2026(-1000, false)).toBe(0);
+    });
+  });
+
   describe("calculateZorgBenefit", () => {
-    it("returns 0 when income exceeds the limit", () => {
-      expect(calculateZorgBenefit(50000, false)).toBe(0);
-      expect(calculateZorgBenefit(60000, true)).toBe(0);
-    });
-
-    it("returns a positive benefit for a low-income single person", () => {
-      const benefit = calculateZorgBenefit(20000, false);
-      expect(benefit).toBeGreaterThan(0);
-    });
-
-    it("returns a higher benefit for a couple than a single at the same income", () => {
-      const single = calculateZorgBenefit(25000, false);
-      const couple = calculateZorgBenefit(25000, true);
-      expect(couple).toBeGreaterThan(single);
+    it("delegates to the 2026 table-based implementation", () => {
+      expect(calculateZorgBenefit(25000, false)).toBe(129);
+      expect(calculateZorgBenefit(25000, true)).toBe(246);
+      expect(calculateZorgBenefit(41000, false)).toBe(0);
+      expect(calculateZorgBenefit(51000, true)).toBe(3);
     });
   });
 
@@ -114,27 +117,14 @@ describe("Allowance Engine v0.1", () => {
       expect(result.valid).toBe(true);
       expect(result.rentBenefit).toBeGreaterThanOrEqual(0);
       expect(result.zorgBenefit).toBeGreaterThanOrEqual(0);
+      expect(result.zorgBenefit).toBe(129);
     });
 
-    it("matches the inline calculator for the standard scenario", () => {
-      const engine = calculateAllowances(defaultInput);
-      const reference = referenceAllowances(defaultInput);
-      expect(engine.rentBenefit).toBe(reference.rb);
-      expect(engine.zorgBenefit).toBe(reference.zb);
-    });
-
-    it("matches the inline calculator for a single low-income zorgtoeslag scenario", () => {
-      const input: AllowanceInput = { income: 25000, isCouple: false };
-      const engine = calculateAllowances(input);
-      const reference = referenceAllowances(input);
-      expect(engine.zorgBenefit).toBe(reference.zb);
-    });
-
-    it("matches the inline calculator for a couple low-income zorgtoeslag scenario", () => {
-      const input: AllowanceInput = { income: 25000, partnerIncome: 15000, isCouple: true };
-      const engine = calculateAllowances(input);
-      const reference = referenceAllowances(input);
-      expect(engine.zorgBenefit).toBe(reference.zb);
+    it("returns the correct zorgtoeslag for the reported bug case", () => {
+      const result = calculateAllowances({ income: 25000, rent: 700, isCouple: false });
+      expect(result.valid).toBe(true);
+      expect(result.zorgBenefit).toBe(129);
+      expect(result.rentBenefit).toBeGreaterThanOrEqual(0);
     });
 
     it("returns 0 benefits for high incomes", () => {
@@ -144,17 +134,16 @@ describe("Allowance Engine v0.1", () => {
       expect(result.zorgBenefit).toBe(0);
     });
 
-    it("matches the inline calculator for a couple huurtoeslag scenario", () => {
+    it("calculates joint income correctly for a couple", () => {
       const input: AllowanceInput = {
         income: 30000,
-        partnerIncome: 10000,
+        partnerIncome: 20000,
         isCouple: true,
         rent: 800,
       };
-      const engine = calculateAllowances(input);
-      const reference = referenceAllowances(input);
-      expect(engine.rentBenefit).toBe(reference.rb);
-      expect(engine.zorgBenefit).toBe(reference.zb);
+      const result = calculateAllowances(input);
+      expect(result.totalIncome).toBe(50000);
+      expect(result.zorgBenefit).toBe(15);
     });
 
     it("returns valid false for negative income", () => {
@@ -191,6 +180,21 @@ describe("Allowance Engine v0.1", () => {
       const couple = calculateAllowances({ income: 30000, partnerIncome: 10000, isCouple: true, rent: 700 });
       expect(couple.totalIncome).toBe(40000);
       expect(couple.totalIncome).not.toBe(alone.totalIncome);
+      expect(couple.zorgBenefit).toBe(129);
+    });
+
+    it("matches the required edge cases from the hotfix specification", () => {
+      // Single
+      expect(calculateAllowances({ income: 25000, isCouple: false }).zorgBenefit).toBe(129);
+      expect(calculateAllowances({ income: 30000, isCouple: false }).zorgBenefit).toBe(126);
+      expect(calculateAllowances({ income: 40500, isCouple: false }).zorgBenefit).toBe(6);
+      expect(calculateAllowances({ income: 41000, isCouple: false }).zorgBenefit).toBe(0);
+
+      // Couple
+      expect(calculateAllowances({ income: 25000, partnerIncome: 0, isCouple: true }).zorgBenefit).toBe(246);
+      expect(calculateAllowances({ income: 30000, partnerIncome: 20000, isCouple: true }).zorgBenefit).toBe(15);
+      expect(calculateAllowances({ income: 51000, partnerIncome: 0, isCouple: true }).zorgBenefit).toBe(3);
+      expect(calculateAllowances({ income: 52000, partnerIncome: 0, isCouple: true }).zorgBenefit).toBe(0);
     });
   });
 });
