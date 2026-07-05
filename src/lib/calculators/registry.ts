@@ -441,7 +441,7 @@ export const calculators: CalculatorDefinition[] = [
     isNew: false,
     badge: "Populair",
     lastUpdated: "2026-06-30",
-    question: "Heb ik recht op huur- of zorgtoeslag?",
+    question: "Krijg een indicatie van huur- of zorgtoeslag.",
     quickLinkLabel: "Toeslagen",
     seo: {
       title: "Toeslagen Calculator 2026 — Zorgtoeslag en huurtoeslag indicatie | Calculatieloket.nl",

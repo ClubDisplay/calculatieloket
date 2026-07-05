@@ -7,6 +7,7 @@ interface Item {
   href: string;
   accent?: string;
   id?: string;
+  template?: string;
 }
 
 interface Props {
@@ -45,7 +46,7 @@ function iconFor(item: Item): string {
       >
         <span class="calc-use-cases-icon" aria-hidden="true" set:html={iconFor(item)} />
         <span class="calc-use-cases-card-title">{item.title}</span>
-        <span class="calc-use-cases-card-desc" data-template={item.description}>{item.description}</span>
+        <span class="calc-use-cases-card-desc" data-template={item.template || item.description} data-fallback={item.description}>{item.description}</span>
         <span class="calc-use-cases-card-cta">Bekijk <span aria-hidden="true">→</span></span>
       </a>
     ))}

@@ -51,21 +51,24 @@ const useCases = [
   {
     id: "bruto-netto",
     title: "Bruto-netto 2026",
-    description: "Bekijk wat je netto overhoudt bij een inkomen van {{inkomen}}.",
+    description: "Bekijk wat je netto overhoudt op basis van je inkomen.",
+    template: "Bekijk wat je netto overhoudt bij een inkomen van {{inkomen}}.",
     href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
   {
     id: "salaris",
     title: "Salaris calculator",
-    description: "Vergelijk bruto en netto op basis van {{inkomen}} per jaar.",
+    description: "Vergelijk bruto en netto op basis van je inkomen per jaar.",
+    template: "Vergelijk bruto en netto op basis van {{inkomen}} per jaar.",
     href: "/salaris-calculator/",
     accent: "#3b82f6",
   },
   {
     id: "hypotheek",
     title: "Hypotheek berekenen",
-    description: "Wat kan je lenen met een totaal inkomen van {{totaal}}?",
+    description: "Bekijk een indicatie van je maximale hypotheek.",
+    template: "Wat kan je lenen met een totaal inkomen van {{totaal}}?",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
@@ -324,6 +327,7 @@ const breadcrumbSchema = {
 <script>
   import { calculateAllowances } from "../lib/calculators/allowances";
   import { formatEuro } from "../lib/format/currency";
+  import { fillTemplate } from "../lib/format/template";
   import { getRecommendations } from "../lib/recommendations/engine";
   import { updateFinancialJourney } from "../lib/recommendations/client";
 
@@ -351,21 +355,16 @@ const breadcrumbSchema = {
     n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   function updateUseCases(income: number, totalIncome: number) {
-    const replacements: Record<string, string> = {
-      "{{inkomen}}": formatNumber(income, 0),
-      "{{totaal}}": formatNumber(totalIncome, 0),
-    };
-
     document.querySelectorAll("[data-usecase]").forEach((card) => {
       const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
       if (!desc) return;
       const template = desc.dataset.template;
-      if (!template) return;
-      let text = template;
-      Object.entries(replacements).forEach(([key, value]) => {
-        text = text.replaceAll(key, value);
-      });
-      desc.textContent = text;
+      const fallback = desc.dataset.fallback || desc.textContent || "";
+      if (!template || template === fallback) return;
+      desc.textContent = fillTemplate(template, {
+        inkomen: formatNumber(income, 0),
+        totaal: formatNumber(totalIncome, 0),
+      }, fallback);
     });
   }
 

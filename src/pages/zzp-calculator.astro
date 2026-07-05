@@ -55,7 +55,8 @@ const useCases = [
   {
     id: "btw",
     title: "BTW Calculator",
-    description: "Reken btw over een jaaromzet van {{omzet}}.",
+    description: "Reken btw over je geschatte jaaromzet als zzp'er.",
+    template: "Reken btw over een jaaromzet van {{omzet}}.",
     href: "/btw-calculator/",
     accent: "#2563eb",
   },
@@ -596,6 +597,7 @@ const breadcrumbSchema = {
 <script>
   import { calculateZzpReverse } from "../lib/calculators/zzp";
   import { formatEuro } from "../lib/format/currency";
+  import { fillTemplate } from "../lib/format/template";
   import { getRecommendations } from "../lib/recommendations/engine";
   import { updateFinancialJourney } from "../lib/recommendations/client";
 
@@ -728,8 +730,9 @@ const breadcrumbSchema = {
     document.querySelectorAll(".calc-use-cases-card").forEach((card) => {
       const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement | null;
       const template = desc?.getAttribute("data-template");
-      if (desc && template && template.includes("{{omzet}}")) {
-        desc.textContent = template.replace("{{omzet}}", omzetFormatted);
+      const fallback = desc?.getAttribute("data-fallback") || desc?.textContent || "";
+      if (desc && template && template !== fallback) {
+        desc.textContent = fillTemplate(template, { omzet: omzetFormatted }, fallback);
       }
       const id = card.getAttribute("data-usecase");
       const anchor = card as HTMLAnchorElement;

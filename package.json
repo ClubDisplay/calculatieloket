@@ -20,6 +20,7 @@
     "rule:impact": "node scripts/rule-impact.mjs",
     "knowledge:changelog": "node scripts/knowledge-changelog.mjs",
     "atlas:check": "node scripts/atlas-ci-check.mjs",
+    "audit:content": "node scripts/audit-content-safety.mjs",
     "audit:lighthouse": "npm run build && node scripts/lighthouse-audit.mjs"
   },
   "dependencies": {
