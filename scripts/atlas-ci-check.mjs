@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // scripts/atlas-ci-check.mjs
-// Atlas v2 — Local CI Check v0.4
+// Atlas v2 — Local CI Check v0.5
 // Voert alle kwaliteitschecks sequentieel uit in de juiste volgorde.
 // Ondersteunt optionele Markdown en JSON report output, plus timing per stap.
 // Bevat geen PII.
+// Content-safety audit (audit:content) draait na de build omdat het dist/ nodig heeft.
 
 import { spawn } from "node:child_process";
 import fs from "node:fs";
@@ -18,6 +19,7 @@ const STEPS = [
   ["test", "Run Vitest tests"],
   ["qa:rules", "Run Rule Resolver QA"],
   ["build", "Build Astro site"],
+  ["audit:content", "Audit content safety"],
 ];
 
 function parseArgs() {
