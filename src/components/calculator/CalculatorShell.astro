@@ -200,5 +200,42 @@ const { title, subtitle } = Astro.props;
     });
 
     calculateBtn?.addEventListener('click', revealResult);
+
+    // Dynamic primary button label: calculator-specific text when no meaningful
+    // result is visible, "Berekening bijwerken" once a result is shown.
+    const UPDATE_LABEL = 'Berekening bijwerken';
+    const resultHero = resultPanel?.querySelector('[data-calc-result-hero]');
+
+    function hasMeaningfulResult() {
+      if (!resultHero) return false;
+      const text = resultHero.textContent || '';
+      // Require both the euro symbol and a digit to avoid treating stray
+      // years/percentages as a meaningful result.
+      return /€/.test(text) && /\d/.test(text);
+    }
+
+    function updatePrimaryButtonLabel() {
+      if (!calculateBtn) return;
+      const btn = calculateBtn as HTMLButtonElement;
+      const defaultLabel = btn.dataset.defaultLabel;
+      if (!defaultLabel) return;
+      const nextLabel = hasMeaningfulResult() ? UPDATE_LABEL : defaultLabel;
+      if (btn.textContent !== nextLabel) {
+        btn.textContent = nextLabel;
+      }
+    }
+
+    // Capture the original label from the DOM so we can revert to it when the
+    // result becomes invalid/empty.
+    if (calculateBtn && !(calculateBtn as HTMLButtonElement).dataset.defaultLabel) {
+      (calculateBtn as HTMLButtonElement).dataset.defaultLabel = calculateBtn.textContent || '';
+    }
+
+    updatePrimaryButtonLabel();
+
+    if (resultHero && calculateBtn) {
+      const observer = new MutationObserver(updatePrimaryButtonLabel);
+      observer.observe(resultHero, { childList: true, subtree: true, characterData: true });
+    }
   })();
 </script>
