@@ -49,14 +49,16 @@ const useCases = [
   {
     id: "bruto-netto",
     title: "Bruto-netto 2026",
-    description: "Bereken je netto salaris bij {{inkomen}} bruto per jaar.",
+    description: "Bereken je netto salaris op basis van je bruto inkomen per jaar.",
+    template: "Bereken je netto salaris bij {{inkomen}} bruto per jaar.",
     href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
   {
     id: "salaris",
     title: "Salaris calculator",
-    description: "Vergelijk bruto en netto op basis van {{inkomen}} per jaar.",
+    description: "Vergelijk bruto en netto op basis van je inkomen per jaar.",
+    template: "Vergelijk bruto en netto op basis van {{inkomen}} per jaar.",
     href: "/salaris-calculator/",
     accent: "#3b82f6",
   },
@@ -321,6 +323,7 @@ const breadcrumbSchema = {
 <script>
   import { calculateMortgage } from "../lib/calculators/mortgage";
   import { formatEuro } from "../lib/format/currency";
+  import { fillTemplate } from "../lib/format/template";
   import { getRecommendations } from "../lib/recommendations/engine";
   import { updateFinancialJourney } from "../lib/recommendations/client";
 
@@ -349,20 +352,15 @@ const breadcrumbSchema = {
     n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   function updateUseCases(income: number) {
-    const replacements: Record<string, string> = {
-      "{{inkomen}}": formatNumber(income, 0),
-    };
-
     document.querySelectorAll("[data-usecase]").forEach((card) => {
       const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
       if (!desc) return;
       const template = desc.dataset.template;
-      if (!template) return;
-      let text = template;
-      Object.entries(replacements).forEach(([key, value]) => {
-        text = text.replaceAll(key, value);
-      });
-      desc.textContent = text;
+      const fallback = desc.dataset.fallback || desc.textContent || "";
+      if (!template || template === fallback) return;
+      desc.textContent = fillTemplate(template, {
+        inkomen: formatNumber(income, 0),
+      }, fallback);
     });
   }
 

@@ -56,28 +56,32 @@ const useCases = [
   {
     id: "bruto-netto",
     title: "Bruto-netto 2026",
-    description: "Bekijk de uitgebreide bruto-netto berekening voor {{bruto}} bruto per maand.",
+    description: "Bekijk een uitgebreide bruto-netto berekening.",
+    template: "Bekijk de uitgebreide bruto-netto berekening voor {{bruto}} bruto per maand.",
     href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
   {
     id: "toeslagen",
     title: "Toeslagen berekenen",
-    description: "Met een netto jaarinkomen van {{netto_jaar}} kun je checken of je recht hebt op huur- of zorgtoeslag.",
+    description: "Bekijk een indicatie van toeslagen op basis van je netto jaarinkomen.",
+    template: "Met een netto jaarinkomen van {{netto_jaar}} bekijk je een indicatie van toeslagen.",
     href: "/toeslagen-calculator/",
     accent: "#059669",
   },
   {
     id: "hypotheek",
     title: "Hypotheek berekenen",
-    description: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
+    description: "Bekijk een hypotheekindicatie op basis van je bruto jaarinkomen.",
+    template: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
   {
     id: "zzp",
     title: "ZZP uurtarief berekenen",
-    description: "Om {{netto}} netto per maand als ZZP'er te halen, bereken je het benodigde uurtarief.",
+    description: "Bereken je benodigde uurtarief als ZZP'er.",
+    template: "Om {{netto}} netto per maand als ZZP'er te halen, bereken je het benodigde uurtarief.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
   },
@@ -360,6 +364,7 @@ const breadcrumbSchema = {
 <script>
   import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
   import { formatEuro } from "../lib/format/currency";
+  import { fillTemplate } from "../lib/format/template";
   import { getRecommendations } from "../lib/recommendations/engine";
   import { updateFinancialJourney } from "../lib/recommendations/client";
 
@@ -390,23 +395,18 @@ const breadcrumbSchema = {
     n.toFixed(decimals).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   function updateUseCases(gross: number, netMonthly: number, netYearly: number, grossYearly: number) {
-    const replacements: Record<string, string> = {
-      "{{bruto}}": formatNumber(gross, 0),
-      "{{bruto_jaar}}": formatNumber(grossYearly, 0),
-      "{{netto}}": formatNumber(netMonthly, 0),
-      "{{netto_jaar}}": formatNumber(netYearly, 0),
-    };
-
     document.querySelectorAll("[data-usecase]").forEach((card) => {
       const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
       if (!desc) return;
       const template = desc.dataset.template;
-      if (!template) return;
-      let text = template;
-      Object.entries(replacements).forEach(([key, value]) => {
-        text = text.replaceAll(key, value);
-      });
-      desc.textContent = text;
+      const fallback = desc.dataset.fallback || desc.textContent || "";
+      if (!template || template === fallback) return;
+      desc.textContent = fillTemplate(template, {
+        bruto: formatNumber(gross, 0),
+        bruto_jaar: formatNumber(grossYearly, 0),
+        netto: formatNumber(netMonthly, 0),
+        netto_jaar: formatNumber(netYearly, 0),
+      }, fallback);
     });
   }
 

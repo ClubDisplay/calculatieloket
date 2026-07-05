@@ -51,14 +51,16 @@ const useCases = [
   {
     id: "terugrekenen",
     title: "BTW terugrekenen",
-    description: "Reken {{incl}} inclusief btw terug naar {{excl}} exclusief.",
+    description: "Reken een inclusief bedrag om naar exclusief btw.",
+    template: "Reken {{incl}} inclusief btw terug naar {{excl}} exclusief.",
     href: "/btw-terugrekenen/",
     accent: "#2563eb",
   },
   {
     id: "inclusief-exclusief",
     title: "BTW inclusief/exclusief",
-    description: "Reken {{bedrag}} om tussen exclusief en inclusief btw.",
+    description: "Reken bedragen om tussen exclusief en inclusief btw.",
+    template: "Reken {{bedrag}} om tussen exclusief en inclusief btw.",
     href: "/btw-inclusief-exclusief/",
     accent: "#3b82f6",
   },
@@ -311,6 +313,7 @@ const breadcrumbSchema = {
 <script>
   import { calculateBtw } from "../lib/calculators/btw";
   import { formatEuro } from "../lib/format/currency";
+  import { fillTemplate } from "../lib/format/template";
   import { getRecommendations } from "../lib/recommendations/engine";
   import { updateFinancialJourney } from "../lib/recommendations/client";
 
@@ -333,24 +336,20 @@ const breadcrumbSchema = {
 
   function updateUseCases(amount: number, rate: number, direction: "excl" | "incl", result: { amountExcl: number; amountIncl: number; btwAmount: number }) {
     const incl = direction === "excl" ? result.amountIncl : amount;
-    const replacements: Record<string, string> = {
-      "{{bedrag}}": formatEuro(amount, 2),
-      "{{btw}}": formatEuro(result.btwAmount, 2),
-      "{{excl}}": formatEuro(result.amountExcl, 2),
-      "{{incl}}": formatEuro(incl, 2),
-    };
 
     document.querySelectorAll("[data-usecase]").forEach((card) => {
       const id = card.getAttribute("data-usecase");
       const desc = card.querySelector(".calc-use-cases-card-desc") as HTMLElement;
       if (!desc) return;
       const template = desc.dataset.template;
-      if (!template) return;
-      let text = template;
-      Object.entries(replacements).forEach(([key, value]) => {
-        text = text.replaceAll(key, value);
-      });
-      desc.textContent = text;
+      const fallback = desc.dataset.fallback || desc.textContent || "";
+      if (!template || template === fallback) return;
+      desc.textContent = fillTemplate(template, {
+        bedrag: formatEuro(amount, 2),
+        btw: formatEuro(result.btwAmount, 2),
+        excl: formatEuro(result.amountExcl, 2),
+        incl: formatEuro(incl, 2),
+      }, fallback);
 
       const anchor = card as HTMLAnchorElement;
       if (id === "terugrekenen") {
