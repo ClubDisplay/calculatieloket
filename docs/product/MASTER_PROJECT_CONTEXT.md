@@ -65,6 +65,10 @@ scripts/              # Build/audit/QA scripts
 - Vereist `npx wrangler login`.
 - `.env` bevat `PUBLIC_ADSENSE_ID` en `PUBLIC_ADS_ENABLED`.
 
+### Internationale domeinstrategie
+
+Internationale uitbreiding loopt via FiscalMesh. **dashboard.fiscalmesh.com** wordt het interne control center; **Calculatieloket.nl** blijft de Nederlandse publieke site. Buitenlandse domeinen worden per land gekozen na lokale bron- en merknaam-analyse. Defensieve domeinen zoals `calculatieloket.de`, `.fr`, `.es` en `.be` worden onderzocht, maar niet automatisch als hoofdmerk gebruikt. Zie `docs/dashboard/dashboard-hosting-plan.md`.
+
 ---
 
 ## 4. Product Roadmap
