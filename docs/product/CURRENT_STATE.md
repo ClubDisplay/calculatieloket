@@ -10,21 +10,21 @@
 
 | | |
 |---|---|
-| **Laatste sprint** | PR #56 + PR #55 — live-button UX en content-safety fix (afgerond en gedeployed) |
+| **Laatste sprint** | PR #60 — AdSense readiness: onder-construction placeholders verwijderd en audit/checklist toegevoegd (in review, niet gedeployed) |
 | **Huidige versie** | v1.0.0+ |
 | **Main commit** | `84b2cf06cf363995995923784273d5bd6948bf0e` |
 | **Calculators** | 10 uniek (hub toont 11 cards; homepage toont 6) |
 | **Categoriepagina's** | 5 |
 | **Knowledge Objects** | 25 |
-| **Teststatus** | 241 passed, 0 failed |
+| **Teststatus** | 253 passed, 0 failed |
 | **Atlas status** | ✅ Groen |
 | **Lighthouse status** | ✅ 13/13 pagina's halen drempels |
 | **Product Completion %** | 95% |
 | **Open blockers** | Geen |
-| **Huidige focus** | Documentatie bijwerken na PR #55/#56; homepage search zichtbaarheid/interactie evalueren |
-| **Eerstvolgende sprint** | SEO-sprint + homepage search UX versterken (ad-hoc, geen P0) |
-| **Open PR's** | Geen |
-| **Open feature branches** | Geen |
+| **Huidige focus** | AdSense readiness afronden: PR #60 reviewen en na merge/deploy AdSense status verifiëren; SEO PR #59 niet mergen zonder akkoord |
+| **Eerstvolgende sprint** | SEO-sprint + homepage search UX versterken (ad-hoc, geen P0); PR #59 pas inzetten na expliciet akkoord |
+| **Open PR's** | PR #60 (fix/adsense-readiness-blockers); PR #59 (seo/btw-cluster-content-quality, niet mergen zonder akkoord) |
+| **Open feature branches** | `fix/adsense-readiness-blockers`; `seo/btw-cluster-content-quality` |
 
 ---
 
@@ -80,6 +80,20 @@ Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO �
 | Internationalisering | 0 | 🔴 (Fase 4) |
 
 ---
+
+## In review / niet gedeployde PR's
+
+### PR #60 — AdSense readiness: remove under-construction placeholders and add checklist
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/60
+- **Branch:** `fix/adsense-readiness-blockers`
+- **Status:** ⏳ Open ter review; niet gemerged of gedeployed
+- **Aangepaste bestanden:** `src/layouts/BaseLayout.astro`, `scripts/audit-content-safety.mjs`, `docs/adsense-readiness-checklist.md`, `05_changelog.md`, `docs/10-CHANGELOG.md`, `docs/product/CURRENT_STATE.md`, `docs/product/MASTER_PROJECT_CONTEXT.md`
+- **Wat:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit header en footer. Uitgebreide content-safety audit detecteert nu automatisch "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen. Nieuw AdSense readiness checklist document.
+- **Tests:** 253/253 geslaagd.
+- **Build:** 23 pagina's.
+- **Console errors:** 0.
+- **Noot:** Niet deployen zonder expliciet akkoord. PR #59 (`seo/btw-cluster-content-quality`) blijft open maar mag niet gemerged/gedeployed worden in deze context.
 
 ## Laatst gedeployde PR's
 
@@ -181,15 +195,18 @@ P2 (na stabiele 1.0):
 
 ## Eerstvolgende sprint
 
-**SEO-sprint + homepage search polish** (ad-hoc, geen P0):
+**AdSense readiness afronden + SEO-sprint voorbereiden** (ad-hoc, geen P0):
 
+- Na merge/deploy van PR #60: verifiëren in Google AdSense dat `ads.txt` wordt gevonden en dat "Lage waarde" / "Needs attention" verdwijnt.
+- AdSense A/B-test: posities en formaten evalueren (pas na AdSense approval).
+- SEO-sprint pas starten na expliciet akkoord: PR #59 (`seo/btw-cluster-content-quality`) mag niet gemerged/gedeployed worden zonder toestemming.
 - Schema-markup audit en validatie (HowTo, FAQPage, BreadcrumbList, CollectionPage, WebSite/SearchAction).
 - Interne linkstructuur versterken, vooral naar/binnen categoriepagina's.
 - Meta description audit op alle 23 pagina's (lengte, uniekheid, keyword-intent).
 - Lighthouse-SEO quick wins (canonical, hreflang-voorbereiding, sitemap-index kwaliteit).
 - Controleer of Calculator Registry metadata consistent wordt gebruikt voor OG-title/description.
 - Homepage search UX-check: zoekveld moet binnen 1-2 seconden zichtbaar en interactief zijn op mobiel en desktop; focus/tap target vergroten indien nodig.
-- Overweeg `npm run audit:content` op te nemen in `npm run atlas:check` zodat content-safety standaard gevalideerd wordt.
+- `npm run audit:content` is nu opgenomen in `npm run atlas:check`.
 
 ---
 

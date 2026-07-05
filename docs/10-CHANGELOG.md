@@ -7,8 +7,9 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-05 — PR #56 Live calculator button UX fix](#2026-07-05--pr-56-live-calculator-button-ux-fix)
-2. [2026-07-05 — PR #55 Content-safety fix](#2026-07-05--pr-55-content-safety-fix)
+1. [2026-07-05 — PR #60 AdSense readiness placeholders/checklist](#2026-07-05--pr-60-adsense-readiness-placeholderschecklist)
+2. [2026-07-05 — PR #56 Live calculator button UX fix](#2026-07-05--pr-56-live-calculator-button-ux-fix)
+3. [2026-07-05 — PR #55 Content-safety fix](#2026-07-05--pr-55-content-safety-fix)
 3. [2026-07-05 — PR #54 Closed (superseded)](#2026-07-05--pr-54-closed-superseded)
 4. [2026-07-05 — PR #52 Zorgtoeslag hotfix](#2026-07-05--pr-52-zorgtoeslag-hotfix)
 5. [2026-07-05 — PR #51 Homepage hero-regressie hotfix](#2026-07-05--pr-51-homepage-hero-regressie-hotfix)
@@ -65,6 +66,18 @@
 50. [2026-06-30](#2026-06-30)
 51. [2026-06-30](#2026-06-30)
 52. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-05 — PR #60 AdSense readiness placeholders/checklist
+
+**Type:** Hotfix / AdSense Readiness
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/60
+**Status:** ⏳ Open ter review; niet gemerged of gedeployed
+**Details:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit de header- en footer-navigatie in `src/layouts/BaseLayout.astro`, inclusief de overbodige placeholder-CSS. `scripts/audit-content-safety.mjs` uitgebreid met automatische detectie van "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen in zowel gerenderde HTML als paginabron. Nieuw document `docs/adsense-readiness-checklist.md` met de complete checklist voor AdSense-approval. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, advertentiecode, cookie/consent, SEO-copy, sitemap, robots of rekenlogica. `public/ads.txt` was reeds aanwezig en correct; na build ook in `dist/ads.txt` en bereikbaar in preview op `/ads.txt`.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 253/253 geslaagd.
+**Atlas CI:** `npm run atlas:check` volledig groen.
 
 ---
 
