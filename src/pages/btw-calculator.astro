@@ -116,6 +116,10 @@ const faq = [
     question: "Wanneer geldt 0% btw?",
     answer: "0% btw geldt voor specifieke situaties, zoals export naar andere EU-landen. Je vermeldt het op je factuur. Controleer bij de <a href=\"https://www.belastingdienst.nl\" target=\"_blank\" rel=\"noopener\">Belastingdienst</a> of dit voor jou mag.",
   },
+  {
+    question: "Is de uitkomst van deze calculator een indicatie?",
+    answer: "Ja. De calculator geeft een wiskundig correcte indicatie op basis van het ingevoerde bedrag en het geselecteerde btw-tarief. Controleer belangrijke bedragen voor je administratie of btw-aangifte altijd via officiële bronnen of een adviseur.",
+  },
 ];
 
 const faqSchema = {
@@ -267,7 +271,7 @@ const breadcrumbSchema = {
     <p>Wil je een bedrag <a href="/btw-terugrekenen/">terugrekenen van inclusief naar exclusief</a>, of tussen <a href="/btw-inclusief-exclusief/">exclusief en inclusief</a> wisselen? Ondernemers kunnen ook hun <a href="/zzp-calculator/">ZZP-uurtarief</a> berekenen.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
-    <p>De calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst. De berekening is wiskundig exact voor het ingevoerde bedrag. Let op: 0% btw geldt alleen in specifieke situaties.</p>
+    <p>De calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst. De berekening is wiskundig correct voor het ingevoerde bedrag en geeft een indicatie. Let op: 0% btw geldt alleen in specifieke situaties.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
     <ul class="calc-list">
@@ -296,6 +300,14 @@ const breadcrumbSchema = {
       <li><strong>Verkeerd tarief gebruiken:</strong> controleer of 21%, 9% of 0% van toepassing is op jouw product of dienst.</li>
       <li><strong>0% btw verwarren met vrijgesteld:</strong> bij 0% breng je wel 0% btw in rekening en vermeld je dit op de factuur; bij een vrijstelling doe je dat niet.</li>
       <li><strong>Afrondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine afrondingsverschillen ontstaan.</li>
+    </ul>
+  </div>
+
+  <div class="calculator-card calc-content">
+    <h2>Ook handig binnen btw</h2>
+    <ul class="calc-list">
+      <li><a href="/btw-terugrekenen/">BTW terugrekenen</a> — van inclusief naar exclusief btw.</li>
+      <li><a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief</a> — wissel in beide richtingen.</li>
     </ul>
   </div>
 
