@@ -1,14 +1,17 @@
 # 10 — Changelog
 
 > **Doel:** Geconsolideerd changelog van alle releases. Dit is een synchrone kopie van `05_changelog.md` in de project-root.  
-> **Laatst bijgewerkt:** 2026-07-03
+> **Laatst bijgewerkt:** 2026-07-05
 
 ---
 
 ## Inhoudsopgave
 
-1. [2026-07-03 — Sprint 117A](#2026-07-03--sprint-117a)
-2. [2026-07-03 — Sprint 117](#2026-07-03--sprint-117)
+1. [2026-07-05 — PR #52 Zorgtoeslag hotfix](#2026-07-05--pr-52-zorgtoeslag-hotfix)
+2. [2026-07-05 — PR #51 Homepage hero-regressie hotfix](#2026-07-05--pr-51-homepage-hero-regressie-hotfix)
+3. [2026-07-05 — PR #50 Calculator Registry](#2026-07-05--pr-50-calculator-registry)
+4. [2026-07-03 — Sprint 117A](#2026-07-03--sprint-117a)
+5. [2026-07-03 — Sprint 117](#2026-07-03--sprint-117)
 3. [2026-07-03 — Sprint 116](#2026-07-03--sprint-116)
 4. [2026-07-03 — Sprint 115](#2026-07-03--sprint-115)
 5. [2026-07-03 — Sprint 112](#2026-07-03--sprint-112)
@@ -59,6 +62,41 @@
 50. [2026-06-30](#2026-06-30)
 51. [2026-06-30](#2026-06-30)
 52. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-05 — PR #52 Zorgtoeslag hotfix
+
+**Type:** P0 hotfix / Bugfix
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/52
+**Merge commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Details:** P0 hotfix voor de toeslagen-calculator. De URL `/toeslagen-calculator/?inkomen=25000&huur=700&partner=0` toonde onterecht €0 zorgtoeslag. De oude lineaire reductieformule in `src/lib/calculators/allowances.ts` is vervangen door een tabelgebaseerde berekening (`calculateHealthcareAllowance2026`) op basis van de officiële Dienst Toeslagen 2026-tabel. Voor alleenstaanden: tot €29.500 → €129/maand; €41.000+ → €0. Voor toeslagpartners: tot €29.500 → €246/maand; €51.000 → €3; €51.500+ → €0. De UI toont zorgtoeslag en huurtoeslag nu apart; de hero toont expliciet "Zorgtoeslag indicatie". Huurtoeslag blijft een vereenvoudigde indicatie met een duidelijke waarschuwing en verwijzing naar de officiële proefberekening van Dienst Toeslagen. Bron-badge in het resultaat gewijzigd van "Belastingdienst" naar "Dienst Toeslagen". Aangepaste bestanden: `src/lib/calculators/allowances.ts`, `src/pages/toeslagen-calculator.astro`, `tests/calculators/allowances.test.ts`. Geen wijzigingen aan andere calculators, engines, Knowledge Objects, Rule Resolver, Recommendation Engine, privacy/cookie/consent, advertentiecode, SEO-copy, sitemap of robots.
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+**Tests:** 233/233 geslaagd.
+
+---
+
+## 2026-07-05 — PR #51 Homepage hero-regressie hotfix
+
+**Type:** Hotfix / UX
+**Merge commit:** `81dd1ba10689481f047bdde1ba756868eef8a6ab`
+**Status:** ✅ Gemerged en gedeployed
+**Details:** Hotfix voor een visuele regressie op de homepage na PR #50. De lichtblauwe hero-gradient (`#eff6ff` → `#f8fafc`) was verdwenen en de groene checkmark-iconen bij de trust-items (Gratis, Geen account, Geen opslag, Officiële bronnen) waren niet meer zichtbaar. Beide zijn hersteld in `src/pages/index.astro`. Geen SEO-copy, metadata, calculatorlogica, registry-wijzigingen, nieuwe pagina's, redesign, privacy/cookie/consent of advertentiecode.
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+**Tests:** 219/219 geslaagd (testsuite van dat moment).
+
+---
+
+## 2026-07-05 — PR #50 Calculator Registry
+
+**Type:** Technisch / Architectuur
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/50
+**Merge commit:** `5b2ea06dee9fea1de9187d5feaf4af25d757dc56`
+**Status:** ✅ Gemerged en gedeployed
+**Details:** Centrale Calculator Registry (`src/lib/calculators/registry.ts`) is live als Single Source of Truth. Alle 10 calculators zijn opgenomen in de registry met metadata zoals titel, beschrijving, URL, categorie, icon, badges, SEO-titel, FAQ, bronnen en recommendation-titels. Smart Search (`src/lib/search-index.ts`), homepage (`src/pages/index.astro`), calculator hub (`src/pages/calculators.astro`), categoriepagina's (`src/pages/categorie/*.astro`), navigatie/footer (`src/layouts/BaseLayout.astro`) en recommendations metadata zijn registry-driven. `auto-importkosten` verschijnt in zowel Auto als Ondernemen via `secondaryCategories`. Sitemap-index opnieuw gegenereerd met 23 pagina's. Geen wijzigingen aan rekenformules, fiscale parameters, privacy/cookie/consent of advertentiecode.
+**Build:** 23 pagina's, sitemap met 22 HTTPS-URL's (demo uitgesloten), geen TypeScript-fouten.
+**Tests:** 219/219 geslaagd (testsuite van dat moment).
 
 ---
 

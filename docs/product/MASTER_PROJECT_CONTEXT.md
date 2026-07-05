@@ -1,7 +1,9 @@
 # MASTER_PROJECT_CONTEXT — Calculatieloket.nl / FiscalMesh
 
 > **Doel:** Één centrale context voor iedere nieuwe AI-sessie. Lees dit bestand eerst voordat je aan code of documentatie werkt.  
-> **Laatst bijgewerkt:** 2026-07-03  
+> **Laatst bijgewerkt:** 2026-07-05  
+> **Productie main commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`  
+> **Productie-URL:** https://calculatieloket.nl/  
 > **Status:** Leidend voor alle volgende sprints.
 
 ---
@@ -78,7 +80,33 @@ Leidend document: `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`.
 
 ---
 
-## 5. Non-negotiables
+## 5. Recente PR's
+
+> Overzicht van de laatste drie productiewijzigingen. Details staan in `docs/product/CURRENT_STATE.md` en `docs/10-CHANGELOG.md`.
+
+### PR #50 — Calculator Registry
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/50
+- **Merge commit:** `5b2ea06dee9fea1de9187d5feaf4af25d757dc56`
+- **Status:** ✅ Gemerged en gedeployed
+- **Wat:** Centrale Calculator Registry (`src/lib/calculators/registry.ts`) is live als Single Source of Truth. Smart Search, homepage, calculator hub, categoriepagina's, navigatie/footer en recommendations metadata zijn registry-driven. Alle 10 calculators staan in de registry; `auto-importkosten` verschijnt in zowel Auto als Ondernemen via `secondaryCategories`.
+
+### PR #51 — Homepage hero-regressie hotfix
+
+- **Merge commit:** `81dd1ba10689481f047bdde1ba756868eef8a6ab`
+- **Status:** ✅ Gemerged en gedeployed
+- **Wat:** Lichtblauwe hero-gradient hersteld en groene checkmark-iconen teruggebracht bij trust-items. Geen SEO-copy, metadata, calculatorlogica of registry-wijzigingen.
+
+### PR #52 — P0 hotfix zorgtoeslag 2026
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/52
+- **Merge commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`
+- **Status:** ✅ Gemerged en gedeployed
+- **Wat:** Fout opgelost waarbij `/toeslagen-calculator/?inkomen=25000&huur=700&partner=0` onterecht €0 toonde. Zorgtoeslag 2026 wordt nu tabelgebaseerd berekend volgens Dienst Toeslagen. Zorgtoeslag en huurtoeslag worden apart getoond; huurtoeslag blijft een vereenvoudigde indicatie met waarschuwing. 233/233 tests geslaagd, 23 pagina's gebouwd, 0 console errors.
+
+---
+
+## 6. Non-negotiables
 
 > Deze regels zijn absoluut. Sprints die ze negeren, worden niet opgepakt.
 
@@ -90,7 +118,7 @@ Leidend document: `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`.
 
 ---
 
-## 6. Development workflow
+## 7. Development workflow
 
 ### Commando's
 
@@ -120,7 +148,7 @@ npm run audit:lighthouse  # Lighthouse audit op 13 pagina's (3 runs median)
 
 ---
 
-## 7. Huidige platformstatus
+## 8. Huidige platformstatus
 
 Calculatieloket staat aan het einde van **Fase 1 — Product Completion**. Overall readiness: **95/100**.
 
@@ -139,15 +167,15 @@ Calculatieloket staat aan het einde van **Fase 1 — Product Completion**. Overa
 | Agents | 0 | 🔴 (Fase 3) |
 | Internationalisering | 0 | 🔴 (Fase 4) |
 
-Technisch en productmatig is Calculatieloket 1.0 klaar. Dashboard, Agents en internationalisering zijn expliciet buiten scope van 1.0.
+Technisch en productmatig is Calculatieloket 1.0 klaar. De Calculator Registry is sinds PR #50 de Single Source of Truth voor homepage, hub, categoriepagina's, navigatie/footer en recommendations. PR #51 en PR #52 waren pure stabiliteits- en correctheidshotfixes zonder nieuwe functionaliteit. Dashboard, Agents en internationalisering zijn expliciet buiten scope van 1.0.
 
-Details: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`.
+Details: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md` en `docs/product/CURRENT_STATE.md`.
 
 ---
 
-## 8. Overzicht van alle calculators
+## 9. Overzicht van alle calculators
 
-**10 unieke calculators** (de hub toont 11 cards omdat Auto importkosten in twee categorieën staat):
+**10 unieke calculators** (de hub toont 11 cards omdat Auto importkosten via `secondaryCategories` in zowel Auto als Ondernemen staat). De centrale Calculator Registry in `src/lib/calculators/registry.ts` is sinds PR #50 de Single Source of Truth voor titels, beschrijvingen, URL's, categorieën en recommendation-metadata.
 
 | # | Calculator | Categorie | URL |
 |---|------------|-----------|-----|
@@ -168,7 +196,7 @@ Details: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`.
 
 ---
 
-## 9. Knowledge Layer
+## 10. Knowledge Layer
 
 De Knowledge Layer bevat gestructureerde feiten over belasting, toeslagen, hypotheken, BTW, etc. als YAML Knowledge Objects.
 
@@ -182,7 +210,7 @@ Engines lezen **nooit direct** uit `knowledgeObjects`; ze gaan via de Rule Resol
 
 ---
 
-## 10. Rule Resolver
+## 11. Rule Resolver
 
 De Rule Resolver is de dunne grenslaag tussen Knowledge Layer en Calculator Engines.
 
@@ -200,7 +228,7 @@ const vat = resolveRule({ type: "vat_rate", country: "NL", locale: "nl-NL", year
 
 ---
 
-## 11. Recommendation Engine
+## 12. Recommendation Engine
 
 De Financial Recommendation Engine is een rule-based aanbevelingslaag bovenop calculator-resultaten.
 
@@ -215,7 +243,7 @@ De engine is bewust **geen AI**; regels zijn traceerbaar, testbaar en onderhoudb
 
 ---
 
-## 12. App Shell
+## 13. App Shell
 
 De Calculator App Shell is de consistente UI-container voor alle calculators.
 
@@ -245,7 +273,7 @@ Alle 10 calculators gebruiken de App Shell. Elke calculator bevat:
 
 ---
 
-## 13. Product Completion filosofie
+## 14. Product Completion filosofie
 
 Product Completion betekent: **af voor gebruikers, zoekmachines en onderhoud**. Niet "af genoeg", maar echt klaar.
 
@@ -263,7 +291,7 @@ Product Completion sluit expliciet uit:
 
 ---
 
-## 14. Open backlog
+## 15. Open backlog
 
 ### P0 — Nodig voor 1.0 (alles af)
 
@@ -274,6 +302,9 @@ Product Completion sluit expliciet uit:
 - Analytics-ready markup ✅
 - AdSense-integratie technisch werken ✅
 - Navigatie consistent over alle pagina's ✅
+- Calculator Registry live als SSOT ✅ (PR #50)
+- Homepage hero-regressie opgelost ✅ (PR #51)
+- P0 zorgtoeslag 2026 correct berekend ✅ (PR #52)
 
 ### P1 — Kort na 1.0
 
@@ -283,6 +314,7 @@ Product Completion sluit expliciet uit:
 - Resultaat-label contrast uniform aanpakken.
 - Analytics-provider aansluiten.
 - Mobiele sticky result hero evalueren.
+- SEO-sprint: schema-validatie, interne linkstructuur, meta descriptions, OG-consistency.
 
 ### P2 — Later
 
@@ -296,7 +328,7 @@ Gedetailleerd overzicht: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`.
 
 ---
 
-## 15. Hoe een nieuwe AI-sessie moet starten
+## 16. Hoe een nieuwe AI-sessie moet starten
 
 1. **Lees dit bestand** (`docs/product/MASTER_PROJECT_CONTEXT.md`).
 2. **Lees daarna** `docs/product/CURRENT_STATE.md` voor de exacte status van vandaag.
@@ -311,4 +343,4 @@ Gedetailleerd overzicht: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md`.
 
 ---
 
-> **Laatst bijgewerkt:** 2026-07-03
+> **Laatst bijgewerkt:** 2026-07-05
