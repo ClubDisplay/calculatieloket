@@ -1,5 +1,39 @@
 # Changelog — Calculatieloket.nl
 
+## 2026-07-05
+
+**Type:** P0 hotfix / Bugfix
+**Wijziging:** PR #52 — P0 hotfix zorgtoeslag 2026
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/52
+**Merge commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Details:** P0 hotfix voor de toeslagen-calculator. De URL `/toeslagen-calculator/?inkomen=25000&huur=700&partner=0` toonde onterecht €0 zorgtoeslag. De oude lineaire reductieformule in `src/lib/calculators/allowances.ts` is vervangen door een tabelgebaseerde berekening (`calculateHealthcareAllowance2026`) op basis van de officiële Dienst Toeslagen 2026-tabel. De UI toont zorgtoeslag en huurtoeslag apart; hero toont expliciet "Zorgtoeslag indicatie". Huurtoeslag blijft een vereenvoudigde indicatie met waarschuwing. Bron-badge gewijzigd naar "Dienst Toeslagen". Aangepaste bestanden: `src/lib/calculators/allowances.ts`, `src/pages/toeslagen-calculator.astro`, `tests/calculators/allowances.test.ts`. Geen wijzigingen aan andere calculators, engines, KO, Rule Resolver, Recommendation Engine, privacy/cookie/consent, advertentiecode, SEO-copy, sitemap of robots.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 233/233 geslaagd.
+
+---
+
+**Type:** Hotfix / UX
+**Wijziging:** PR #51 — Homepage hero-regressie hotfix
+**Merge commit:** `81dd1ba10689481f047bdde1ba756868eef8a6ab`
+**Status:** ✅ Gemerged en gedeployed
+**Details:** Hotfix voor visuele regressie op homepage na PR #50: lichtblauwe hero-gradient hersteld en groene checkmark-iconen terug bij trust-items. Geen SEO-copy, metadata, calculatorlogica, registry-wijzigingen, nieuwe pagina's, redesign, privacy/cookie/consent of advertentiecode.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 219/219 geslaagd (testsuite van dat moment).
+
+---
+
+**Type:** Technisch / Architectuur
+**Wijziging:** PR #50 — Calculator Registry
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/50
+**Merge commit:** `5b2ea06dee9fea1de9187d5feaf4af25d757dc56`
+**Status:** ✅ Gemerged en gedeployed
+**Details:** Centrale Calculator Registry (`src/lib/calculators/registry.ts`) is live als Single Source of Truth. Smart Search, homepage, calculator hub, categoriepagina's, navigatie/footer en recommendations metadata zijn registry-driven. Alle 10 calculators in registry; `auto-importkosten` in Auto én Ondernemen via `secondaryCategories`. Sitemap opnieuw gegenereerd met 23 pagina's. Geen wijzigingen aan rekenformules, fiscale parameters, privacy/cookie/consent of advertentiecode.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 219/219 geslaagd (testsuite van dat moment).
+
+---
+
 ## 2026-07-03
 
 **Type:** Product/UX
