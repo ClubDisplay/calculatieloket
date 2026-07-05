@@ -235,7 +235,7 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <button id="berekenBtn" class="btn btn-primary btn-lg" style="width:100%" data-analytics="cta" data-analytics-category="calculator-page" data-analytics-action="click" data-analytics-label="bereken">Bekijk je netto salaris</button>
+      <p class="calc-live-status" aria-live="polite">Resultaat wordt automatisch bijgewerkt.</p>
       <p class="calc-error" id="calcError" style="display:none;">Vul een geldig bruto maandsalaris in (hoger dan 0).</p>
     </InputPanel>
 
@@ -387,7 +387,6 @@ const breadcrumbSchema = {
   const hero = document.querySelector(".calc-result-panel-hero") as HTMLElement;
   const heroSubtext = document.querySelector(".calc-result-panel-subtext") as HTMLElement;
   const errorBox = document.getElementById("calcError") as HTMLElement;
-  const berekenBtn = document.getElementById("berekenBtn") as HTMLButtonElement;
   const copyLinkBtn = document.getElementById("copyLinkBtn") as HTMLButtonElement;
   const financialJourney = document.querySelector(".calc-financial-journey") as HTMLElement;
 
@@ -573,7 +572,6 @@ const breadcrumbSchema = {
   grossInput.addEventListener("input", calculate);
   pensionInput.addEventListener("input", calculate);
   lhCheckbox.addEventListener("change", calculate);
-  berekenBtn.addEventListener("click", calculate);
   grossInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
