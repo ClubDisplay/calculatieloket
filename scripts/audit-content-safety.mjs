@@ -13,6 +13,10 @@ const overclaimRegex = /\b(heb\s+(ik|je|u)\s+recht\s+op|recht\s+op\s+(huurtoesla
 
 const placeholderInDescriptionRegex = /description:\s*"[^"]*\{\{[^"]*"/g;
 
+// Under-construction / placeholder signals that can trigger AdSense "Low value content" warnings
+const underConstructionTextRegex = /\b(binnenkort|in\s+aanbouw|work\s+in\s+progress|tijdelijk\s+niet\s+beschikbaar)\b/gi;
+const placeholderClassRegex = /class="[^"]*\bplaceholder\b[^"]*"/g;
+
 function stripDataTemplateAttributes(content) {
   // Remove data-template="..." and data-fallback="..." attributes from HTML.
   // This lets us keep templates as JS data while auditing visible text.
@@ -45,6 +49,13 @@ async function checkDistFiles(files) {
     if (overclaimRegex.test(content)) {
       issues.push(`${file}: hard claim ("recht op") still present`);
     }
+    if (underConstructionTextRegex.test(content)) {
+      const matches = [...content.matchAll(underConstructionTextRegex)].map((m) => m[0]);
+      issues.push(`${file}: under-construction text still present: ${[...new Set(matches)].join(", ")}`);
+    }
+    if (placeholderClassRegex.test(content)) {
+      issues.push(`${file}: placeholder class found in rendered HTML`);
+    }
   }
   return issues;
 }
@@ -60,6 +71,13 @@ async function checkPageSource(files) {
     if (overclaimRegex.test(content)) {
       issues.push(`${file}: hard claim ("recht op") still present`);
     }
+    if (underConstructionTextRegex.test(content)) {
+      const matches = [...content.matchAll(underConstructionTextRegex)].map((m) => m[0]);
+      issues.push(`${file}: under-construction text still present: ${[...new Set(matches)].join(", ")}`);
+    }
+    if (placeholderClassRegex.test(content)) {
+      issues.push(`${file}: placeholder class found in source`);
+    }
   }
   return issues;
 }
@@ -69,6 +87,10 @@ async function checkRegistry(filePath) {
   const content = await readFile(filePath, "utf-8");
   if (overclaimRegex.test(content)) {
     issues.push(`${filePath}: hard claim ("recht op") still present`);
+  }
+  if (underConstructionTextRegex.test(content)) {
+    const matches = [...content.matchAll(underConstructionTextRegex)].map((m) => m[0]);
+    issues.push(`${filePath}: under-construction text still present: ${[...new Set(matches)].join(", ")}`);
   }
   return issues;
 }
