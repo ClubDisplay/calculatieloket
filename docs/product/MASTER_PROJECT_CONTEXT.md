@@ -2,7 +2,7 @@
 
 > **Doel:** Één centrale context voor iedere nieuwe AI-sessie. Lees dit bestand eerst voordat je aan code of documentatie werkt.  
 > **Laatst bijgewerkt:** 2026-07-05  
-> **Productie main commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`  
+> **Productie main commit:** `84b2cf06cf363995995923784273d5bd6948bf0e`  
 > **Productie-URL:** https://calculatieloket.nl/  
 > **Status:** Leidend voor alle volgende sprints.
 
@@ -84,25 +84,26 @@ Leidend document: `docs/product/00-FISCALMESH-PRODUCT-ROADMAP.md`.
 
 > Overzicht van de laatste drie productiewijzigingen. Details staan in `docs/product/CURRENT_STATE.md` en `docs/10-CHANGELOG.md`.
 
-### PR #50 — Calculator Registry
+### PR #56 — Live calculator button UX fix
 
-- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/50
-- **Merge commit:** `5b2ea06dee9fea1de9187d5feaf4af25d757dc56`
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/56
+- **Merge commit:** `84b2cf06cf363995995923784273d5bd6948bf0e`
 - **Status:** ✅ Gemerged en gedeployed
-- **Wat:** Centrale Calculator Registry (`src/lib/calculators/registry.ts`) is live als Single Source of Truth. Smart Search, homepage, calculator hub, categoriepagina's, navigatie/footer en recommendations metadata zijn registry-driven. Alle 10 calculators staan in de registry; `auto-importkosten` verschijnt in zowel Auto als Ondernemen via `secondaryCategories`.
+- **Wat:** Verwijderd van alle 10 actieve calculators de redundante primaire "Bereken"-knop. De knop was overbodig omdat het resultaat al live bijgewerkt wordt. In de plaats komt een neutrale statusregel "Resultaat wordt automatisch bijgewerkt." met `aria-live="polite"`. De `CalculatorShell.astro` krijgt de bijbehorende `.calc-live-status` CSS. JavaScript-event listeners op de verwijderde knoppen zijn opgeruimd. Geen wijzigingen aan rekenlogica, fiscale parameters, content, SEO, metadata, sitemap, privacy/cookie/consent of advertentiecode. 241/241 tests geslaagd, 23 pagina's gebouwd, 0 console errors.
 
-### PR #51 — Homepage hero-regressie hotfix
+### PR #55 — Content-safety fix (harde claims + placeholders)
 
-- **Merge commit:** `81dd1ba10689481f047bdde1ba756868eef8a6ab`
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/55
+- **Merge commit:** `8246c7c049776097a9b1d77a743c380584047406`
 - **Status:** ✅ Gemerged en gedeployed
-- **Wat:** Lichtblauwe hero-gradient hersteld en groene checkmark-iconen teruggebracht bij trust-items. Geen SEO-copy, metadata, calculatorlogica of registry-wijzigingen.
+- **Wat:** Harde claim-copy (bijv. "heb je recht op ...") omgezet naar indicatie-copy op publieke pagina's, met name in toeslagen-gerelateerde teksten. Ruwe `{{placeholder}}`-tokens vervangen door een veilige `fillTemplate()` helper in `src/lib/format/template.ts` die terugvalt naar fallback-tekst als een waarde ontbreekt, zodat gebruikers nooit raw placeholders zien. Nieuw content-safety audit-script `scripts/audit-content-safety.mjs` via `npm run audit:content` faalt de build als er nog raw placeholders of hard claim-copy in de statische output of paginabron voorkomen. Bijbehorende unit tests in `tests/format/template.test.ts` (8 tests). 241/241 tests geslaagd, 23 pagina's gebouwd, 0 console errors.
 
 ### PR #52 — P0 hotfix zorgtoeslag 2026
 
 - **PR:** https://github.com/ClubDisplay/calculatieloket/pull/52
 - **Merge commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`
 - **Status:** ✅ Gemerged en gedeployed
-- **Wat:** Fout opgelost waarbij `/toeslagen-calculator/?inkomen=25000&huur=700&partner=0` onterecht €0 toonde. Zorgtoeslag 2026 wordt nu tabelgebaseerd berekend volgens Dienst Toeslagen. Zorgtoeslag en huurtoeslag worden apart getoond; huurtoeslag blijft een vereenvoudigde indicatie met waarschuwing. 233/233 tests geslaagd, 23 pagina's gebouwd, 0 console errors.
+- **Wat:** Fout opgelost waarbij `/toeslagen-calculator/?inkomen=25000&huur=700&partner=0` onterecht €0 toonde. Zorgtoeslag 2026 wordt nu tabelgebaseerd berekend volgens Dienst Toeslagen. Zorgtoeslag en huurtoeslag worden apart getoond; huurtoeslag blijft een vereenvoudigde indicatie met waarschuwing. 233/233 tests geslaagd (testcount van dat moment), 23 pagina's gebouwd, 0 console errors.
 
 ---
 
@@ -167,7 +168,7 @@ Calculatieloket staat aan het einde van **Fase 1 — Product Completion**. Overa
 | Agents | 0 | 🔴 (Fase 3) |
 | Internationalisering | 0 | 🔴 (Fase 4) |
 
-Technisch en productmatig is Calculatieloket 1.0 klaar. De Calculator Registry is sinds PR #50 de Single Source of Truth voor homepage, hub, categoriepagina's, navigatie/footer en recommendations. PR #51 en PR #52 waren pure stabiliteits- en correctheidshotfixes zonder nieuwe functionaliteit. Dashboard, Agents en internationalisering zijn expliciet buiten scope van 1.0.
+Technisch en productmatig is Calculatieloket 1.0 klaar. De Calculator Registry is sinds PR #50 de Single Source of Truth voor homepage, hub, categoriepagina's, navigatie/footer en recommendations. PR #51, PR #52, PR #55 en PR #56 waren pure stabiliteits-, correctheids-, content-safety en UX-hotfixes zonder nieuwe functionaliteit. Dashboard, Agents en internationalisering zijn expliciet buiten scope van 1.0.
 
 Details: `docs/product/18-PRODUCT-COMPLETION-BOARD-v1.md` en `docs/product/CURRENT_STATE.md`.
 
@@ -310,11 +311,15 @@ Product Completion sluit expliciet uit:
 
 - ~~OG-image optimaliseren naar 1200×630.~~ ✅ Afgerond in Sprint 112.
 - ~~Productie Lighthouse baseline meten met AdSense.~~ ✅ Afgerond in Sprint 112 (lokaal; echte productiewaarden volgen na launch).
+- ~~Content-safety: harde claims en raw placeholders opruimen.~~ ✅ Afgerond in PR #55.
+- ~~Live-button UX: redundante "Bereken"-knoppen verwijderen.~~ ✅ Afgerond in PR #56 (superseded PR #54 gesloten).
 - AdSense A/B-test: posities en formaten.
 - Resultaat-label contrast uniform aanpakken.
 - Analytics-provider aansluiten.
 - Mobiele sticky result hero evalueren.
 - SEO-sprint: schema-validatie, interne linkstructuur, meta descriptions, OG-consistency.
+- Homepage search: zichtbaarheid en interactie (focus, tap target, visuele hierarchie) evalueren en verbeteren.
+- `npm run audit:content` opnemen in Atlas CI zodat content-safety standaard gecontroleerd wordt.
 
 ### P2 — Later
 

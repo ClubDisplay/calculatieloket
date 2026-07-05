@@ -3,26 +3,26 @@
 > **Datum:** 2026-07-05
 > **Laatst bijgewerkt:** 2026-07-05
 > **Laatste ontwerpdocument:** `docs/product/UX_MASTERPLAN.md`
-> **Laatste main commit:** `99deef5028686ceb779f247f1b8da6b0019ba024`
+> **Laatste main commit:** `84b2cf06cf363995995923784273d5bd6948bf0e`
 > **Productie:** https://calculatieloket.nl/
 
 ---
 
 | | |
 |---|---|
-| **Laatste sprint** | Hotfix PR #52 — P0 zorgtoeslag 2026 (afgerond) |
+| **Laatste sprint** | PR #56 + PR #55 — live-button UX en content-safety fix (afgerond en gedeployed) |
 | **Huidige versie** | v1.0.0+ |
-| **Main commit** | `99deef5028686ceb779f247f1b8da6b0019ba024` |
+| **Main commit** | `84b2cf06cf363995995923784273d5bd6948bf0e` |
 | **Calculators** | 10 uniek (hub toont 11 cards; homepage toont 6) |
 | **Categoriepagina's** | 5 |
 | **Knowledge Objects** | 25 |
-| **Teststatus** | 233 passed, 0 failed |
+| **Teststatus** | 241 passed, 0 failed |
 | **Atlas status** | ✅ Groen |
 | **Lighthouse status** | ✅ 13/13 pagina's halen drempels |
 | **Product Completion %** | 95% |
 | **Open blockers** | Geen |
-| **Huidige focus** | Productie-stabiliteit na Registry + hero hotfix + zorgtoeslag hotfix |
-| **Eerstvolgende sprint** | SEO-sprint: technische & semantische SEO versterken (ad-hoc, geen P0) |
+| **Huidige focus** | Documentatie bijwerken na PR #55/#56; homepage search zichtbaarheid/interactie evalueren |
+| **Eerstvolgende sprint** | SEO-sprint + homepage search UX versterken (ad-hoc, geen P0) |
 | **Open PR's** | Geen |
 | **Open feature branches** | Geen |
 
@@ -56,7 +56,7 @@ Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO �
 - `check:knowledge` ✅
 - `validate:knowledge` ✅ (0 errors, 2 draft waarschuwingen)
 - `validate:cdl` ✅ (9/9 definities)
-- `test` ✅ (233 tests)
+- `test` ✅ (241 tests)
 - `qa:rules` ✅ (17 lookups, 0 failures)
 - `build` ✅ (23 pagina's)
 
@@ -82,6 +82,36 @@ Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO �
 ---
 
 ## Laatst gedeployde PR's
+
+### PR #56 — Live calculator button UX fix
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/56
+- **Merge commit:** `84b2cf06cf363995995923784273d5bd6948bf0e`
+- **Status:** ✅ Gemerged en gedeployed naar productie
+- **Productie:** https://calculatieloket.nl/
+- **Aangepaste bestanden:** `src/components/calculator/CalculatorShell.astro`, `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro`, `src/pages/zzp-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `src/pages/auto-importkosten-berekenen.astro`
+- **Wat:** Verwijderd van alle 10 actieve calculators de redundante primaire "Bereken"-knop. De knop was overbodig omdat het resultaat al live bijgewerkt wordt. In de plaats komt een neutrale statusregel "Resultaat wordt automatisch bijgewerkt." met `aria-live="polite"`. De `CalculatorShell.astro` krijgt de bijbehorende `.calc-live-status` CSS. JavaScript-event listeners op de verwijderde knoppen zijn opgeruimd. Geen wijzigingen aan rekenlogica, fiscale parameters, content, SEO, metadata, sitemap, privacy/cookie/consent of advertentiecode.
+- **Tests:** 241/241 geslaagd.
+- **Build:** 23 pagina's.
+- **Console errors:** 0.
+
+### PR #55 — Content-safety fix (harde claims + placeholders)
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/55
+- **Merge commit:** `8246c7c049776097a9b1d77a743c380584047406`
+- **Status:** ✅ Gemerged en gedeployed naar productie
+- **Productie:** https://calculatieloket.nl/
+- **Aangepaste bestanden:** `scripts/audit-content-safety.mjs`, `package.json`, `src/lib/format/template.ts`, `src/lib/calculators/registry.ts`, `src/components/calculator/UseCasesPanel.astro`, `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro`, `src/pages/zzp-calculator.astro`, `tests/format/template.test.ts`
+- **Wat:** Harde claim-copy (bijv. "heb je recht op ...") omgezet naar indicatie-copy op publieke pagina's, met name in toeslagen-gerelateerde teksten. Ruwe `{{placeholder}}`-tokens vervangen door een veilige `fillTemplate()` helper in `src/lib/format/template.ts` die terugvalt naar fallback-tekst als een waarde ontbreekt, zodat gebruikers nooit raw placeholders zien. Nieuw content-safety audit-script `scripts/audit-content-safety.mjs` via `npm run audit:content` faalt de build als er nog raw placeholders of hard claim-copy in de statische output of paginabron voorkomen. Bijbehorende unit tests in `tests/format/template.test.ts`.
+- **Tests:** 241/241 geslaagd (toevoeging 8 tests voor template helper).
+- **Build:** 23 pagina's.
+- **Console errors:** 0.
+
+### PR #54 — Overbodige calculator buttons (gesloten)
+
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/54
+- **Status:** ❌ Gesloten (niet gemerged)
+- **Wat:** Oorspronkelijke poging om de overbodige "Bereken"-knoppen op calculators aan te pakken. PR #54 is gesloten omdat PR #56 dezelfde probleemstelling opgelost heeft met een schonere, completere aanpak voor alle 10 calculators. Geen productie-impact.
 
 ### PR #52 — P0 hotfix zorgtoeslag 2026
 
@@ -118,14 +148,18 @@ Drempels: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO �
 P1 (kort na 1.0):
 
 - ~~OG-image 1200×630 optimaliseren~~ ✅ Afgerond in Sprint 112.
-- ~~Productie Lighthouse baseline met AdSense~~ ✅ Afgerond in Sprint 112 (lokaal; echte productiewaarden volgen na launch).
+- ~~Productie Lighthouse baseline meten met AdSense~~ ✅ Afgerond in Sprint 112 (lokaal; echte productiewaarden volgen na launch).
 - ~~Calculator Registry live~~ ✅ Afgerond in PR #50.
 - ~~Homepage hero-regressie opgelost~~ ✅ Afgerond in PR #51.
 - ~~P0 zorgtoeslag hotfix 2026~~ ✅ Afgerond in PR #52.
+- ~~Content-safety: harde claims en raw placeholders opruimen~~ ✅ Afgerond in PR #55.
+- ~~Live-button UX: redundante "Bereken"-knoppen verwijderen~~ ✅ Afgerond in PR #56.
 - AdSense A/B-test posities/formaten
 - Resultaat-label contrast uniform aanpakken
 - Analytics-provider aansluiten
 - SEO-sprint: semantische structuur, schema-validatie, interne linkstructuur versterken
+- Homepage search: zichtbaarheid en interactie evalueren/verbeteren (geen visuele regressie, juiste focus/tap target)
+- `npm run audit:content` opnemen in Atlas CI zodat content-safety standaard gecontroleerd wordt
 
 P2 (na stabiele 1.0):
 
@@ -137,21 +171,25 @@ P2 (na stabiele 1.0):
 
 ## Bekende waarschuwingen
 
-- Dev-build kan een bestaande `CookieConsent.astro_astro_type_script_index_0_lang` empty-chunk warning geven; deze is niet door PR #50/#51/#52 geïntroduceerd en heeft geen impact op productie.
+- Dev-build kan een bestaande `CookieConsent.astro_astro_type_script_index_0_lang` empty-chunk warning geven; deze is niet door PR #50/#51/#52/#55/#56 geïntroduceerd en heeft geen impact op productie.
 - Lokale `.env` staat op `PUBLIC_ADS_ENABLED=false`. Productie-builds gebruiken `PUBLIC_ADS_ENABLED=true`.
 - Knowledge registry heeft 2 verwachte draft waarschuwingen.
+- PR #54 is gesloten zonder merge; PR #56 heeft dezelfde button-UX opgelost.
+- Homepage search is functioneel, maar zichtbaarheid en interactie (focus, tap target, visuele hierarchie) moeten visueel gecontroleerd en waar nodig verbeterd worden.
 
 ---
 
 ## Eerstvolgende sprint
 
-**SEO-sprint** (ad-hoc, geen P0):
+**SEO-sprint + homepage search polish** (ad-hoc, geen P0):
 
 - Schema-markup audit en validatie (HowTo, FAQPage, BreadcrumbList, CollectionPage, WebSite/SearchAction).
 - Interne linkstructuur versterken, vooral naar/binnen categoriepagina's.
 - Meta description audit op alle 23 pagina's (lengte, uniekheid, keyword-intent).
 - Lighthouse-SEO quick wins (canonical, hreflang-voorbereiding, sitemap-index kwaliteit).
 - Controleer of Calculator Registry metadata consistent wordt gebruikt voor OG-title/description.
+- Homepage search UX-check: zoekveld moet binnen 1-2 seconden zichtbaar en interactief zijn op mobiel en desktop; focus/tap target vergroten indien nodig.
+- Overweeg `npm run audit:content` op te nemen in `npm run atlas:check` zodat content-safety standaard gevalideerd wordt.
 
 ---
 

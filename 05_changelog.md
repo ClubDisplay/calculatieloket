@@ -2,6 +2,36 @@
 
 ## 2026-07-05
 
+**Type:** Hotfix / UX
+**Wijziging:** PR #56 — Live calculator button UX fix
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/56
+**Merge commit:** `84b2cf06cf363995995923784273d5bd6948bf0e`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Details:** Verwijderd van alle 10 actieve calculators de redundante primaire "Bereken"-knop. De knop was overbodig omdat het resultaat al live bijgewerkt wordt. In de plaats komt een neutrale statusregel "Resultaat wordt automatisch bijgewerkt." met `aria-live="polite"`. De `CalculatorShell.astro` krijgt de bijbehorende `.calc-live-status` CSS. JavaScript-event listeners op de verwijderde knoppen zijn opgeruimd. Aangepaste bestanden: `src/components/calculator/CalculatorShell.astro`, `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro`, `src/pages/zzp-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `src/pages/auto-importkosten-berekenen.astro`. Geen wijzigingen aan rekenlogica, fiscale parameters, content, SEO, metadata, sitemap, privacy/cookie/consent of advertentiecode.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 241/241 geslaagd.
+
+---
+
+**Type:** Hotfix / Content Quality
+**Wijziging:** PR #55 — Content-safety fix (harde claims + placeholders)
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/55
+**Merge commit:** `8246c7c049776097a9b1d77a743c380584047406`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Details:** Harde claim-copy (bijv. "heb je recht op ...") omgezet naar indicatie-copy op publieke pagina's, met name in toeslagen-gerelateerde teksten. Ruwe `{{placeholder}}`-tokens vervangen door een veilige `fillTemplate()` helper in `src/lib/format/template.ts` die terugvalt naar fallback-tekst als een waarde ontbreekt, zodat gebruikers nooit raw placeholders zien. Nieuw content-safety audit-script `scripts/audit-content-safety.mjs` via `npm run audit:content` faalt de build als er nog raw placeholders of hard claim-copy in de statische output of paginabron voorkomen. Bijbehorende unit tests in `tests/format/template.test.ts` (8 tests). Aangepaste bestanden: `scripts/audit-content-safety.mjs`, `package.json`, `src/lib/format/template.ts`, `src/lib/calculators/registry.ts`, `src/components/calculator/UseCasesPanel.astro`, `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/hypotheek-calculator.astro`, `src/pages/toeslagen-calculator.astro`, `src/pages/btw-calculator.astro`, `src/pages/btw-terugrekenen.astro`, `src/pages/btw-inclusief-exclusief.astro`, `src/pages/zzp-calculator.astro`, `tests/format/template.test.ts`. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, privacy/cookie/consent, advertentiecode, SEO-copy, sitemap of robots.
+**Build:** 23 pagina's, 0 TypeScript-fouten.
+**Tests:** 241/241 geslaagd (8 extra tests voor template helper).
+
+---
+
+**Type:** UX / Closed
+**Wijziging:** PR #54 — Overbodige calculator buttons (gesloten)
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/54
+**Status:** ❌ Gesloten zonder merge
+**Details:** Oorspronkelijke poging om overbodige "Bereken"-knoppen op calculators aan te pakken. PR #54 is gesloten omdat PR #56 dezelfde probleemstelling opgelost heeft met een schonere, completere aanpak voor alle 10 actieve calculators. Geen productie-impact.
+
+---
+
 **Type:** P0 hotfix / Bugfix
 **Wijziging:** PR #52 — P0 hotfix zorgtoeslag 2026
 **PR:** https://github.com/ClubDisplay/calculatieloket/pull/52
