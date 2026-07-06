@@ -2,10 +2,21 @@
 
 ## 2026-07-06
 
+**Type:** Docs / Audit
+**Wijziging:** PR #69 — Sitemap coverage audit toegevoegd
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/69
+**Status:** ⏳ Open ter review; niet gemerged
+**Details:** Sitemap coverage audit toegevoegd in `docs/audits/sitemap-coverage-audit.md`. Vergelijking tussen 23 gebouwde pagina’s, 22 sitemap-URL’s en 15 ontdekte pagina’s in Search Console. Conclusie: geen belangrijke pagina’s ontbreken in de sitemap; verschil is waarschijnlijk Search Console-vertraging (last read 30 juni 2026). Dashboard (`CALCULATIELOKET_GROWTH_DASHBOARD.md`) en sprint-backlog bijgewerkt. Geen codewijzigingen, geen sitemapwijzigingen, geen robots/canonical-wijzigingen, geen route-wijzigingen, geen SEO metadata, geen calculatorlogica, geen rekenformules, geen fiscale parameters, geen privacy/cookie/consent, geen advertentiecode, geen deploy.
+
+---
+
+## 2026-07-06
+
 **Type:** Docs / Dashboard
 **Wijziging:** PR #68 — Eerste Search Console baseline ingevuld
 **PR:** https://github.com/ClubDisplay/calculatieloket/pull/68
-**Status:** ⏳ Open ter review; niet gemerged
+**Merge commit:** `eda1927`
+**Status:** ✅ Gemerged (docs-only, geen deploy)
 **Details:** Eerste Search Console baseline (`docs/dashboard/search-console/2026-07-baseline.md`) gevuld op basis van Barry’s export van 6 juli 2026. Top pagina’s, zoekopdrachten, devices, countries en sitemapstatus toegevoegd. Dashboard (`CALCULATIELOKET_GROWTH_DASHBOARD.md`) en sprint-backlog bijgewerkt. Quick win `/bruto-netto-2026/` benoemd. Sitemap-dekking (23 buildpagina’s vs. 15 ontdekte pagina’s) geïdentificeerd als vervolgactie. Geen codewijzigingen, geen contentwijzigingen op live pagina’s, geen calculatorlogica, geen rekenformules, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy, geen verzonnen Search Console-data.
 
 ---
