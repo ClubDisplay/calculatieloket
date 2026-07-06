@@ -2,7 +2,8 @@
 
 > **Doel:** Centrale documentatie voor het monitoren, plannen en groeien van Calculatieloket.nl op SEO, AdSense, content en technische kwaliteit.  
 > **Laatst bijgewerkt:** 2026-07-05  
-> **Status:** Actief — groeit mee met data.
+> **Status:** Actief — groeit mee met data.  
+> **Agents:** Zie `docs/agents/` voor vaste werkinstructies. Agents gebruiken dit dashboard als bron van waarheid.
 
 ---
 
@@ -228,4 +229,4 @@ Zie ook: `docs/dashboard/sprint-backlog.md`.
 
 ---
 
-> Zie ook: `docs/dashboard/monthly-seo-baseline-template.md`, `docs/dashboard/adsense-status-log.md`, `docs/dashboard/sprint-backlog.md`, `docs/dashboard/search-console-import-template.csv`.
+> Zie ook: `docs/dashboard/monthly-seo-baseline-template.md`, `docs/dashboard/adsense-status-log.md`, `docs/dashboard/sprint-backlog.md`, `docs/dashboard/search-console-import-template.csv`, `docs/agents/`.

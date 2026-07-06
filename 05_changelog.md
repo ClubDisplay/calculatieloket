@@ -2,10 +2,20 @@
 
 ## 2026-07-05
 
+**Type:** Docs / Agents
+**Wijziging:** PR #63 — SEO Growth Agents
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/63
+**Status:** ⏳ Open ter review; niet gemerged of gedeployed
+**Details:** Interne Agents-documentatie toegevoegd voor Calculatieloket.nl: `docs/agents/README.md`, `docs/agents/seo-strategist-agent.md`, `docs/agents/content-quality-agent.md`, `docs/agents/adsense-readiness-agent.md`, `docs/agents/technical-qa-agent.md`, `docs/agents/sprint-coordinator-agent.md`. Agents zijn interne werkinstructies voor SEO-groei, contentkwaliteit, AdSense-readiness, technische QA en sprintplanning. Ze gebruiken `docs/dashboard/` als bron van waarheid en mogen geen live wijzigingen zonder akkoord van Barry. Verwijzingen toegevoegd in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`, `docs/dashboard/sprint-backlog.md`, `docs/product/MASTER_PROJECT_CONTEXT.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. Geen codewijzigingen, geen calculatorlogica, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy.
+
+---
+
+## 2026-07-05
+
 **Type:** Hotfix / AdSense Readiness
 **Wijziging:** PR #62 — SEO & AdSense Growth Dashboard
-**PR:** https://github.com/ClubDisplay/calculatieloket/pull/62
-**Status:** ⏳ Open ter review; niet gemerged of gedeployed
+**Merge commit:** `d709de4`
+**Status:** ✅ Gemerged (docs-only, geen deploy)
 **Details:** Nieuw intern growth dashboard voor Calculatieloket.nl aangemaakt in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md` met huidige status, AdSense monitoring, Search Console baseline, contentclusters, technische kwaliteit, AdSense readiness checklist, PR changelog, backlog en beslisregels. Opgemaakt: `docs/dashboard/monthly-seo-baseline-template.md`, `docs/dashboard/search-console-import-template.csv`, `docs/dashboard/adsense-status-log.md`, `docs/dashboard/sprint-backlog.md`. Verwijzingen toegevoegd in `docs/product/CURRENT_STATE.md`, `docs/product/MASTER_PROJECT_CONTEXT.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. `dashboard.fiscalmesh.com` blijft toekomstig intern dashboarddomein. Geen codewijzigingen, geen calculatorlogica, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode en geen deploy.
 
 ---
