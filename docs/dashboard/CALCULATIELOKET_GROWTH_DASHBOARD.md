@@ -1,7 +1,7 @@
 # Calculatieloket.nl — SEO & AdSense Growth Dashboard
 
 > **Doel:** Centrale documentatie voor het monitoren, plannen en groeien van Calculatieloket.nl op SEO, AdSense, content en technische kwaliteit.  
-> **Laatst bijgewerkt:** 2026-07-05  
+> **Laatst bijgewerkt:** 2026-07-06  
 > **Status:** Actief — groeit mee met data.  
 > **Agents:** Zie `docs/agents/` voor vaste werkinstructies. Agents gebruiken dit dashboard als bron van waarheid.
 
@@ -52,9 +52,9 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 | /btw-calculator/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-terugrekenen/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-inclusief-exclusief/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /bruto-netto-2026/ | Salaris | Live | 2026-07-05 | | | | | Analyse voor contentkwaliteit |
-| /salaris-calculator/ | Salaris | Live | 2026-07-05 | | | | | Analyse voor contentkwaliteit |
-| /vakantiegeld-calculator/ | Salaris | Live | 2026-07-05 | | | | | Analyse voor contentkwaliteit |
+| /bruto-netto-2026/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
+| /salaris-calculator/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
+| /vakantiegeld-calculator/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
 | /toeslagen-calculator/ | Toeslagen | Live | 2026-07-05 | | | | | Content verduidelijken |
 | /hypotheek-calculator/ | Wonen | Live | 2026-07-05 | | | | | Content verbeteren |
 | /zzp-calculator/ | ZZP | Live | 2026-07-05 | | | | | Cluster uitbreiden |
@@ -81,11 +81,12 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 ### Salaris / bruto-netto
 
 - **Huidige pagina’s:** `/bruto-netto-2026/`, `/salaris-calculator/`, `/vakantiegeld-calculator/`
-- **Status:** Volgende contentkwaliteit-sprint
-- **Kansen:** Meer uitleg over loonheffing, bruto-netto verschillen, voorbeelden
-- **Risico’s:** Fiscale/loonheffings-informatie vereist officiële bronnen
+- **Status:** Audit afgerond; content-PR voorbereid
+- **Kansen:** Differentiatie bruto-netto vs salaris-calculator, cluster-crosslinking “Ook handig binnen salaris”, harde toeslagclaim verzachten
+- **Risico’s:** Cannibalisatie tussen bruto-netto-2026 en salaris-calculator; harde claim in use-case copy
 - **Officiële bronnen nodig?** Ja — Belastingdienst, loonheffingstabellen 2026
-- **Volgende sprint:** Analyse eerst, daarna pas content
+- **Audit:** `docs/audits/salary-bruto-netto-cluster-audit.md`
+- **Volgende sprint:** Contentkwaliteit verbeteren op basis van de audit
 
 ### Toeslagen
 
@@ -181,6 +182,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | PR | Datum | Type | Samenvatting | Deploy | Impact | Opmerking |
 |---|---|---|---|---|---|---|
+| PR #64 | 2026-07-06 | Docs | Salaris/bruto-netto cluster audit toegevoegd | Nee | Laag | `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | PR #55 | 2026-07-05 | Content Quality | Harde claims en placeholders verwijderd | Ja | Middel | Content-safety audit geïntroduceerd |
 | PR #56 | 2026-07-05 | UX | Loze "Bereken"-knoppen verwijderd | Ja | Laag | Betere UX, minder ruis |
 | PR #58 | 2026-07-05 | Quality Gates | `audit:content` opgenomen in `atlas:check` + search-tests | Ja | Laag | Betere CI-dekking |
@@ -195,7 +197,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 | Prioriteit | Thema | Taak | Type | Risico | Verwachte impact | Status |
 |---|---|---|---|---|---|---|
 | P1 | AdSense | AdSense status monitoren | Monitoring | Laag | Hoog | Actief |
-| P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | Open |
+| P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | ✅ Afgerond; zie `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | Open |
 | P1 | SEO | Search Console baseline klaarzetten | Monitoring | Laag | Middel | Open |
 | P2 | Content | Toeslagen content verduidelijken | Content | Middel | Middel | Open |

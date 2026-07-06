@@ -1,13 +1,14 @@
 # 10 — Changelog
 
 > **Doel:** Geconsolideerd changelog van alle releases. Dit is een synchrone kopie van `05_changelog.md` in de project-root.  
-> **Laatst bijgewerkt:** 2026-07-05
+> **Laatst bijgewerkt:** 2026-07-06
 
 ---
 
 ## Inhoudsopgave
 
-1. [2026-07-05 — PR #63 SEO Growth Agents](#2026-07-05--pr-63-seo-growth-agents)
+1. [2026-07-06 — PR #?? Salary and bruto-netto cluster audit](#2026-07-06--pr--salary-and-bruto-netto-cluster-audit)
+2. [2026-07-05 — PR #63 SEO Growth Agents](#2026-07-05--pr-63-seo-growth-agents)
 2. [2026-07-05 — PR #62 SEO & AdSense Growth Dashboard](#2026-07-05--pr-62-seo--adsense-growth-dashboard)
 3. [2026-07-05 — PR #61 Internationale domeinstrategie](#2026-07-05--pr-61-internationale-domeinstrategie)
 3. [2026-07-05 — PR #60 AdSense readiness placeholders/checklist](#2026-07-05--pr-60-adsense-readiness-placeholderschecklist)
@@ -69,6 +70,15 @@
 50. [2026-06-30](#2026-06-30)
 51. [2026-06-30](#2026-06-30)
 52. [2026-06-30](#2026-06-30)
+
+---
+
+## 2026-07-06 — PR #?? Salary and bruto-netto cluster audit
+
+**Type:** Docs / Audit
+**PR:** [nog aan te maken]
+**Status:** ⏳ In voorbereiding
+**Details:** Salaris/bruto-netto cluster audit toegevoegd in `docs/audits/salary-bruto-netto-cluster-audit.md`. De audit analyseert `/bruto-netto-2026/`, `/salaris-calculator/` en `/vakantiegeld-calculator/` op SEO, contentkwaliteit, cannibalisatie, interne crosslinking, harde claims en AdSense-readiness. Aanbevolen volgende stap is een kleine content-PR (branch `seo/salary-cluster-content-quality`) zonder wijzigingen aan rekenlogica, fiscale parameters, URL’s, SEO metadata, privacy/cookie/consent of advertentiecode. Dashboard- en sprint-backlog verwijzingen bijgewerkt in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`. Geen codewijzigingen, geen live contentwijzigingen, geen calculatorlogica, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy.
 
 ---
 

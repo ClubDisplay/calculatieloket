@@ -1,5 +1,15 @@
 # Changelog — Calculatieloket.nl
 
+## 2026-07-06
+
+**Type:** Docs / Audit
+**Wijziging:** PR #?? — Salary and bruto-netto cluster audit
+**PR:** [nog aan te maken]
+**Status:** ⏳ In voorbereiding
+**Details:** Salaris/bruto-netto cluster audit toegevoegd in `docs/audits/salary-bruto-netto-cluster-audit.md`. De audit analyseert `/bruto-netto-2026/`, `/salaris-calculator/` en `/vakantiegeld-calculator/` op SEO, contentkwaliteit, cannibalisatie, interne crosslinking, harde claims en AdSense-readiness. Aanbevolen volgende stap is een kleine content-PR (branch `seo/salary-cluster-content-quality`) zonder wijzigingen aan rekenlogica, fiscale parameters, URL’s, SEO metadata, privacy/cookie/consent of advertentiecode. Dashboard- en sprint-backlog verwijzingen bijgewerkt in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`. Geen codewijzigingen, geen live contentwijzigingen, geen calculatorlogica, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy.
+
+---
+
 ## 2026-07-05
 
 **Type:** Docs / Agents
