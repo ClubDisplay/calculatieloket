@@ -246,7 +246,7 @@ rules:
 warnings:
   - id: no_wealth_check
     message:
-      nl-NL: 'Let op: deze calculator houdt nog geen rekening met vermogen. Je vermogen kan bepalen of je wel of geen recht hebt op toeslag.'
+      nl-NL: 'Let op: deze calculator houdt nog geen rekening met vermogen. Je vermogen kan invloed hebben op de vraag of toeslagen relevant zijn voor jouw situatie.'
     severity: warning
 journeys:
   enabled: true

@@ -228,7 +228,7 @@ journeys:
         url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026"
     warnings:
       - "Deze berekening is een indicatie. De Dienst Toeslagen kijkt naar meer factoren."
-      - "De calculator houdt nog geen rekening met vermogen — dit kan je recht op toeslag bepalen."
+      - "De calculator houdt nog geen rekening met vermogen — dit kan invloed hebben op de vraag of toeslagen relevant zijn voor jouw situatie."
       - "Doe altijd de officiële proefberekening op Toeslagen.nl."
     conversion_opportunities:
       - "Officiële proefberekening starten op Toeslagen.nl"
