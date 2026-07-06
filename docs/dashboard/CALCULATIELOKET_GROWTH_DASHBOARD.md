@@ -52,9 +52,9 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 | /btw-calculator/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-terugrekenen/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-inclusief-exclusief/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /bruto-netto-2026/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
-| /salaris-calculator/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
-| /vakantiegeld-calculator/ | Salaris | Live | 2026-07-06 | | | | | Audit afgerond; content-PR voorbereid |
+| /bruto-netto-2026/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
+| /salaris-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
+| /vakantiegeld-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
 | /toeslagen-calculator/ | Toeslagen | Live | 2026-07-05 | | | | | Content verduidelijken |
 | /hypotheek-calculator/ | Wonen | Live | 2026-07-05 | | | | | Content verbeteren |
 | /zzp-calculator/ | ZZP | Live | 2026-07-05 | | | | | Cluster uitbreiden |
@@ -81,12 +81,12 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 ### Salaris / bruto-netto
 
 - **Huidige pagina’s:** `/bruto-netto-2026/`, `/salaris-calculator/`, `/vakantiegeld-calculator/`
-- **Status:** Audit afgerond; content-PR voorbereid
-- **Kansen:** Differentiatie bruto-netto vs salaris-calculator, cluster-crosslinking “Ook handig binnen salaris”, harde toeslagclaim verzachten
-- **Risico’s:** Cannibalisatie tussen bruto-netto-2026 en salaris-calculator; harde claim in use-case copy
+- **Status:** Contentkwaliteit verbeterd via content-PR
+- **Kansen:** Differentiatie bruto-netto vs salaris-calculator toegepast, cluster-crosslinking “Ook handig binnen salaris” toegevoegd, harde toeslagclaim verzacht
+- **Risico’s:** Cannibalisatie verminderd; harde claim in use-case copy verzacht
 - **Officiële bronnen nodig?** Ja — Belastingdienst, loonheffingstabellen 2026
 - **Audit:** `docs/audits/salary-bruto-netto-cluster-audit.md`
-- **Volgende sprint:** Contentkwaliteit verbeteren op basis van de audit
+- **Volgende sprint:** Monitoren in Search Console; visuele controle na deploy
 
 ### Toeslagen
 
@@ -182,6 +182,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | PR | Datum | Type | Samenvatting | Deploy | Impact | Opmerking |
 |---|---|---|---|---|---|---|
+| PR #?? | 2026-07-06 | Content | Salaris/bruto-netto contentkwaliteit verbeterd | Nee | Middel | “Ook handig binnen salaris” toegevoegd, harde claim verzacht, pagina’s gedifferentieerd |
 | PR #64 | 2026-07-06 | Docs | Salaris/bruto-netto cluster audit toegevoegd | Nee | Laag | `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | PR #55 | 2026-07-05 | Content Quality | Harde claims en placeholders verwijderd | Ja | Middel | Content-safety audit geïntroduceerd |
 | PR #56 | 2026-07-05 | UX | Loze "Bereken"-knoppen verwijderd | Ja | Laag | Betere UX, minder ruis |
@@ -198,7 +199,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 |---|---|---|---|---|---|---|
 | P1 | AdSense | AdSense status monitoren | Monitoring | Laag | Hoog | Actief |
 | P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | ✅ Afgerond; zie `docs/audits/salary-bruto-netto-cluster-audit.md` |
-| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | Open |
+| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ⏳ In review; zie PR #?? |
 | P1 | SEO | Search Console baseline klaarzetten | Monitoring | Laag | Middel | Open |
 | P2 | Content | Toeslagen content verduidelijken | Content | Middel | Middel | Open |
 | P2 | Content | ZZP cluster uitbreiden | Content | Middel | Middel | Open |
