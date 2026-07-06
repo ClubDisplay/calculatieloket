@@ -48,7 +48,7 @@ const initialEffectiveRate = initialResult.grossYearly > 0
   ? ((initialNetTax / initialResult.grossYearly) * 100).toFixed(1).replace(".", ",")
   : "0,0";
 
-const lastUpdated = "30 juni 2026";
+const lastUpdated = "1 juli 2026";
 
 const quickAmounts = [2500, 3000, 3500, 4000, 5000];
 
@@ -136,6 +136,10 @@ const faq = [
   {
     question: "Wat verandert er als mijn salaris stijgt?",
     answer: "Je betaalt meer belasting over de extra euro's. Boven € 75.518 is dat 49,50%. Ook loopt de arbeidskorting sneller af, dus de netto winst per extra bruto euro wordt kleiner.",
+  },
+  {
+    question: "Wat is het verschil tussen deze pagina en de salaris calculator?",
+    answer: "Deze bruto-netto pagina richt zich op algemene uitleg, de tarieven en een snelle indicatie waarbij je je pensioenpremie als vast bedrag invult. De salaris calculator is vooral bedoeld om snel verschillende bruto bedragen te vergelijken met je pensioen als percentage.",
   },
 ];
 
@@ -308,8 +312,8 @@ const breadcrumbSchema = {
     <p class="badge-indicatie">Indicatie 2026</p>
 
     <h2 class="page-title">Bruto netto 2026</h2>
-    <p>Bereken eenvoudig hoeveel je netto per maand en per jaar overhoudt in 2026. We gebruiken de actuele Box 1 tarieven, 8% vakantiegeld, loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
-    <p>Wil je een ander bruto bedrag vergelijken? Gebruik de <a href="/salaris-calculator/">salariscalculator</a>. Voor je hypotheekindicatie, toeslagen of ZZP-uurtarief gebruik je de <a href="/hypotheek-calculator/">hypotheekcalculator</a>, <a href="/toeslagen-calculator/">toeslagencalculator</a> of <a href="/zzp-calculator/">ZZP-calculator</a>.</p>
+    <p>Op deze pagina vind je een algemene uitleg over het verschil tussen bruto en netto loon in 2026. Je ziet de actuele Box 1 tarieven, een indicatieve tabel en een snelle bruto-netto berekening. Handig als je wilt begrijpen hoe loonheffing, vakantiegeld, pensioen en heffingskortingen je nettoloon beïnvloeden.</p>
+    <p>Wil je direct verschillende bruto bedragen vergelijken met je pensioen als percentage? Gebruik dan de <a href="/salaris-calculator/">salariscalculator</a>. Voor je hypotheekindicatie, toeslagen of ZZP-uurtarief gebruik je de <a href="/hypotheek-calculator/">hypotheekcalculator</a>, <a href="/toeslagen-calculator/">toeslagencalculator</a> of <a href="/zzp-calculator/">ZZP-calculator</a>.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>Deze calculator is gebaseerd op de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> van de Belastingdienst voor 2026. De uitkomst is een indicatie: je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>
@@ -361,6 +365,14 @@ const breadcrumbSchema = {
       <li><strong>Pensioen vergeten:</strong> de werknemersbijdrage wordt afgetrokken vóór de belasting.</li>
       <li><strong>Loonheffingskorting dubbel toegepast:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
       <li><strong>Extra inkomsten negeren:</strong> meer verdienen betekent een andere belastingschijf en korting.</li>
+    </ul>
+  </div>
+
+  <div class="calculator-card calc-content">
+    <h2>Ook handig binnen salaris</h2>
+    <ul class="calc-list">
+      <li><a href="/salaris-calculator/">Salaris calculator</a> — direct bruto naar netto berekenen met pensioenpercentage.</li>
+      <li><a href="/vakantiegeld-calculator/">Vakantiegeld calculator</a> — indicatie van je netto vakantiegeld in 2026.</li>
     </ul>
   </div>
 

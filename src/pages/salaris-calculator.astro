@@ -48,7 +48,7 @@ const initialEffectiveRate = initialResult.grossYearly > 0
   ? ((initialNetTax / initialResult.grossYearly) * 100).toFixed(1).replace(".", ",")
   : "0,0";
 
-const lastUpdated = "30 juni 2026";
+const lastUpdated = "1 juli 2026";
 
 const quickAmounts = [2500, 3000, 3500, 4000, 5000];
 
@@ -126,8 +126,8 @@ const faq = [
     answer: "Ja, het percentage pensioenpremie dat je zelf betaalt wordt afgetrokken van je bruto jaarinkomen vóór de belastingberekening. Alleen het werknemersdeel telt mee.",
   },
   {
-    question: "Hoe verschilt dit van de bruto-netto 2026 pagina?",
-    answer: "Deze salaris calculator is een snelle bruto-netto indicatie waarbij je je pensioenpremie als percentage invult. De bruto-netto 2026 pagina biedt een uitgebreidere uitleg, voorbeelden en de mogelijkheid om je pensioenpremie als vast bedrag in te voeren.",
+    question: "Hoe verschilt deze salaris calculator van de bruto-netto 2026 pagina?",
+    answer: "Deze salaris calculator is een interactieve bruto-netto indicatie waarbij je je pensioenpremie als percentage invult. De bruto-netto 2026 pagina biedt meer algemene uitleg, voorbeelden en de mogelijkheid om je pensioenpremie als vast bedrag in te voeren. Beide pagina's gebruiken dezelfde 2026-tarieven.",
   },
 ];
 
@@ -298,8 +298,8 @@ const breadcrumbSchema = {
 
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Salaris calculator 2026</h2>
-    <p>Met deze salaris calculator bereken je eenvoudig hoeveel je netto per maand (en per jaar) overhoudt in 2026. We gebruiken de actuele Box 1 inkomstenbelastingtarieven, vakantiegeld (8%), loonheffingskorting, algemene heffingskorting en arbeidskorting.</p>
-    <p>Wil je een uitgebreidere bruto-netto berekening met een vast pensioenbedrag? Gebruik de <a href="/bruto-netto-2026/">bruto-netto calculator</a>. Voor je hypotheek, toeslagen of ZZP-tarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
+    <p>Met deze interactieve salaris calculator reken je snel uit hoeveel je netto per maand en per jaar overhoudt in 2026. Vul je bruto maandsalaris, je pensioenpercentage als werknemer en de loonheffingskorting in. De calculator toont direct je nettobedrag, inclusief vakantiegeld, algemene heffingskorting en arbeidskorting.</p>
+    <p>Wil je een uitgebreidere bruto-netto uitleg met de mogelijkheid om je pensioen als vast bedrag in te voeren? Gebruik dan de <a href="/bruto-netto-2026/">bruto-netto calculator</a>. Voor je hypotheek, toeslagen of ZZP-tarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>De berekening gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> voor 2026. Je kunt je pensioenpremie als percentage invoeren, waardoor je snel verschillende bruto bedragen kunt vergelijken. De uitkomst is een indicatie.</p>
@@ -347,6 +347,14 @@ const breadcrumbSchema = {
       <li><strong>Loonheffingskorting dubbel toepassen:</strong> je kunt deze maar bij één werkgever tegelijk hebben.</li>
       <li><strong>Netto als definitief loon zien:</strong> cao, bonus, bijtelling auto en extra inkomsten kunnen je loonstrook beïnvloeden.</li>
       <li><strong>Bruto jaarsalaris vergeten:</strong> vakantiegeld (8%) telt mee in de jaarberekening.</li>
+    </ul>
+  </div>
+
+  <div class="calculator-card calc-content">
+    <h2>Ook handig binnen salaris</h2>
+    <ul class="calc-list">
+      <li><a href="/bruto-netto-2026/">Bruto netto 2026</a> — algemene uitleg, tarieven en snelle bruto-netto indicatie.</li>
+      <li><a href="/vakantiegeld-calculator/">Vakantiegeld calculator</a> — indicatie van je netto vakantiegeld in 2026.</li>
     </ul>
   </div>
 
