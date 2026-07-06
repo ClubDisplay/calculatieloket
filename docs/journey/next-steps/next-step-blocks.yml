@@ -100,7 +100,7 @@ blocks:
         tracking: "future"
         status: "planned"
 
-      - label: "Check je recht op toeslagen"
+      - label: "Bekijk je toeslagenindicatie"
         href: "/toeslagen-calculator/?income={belastbaar_jaarinkomen}"
         reason: "Jouw inkomen bepaalt mede of je in aanmerking kunt komen voor toeslagen."
         reused_data: ["belastbaar_jaarinkomen"]
@@ -252,7 +252,7 @@ blocks:
 
       - label: "Check je vermogenstoets"
         href: null
-        reason: "Vermogen kan invloed hebben op je recht op toeslagen."
+        reason: "Vermogen kan invloed hebben op de vraag of toeslagen relevant zijn voor jouw situatie."
         reused_data: []
         priority: 5
         display_rules:
