@@ -18,8 +18,8 @@
 ## Deze week
 
 - AdSense monitoren
-- Salaris/bruto-netto cluster voorbereiden
-- Search Console baseline vullen zodra export beschikbaar is (`docs/dashboard/search-console/2026-07-baseline.md`)
+- Sitemap-dekking controleren: 23 buildpagina’s versus 15 ontdekte sitemap-pagina’s
+- PR #59 (BTW) en PR #65 (salaris/bruto-netto) monitoren in Search Console
 - Agents-structuur gebruiken voor nieuwe analyses
 
 ---
@@ -29,6 +29,7 @@
 - Salaris/bruto-netto contentkwaliteit
 - Toeslagen contentkwaliteit
 - AdSense advertentieplaatsing pas na goedkeuring
+- Pas na nieuwe Search Console-data beslissen over Toeslagen/Hypotheek/ZZP audit
 
 ---
 

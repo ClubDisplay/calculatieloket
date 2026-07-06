@@ -74,6 +74,16 @@
 
 ---
 
+## 2026-07-06 — Eerste Search Console baseline ingevuld
+
+- **Type:** Docs / Dashboard
+- **Wijziging:** PR #68 — Eerste Search Console baseline ingevuld
+- **PR:** https://github.com/ClubDisplay/calculatieloket/pull/68
+- **Status:** ⏳ Open ter review; niet gemerged
+- **Details:** Eerste Search Console baseline (`docs/dashboard/search-console/2026-07-baseline.md`) gevuld op basis van Barry’s export van 6 juli 2026. Top pagina’s, zoekopdrachten, devices, countries en sitemapstatus toegevoegd. Dashboard (`CALCULATIELOKET_GROWTH_DASHBOARD.md`) en sprint-backlog bijgewerkt. Quick win `/bruto-netto-2026/` benoemd. Sitemap-dekking (23 buildpagina’s vs. 15 ontdekte pagina’s) geïdentificeerd als vervolgactie. Geen codewijzigingen, geen contentwijzigingen op live pagina’s, geen calculatorlogica, geen rekenformules, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy, geen verzonnen Search Console-data.
+
+---
+
 ## 2026-07-06 — Search Console baseline voorbereiden
 
 - **Type:** Docs / Dashboard
