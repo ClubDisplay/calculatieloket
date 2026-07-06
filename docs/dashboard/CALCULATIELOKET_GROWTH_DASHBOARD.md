@@ -16,9 +16,9 @@
 | AdSense-status | Getting ready / review loopt | 2026-07-05 | Review aangevraagd na PR #60 |
 | Ads.txt-status | Authorised | 2026-07-05 | `google.com, pub-6003900314370739, DIRECT, f08c47fec0942fa0` |
 | Aantal pagina’s | 23 | 2026-07-05 | Na laatste build |
-| Laatste bekende tests | 253/253 passed | 2026-07-05 | Vitest suite |
-| Laatste bekende build | Groen | 2026-07-05 | `npm run atlas:check` ✅ |
-| Laatste deploy | 2026-07-05 | 2026-07-05 | PR #60 + PR #59 live |
+| Laatste bekende tests | 253/253 passed | 2026-07-06 | Vitest suite |
+| Laatste bekende build | Groen | 2026-07-06 | `npm run atlas:check` ✅ |
+| Laatste deploy | 2026-07-06 | 2026-07-06 | PR #65 live |
 | Open risico’s | AdSense review afwachten | 2026-07-05 | Geen grote productie-wijzigingen tijdens review |
 
 ---
@@ -52,9 +52,9 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 | /btw-calculator/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-terugrekenen/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
 | /btw-inclusief-exclusief/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /bruto-netto-2026/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
-| /salaris-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
-| /vakantiegeld-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Content-PR in review |
+| /bruto-netto-2026/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
+| /salaris-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
+| /vakantiegeld-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
 | /toeslagen-calculator/ | Toeslagen | Live | 2026-07-05 | | | | | Content verduidelijken |
 | /hypotheek-calculator/ | Wonen | Live | 2026-07-05 | | | | | Content verbeteren |
 | /zzp-calculator/ | ZZP | Live | 2026-07-05 | | | | | Cluster uitbreiden |
@@ -81,12 +81,12 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 ### Salaris / bruto-netto
 
 - **Huidige pagina’s:** `/bruto-netto-2026/`, `/salaris-calculator/`, `/vakantiegeld-calculator/`
-- **Status:** Contentkwaliteit verbeterd via content-PR
+- **Status:** Contentkwaliteit verbeterd en gedeployed via PR #65
 - **Kansen:** Differentiatie bruto-netto vs salaris-calculator toegepast, cluster-crosslinking “Ook handig binnen salaris” toegevoegd, harde toeslagclaim verzacht
 - **Risico’s:** Cannibalisatie verminderd; harde claim in use-case copy verzacht
 - **Officiële bronnen nodig?** Ja — Belastingdienst, loonheffingstabellen 2026
 - **Audit:** `docs/audits/salary-bruto-netto-cluster-audit.md`
-- **Volgende sprint:** Monitoren in Search Console; visuele controle na deploy
+- **Volgende sprint:** Monitoren in Search Console
 
 ### Toeslagen
 
@@ -139,10 +139,10 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | Check | Status | Laatste controle | Tool/commando | Opmerking |
 |---|---|---|---|---|
-| Unit tests | ✅ | 2026-07-05 | `npm run test` | 253/253 |
-| Build | ✅ | 2026-07-05 | `npm run build` | 23 pagina’s |
-| Content-safety | ✅ | 2026-07-05 | `npm run audit:content` | Geen placeholders/hard claims |
-| Atlas CI | ✅ | 2026-07-05 | `npm run atlas:check` | Volledig groen |
+| Unit tests | ✅ | 2026-07-06 | `npm run test` | 253/253 |
+| Build | ✅ | 2026-07-06 | `npm run build` | 23 pagina’s |
+| Content-safety | ✅ | 2026-07-06 | `npm run audit:content` | Geen placeholders/hard claims |
+| Atlas CI | ✅ | 2026-07-06 | `npm run atlas:check` | Volledig groen |
 | Sitemap | ✅ | 2026-07-05 | `dist/sitemap-index.xml` | 23 pagina’s |
 | Robots.txt | ✅ | 2026-07-05 | `public/robots.txt` | Naar sitemap-index |
 | Canonical | ✅ | 2026-07-05 | `BaseLayout.astro` | Per pagina |
@@ -182,7 +182,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | PR | Datum | Type | Samenvatting | Deploy | Impact | Opmerking |
 |---|---|---|---|---|---|---|
-| PR #65 | 2026-07-06 | Content | Salaris/bruto-netto contentkwaliteit verbeterd | Nee | Middel | “Ook handig binnen salaris” toegevoegd, harde claim verzacht, pagina’s gedifferentieerd |
+| PR #65 | 2026-07-06 | Content | Salaris/bruto-netto contentkwaliteit verbeterd | Ja | Middel | “Ook handig binnen salaris” toegevoegd, harde claim verzacht, pagina’s gedifferentieerd |
 | PR #64 | 2026-07-06 | Docs | Salaris/bruto-netto cluster audit toegevoegd | Nee | Laag | `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | PR #55 | 2026-07-05 | Content Quality | Harde claims en placeholders verwijderd | Ja | Middel | Content-safety audit geïntroduceerd |
 | PR #56 | 2026-07-05 | UX | Loze "Bereken"-knoppen verwijderd | Ja | Laag | Betere UX, minder ruis |
@@ -199,7 +199,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 |---|---|---|---|---|---|---|
 | P1 | AdSense | AdSense status monitoren | Monitoring | Laag | Hoog | Actief |
 | P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | ✅ Afgerond; zie `docs/audits/salary-bruto-netto-cluster-audit.md` |
-| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ⏳ In review; zie PR #65 |
+| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ✅ Afgerond en gedeployed via PR #65 |
 | P1 | SEO | Search Console baseline klaarzetten | Monitoring | Laag | Middel | Open |
 | P2 | Content | Toeslagen content verduidelijken | Content | Middel | Middel | Open |
 | P2 | Content | ZZP cluster uitbreiden | Content | Middel | Middel | Open |

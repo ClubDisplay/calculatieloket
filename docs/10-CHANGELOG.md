@@ -78,8 +78,13 @@
 
 **Type:** Content / SEO
 **PR:** https://github.com/ClubDisplay/calculatieloket/pull/65
-**Status:** ⏳ In voorbereiding
-**Details:** Contentkwaliteit van de Salaris/bruto-netto cluster verbeterd op basis van `docs/audits/salary-bruto-netto-cluster-audit.md`. Aangepaste bestanden: `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. De introducties van `/bruto-netto-2026/` en `/salaris-calculator/` zijn duidelijker gedifferentieerd. Op alle drie de pagina’s is een consistente “Ook handig binnen salaris”-sectie toegevoegd. De harde toeslagclaim in `/vakantiegeld-calculator/` use-case copy is verzacht naar een indicatieve formulering. Datums op gewijzigde pagina’s zijn gelijkgetrokken naar “1 juli 2026”. Geen wijzigingen aan rekenlogica, rekenformules, fiscale parameters, loonbelastingtabellen, heffingskortingen, URL’s, SEO titles, meta descriptions, schema/structured data, privacy/cookie/consent, advertentiecode, PUBLIC_ADS_ENABLED of deploy.
+**Merge commit:** `9eddbab`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Deployment:** https://calculatieloket.nl/ (preview: https://1539e08f.calculatieloket.pages.dev)
+**Details:** Contentkwaliteit van de Salaris/bruto-netto cluster verbeterd op basis van `docs/audits/salary-bruto-netto-cluster-audit.md`. Aangepaste bestanden: `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. De introducties van `/bruto-netto-2026/` en `/salaris-calculator/` zijn duidelijker gedifferentieerd. Op alle drie de pagina’s is een consistente “Ook handig binnen salaris”-sectie toegevoegd. De harde toeslagclaim in `/vakantiegeld-calculator/` use-case copy is verzacht naar een indicatieve formulering. Datums op gewijzigde pagina’s zijn gelijkgetrokken naar “1 juli 2026”. Build met `PUBLIC_ADS_ENABLED=true`. Geen wijzigingen aan rekenlogica, rekenformules, fiscale parameters, loonbelastingtabellen, heffingskortingen, URL’s, SEO titles, meta descriptions, schema/structured data, privacy/cookie/consent, advertentiecode, PUBLIC_ADS_ENABLED of deploy-configuratie.
+**Build:** 23 pagina’s, 0 TypeScript-fouten.
+**Tests:** 253/253 geslaagd.
+**Atlas CI:** `npm run atlas:check` volledig groen (2 verwachte draft-waarschuwingen).
 
 ---
 
