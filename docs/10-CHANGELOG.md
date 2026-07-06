@@ -79,7 +79,8 @@
 - **Type:** Hotfix / Content Safety
 - **Wijziging:** PR #66 — Soften toeslagen copy in financial journey
 - **PR:** https://github.com/ClubDisplay/calculatieloket/pull/66
-- **Status:** ⏳ Open ter review; niet gemerged of gedeployed
+- **Status:** ✅ Gemerged en gedeployed naar productie
+- **Deployment:** https://calculatieloket.nl/
 - **Details:** Harde "recht hebt op"-formuleringen in FinancialJourney-recommendations, category-copy, calculator-definities en journey-content verzacht naar indicatieve formuleringen. Aangepaste bestanden: `src/lib/recommendations/rules/vacation-pay.ts`, `src/lib/recommendations/rules/income.ts`, `src/lib/recommendations/rules/mortgage.ts`, `src/lib/recommendations/rules/zzp.ts`, `src/pages/categorie/inkomen.astro`, `docs/v2/definitions/toeslagen-calculator.yml`, `docs/journey/next-steps/next-step-blocks.yml`, `docs/journey/journeys.yml`, `docs/10-CHANGELOG.md` en `05_changelog.md`. Geen wijzigingen aan rekenlogica, rekenformules, fiscale parameters, toeslaggrenzen, voorbeeldbedragen, URL’s, SEO metadata, schema, privacy/cookie/consent, advertentiecode, PUBLIC_ADS_ENABLED of deploy-configuratie.
 
 ## 2026-07-06 — PR #65 Salary and bruto-netto content cluster improvement
