@@ -71,7 +71,7 @@ Internationale uitbreiding loopt via FiscalMesh. **dashboard.fiscalmesh.com** wo
 
 ### SEO & AdSense Growth Dashboard
 
-Het interne growth dashboard voor Calculatieloket.nl is vastgelegd in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`. Dit dashboard dient als centrale bron van waarheid voor huidige status, AdSense monitoring, Search Console baseline, contentclusters, technische kwaliteit, beslisregels en backlog. Agents werken straks vanuit dit dashboard.
+Het interne growth dashboard voor Calculatieloket.nl is vastgelegd in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`. Dit dashboard dient als centrale bron van waarheid voor huidige status, AdSense monitoring, Search Console baseline, contentclusters, technische kwaliteit, beslisregels en backlog. Interne Agents voor SEO, contentkwaliteit, AdSense-readiness, technische QA en sprintcoördinatie staan in `docs/agents/` en gebruiken `docs/dashboard/` als bron van waarheid.
 
 ---
 

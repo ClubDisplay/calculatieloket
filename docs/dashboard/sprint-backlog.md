@@ -20,7 +20,7 @@
 - AdSense monitoren
 - Salaris/bruto-netto cluster voorbereiden
 - Search Console baseline klaarzetten
-- Agents-structuur voorbereiden nadat dashboard staat
+- Agents-structuur gebruiken voor nieuwe analyses
 
 ---
 
@@ -29,7 +29,12 @@
 - Salaris/bruto-netto contentkwaliteit
 - Toeslagen contentkwaliteit
 - AdSense advertentieplaatsing pas na goedkeuring
-- Agents-documenten maken
+
+---
+
+## Agents
+
+Agents-documentatie is aangemaakt in `docs/agents/`. Volgende stap: agents gebruiken voor analyse vóór nieuwe contentkwaliteit-sprints. Zie `docs/agents/README.md`.
 
 ---
 
