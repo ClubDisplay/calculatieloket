@@ -3,8 +3,8 @@
 ## 2026-07-06
 
 **Type:** Content / SEO
-**Wijziging:** PR #?? — Salary and bruto-netto content cluster improvement
-**PR:** [nog aan te maken]
+**Wijziging:** PR #65 — Salary and bruto-netto content cluster improvement
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/65
 **Status:** ⏳ In voorbereiding
 **Details:** Contentkwaliteit van de Salaris/bruto-netto cluster verbeterd op basis van `docs/audits/salary-bruto-netto-cluster-audit.md`. Aangepaste bestanden: `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. De introducties van `/bruto-netto-2026/` en `/salaris-calculator/` zijn duidelijker gedifferentieerd. Op alle drie de pagina’s is een consistente “Ook handig binnen salaris”-sectie toegevoegd. De harde toeslagclaim in `/vakantiegeld-calculator/` use-case copy is verzacht naar een indicatieve formulering. Datums op gewijzigde pagina’s zijn gelijkgetrokken naar “1 juli 2026”. Geen wijzigingen aan rekenlogica, rekenformules, fiscale parameters, loonbelastingtabellen, heffingskortingen, URL’s, SEO titles, meta descriptions, schema, privacy/cookie/consent, advertentiecode, PUBLIC_ADS_ENABLED of deploy.
 

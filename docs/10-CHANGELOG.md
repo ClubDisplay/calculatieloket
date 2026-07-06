@@ -7,7 +7,7 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-06 — PR #?? Salary and bruto-netto content cluster improvement](#2026-07-06--pr--salary-and-bruto-netto-content-cluster-improvement)
+1. [2026-07-06 — PR #65 Salary and bruto-netto content cluster improvement](#2026-07-06--pr-65-salary-and-bruto-netto-content-cluster-improvement)
 2. [2026-07-06 — PR #64 Salary and bruto-netto cluster audit](#2026-07-06--pr-64-salary-and-bruto-netto-cluster-audit)
 3. [2026-07-05 — PR #63 SEO Growth Agents](#2026-07-05--pr-63-seo-growth-agents)
 2. [2026-07-05 — PR #62 SEO & AdSense Growth Dashboard](#2026-07-05--pr-62-seo--adsense-growth-dashboard)
@@ -74,10 +74,10 @@
 
 ---
 
-## 2026-07-06 — PR #?? Salary and bruto-netto content cluster improvement
+## 2026-07-06 — PR #65 Salary and bruto-netto content cluster improvement
 
 **Type:** Content / SEO
-**PR:** [nog aan te maken]
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/65
 **Status:** ⏳ In voorbereiding
 **Details:** Contentkwaliteit van de Salaris/bruto-netto cluster verbeterd op basis van `docs/audits/salary-bruto-netto-cluster-audit.md`. Aangepaste bestanden: `src/pages/bruto-netto-2026.astro`, `src/pages/salaris-calculator.astro`, `src/pages/vakantiegeld-calculator.astro`, `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. De introducties van `/bruto-netto-2026/` en `/salaris-calculator/` zijn duidelijker gedifferentieerd. Op alle drie de pagina’s is een consistente “Ook handig binnen salaris”-sectie toegevoegd. De harde toeslagclaim in `/vakantiegeld-calculator/` use-case copy is verzacht naar een indicatieve formulering. Datums op gewijzigde pagina’s zijn gelijkgetrokken naar “1 juli 2026”. Geen wijzigingen aan rekenlogica, rekenformules, fiscale parameters, loonbelastingtabellen, heffingskortingen, URL’s, SEO titles, meta descriptions, schema/structured data, privacy/cookie/consent, advertentiecode, PUBLIC_ADS_ENABLED of deploy.
 

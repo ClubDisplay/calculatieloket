@@ -182,7 +182,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | PR | Datum | Type | Samenvatting | Deploy | Impact | Opmerking |
 |---|---|---|---|---|---|---|
-| PR #?? | 2026-07-06 | Content | Salaris/bruto-netto contentkwaliteit verbeterd | Nee | Middel | “Ook handig binnen salaris” toegevoegd, harde claim verzacht, pagina’s gedifferentieerd |
+| PR #65 | 2026-07-06 | Content | Salaris/bruto-netto contentkwaliteit verbeterd | Nee | Middel | “Ook handig binnen salaris” toegevoegd, harde claim verzacht, pagina’s gedifferentieerd |
 | PR #64 | 2026-07-06 | Docs | Salaris/bruto-netto cluster audit toegevoegd | Nee | Laag | `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | PR #55 | 2026-07-05 | Content Quality | Harde claims en placeholders verwijderd | Ja | Middel | Content-safety audit geïntroduceerd |
 | PR #56 | 2026-07-05 | UX | Loze "Bereken"-knoppen verwijderd | Ja | Laag | Betere UX, minder ruis |
@@ -199,7 +199,7 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 |---|---|---|---|---|---|---|
 | P1 | AdSense | AdSense status monitoren | Monitoring | Laag | Hoog | Actief |
 | P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | ✅ Afgerond; zie `docs/audits/salary-bruto-netto-cluster-audit.md` |
-| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ⏳ In review; zie PR #?? |
+| P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ⏳ In review; zie PR #65 |
 | P1 | SEO | Search Console baseline klaarzetten | Monitoring | Laag | Middel | Open |
 | P2 | Content | Toeslagen content verduidelijken | Content | Middel | Middel | Open |
 | P2 | Content | ZZP cluster uitbreiden | Content | Middel | Middel | Open |
