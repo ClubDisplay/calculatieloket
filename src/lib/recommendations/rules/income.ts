@@ -40,8 +40,8 @@ export function incomeRules(input: RecommendationInput): Recommendation[] {
     recs.push(
       recommendationFromRegistry("toeslagen", {
         description: grossYearly
-          ? `Controleer of je met een inkomen van ${formatEuro(grossYearly)} recht hebt op toeslagen.`
-          : "Check of je recht hebt op huur- of zorgtoeslag.",
+          ? `Krijg een indicatie of toeslagen relevant kunnen zijn bij een inkomen van ${formatEuro(grossYearly)}.`
+          : "Krijg een indicatie of toeslagen relevant kunnen zijn voor jouw situatie.",
         url: buildUrl("/toeslagen-calculator/", { inkomen: grossYearly }),
         priority: 1,
         reason: "laag netto inkomen",

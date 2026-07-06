@@ -39,8 +39,8 @@ export function vacationPayRules(input: RecommendationInput): Recommendation[] {
     }),
     recommendationFromRegistry("toeslagen", {
       description: grossYearly
-        ? `Controleer of je met een inkomen van ${formatEuro(grossYearly)} recht hebt op toeslagen.`
-        : "Check of je recht hebt op huur- of zorgtoeslag.",
+        ? `Krijg een indicatie of toeslagen relevant kunnen zijn bij een inkomen van ${formatEuro(grossYearly)}.`
+        : "Krijg een indicatie of toeslagen relevant kunnen zijn voor jouw situatie.",
       url: buildUrl("/toeslagen-calculator/", { inkomen: grossYearly }),
       priority: 3,
       reason: "altijd relevant",

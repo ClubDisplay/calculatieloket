@@ -42,8 +42,8 @@ export function zzpRules(input: RecommendationInput): Recommendation[] {
     }),
     recommendationFromRegistry("toeslagen", {
       description: revenue
-        ? `Controleer of je met een inkomen van ${formatEuro(revenue)} recht hebt op toeslagen.`
-        : "Check of je recht hebt op huur- of zorgtoeslag.",
+        ? `Krijg een indicatie of toeslagen relevant kunnen zijn bij een inkomen van ${formatEuro(revenue)}.`
+        : "Krijg een indicatie of toeslagen relevant kunnen zijn voor jouw situatie.",
       url: buildUrl("/toeslagen-calculator/", { inkomen: revenue }),
       priority: 4,
       reason: "altijd relevant",
