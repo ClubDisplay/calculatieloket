@@ -207,6 +207,7 @@ P2 (na stabiele 1.0):
 - Controleer of Calculator Registry metadata consistent wordt gebruikt voor OG-title/description.
 - Homepage search UX-check: zoekveld moet binnen 1-2 seconden zichtbaar en interactief zijn op mobiel en desktop; focus/tap target vergroten indien nodig.
 - `npm run audit:content` is nu opgenomen in `npm run atlas:check`.
+- Nieuw SEO/AdSense Growth Dashboard aangemaakt in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md` als leidend document voor monitoring, contentclusters en sprintplanning.
 
 ---
 

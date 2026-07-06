@@ -1,0 +1,3 @@
+date,period,type,query,page,clicks,impressions,ctr,position,notes,next_action
+2026-07-01,2026-06-01..2026-06-30,query,example query,https://calculatieloket.nl/,0,0,0,0,example row,fill in
+2026-07-01,2026-06-01..2026-06-30,page,,https://calculatieloket.nl/,0,0,0,0,example row,fill in

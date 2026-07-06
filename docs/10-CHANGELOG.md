@@ -7,8 +7,10 @@
 
 ## Inhoudsopgave
 
-1. [2026-07-05 — PR #60 AdSense readiness placeholders/checklist](#2026-07-05--pr-60-adsense-readiness-placeholderschecklist)
-2. [2026-07-05 — PR #56 Live calculator button UX fix](#2026-07-05--pr-56-live-calculator-button-ux-fix)
+1. [2026-07-05 — PR #62 SEO & AdSense Growth Dashboard](#2026-07-05--pr-62-seo--adsense-growth-dashboard)
+2. [2026-07-05 — PR #61 Internationale domeinstrategie](#2026-07-05--pr-61-internationale-domeinstrategie)
+3. [2026-07-05 — PR #60 AdSense readiness placeholders/checklist](#2026-07-05--pr-60-adsense-readiness-placeholderschecklist)
+4. [2026-07-05 — PR #56 Live calculator button UX fix](#2026-07-05--pr-56-live-calculator-button-ux-fix)
 3. [2026-07-05 — PR #55 Content-safety fix](#2026-07-05--pr-55-content-safety-fix)
 3. [2026-07-05 — PR #54 Closed (superseded)](#2026-07-05--pr-54-closed-superseded)
 4. [2026-07-05 — PR #52 Zorgtoeslag hotfix](#2026-07-05--pr-52-zorgtoeslag-hotfix)
@@ -69,12 +71,32 @@
 
 ---
 
+## 2026-07-05 — PR #62 SEO & AdSense Growth Dashboard
+
+**Type:** Docs / Growth
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/62
+**Status:** ⏳ Open ter review; niet gemerged of gedeployed
+**Details:** Nieuw intern growth dashboard voor Calculatieloket.nl aangemaakt in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md` met huidige status, AdSense monitoring, Search Console baseline, contentclusters, technische kwaliteit, AdSense readiness checklist, PR changelog, backlog en beslisregels. Opgemaakt: `docs/dashboard/monthly-seo-baseline-template.md`, `docs/dashboard/search-console-import-template.csv`, `docs/dashboard/adsense-status-log.md`, `docs/dashboard/sprint-backlog.md`. Verwijzingen toegevoegd in `docs/product/CURRENT_STATE.md`, `docs/product/MASTER_PROJECT_CONTEXT.md`, `docs/10-CHANGELOG.md` en `05_changelog.md`. `dashboard.fiscalmesh.com` blijft toekomstig intern dashboarddomein. Geen codewijzigingen, geen calculatorlogica, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode en geen deploy.
+
+---
+
+## 2026-07-05 — PR #61 Internationale domeinstrategie
+
+**Type:** Docs / Strategy
+**PR:** https://github.com/ClubDisplay/calculatieloket/pull/61
+**Merge commit:** `17ebee6`
+**Status:** ✅ Gemerged (docs-only, geen deploy)
+**Details:** Internationale domeinstrategie vastgelegd in `docs/dashboard/dashboard-hosting-plan.md`. `dashboard.fiscalmesh.com` wordt het interne control center; `Calculatieloket.nl` blijft de Nederlandse publieke site. `calculatieloket.de`, `.fr`, `.es` en `.be` worden defensief onderzocht, maar niet automatisch als hoofdmerk gebruikt. Per land moet eerst taal, zoektermen, merknaam, domeinbeschikbaarheid, officiële bronnen, AdSense/Search Console en juridische eisen worden onderzocht. Verwijzing toegevoegd in `docs/product/MASTER_PROJECT_CONTEXT.md`. Geen codewijzigingen, geen domeinregistratie, geen DNS, geen deploy.
+
+---
+
 ## 2026-07-05 — PR #60 AdSense readiness placeholders/checklist
 
 **Type:** Hotfix / AdSense Readiness
 **PR:** https://github.com/ClubDisplay/calculatieloket/pull/60
-**Status:** ⏳ Open ter review; niet gemerged of gedeployed
-**Details:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit de header- en footer-navigatie in `src/layouts/BaseLayout.astro`, inclusief de overbodige placeholder-CSS. `scripts/audit-content-safety.mjs` uitgebreid met automatische detectie van "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen in zowel gerenderde HTML als paginabron. Nieuw document `docs/adsense-readiness-checklist.md` met de complete checklist voor AdSense-approval. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, advertentiecode, cookie/consent, SEO-copy, sitemap, robots of rekenlogica. `public/ads.txt` was reeds aanwezig en correct; na build ook in `dist/ads.txt` en bereikbaar in preview op `/ads.txt`.
+**Merge commit:** `21cb1e0b5bc3c730dad4c3b08891e529c4ae328f`
+**Status:** ✅ Gemerged en gedeployed naar productie
+**Details:** Verwijderd alle zichtbare under-construction placeholders ("Kennisbank (binnenkort)", "Calculator Explorer (binnenkort)", "Toeslagen (binnenkort)", "Nieuws (binnenkort)") uit de header- en footer-navigatie in `src/layouts/BaseLayout.astro`, inclusief de overbodige placeholder-CSS. `scripts/audit-content-safety.mjs` uitgebreid met automatische detectie van "binnenkort", "in aanbouw", "work in progress", "tijdelijk niet beschikbaar" en placeholder-klassen. Nieuw document `docs/adsense-readiness-checklist.md` met de complete checklist voor AdSense-approval. Geen wijzigingen aan calculator engines, Knowledge Objects, Rule Resolver, Recommendation Engine, SEO-copy, sitemap, robots of rekenlogica. `public/ads.txt` was reeds aanwezig en correct; na build ook in `dist/ads.txt` en bereikbaar op productie. Productie-build is uitgevoerd met `PUBLIC_ADS_ENABLED=true`.
 **Build:** 23 pagina's, 0 TypeScript-fouten.
 **Tests:** 253/253 geslaagd.
 **Atlas CI:** `npm run atlas:check` volledig groen.

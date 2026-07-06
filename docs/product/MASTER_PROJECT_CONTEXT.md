@@ -69,6 +69,10 @@ scripts/              # Build/audit/QA scripts
 
 Internationale uitbreiding loopt via FiscalMesh. **dashboard.fiscalmesh.com** wordt het interne control center; **Calculatieloket.nl** blijft de Nederlandse publieke site. Buitenlandse domeinen worden per land gekozen na lokale bron- en merknaam-analyse. Defensieve domeinen zoals `calculatieloket.de`, `.fr`, `.es` en `.be` worden onderzocht, maar niet automatisch als hoofdmerk gebruikt. Zie `docs/dashboard/dashboard-hosting-plan.md`.
 
+### SEO & AdSense Growth Dashboard
+
+Het interne growth dashboard voor Calculatieloket.nl is vastgelegd in `docs/dashboard/CALCULATIELOKET_GROWTH_DASHBOARD.md`. Dit dashboard dient als centrale bron van waarheid voor huidige status, AdSense monitoring, Search Console baseline, contentclusters, technische kwaliteit, beslisregels en backlog. Agents werken straks vanuit dit dashboard.
+
 ---
 
 ## 4. Product Roadmap
