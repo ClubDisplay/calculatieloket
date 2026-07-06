@@ -19,7 +19,7 @@
 
 - AdSense monitoren
 - Salaris/bruto-netto cluster voorbereiden
-- Search Console baseline klaarzetten
+- Search Console baseline vullen zodra export beschikbaar is (`docs/dashboard/search-console/2026-07-baseline.md`)
 - Agents-structuur gebruiken voor nieuwe analyses
 
 ---

@@ -36,10 +36,13 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 ## 3. Search Console baseline
 
 | Datum export | Periode | Klikken | Vertoningen | CTR | Gem. positie | Belangrijkste groei | Belangrijkste daling | Actie |
-|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | | Wacht op export |
 
-> Vul maandelijks in via `docs/dashboard/monthly-seo-baseline-template.md`.
+- **Baselinebestand:** `docs/dashboard/search-console/2026-07-baseline.md`
+- **Status:** wacht op Barry’s Search Console-export
+- **Volgende actie:** Barry levert Search Console-export aan; baseline vullen en interpreteren
+- **Template:** zie ook `docs/dashboard/monthly-seo-baseline-template.md` en `docs/dashboard/search-console/README.md`
 
 ---
 
