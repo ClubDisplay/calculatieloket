@@ -42,8 +42,9 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 - **Baselinebestand:** `docs/dashboard/search-console/2026-07-baseline.md`
 - **Status:** ✅ juli 2026 baseline ingevuld
 - **Quick win:** `/bruto-netto-2026/` — 55 vertoningen, positie 17,13, 0 klikken
-- **Sitemapstatus:** Success, 15 ontdekte pagina’s; moet gecontroleerd worden tegen 23 gebouwde pagina’s
-- **Volgende actie:** Sitemap-dekking controleren; PR #59 en PR #65 2–4 weken monitoren
+- **Sitemapstatus:** Success, 15 ontdekte pagina’s; audit uitgevoerd (`docs/audits/sitemap-coverage-audit.md`)
+- **Sitemap audit conclusie:** 23 buildpagina’s, 22 sitemap-URL’s, geen belangrijke pagina’s ontbrekend; verschil 15 discovered pages waarschijnlijk Search Console-vertraging
+- **Volgende actie:** Sitemap opnieuw indienen in Search Console; PR #59 en PR #65 2–4 weken monitoren
 - **Template:** zie ook `docs/dashboard/monthly-seo-baseline-template.md` en `docs/dashboard/search-console/README.md`
 
 ---

@@ -18,7 +18,8 @@
 ## Deze week
 
 - AdSense monitoren
-- Sitemap-dekking controleren: 23 buildpagina’s versus 15 ontdekte sitemap-pagina’s
+- Sitemap coverage audit reviewen (`docs/audits/sitemap-coverage-audit.md`)
+- Pas na audit besluiten of sitemap-fix nodig is
 - PR #59 (BTW) en PR #65 (salaris/bruto-netto) monitoren in Search Console
 - Agents-structuur gebruiken voor nieuwe analyses
 
