@@ -79,7 +79,8 @@
 - **Type:** Docs / Dashboard
 - **Wijziging:** PR #67 — Search Console baseline voorbereiden
 - **PR:** https://github.com/ClubDisplay/calculatieloket/pull/67
-- **Status:** ⏳ Open ter review; niet gemerged
+- **Merge commit:** `9d9b825`
+- **Status:** ✅ Gemerged (docs-only, geen deploy)
 - **Details:** Search Console baseline-map en juli 2026 template toegevoegd in `docs/dashboard/search-console/`. Dashboard (`CALCULATIELOKET_GROWTH_DASHBOARD.md`) en sprint-backlog bijgewerkt. Geen codewijzigingen, geen contentwijzigingen op live pagina’s, geen calculatorlogica, geen rekenformules, geen fiscale parameters, geen URL’s, geen SEO metadata, geen privacy/cookie/consent, geen advertentiecode, geen deploy.
 
 ---
