@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW inclusief en exclusief berekenen — 21%, 9% en 0% | Calculatieloket.nl";
-const description = "Bereken btw inclusief en exclusief met 21%, 9% of 0% tarief. Zie direct bedrag exclusief, btw-bedrag en inclusief. Gebaseerd op Belastingdienst tarieven.";
+const description = "Leer hoe je btw inclusief en exclusief berekent. Formules, voorbeelden en een gratis rekenmachine voor 21%, 9% en 0% btw. Gebaseerd op Belastingdienst tarieven.";
 
 const defaultAmount = 100;
 const defaultRate = 21;
@@ -175,15 +175,20 @@ const breadcrumbSchema = {
     ]}
   />
 
-  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
-
   <Breadcrumbs items={[
     { label: "Home", href: "/" },
     { label: "Belasting", href: "/categorie/belasting/" },
     { label: "BTW inclusief/exclusief", current: true },
   ]} />
 
-  <CalculatorShell title="BTW inclusief en exclusief" subtitle="Bereken een bedrag van exclusief btw naar inclusief btw, of reken terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw.">
+  <section class="page-intro">
+    <h1>BTW inclusief en exclusief berekenen</h1>
+    <p><strong>Exclusief btw</strong> is het bedrag zonder btw. Dit is het nettobedrag dat een bedrijf ontvangt voor een product of dienst. <strong>Inclusief btw</strong> is het bedrag met btw erbij — dit is wat de klant uiteindelijk betaalt. Het <strong>btw-bedrag</strong> is het verschil tussen het inclusieve en het exclusieve bedrag.</p>
+    <p>Op deze pagina lees je hoe je in twee richtingen rekent: van exclusief naar inclusief en andersom. Je vindt de formules, praktische voorbeelden en een rekenmachine die direct uitrekent welk bedrag exclusief, inclusief en het btw-bedrag is. Kies 21%, 9% of 0% btw.</p>
+    <p>Bedrijven werken in hun administratie en offertes vaak met bedragen exclusief btw, terwijl consumenten in winkels en webshops meestal prijzen inclusief btw zien. Het is daarom handig om snel tussen beide te kunnen wisselen.</p>
+  </section>
+
+  <CalculatorShell subtitle="Bereken een bedrag van exclusief btw naar inclusief btw, of reken terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw.">
     <InputPanel title="Jouw bedrag" slot="input">
       <div class="form-group">
         <label for="amount">Bedrag</label>
@@ -269,11 +274,6 @@ const breadcrumbSchema = {
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">BTW inclusief en exclusief</h2>
-    <p><strong>Exclusief btw</strong> is het bedrag zonder btw. Dit is het nettobedrag dat een bedrijf ontvangt voor een product of dienst. <strong>Inclusief btw</strong> is het bedrag met btw erbij — dit is wat de klant uiteindelijk betaalt. Het <strong>btw-bedrag</strong> is het verschil tussen het inclusieve en het exclusieve bedrag.</p>
-    <p>Wil je snel <a href="/btw-terugrekenen/">btw terugrekenen</a> van inclusief naar exclusief, of alle tarieven in één keer zien in de <a href="/btw-calculator/">BTW calculator</a>? Voor ondernemers is er ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
-    <p>Bedrijven werken in hun administratie en offertes vaak met bedragen exclusief btw, terwijl consumenten in winkels en webshops meestal prijzen inclusief btw zien. Het is daarom handig om snel tussen beide te kunnen wisselen.</p>
-
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>Deze calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst (21%, 9% en 0%). De formule werkt in beide richtingen en is wiskundig correct voor het ingevoerde bedrag. De uitkomst is een indicatie.</p>
 
@@ -358,6 +358,8 @@ const breadcrumbSchema = {
       <li><a href="/btw-terugrekenen/">BTW terugrekenen</a> — van inclusief naar exclusief btw.</li>
     </ul>
   </div>
+
+  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
 
   <CrossSellCards
     title="Ook handig om te berekenen"
@@ -577,6 +579,27 @@ const breadcrumbSchema = {
 </script>
 
 <style>
+  .page-intro {
+    max-width: 72ch;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .page-intro p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
   .calc-content {
     padding: 1.5rem;
   }

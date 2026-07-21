@@ -19,7 +19,7 @@ import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
 const title = "BTW terugrekenen — van inclusief naar exclusief | Calculatieloket.nl";
-const description = "Reken btw terug van inclusief naar exclusief. Kies 21%, 9% of 0% btw en zie direct het exclusieve bedrag en het btw-bedrag. Gebaseerd op officiële tarieven.";
+const description = "Leer hoe je btw terugrekent van inclusief naar exclusief. Formule, rekenvoorbeelden en een gratis rekenmachine voor 21%, 9% en 0% btw. Gebaseerd op officiële tarieven."
 
 const defaultAmount = 121;
 const defaultRate = 21;
@@ -165,15 +165,20 @@ const breadcrumbSchema = {
     ]}
   />
 
-  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
-
   <Breadcrumbs items={[
     { label: "Home", href: "/" },
     { label: "Belasting", href: "/categorie/belasting/" },
     { label: "BTW terugrekenen", current: true },
   ]} />
 
-  <CalculatorShell title="BTW terugrekenen" subtitle="Reken een bedrag inclusief btw om naar exclusief btw. Kies 21%, 9% of 0% en zie direct het resultaat.">
+  <section class="page-intro">
+    <h1>BTW terugrekenen van inclusief naar exclusief</h1>
+    <p>Bij btw terugrekenen wil je van een bedrag inclusief btw weten wat het bedrag exclusief btw is en hoeveel btw er in het totaalbedrag zit. Dit is nodig als je een factuur of kassabon hebt waar alleen het totaalbedrag op staat.</p>
+    <p>De formule is simpel: deel het bedrag inclusief btw door (1 + het btw-percentage). Bij 21% btw deel je dus door 1,21. Op deze pagina lees je de exacte formule, zie je rekenvoorbeelden voor 21% en 9% btw, en kun je direct zelf een bedrag invullen.</p>
+    <p>Let op: je kunt niet simpelweg 21% aftrekken van het inclusieve bedrag. Omdat de btw is berekend over het exclusieve bedrag, moet je delen in plaats van aftrekken. Hieronder leggen we uit waarom.</p>
+  </section>
+
+  <CalculatorShell subtitle="Reken een bedrag inclusief btw om naar exclusief btw. Kies 21%, 9% of 0% en zie direct het resultaat.">
     <InputPanel title="Jouw bedrag" slot="input">
       <div class="form-group">
         <label for="amount">Bedrag inclusief btw</label>
@@ -252,10 +257,6 @@ const breadcrumbSchema = {
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">BTW terugrekenen</h2>
-    <p>Bij btw terugrekenen wil je van een bedrag inclusief btw weten wat het bedrag exclusief btw is en hoeveel btw er in het totaalbedrag zit.</p>
-    <p>Wil je btw in beide richtingen berekenen? Gebruik dan de <a href="/btw-calculator/">BTW calculator</a> of de <a href="/btw-inclusief-exclusief/">btw inclusief/exclusief</a> tool. Ondernemers bekijken ook het <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
-
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>Deze calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst (21%, 9% en 0%). De formule is wiskundig correct: exclusief = inclusief ÷ (1 + tarief). De uitkomst is een indicatie.</p>
     <p>Je kunt niet simpelweg het btw-percentage van het inclusief bedrag aftrekken. Het inclusief bedrag is namelijk al opgebouwd uit het bedrag exclusief btw plus de btw daarover. Daarom gebruik je een deling in plaats van een aftrekking.</p>
@@ -316,6 +317,8 @@ const breadcrumbSchema = {
       <li><a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief</a> — wissel in beide richtingen.</li>
     </ul>
   </div>
+
+  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
 
   <CrossSellCards
     title="Ook handig om te berekenen"
@@ -503,6 +506,27 @@ const breadcrumbSchema = {
 </script>
 
 <style>
+  .page-intro {
+    max-width: 72ch;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .page-intro p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
   .calc-content {
     padding: 1.5rem;
   }
