@@ -16,6 +16,22 @@ npm run preview      # preview built dist/
 npx wrangler pages deploy dist --project-name=calculatieloket
 ```
 
+## Git workflow
+
+Main is protected: changes must go through a pull request and pass the **Atlas CI** workflow (`Run Atlas CI checks`).
+
+Local workflow for a new change:
+
+```bash
+git checkout -b feature/naam-van-wijziging
+# maak wijzigingen
+npm run build
+gh pr create --title "feat: korte omschrijving" --body "Langere uitleg"
+# merge via GitHub na groen CI
+```
+
+Direct pushes to `main` are blocked by branch protection. Use the PR workflow to keep the repo consistent with the deployed site.
+
 ## Architecture
 
 ```
