@@ -1,7 +1,7 @@
 # Calculatieloket.nl — SEO & AdSense Growth Dashboard
 
 > **Doel:** Centrale documentatie voor het monitoren, plannen en groeien van Calculatieloket.nl op SEO, AdSense, content en technische kwaliteit.  
-> **Laatst bijgewerkt:** 2026-07-06  
+> **Laatst bijgewerkt:** 2026-07-27  
 > **Status:** Actief — groeit mee met data.  
 > **Agents:** Zie `docs/agents/` voor vaste werkinstructies. Agents gebruiken dit dashboard als bron van waarheid.
 
@@ -17,7 +17,7 @@
 | Ads.txt-status | Authorised | 2026-07-05 | `google.com, pub-6003900314370739, DIRECT, f08c47fec0942fa0` |
 | Aantal pagina’s | 23 | 2026-07-05 | Na laatste build |
 | Laatste bekende tests | 253/253 passed | 2026-07-06 | Vitest suite |
-| Laatste bekende build | Groen | 2026-07-06 | `npm run atlas:check` ✅ |
+| Laatste bekende build | Groen | 2026-07-06 | `npm run atlas:check` ✅; controleer na deze sprint opnieuw |
 | Laatste deploy | 2026-07-06 | 2026-07-06 | PR #65 live |
 | Open risico’s | AdSense review afwachten | 2026-07-05 | Geen grote productie-wijzigingen tijdens review |
 
@@ -37,14 +37,17 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | Datum export | Periode | Klikken | Vertoningen | CTR | Gem. positie | Belangrijkste groei | Belangrijkste daling | Actie |
 |---|---|---|---|---|---|---|---|---|---|
+| 2026-07-27 | laatste 3 maanden | 4 | 1.127 | 0,35% | circa 60 | /btw-terugrekenen/ (583 vertoningen) | /bruto-netto-2026/ (positie 15,81) | Content op /bruto-netto-2026/ en /btw-terugrekenen/ versterken |
 | 2026-07-06 | laatste 28 dagen | 4 | 228 | 1,75% | 55 | /bruto-netto-2026/ (positie 17,13) | — | Sitemap-dekking controleren; PR #59 en PR #65 monitoren |
 
-- **Baselinebestand:** `docs/dashboard/search-console/2026-07-baseline.md`
-- **Status:** ✅ juli 2026 baseline ingevuld
-- **Quick win:** `/bruto-netto-2026/` — 55 vertoningen, positie 17,13, 0 klikken
-- **Sitemapstatus:** Success, 15 ontdekte pagina’s; audit uitgevoerd (`docs/audits/sitemap-coverage-audit.md`)
+- **Laatste baseline:** `docs/dashboard/search-console/2026-07-27-baseline.md`
+- **Eerdere baseline:** `docs/dashboard/search-console/2026-07-baseline.md`
+- **Status:** ✅ 27 juli 2026 baseline ingevuld
+- **Quick win:** `/bruto-netto-2026/` — 135 vertoningen, positie 15,81, 0 klikken (dichtst bij pagina 1)
+- **Hoogste volume:** `/btw-terugrekenen/` — 583 vertoningen, positie 57,56, 0 klikken
+- **Sitemapstatus:** Success, 15 ontdekte pagina’s (laatst bekend); audit uitgevoerd (`docs/audits/sitemap-coverage-audit.md`)
 - **Sitemap audit conclusie:** 23 buildpagina’s, 22 sitemap-URL’s, geen belangrijke pagina’s ontbrekend; verschil 15 discovered pages waarschijnlijk Search Console-vertraging
-- **Volgende actie:** Sitemap opnieuw indienen in Search Console; PR #59 en PR #65 2–4 weken monitoren
+- **Volgende actie:** Sitemap opnieuw indienen in Search Console na deploy; PR #59 en PR #65 2–4 weken monitoren; deze content-sprint monitoren
 - **Template:** zie ook `docs/dashboard/monthly-seo-baseline-template.md` en `docs/dashboard/search-console/README.md`
 
 ---
@@ -53,12 +56,12 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 
 | URL | Cluster | Status | Laatste update | Klikken | Vertoningen | CTR | Positie | Volgende actie |
 |---|---|---|---|---|---|---|---|---|
-| / | Platform | Live | 2026-07-05 | | | | | Monitoren |
+| / | Platform | Live | 2026-07-05 | 4 | 21 | 19,05% | 47,48 | Monitoren; enige pagina met klikken |
 | /calculators/ | Platform | Live | 2026-07-05 | | | | | Monitoren |
-| /btw-calculator/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /btw-terugrekenen/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /btw-inclusief-exclusief/ | BTW | Verbeterd | PR #59 | | | | | Monitoren |
-| /bruto-netto-2026/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
+| /btw-calculator/ | BTW | Verbeterd | PR #59 | 0 | onbekend | 0% | onbekend | Monitoren |
+| /btw-terugrekenen/ | BTW | Verbeterd | PR #59 | 0 | 583 | 0% | 57,56 | Content versterken; meer voorbeelden en FAQ |
+| /btw-inclusief-exclusief/ | BTW | Verbeterd | PR #59 | 0 | 573 | 0% | 80,20 | Monitoren; lage prioriteit |
+| /bruto-netto-2026/ | Salaris | Verbeterd | 2026-07-06 | 0 | 135 | 0% | 15,81 | **P1:** content versterken om pagina 1 te halen |
 | /salaris-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
 | /vakantiegeld-calculator/ | Salaris | Verbeterd | 2026-07-06 | | | | | Gedeployed; monitoren |
 | /toeslagen-calculator/ | Toeslagen | Live | 2026-07-05 | | | | | Content verduidelijken |
@@ -78,21 +81,25 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 ### BTW
 
 - **Huidige pagina’s:** `/btw-calculator/`, `/btw-terugrekenen/`, `/btw-inclusief-exclusief/`
-- **Status:** Verbeterd via PR #59
-- **Kansen:** Interne links tussen BTW-pagina’s, duidelijke voorbeelden, FAQ
+- **Status:** Verbeterd via PR #59; sindsdien veel meer vertoningen, maar posities nog laag
+- **Kansen:**
+  - `/btw-terugrekenen/` heeft 583 vertoningen maar staat op positie 57,56. Versterken met meer voorbeelden, 21%/9% subsecties en FAQ.
+  - `/btw-inclusief-exclusief/` heeft 573 vertoningen maar staat op pagina 8; pas aanpakken als `/btw-terugrekenen/` op pagina 1 staat.
 - **Risico’s:** 0%-tarief verkeerd toegepast
 - **Officiële bronnen nodig?** Ja — Belastingdienst
-- **Volgende sprint:** Monitoren in Search Console
+- **Volgende sprint:** Content versterken op `/btw-terugrekenen/`; monitoren in Search Console
 
 ### Salaris / bruto-netto
 
 - **Huidige pagina’s:** `/bruto-netto-2026/`, `/salaris-calculator/`, `/vakantiegeld-calculator/`
-- **Status:** Contentkwaliteit verbeterd en gedeployed via PR #65
-- **Kansen:** Differentiatie bruto-netto vs salaris-calculator toegepast, cluster-crosslinking “Ook handig binnen salaris” toegevoegd, harde toeslagclaim verzacht
+- **Status:** Contentkwaliteit verbeterd en gedeployed via PR #65; `/bruto-netto-2026/` staat nu op positie 15,81 (dichtst bij pagina 1)
+- **Kansen:**
+  - `/bruto-netto-2026/` is de snelste kans op klikken: 135 vertoningen, positie 15,81. Uitbreiden met meer voorbeelden, “Nettoloon 2026” en “Bruto netto berekenen 2026” secties, en FAQ.
+  - `/salaris-calculator/` en `/vakantiegeld-calculator/` monitoren.
 - **Risico’s:** Cannibalisatie verminderd; harde claim in use-case copy verzacht
 - **Officiële bronnen nodig?** Ja — Belastingdienst, loonheffingstabellen 2026
 - **Audit:** `docs/audits/salary-bruto-netto-cluster-audit.md`
-- **Volgende sprint:** Monitoren in Search Console
+- **Volgende sprint:** Content versterken op `/bruto-netto-2026/`; monitoren in Search Console
 
 ### Toeslagen
 
@@ -204,13 +211,16 @@ Zie ook: `docs/dashboard/adsense-status-log.md`.
 | Prioriteit | Thema | Taak | Type | Risico | Verwachte impact | Status |
 |---|---|---|---|---|---|---|
 | P1 | AdSense | AdSense status monitoren | Monitoring | Laag | Hoog | Actief |
+| P1 | Content | `/bruto-netto-2026/` content versterken voor pagina 1 | Content | Middel | Hoog | **In uitvoering** in deze sprint |
+| P1 | Content | `/btw-terugrekenen/` content versterken met voorbeelden en FAQ | Content | Middel | Hoog | **In uitvoering** in deze sprint |
 | P1 | Content | Salaris/bruto-netto cluster analyseren | Analyse | Middel | Middel | ✅ Afgerond; zie `docs/audits/salary-bruto-netto-cluster-audit.md` |
 | P1 | Content | Salaris/bruto-netto contentkwaliteit verbeteren | Content | Middel | Hoog | ✅ Afgerond en gedeployed via PR #65 |
-| P1 | SEO | Search Console baseline klaarzetten | Monitoring | Laag | Middel | Open |
+| P1 | SEO | Search Console baseline bijwerken | Monitoring | Laag | Middel | ✅ Afgerond; zie `docs/dashboard/search-console/2026-07-27-baseline.md` |
 | P2 | Content | Toeslagen content verduidelijken | Content | Middel | Middel | Open |
 | P2 | Content | ZZP cluster uitbreiden | Content | Middel | Middel | Open |
 | P2 | Content | Hypotheek content verbeteren | Content | Middel | Middel | Open |
 | P2 | AdSense | Advertentieplaatsing ontwerpen na goedkeuring | UX | Middel | Middel | Open |
+| P3 | Content | Long-tail pagina’s overwegen (`/nettoloon-2026/`, `/btw-21-procent-berekenen/`) | Content | Middel | Middel | Open; pas na data deze sprint |
 | P3 | Content | Kennisbank bouwen | Product | Hoog | Middel | Open |
 | P3 | Strategy | Internationale domeinen onderzoeken | Strategy | Hoog | Laag | Open |
 

@@ -40,7 +40,7 @@ const heroLabel = "Bedrag exclusief btw";
 const heroValue = formatEuro(initialResult.amountExcl, 2);
 const heroSubtext = `Gebaseerd op ${defaultRate}% btw over ${formatEuro(defaultAmount, 2)} (inclusief)`;
 
-const lastUpdated = "2 juli 2026";
+const lastUpdated = "27 juli 2026";
 
 const quickAmounts = [100, 250, 500, 1000];
 
@@ -112,6 +112,22 @@ const faq = [
   {
     question: "Kan ik deze berekening gebruiken voor mijn btw-aangifte?",
     answer: "De uitkomst is een indicatie. Gebruik de berekening als hulpmiddel, maar controleer voor je administratie of btw-aangifte altijd de officiële informatie van de <a href=\"https://www.belastingdienst.nl\" target=\"_blank\" rel=\"noopener\">Belastingdienst</a> of vraag een adviseur.",
+  },
+  {
+    question: "Hoe reken je btw inclusief om naar exclusief?",
+    answer: "Deel het bedrag inclusief btw door (1 + het btw-percentage). Bij 21% is dat delen door 1,21, bij 9% delen door 1,09. Het resultaat is het exclusieve bedrag. Het btw-bedrag is het inclusieve bedrag min het exclusieve bedrag.",
+  },
+  {
+    question: "Hoe bereken je 21% btw terug?",
+    answer: "Deel het bedrag inclusief btw door 1,21. Stel je hebt € 121 inclusief 21% btw. Dan is € 121 ÷ 1,21 = € 100 exclusief btw. Het btw-bedrag is € 121 − € 100 = € 21.",
+  },
+  {
+    question: "Hoe bereken je 9% btw terug?",
+    answer: "Deel het bedrag inclusief btw door 1,09. Stel je hebt € 109 inclusief 9% btw. Dan is € 109 ÷ 1,09 = € 100 exclusief btw. Het btw-bedrag is € 109 − € 100 = € 9.",
+  },
+  {
+    question: "Wat is het verschil tussen btw terugrekenen en btw berekenen?",
+    answer: "Btw terugrekenen gaat van een inclusief bedrag naar een exclusief bedrag. Btw berekenen gaat meestal van exclusief naar inclusief, of berekent het btw-bedrag over een exclusief bedrag. Beide gebruiken dezelfde tarieven.",
   },
 ];
 
@@ -278,6 +294,7 @@ const breadcrumbSchema = {
     </ul>
 
     <h2>Voorbeelden van btw terugrekenen</h2>
+    <p>Hieronder zie je concrete voorbeelden voor 21% en 9% btw. De formule is steeds: exclusief = inclusief &divide; (1 + tarief).</p>
 
     <h3>Voorbeeld 1: 21% btw</h3>
     <ul class="calc-list">
@@ -293,6 +310,45 @@ const breadcrumbSchema = {
       <li>Btw-tarief: <strong>9%</strong></li>
       <li>Berekening: &euro;109 &divide; 1,09 = <strong>&euro;100</strong></li>
       <li>Btw-bedrag: &euro;109 &minus; &euro;100 = <strong>&euro;9</strong></li>
+    </ul>
+
+    <h3>Voorbeeld 3: 0% btw</h3>
+    <ul class="calc-list">
+      <li>Bedrag inclusief btw: <strong>&euro;100</strong></li>
+      <li>Btw-tarief: <strong>0%</strong></li>
+      <li>Berekening: &euro;100 &divide; 1,00 = <strong>&euro;100</strong></li>
+      <li>Btw-bedrag: <strong>&euro;0</strong></li>
+      <li>Let op: 0% btw is iets anders dan een btw-vrijstelling. Het 0%-tarief mag alleen in specifieke situaties, zoals bepaalde internationale handel.</li>
+    </ul>
+
+    <h2>21% btw terugrekenen</h2>
+    <p>Het 21%-tarief is het hoge btw-tarief in Nederland. Dit tarief geldt voor de meeste producten en diensten. De formule voor 21% btw terugrekenen is:</p>
+    <div class="formula-box">
+      <p><strong>Exclusief bedrag = inclusief bedrag &divide; 1,21</strong></p>
+    </div>
+    <p>Voorbeelden:</p>
+    <ul class="calc-list">
+      <li>&euro;50 inclusief 21% = &euro;50 &divide; 1,21 = <strong>&euro;41,32</strong> exclusief, btw = <strong>&euro;8,68</strong></li>
+      <li>&euro;100 inclusief 21% = &euro;100 &divide; 1,21 = <strong>&euro;82,64</strong> exclusief, btw = <strong>&euro;17,36</strong></li>
+      <li>&euro;250 inclusief 21% = &euro;250 &divide; 1,21 = <strong>&euro;206,61</strong> exclusief, btw = <strong>&euro;43,39</strong></li>
+      <li>&euro;500 inclusief 21% = &euro;500 &divide; 1,21 = <strong>&euro;413,22</strong> exclusief, btw = <strong>&euro;86,78</strong></li>
+      <li>&euro;1.000 inclusief 21% = &euro;1.000 &divide; 1,21 = <strong>&euro;826,45</strong> exclusief, btw = <strong>&euro;173,55</strong></li>
+      <li>&euro;2.500 inclusief 21% = &euro;2.500 &divide; 1,21 = <strong>&euro;2.066,12</strong> exclusief, btw = <strong>&euro;433,88</strong></li>
+    </ul>
+
+    <h2>9% btw terugrekenen</h2>
+    <p>Het 9%-tarief is het lage btw-tarief. Dit tarief geldt voor bepaalde producten en diensten, zoals levensmiddelen, boeken en bepaalde arbeid. De formule voor 9% btw terugrekenen is:</p>
+    <div class="formula-box">
+      <p><strong>Exclusief bedrag = inclusief bedrag &divide; 1,09</strong></p>
+    </div>
+    <p>Voorbeelden:</p>
+    <ul class="calc-list">
+      <li>&euro;50 inclusief 9% = &euro;50 &divide; 1,09 = <strong>&euro;45,87</strong> exclusief, btw = <strong>&euro;4,13</strong></li>
+      <li>&euro;100 inclusief 9% = &euro;100 &divide; 1,09 = <strong>&euro;91,74</strong> exclusief, btw = <strong>&euro;8,26</strong></li>
+      <li>&euro;250 inclusief 9% = &euro;250 &divide; 1,09 = <strong>&euro;229,36</strong> exclusief, btw = <strong>&euro;20,64</strong></li>
+      <li>&euro;500 inclusief 9% = &euro;500 &divide; 1,09 = <strong>&euro;458,72</strong> exclusief, btw = <strong>&euro;41,28</strong></li>
+      <li>&euro;1.000 inclusief 9% = &euro;1.000 &divide; 1,09 = <strong>&euro;917,43</strong> exclusief, btw = <strong>&euro;82,57</strong></li>
+      <li>&euro;2.500 inclusief 9% = &euro;2.500 &divide; 1,09 = <strong>&euro;2.293,58</strong> exclusief, btw = <strong>&euro;206,42</strong></li>
     </ul>
 
     <h2>Veelgemaakte fouten bij btw terugrekenen</h2>
