@@ -48,7 +48,7 @@ const initialEffectiveRate = initialResult.grossYearly > 0
   ? ((initialNetTax / initialResult.grossYearly) * 100).toFixed(1).replace(".", ",")
   : "0,0";
 
-const lastUpdated = "1 juli 2026";
+const lastUpdated = "27 juli 2026";
 
 const quickAmounts = [2500, 3000, 3500, 4000, 5000];
 
@@ -141,6 +141,22 @@ const faq = [
     question: "Wat is het verschil tussen deze pagina en de salaris calculator?",
     answer: "Deze bruto-netto pagina richt zich op algemene uitleg, de tarieven en een snelle indicatie waarbij je je pensioenpremie als vast bedrag invult. De salaris calculator is vooral bedoeld om snel verschillende bruto bedragen te vergelijken met je pensioen als percentage.",
   },
+  {
+    question: "Hoeveel netto krijg ik bij een bruto salaris in 2026?",
+    answer: "Dat hangt af van je precieze situatie. Ter indicatie: bij € 2.500 bruto per maand houd je ongeveer € 2.240 netto over, bij € 3.500 bruto ongeveer € 2.760 en bij € 5.000 bruto ongeveer € 3.490. Gebruik de rekenmachine voor jouw situatie, want pensioen, cao en bijtelling kunnen afwijken.",
+  },
+  {
+    question: "Wat is nettoloon in 2026?",
+    answer: "Nettoloon is het bedrag dat je daadwerkelijk op je rekening krijgt na aftrek van loonheffing, premies en heffingskortingen. In 2026 wordt nettoloon bepaald door de Box 1 tarieven, algemene heffingskorting, arbeidskorting en jouw persoonlijke situatie.",
+  },
+  {
+    question: "Hoe reken je bruto om naar netto in 2026?",
+    answer: "Je berekent bruto naar netto door loonheffing, arbeidskorting en algemene heffingskorting toe te passen op je belastbaar inkomen. Daarbij tel je 8% vakantiegeld bij je jaarsalaris en trek je je pensioenpremie af. Onze calculator doet deze berekening automatisch en geeft een indicatie.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto-netto en nettoloon?",
+    answer: "Bruto-netto is de vergelijking tussen je brutosalaris en je nettoloon. Netsalaris is hetzelfde als nettoloon: het bedrag dat na alle inhoudingen overblijft. Op deze pagina gebruiken we beide termen door elkaar.",
+  },
 ];
 
 const faqSchema = {
@@ -202,9 +218,9 @@ const breadcrumbSchema = {
 
   <section class="page-intro">
     <h1>Bruto netto salaris berekenen 2026</h1>
-    <p>Wil je weten wat je netto salaris is in 2026? Op deze pagina vind je een algemene uitleg over het verschil tussen bruto en netto loon, de actuele Box 1 tarieven en een snelle bruto-netto berekening. Handig als je wilt begrijpen hoe loonheffing, vakantiegeld, pensioen en heffingskortingen je nettoloon beïnvloeden.</p>
+    <p>Wil je weten wat je netto salaris is in 2026? Op deze pagina vind je een algemene uitleg over het verschil tussen bruto en netto loon, de actuele Box 1 tarieven en een bruto-netto calculator. Handig als je wilt begrijpen hoe loonheffing, vakantiegeld, pensioen en heffingskortingen je nettoloon beïnvloeden.</p>
     <p>Vul je bruto maandsalaris, pensioenpremie en of je loonheffingskorting toepast in de rekenmachine hieronder. Je ziet direct een indicatie van je netto loon per maand en per jaar, inclusief vakantiegeld.</p>
-    <p>De berekening gebruikt de officiële Box 1 tarieven, algemene heffingskorting en arbeidskorting van de Belastingdienst voor 2026. Houd er rekening mee dat je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>
+    <p>De berekening gebruikt de officiële Box 1 tarieven, algemene heffingskorting en arbeidskorting van de Belastingdienst voor 2026. Gebruik deze bruto-netto calculator voor een indicatie van je nettoloon 2026. Houd er rekening mee dat je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>
   </section>
 
   <CalculatorShell subtitle="Vul je bruto loon, pensioenpremie en loonheffingskorting in. Zie direct hoeveel je netto per maand en per jaar overhoudt.">
@@ -347,6 +363,10 @@ const breadcrumbSchema = {
     <p>Indicatie op basis van 2026-tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
     <div class="example-grid">
       <div class="example-card">
+        <strong>€ 2.000 bruto</strong>
+        <p>Netto per maand: circa € 1.910</p>
+      </div>
+      <div class="example-card">
         <strong>€ 2.500 bruto</strong>
         <p>Netto per maand: circa € 2.240</p>
       </div>
@@ -355,10 +375,33 @@ const breadcrumbSchema = {
         <p>Netto per maand: circa € 2.760</p>
       </div>
       <div class="example-card">
+        <strong>€ 4.000 bruto</strong>
+        <p>Netto per maand: circa € 3.010</p>
+      </div>
+      <div class="example-card">
         <strong>€ 5.000 bruto</strong>
         <p>Netto per maand: circa € 3.490</p>
       </div>
+      <div class="example-card">
+        <strong>€ 6.000 bruto</strong>
+        <p>Netto per maand: circa € 3.940</p>
+      </div>
     </div>
+
+    <h2>Nettoloon 2026</h2>
+    <p>Nettoloon is het bedrag dat je overhoudt na alle inhoudingen. In 2026 bepaalt de Belastingdienst hoeveel loonheffing je betaalt via de Box 1 tarieven. Daarnaast verlaag je je belasting via de algemene heffingskorting (maximaal € 3.115) en de arbeidskorting (maximaal € 5.685). Het resultaat is je netto loon per maand.</p>
+    <p>Wil je weten hoeveel nettoloon jij in 2026 overhoudt? Vul je bruto maandsalaris en pensioenpremie in de calculator in. Je ziet direct een indicatie per maand en per jaar. Houd er rekening mee dat toeslagen, bijtelling en een tweede baan je netto kunnen beïnvloeden.</p>
+
+    <h2>Bruto netto berekenen 2026</h2>
+    <p>Met een bruto-netto berekening voor 2026 zie je in één oogopslag hoeveel belasting en premies je ongeveer betaalt. De belangrijkste stappen zijn:</p>
+    <ol class="calc-list">
+      <li>Bepaal je bruto maandsalaris inclusief vakantiegeld.</li>
+      <li>Trek je werknemerspensioenpremie af.</li>
+      <li>Pas de Box 1 tarieven toe op je belastbaar inkomen.</li>
+      <li>Trek de algemene heffingskorting en arbeidskorting af.</li>
+      <li>De rest is je netto salaris.</li>
+    </ol>
+    <p>Onze calculator voert deze stappen automatisch uit. Je kunt ook direct verschillende bruto bedragen vergelijken via de <a href="/salaris-calculator/">salaris calculator</a>.</p>
 
     <h2>Veelgemaakte fouten</h2>
     <ul class="calc-list">
@@ -674,7 +717,8 @@ const breadcrumbSchema = {
     text-decoration: none;
   }
 
-  .calc-content ul {
+  .calc-content ul,
+  .calc-content ol {
     margin-left: 1.25rem;
     margin-bottom: 1rem;
   }
