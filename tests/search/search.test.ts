@@ -31,7 +31,17 @@ describe("search aliases", () => {
   });
 
   it('"btw" toont relevante btw-calculators', () => {
-    expectCalculator("btw", ["BTW calculator", "BTW terugrekenen", "BTW inclusief/exclusief"]);
+    expectCalculator("btw", [
+      "BTW calculator",
+      "BTW terugrekenen",
+      "BTW inclusief/exclusief",
+      "BTW 21 procent berekenen",
+      "BTW 9 procent berekenen",
+      "BTW van bedrag afhalen",
+      "Hoe bereken je btw?",
+      "BTW-bedrag berekenen",
+      "Exclusief naar inclusief btw",
+    ]);
   });
 
   it('"bruto" toont Bruto netto 2026 of salaris/bruto-netto resultaat', () => {

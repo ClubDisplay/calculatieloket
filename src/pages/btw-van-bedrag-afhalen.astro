@@ -1,0 +1,172 @@
+---
+import BtwCalculatorPage from "../components/calculator/BtwCalculatorPage.astro";
+
+const title = "BTW van bedrag afhalen — Inclusief naar exclusief | Calculatieloket.nl";
+const description = "Haal btw van een totaalbedrag af. Reken inclusief btw om naar exclusief en zie direct het btw-bedrag. Gebaseerd op officiële tarieven.";
+
+const sources = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — BTW-tarieven",
+    description: "Actuele btw-tarieven: 21%, 9% en 0%.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Rekenvoorbeeld btw berekenen",
+    description: "Voorbeelden van btw berekenen inclusief en exclusief.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/rekenvoorbeeld_btw_berekenen",
+  },
+];
+
+const faq = [
+  {
+    question: "Hoe haal je btw van een bedrag af?",
+    answer: "Deel het inclusieve bedrag door (1 + het btw-percentage). Bij 21% deel je door 1,21. Bij 9% deel je door 1,09. Het resultaat is het exclusieve bedrag. Het btw-bedrag is het verschil.",
+  },
+  {
+    question: "Hoeveel btw zit er in € 121?",
+    answer: "Als het 21% btw betreft: € 121 ÷ 1,21 = € 100 exclusief. Het btw-bedrag is € 121 − € 100 = € 21.",
+  },
+  {
+    question: "Kan je btw gewoon aftrekken van het totaalbedrag?",
+    answer: "Nee, je kunt niet simpelweg 21% aftrekken. Omdat de btw is berekend over het exclusieve bedrag, moet je delen in plaats van aftrekken.",
+  },
+  {
+    question: "Welk btw-tarief moet ik gebruiken?",
+    answer: "Voor de meeste producten en diensten is dat 21%. Voor levensmiddelen, boeken, medicijnen en bepaald vervoer is dat 9%. In specifieke situaties geldt 0%.",
+  },
+  {
+    question: "Wat is het verschil tussen exclusief en inclusief btw?",
+    answer: "Exclusief btw is het bedrag zonder btw. Inclusief btw is het totaalbedrag dat je betaalt, inclusief de btw. In Nederland wordt de consumentenprijs meestal inclusief btw weergegeven.",
+  },
+  {
+    question: "Kan ik deze berekening gebruiken voor mijn administratie?",
+    answer: "De uitkomst is een indicatie. Gebruik de berekening als hulpmiddel, maar controleer belangrijke bedragen voor je administratie of btw-aangifte via officiële bronnen of een adviseur.",
+  },
+];
+
+const useCases = [
+  {
+    id: "btw-21-procent",
+    title: "BTW 21% berekenen",
+    description: "Bereken het hoge btw-tarief over een exclusief bedrag.",
+    template: "Vergelijk {{excl}} exclusief met {{incl}} inclusief 21% btw.",
+    href: "/btw-21-procent-berekenen/",
+    accent: "#2563eb",
+  },
+  {
+    id: "btw-9-procent",
+    title: "BTW 9% berekenen",
+    description: "Bereken het lage btw-tarief over een exclusief bedrag.",
+    template: "Vergelijk {{excl}} exclusief met {{incl}} inclusief 9% btw.",
+    href: "/btw-9-procent-berekenen/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "inclusief-exclusief",
+    title: "BTW inclusief/exclusief",
+    description: "Wissel in beide richtingen tussen exclusief en inclusief.",
+    template: "Reken {{bedrag}} om tussen exclusief en inclusief btw.",
+    href: "/btw-inclusief-exclusief/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "zzp",
+    title: "ZZP uurtarief",
+    description: "Bereken je benodigde uurtarief als ZZP'er.",
+    href: "/zzp-calculator/",
+    accent: "#7c3aed",
+  },
+];
+
+const crossSell = [
+  { href: "/btw-21-procent-berekenen/", title: "BTW 21%", description: "Bereken het hoge btw-tarief.", accent: "#2563eb" },
+  { href: "/btw-9-procent-berekenen/", title: "BTW 9%", description: "Bereken het lage btw-tarief.", accent: "#3b82f6" },
+  { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/btw-terugrekenen/", label: "BTW terugrekenen" },
+  { href: "/btw-inclusief-exclusief/", label: "BTW inclusief/exclusief" },
+  { href: "/btw-21-procent-berekenen/", label: "BTW 21 procent berekenen" },
+  { href: "/btw-9-procent-berekenen/", label: "BTW 9 procent berekenen" },
+  { href: "/exclusief-naar-inclusief-btw/", label: "Exclusief naar inclusief btw" },
+];
+
+const content = `
+<h2>De formule om btw van een bedrag af te halen</h2>
+<p>De formule voor het terugrekenen van btw is:</p>
+<div class="formula-box">
+  <p><strong>Exclusief bedrag = inclusief bedrag &divide; (1 + btw-percentage)</strong></p>
+  <p><strong>Btw-bedrag = inclusief bedrag &minus; exclusief bedrag</strong></p>
+</div>
+<p>In de praktijk:</p>
+<ul class="calc-list">
+  <li>Bij 21% btw: deel door <strong>1,21</strong></li>
+  <li>Bij 9% btw: deel door <strong>1,09</strong></li>
+  <li>Bij 0% btw: het exclusieve bedrag is gelijk aan het inclusieve bedrag</li>
+</ul>
+
+<h2>Voorbeelden: btw van een bedrag afhalen</h2>
+<table class="rate-table">
+  <thead>
+    <tr><th>Tarief</th><th>Inclusief</th><th>Exclusief</th><th>Btw-bedrag</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>21%</td><td>&euro; 121</td><td>&euro; 100</td><td>&euro; 21</td></tr>
+    <tr><td>21%</td><td>&euro; 242</td><td>&euro; 200</td><td>&euro; 42</td></tr>
+    <tr><td>9%</td><td>&euro; 109</td><td>&euro; 100</td><td>&euro; 9</td></tr>
+    <tr><td>9%</td><td>&euro; 218</td><td>&euro; 200</td><td>&euro; 18</td></tr>
+  </tbody>
+</table>
+
+<h2>Waarom kun je niet gewoon 21% aftrekken?</h2>
+<p>Stel, je hebt een factuur van &euro;121 inclusief 21% btw. Als je 21% van &euro;121 aftrekt, kom je uit op &euro;25,41 btw en &euro;95,59 exclusief. Dat klopt niet.</p>
+<p>De 21% is namelijk berekend over het exclusieve bedrag (&euro;100), niet over het inclusieve bedrag (&euro;121). Daarom deel je door 1,21. Het juiste antwoord is &euro;100 exclusief en &euro;21 btw.</p>
+
+<h2>Veelgemaakte fouten</h2>
+<ul class="calc-list">
+  <li><strong>Percentage van inclusief bedrag aftrekken:</strong> dit geeft altijd een te laag exclusief bedrag.</li>
+  <li><strong>Verkeerd tarief gebruiken:</strong> controleer of 21%, 9% of 0% van toepassing is.</li>
+  <li><strong>Servicekosten vergeten:</strong> sommige kosten op een factuur zijn exclusief btw, andere inclusief. Let op bij het totaalbedrag.</li>
+</ul>
+`;
+---
+
+<BtwCalculatorPage
+  title={title}
+  description={description}
+  pageTitle="BTW van bedrag afhalen"
+  calculatorId="btw-van-bedrag-afhalen"
+  defaultAmount={121}
+  defaultRate={21}
+  defaultDirection="incl"
+  allowRateSwitch={true}
+  allowDirectionSwitch={false}
+  intro={[
+    "Reken inclusief btw om naar exclusief btw. Kies 21%, 9% of 0% en zie direct het exclusieve bedrag en het btw-bedrag.",
+    "Wil je weten hoeveel btw er in een totaalbedrag zit? Op deze pagina haal je eenvoudig de btw van een bedrag af. Handig voor facturen, bonnetjes en kassatickets.",
+  ]}
+  content={content}
+  faq={faq}
+  useCases={useCases}
+  crossSell={crossSell}
+  relatedLinks={relatedLinks}
+  howTo={{
+    name: "BTW van een bedrag afhalen",
+    description: "Stappen om btw van een inclusief bedrag af te halen.",
+    steps: [
+      { name: "Vul het totaalbedrag in", text: "Voer het bedrag inclusief btw in." },
+      { name: "Kies het btw-tarief", text: "Selecteer 21%, 9% of 0% btw." },
+      { name: "Bekijk het exclusieve bedrag", text: "De calculator toont het bedrag exclusief btw en het btw-bedrag." },
+    ],
+  }}
+  sources={sources}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Belasting", href: "/categorie/belasting/" },
+    { label: "BTW van bedrag afhalen", current: true },
+  ]}
+  footerDisclaimer="Deze uitkomst is een indicatie op basis van je invoer en de btw-tarieven van 2026. Controleer belangrijke bedragen via officiële bronnen of een adviseur. Aan de uitkomst kunnen geen rechten worden ontleend."
+/>

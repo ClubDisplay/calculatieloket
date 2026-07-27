@@ -18,8 +18,8 @@ import { calculateBtw } from "../lib/calculators/btw";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
-const title = "BTW Calculator — Bereken 21%, 9% en 0% btw | Calculatieloket.nl";
-const description = "Bereken btw inclusief of exclusief met 21%, 9% of 0% tarief. Zie direct bedrag exclusief, btw-bedrag en inclusief. Gebaseerd op Belastingdienst tarieven.";
+const title = "BTW 21 procent berekenen — Hoog tarief | Calculatieloket.nl";
+const description = "Bereken 21% btw over elk bedrag. Zie direct exclusief, btw-bedrag en inclusief. Gebaseerd op het hoge btw-tarief van de Belastingdienst.";
 
 const defaultAmount = 100;
 const defaultRate = 21;
@@ -32,34 +32,42 @@ const initialResult = calculateBtw({
 });
 
 const initialRecommendations = getRecommendations({
-  calculator: "btw",
+  calculator: "btw-21-procent",
   values: { amount: defaultAmount, rate: defaultRate, direction: defaultDirection },
   result: initialResult,
 });
 
-const heroLabel = defaultDirection === "excl" ? "Bedrag inclusief btw" : "Bedrag exclusief btw";
+const heroLabel = defaultDirection === "excl" ? "Bedrag inclusief 21% btw" : "Bedrag exclusief 21% btw";
 const heroValue = formatEuro(defaultDirection === "excl" ? initialResult.amountIncl : initialResult.amountExcl, 2);
 const heroSubtext = defaultDirection === "excl"
-  ? `Dit wordt ${formatEuro(initialResult.amountIncl, 2)} inclusief btw over ${formatEuro(initialResult.amountExcl, 2)} exclusief.`
+  ? `Dit wordt ${formatEuro(initialResult.amountIncl, 2)} inclusief 21% btw over ${formatEuro(initialResult.amountExcl, 2)} exclusief.`
   : `Dit is ${formatEuro(initialResult.amountExcl, 2)} exclusief btw van ${formatEuro(initialResult.amountIncl, 2)} inclusief.`;
 
-const lastUpdated = "1 juli 2026";
+const lastUpdated = "27 juli 2026";
 
-const quickAmounts = [100, 250, 500, 1000];
+const quickAmounts = [50, 100, 250, 500, 1000];
 
 const useCases = [
+  {
+    id: "btw-9-procent",
+    title: "BTW 9% berekenen",
+    description: "Bereken het lage btw-tarief voor producten zoals levensmiddelen.",
+    template: "Vergelijk {{incl}} inclusief 21% met het 9% tarief.",
+    href: "/btw-9-procent-berekenen/",
+    accent: "#3b82f6",
+  },
   {
     id: "terugrekenen",
     title: "BTW terugrekenen",
     description: "Reken een inclusief bedrag om naar exclusief btw.",
-    template: "Reken {{incl}} inclusief btw terug naar {{excl}} exclusief.",
+    template: "Reken {{incl}} inclusief 21% btw terug naar {{excl}} exclusief.",
     href: "/btw-terugrekenen/",
     accent: "#2563eb",
   },
   {
     id: "inclusief-exclusief",
     title: "BTW inclusief/exclusief",
-    description: "Reken bedragen om tussen exclusief en inclusief btw.",
+    description: "Reken bedragen om tussen exclusief en inclusief.",
     template: "Reken {{bedrag}} om tussen exclusief en inclusief btw.",
     href: "/btw-inclusief-exclusief/",
     accent: "#3b82f6",
@@ -67,16 +75,9 @@ const useCases = [
   {
     id: "zzp",
     title: "ZZP uurtarief",
-    description: "Vind het uurtarief dat je als ZZP'er moet vragen.",
+    description: "Bereken je benodigde uurtarief als ZZP'er.",
     href: "/zzp-calculator/",
     accent: "#7c3aed",
-  },
-  {
-    id: "import",
-    title: "Auto importkosten",
-    description: "Bereken de totale kosten voor het importeren van een auto of camper.",
-    href: "/auto-importkosten-berekenen/",
-    accent: "#d97706",
   },
 ];
 
@@ -97,28 +98,28 @@ const sources = [
 
 const faq = [
   {
-    question: "Hoe bereken je btw over een bedrag?",
-    answer: "Vermenigvuldig het bedrag exclusief btw met het percentage gedeeld door 100. Bij 21%: bedrag × 0,21.",
-  },
-  {
-    question: "Hoe reken je inclusief btw terug naar exclusief?",
-    answer: "Deel het bedrag door 1 plus het percentage gedeeld door 100. Bij 21%: bedrag ÷ 1,21.",
+    question: "Hoe bereken je 21% btw over een bedrag?",
+    answer: "Vermenigvuldig het exclusieve bedrag met 0,21. Het totaal inclusief btw is het exclusieve bedrag × 1,21. Wil je van inclusief naar exclusief, deel dan door 1,21.",
   },
   {
     question: "Wanneer gebruik je 21% btw?",
-    answer: "21% is het hoge tarief voor de meeste goederen en diensten, zoals elektronica, kleding, uit eten gaan en professionele dienstverlening.",
+    answer: "21% is het algemene hoge tarief. Het geldt voor de meeste goederen en diensten, zoals elektronica, kleding, horeca, consultancy en reparaties.",
   },
   {
-    question: "Wanneer gebruik je 9% btw?",
-    answer: "9% is het lage tarief voor basisbehoeften zoals voedingsmiddelen, water, boeken, medicijnen, kunst en bepaald vervoer.",
+    question: "Hoe reken je € 100 exclusief om naar inclusief 21% btw?",
+    answer: "€ 100 × 1,21 = € 121. Het btw-bedrag is € 21.",
   },
   {
-    question: "Wanneer geldt 0% btw?",
-    answer: "0% btw geldt voor specifieke situaties, zoals export naar andere EU-landen. Je vermeldt het op je factuur. Controleer bij de <a href=\"https://www.belastingdienst.nl\" target=\"_blank\" rel=\"noopener\">Belastingdienst</a> of dit voor jou mag.",
+    question: "Hoe haal je 21% btw van een totaalbedrag af?",
+    answer: "Deel het inclusieve bedrag door 1,21. Bij € 121 is dat € 100 exclusief. Het btw-bedrag is € 121 − € 100 = € 21.",
   },
   {
-    question: "Is de uitkomst van deze calculator een indicatie?",
-    answer: "Ja. De calculator geeft een wiskundig correcte indicatie op basis van het ingevoerde bedrag en het geselecteerde btw-tarief. Controleer belangrijke bedragen voor je administratie of btw-aangifte altijd via officiële bronnen of een adviseur.",
+    question: "Is 21% btw hetzelfde als 21% van het inclusieve bedrag?",
+    answer: "Nee. 21% btw is berekend over het exclusieve bedrag. 21% van het inclusieve bedrag zou meer zijn dan het werkelijke btw-bedrag. Daarom deel je bij terugrekenen door 1,21.",
+  },
+  {
+    question: "Kan ik deze berekening gebruiken voor mijn btw-aangifte?",
+    answer: "De uitkomst is een indicatie. Gebruik de berekening als hulpmiddel, maar controleer belangrijke bedragen voor je administratie of btw-aangifte via officiële bronnen of een adviseur.",
   },
 ];
 
@@ -148,12 +149,17 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "BTW Calculator",
-      "item": "https://calculatieloket.nl/btw-calculator/",
+      "name": "Belasting",
+      "item": "https://calculatieloket.nl/categorie/belasting/",
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "BTW 21 procent berekenen",
+      "item": "https://calculatieloket.nl/btw-21-procent-berekenen/",
     },
   ],
 };
-
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
@@ -161,12 +167,11 @@ const breadcrumbSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   <HowToSchema
     slot="head"
-    name="BTW berekenen over een bedrag"
-    description="Stappen om btw te berekenen over een bedrag in 2026."
+    name="21% btw berekenen"
+    description="Stappen om 21% btw te berekenen over een bedrag."
     totalTime="PT30S"
     steps={[
-      { name: "Vul het bedrag in", text: "Voer het bedrag in waarover je btw wilt berekenen." },
-      { name: "Kies het btw-tarief", text: "Selecteer 21%, 9% of 0% btw." },
+      { name: "Vul het bedrag in", text: "Voer het bedrag in waarover je 21% btw wilt berekenen." },
       { name: "Kies de richting", text: "Kies of je van exclusief naar inclusief wilt rekenen, of andersom." },
       { name: "Bekijk het resultaat", text: "De calculator toont het bedrag exclusief, het btw-bedrag en het bedrag inclusief." },
     ]}
@@ -177,10 +182,10 @@ const breadcrumbSchema = {
   <Breadcrumbs items={[
     { label: "Home", href: "/" },
     { label: "Belasting", href: "/categorie/belasting/" },
-    { label: "BTW calculator", current: true },
+    { label: "BTW 21 procent berekenen", current: true },
   ]} />
 
-  <CalculatorShell title="BTW berekenen" subtitle="Kies 21%, 9% of 0% en reken direct van exclusief naar inclusief btw — of andersom.">
+  <CalculatorShell title="BTW 21 procent berekenen" subtitle="Reken direct 21% btw uit. Kies exclusief naar inclusief of inclusief naar exclusief.">
     <InputPanel title="Jouw bedrag" slot="input">
       <div class="form-group">
         <label for="amount">Bedrag</label>
@@ -201,12 +206,10 @@ const breadcrumbSchema = {
 
       <div class="form-group">
         <label>BTW-tarief</label>
-        <div class="radio-group" id="btwRate" role="group" aria-label="BTW-tarief" aria-describedby="btwRateHint">
-          <button type="button" data-rate="21" class={defaultRate === 21 ? "active" : ""} aria-pressed={defaultRate === 21 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-21">21%</button>
-          <button type="button" data-rate="9" class={defaultRate === 9 ? "active" : ""} aria-pressed={defaultRate === 9 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-9">9%</button>
-          <button type="button" data-rate="0" class={defaultRate === 0 ? "active" : ""} aria-pressed={defaultRate === 0 ? "true" : "false"} data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-0">0%</button>
+        <div class="radio-group radio-group-fixed" role="group" aria-label="BTW-tarief">
+          <button type="button" class="active" aria-pressed="true" data-analytics="radio-button" data-analytics-category="calculator-page" data-analytics-action="select" data-analytics-label="rate-21">21%</button>
         </div>
-        <p class="btw-nul-waarschuwing" id="btwRateHint">0% btw geldt alleen in specifieke situaties, zoals internationale handel. Controleer altijd of je dit tarief mag toepassen.</p>
+        <p class="btw-nul-waarschuwing">Het hoge tarief van 21% geldt voor de meeste producten en diensten.</p>
       </div>
 
       <div class="form-group">
@@ -223,7 +226,7 @@ const breadcrumbSchema = {
 
     <ResultPanel
       slot="result"
-      title="BTW resultaat"
+      title="21% btw resultaat"
       heroLabel={heroLabel}
       heroValue={heroValue}
       heroSubtext={heroSubtext}
@@ -238,7 +241,7 @@ const breadcrumbSchema = {
       <div class="result-row"><span class="label">Btw-bedrag</span><span class="value" id="detailBtw">{formatEuro(initialResult.btwAmount, 2)}</span></div>
       <div class="result-row"><span class="label">Bedrag inclusief btw</span><span class="value" id="detailIncl">{formatEuro(initialResult.amountIncl, 2)}</span></div>
       <div class="result-divider"></div>
-      <div class="result-row"><span class="label">Gebruikt tarief</span><span class="value" id="detailRate">{`${initialResult.rate}% btw`}</span></div>
+      <div class="result-row"><span class="label">Gebruikt tarief</span><span class="value" id="detailRate">21% btw</span></div>
 
       <FinancialJourney recommendations={initialRecommendations} />
       <InlineSources title="Gebruikte bronnen" items={sources} />
@@ -247,7 +250,6 @@ const breadcrumbSchema = {
         <span class="copy-link-icon" aria-hidden="true">🔗</span>
         <span class="copy-link-text">Deel deze berekening</span>
       </button>
-
     </ResultPanel>
 
     <TrustPanel slot="result" lastUpdated={lastUpdated} sourcesId="calculator-sources" />
@@ -260,69 +262,74 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/belasting/" categoryLabel="Belasting"
       slot="footer"
-      disclaimer="Deze uitkomst is een indicatie op basis van je invoer en de btw-tarieven van 2026. Controleer belangrijke bedragen via officiële bronnen of een adviseur. Aan de uitkomst kunnen geen rechten worden ontleend."
+      disclaimer="Deze uitkomst is een indicatie op basis van je invoer en het 21% btw-tarief van 2026. Controleer belangrijke bedragen via officiële bronnen of een adviseur. Aan de uitkomst kunnen geen rechten worden ontleend."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
 
   <div class="calculator-card calc-content" id="calculator-content">
-    <h2 class="page-title">BTW Calculator</h2>
-    <p>Reken van exclusief naar inclusief btw en andersom. Kies 21%, 9% of 0% en zie direct het btw-bedrag en het totaal.</p>
-    <p>Wil je een bedrag <a href="/btw-terugrekenen/">terugrekenen van inclusief naar exclusief</a>, of tussen <a href="/btw-inclusief-exclusief/">exclusief en inclusief</a> wisselen? Ondernemers kunnen ook hun <a href="/zzp-calculator/">ZZP-uurtarief</a> berekenen.</p>
+    <h2 class="page-title">BTW 21 procent berekenen</h2>
+    <p>21% btw is het hoge btw-tarief in Nederland. Op deze pagina bereken je direct hoeveel 21% btw is over elk bedrag. Je kunt zowel van exclusief naar inclusief rekenen als van inclusief naar exclusief.</p>
+    <p>Wil je het lage tarief gebruiken? Ga dan naar de <a href="/btw-9-procent-berekenen/">BTW 9 procent berekenen</a> pagina. Voor het algemene overzicht met alle tarieven gebruik je de <a href="/btw-calculator/">BTW calculator</a>.</p>
 
-    <h2>Waarom kun je deze berekening vertrouwen?</h2>
-    <p>De calculator gebruikt de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">btw-tarieven</a> van de Belastingdienst. De berekening is wiskundig correct voor het ingevoerde bedrag en geeft een indicatie. Let op: 0% btw geldt alleen in specifieke situaties.</p>
+    <h2>De formule voor 21% btw</h2>
+    <p>Voor 21% btw gelden deze formules:</p>
+    <div class="formula-box">
+      <p><strong>Inclusief bedrag = exclusief bedrag &times; 1,21</strong></p>
+      <p><strong>Exclusief bedrag = inclusief bedrag &divide; 1,21</strong></p>
+      <p><strong>Btw-bedrag = inclusief bedrag &minus; exclusief bedrag</strong></p>
+    </div>
 
-    <h2>Hoe werkt deze berekening?</h2>
+    <h2>Voorbeelden 21% btw</h2>
+    <table class="rate-table">
+      <thead>
+        <tr><th>Exclusief</th><th>Btw-bedrag</th><th>Inclusief</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>&euro; 50</td><td>&euro; 10,50</td><td>&euro; 60,50</td></tr>
+        <tr><td>&euro; 100</td><td>&euro; 21</td><td>&euro; 121</td></tr>
+        <tr><td>&euro; 250</td><td>&euro; 52,50</td><td>&euro; 302,50</td></tr>
+        <tr><td>&euro; 500</td><td>&euro; 105</td><td>&euro; 605</td></tr>
+        <tr><td>&euro; 1.000</td><td>&euro; 210</td><td>&euro; 1.210</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wanneer gebruik je 21% btw?</h2>
+    <p>Het hoge tarief van 21% geldt voor de meeste goederen en diensten. Voorbeelden zijn:</p>
     <ul class="calc-list">
-      <li><strong>Exclusief &rarr; inclusief:</strong> btw = bedrag &times; (tarief &divide; 100). Totaal = bedrag + btw.</li>
-      <li><strong>Inclusief &rarr; exclusief:</strong> bedrag exclusief = bedrag &divide; (1 + tarief &divide; 100). De btw is het verschil.</li>
+      <li>Elektronica en apparatuur</li>
+      <li>Kleding en schoenen</li>
+      <li>Meubels en huishoudelijke artikelen</li>
+      <li>Consultancy en professionele diensten</li>
+      <li>Reparatie- en onderhoudswerkzaamheden</li>
+      <li>Horeca (eten en drinken in restaurants)</li>
     </ul>
-
-    <h3>Voorbeeld</h3>
-    <p>Je hebt <strong>&euro;100 exclusief btw</strong> met 21%:</p>
-    <ul class="calc-list">
-      <li>btw = &euro;100 &times; 0,21 = <strong>&euro;21</strong></li>
-      <li>totaal inclusief btw = <strong>&euro;121</strong></li>
-    </ul>
-    <p>Andersom, met <strong>&euro;121 inclusief btw</strong>:</p>
-    <ul class="calc-list">
-      <li>exclusief = &euro;121 &divide; 1,21 = <strong>&euro;100</strong></li>
-      <li>btw = &euro;121 &minus; &euro;100 = <strong>&euro;21</strong></li>
-    </ul>
-
-    <h2>Bronnen en informatie</h2>
-    <p>De btw-tarieven zijn vastgesteld door de Belastingdienst. Voor actuele info, zie <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst — BTW-tarief</a>.</p>
+    <p>Voor sommige producten geldt het <a href="/btw-9-procent-berekenen/">lage tarief van 9%</a>. Controleer bij twijfel de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst</a>.</p>
 
     <h2>Veelgemaakte fouten</h2>
     <ul class="calc-list">
-      <li><strong>21% van het inclusieve bedrag aftrekken:</strong> btw terugrekenen doe je door te delen, niet door een percentage af te trekken.</li>
-      <li><strong>Verkeerd tarief gebruiken:</strong> controleer of 21%, 9% of 0% van toepassing is op jouw product of dienst.</li>
-      <li><strong>0% btw verwarren met vrijgesteld:</strong> bij 0% breng je wel 0% btw in rekening en vermeld je dit op de factuur; bij een vrijstelling doe je dat niet.</li>
-      <li><strong>Afrondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine afrondingsverschillen ontstaan.</li>
+      <li><strong>21% van het inclusieve bedrag aftrekken:</strong> dit geeft een verkeerd antwoord. Deel door 1,21 om exclusief te krijgen.</li>
+      <li><strong>0% btw verwarren met vrijgesteld:</strong> bij 0% vermeld je het op de factuur, bij vrijgesteld niet.</li>
+      <li><strong>Afrondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine verschillen ontstaan.</li>
     </ul>
   </div>
 
   <div class="calculator-card calc-content">
     <h2>Ook handig binnen btw</h2>
     <ul class="calc-list">
-      <li><a href="/btw-terugrekenen/">BTW terugrekenen</a> — van inclusief naar exclusief btw.</li>
-      <li><a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief</a> — wissel in beide richtingen.</li>
-      <li><a href="/btw-21-procent-berekenen/">BTW 21 procent berekenen</a> — het hoge tarief.</li>
+      <li><a href="/btw-calculator/">BTW calculator</a> — alle tarieven en richtingen.</li>
       <li><a href="/btw-9-procent-berekenen/">BTW 9 procent berekenen</a> — het lage tarief.</li>
-      <li><a href="/btw-van-bedrag-afhalen/">BTW van bedrag afhalen</a> — inclusief naar exclusief.</li>
-      <li><a href="/exclusief-naar-inclusief-btw/">Exclusief naar inclusief btw</a> — exclusief naar inclusief.</li>
-      <li><a href="/btw-bedrag-berekenen/">BTW-bedrag berekenen</a> — focus op het btw-bedrag.</li>
-      <li><a href="/hoe-bereken-je-btw/">Hoe bereken je btw?</a> — uitleg en formules.</li>
+      <li><a href="/btw-terugrekenen/">BTW terugrekenen</a> — van inclusief naar exclusief.</li>
+      <li><a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief</a> — wissel in beide richtingen.</li>
+      <li><a href="/exclusief-naar-inclusief-btw/">Exclusief naar inclusief btw</a> — richting excl → incl.</li>
     </ul>
   </div>
 
   <CrossSellCards
     title="Andere calculators die je helpen"
     items={[
+      { href: "/btw-9-procent-berekenen/", title: "BTW 9%", description: "Bereken het lage btw-tarief.", accent: "#3b82f6" },
       { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", accent: "#2563eb" },
-      { href: "/salaris-calculator/", title: "Salaris Calculator", description: "Vergelijk bruto en netto.", accent: "#3b82f6" },
-      { href: "/hypotheek-calculator/", title: "Hypotheek Calculator", description: "Bekijk een indicatie van maandlasten.", accent: "#d97706" },
       { href: "/zzp-calculator/", title: "ZZP Calculator", description: "Reken je uurtarief als ondernemer.", accent: "#7c3aed" },
     ]}
   />
@@ -348,10 +355,10 @@ const breadcrumbSchema = {
   const detailIncl = document.getElementById("detailIncl")!;
   const detailRate = document.getElementById("detailRate")!;
 
-  let rate = 21;
+  const rate = 21;
   let direction: "excl" | "incl" = "excl";
 
-  function updateUseCases(amount: number, rate: number, direction: "excl" | "incl", result: { amountExcl: number; amountIncl: number; btwAmount: number }) {
+  function updateUseCases(amount: number, direction: "excl" | "incl", result: { amountExcl: number; amountIncl: number; btwAmount: number }) {
     const incl = direction === "excl" ? result.amountIncl : amount;
 
     document.querySelectorAll("[data-usecase]").forEach((card) => {
@@ -373,6 +380,8 @@ const breadcrumbSchema = {
         anchor.href = `/btw-terugrekenen/?bedrag=${incl}&tarief=${rate}&richting=incl`;
       } else if (id === "inclusief-exclusief") {
         anchor.href = `/btw-inclusief-exclusief/?bedrag=${amount}&tarief=${rate}&richting=${direction}`;
+      } else if (id === "btw-9-procent") {
+        anchor.href = `/btw-9-procent-berekenen/?bedrag=${amount}&richting=${direction}`;
       }
     });
   }
@@ -409,9 +418,9 @@ const breadcrumbSchema = {
     errorBox.style.display = "none";
 
     hero.textContent = formatEuro(direction === "excl" ? result.amountIncl : result.amountExcl, 2);
-    heroLabel.textContent = direction === "excl" ? "Bedrag inclusief btw" : "Bedrag exclusief btw";
+    heroLabel.textContent = direction === "excl" ? "Bedrag inclusief 21% btw" : "Bedrag exclusief 21% btw";
     heroSubtext.textContent = direction === "excl"
-      ? `Dit wordt ${formatEuro(result.amountIncl, 2)} inclusief btw over ${formatEuro(result.amountExcl, 2)} exclusief.`
+      ? `Dit wordt ${formatEuro(result.amountIncl, 2)} inclusief 21% btw over ${formatEuro(result.amountExcl, 2)} exclusief.`
       : `Dit is ${formatEuro(result.amountExcl, 2)} exclusief btw van ${formatEuro(result.amountIncl, 2)} inclusief.`;
 
     detailExcl.textContent = formatEuro(result.amountExcl, 2);
@@ -419,10 +428,10 @@ const breadcrumbSchema = {
     detailIncl.textContent = formatEuro(result.amountIncl, 2);
     detailRate.textContent = `${result.rate}% btw`;
 
-    updateUseCases(amount, rate, direction, result);
+    updateUseCases(amount, direction, result);
     if (financialJourney) {
       const recs = getRecommendations({
-        calculator: "btw",
+        calculator: "btw-21-procent",
         values: { amount, rate, direction },
         result,
       });
@@ -434,19 +443,9 @@ const breadcrumbSchema = {
   function applyUrlParams() {
     const params = new URLSearchParams(window.location.search);
     const bedrag = params.get("bedrag");
-    const tarief = params.get("tarief");
     const richting = params.get("richting");
 
     if (bedrag !== null) amountInput.value = bedrag;
-    if (tarief !== null) {
-      rate = parseInt(tarief, 10);
-      document.querySelectorAll("#btwRate button").forEach((btn) => {
-        const button = btn as HTMLButtonElement;
-        const isActive = button.dataset.rate === tarief;
-        button.classList.toggle("active", isActive);
-        button.setAttribute("aria-pressed", isActive ? "true" : "false");
-      });
-    }
     if (richting !== null && (richting === "excl" || richting === "incl")) {
       direction = richting;
       document.querySelectorAll("#btwDirection button").forEach((btn) => {
@@ -489,21 +488,6 @@ const breadcrumbSchema = {
     });
   }
 
-  function initRateButtons() {
-    document.getElementById("btwRate")!.addEventListener("click", (e) => {
-      const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
-      if (!btn) return;
-      document.querySelectorAll("#btwRate button").forEach((b) => {
-        b.classList.remove("active");
-        b.setAttribute("aria-pressed", "false");
-      });
-      btn.classList.add("active");
-      btn.setAttribute("aria-pressed", "true");
-      rate = parseInt(btn.dataset.rate!, 10);
-      calculate();
-    });
-  }
-
   function initDirectionButtons() {
     document.getElementById("btwDirection")!.addEventListener("click", (e) => {
       const btn = (e.target as HTMLElement).closest("button") as HTMLButtonElement | null;
@@ -523,7 +507,6 @@ const breadcrumbSchema = {
   calculate();
   initQuickChips();
   initCopyLink();
-  initRateButtons();
   initDirectionButtons();
 
   amountInput.addEventListener("input", calculate);
@@ -588,6 +571,28 @@ const breadcrumbSchema = {
     line-height: 1.7;
     color: var(--color-text-muted);
     margin-bottom: 0.5rem;
+  }
+
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .rate-table th,
+  .rate-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--color-border);
+  }
+
+  .rate-table th {
+    background: var(--color-primary-light);
+    font-weight: 700;
+  }
+
+  .rate-table tr:nth-child(even) {
+    background: var(--color-surface);
   }
 
   .calc-error {
@@ -708,6 +713,19 @@ const breadcrumbSchema = {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     margin-top: 0.5rem;
+  }
+
+  .formula-box {
+    background: var(--color-primary-light);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .formula-box p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
   }
 
   @media (max-width: 560px) {
