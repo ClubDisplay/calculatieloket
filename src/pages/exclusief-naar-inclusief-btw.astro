@@ -1,0 +1,188 @@
+---
+import BtwCalculatorPage from "../components/calculator/BtwCalculatorPage.astro";
+
+const title = "Exclusief naar inclusief btw — 21%, 9% en 0% | Calculatieloket.nl";
+const description = "Reken exclusief btw om naar inclusief btw. Kies 21%, 9% of 0% en zie direct het totaalbedrag. Gebaseerd op de Belastingdienst.";
+
+const sources = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — BTW-tarieven",
+    description: "Actuele btw-tarieven: 21%, 9% en 0%.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Rekenvoorbeeld btw berekenen",
+    description: "Voorbeelden van btw berekenen inclusief en exclusief.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/rekenvoorbeeld_btw_berekenen",
+  },
+];
+
+const faq = [
+  {
+    question: "Hoe reken je exclusief om naar inclusief btw?",
+    answer: "Vermenigvuldig het exclusieve bedrag met (1 + het btw-percentage). Bij 21%: bedrag × 1,21. Bij 9%: bedrag × 1,09. Het resultaat is het totaal inclusief btw.",
+  },
+  {
+    question: "Hoeveel is € 100 exclusief inclusief 21% btw?",
+    answer: "€ 100 × 1,21 = € 121. Het btw-bedrag is € 21.",
+  },
+  {
+    question: "Hoeveel is € 100 exclusief inclusief 9% btw?",
+    answer: "€ 100 × 1,09 = € 109. Het btw-bedrag is € 9.",
+  },
+  {
+    question: "Wat is de formule exclusief naar inclusief?",
+    answer: "Inclusief bedrag = exclusief bedrag × (1 + tarief). Het btw-bedrag is inclusief min exclusief.",
+  },
+  {
+    question: "Welk tarief moet ik gebruiken?",
+    answer: "Voor de meeste producten en diensten gebruik je 21%. Voor levensmiddelen, boeken, medicijnen en bepaald vervoer gebruik je 9%. In specifieke situaties geldt 0%.",
+  },
+  {
+    question: "Kan ik deze berekening gebruiken voor mijn btw-aangifte?",
+    answer: "De uitkomst is een indicatie. Gebruik de berekening als hulpmiddel, maar controleer belangrijke bedragen voor je administratie of btw-aangifte via officiële bronnen of een adviseur.",
+  },
+];
+
+const useCases = [
+  {
+    id: "btw-21-procent",
+    title: "BTW 21% berekenen",
+    description: "Bereken het hoge tarief met focus op 21%.",
+    template: "Bereken {{bedrag}} inclusief 21% btw.",
+    href: "/btw-21-procent-berekenen/",
+    accent: "#2563eb",
+  },
+  {
+    id: "btw-9-procent",
+    title: "BTW 9% berekenen",
+    description: "Bereken het lage tarief met focus op 9%.",
+    template: "Bereken {{bedrag}} inclusief 9% btw.",
+    href: "/btw-9-procent-berekenen/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "terugrekenen",
+    title: "BTW terugrekenen",
+    description: "Reken een inclusief bedrag om naar exclusief.",
+    template: "Reken {{incl}} inclusief btw terug naar {{excl}} exclusief.",
+    href: "/btw-terugrekenen/",
+    accent: "#2563eb",
+  },
+  {
+    id: "btw-bedrag",
+    title: "BTW-bedrag berekenen",
+    description: "Bereken specifiek het btw-bedrag over een exclusief bedrag.",
+    template: "Bereken het btw-bedrag over {{bedrag}} exclusief.",
+    href: "/btw-bedrag-berekenen/",
+    accent: "#3b82f6",
+  },
+];
+
+const crossSell = [
+  { href: "/btw-21-procent-berekenen/", title: "BTW 21%", description: "Bereken het hoge btw-tarief.", accent: "#2563eb" },
+  { href: "/btw-9-procent-berekenen/", title: "BTW 9%", description: "Bereken het lage btw-tarief.", accent: "#3b82f6" },
+  { href: "/bruto-netto-2026/", title: "Bruto netto 2026", description: "Bereken een indicatie van je nettoloon.", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/btw-calculator/", label: "BTW calculator" },
+  { href: "/btw-21-procent-berekenen/", label: "BTW 21 procent berekenen" },
+  { href: "/btw-9-procent-berekenen/", label: "BTW 9 procent berekenen" },
+  { href: "/btw-terugrekenen/", label: "BTW terugrekenen" },
+  { href: "/btw-bedrag-berekenen/", label: "BTW-bedrag berekenen" },
+];
+
+const content = `
+<h2>De formule exclusief naar inclusief</h2>
+<p>Als je een exclusief bedrag hebt en wilt weten wat het inclusief btw is, gebruik je deze formule:</p>
+<div class="formula-box">
+  <p><strong>Inclusief bedrag = exclusief bedrag &times; (1 + tarief)</strong></p>
+  <p><strong>Btw-bedrag = inclusief bedrag &minus; exclusief bedrag</strong></p>
+</div>
+<p>Voor de Nederlandse tarieven:</p>
+<ul class="calc-list">
+  <li>21% btw: exclusief &times; <strong>1,21</strong></li>
+  <li>9% btw: exclusief &times; <strong>1,09</strong></li>
+  <li>0% btw: exclusief &times; <strong>1,00</strong> (geen verandering)</li>
+</ul>
+
+<h2>Voorbeelden exclusief naar inclusief</h2>
+<table class="rate-table">
+  <thead>
+    <tr><th>Exclusief</th><th>Tarief</th><th>Btw-bedrag</th><th>Inclusief</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>&euro; 50</td><td>21%</td><td>&euro; 10,50</td><td>&euro; 60,50</td></tr>
+    <tr><td>&euro; 100</td><td>21%</td><td>&euro; 21</td><td>&euro; 121</td></tr>
+    <tr><td>&euro; 250</td><td>21%</td><td>&euro; 52,50</td><td>&euro; 302,50</td></tr>
+    <tr><td>&euro; 50</td><td>9%</td><td>&euro; 4,50</td><td>&euro; 54,50</td></tr>
+    <tr><td>&euro; 100</td><td>9%</td><td>&euro; 9</td><td>&euro; 109</td></tr>
+    <tr><td>&euro; 250</td><td>9%</td><td>&euro; 22,50</td><td>&euro; 272,50</td></tr>
+  </tbody>
+</table>
+
+<h2>Wanneer heb je exclusief naar inclusief nodig?</h2>
+<p>Deze berekening gebruik je vaak bij:</p>
+<ul class="calc-list">
+  <li>Het maken van een offerte of factuur</li>
+  <li>Het bepalen van de verkoopprijs in de winkel</li>
+  <li>Het berekenen van de totale kosten van een inkoop</li>
+  <li>Het vergelijken van prijzen met en zonder btw</li>
+</ul>
+
+<h2>Welk tarief gebruik je?</h2>
+<ul class="calc-list">
+  <li><strong>21%:</strong> de meeste goederen en diensten.</li>
+  <li><strong>9%:</strong> levensmiddelen, water, boeken, medicijnen, kunst, bepaald vervoer.</li>
+  <li><strong>0%:</strong> specifieke situaties zoals export naar EU-landen.</li>
+</ul>
+<p>Controleer bij twijfel de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst</a>.</p>
+
+<h2>Veelgemaakte fouten</h2>
+<ul class="calc-list">
+  <li><strong>Exclusief + 21% in plaats van × 1,21:</strong> € 100 + € 21 = € 121 klopt wel toevallig, maar bij andere bedragen of tarieven loop je mis.</li>
+  <li><strong>Verkeerd tarief gebruiken:</strong> 9% en 21% door elkaar halen geeft een verkeerd totaal.</li>
+  <li><strong>0% verwarren met vrijgesteld:</strong> bij 0% vermeld je 0% op de factuur; bij vrijgesteld geen btw.</li>
+</ul>
+`;
+---
+
+<BtwCalculatorPage
+  title={title}
+  description={description}
+  pageTitle="Exclusief naar inclusief btw"
+  calculatorId="exclusief-naar-inclusief"
+  defaultAmount={100}
+  defaultRate={21}
+  defaultDirection="excl"
+  allowRateSwitch={true}
+  allowDirectionSwitch={false}
+  intro={[
+    "Reken exclusief btw om naar inclusief btw. Kies 21%, 9% of 0% en zie direct het totaalbedrag.",
+    "Deze calculator is speciaal voor de richting exclusief → inclusief. Handig als je een nettoprijs hebt en wilt weten wat de consument uiteindelijk betaalt.",
+  ]}
+  content={content}
+  faq={faq}
+  useCases={useCases}
+  crossSell={crossSell}
+  relatedLinks={relatedLinks}
+  howTo={{
+    name: "Exclusief naar inclusief btw berekenen",
+    description: "Stappen om een exclusief bedrag om te rekenen naar inclusief btw.",
+    steps: [
+      { name: "Vul het exclusieve bedrag in", text: "Voer het bedrag exclusief btw in." },
+      { name: "Kies het btw-tarief", text: "Selecteer 21%, 9% of 0% btw." },
+      { name: "Bekijk het inclusieve bedrag", text: "De calculator toont het btw-bedrag en het totaal inclusief btw." },
+    ],
+  }}
+  sources={sources}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Belasting", href: "/categorie/belasting/" },
+    { label: "Exclusief naar inclusief btw", current: true },
+  ]}
+  footerDisclaimer="Deze uitkomst is een indicatie op basis van je invoer en de btw-tarieven van 2026. Controleer belangrijke bedragen via officiële bronnen of een adviseur. Aan de uitkomst kunnen geen rechten worden ontleend."
+/>
