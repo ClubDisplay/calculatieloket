@@ -1,0 +1,125 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Huurtoeslag berekenen 2026 | Indicatie huurtoeslag | Calculatieloket.nl";
+const description = "Bereken je huurtoeslag in 2026. Zie of je mogelijk recht hebt op huurtoeslag. Een indicatie op basis van huur en inkomen.";
+const h1 = "Huurtoeslag berekenen 2026";
+
+const intro = [
+  "Huurtoeslag is een tegemoetkoming in je huurkosten. Of je recht hebt, hangt af van je huur, inkomen, vermogen en woonsituatie. Deze pagina geeft een algemene indicatie.",
+  "Vul je huur en inkomen in de toeslagen calculator in voor een indicatie van je mogelijke huurtoeslag.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Huurtoeslag",
+    description: "Voorwaarden en bedragen voor huurtoeslag.",
+    href: "https://www.belastingdienst.nl/toeslagen/huurtoeslag",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Huurtoeslag",
+    description: "Informatie over huurtoeslag op Rijksoverheid.nl.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/huurtoeslag",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Toeslagen calculator", description: "Bereken alle toeslagen.", href: "/toeslagen-calculator/", accent: "#059669" },
+  { title: "Zorgtoeslag", description: "Bereken je zorgtoeslag.", href: "/zorgtoeslag-berekenen/", accent: "#10b981" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — alle toeslagen in één overzicht" },
+  { href: "/zorgtoeslag-berekenen/", label: "Zorgtoeslag berekenen" },
+  { href: "/kindgebonden-budget-berekenen/", label: "Kindgebonden budget berekenen" },
+  { href: "/toeslagen-2026/", label: "Toeslagen 2026" },
+];
+
+const faq = [
+  {
+    question: "Wie komt in aanmerking voor huurtoeslag?",
+    answer: "Je kunt mogelijk recht hebben op huurtoeslag als je een zelfstandige woning huurt, je huur binnen de grenzen valt, je inkomen niet te hoog is en je vermogen onder de grens blijft. Jongeren tot 23 jaar hebben een aparte huurgrens.",
+  },
+  {
+    question: "Hoeveel huurtoeslag kan ik krijgen?",
+    answer: "Dat hangt af van je huur, inkomen, vermogen en huishoudensamenstelling. De toeslagen calculator geeft een indicatie. Voor een exact bedrag moet je een aanvraag doen bij de Belastingdienst.",
+  },
+  {
+    question: "Wat is de huurgrens voor huurtoeslag in 2026?",
+    answer: "De huurgrens voor huurtoeslag wordt jaarlijks vastgesteld. Voor 2026 kun je de actuele grenzen vinden op de website van de Belastingdienst. Jongeren tot 23 jaar hebben een lagere grens.",
+  },
+  {
+    question: "Telt mijn vermogen mee?",
+    answer: "Ja, je vermogen telt mee. Als je vermogen boven een bepaalde grens uitkomt, heb je mogelijk niet in aanmerking voor huurtoeslag. De grens wordt jaarlijks aangepast.",
+  },
+  {
+    question: "Kan ik huurtoeslag krijgen als ik 23 jaar ben?",
+    answer: "Jongeren tot 23 jaar hebben een aparte huurgrens. Daarboven gelden de reguliere regels. Of je recht hebt, hangt af van je specifieke situatie.",
+  },
+  {
+    question: "Hoe vraag ik huurtoeslag aan?",
+    answer: "Je vraagt huurtoeslag aan via Mijn toeslagen van de Belastingdienst. Dit kan ook met DigiD. Doe dit tijdig, want toeslagen worden meestal met terugwerkende kracht verstrekt.",
+  },
+];
+
+const howTo = {
+  name: "Huurtoeslag berekenen",
+  description: "Stappen om een indicatie van je huurtoeslag te krijgen.",
+  steps: [
+    { name: "Vul je huur in", text: "Voer je maandelijkse huur in." },
+    { name: "Vul je inkomen in", text: "Voer je (gezamenlijke) inkomen in." },
+    { name: "Controleer je vermogen", text: "Houd rekening met de vermogensgrenzen." },
+    { name: "Bekijk de indicatie", text: "De calculator geeft een indicatie van je toeslag." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Belasting", href: "/categorie/belasting/" },
+  { label: "Huurtoeslag berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Belasting"
+  calculatorCta={{ href: "/toeslagen-calculator/", title: "Toeslagen calculator openen", description: "Vul je huur, inkomen en vermogen in voor een indicatie van je huurtoeslag." }}
+>
+  <Fragment slot="content">
+    <h2>Wat is huurtoeslag?</h2>
+    <p>Huurtoeslag is een maandelijkse bijdrage van de overheid om je huurkosten te verlagen. De toeslag geldt voor zelfstandige woonruimte en hangt af van je huur, inkomen, vermogen en huishoudensamenstelling.</p>
+
+    <h2>Voorwaarden huurtoeslag 2026</h2>
+    <p>De belangrijkste voorwaarden voor huurtoeslag zijn:</p>
+    <ul class="calc-list">
+      <li>Je huurt een zelfstandige woning.</li>
+      <li>Je huur valt binnen de maximale huurgrens.</li>
+      <li>Je inkomen is niet te hoog.</li>
+      <li>Je vermogen blijft onder de grens.</li>
+      <li>Je bent ingeschreven op het adres.</li>
+    </ul>
+    <p>De exacte grenzen voor 2026 worden vastgesteld door de overheid. Raadpleeg hiervoor de <a href="https://www.belastingdienst.nl/toeslagen/huurtoeslag" target="_blank" rel="noopener">Belastingdienst</a>.</p>
+
+    <h2>Huurtoeslag en inkomen</h2>
+    <p>Je inkomen bepaalt mede hoeveel huurtoeslag je krijgt. Hoe hoger het inkomen, hoe lager de toeslag. Het gaat om je belastbaar inkomen, inclusief eventuele toeslagen van een partner.</p>
+
+    <h2>Huurtoeslag en vermogen</h2>
+    <p>Als je vermogen boven de grens uitkomt, heb je mogelijk niet in aanmerking voor huurtoeslag. Vermogen kan spaargeld, beleggingen en een tweede woning zijn. De eigen woning telt niet mee.</p>
+
+    <h2>Indicatie berekenen</h2>
+    <p>Wil je weten of je mogelijk recht hebt op huurtoeslag? Gebruik de toeslagen calculator voor een indicatie. Voor een definitief antwoord moet je een aanvraag indienen bij de Belastingdienst.</p>
+  </Fragment>
+</ContentHubPage>

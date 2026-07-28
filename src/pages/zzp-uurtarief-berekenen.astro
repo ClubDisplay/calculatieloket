@@ -1,0 +1,130 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP uurtarief berekenen 2026 | Uurtarief calculator | Calculatieloket.nl";
+const description = "Bereken je ZZP uurtarief voor 2026. Zie welk uurtarief je nodig hebt voor je gewenste netto inkomen. Een indicatie.";
+const h1 = "ZZP uurtarief berekenen 2026";
+
+const intro = [
+  "Als ZZP'er wil je weten welk uurtarief je moet hanteren om je gewenste inkomen te realiseren. Met deze pagina krijg je een indicatie van hoe je je uurtarief kunt berekenen.",
+  "Je uurtarief hangt af van je gewenste netto inkomen, het aantal uren dat je werkt, vakantiedagen, ziekte, overhead en belasting. Gebruik de ZZP calculator voor een concrete berekening.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — ZZP en inkomstenbelasting",
+    description: "Informatie over belasting voor ZZP'ers.",
+    href: "https://www.belastingdienst.nl/zzp",
+  },
+  {
+    label: "Officiële bron",
+    title: "KVK — Ondernemen als ZZP'er",
+    description: "Informatie over starten als ZZP'er.",
+    href: "https://www.kvk.nl/zzp",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP calculator", description: "Bereken je netto ZZP inkomen.", href: "/zzp-calculator/", accent: "#7c3aed" },
+  { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — volledige ZZP berekening" },
+  { href: "/zzp-omzet-berekenen/", label: "ZZP omzet berekenen" },
+  { href: "/zzp-inkomen-berekenen/", label: "ZZP inkomen berekenen" },
+  { href: "/zzp-kosten-berekenen/", label: "ZZP kosten berekenen" },
+];
+
+const faq = [
+  {
+    question: "Hoe bereken je je ZZP uurtarief?",
+    answer: "Je uurtarief bereken je door je gewenste netto jaarinkomen, kosten, vakantiedagen, ziekte, pensioen en belasting te vertalen naar het aantal uren dat je facturabel kunt werken. De formule is: (gewenst inkomen + kosten + belasting) / betaalde uren = uurtarief.",
+  },
+  {
+    question: "Wat is een realistisch uurtarief voor ZZP?",
+    answer: "Dat hangt sterk af van je branche, ervaring en regio. Veel ZZP'ers hanteren uurtarieven tussen € 50 en € 150. De calculator geeft een indicatie op basis van je eigen situatie.",
+  },
+  {
+    question: "Hoeveel uren kan ik als ZZP'er factureren?",
+    answer: "De meeste ZZP'ers kunnen ongeveer 60-70% van hun beschikbare tijd factureren. De rest gaat naar administratie, acquisitie, vakantie, ziekte en vakantiedagen.",
+  },
+  {
+    question: "Welke kosten moet ik meenemen?",
+    answer: "Denk aan verzekeringen, pensioen, accountant, internet, telefoon, reiskosten, apparatuur, kantoorruimte en vakantiedagen. Deze kosten verhogen het uurtarief dat je nodig hebt.",
+  },
+  {
+    question: "Moet ik btw berekenen over mijn uurtarief?",
+    answer: "Je factureert meestal 21% btw bovenop je uurtarief. De btw geef je door aan de Belastingdienst. Zie ook onze <a href='/btw-calculator/'>btw calculator</a>.",
+  },
+  {
+    question: "Hoe zit het met pensioen als ZZP'er?",
+    answer: "Als ZZP'er bouw je geen automatisch pensioen op. Je kunt zelf sparen of een pensioenregeling afsluiten. Deze kosten neem je mee in je uurtarief.",
+  },
+];
+
+const howTo = {
+  name: "ZZP uurtarief berekenen",
+  description: "Stappen om je ZZP uurtarief te berekenen.",
+  steps: [
+    { name: "Bepaal je gewenste netto inkomen", text: "Bedenk hoeveel netto je per jaar nodig hebt." },
+    { name: "Tel je kosten op", text: "Reken pensioen, verzekeringen, administratie en andere kosten mee." },
+    { name: "Schat je betaalde uren", text: "Hoeveel uren kun je per jaar factureren?" },
+    { name: "Bereken je uurtarief", text: "Deel het totaal door je betaalde uren." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { label: "ZZP uurtarief berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "ZZP calculator openen", description: "Vul je gewenste netto inkomen, uren en kosten in voor een indicatie van je uurtarief." }}
+>
+  <Fragment slot="content">
+    <h2>ZZP uurtarief formule</h2>
+    <p>Een indicatie voor je uurtarief kun je berekenen met deze formule:</p>
+    <p><strong>Uurtarief = (gewenst netto inkomen + kosten + belasting) / betaalde uren</strong></p>
+    <p>De 'betaalde uren' zijn de uren die je daadwerkelijk kunt factureren. Meestal is dat 60-70% van je totale werktijd, omdat je ook tijd kwijt bent aan administratie, acquisitie, vakantie en ziekte.</p>
+
+    <h2>Voorbeeld ZZP uurtarief</h2>
+    <p>Stel je wilt € 50.000 netto per jaar verdienen, je kosten zijn € 15.000 en je belasting is € 18.000. Je totale opbrengst moet dan ongeveer € 83.000 zijn. Als je 1.200 uren per jaar factureert, komt je uurtarief uit op ongeveer € 69 exclusief btw.</p>
+    <div class="example-grid">
+      <div class="example-card"><strong>Netto inkomen</strong><p>€ 50.000</p></div>
+      <div class="example-card"><strong>Kosten + belasting</strong><p>€ 33.000</p></div>
+      <div class="example-card"><strong>Betaalde uren</strong><p>1.200 uur</p></div>
+      <div class="example-card"><strong>Indicatief uurtarief</strong><p>€ 69 excl. btw</p></div>
+    </div>
+
+    <h2>Welke kosten telt je mee?</h2>
+    <ul class="calc-list">
+      <li>Pensioenpremie of -spaarbedrag</li>
+      <li>Arbeidsongeschiktheidsverzekering (AOV)</li>
+      <li>Aansprakelijkheidsverzekering</li>
+      <li>Accountant of boekhouder</li>
+      <li>Internet, telefoon, kantoorruimte</li>
+      <li>Reiskosten en apparatuur</li>
+      <li>Vakantiedagen en ziekte</li>
+    </ul>
+
+    <h2>Uurtarief en btw</h2>
+    <p>Aan klanten factureer je meestal 21% btw bovenop je uurtarief. De btw is geen inkomen; je draagt deze af aan de Belastingdienst. Wil je btw berekenen? Gebruik dan onze <a href="/btw-calculator/">btw calculator</a>.</p>
+  </Fragment>
+</ContentHubPage>

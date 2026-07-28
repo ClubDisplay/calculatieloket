@@ -1,0 +1,124 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Kindgebonden budget berekenen 2026 | Indicatie | Calculatieloket.nl";
+const description = "Bereken of je mogelijk recht hebt op kindgebonden budget in 2026. Een indicatie op basis van inkomen en kinderen.";
+const h1 = "Kindgebonden budget berekenen 2026";
+
+const intro = [
+  "Kindgebonden budget is een tegemoetkoming in de kosten voor je kinderen. Of je recht hebt, hangt af van je inkomen, vermogen en het aantal kinderen. Deze pagina geeft een algemene indicatie.",
+  "Vul je inkomen en gezinsgegevens in de toeslagen calculator in voor een indicatie van je mogelijke kindgebonden budget.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Kindgebonden budget",
+    description: "Voorwaarden en bedragen voor kindgebonden budget.",
+    href: "https://www.belastingdienst.nl/toeslagen/kindgebonden-budget",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Kindgebonden budget",
+    description: "Informatie over kindgebonden budget.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/kindgebonden-budget",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Toeslagen calculator", description: "Bereken alle toeslagen.", href: "/toeslagen-calculator/", accent: "#059669" },
+  { title: "Huurtoeslag", description: "Bereken je huurtoeslag.", href: "/huurtoeslag-berekenen/", accent: "#10b981" },
+  { title: "Zorgtoeslag", description: "Bereken je zorgtoeslag.", href: "/zorgtoeslag-berekenen/", accent: "#14b8a6" },
+];
+
+const relatedLinks = [
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — alle toeslagen in één overzicht" },
+  { href: "/huurtoeslag-berekenen/", label: "Huurtoeslag berekenen" },
+  { href: "/zorgtoeslag-berekenen/", label: "Zorgtoeslag berekenen" },
+  { href: "/toeslagen-2026/", label: "Toeslagen 2026" },
+];
+
+const faq = [
+  {
+    question: "Wie komt in aanmerking voor kindgebonden budget?",
+    answer: "Je kunt mogelijk recht hebben als je kinderen hebt, je inkomen en vermogen binnen de grenzen vallen en je kinderen bij je wonen. De hoogte hangt af van je situatie.",
+  },
+  {
+    question: "Hoeveel kindgebonden budget kan ik krijgen?",
+    answer: "Het bedrag hangt af van je inkomen, vermogen, het aantal kinderen en de leeftijd van de kinderen. De toeslagen calculator geeft een indicatie. Voor een exact bedrag dien je een aanvraag in bij de Belastingdienst.",
+  },
+  {
+    question: "Hoe hoog is het kindgebonden budget in 2026?",
+    answer: "De bedragen voor 2026 worden vastgesteld door de overheid. Raadpleeg de Belastingdienst voor de actuele bedragen en inkomensgrenzen.",
+  },
+  {
+    question: "Telt mijn vermogen mee?",
+    answer: "Ja, je vermogen telt mee. Als je vermogen boven de grens uitkomt, heb je mogelijk niet in aanmerking voor kindgebonden budget. De eigen woning telt niet mee.",
+  },
+  {
+    question: "Hoe vraag ik kindgebonden budget aan?",
+    answer: "Je vraagt kindgebonden budget aan via Mijn toeslagen van de Belastingdienst met DigiD. Het wordt automatisch meegenomen als je andere toeslagen aanvraagt.",
+  },
+  {
+    question: "Geldt er een maximum inkomen?",
+    answer: "Ja, er geldt een inkomensgrens. Deze wordt jaarlijks vastgesteld. Hoe hoger je inkomen, hoe lager het kindgebonden budget. Boven een bepaald inkomen komt je er niet meer voor in aanmerking.",
+  },
+];
+
+const howTo = {
+  name: "Kindgebonden budget berekenen",
+  description: "Stappen om een indicatie van je kindgebonden budget te krijgen.",
+  steps: [
+    { name: "Vul je inkomen in", text: "Voer je belastbaar inkomen in." },
+    { name: "Geef je kinderen aan", text: "Aantal kinderen en leeftijd." },
+    { name: "Controleer je vermogen", text: "Houd rekening met de vermogensgrenzen." },
+    { name: "Bekijk de indicatie", text: "De calculator geeft een indicatie van je toeslag." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Belasting", href: "/categorie/belasting/" },
+  { label: "Kindgebonden budget berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Belasting"
+  calculatorCta={{ href: "/toeslagen-calculator/", title: "Toeslagen calculator openen", description: "Vul je inkomen, vermogen en kinderen in voor een indicatie van je kindgebonden budget." }}
+>
+  <Fragment slot="content">
+    <h2>Wat is kindgebonden budget?</h2>
+    <p>Kindgebonden budget is een maandelijks bedrag van de overheid voor ouders met kinderen. Het is bedoeld als tegemoetkoming in de kosten van opvoeding en onderwijs. De toeslag wordt uitbetaald door de Belastingdienst.</p>
+
+    <h2>Voorwaarden kindgebonden budget 2026</h2>
+    <p>De belangrijkste voorwaarden zijn:</p>
+    <ul class="calc-list">
+      <li>Je hebt een of meer kinderen tot 18 jaar.</li>
+      <li>Je kinderen zijn ingeschreven op jouw adres.</li>
+      <li>Je inkomen is niet te hoog.</li>
+      <li>Je vermogen blijft onder de grens.</li>
+    </ul>
+    <p>De exacte grenzen voor 2026 worden vastgesteld door de overheid. Raadpleeg hiervoor de <a href="https://www.belastingdienst.nl/toeslagen/kindgebonden-budget" target="_blank" rel="noopener">Belastingdienst</a>.</p>
+
+    <h2>Hoogte kindgebonden budget</h2>
+    <p>Het bedrag hangt af van je inkomen, het aantal kinderen en de leeftijd van je kinderen. Kinderen tot 12 jaar, van 12 tot 16 jaar en van 16 tot 18 jaar hebben verschillende bedragen. De toeslagen calculator houdt hier rekening mee.</p>
+
+    <h2>Kindgebonden budget en inkomen</h2>
+    <p>Hoe hoger je inkomen, hoe lager het kindgebonden budget. Er geldt een inkomensgrens. Boven die grens ontvang je geen kindgebonden budget meer. Het inkomen van beide ouders telt mee als je samenwoont.</p>
+
+    <h2>Indicatie berekenen</h2>
+    <p>Wil je weten of je mogelijk recht hebt op kindgebonden budget? Gebruik de toeslagen calculator voor een indicatie. Voor een definitief antwoord dien je een aanvraag in bij de Belastingdienst.</p>
+  </Fragment>
+</ContentHubPage>

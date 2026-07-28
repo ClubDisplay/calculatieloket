@@ -1,0 +1,124 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Zorgtoeslag berekenen 2026 | Indicatie zorgtoeslag | Calculatieloket.nl";
+const description = "Bereken je zorgtoeslag in 2026. Zie of je mogelijk recht hebt op zorgtoeslag. Een indicatie op basis van inkomen en vermogen.";
+const h1 = "Zorgtoeslag berekenen 2026";
+
+const intro = [
+  "Zorgtoeslag is een tegemoetkoming in de kosten van je zorgverzekering. Of je recht hebt, hangt af van je inkomen, vermogen en woonsituatie. Deze pagina geeft een algemene indicatie.",
+  "Vul je inkomen in de toeslagen calculator in voor een indicatie van je mogelijke zorgtoeslag.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Zorgtoeslag",
+    description: "Voorwaarden en bedragen voor zorgtoeslag.",
+    href: "https://www.belastingdienst.nl/toeslagen/zorgtoeslag",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Zorgtoeslag",
+    description: "Informatie over zorgtoeslag op Rijksoverheid.nl.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/zorgtoeslag",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Toeslagen calculator", description: "Bereken alle toeslagen.", href: "/toeslagen-calculator/", accent: "#059669" },
+  { title: "Huurtoeslag", description: "Bereken je huurtoeslag.", href: "/huurtoeslag-berekenen/", accent: "#10b981" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — alle toeslagen in één overzicht" },
+  { href: "/huurtoeslag-berekenen/", label: "Huurtoeslag berekenen" },
+  { href: "/kindgebonden-budget-berekenen/", label: "Kindgebonden budget berekenen" },
+  { href: "/toeslagen-2026/", label: "Toeslagen 2026" },
+];
+
+const faq = [
+  {
+    question: "Wie komt in aanmerking voor zorgtoeslag?",
+    answer: "Je kunt mogelijk recht hebben op zorgtoeslag als je inkomen en vermogen onder bepaalde grenzen blijven. Zowel alleenstaanden als mensen met een partner kunnen recht hebben, met verschillende grenzen.",
+  },
+  {
+    question: "Hoeveel zorgtoeslag kan ik krijgen?",
+    answer: "Het bedrag hangt af van je inkomen, vermogen en of je alleenstaand bent of een partner hebt. De toeslagen calculator geeft een indicatie. Voor een exact bedrag dien je een aanvraag in bij de Belastingdienst.",
+  },
+  {
+    question: "Hoe hoog is de zorgtoeslag in 2026?",
+    answer: "De zorgtoeslagbedragen voor 2026 worden vastgesteld door de overheid. Raadpleeg de Belastingdienst voor de actuele bedragen en inkomensgrenzen.",
+  },
+  {
+    question: "Telt mijn vermogen mee voor zorgtoeslag?",
+    answer: "Ja, je vermogen telt mee. Als je vermogen boven de grens uitkomt, heb je mogelijk niet in aanmerking voor zorgtoeslag. De grens wordt jaarlijks aangepast.",
+  },
+  {
+    question: "Hoe vraag ik zorgtoeslag aan?",
+    answer: "Je vraagt zorgtoeslag aan via Mijn toeslagen van de Belastingdienst met DigiD. Dit kan ook voor het hele jaar tegelijk.",
+  },
+  {
+    question: "Krijg ik zorgtoeslag als ik alleen woon?",
+    answer: "Alleenstaanden kunnen recht hebben op zorgtoeslag. De inkomens- en vermogensgrenzen zijn anders dan voor mensen met een partner.",
+  },
+];
+
+const howTo = {
+  name: "Zorgtoeslag berekenen",
+  description: "Stappen om een indicatie van je zorgtoeslag te krijgen.",
+  steps: [
+    { name: "Vul je inkomen in", text: "Voer je belastbaar inkomen in." },
+    { name: "Controleer je vermogen", text: "Houd rekening met de vermogensgrenzen." },
+    { name: "Geef je woonsituatie aan", text: "Alleenstaand of met partner." },
+    { name: "Bekijk de indicatie", text: "De calculator geeft een indicatie van je toeslag." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Belasting", href: "/categorie/belasting/" },
+  { label: "Zorgtoeslag berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Belasting"
+  calculatorCta={{ href: "/toeslagen-calculator/", title: "Toeslagen calculator openen", description: "Vul je inkomen en vermogen in voor een indicatie van je zorgtoeslag." }}
+>
+  <Fragment slot="content">
+    <h2>Wat is zorgtoeslag?</h2>
+    <p>Zorgtoeslag is een maandelijks bedrag van de overheid om de kosten van je zorgverzekering te verlagen. De toeslag wordt betaald aan de zorgverzekeraar of op je rekening, afhankelijk van je situatie.</p>
+
+    <h2>Voorwaarden zorgtoeslag 2026</h2>
+    <p>De belangrijkste voorwaarden voor zorgtoeslag zijn:</p>
+    <ul class="calc-list">
+      <li>Je hebt een Nederlandse zorgverzekering.</li>
+      <li>Je inkomen is niet te hoog.</li>
+      <li>Je vermogen blijft onder de grens.</li>
+      <li>Je woont in Nederland.</li>
+    </ul>
+    <p>De exacte inkomens- en vermogensgrenzen voor 2026 worden vastgesteld door de overheid. Raadpleeg hiervoor de <a href="https://www.belastingdienst.nl/toeslagen/zorgtoeslag" target="_blank" rel="noopener">Belastingdienst</a>.</p>
+
+    <h2>Zorgtoeslag en inkomen</h2>
+    <p>Hoe hoger je inkomen, hoe lager je zorgtoeslag. Het inkomen dat telt, is je belastbaar inkomen uit werk en woning. Voor mensen met een partner wordt het gezamenlijke inkomen gebruikt.</p>
+
+    <h2>Zorgtoeslag en vermogen</h2>
+    <p>Je vermogen kan invloed hebben op je in aanmerking komt voor zorgtoeslag. Dit geldt voor spaargeld, beleggingen en een tweede woning. De eigen woning telt niet mee.</p>
+
+    <h2>Indicatie berekenen</h2>
+    <p>Wil je weten of je mogelijk recht hebt op zorgtoeslag? Gebruik de toeslagen calculator voor een indicatie. Voor een definitief antwoord dien je een aanvraag in bij de Belastingdienst.</p>
+  </Fragment>
+</ContentHubPage>

@@ -1,0 +1,120 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Hypotheek 2026 | Berekenen, rente en regels | Calculatieloket.nl";
+const description = "Alles over hypotheek in 2026: regels, rente, maximale hypotheek en maandlasten. Een indicatie. Voor advies raadpleeg je een hypotheekadviseur.";
+const h1 = "Hypotheek 2026";
+
+const intro = [
+  "In 2026 gelden er regels voor hypotheken, zoals de financieringslastnorm en renteaftrek. Wil je een hypotheek berekenen? Deze pagina geeft een algemeen overzicht.",
+  "Gebruik de hypotheek calculator voor een indicatie op basis van je inkomen, rente en looptijd.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "AFM — Hypotheekregels",
+    description: "Informatie over verantwoord lenen.",
+    href: "https://www.afm.nl/consumenten/hypotheek",
+  },
+  {
+    label: "Officiële bron",
+    title: "NHG — Nationale Hypotheek Garantie",
+    description: "Informatie over NHG.",
+    href: "https://www.nhg.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Hypotheekrenteaftrek",
+    description: "Informatie over renteaftrek.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/woning/eigen_woning/hypotheekrenteaftrek",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Maximale hypotheek", description: "Bereken hoeveel je kunt lenen.", href: "/maximale-hypotheek-berekenen/", accent: "#d97706" },
+  { title: "Hypotheek maandlasten", description: "Bereken je maandlasten.", href: "/hypotheek-maandlasten-berekenen/", accent: "#f59e0b" },
+  { title: "Hypotheek rente", description: "Bereken de rente.", href: "/hypotheek-rente-berekenen/", accent: "#b45309" },
+];
+
+const relatedLinks = [
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — volledige hypotheekindicatie" },
+  { href: "/maximale-hypotheek-berekenen/", label: "Maximale hypotheek berekenen" },
+  { href: "/hypotheek-maandlasten-berekenen/", label: "Hypotheek maandlasten berekenen" },
+  { href: "/hypotheek-rente-berekenen/", label: "Hypotheek rente berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wat verandert er in 2026 voor hypotheken?",
+    answer: "De regels rond hypotheken worden jaarlijks geëvalueerd. Denk aan de financieringslastnorm, de NHG-grens, de hypotheekrenteaftrek en de overdrachtsbelasting. Raadpleeg de AFM en NHG voor actuele regels.",
+  },
+  {
+    question: "Hoeveel kan ik lenen in 2026?",
+    answer: "Je maximale hypotheek hangt af van je bruto inkomen, schulden, rente en de regels van de AFM. Een vuistregel is 4 tot 5,5 keer je bruto jaarinkomen, maar dit is slechts een indicatie.",
+  },
+  {
+    question: "Wat is de NHG-grens in 2026?",
+    answer: "De NHG-grens wordt jaarlijks vastgesteld. Huizen tot deze grens kunnen onder de Nationale Hypotheek Garantie vallen. Raadpleeg nhg.nl voor het actuele bedrag.",
+  },
+  {
+    question: "Mag ik nog hypotheekrenteaftrek?",
+    answer: "Onder voorwaarden mag je hypotheekrenteaftrek toepassen op je eigen woning. Voor nieuwe hypotheken gelden aanvullende regels, zoals aflossingsverplichtingen. Raadpleeg de Belastingdienst voor details.",
+  },
+  {
+    question: "Wat is de financieringslastnorm?",
+    answer: "De financieringslastnorm bepaalt hoeveel procent van je bruto inkomen je maximaal aan woonlasten mag uitgeven. Deze norm hangt af van je inkomen en de rente.",
+  },
+  {
+    question: "Moet ik een eigen bijdrage hebben?",
+    answer: "Voor de kosten koper (notaris, taxatie, advies) heb je meestal eigen geld nodig. De meeste banken financieren deze kosten niet mee in de hypotheek.",
+  },
+];
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Wonen", href: "/categorie/wonen/" },
+  { label: "Hypotheek 2026", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  categoryLabel="Wonen"
+  calculatorCta={{ href: "/hypotheek-calculator/", title: "Hypotheek calculator openen", description: "Bereken een indicatie van je maximale hypotheek en maandlasten in 2026." }}
+>
+  <Fragment slot="content">
+    <h2>Hypotheek in 2026</h2>
+    <p>In 2026 kun je een hypotheek afsluiten voor de aankoop, verbouwing of oversluiting van een woning. De regels zijn gericht op verantwoord lenen. De maximale hypotheek wordt bepaald door je inkomen, rente en schulden.</p>
+
+    <h2>Belangrijke regels en begrippen</h2>
+    <ul class="calc-list">
+      <li><strong>Financieringslastnorm:</strong> maximaal percentage van inkomen voor wonen.</li>
+      <li><strong>NHG:</strong> garantie voor leningen tot een bepaalde grens.</li>
+      <li><strong>Rentevaste periode:</strong> periode waarin de rente niet verandert.</li>
+      <li><strong>Aflossingsverplichting:</strong> voor volledige renteaftrek moet je aflossen.</li>
+      <li><strong>Overdrachtsbelasting:</strong> belasting bij aankoop van een woning.</li>
+    </ul>
+
+    <h2>Hypotheekrente 2026</h2>
+    <p>De hypotheekrente bepaalt een groot deel van je maandlasten. In 2026 ligt de rente afhankelijk van marktontwikkelingen. Vergelijk altijd meerdere geldverstrekkers en kies een rentevaste periode die bij je past.</p>
+
+    <h2>Maximale hypotheek indicatie</h2>
+    <p>Een veelgebruikte vuistregel is dat je 4 tot 5,5 keer je bruto jaarinkomen kunt lenen. De exacte factor hangt af van de rente, je schulden en de regels van de bank. Gebruik de <a href="/maximale-hypotheek-berekenen/">maximale hypotheek</a> pagina voor een indicatie.</p>
+
+    <h2>Maandlasten</h2>
+    <p>Je maandlasten bestaan uit rente en aflossing. Bij een annuïteitenhypotheek betaal je elke maand hetzelfde bedrag. Bij een lineaire hypotheek dalen de maandlasten naarmate je meer hebt afgelost. Gebruik de <a href="/hypotheek-maandlasten-berekenen/">hypotheek maandlasten</a> pagina voor een indicatie.</p>
+
+    <h2>Advies</h2>
+    <p>Deze pagina geeft alleen een algemene indicatie. Voor een persoonlijk hypotheekadvies neem je contact op met een erkend hypotheekadviseur. De AFM, NHG en Belastingdienst bieden objectieve informatie.</p>
+  </Fragment>
+</ContentHubPage>

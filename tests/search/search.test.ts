@@ -11,23 +11,23 @@ function expectCalculator(query: string, expectedTitle: string | string[]) {
 
 describe("search aliases", () => {
   it('"zorg" toont minimaal de Toeslagen calculator', () => {
-    expectCalculator("zorg", "Toeslagen calculator");
+    expectCalculator("zorg", ["Toeslagen calculator", "Zorgtoeslag berekenen"]);
   });
 
   it('"zorgtoeslag" toont minimaal de Toeslagen calculator', () => {
-    expectCalculator("zorgtoeslag", "Toeslagen calculator");
+    expectCalculator("zorgtoeslag", ["Toeslagen calculator", "Zorgtoeslag berekenen"]);
   });
 
   it('"huur" toont minimaal de Toeslagen calculator', () => {
-    expectCalculator("huur", "Toeslagen calculator");
+    expectCalculator("huur", ["Toeslagen calculator", "Huurtoeslag berekenen"]);
   });
 
   it('"huurtoeslag" toont minimaal de Toeslagen calculator', () => {
-    expectCalculator("huurtoeslag", "Toeslagen calculator");
+    expectCalculator("huurtoeslag", ["Toeslagen calculator", "Huurtoeslag berekenen"]);
   });
 
   it('"toeslag" toont de Toeslagen calculator', () => {
-    expectCalculator("toeslag", "Toeslagen calculator");
+    expectCalculator("toeslag", ["Toeslagen calculator", "Toeslagen 2026", "Huurtoeslag berekenen", "Zorgtoeslag berekenen"]);
   });
 
   it('"btw" toont relevante btw-calculators', () => {
@@ -45,19 +45,43 @@ describe("search aliases", () => {
   });
 
   it('"bruto" toont Bruto netto 2026 of salaris/bruto-netto resultaat', () => {
-    expectCalculator("bruto", ["Bruto netto 2026", "Salaris calculator"]);
+    expectCalculator("bruto", [
+      "Bruto netto 2026",
+      "Salaris calculator",
+      "Nettoloon 2026",
+      "Salaris 2026 berekenen",
+      "Bruto netto berekenen 2026",
+      "Loonheffing berekenen 2026",
+    ]);
   });
 
   it('"salaris" toont salaris/bruto-netto resultaat', () => {
-    expectCalculator("salaris", ["Salaris calculator", "Bruto netto 2026"]);
+    expectCalculator("salaris", [
+      "Salaris calculator",
+      "Bruto netto 2026",
+      "Salaris 2026 berekenen",
+      "Nettoloon 2026",
+    ]);
   });
 
   it('"hypotheek" toont de Hypotheek calculator', () => {
-    expectCalculator("hypotheek", "Hypotheek calculator");
+    expectCalculator("hypotheek", [
+      "Hypotheek calculator",
+      "Maximale hypotheek berekenen",
+      "Hypotheek maandlasten berekenen",
+      "Hypotheek rente berekenen",
+      "Hypotheek 2026",
+    ]);
   });
 
   it('"zzp" toont de ZZP calculator', () => {
-    expectCalculator("zzp", "ZZP calculator");
+    expectCalculator("zzp", [
+      "ZZP calculator",
+      "ZZP uurtarief berekenen",
+      "ZZP inkomen berekenen",
+      "ZZP omzet berekenen",
+      "ZZP kosten berekenen",
+    ]);
   });
 
   it('"import" toont Auto importkosten berekenen', () => {

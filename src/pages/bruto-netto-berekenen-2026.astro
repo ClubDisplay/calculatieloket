@@ -1,0 +1,174 @@
+---
+import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
+import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+
+const title = "Bruto netto berekenen 2026 | Salaris omrekenen | Calculatieloket.nl";
+const description = "Reken bruto om naar netto in 2026. Bereken je salaris per maand of jaar met de Belastingdienst tarieven. Een indicatie.";
+const h1 = "Bruto netto berekenen 2026";
+const pageTitle = "Bruto netto 2026";
+
+const intro = [
+  "Wil je bruto netto berekenen voor 2026? Deze calculator helpt je om snel te zien hoeveel netto loon je overhoudt bij een bepaald bruto bedrag.",
+  "Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in. Je ziet direct een indicatie van je netto salaris per maand en per jaar.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 1 tarieven 2026",
+    description: "Actuele tarieven en schijven voor de inkomstenbelasting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Algemene heffingskorting 2026",
+    description: "Maximale bedragen voor de algemene heffingskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Arbeidskorting 2026",
+    description: "Maximale bedragen voor de arbeidskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+  },
+];
+
+const useCases: UseCaseItem[] = [
+  {
+    id: "nettoloon",
+    title: "Nettoloon 2026",
+    description: "Bekijk hoeveel netto loon je overhoudt.",
+    template: "Bekijk je nettoloon voor {{bruto}} bruto per maand.",
+    href: "/nettoloon-2026/",
+    accent: "#2563eb",
+  },
+  {
+    id: "salaris",
+    title: "Salaris 2026",
+    description: "Bereken je salaris voor 2026.",
+    template: "Vergelijk bruto {{bruto}} met netto {{netto}} in 2026.",
+    href: "/salaris-2026-berekenen/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "vakantiegeld",
+    title: "Vakantiegeld berekenen",
+    description: "Bereken je netto vakantiegeld.",
+    template: "Bereken je netto vakantiegeld bij {{bruto}} bruto per maand.",
+    href: "/vakantiegeld-calculator/",
+    accent: "#0891b2",
+  },
+  {
+    id: "hypotheek",
+    title: "Hypotheek indicatie",
+    description: "Bekijk een hypotheekindicatie.",
+    template: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+  { title: "Salaris 2026", description: "Bereken je salaris voor 2026.", href: "/salaris-2026-berekenen/", accent: "#3b82f6" },
+  { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — uitgebreide uitleg" },
+  { href: "/nettoloon-2026/", label: "Nettoloon 2026 — bereken je netto salaris" },
+  { href: "/salaris-calculator/", label: "Salaris calculator — bruto-netto vergelijken" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator" },
+];
+
+const faq = [
+  {
+    question: "Hoe reken je bruto om naar netto in 2026?",
+    answer: "Je rekent bruto om naar netto door loonheffing toe te passen op je belastbaar inkomen. Je trekt eerst pensioenpremie af van je bruto, telt 8% vakantiegeld op en past de Box 1 tarieven toe. Vervolgens verminder je de algemene heffingskorting en arbeidskorting. De rest is netto.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto en netto?",
+    answer: "Bruto is het loon inclusief vakantiegeld dat je werkgever betaalt. Netto is wat je na belasting en premies ontvangt. De calculator laat beide bedragen zien.",
+  },
+  {
+    question: "Hoeveel netto is € 3.500 bruto in 2026?",
+    answer: "Ter indicatie: met loonheffingskorting en € 150 pensioenpremie per maand houd je bij € 3.500 bruto ongeveer € 2.760 netto per maand over. Pensioen, cao en bijtelling kunnen dit beïnvloeden.",
+  },
+  {
+    question: "Welke belastingtarieven gelden in 2026?",
+    answer: "In 2026 gelden 35,75% tot € 38.441, 37,56% van € 38.441 tot € 75.518 en 49,50% boven € 75.518. De algemene heffingskorting is maximaal € 3.115 en de arbeidskorting maximaal € 5.685.",
+  },
+  {
+    question: "Waarom moet ik mijn pensioenpremie invullen?",
+    answer: "Je pensioenpremie wordt afgetrokken van je bruto loon voordat de belasting wordt berekend. Daardoor heeft dit direct invloed op je netto loon.",
+  },
+  {
+    question: "Wat gebeurt er zonder loonheffingskorting?",
+    answer: "Zonder loonheffingskorting betaal je meer belasting. De calculator toont het verschil tussen netto met en zonder korting, zodat je het voordeel ziet.",
+  },
+];
+
+const howTo = {
+  name: "Bruto netto berekenen 2026",
+  description: "Stappen om bruto naar netto te rekenen in 2026.",
+  steps: [
+    { name: "Vul je bruto maandsalaris in", text: "Voer je bruto maandsalaris in, inclusief vakantiegeld." },
+    { name: "Vul je pensioenpremie in", text: "Voer het werknemersdeel van je pensioenpremie per maand in." },
+    { name: "Pas loonheffingskorting toe", text: "Zet de loonheffingskorting aan indien van toepassing." },
+    { name: "Bekijk je netto loon", text: "De calculator toont je netto loon per maand en per jaar." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Inkomen", href: "/categorie/inkomen/" },
+  { label: "Bruto netto berekenen 2026", current: true },
+];
+---
+
+<IncomeCalculatorPage
+  title={title}
+  description={description}
+  h1={h1}
+  pageTitle={pageTitle}
+  intro={intro}
+  breadcrumbs={breadcrumbs}
+  sources={sources}
+  useCases={useCases}
+  crossSell={crossSell}
+  relatedLinks={relatedLinks}
+  faq={faq}
+  howTo={howTo}
+  calculatorKey="bruto-netto-berekenen"
+>
+  <Fragment slot="content">
+    <p class="badge-indicatie">Indicatie 2026</p>
+    <p>Bruto netto berekenen in 2026 is eenvoudig met deze calculator. Je vult je bruto maandsalaris in, samen met je pensioenpremie en of je de loonheffingskorting toepast. De calculator geeft een indicatie van je netto loon per maand en per jaar.</p>
+    <p>De berekening volgt de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">heffingskortingen</a> van de Belastingdienst. Gebruik het resultaat als richtlijn.</p>
+
+    <h2>Stappen bruto-netto berekening</h2>
+    <ol class="calc-list">
+      <li>Bepaal je bruto maandsalaris inclusief 8% vakantiegeld.</li>
+      <li>Trek het werknemersdeel van je pensioenpremie af.</li>
+      <li>Pas de Box 1 tarieven toe op je belastbaar inkomen.</li>
+      <li>Trek de algemene heffingskorting en arbeidskorting af.</li>
+      <li>Het resterende bedrag is je netto loon.</li>
+    </ol>
+
+    <h2>Bruto-netto tabel 2026</h2>
+    <p>Indicatie bij loonheffingskorting en € 150 pensioenpremie per maand:</p>
+    <table class="rate-table">
+      <thead><tr><th>Bruto per maand</th><th>Netto per maand (indicatie)</th></tr></thead>
+      <tbody>
+        <tr><td>€ 2.500</td><td>Circa € 2.240</td></tr>
+        <tr><td>€ 3.000</td><td>Circa € 2.510</td></tr>
+        <tr><td>€ 3.500</td><td>Circa € 2.760</td></tr>
+        <tr><td>€ 4.500</td><td>Circa € 3.250</td></tr>
+        <tr><td>€ 5.500</td><td>Circa € 3.730</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Waarom deze calculator?</h2>
+    <p>Deze bruto-netto calculator is gebaseerd op actuele cijfers van de Belastingdienst. Je krijgt snel inzicht in je netto loon zonder ingewikkelde formulieren. Voor een exacte berekening raadpleeg je je loonstrook of een salarisadministrateur.</p>
+  </Fragment>
+</IncomeCalculatorPage>

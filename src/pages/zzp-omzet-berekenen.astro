@@ -1,0 +1,125 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP omzet berekenen 2026 | Omzet en winst | Calculatieloket.nl";
+const description = "Bereken je ZZP omzet voor 2026. Zie hoeveel omzet je nodig hebt voor je gewenste inkomen. Een indicatie.";
+const h1 = "ZZP omzet berekenen 2026";
+
+const intro = [
+  "Als ZZP'er is je omzet het totale bedrag dat je factureert aan klanten. Om te weten hoeveel omzet je nodig hebt, moet je rekening houden met kosten, belasting en het gewenste netto inkomen.",
+  "Deze pagina geeft een algemene uitleg over ZZP omzet berekenen. Voor een concrete indicatie kun je de ZZP calculator gebruiken.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — ZZP en inkomstenbelasting",
+    description: "Informatie over belasting voor ZZP'ers.",
+    href: "https://www.belastingdienst.nl/zzp",
+  },
+  {
+    label: "Officiële bron",
+    title: "KVK — Ondernemen als ZZP'er",
+    description: "Informatie over starten als ZZP'er.",
+    href: "https://www.kvk.nl/zzp",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP uurtarief", description: "Bereken je benodigde uurtarief.", href: "/zzp-uurtarief-berekenen/", accent: "#7c3aed" },
+  { title: "ZZP inkomen", description: "Bereken je ZZP inkomen.", href: "/zzp-inkomen-berekenen/", accent: "#8b5cf6" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — volledige ZZP berekening" },
+  { href: "/zzp-uurtarief-berekenen/", label: "ZZP uurtarief berekenen" },
+  { href: "/zzp-inkomen-berekenen/", label: "ZZP inkomen berekenen" },
+  { href: "/zzp-kosten-berekenen/", label: "ZZP kosten berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wat is omzet als ZZP'er?",
+    answer: "Omzet is het totale bedrag dat je factureert aan klanten, inclusief btw. Je winst is de omzet minus je kosten. Je netto inkomen is de winst minus belasting.",
+  },
+  {
+    question: "Hoe bereken je je benodigde omzet?",
+    answer: "Je benodigde omzet bereken je door je gewenste netto inkomen, kosten en belasting bij elkaar op te tellen. Formule: benodigde omzet = gewenst netto inkomen + kosten + belasting.",
+  },
+  {
+    question: "Wat is het verschil tussen omzet en winst?",
+    answer: "Omzet is alles wat je factureert. Winst is omzet minus kosten. Je belasting betaal je over je winst, niet over je omzet.",
+  },
+  {
+    question: "Welke kosten trek je af van je omzet?",
+    answer: "Denk aan kantoorkosten, verzekeringen, pensioen, accountant, reiskosten, apparatuur, marketing en vakantiedagen. Alleen zakelijke kosten zijn aftrekbaar.",
+  },
+  {
+    question: "Hoe zit het met btw bij ZZP omzet?",
+    answer: "Je factureert meestal 21% btw. De btw is geen omzet voor jou; je draagt deze af. Voor btw-vrijgestelde diensten geldt 0% of geen btw.",
+  },
+  {
+    question: "Wat is een realistische omzet voor ZZP'ers?",
+    answer: "Dat hangt af van je branche, uurtarief en het aantal betaalde uren. Veel ZZP'ers zitten tussen de € 50.000 en € 150.000 omzet per jaar.",
+  },
+];
+
+const howTo = {
+  name: "ZZP omzet berekenen",
+  description: "Stappen om je benodigde ZZP omzet te berekenen.",
+  steps: [
+    { name: "Bepaal je gewenste netto inkomen", text: "Bedenk hoeveel je netto per jaar nodig hebt." },
+    { name: "Tel je kosten op", text: "Reken alle zakelijke kosten mee." },
+    { name: "Schat je belasting", text: "Reken met de tarieven voor ondernemers." },
+    { name: "Bereken je omzet", text: "Gewenst inkomen + kosten + belasting = omzet." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { label: "ZZP omzet berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "ZZP calculator openen", description: "Vul je uurtarief, uren en kosten in voor een indicatie van je omzet en netto inkomen." }}
+>
+  <Fragment slot="content">
+    <h2>Omzet, winst en netto inkomen</h2>
+    <p>Als ZZP'er kun je drie belangrijke begrippen onderscheiden:</p>
+    <ul class="calc-list">
+      <li><strong>Omzet:</strong> het totale bedrag dat je factureert, inclusief btw.</li>
+      <li><strong>Winst:</strong> omzet minus kosten (exclusief btw).</li>
+      <li><strong>Netto inkomen:</strong> winst minus inkomstenbelasting en premies.</li>
+    </ul>
+
+    <h2>ZZP omzet formule</h2>
+    <p><strong>Benodigde omzet = gewenst netto inkomen + kosten + belasting</strong></p>
+    <p>Als je bijvoorbeeld € 50.000 netto wilt, € 15.000 aan kosten hebt en € 18.000 aan belasting verwacht, heb je ongeveer € 83.000 omzet nodig.</p>
+
+    <h2>Voorbeeld ZZP omzet</h2>
+    <div class="example-grid">
+      <div class="example-card"><strong>Gewenst netto</strong><p>€ 50.000</p></div>
+      <div class="example-card"><strong>Kosten</strong><p>€ 15.000</p></div>
+      <div class="example-card"><strong>Belasting</strong><p>€ 18.000</p></div>
+      <div class="example-card"><strong>Omzet nodig</strong><p>€ 83.000</p></div>
+    </div>
+
+    <h2>Omzet en uurtarief</h2>
+    <p>Je omzet hangt ook samen met je uurtarief en het aantal betaalde uren. Formule: omzet = uurtarief × betaalde uren. Wil je je uurtarief weten? Gebruik dan onze <a href="/zzp-uurtarief-berekenen/">ZZP uurtarief</a> pagina.</p>
+  </Fragment>
+</ContentHubPage>

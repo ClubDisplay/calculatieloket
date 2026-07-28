@@ -1,0 +1,108 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Toeslagen 2026 | Alle toeslagen op een rij | Calculatieloket.nl";
+const description = "Overzicht van toeslagen in 2026: huurtoeslag, zorgtoeslag, kindgebonden budget. Bereken een indicatie en bekijk de voorwaarden.";
+const h1 = "Toeslagen 2026";
+
+const intro = [
+  "In 2026 zijn er verschillende toeslagen beschikbaar voor huurders, zorgverzekerden en ouders. Deze pagina geeft een overzicht van de belangrijkste toeslagen en hoe je een indicatie kunt berekenen.",
+  "Gebruik de toeslagen calculator voor een indicatie van je in aanmerking komt voor huurtoeslag, zorgtoeslag en kindgebonden budget.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Toeslagen",
+    description: "Overzicht en voorwaarden van alle toeslagen.",
+    href: "https://www.belastingdienst.nl/toeslagen",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Toeslagen",
+    description: "Informatie over toeslagen op Rijksoverheid.nl.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/toeslagen",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+  { title: "Salaris 2026", description: "Bereken je salaris.", href: "/salaris-2026-berekenen/", accent: "#3b82f6" },
+  { title: "ZZP inkomen", description: "Bereken je ZZP inkomen.", href: "/zzp-inkomen-berekenen/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — alle toeslagen berekenen" },
+  { href: "/huurtoeslag-berekenen/", label: "Huurtoeslag berekenen" },
+  { href: "/zorgtoeslag-berekenen/", label: "Zorgtoeslag berekenen" },
+  { href: "/kindgebonden-budget-berekenen/", label: "Kindgebonden budget berekenen" },
+];
+
+const faq = [
+  {
+    question: "Welke toeslagen zijn er in 2026?",
+    answer: "De belangrijkste toeslagen in 2026 zijn huurtoeslag, zorgtoeslag, kindgebonden budget en kinderopvangtoeslag. De voorwaarden en bedragen hangen af van je inkomen, vermogen en gezinssituatie.",
+  },
+  {
+    question: "Hoe vraag ik toeslagen aan?",
+    answer: "Je vraagt toeslagen aan via Mijn toeslagen van de Belastingdienst met DigiD. Je kunt meerdere toeslagen tegelijk aanvragen. Zorg dat je je inkomen en vermogen goed inschat.",
+  },
+  {
+    question: "Wanneer worden toeslagen uitbetaald?",
+    answer: "Toeslagen worden maandelijks vooruit uitbetaald. Aan het einde van het jaar wordt een definitieve berekening gemaakt op basis van je daadwerkelijke inkomen. Bij een te hoge voorschotbetaaling moet je mogelijk terugbetalen.",
+  },
+  {
+    question: "Telt mijn vermogen mee?",
+    answer: "Ja, voor de meeste toeslagen telt je vermogen mee. Dit kan spaargeld, beleggingen en een tweede woning zijn. De eigen woning telt niet mee. De grenzen worden jaarlijks aangepast.",
+  },
+  {
+    question: "Wat gebeurt er als mijn inkomen verandert?",
+    answer: "Als je inkomen verandert, kan dit invloed hebben op je toeslagen. Je kunt wijzigingen doorgeven via Mijn toeslagen. Dit voorkomt dat je later moet terugbetalen.",
+  },
+  {
+    question: "Kan ik toeslagen krijgen als ik een eigen huis heb?",
+    answer: "Voor huurtoeslag heb je een huurwoning nodig. Zorgtoeslag en kindgebonden budget zijn onafhankelijk van wonen in koop of huur. De eigen woning telt niet mee als vermogen voor toeslagen.",
+  },
+];
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Belasting", href: "/categorie/belasting/" },
+  { label: "Toeslagen 2026", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  categoryLabel="Belasting"
+  calculatorCta={{ href: "/toeslagen-calculator/", title: "Toeslagen calculator openen", description: "Bereken een indicatie van al je toeslagen in 2026." }}
+>
+  <Fragment slot="content">
+    <h2>Overzicht toeslagen 2026</h2>
+    <p>In 2026 kun je als huurder, zorgverzekerde of ouder mogelijk aanspraak maken op een of meer toeslagen. De belangrijkste zijn:</p>
+    <ul class="calc-list">
+      <li><strong>Huurtoeslag:</strong> tegemoetkoming in huurkosten.</li>
+      <li><strong>Zorgtoeslag:</strong> tegemoetkoming in zorgverzekeringskosten.</li>
+      <li><strong>Kindgebonden budget:</strong> tegemoetkoming voor ouders.</li>
+      <li><strong>Kinderopvangtoeslag:</strong> tegemoetkoming in opvangkosten.</li>
+    </ul>
+
+    <h2>Voorwaarden in 2026</h2>
+    <p>Voor alle toeslagen gelden voorwaarden rond inkomen, vermogen en woonsituatie. De exacte grenzen worden jaarlijks vastgesteld. Raadpleeg voor de actuele cijfers de <a href="https://www.belastingdienst.nl/toeslagen" target="_blank" rel="noopener">Belastingdienst</a>.</p>
+
+    <h2>Toeslagen calculator</h2>
+    <p>Met onze toeslagen calculator kun je een indicatie krijgen van je in aanmerking komt voor huurtoeslag, zorgtoeslag en kindgebonden budget. Vul je inkomen, vermogen en gezinsgegevens in. Voor een definitief antwoord moet je een aanvraag doen bij de Belastingdienst.</p>
+
+    <h2>Let op bij wijzigingen</h2>
+    <p>Verhuizing, meer of minder verdienen, een nieuwe partner of een kind dat de leeftijdsgrens bereikt: al deze wijzigingen kunnen invloed hebben op je toeslagen. Geef wijzigingen tijdig door via Mijn toeslagen.</p>
+  </Fragment>
+</ContentHubPage>

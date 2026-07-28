@@ -1,0 +1,131 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Maximale hypotheek berekenen 2026 | Indicatie | Calculatieloket.nl";
+const description = "Bereken je maximale hypotheek in 2026. Een indicatie op basis van je inkomen. Voor een definitief advies raadpleeg je een hypotheekadviseur.";
+const h1 = "Maximale hypotheek berekenen 2026";
+
+const intro = [
+  "Wil je weten hoeveel je ongeveer kunt lenen voor een woning? De maximale hypotheek hangt af van je bruto inkomen, eventuele schulden, de rente en de regels van de overheid en banken.",
+  "Deze pagina geeft een algemene indicatie. Voor een persoonlijk en definitief hypotheekadvies raadpleeg je een erkend hypotheekadviseur.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "AFM — Hypotheekregels",
+    description: "Informatie over verantwoord lenen voor een hypotheek.",
+    href: "https://www.afm.nl/consumenten/hypotheek",
+  },
+  {
+    label: "Officiële bron",
+    title: "NHG — Nationale Hypotheek Garantie",
+    description: "Informatie over de Nationale Hypotheek Garantie.",
+    href: "https://www.nhg.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Hypotheek calculator", description: "Bereken een hypotheekindicatie.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+  { title: "Salaris 2026", description: "Bereken je bruto-netto salaris.", href: "/salaris-2026-berekenen/", accent: "#3b82f6" },
+];
+
+const relatedLinks = [
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — volledige hypotheekindicatie" },
+  { href: "/hypotheek-maandlasten-berekenen/", label: "Hypotheek maandlasten berekenen" },
+  { href: "/hypotheek-rente-berekenen/", label: "Hypotheek rente berekenen" },
+  { href: "/hypotheek-2026/", label: "Hypotheek 2026" },
+];
+
+const faq = [
+  {
+    question: "Hoeveel kan ik lenen voor een hypotheek?",
+    answer: "Je maximale hypotheek hangt af van je bruto inkomen, de rente, je schulden en de regels van de AFM en banken. Een vuistregel is dat je circa 4 tot 5,5 keer je bruto jaarinkomen kunt lenen, afhankelijk van de rente. Dit is slechts een indicatie.",
+  },
+  {
+    question: "Wat is de financieringslastnorm?",
+    answer: "De financieringslastnorm bepaalt hoeveel van je bruto inkomen je maximaal aan wonen mag uitgeven. Deze norm is afhankelijk van je inkomen en de rente. De AFM publiceert hierover regels.",
+  },
+  {
+    question: "Hoeveel hypotheek heb ik nodig voor een huis van € 400.000?",
+    answer: "Als je geen eigen geld hebt, heb je een hypotheek van € 400.000 nodig. De meeste banken vragen een eigen bijdrage van minimaal de kosten koper (circa 4% tot 6% van de koopsom). Hoeveel je kunt lenen, hangt af van je inkomen.",
+  },
+  {
+    question: "Tellen studieleningen mee?",
+    answer: "Ja, bestaande schulden zoals een studielening tellen mee bij de berekening van je maximale hypotheek. De bank berekent hoeveel ruimte je overhoudt voor woonlasten.",
+  },
+  {
+    question: "Wat is de rol van de rente?",
+    answer: "Hoe lager de rente, hoe meer je over het algemeen kunt lenen. De bank houdt rekening met de lasten op de rentevaste periode. Een hogere rente betekent hogere maandlasten en daardoor een lagere maximale hypotheek.",
+  },
+  {
+    question: "Moet ik een hypotheekadviseur inschakelen?",
+    answer: "Ja, voor een persoonlijk en definitief hypotheekadvies is het verstandig om een erkend hypotheekadviseur in te schakelen. Deze calculator geeft slechts een algemene indicatie.",
+  },
+];
+
+const howTo = {
+  name: "Maximale hypotheek berekenen",
+  description: "Stappen om een indicatie van je maximale hypotheek te krijgen.",
+  steps: [
+    { name: "Bepaal je bruto inkomen", text: "Voer je jaarinkomen in." },
+    { name: "Noteer je schulden", text: "Tel eventuele studieschuld en andere leningen op." },
+    { name: "Kies een rente", text: "Gebruik een actuele rente als indicatie." },
+    { name: "Bekijk de indicatie", text: "De calculator geeft een indicatie van je maximale hypotheek." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Wonen", href: "/categorie/wonen/" },
+  { label: "Maximale hypotheek berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Wonen"
+  calculatorCta={{ href: "/hypotheek-calculator/", title: "Hypotheek calculator openen", description: "Vul je inkomen en rente in voor een indicatie van je maximale hypotheek." }}
+>
+  <Fragment slot="content">
+    <h2>Maximale hypotheek indicatie</h2>
+    <p>De maximale hypotheek wordt bepaald door je bruto inkomen, de rente en de regels rond verantwoord lenen. Een veelgebruikte vuistregel is dat je ongeveer 4 tot 5,5 keer je bruto jaarinkomen kunt lenen, maar de exacte factor hangt af van de actuele rente en je persoonlijke situatie.</p>
+
+    <h2>Voorbeelden maximale hypotheek</h2>
+    <p>Indicatie bij een rente van 4% en een gezonde schuldenpositie:</p>
+    <table class="rate-table">
+      <thead><tr><th>Bruto jaarinkomen</th><th>Maximale hypotheek (indicatie)</th></tr></thead>
+      <tbody>
+        <tr><td>€ 40.000</td><td>Circa € 160.000 - € 200.000</td></tr>
+        <tr><td>€ 60.000</td><td>Circa € 240.000 - € 300.000</td></tr>
+        <tr><td>€ 80.000</td><td>Circa € 320.000 - € 400.000</td></tr>
+        <tr><td>€ 100.000</td><td>Circa € 400.000 - € 500.000</td></tr>
+      </tbody>
+    </table>
+    <p>Dit zijn indicaties. De werkelijke maximale hypotheek kan afwijken door rente, schulden, partnerinkomen en bankregels.</p>
+
+    <h2>Factoren die meespelen</h2>
+    <ul class="calc-list">
+      <li><strong>Bruto inkomen:</strong> hoger inkomen betekent meer leenruimte.</li>
+      <li><strong>Partnerinkomen:</strong> inkomen van een partner telt mee.</li>
+      <li><strong>Schulden:</strong> studieschuld en andere leningen verlagen de leenruimte.</li>
+      <li><strong>Rente:</strong> een hogere rente geeft minder leenruimte.</li>
+      <li><strong>Looptijd:</strong> een langere looptijd geeft lagere maandlasten.</li>
+      <li><strong>Financieringslastnorm:</strong> de maximale percentage van je inkomen voor wonen.</li>
+    </ul>
+
+    <h2>Advies</h2>
+    <p>Deze pagina geeft alleen een indicatie. Voor een persoonlijke berekening en het beste advies neem je contact op met een erkend hypotheekadviseur. De AFM en NHG bieden objectieve informatie over verantwoord lenen.</p>
+  </Fragment>
+</ContentHubPage>
