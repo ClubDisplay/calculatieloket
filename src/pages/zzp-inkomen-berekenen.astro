@@ -1,0 +1,128 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP inkomen berekenen 2026 | Netto ZZP inkomen | Calculatieloket.nl";
+const description = "Bereken je netto ZZP inkomen in 2026. Zie hoeveel je overhoudt na kosten en belasting. Een indicatie.";
+const h1 = "ZZP inkomen berekenen 2026";
+
+const intro = [
+  "Als ZZP'er wil je weten hoeveel je netto overhoudt na aftrek van alle kosten en belasting. Deze pagina geeft een algemene uitleg over ZZP inkomen berekenen.",
+  "Vul je omzet, kosten en uren in de ZZP calculator in voor een indicatie van je netto ZZP inkomen.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — ZZP en inkomstenbelasting",
+    description: "Informatie over belasting voor ZZP'ers.",
+    href: "https://www.belastingdienst.nl/zzp",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — MKB-winstvrijstelling 2026",
+    description: "Informatie over de MKB-winstvrijstelling voor ondernemers.",
+    href: "https://www.belastingdienst.nl/mkb-winstvrijstelling",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP uurtarief", description: "Bereken je benodigde uurtarief.", href: "/zzp-uurtarief-berekenen/", accent: "#7c3aed" },
+  { title: "ZZP omzet", description: "Bereken je benodigde omzet.", href: "/zzp-omzet-berekenen/", accent: "#8b5cf6" },
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — volledige ZZP berekening" },
+  { href: "/zzp-uurtarief-berekenen/", label: "ZZP uurtarief berekenen" },
+  { href: "/zzp-omzet-berekenen/", label: "ZZP omzet berekenen" },
+  { href: "/zzp-kosten-berekenen/", label: "ZZP kosten berekenen" },
+];
+
+const faq = [
+  {
+    question: "Hoe bereken je je netto ZZP inkomen?",
+    answer: "Je netto ZZP inkomen bereken je door je omzet te verminderen met zakelijke kosten. Over de winst betaal je inkomstenbelasting en premies. De rest is je netto inkomen.",
+  },
+  {
+    question: "Wat is de MKB-winstvrijstelling?",
+    answer: "De MKB-winstvrijstelling is een vrijgesteld deel van je winst. In 2026 geldt een percentage van 13,31% over de winst tot € 107.224. Hier betaal je geen belasting over.",
+  },
+  {
+    question: "Welke kosten zijn aftrekbaar voor ZZP'ers?",
+    answer: "Zakelijke kosten zoals kantoor, verzekeringen, accountant, reiskosten, marketing en apparatuur zijn aftrekbaar. Privékosten zijn niet aftrekbaar.",
+  },
+  {
+    question: "Hoeveel belasting betaal ik als ZZP'er?",
+    answer: "ZZP'ers betalen inkomstenbelasting over hun winst. In 2026 gelden de Box 1 tarieven: 35,75% tot € 38.441, 37,56% tot € 75.518 en 49,50% boven € 75.518. De MKB-winstvrijstelling verlaagt de belasting.",
+  },
+  {
+    question: "Hoeveel netto is € 80.000 omzet als ZZP'er?",
+    answer: "Dat hangt af van je kosten. Stel je kosten zijn € 20.000, dan is je winst € 60.000. Na MKB-winstvrijstelling en belasting houd je mogelijk € 35.000 - € 40.000 netto over. Gebruik de ZZP calculator voor een indicatie.",
+  },
+  {
+    question: "Moet ik btw afdragen van mijn inkomen?",
+    answer: "Btw is geen kostenpost. Je factureert btw aan klanten en draagt deze af aan de Belastingdienst. Btw telt niet mee in je netto inkomen.",
+  },
+];
+
+const howTo = {
+  name: "ZZP inkomen berekenen",
+  description: "Stappen om je netto ZZP inkomen te berekenen.",
+  steps: [
+    { name: "Vul je omzet in", text: "Voer je jaaromzet in." },
+    { name: "Trek je kosten af", text: "Reken alle zakelijke kosten mee." },
+    { name: "Pas belasting toe", text: "Gebruik de tarieven voor ondernemers." },
+    { name: "Bekijk je netto inkomen", text: "De calculator toont je netto ZZP inkomen." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { label: "ZZP inkomen berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "ZZP calculator openen", description: "Vul je omzet, kosten en uren in voor een indicatie van je netto ZZP inkomen." }}
+>
+  <Fragment slot="content">
+    <h2>Netto ZZP inkomen</h2>
+    <p>Je netto ZZP inkomen is het bedrag dat je uiteindelijk voor jezelf houdt. De berekening ziet er globaal zo uit:</p>
+    <ol class="calc-list">
+      <li>Omzet (exclusief btw)</li>
+      <li>Min zakelijke kosten</li>
+      <li>= Winst</li>
+      <li>Min MKB-winstvrijstelling</li>
+      <li>Min inkomstenbelasting en premies</li>
+      <li>= Netto ZZP inkomen</li>
+    </ol>
+
+    <h2>MKB-winstvrijstelling 2026</h2>
+    <p>In 2026 bedraagt de MKB-winstvrijstelling 13,31% over de winst tot € 107.224. Dit percentage kan nog worden aangepast. Raadpleeg voor de exacte cijfers de <a href="https://www.belastingdienst.nl/mkb-winstvrijstelling" target="_blank" rel="noopener">Belastingdienst</a>. De vrijstelling verlaagt je belastbare winst.</p>
+
+    <h2>Voorbeeld ZZP inkomen</h2>
+    <div class="example-grid">
+      <div class="example-card"><strong>Omzet</strong><p>€ 100.000</p></div>
+      <div class="example-card"><strong>Kosten</strong><p>€ 25.000</p></div>
+      <div class="example-card"><strong>Winst</strong><p>€ 75.000</p></div>
+      <div class="example-card"><strong>Netto inkomen (indicatie)</strong><p>€ 45.000 - € 48.000</p></div>
+    </div>
+    <p>Dit is een indicatie. De exacte uitkomst hangt af van je kostenstructuur, aftrekposten en persoonlijke situatie.</p>
+
+    <h2>Zelfstandigenaftrek</h2>
+    <p>Als je voldoet aan het urencriterium, kom je mogelijk in aanmerking voor de zelfstandigenaftrek. In 2026 bedraagt deze een vast bedrag dat aftrekbaar is van je winst. Controleer of je voldoet aan de voorwaarden via de Belastingdienst.</p>
+  </Fragment>
+</ContentHubPage>

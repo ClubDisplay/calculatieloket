@@ -1,0 +1,136 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP kosten berekenen 2026 | Zakelijke kosten | Calculatieloket.nl";
+const description = "Bereken je ZZP kosten voor 2026. Zie welke zakelijke kosten je hebt en hoe ze je uurtarief beïnvloeden. Een indicatie.";
+const h1 = "ZZP kosten berekenen 2026";
+
+const intro = [
+  "Als ZZP'er heb je allerlei zakelijke kosten. Denk aan verzekeringen, accountant, kantoor, reiskosten en pensioen. Deze kosten beïnvloeden je uurtarief en je netto inkomen.",
+  "Op deze pagina vind je een overzicht van veelvoorkomende ZZP kosten. Gebruik de ZZP calculator om te zien hoe kosten je tarief en inkomen beïnvloeden.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — ZZP en aftrekposten",
+    description: "Informatie over aftrekbare kosten voor ZZP'ers.",
+    href: "https://www.belastingdienst.nl/zzp",
+  },
+  {
+    label: "Officiële bron",
+    title: "KVK — Ondernemen als ZZP'er",
+    description: "Informatie over starten als ZZP'er.",
+    href: "https://www.kvk.nl/zzp",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP uurtarief", description: "Bereken je benodigde uurtarief.", href: "/zzp-uurtarief-berekenen/", accent: "#7c3aed" },
+  { title: "ZZP inkomen", description: "Bereken je netto ZZP inkomen.", href: "/zzp-inkomen-berekenen/", accent: "#8b5cf6" },
+  { title: "ZZP omzet", description: "Bereken je benodigde omzet.", href: "/zzp-omzet-berekenen/", accent: "#a78bfa" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — volledige ZZP berekening" },
+  { href: "/zzp-uurtarief-berekenen/", label: "ZZP uurtarief berekenen" },
+  { href: "/zzp-omzet-berekenen/", label: "ZZP omzet berekenen" },
+  { href: "/zzp-inkomen-berekenen/", label: "ZZP inkomen berekenen" },
+];
+
+const faq = [
+  {
+    question: "Welke kosten heeft een ZZP'er?",
+    answer: "Veelvoorkomende ZZP kosten zijn verzekeringen (AOV, aansprakelijkheid), accountant, kantoorruimte, internet, telefoon, reiskosten, apparatuur, marketing, pensioen en vakantiedagen.",
+  },
+  {
+    question: "Hoeveel kosten heeft een ZZP'er per jaar?",
+    answer: "Dat verschilt sterk. Een ZZP'er met weinig kosten kan uitkomen op € 5.000 - € 10.000 per jaar. ZZP'ers met meer verzekeringen, kantoor en apparatuur kunnen € 15.000 - € 30.000 of meer kwijt zijn.",
+  },
+  {
+    question: "Zijn alle kosten aftrekbaar?",
+    answer: "Nee, alleen zakelijke kosten zijn aftrekbaar. Privékosten zoals boodschappen, hobby's en prive reiskosten mag je niet aftrekken. De kosten moeten redelijk en zakelijk zijn.",
+  },
+  {
+    question: "Hoe beïnvloeden kosten mijn uurtarief?",
+    answer: "Hoe hoger je kosten, hoe meer omzet je moet draaien en hoe hoger je uurtarief moet zijn. Formule: uurtarief = (gewenst inkomen + kosten + belasting) / betaalde uren.",
+  },
+  {
+    question: "Is btw aftrekbaar?",
+    answer: "Btw die je zelf betaalt over zakelijke aankopen kun je meestal terugvragen via je btw-aangifte. Dit is geen kostenpost maar een teruggaaf.",
+  },
+  {
+    question: "Hoe reken ik pensioen als kosten?",
+    answer: "Als ZZP'er bouw je geen automatisch pensioen op. Het bedrag dat je zelf asideert voor pensioen is een kostenpost. Dit moet je meenemen in je uurtarief.",
+  },
+];
+
+const howTo = {
+  name: "ZZP kosten berekenen",
+  description: "Stappen om je ZZP kosten in kaart te brengen.",
+  steps: [
+    { name: "Verzekeringen", text: "Noteer je AOV, aansprakelijkheid en andere verzekeringen." },
+    { name: "Administratie", text: "Reken accountant, boekhoudsoftware en kantoor." },
+    { name: "Vaste lasten", text: "Tel internet, telefoon, kantoorruimte en apparatuur." },
+    { name: "Variabele kosten", text: "Reken reiskosten, marketing en vakantiedagen mee." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Ondernemen", href: "/categorie/ondernemen/" },
+  { label: "ZZP kosten berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "ZZP calculator openen", description: "Vul je kosten in voor een indicatie van je uurtarief en netto inkomen." }}
+>
+  <Fragment slot="content">
+    <h2>Overzicht ZZP kosten</h2>
+    <p>De belangrijkste kostenposten voor ZZP'ers zijn:</p>
+    <table class="rate-table">
+      <thead><tr><th>Kostenpost</th><th>Indicatie per jaar</th></tr></thead>
+      <tbody>
+        <tr><td>Arbeidsongeschiktheidsverzekering (AOV)</td><td>€ 1.000 - € 3.000</td></tr>
+        <tr><td>Aansprakelijkheidsverzekering</td><td>€ 200 - € 500</td></tr>
+        <tr><td>Accountant / boekhouder</td><td>€ 500 - € 2.000</td></tr>
+        <tr><td>Pensioen</td><td>€ 2.000 - € 10.000+</td></tr>
+        <tr><td>Kantoor / internet / telefoon</td><td>€ 1.000 - € 3.000</td></tr>
+        <tr><td>Reiskosten</td><td>Variabel</td></tr>
+        <tr><td>Marketing en website</td><td>€ 500 - € 2.000</td></tr>
+        <tr><td>Apparatuur</td><td>Variabel</td></tr>
+      </tbody>
+    </table>
+    <p>Dit zijn indicatieve bedragen. Je eigen kosten kunnen hoger of lager uitvallen.</p>
+
+    <h2>Kosten en uurtarief</h2>
+    <p>Je kosten moeten terugverdiend worden via je omzet. Daarom hebben hogere kosten direct invloed op je benodigde uurtarief. Een ZZP'er met € 25.000 aan kosten moet dus meer factureren dan iemand met € 10.000 aan kosten, bij hetzelfde gewenste netto inkomen.</p>
+
+    <h2>Aftrekbare kosten</h2>
+    <p>Zakelijke kosten zijn aftrekbaar van je winst. Hierdoor betaal je minder belasting. Voorbeelden zijn:</p>
+    <ul class="calc-list">
+      <li>Kantoorkosten en werkplek</li>
+      <li>Zakelijke reiskosten</li>
+      <li>Verzekeringen</li>
+      <li>Accountant en boekhoudsoftware</li>
+      <li>Zakelijke apparatuur</li>
+      <li>Marketing en reclame</li>
+    </ul>
+
+    <h2>Niet-aftrekbare kosten</h2>
+    <p>Privékosten zijn niet aftrekbaar. Ook kosten die niet zakelijk zijn, zoals overdreven representatie, mag je niet aftrekken. Bij twijfel raadpleeg je een accountant.</p>
+  </Fragment>
+</ContentHubPage>

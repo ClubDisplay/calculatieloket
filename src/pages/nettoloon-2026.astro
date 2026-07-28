@@ -1,0 +1,182 @@
+---
+import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
+import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+
+const title = "Nettoloon 2026 | Netto salaris berekenen | Calculatieloket.nl";
+const description = "Bereken je nettoloon in 2026. Zie direct hoeveel je netto per maand en per jaar overhoudt. Gebaseerd op Belastingdienst tarieven.";
+const h1 = "Nettoloon 2026 berekenen";
+const pageTitle = "Nettoloon 2026";
+
+const intro = [
+  "Wil je weten wat je nettoloon is in 2026? Op deze pagina vind je een algemene uitleg over nettoloon, de actuele Box 1 tarieven en een nettoloon calculator.",
+  "Vul je bruto maandsalaris, pensioenpremie en of je loonheffingskorting toepast in de rekenmachine. Je ziet direct een indicatie van je nettoloon per maand en per jaar, inclusief vakantiegeld.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 1 tarieven 2026",
+    description: "Actuele tarieven en schijven voor de inkomstenbelasting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Algemene heffingskorting 2026",
+    description: "Tabel en maximale bedragen voor de algemene heffingskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Arbeidskorting 2026",
+    description: "Tabel en maximale bedragen voor de arbeidskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+  },
+];
+
+const useCases: UseCaseItem[] = [
+  {
+    id: "bruto-netto",
+    title: "Bruto netto 2026",
+    description: "Bekijk een uitgebreide bruto-netto uitleg en berekening.",
+    template: "Bekijk de uitgebreide bruto-netto berekening voor {{bruto}} bruto per maand.",
+    href: "/bruto-netto-2026/",
+    accent: "#2563eb",
+  },
+  {
+    id: "salaris",
+    title: "Salaris vergelijken",
+    description: "Vergelijk bruto en netto loon op de salariscalculator.",
+    template: "Vergelijk bruto {{bruto}} met netto {{netto}} op de salariscalculator.",
+    href: "/salaris-calculator/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "vakantiegeld",
+    title: "Vakantiegeld berekenen",
+    description: "Bereken een indicatie van je netto vakantiegeld.",
+    template: "Bereken je netto vakantiegeld bij een bruto salaris van {{bruto}}.",
+    href: "/vakantiegeld-calculator/",
+    accent: "#0891b2",
+  },
+  {
+    id: "hypotheek",
+    title: "Hypotheek indicatie",
+    description: "Bekijk een hypotheekindicatie op basis van je bruto jaarinkomen.",
+    template: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Salaris 2026", description: "Bereken je salaris voor 2026.", href: "/salaris-2026-berekenen/", accent: "#2563eb" },
+  { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "ZZP uurtarief", description: "Reken van gewenst netto naar uurtarief.", href: "/zzp-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — algemene uitleg en indicatie" },
+  { href: "/salaris-calculator/", label: "Salaris calculator — bruto-netto met pensioenpercentage" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator — netto vakantiegeld 2026" },
+  { href: "/salaris-2026-berekenen/", label: "Salaris 2026 berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wat is nettoloon in 2026?",
+    answer: "Nettoloon is het bedrag dat je daadwerkelijk op je rekening krijgt na aftrek van loonheffing, premies en heffingskortingen. In 2026 wordt dit bepaald door de Box 1 tarieven, algemene heffingskorting, arbeidskorting en jouw persoonlijke situatie.",
+  },
+  {
+    question: "Hoeveel nettoloon krijg ik bij een bruto salaris?",
+    answer: "Dat hangt af van je bruto salaris, pensioenpremie, loonheffingskorting en andere factoren. Ter indicatie: bij € 2.500 bruto per maand houd je ongeveer € 2.240 netto over, bij € 3.500 bruto ongeveer € 2.760 en bij € 5.000 bruto ongeveer € 3.490. Gebruik de rekenmachine voor jouw situatie.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto en netto salaris?",
+    answer: "Bruto salaris is wat je werkgever je betaalt, inclusief vakantiegeld. Netto salaris is wat er daadwerkelijk op je rekening komt, na belasting en premies.",
+  },
+  {
+    question: "Hoe werkt loonheffingskorting?",
+    answer: "Loonheffingskorting bestaat uit de algemene heffingskorting en arbeidskorting. Je betaalt hierdoor minder belasting. Je mag deze korting maar bij één werkgever tegelijk toepassen.",
+  },
+  {
+    question: "Waarom kan mijn loonstrook afwijken?",
+    answer: "Pensioenfonds, cao, bijzondere beloningen, reiskostenvergoeding, lease-auto bijtelling en andere toeslagen of kortingen beïnvloeden je nettoloon.",
+  },
+  {
+    question: "Welke tarieven gelden in 2026?",
+    answer: "Over inkomen tot € 38.441 betaal je 35,75%. Van € 38.441 tot € 75.518 is dat 37,56%. Boven € 75.518 geldt 49,50%. De algemene heffingskorting is maximaal € 3.115, de arbeidskorting maximaal € 5.685.",
+  },
+];
+
+const howTo = {
+  name: "Nettoloon berekenen in 2026",
+  description: "Stappen om je nettoloon in 2026 te berekenen.",
+  steps: [
+    { name: "Vul je bruto maandsalaris in", text: "Voer je bruto maandsalaris in, inclusief vakantiegeld." },
+    { name: "Vul je pensioenpremie in", text: "Voer het werknemersdeel van je pensioenpremie per maand in." },
+    { name: "Pas loonheffingskorting toe", text: "Zet de loonheffingskorting aan als je deze bij je werkgever hebt." },
+    { name: "Bekijk je nettoloon", text: "De calculator toont je nettoloon per maand en per jaar." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Inkomen", href: "/categorie/inkomen/" },
+  { label: "Nettoloon 2026", current: true },
+];
+---
+
+<IncomeCalculatorPage
+  title={title}
+  description={description}
+  h1={h1}
+  pageTitle={pageTitle}
+  intro={intro}
+  breadcrumbs={breadcrumbs}
+  sources={sources}
+  useCases={useCases}
+  crossSell={crossSell}
+  relatedLinks={relatedLinks}
+  faq={faq}
+  howTo={howTo}
+  calculatorKey="nettoloon"
+>
+  <Fragment slot="content">
+    <p class="badge-indicatie">Indicatie 2026</p>
+    <p>Nettoloon 2026 is het bedrag dat je werkelijk ontvangt na aftrek van loonheffing, premies en doorbetaling van heffingskortingen. In deze nettoloon calculator vul je je bruto maandsalaris, je pensioenpremie en de loonheffingskorting in. Je ziet direct een indicatie van je netto salaris per maand en per jaar.</p>
+    <p>De berekening is gebaseerd op de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> van de Belastingdienst voor 2026. Gebruik de uitkomst als richtlijn.</p>
+
+    <h2>Tarieven 2026</h2>
+    <p>Voor 2026 gelden deze Box 1 tarieven:</p>
+    <table class="rate-table">
+      <thead><tr><th>Schijf</th><th>Inkomen</th><th>Tarief</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Tot € 38.441</td><td>35,75%</td></tr>
+        <tr><td>2</td><td>€ 38.441 - € 75.518</td><td>37,56%</td></tr>
+        <tr><td>3</td><td>Boven € 75.518</td><td>49,50%</td></tr>
+      </tbody>
+    </table>
+    <p>De percentages gelden voor mensen die de AOW-leeftijd nog niet hebben bereikt. Boven de 65 jaar gelden vaak lagere tarieven.</p>
+
+    <h2>Voorbeelden nettoloon 2026</h2>
+    <p>Indicatie op basis van 2026-tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
+    <div class="example-grid">
+      <div class="example-card"><strong>€ 2.500 bruto</strong><p>Netto per maand: circa € 2.240</p></div>
+      <div class="example-card"><strong>€ 3.500 bruto</strong><p>Netto per maand: circa € 2.760</p></div>
+      <div class="example-card"><strong>€ 5.000 bruto</strong><p>Netto per maand: circa € 3.490</p></div>
+    </div>
+
+    <h2>Factoren die je nettoloon beïnvloeden</h2>
+    <ul class="calc-list">
+      <li><strong>Bruto salaris:</strong> hoe hoger het brutoloon, hoe meer belasting je betaalt.</li>
+      <li><strong>Pensioenpremie:</strong> een hogere werknemersbijdrage verlaagt je belastbare inkomen.</li>
+      <li><strong>Loonheffingskorting:</strong> met deze korting houd je meer netto over.</li>
+      <li><strong>Vakantiegeld:</strong> 8% vakantiegeld telt mee in je jaarsalaris.</li>
+      <li><strong>Bijtelling:</strong> een lease-auto of andere vergoedingen kunnen je belastbaar inkomen verhogen.</li>
+      <li><strong>Extra inkomsten:</strong> een tweede baan of bonus kan je in een hogere belastingschijf plaatsen.</li>
+    </ul>
+
+    <h2>Nettoloon vs bruto-netto</h2>
+    <p>Nettoloon en bruto-netto gaan over hetzelfde: het verschil tussen wat je werkgever betaalt en wat jij ontvangt. Nettoloon is het eindresultaat. Bruto-netto is de weg daarnaartoe: bruto salaris minus loonheffing plus heffingskortingen.</p>
+  </Fragment>
+</IncomeCalculatorPage>

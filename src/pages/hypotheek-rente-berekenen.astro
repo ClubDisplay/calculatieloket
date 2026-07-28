@@ -1,0 +1,125 @@
+---
+import ContentHubPage from "../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../components/calculator/ContentHubPage.astro";
+
+const title = "Hypotheek rente berekenen 2026 | Rente op hypotheek | Calculatieloket.nl";
+const description = "Bereken de rente op je hypotheek in 2026. Een indicatie van maandlasten en totale rente. Voor advies raadpleeg je een hypotheekadviseur.";
+const h1 = "Hypotheek rente berekenen 2026";
+
+const intro = [
+  "De rente op je hypotheek bepaalt een groot deel van je maandlasten en totale kosten. Wil je weten hoeveel rente je ongeveer betaalt? Deze pagina geeft een algemene indicatie.",
+  "Vul je hypotheekbedrag, rente en looptijd in de hypotheek calculator in voor een indicatie van je rente en maandlasten.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "AFM — Hypotheekregels",
+    description: "Informatie over verantwoord lenen.",
+    href: "https://www.afm.nl/consumenten/hypotheek",
+  },
+  {
+    label: "Officiële bron",
+    title: "DNB — Hypotheekrente",
+    description: "Informatie over rente en woningmarkt.",
+    href: "https://www.dnb.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Hypotheek calculator", description: "Bereken een hypotheekindicatie.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Maximale hypotheek", description: "Bereken hoeveel je kunt lenen.", href: "/maximale-hypotheek-berekenen/", accent: "#f59e0b" },
+  { title: "Hypotheek maandlasten", description: "Bereken je maandlasten.", href: "/hypotheek-maandlasten-berekenen/", accent: "#b45309" },
+];
+
+const relatedLinks = [
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — volledige hypotheekindicatie" },
+  { href: "/maximale-hypotheek-berekenen/", label: "Maximale hypotheek berekenen" },
+  { href: "/hypotheek-maandlasten-berekenen/", label: "Hypotheek maandlasten berekenen" },
+  { href: "/hypotheek-2026/", label: "Hypotheek 2026" },
+];
+
+const faq = [
+  {
+    question: "Hoe bereken je de rente op een hypotheek?",
+    answer: "De rente op een hypotheek bereken je door het hypotheekbedrag te vermenigvuldigen met het rentepercentage. De jaarlijkse rente deel je door 12 voor de maandlast. Bij annuïteitenhypotheken wordt dit gecombineerd met aflossing.",
+  },
+  {
+    question: "Hoeveel rente betaal ik op € 300.000?",
+    answer: "Bij een rente van 4% betaal je per jaar € 12.000 aan rente, dat is € 1.000 per maand. Dit is exclusief aflossing. De totale maandlast is hoger als je ook aflost.",
+  },
+  {
+    question: "Wat is de rente in 2026?",
+    answer: "De hypotheekrente in 2026 is afhankelijk van marktontwikkelingen, de rentevaste periode en de bank. Vergelijk actuele rentes bij verschillende geldverstrekkers.",
+  },
+  {
+    question: "Vaste of variabele rente?",
+    answer: "Bij een vaste rente weet je waar je aan toe bent gedurende de rentevaste periode. Bij een variabele rente kan de maandlast veranderen. Welke vorm past bij jou, hangt af van je risicobereidheid en situatie.",
+  },
+  {
+    question: "Hoe lang is de rentevaste periode?",
+    answer: "De rentevaste periode is meestal 5, 10, 20 of 30 jaar. Hoe langer de periode, hoe hoger de rente vaak is. Na afloop kun je een nieuwe rente afsluiten.",
+  },
+  {
+    question: "Kan ik de rente aftrekken?",
+    answer: "Onder voorwaarden is hypotheekrenteaftrek mogelijk voor je eigen woning. Voor nieuwe hypotheken gelden aanvullende regels, zoals aflossingsverplichtingen. Raadpleeg een adviseur voor details.",
+  },
+];
+
+const howTo = {
+  name: "Hypotheek rente berekenen",
+  description: "Stappen om de rente op je hypotheek te berekenen.",
+  steps: [
+    { name: "Vul je hypotheekbedrag in", text: "Voer het totale leenbedrag in." },
+    { name: "Kies een rentepercentage", text: "Gebruik een actuele rente als indicatie." },
+    { name: "Kies een looptijd", text: "Bijvoorbeeld 20 of 30 jaar." },
+    { name: "Bekijk rente en lasten", text: "De calculator toont een indicatie." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Wonen", href: "/categorie/wonen/" },
+  { label: "Hypotheek rente berekenen", current: true },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={breadcrumbs}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  categoryLabel="Wonen"
+  calculatorCta={{ href: "/hypotheek-calculator/", title: "Hypotheek calculator openen", description: "Vul je hypotheekbedrag, rente en looptijd in voor een indicatie van rente en maandlasten." }}
+>
+  <Fragment slot="content">
+    <h2>Hypotheekrente berekenen</h2>
+    <p>De rente op je hypotheek bereken je eenvoudig: jaarlijkse rente = hypotheekbedrag × rentepercentage. De maandlast aan rente is dit bedrag gedeeld door 12. Bij een annuïteitenhypotheek betaal je in het begin meer rente en later meer aflossing.</p>
+
+    <h2>Voorbeeld rente berekening</h2>
+    <table class="rate-table">
+      <thead><tr><th>Hypotheek</th><th>Rente 3,5%</th><th>Rente 4,5%</th></tr></thead>
+      <tbody>
+        <tr><td>€ 200.000</td><td>€ 7.000 / jaar</td><td>€ 9.000 / jaar</td></tr>
+        <tr><td>€ 300.000</td><td>€ 10.500 / jaar</td><td>€ 13.500 / jaar</td></tr>
+        <tr><td>€ 400.000</td><td>€ 14.000 / jaar</td><td>€ 18.000 / jaar</td></tr>
+      </tbody>
+    </table>
+    <p>Dit is de rente exclusief aflossing. De totale maandlast is hoger.</p>
+
+    <h2>Totale rente over looptijd</h2>
+    <p>Over 30 jaar betaal je vaak meer rente dan het oorspronkelijke hypotheekbedrag. Door extra af te lossen of een lagere rente te kiezen, kun je de totale kosten verminderen.</p>
+
+    <h2>Belang van rente bij aankoop</h2>
+    <p>De rente bepaalt mede hoeveel je kunt lenen en wat je maandlasten zijn. Een klein verschil in rente kan over de looptijd duizenden euro's schelen. Vergelijk daarom meerdere aanbieders.</p>
+
+    <h2>Advies</h2>
+    <p>Deze pagina geeft alleen een indicatie. Voor een persoonlijk advies over rentevaste periodes, hypotheekvormen en totale kosten neem je contact op met een erkend hypotheekadviseur.</p>
+  </Fragment>
+</ContentHubPage>

@@ -1,0 +1,181 @@
+---
+import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
+import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+
+const title = "Loonheffing berekenen 2026 | Loonbelasting indicatie | Calculatieloket.nl";
+const description = "Bereken de loonheffing in 2026. Zie hoeveel belasting je ongeveer betaalt over je salaris. Gebaseerd op Belastingdienst tarieven.";
+const h1 = "Loonheffing berekenen 2026";
+const pageTitle = "Loonheffing 2026";
+
+const intro = [
+  "Wil je weten hoeveel loonheffing je in 2026 betaalt? Deze calculator geeft een indicatie van de belasting en premies over je bruto salaris.",
+  "Vul je bruto maandsalaris, pensioenpremie en loonheffingskorting in. Je ziet direct een indicatie van je loonheffing per maand en per jaar.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 1 tarieven 2026",
+    description: "Actuele tarieven en schijven voor de inkomstenbelasting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Algemene heffingskorting 2026",
+    description: "Maximale bedragen voor de algemene heffingskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Arbeidskorting 2026",
+    description: "Maximale bedragen voor de arbeidskorting.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+  },
+];
+
+const useCases: UseCaseItem[] = [
+  {
+    id: "nettoloon",
+    title: "Nettoloon 2026",
+    description: "Bekijk hoeveel netto loon je overhoudt.",
+    template: "Bekijk je nettoloon voor {{bruto}} bruto per maand.",
+    href: "/nettoloon-2026/",
+    accent: "#2563eb",
+  },
+  {
+    id: "bruto-netto",
+    title: "Bruto netto berekenen",
+    description: "Reken bruto om naar netto.",
+    template: "Reken {{bruto}} bruto om naar netto in 2026.",
+    href: "/bruto-netto-berekenen-2026/",
+    accent: "#3b82f6",
+  },
+  {
+    id: "salaris",
+    title: "Salaris 2026",
+    description: "Bereken je salaris voor 2026.",
+    template: "Bekijk je salaris voor bruto {{bruto}} in 2026.",
+    href: "/salaris-2026-berekenen/",
+    accent: "#0891b2",
+  },
+  {
+    id: "hypotheek",
+    title: "Hypotheek indicatie",
+    description: "Bekijk een hypotheekindicatie.",
+    template: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
+    href: "/hypotheek-calculator/",
+    accent: "#d97706",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
+  { title: "Salaris 2026", description: "Bereken je salaris voor 2026.", href: "/salaris-2026-berekenen/", accent: "#3b82f6" },
+  { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — uitgebreide uitleg" },
+  { href: "/nettoloon-2026/", label: "Nettoloon 2026 — bereken je netto salaris" },
+  { href: "/salaris-2026-berekenen/", label: "Salaris 2026 berekenen" },
+  { href: "/bruto-netto-berekenen-2026/", label: "Bruto netto berekenen 2026" },
+];
+
+const faq = [
+  {
+    question: "Wat is loonheffing in 2026?",
+    answer: "Loonheffing is het totale bedrag aan belasting en premies dat je werkgever inhoudt op je salaris. Het bestaat uit loonbelasting, premies volksverzekeringen en wordt verminderd met heffingskortingen.",
+  },
+  {
+    question: "Hoeveel loonheffing betaal ik in 2026?",
+    answer: "Dat hangt af van je inkomen. Over inkomen tot € 38.441 betaal je 35,75%, over € 38.441 tot € 75.518 37,56% en boven € 75.518 49,50%. De heffingskortingen verlagen het uiteindelijke bedrag.",
+  },
+  {
+    question: "Wat is het verschil tussen loonheffing en loonheffingskorting?",
+    answer: "Loonheffing is de belasting die je betaalt. Loonheffingskorting is een korting op die belasting. Door de korting houd je meer netto loon over.",
+  },
+  {
+    question: "Hoe bereken je loonheffing zelf?",
+    answer: "Je berekent loonheffing door op je belastbare inkomen de Box 1 tarieven toe te passen. Daarna trek je de algemene heffingskorting en arbeidskorting af. De calculator doet dit automatisch.",
+  },
+  {
+    question: "Welke heffingskortingen gelden in 2026?",
+    answer: "In 2026 gelden de algemene heffingskorting (maximaal € 3.115) en de arbeidskorting (maximaal € 5.685). De arbeidskorting loopt af naarmate je inkomen stijgt.",
+  },
+  {
+    question: "Waarom kan mijn loonheffing afwijken?",
+    answer: "Pensioenpremie, cao, bijzondere beloningen, lease-auto bijtelling, tweede baan en toeslagen kunnen je belastbaar inkomen en dus je loonheffing beïnvloeden.",
+  },
+];
+
+const howTo = {
+  name: "Loonheffing berekenen 2026",
+  description: "Stappen om je loonheffing in 2026 te berekenen.",
+  steps: [
+    { name: "Vul je bruto maandsalaris in", text: "Voer je bruto maandsalaris in, inclusief vakantiegeld." },
+    { name: "Vul je pensioenpremie in", text: "Voer het werknemersdeel van je pensioenpremie per maand in." },
+    { name: "Pas loonheffingskorting toe", text: "Zet de loonheffingskorting aan indien van toepassing." },
+    { name: "Bekijk je loonheffing", text: "De calculator toont je loonheffing per maand en per jaar." },
+  ],
+};
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Inkomen", href: "/categorie/inkomen/" },
+  { label: "Loonheffing berekenen 2026", current: true },
+];
+---
+
+<IncomeCalculatorPage
+  title={title}
+  description={description}
+  h1={h1}
+  pageTitle={pageTitle}
+  intro={intro}
+  breadcrumbs={breadcrumbs}
+  sources={sources}
+  useCases={useCases}
+  crossSell={crossSell}
+  relatedLinks={relatedLinks}
+  faq={faq}
+  howTo={howTo}
+  calculatorKey="loonheffing"
+  heroLabel="Jouw loonheffing per maand"
+  resultTitle="Loonheffing 2026"
+>
+  <Fragment slot="content">
+    <p class="badge-indicatie">Indicatie 2026</p>
+    <p>Loonheffing is het bedrag aan belasting en premies dat je werkgever inhoudt op je salaris. In 2026 bestaat dit uit loonbelasting volgens de Box 1 tarieven, verminderd met de algemene heffingskorting en arbeidskorting. Deze loonheffing calculator geeft een indicatie van wat je ongeveer betaalt.</p>
+    <p>De berekening gebruikt de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">heffingskortingen</a> van de Belastingdienst. Gebruik het resultaat als richtlijn.</p>
+
+    <h2>Loonheffing tarieven 2026</h2>
+    <p>Voor 2026 gelden deze tarieven over je belastbare inkomen:</p>
+    <table class="rate-table">
+      <thead><tr><th>Schijf</th><th>Inkomen</th><th>Tarief</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Tot € 38.441</td><td>35,75%</td></tr>
+        <tr><td>2</td><td>€ 38.441 - € 75.518</td><td>37,56%</td></tr>
+        <tr><td>3</td><td>Boven € 75.518</td><td>49,50%</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Heffingskortingen 2026</h2>
+    <p>De belangrijkste heffingskortingen in 2026 zijn:</p>
+    <ul class="calc-list">
+      <li><strong>Algemene heffingskorting:</strong> maximaal € 3.115.</li>
+      <li><strong>Arbeidskorting:</strong> maximaal € 5.685, loopt af bij hogere inkomens.</li>
+    </ul>
+    <p>Deze kortingen verminderen de te betalen loonheffing. In de calculator zie je het effect van de loonheffingskorting op je netto loon.</p>
+
+    <h2>Loonheffing berekenen voorbeelden</h2>
+    <p>Indicatie van loonheffing per jaar bij loonheffingskorting en € 150 pensioenpremie per maand:</p>
+    <div class="example-grid">
+      <div class="example-card"><strong>€ 2.500 bruto</strong><p>Loonheffing per jaar: circa € 2.700</p></div>
+      <div class="example-card"><strong>€ 3.500 bruto</strong><p>Loonheffing per jaar: circa € 5.700</p></div>
+      <div class="example-card"><strong>€ 5.000 bruto</strong><p>Loonheffing per jaar: circa € 11.600</p></div>
+    </div>
+
+    <h2>Loonheffing vs netto loon</h2>
+    <p>Loonheffing is wat je afdracht. Netto loon is wat er overblijft. Door de heffingskortingen houd je meer over dan het bruto bedrag minus het ruwe belastingtarief. De calculator toont beide bedragen naast elkaar.</p>
+  </Fragment>
+</IncomeCalculatorPage>

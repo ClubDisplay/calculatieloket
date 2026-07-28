@@ -1,0 +1,307 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../Breadcrumbs.astro";
+import AdSlot from "../AdSlot.astro";
+import CrossSellCards from "../CrossSellCards.astro";
+import FaqAccordion from "./FaqAccordion.astro";
+import SourceCards from "../SourceCards.astro";
+import HowToSchema from "./HowToSchema.astro";
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  current?: boolean;
+}
+
+export interface SourceItem {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+export interface CrossSellItem {
+  href: string;
+  title: string;
+  description: string;
+  accent: string;
+}
+
+export interface HowToStep {
+  name: string;
+  text: string;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  breadcrumbs: BreadcrumbItem[];
+  intro: string[];
+  sources: SourceItem[];
+  faq: Array<{ question: string; answer: string }>;
+  relatedLinks: Array<{ href: string; label: string }>;
+  crossSell: CrossSellItem[];
+  howTo?: { name: string; description: string; steps: HowToStep[] };
+  lastUpdated?: string;
+  adSlot?: string;
+  categoryLabel?: string;
+  calculatorCta?: { href: string; title: string; description: string };
+}
+
+const {
+  title,
+  description,
+  h1,
+  breadcrumbs,
+  intro,
+  sources,
+  faq,
+  relatedLinks,
+  crossSell,
+  howTo,
+  lastUpdated = "27 juli 2026",
+  adSlot = "1234567899",
+  categoryLabel = "Calculators",
+  calculatorCta,
+} = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    "item": item.href ? `https://calculatieloket.nl${item.href}` : undefined,
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} containerClass="container-wide">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  {howTo && (
+    <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT5M" steps={howTo.steps} />
+  )}
+
+  <AdSlot slot={adSlot} format="auto" style="min-height:100px" />
+
+  <Breadcrumbs items={breadcrumbs} />
+
+  <section class="page-intro">
+    <h1 set:html={h1} />
+    {intro.map((paragraph) => <p set:html={paragraph} />)}
+  </section>
+
+  <div class="calculator-card calc-content">
+    <slot name="content" />
+
+    {calculatorCta && (
+      <div class="cta-box">
+        <h2>Direct berekenen?</h2>
+        <p>{calculatorCta.description}</p>
+        <a href={calculatorCta.href} class="cta-button">{calculatorCta.title}</a>
+      </div>
+    )}
+  </div>
+
+  <div class="calculator-card calc-content">
+    <h2>Ook handig binnen {categoryLabel.toLowerCase()}</h2>
+    <ul class="calc-list">
+      {relatedLinks.map((link) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="calculator-card calc-content">
+    <FaqAccordion title="Veelgestelde vragen" items={faq} />
+  </div>
+
+  <SourceCards id="calculator-sources" title="Bronnen" items={sources} />
+
+  <AdSlot slot={adSlot} format="auto" style="min-height:280px" />
+
+  <CrossSellCards title="Andere calculators die je helpen" items={crossSell} />
+
+  <p class="hub-footer">Laatst bijgewerkt: {lastUpdated}. De informatie op deze pagina is een indicatie. Raadpleeg voor belangrijke beslissingen altijd een adviseur of officiële bron.</p>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    max-width: 72ch;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .page-intro p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-content {
+    padding: 1.5rem;
+  }
+
+  .calc-content h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .calc-content h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .calc-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .calc-content a {
+    text-decoration: underline;
+  }
+
+  .calc-content a:hover {
+    text-decoration: none;
+  }
+
+  .calc-content ul,
+  .calc-content ol {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .calc-content strong {
+    color: var(--color-text);
+  }
+
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .rate-table th,
+  .rate-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--color-border);
+  }
+
+  .rate-table th {
+    background: var(--color-primary-light);
+    font-weight: 700;
+  }
+
+  .rate-table tr:nth-child(even) {
+    background: var(--color-surface);
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .example-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+
+  .example-card strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .example-card p {
+    margin-bottom: 0;
+  }
+
+  .cta-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+  }
+
+  .cta-box h2 {
+    margin-top: 0;
+  }
+
+  .cta-box p {
+    margin-bottom: 1rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-weight: 700;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+  }
+
+  .cta-button:hover {
+    background: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  .hub-footer {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .calc-content {
+      padding: 1rem;
+    }
+  }
+</style>
