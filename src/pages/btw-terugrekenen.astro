@@ -40,7 +40,7 @@ const heroLabel = "Bedrag exclusief btw";
 const heroValue = formatEuro(initialResult.amountExcl, 2);
 const heroSubtext = `Gebaseerd op ${defaultRate}% btw over ${formatEuro(defaultAmount, 2)} (inclusief)`;
 
-const lastUpdated = "27 juli 2026";
+const lastUpdated = "4 augustus 2026";
 
 const quickAmounts = [100, 250, 500, 1000];
 
@@ -292,6 +292,7 @@ const breadcrumbSchema = {
       <li>Bij 9% btw: deel je het bedrag door <strong>1,09</strong></li>
       <li>Bij 0% btw: is het exclusieve bedrag gelijk aan het inclusieve bedrag en is het btw-bedrag <strong>&euro;0</strong></li>
     </ul>
+    <p>Wil je ook in de andere richting rekenen of het btw-bedrag over een exclusief bedrag berekenen? Gebruik dan de <a href="/btw-inclusief-exclusief/">BTW inclusief/exclusief calculator</a>.</p>
 
     <h2>Voorbeelden van btw terugrekenen</h2>
     <p>Hieronder zie je concrete voorbeelden voor 21% en 9% btw. De formule is steeds: exclusief = inclusief &divide; (1 + tarief).</p>
