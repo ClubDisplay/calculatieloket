@@ -18,8 +18,8 @@ import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
 import { formatEuro } from "../lib/format/currency";
 import { getRecommendations } from "../lib/recommendations/engine";
 
-const title = "Bruto netto 2026 | Nettoloon berekenen | Calculatieloket.nl";
-const description = "Bereken je netto salaris in 2026. Uitleg over bruto-netto, Box 1 tarieven, loonheffingskorting en een gratis rekenmachine. Gebaseerd op Belastingdienst tarieven."
+const title = "Bruto-netto salaris 2026 berekenen | Netto loon indicatie";
+const description = "Bereken je netto salaris 2026. Vul bruto loon, pensioen en loonheffingskorting in. Zie direct je netto loon per maand. Indicatie op basis van Belastingdienst tarieven."
 
 const defaultGross = 3000;
 const defaultPension = 150;
@@ -48,7 +48,7 @@ const initialEffectiveRate = initialResult.grossYearly > 0
   ? ((initialNetTax / initialResult.grossYearly) * 100).toFixed(1).replace(".", ",")
   : "0,0";
 
-const lastUpdated = "27 juli 2026";
+const lastUpdated = "4 augustus 2026";
 
 const quickAmounts = [2500, 3000, 3500, 4000, 5000];
 
@@ -218,7 +218,7 @@ const breadcrumbSchema = {
 
   <section class="page-intro">
     <h1>Bruto netto salaris berekenen 2026</h1>
-    <p>Wil je weten wat je netto salaris is in 2026? Op deze pagina vind je een algemene uitleg over het verschil tussen bruto en netto loon, de actuele Box 1 tarieven en een bruto-netto calculator. Handig als je wilt begrijpen hoe loonheffing, vakantiegeld, pensioen en heffingskortingen je nettoloon beïnvloeden.</p>
+    <p>Wil je weten wat je netto salaris is in 2026? Op deze pagina vind je een algemene uitleg over het verschil tussen bruto en netto loon, de actuele Box 1 tarieven en een bruto-netto calculator. Handig als je wilt begrijpen hoe loonheffing, vakantiegeld, pensioen en heffingskortingen je nettoloon beïnvloeden. Wil je snel bruto bedragen vergelijken? Gebruik dan de <a href="/salaris-calculator/">salaris calculator</a> of bereken je <a href="/vakantiegeld-calculator/">vakantiegeld</a> apart.</p>
     <p>Vul je bruto maandsalaris, pensioenpremie en of je loonheffingskorting toepast in de rekenmachine hieronder. Je ziet direct een indicatie van je netto loon per maand en per jaar, inclusief vakantiegeld.</p>
     <p>De berekening gebruikt de officiële Box 1 tarieven, algemene heffingskorting en arbeidskorting van de Belastingdienst voor 2026. Gebruik deze bruto-netto calculator voor een indicatie van je nettoloon 2026. Houd er rekening mee dat je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>
   </section>
