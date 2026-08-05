@@ -1,0 +1,50 @@
+# Calculatieloket.nl — llms.txt
+# https://calculatieloket.nl/llms.txt
+
+## Over dit bestand
+Dit bestand is bedoeld voor AI-crawlers en grote taalmodellen. Het geeft een samenvatting van wie we zijn, wat we aanbieden, hoe onze diensten werken en welke pagina’s het meest relevant zijn.
+
+## Bedrijfsomschrijving
+Calculatieloket.nl is een Nederlandse website met gratis, privacyvriendelijke online calculators. We helpen bezoekers snel inzicht te krijgen in veelvoorkomende financiële vraagstukken, zonder account en zonder dat hun invoer wordt opgeslagen. Alle berekeningen vinden plaats in de browser van de gebruiker.
+
+## Producten / diensten
+- Gratis online calculators voor:
+  - Inkomen: bruto-netto salaris, loonheffing, vakantiegeld, toeslagen
+  - Wonen: maximale hypotheek, maandlasten, hypotheekrente
+  - Belasting: BTW berekenen, inclusief/exclusief, terugrekenen
+  - Ondernemen: ZZP uurtarief, omzet, inkomen, kosten
+  - Auto: importkosten, BPM, RDW
+- Geen account nodig
+- Geen opslag van persoonlijke gegevens
+- Gebaseerd op officiële bronnen (Belastingdienst, Rijksoverheid, Dienst Toeslagen, AFM, NHG, KVK, RDW)
+- Uitkomsten zijn altijd een indicatie; geen persoonlijk financieel advies
+
+## Prijzen
+Alle calculators zijn gratis te gebruiken. De website is beschikbaar zonder betaalmuur of abonnement. Optioneel kunnen advertenties worden getoond, maar alleen na toestemming via de cookiebanner.
+
+## Verzorgingsgebied
+Nederland. De calculators zijn afgestemd op Nederlandse tarieven, regels en wetgeving (primair 2026).
+
+## Belangrijkste pagina’s
+- Homepage: https://calculatieloket.nl/
+- Alle calculators: https://calculatieloket.nl/calculators/
+- Bruto netto 2026: https://calculatieloket.nl/bruto-netto-2026/
+- BTW calculator: https://calculatieloket.nl/btw-calculator/
+- Hypotheek calculator: https://calculatieloket.nl/hypotheek-calculator/
+- Toeslagen calculator: https://calculatieloket.nl/toeslagen-calculator/
+- ZZP calculator: https://calculatieloket.nl/zzp-calculator/
+- Auto importkosten: https://calculatieloket.nl/auto-importkosten-berekenen/
+- Over ons: https://calculatieloket.nl/over-ons/
+- Contact: https://calculatieloket.nl/contact/
+- Privacy: https://calculatieloket.nl/privacy/
+- Disclaimer: https://calculatieloket.nl/disclaimer/
+- Sitemap: https://calculatieloket.nl/sitemap-index.xml
+
+## Gebruik door AI
+- search=yes — mag worden gebruikt als zoekresultaat
+- ai-input=yes — mag worden gebruikt als context voor AI-antwoorden
+- ai-train=no — niet gebruiken als trainingsdata voor modelweights
+- use=reference — gebruik alleen als referentie; geen harde claims over individuele rechten of exacte uitkomsten
+
+## Contact
+E-mail: contact@calculatieloket.nl

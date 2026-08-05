@@ -9,6 +9,7 @@ import {
   getCategoryList,
   getCalculatorGroupsForHub,
 } from "../lib/calculators/registry";
+import { parseDutchDate } from "../lib/format/date";
 
 const title = "Alle calculators | Calculatieloket.nl";
 const description = "Ontdek alle 10 gratis calculators van Calculatieloket.nl. Van inkomen, belasting en wonen tot ondernemen en auto. Snel, duidelijk en gebaseerd op officiële bronnen.";
@@ -49,7 +50,58 @@ const collectionSchema = {
   },
 };
 
-const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
+const lastUpdated = "4 augustus 2026";
+const lastUpdatedIso = parseDutchDate(lastUpdated);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Alle calculators van Calculatieloket.nl",
+  description,
+  author: { "@type": "Organization", name: "Calculatieloket.nl" },
+  publisher: {
+    "@type": "Organization",
+    name: "Calculatieloket.nl",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://calculatieloket.nl/logo_Calculatieloket-og.png",
+    },
+  },
+  datePublished: lastUpdatedIso,
+  dateModified: lastUpdatedIso,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://calculatieloket.nl/calculators/",
+  },
+  inLanguage: "nl-NL",
+};
+
+const pillarFaq = [
+  {
+    question: "Zijn alle calculators echt gratis?",
+    answer: "Ja, alle calculators zijn gratis te gebruiken. Je hoeft geen account aan te maken en er is geen betaalmuur.",
+  },
+  {
+    question: "Welke categorieën zijn er?",
+    answer: "We hebben calculators voor inkomen, wonen, belasting, ondernemen en auto. Zoek je iets specifieks? Gebruik de zoekbalk bovenaan de pagina.",
+  },
+  {
+    question: "Kan ik de uitkomst gebruiken voor mijn belastingaangifte?",
+    answer: "De uitkomsten zijn een indicatie. Gebruik ze als richtlijn en controleer belangrijke bedragen altijd via officiële bronnen of een adviseur.",
+  },
+];
+
+const pillarFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: pillarFaq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
+const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema, articleSchema, pillarFaqSchema]);
 ---
 
 <BaseLayout {title} {description}>
@@ -109,6 +161,47 @@ const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
     title="Bekijk calculators per categorie"
     analyticsCategory="calculator-hub"
   />
+
+  <section class="calculator-card pillar-content" aria-labelledby="pillar-title">
+    <h2 id="pillar-title">Gratis online berekeningen voor iedere situatie</h2>
+    <p>
+      Calculatieloket.nl bundelt de meestgezochte financiële berekeningen in één overzichtelijke website. Je hoeft geen spreadsheet te bouwen of ingewikkelde tabellen te doorzoeken: vul je gegevens in en zie direct een indicatie.
+    </p>
+
+    <h3>Altijd gratis, zonder account</h3>
+    <p>
+      Alle calculators zijn gratis. Je hoeft geen account aan te maken, geen app te installeren en geen betaalmuur te passeren. We tonen mogelijk advertenties, maar alleen als je daarvoor toestemming geeft via de cookiebanner. Weiger je advertenties? De site blijft volledig functioneel.
+    </p>
+
+    <h3>Keuze uit vijf categorieën</h3>
+    <ul>
+      <li><strong>Inkomen</strong> — denk aan bruto-netto salaris, vakantiegeld, toeslagen en loonheffing.</li>
+      <li><strong>Wonen</strong> — van maximale hypotheek tot maandlasten en rente.</li>
+      <li><strong>Belasting</strong> — onder andere BTW berekenen, inclusief/exclusief en terugrekenen.</li>
+      <li><strong>Ondernemen</strong> — voor ZZP'ers: uurtarief, omzet, inkomen en kosten.</li>
+      <li><strong>Auto</strong> — momenteel onder andere importkosten berekenen.</li>
+    </ul>
+
+    <h3>Wetgeving, privacy en veiligheid</h3>
+    <p>
+      Onze berekeningen zijn gebaseerd op officiële bronnen zoals de Belastingdienst, Rijksoverheid, Dienst Toeslagen, AFM, NHG, KVK en RDW. We controleren de parameters jaarlijks en passen deze aan zodra nieuwe cijfers bekend zijn. Wat je invult in een calculator blijft in je eigen browser: we slaan geen persoonlijke gegevens op.
+    </p>
+
+    <h3>Rekenvoorbeeld: van bruto naar netto</h3>
+    <p>
+      Stel je hebt een bruto maandsalaris van € 3.500, betaalt € 150 pensioenpremie per maand en de loonheffingskorting is van toepassing. Onze <a href="/bruto-netto-2026/">bruto-netto calculator</a> geeft dan een netto-indicatie van circa € 2.800 per maand. Je werkelijke loonstrook kan afwijken door cao, bonussen, reiskosten of andere persoonlijke situaties.
+    </p>
+
+    <h2>Veelgestelde vragen</h2>
+    {pillarFaq.map((item) => (
+      <details class="pillar-faq-item">
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </section>
+
+  <p class="pillar-footer">Laatst bijgewerkt: {lastUpdated}. De informatie op deze pagina is een indicatie. Raadpleeg voor belangrijke beslissingen altijd een adviseur of officiële bron.</p>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -223,6 +316,48 @@ const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema]);
 
     .hub-groups :global(.cat-grid) {
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .pillar-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-content ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-content li {
+      margin-bottom: 0.35rem;
+    }
+
+    .pillar-faq-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-faq-item summary {
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .pillar-faq-item p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .pillar-footer {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
     @media (max-width: 560px) {
