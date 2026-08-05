@@ -16,6 +16,7 @@ import HowToSchema from "./HowToSchema.astro";
 import InlineSources from "./InlineSources.astro";
 import { calculateNetIncomeEstimate2026 } from "../../lib/calculators/tax";
 import { formatEuro } from "../../lib/format/currency";
+import { parseDutchDate, stripHtml } from "../../lib/format/date";
 import { getRecommendations } from "../../lib/recommendations/engine";
 
 export interface UseCaseItem {
@@ -150,11 +151,37 @@ const breadcrumbSchema = {
     "item": item.href ? `https://calculatieloket.nl${item.href}` : undefined,
   })),
 };
+
+const pageUrl = Astro.url.href;
+const articleIsoDate = parseDutchDate(lastUpdated);
+const articleHeadline = pageTitle ? stripHtml(pageTitle) : stripHtml(h1);
+const articleSchema = articleIsoDate
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": articleHeadline,
+      "description": description,
+      "author": { "@type": "Organization", "name": "Calculatieloket.nl" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Calculatieloket.nl",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://calculatieloket.nl/logo_Calculatieloket-og.png",
+        },
+      },
+      "datePublished": articleIsoDate,
+      "dateModified": articleIsoDate,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
+      "inLanguage": "nl-NL",
+    }
+  : undefined;
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}
 
   <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT1M" steps={howTo.steps} />
 

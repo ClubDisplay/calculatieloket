@@ -17,6 +17,7 @@ import InlineSources from "./InlineSources.astro";
 import { calculateBtw } from "../../lib/calculators/btw";
 import { getRecommendations } from "../../lib/recommendations/engine";
 import { formatEuro } from "../../lib/format/currency";
+import { parseDutchDate } from "../../lib/format/date";
 
 export interface UseCaseItem {
   id: string;
@@ -132,12 +133,37 @@ const breadcrumbSchema = {
   })),
 };
 
+const pageUrl = Astro.url.href;
+const articleIsoDate = parseDutchDate(lastUpdated);
+const articleSchema = articleIsoDate
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": pageTitle,
+      "description": description,
+      "author": { "@type": "Organization", "name": "Calculatieloket.nl" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Calculatieloket.nl",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://calculatieloket.nl/logo_Calculatieloket-og.png",
+        },
+      },
+      "datePublished": articleIsoDate,
+      "dateModified": articleIsoDate,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
+      "inLanguage": "nl-NL",
+    }
+  : undefined;
+
 const defaultRateLabel = `${defaultRate}%`;
 ---
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}
   <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT30S" steps={howTo.steps} />
 
   <AdSlot slot={adSlot} format="auto" style="min-height:100px" />

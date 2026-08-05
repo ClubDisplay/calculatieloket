@@ -24,6 +24,71 @@ const websiteSchema = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness"],
+  "name": "Calculatieloket.nl",
+  "url": "https://calculatieloket.nl",
+  "logo": "https://calculatieloket.nl/logo_Calculatieloket-og.png",
+  "email": "contact@calculatieloket.nl",
+  "areaServed": "NL",
+  "priceRange": "€",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "contact@calculatieloket.nl",
+    "availableLanguage": "Dutch",
+  },
+};
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Gratis online calculators van Calculatieloket.nl",
+  "description": "Gratis, privacyvriendelijke online calculators voor BTW, salaris, hypotheek, toeslagen, ZZP en auto-kosten.",
+  "brand": { "@type": "Brand", "name": "Calculatieloket.nl" },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://calculatieloket.nl",
+  },
+};
+
+const homeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Zijn de berekeningen gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Worden mijn gegevens opgeslagen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nee. Alles gebeurt in je eigen browser. Wat je invult wordt niet door ons opgeslagen. Lees meer in ons privacybeleid.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Waarom is de uitkomst een indicatie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We gebruiken officiële tarieven, maar je persoonlijke situatie kan afwijken. Gebruik de uitkomst als richtlijn.",
+      },
+    },
+  ],
+};
+
+const homeSchemas = [organizationSchema, productSchema, homeFaqSchema];
+
 const searchIndex = getSearchIndex();
 const searchIcons = getSearchIcons();
 const cards = getFeaturedCards();
@@ -33,6 +98,7 @@ const quickLinks = getQuickLinks();
 
 <BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(homeSchemas)} />
 
   <!-- ===== HERO v3 ===== -->
   <section class="home-hero" slot="hero">
