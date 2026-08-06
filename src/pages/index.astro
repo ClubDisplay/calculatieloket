@@ -41,21 +41,6 @@ const organizationSchema = {
   },
 };
 
-const productSchema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Gratis online calculators van Calculatieloket.nl",
-  "description": "Gratis, privacyvriendelijke online calculators voor BTW, salaris, hypotheek, toeslagen, ZZP en auto-kosten.",
-  "brand": { "@type": "Brand", "name": "Calculatieloket.nl" },
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://calculatieloket.nl",
-  },
-};
-
 const homeFaqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -87,7 +72,7 @@ const homeFaqSchema = {
   ],
 };
 
-const homeSchemas = [organizationSchema, productSchema, homeFaqSchema];
+const homeSchemas = [organizationSchema, homeFaqSchema];
 
 const searchIndex = getSearchIndex();
 const searchIcons = getSearchIcons();
