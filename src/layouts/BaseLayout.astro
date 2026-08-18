@@ -95,7 +95,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#2563eb" />
     <meta name="google-site-verification" content="TRZKC7ND9bcmpINNlT34pqz7ZpoI5C_xIXV-Ypg903c" />
-    <link rel="canonical" href={canonical} />
+    {!redirectTo && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {adsEnabled && cookiebotId && (
       <>

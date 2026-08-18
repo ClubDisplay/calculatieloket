@@ -162,7 +162,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} containerClass="container-wide" noindex={true} redirectTo="/btw-calculator/">
+<BaseLayout title={title} description={description} containerClass="container-wide">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   <HowToSchema
