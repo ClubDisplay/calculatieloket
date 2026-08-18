@@ -48,6 +48,8 @@ export interface Props {
   adSlot?: string;
   categoryLabel?: string;
   calculatorCta?: { href: string; title: string; description: string };
+  noindex?: boolean;
+  redirectTo?: string;
 }
 
 const {
@@ -65,6 +67,8 @@ const {
   adSlot = "1234567899",
   categoryLabel = "Calculators",
   calculatorCta,
+  noindex = false,
+  redirectTo,
 } = Astro.props;
 
 const faqSchema = {
@@ -117,7 +121,7 @@ const articleSchema = articleIsoDate
   : undefined;
 ---
 
-<BaseLayout title={title} description={description} containerClass="container-wide">
+<BaseLayout title={title} description={description} containerClass="container-wide" noindex={noindex} redirectTo={redirectTo}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}

@@ -7,9 +7,54 @@ const { title, description } = Astro.props;
 const categoryList = getCategoryList();
 const containerClass = Astro.props.containerClass ?? "container";
 const noindex = Astro.props.noindex ?? false;
+const redirectTo = Astro.props.redirectTo;
 const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
 const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === "true";
+const cookiebotId = import.meta.env.PUBLIC_COOKIEBOT_ID;
 const canonical = new URL(Astro.url.pathname, "https://calculatieloket.nl").href;
+const adsenseInlineScript = adsenseId
+  ? `window.__ADSENSE_ID__ = ${JSON.stringify(adsenseId)};
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag("consent", "default", {
+  ad_storage: "denied",
+  analytics_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
+});
+
+function loadAdSense() {
+  if (window.__ADSENSE_LOADED__ || !window.__ADSENSE_ID__) return;
+  window.__ADSENSE_LOADED__ = true;
+  const s = document.createElement("script");
+  s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + window.__ADSENSE_ID__;
+  s.async = true;
+  s.crossOrigin = "anonymous";
+  document.head.appendChild(s);
+  s.onload = function () {
+    gtag("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+    });
+    document.querySelectorAll(".adsbygoogle").forEach(function (el) {
+      (window.adsbygoogle || []).push({});
+    });
+  };
+}
+
+window.CookiebotOnConsentReady = function () {
+  if (window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.marketing) {
+    loadAdSense();
+  }
+};
+
+if (window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.marketing) {
+  loadAdSense();
+}`
+  : "";
+
 const pathname = Astro.url.pathname;
 const isCurrentPage = (href: string) => {
   if (href === "/") return pathname === "/";
@@ -41,11 +86,30 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    {redirectTo && (
+      <>
+        <meta http-equiv="refresh" content={`0;url=https://calculatieloket.nl${redirectTo}`} />
+        <link rel="canonical" href={`https://calculatieloket.nl${redirectTo}`} />
+      </>
+    )}
     <meta name="description" content={description} />
     <meta name="theme-color" content="#2563eb" />
     <meta name="google-site-verification" content="TRZKC7ND9bcmpINNlT34pqz7ZpoI5C_xIXV-Ypg903c" />
-    <link rel="canonical" href={canonical} />
+    {!redirectTo && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {adsEnabled && cookiebotId && (
+      <>
+        <script is:inline set:html={adsenseInlineScript}></script>
+        <script
+          is:inline
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid={cookiebotId}
+          data-blockingmode="auto"
+          type="text/javascript"
+        ></script>
+      </>
+    )}
     <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />

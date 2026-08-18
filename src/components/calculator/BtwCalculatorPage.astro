@@ -64,6 +64,8 @@ export interface Props {
   breadcrumbs: BreadcrumbItem[];
   footerDisclaimer?: string;
   adSlot?: string;
+  noindex?: boolean;
+  redirectTo?: string;
 }
 
 const {
@@ -89,6 +91,8 @@ const {
   breadcrumbs,
   footerDisclaimer = "Deze uitkomst is een indicatie op basis van je invoer en de btw-tarieven van 2026. Controleer belangrijke bedragen via officiële bronnen of een adviseur. Aan de uitkomst kunnen geen rechten worden ontleend.",
   adSlot = "1234567890",
+  noindex = false,
+  redirectTo,
 } = Astro.props;
 
 const initialResult = calculateBtw({
@@ -160,7 +164,7 @@ const articleSchema = articleIsoDate
 const defaultRateLabel = `${defaultRate}%`;
 ---
 
-<BaseLayout title={title} description={description} containerClass="container-wide">
+<BaseLayout title={title} description={description} containerClass="container-wide" noindex={noindex} redirectTo={redirectTo}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}
