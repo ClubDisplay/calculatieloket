@@ -1,6 +1,14 @@
 ---
 import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
 import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
+import { formatEuro } from "../lib/format/currency";
+
+const netExample = (grossMonthlySalary: number) => formatEuro(calculateNetIncomeEstimate2026({
+  grossMonthlySalary,
+  pensionAmount: 150,
+  applyLoonheffingskorting: true,
+}).netMonthly, 0);
 
 const title = "Nettoloon 2026 | Netto salaris berekenen | Calculatieloket.nl";
 const description = "Bereken je nettoloon in 2026. Zie direct hoeveel je netto per maand en per jaar overhoudt. Gebaseerd op Belastingdienst tarieven.";
@@ -88,7 +96,7 @@ const faq = [
   },
   {
     question: "Hoeveel nettoloon krijg ik bij een bruto salaris?",
-    answer: "Dat hangt af van je bruto salaris, pensioenpremie, loonheffingskorting en andere factoren. Ter indicatie: bij € 2.500 bruto per maand houd je ongeveer € 2.240 netto over, bij € 3.500 bruto ongeveer € 2.760 en bij € 5.000 bruto ongeveer € 3.490. Gebruik de rekenmachine voor jouw situatie.",
+    answer: `Dat hangt af van je bruto salaris, pensioenpremie, loonheffingskorting en andere factoren. Ter indicatie met € 150 pensioenpremie per maand en loonheffingskorting: bij € 2.500 bruto per maand houd je ongeveer ${netExample(2500)} netto over, bij € 3.500 bruto ongeveer ${netExample(3500)} en bij € 5.000 bruto ongeveer ${netExample(5000)}. Gebruik de rekenmachine voor jouw situatie.`,
   },
   {
     question: "Wat is het verschil tussen bruto en netto salaris?",
@@ -161,9 +169,9 @@ const breadcrumbs = [
     <h2>Voorbeelden nettoloon 2026</h2>
     <p>Indicatie op basis van 2026-tarieven, inclusief vakantiegeld en loonheffingskorting:</p>
     <div class="example-grid">
-      <div class="example-card"><strong>€ 2.500 bruto</strong><p>Netto per maand: circa € 2.240</p></div>
-      <div class="example-card"><strong>€ 3.500 bruto</strong><p>Netto per maand: circa € 2.760</p></div>
-      <div class="example-card"><strong>€ 5.000 bruto</strong><p>Netto per maand: circa € 3.490</p></div>
+      {[2500, 3500, 5000].map((gross) => (
+        <div class="example-card"><strong>{formatEuro(gross, 0)} bruto</strong><p>Netto per maand: circa {netExample(gross)}</p></div>
+      ))}
     </div>
 
     <h2>Factoren die je nettoloon beïnvloeden</h2>

@@ -1,6 +1,8 @@
 ---
 import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
 import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
+import { formatEuro } from "../lib/format/currency";
 
 const title = "Loonheffing berekenen 2026 | Loonbelasting indicatie | Calculatieloket.nl";
 const description = "Bereken de loonheffing in 2026. Zie hoeveel belasting je ongeveer betaalt over je salaris. Gebaseerd op Belastingdienst tarieven.";
@@ -81,6 +83,18 @@ const relatedLinks = [
   { href: "/bruto-netto-berekenen-2026/", label: "Bruto netto berekenen 2026" },
 ];
 
+const taxExamples = [2500, 3500, 5000].map((grossMonthlySalary) => {
+  const result = calculateNetIncomeEstimate2026({
+    grossMonthlySalary,
+    pensionAmount: 150,
+    applyLoonheffingskorting: true,
+  });
+  return {
+    gross: formatEuro(grossMonthlySalary, 0),
+    annualTax: formatEuro(Math.max(0, result.incomeTax - result.totalCredits), 0),
+  };
+});
+
 const faq = [
   {
     question: "Wat is loonheffing in 2026?",
@@ -141,6 +155,7 @@ const breadcrumbs = [
   howTo={howTo}
   calculatorKey="loonheffing"
   heroLabel="Jouw loonheffing per maand"
+  heroMetric="tax"
   resultTitle="Loonheffing 2026"
 >
   <Fragment slot="content">
@@ -170,9 +185,9 @@ const breadcrumbs = [
     <h2>Loonheffing berekenen voorbeelden</h2>
     <p>Indicatie van loonheffing per jaar bij loonheffingskorting en € 150 pensioenpremie per maand:</p>
     <div class="example-grid">
-      <div class="example-card"><strong>€ 2.500 bruto</strong><p>Loonheffing per jaar: circa € 2.700</p></div>
-      <div class="example-card"><strong>€ 3.500 bruto</strong><p>Loonheffing per jaar: circa € 5.700</p></div>
-      <div class="example-card"><strong>€ 5.000 bruto</strong><p>Loonheffing per jaar: circa € 11.600</p></div>
+      {taxExamples.map((example) => (
+        <div class="example-card"><strong>{example.gross} bruto</strong><p>Loonheffing per jaar: circa {example.annualTax}</p></div>
+      ))}
     </div>
 
     <h2>Loonheffing vs netto loon</h2>
