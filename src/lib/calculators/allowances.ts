@@ -40,21 +40,24 @@ interface RentAllowanceData {
   currency: string;
   period: string;
   max_rent: number;
-  income_limit_single: number;
-  income_limit_couple: number;
-  base_benefit: number;
-  own_payment_threshold_single: number;
-  own_payment_threshold_couple: number;
-  own_payment_rate: number;
+  base_rent_single: number;
+  base_rent_couple: number;
+  quality_discount_limit: number;
+  cap_limit_one_or_two: number;
+  income_threshold_single: number;
+  income_threshold_couple: number;
+  reduction_rate_single: number;
+  reduction_rate_couple: number;
 }
 
-/** Fallback housing allowance parameters matching the previous hardcoded values. */
+/** Official 2026 values for a household of one or two people aged 21 or older. */
 const FALLBACK_RENT_2026 = {
   maxRent: 932.93,
-  incomeLimit: { single: 32500, couple: 43500 },
-  baseBenefit: 425,
-  ownPaymentThreshold: { single: 18000, couple: 21000 },
-  ownPaymentRate: 0.15,
+  baseRent: { single: 202.52, couple: 200.71 },
+  qualityDiscountLimit: 498.20,
+  capLimit: 713.02,
+  incomeThreshold: { single: 23425, couple: 31500 },
+  reductionRate: { single: 0.27, couple: 0.22 },
 } as const;
 
 /**
@@ -158,30 +161,37 @@ function loadRentAllowance2026() {
     const data = obj.data as RentAllowanceData;
     if (
       typeof data.max_rent === "number" &&
-      typeof data.income_limit_single === "number" &&
-      typeof data.income_limit_couple === "number" &&
-      typeof data.base_benefit === "number" &&
-      typeof data.own_payment_threshold_single === "number" &&
-      typeof data.own_payment_threshold_couple === "number" &&
-      typeof data.own_payment_rate === "number"
+      typeof data.base_rent_single === "number" &&
+      typeof data.base_rent_couple === "number" &&
+      typeof data.quality_discount_limit === "number" &&
+      typeof data.cap_limit_one_or_two === "number" &&
+      typeof data.income_threshold_single === "number" &&
+      typeof data.income_threshold_couple === "number" &&
+      typeof data.reduction_rate_single === "number" &&
+      typeof data.reduction_rate_couple === "number"
     ) {
       return {
         maxRent: data.max_rent,
-        incomeLimit: { single: data.income_limit_single, couple: data.income_limit_couple },
-        baseBenefit: data.base_benefit,
-        ownPaymentThreshold: {
-          single: data.own_payment_threshold_single,
-          couple: data.own_payment_threshold_couple,
+        baseRent: { single: data.base_rent_single, couple: data.base_rent_couple },
+        qualityDiscountLimit: data.quality_discount_limit,
+        capLimit: data.cap_limit_one_or_two,
+        incomeThreshold: {
+          single: data.income_threshold_single,
+          couple: data.income_threshold_couple,
         },
-        ownPaymentRate: data.own_payment_rate,
+        reductionRate: {
+          single: data.reduction_rate_single,
+          couple: data.reduction_rate_couple,
+        },
       };
     }
   }
 
   return {
     ...FALLBACK_RENT_2026,
-    incomeLimit: { ...FALLBACK_RENT_2026.incomeLimit },
-    ownPaymentThreshold: { ...FALLBACK_RENT_2026.ownPaymentThreshold },
+    baseRent: { ...FALLBACK_RENT_2026.baseRent },
+    incomeThreshold: { ...FALLBACK_RENT_2026.incomeThreshold },
+    reductionRate: { ...FALLBACK_RENT_2026.reductionRate },
   };
 }
 
@@ -189,7 +199,8 @@ function loadRentAllowance2026() {
 const RENT_2026 = loadRentAllowance2026();
 
 /**
- * Calculate the 2026 housing benefit (huurtoeslag) indication.
+ * Calculate the 2026 housing benefit for a one- or two-person household
+ * aged 21 or older, before testing eligibility conditions outside this form.
  */
 export function calculateRentBenefit(
   totalYearlyIncome: number,
@@ -203,19 +214,18 @@ export function calculateRentBenefit(
     return 0;
   }
 
-  const incomeLimit = isCouple ? RENT_2026.incomeLimit.couple : RENT_2026.incomeLimit.single;
-  if (totalYearlyIncome > incomeLimit) {
-    return 0;
-  }
+  const rekenhuur = Math.min(monthlyRent, RENT_2026.maxRent);
+  const baseRent = isCouple ? RENT_2026.baseRent.couple : RENT_2026.baseRent.single;
+  if (rekenhuur <= baseRent) return 0;
 
-  const threshold = isCouple
-    ? RENT_2026.ownPaymentThreshold.couple
-    : RENT_2026.ownPaymentThreshold.single;
-  const ownPayment = Math.max(0, (totalYearlyIncome - threshold) * RENT_2026.ownPaymentRate);
-  const benefit = Math.max(0, RENT_2026.baseBenefit - ownPayment);
-  const rentFactor = Math.min(monthlyRent, RENT_2026.maxRent) / RENT_2026.maxRent;
+  const partA = Math.max(0, Math.min(rekenhuur, RENT_2026.qualityDiscountLimit) - baseRent);
+  const partB = Math.max(0, Math.min(rekenhuur, RENT_2026.capLimit) - RENT_2026.qualityDiscountLimit) * 0.65;
+  const partC = Math.max(0, rekenhuur - RENT_2026.capLimit) * 0.4;
+  const threshold = isCouple ? RENT_2026.incomeThreshold.couple : RENT_2026.incomeThreshold.single;
+  const rate = isCouple ? RENT_2026.reductionRate.couple : RENT_2026.reductionRate.single;
+  const correction = Math.max(0, totalYearlyIncome - threshold) * rate / 12;
 
-  return Math.round(benefit * rentFactor);
+  return Math.max(0, Math.floor(partA + partB + partC - correction));
 }
 
 /**

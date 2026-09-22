@@ -976,7 +976,7 @@ export const generatedKnowledgeObjects = [
     "effective_until": null,
     "authority": {
       "level": "official",
-      "last_review": "2026-06-30",
+      "last_review": "2026-09-22",
       "name": "Dienst Toeslagen"
     },
     "sources": [
@@ -993,6 +993,13 @@ export const generatedKnowledgeObjects = [
         "authority_level": "official",
         "domain": "belastingdienst.nl",
         "last_verified": "2026-06-30"
+      },
+      {
+        "label": "Dienst Toeslagen — Berekening huurtoeslag 2026",
+        "url": "https://download.belastingdienst.nl/toeslagen/docs/berekening_huurtoeslag_tg0831z62fd.pdf",
+        "authority_level": "official",
+        "domain": "download.belastingdienst.nl",
+        "last_verified": "2026-09-22"
       }
     ],
     "relationships": [
@@ -1015,19 +1022,21 @@ export const generatedKnowledgeObjects = [
       "engine_parameters"
     ],
     "notes": {
-      "nl-NL": "Deze parameters komen overeen met de hardcoded RENT_2026 waarden in de vorige versie van de Allowance Engine. Dit object bevat de exacte engine-parameters; algemene drempels en maximumbedragen staan in `nl.allowance.rent`. De exacte toeslag hangt af van huur, inkomen, huishouden, leeftijd en vermogen."
+      "nl-NL": "Rekenparameters uit Berekening huurtoeslag 2026. De calculator neemt een huishouden van 1 of 2 personen van 21 jaar of ouder aan. Vermogen, medebewoners en overige voorwaarden worden niet getoetst."
     },
     "data": {
       "allowance_type": "huurtoeslag",
       "currency": "EUR",
       "period": "month",
       "max_rent": 932.93,
-      "income_limit_single": 32500,
-      "income_limit_couple": 43500,
-      "base_benefit": 425,
-      "own_payment_threshold_single": 18000,
-      "own_payment_threshold_couple": 21000,
-      "own_payment_rate": 0.15
+      "base_rent_single": 202.52,
+      "base_rent_couple": 200.71,
+      "quality_discount_limit": 498.2,
+      "cap_limit_one_or_two": 713.02,
+      "income_threshold_single": 23425,
+      "income_threshold_couple": 31500,
+      "reduction_rate_single": 0.27,
+      "reduction_rate_couple": 0.22
     }
   },
   {
