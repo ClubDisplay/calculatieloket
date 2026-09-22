@@ -59,7 +59,7 @@ export const HUURTOESLAG = {
   vermogensgrensMedebewoner: 38479,
   notitie: "Vanaf 2026 kan de huur niet meer 'te hoog' zijn om huurtoeslag aan te vragen. Rekengrenzen tellen wel mee voor de hoogte van de toeslag.",
   bronLabel: "Dienst Toeslagen — Huurtoeslag 2026 / Toeslagenkaart 2026",
-  bronUrl: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026",
+  bronUrl: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart",
 } as const;
 
 export const ZORGTOESLAG = {
