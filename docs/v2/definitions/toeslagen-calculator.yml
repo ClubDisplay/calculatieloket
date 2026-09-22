@@ -218,7 +218,7 @@ rules:
     applies_to: calculator
     source:
       label: Toeslagenkaart 2026
-      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart
       authority_level: official
     status: active
   - id: zorgtoeslag_max_couple_2026
@@ -229,7 +229,7 @@ rules:
     applies_to: calculator
     source:
       label: Toeslagenkaart 2026
-      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+      url: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart
       authority_level: official
     status: active
   - id: wealth_check_informational
@@ -292,7 +292,7 @@ sources:
     label:
       nl-NL: Dienst Toeslagen — Zorgtoeslag
   - url:
-      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026
+      nl-NL: https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart
     domain: belastingdienst.nl
     label:
       nl-NL: Toeslagenkaart 2026

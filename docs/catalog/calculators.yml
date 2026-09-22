@@ -212,7 +212,7 @@ calculators:
       - name: "Dienst Toeslagen — Zorgtoeslag"
         url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag"
       - name: "Toeslagenkaart 2026"
-        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart"
     schema: "faq,howto"
     component_version: "2.0"
     engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/allowances.ts
@@ -284,7 +284,7 @@ calculators:
       - name: "Belastingdienst — Arbeidskorting 2026"
         url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026"
       - name: "Rijksoverheid — Vakantiegeld"
-        url: "https://www.rijksoverheid.nl/onderwerpen/vakantiegeld"
+        url: "https://www.rijksoverheid.nl/vraag-en-antwoord/vakantiedagen-en-vakantiegeld/hoe-hoog-is-mijn-vakantiegeld"
     schema: "faq,howto,breadcrumb"
     component_version: "2.0"
     engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/vacation-pay.ts

@@ -1,6 +1,14 @@
 ---
 import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
 import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
+import { formatEuro } from "../lib/format/currency";
+
+const netExample = (grossMonthlySalary: number) => formatEuro(calculateNetIncomeEstimate2026({
+  grossMonthlySalary,
+  pensionAmount: 150,
+  applyLoonheffingskorting: true,
+}).netMonthly, 0);
 
 const title = "Salaris 2026 berekenen | Bruto netto salaris | Calculatieloket.nl";
 const description = "Bereken je salaris in 2026. Zie direct je bruto-netto loon per maand en jaar. Gebaseerd op de Belastingdienst tarieven.";
@@ -152,10 +160,9 @@ const breadcrumbs = [
     <h2>Salaris voorbeelden 2026</h2>
     <p>Indicatie bij een pensioenpremie van € 150 per maand en loonheffingskorting:</p>
     <div class="example-grid">
-      <div class="example-card"><strong>€ 2.500 bruto</strong><p>Netto: circa € 2.240</p></div>
-      <div class="example-card"><strong>€ 3.000 bruto</strong><p>Netto: circa € 2.510</p></div>
-      <div class="example-card"><strong>€ 4.000 bruto</strong><p>Netto: circa € 3.010</p></div>
-      <div class="example-card"><strong>€ 5.000 bruto</strong><p>Netto: circa € 3.490</p></div>
+      {[2500, 3000, 4000, 5000].map((gross) => (
+        <div class="example-card"><strong>{formatEuro(gross, 0)} bruto</strong><p>Netto: circa {netExample(gross)}</p></div>
+      ))}
     </div>
 
     <h2>Wat bepaalt je netto salaris?</h2>

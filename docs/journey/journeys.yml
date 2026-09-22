@@ -225,7 +225,7 @@ journeys:
       - name: "Dienst Toeslagen — Zorgtoeslag"
         url: "https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag"
       - name: "Toeslagenkaart 2026"
-        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026"
+        url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart"
     warnings:
       - "Deze berekening is een indicatie. De Dienst Toeslagen kijkt naar meer factoren."
       - "De calculator houdt nog geen rekening met vermogen — dit kan invloed hebben op de vraag of toeslagen relevant zijn voor jouw situatie."

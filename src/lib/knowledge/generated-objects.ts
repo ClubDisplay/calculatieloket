@@ -782,7 +782,7 @@ export const generatedKnowledgeObjects = [
       },
       {
         "label": "Toeslagenkaart 2026",
-        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026",
+        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart",
         "authority_level": "official",
         "domain": "belastingdienst.nl",
         "last_verified": "2026-06-29"
@@ -852,7 +852,7 @@ export const generatedKnowledgeObjects = [
       },
       {
         "label": "Toeslagenkaart 2026",
-        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026",
+        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart",
         "authority_level": "official",
         "domain": "belastingdienst.nl",
         "last_verified": "2026-06-30"
@@ -921,7 +921,7 @@ export const generatedKnowledgeObjects = [
       },
       {
         "label": "Toeslagenkaart 2026",
-        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026",
+        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart",
         "authority_level": "official",
         "domain": "belastingdienst.nl",
         "last_verified": "2026-06-29"
@@ -989,7 +989,7 @@ export const generatedKnowledgeObjects = [
       },
       {
         "label": "Toeslagenkaart 2026",
-        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart-2026",
+        "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/themaoverstijgend/brochures_en_publicaties/toeslagenkaart",
         "authority_level": "official",
         "domain": "belastingdienst.nl",
         "last_verified": "2026-06-30"

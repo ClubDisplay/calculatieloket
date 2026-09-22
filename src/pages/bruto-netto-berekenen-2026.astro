@@ -1,6 +1,14 @@
 ---
 import IncomeCalculatorPage from "../components/calculator/IncomeCalculatorPage.astro";
 import type { UseCaseItem, CrossSellItem, SourceItem } from "../components/calculator/IncomeCalculatorPage.astro";
+import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
+import { formatEuro } from "../lib/format/currency";
+
+const netExample = (grossMonthlySalary: number) => formatEuro(calculateNetIncomeEstimate2026({
+  grossMonthlySalary,
+  pensionAmount: 150,
+  applyLoonheffingskorting: true,
+}).netMonthly, 0);
 
 const title = "Bruto netto berekenen 2026 | Salaris omrekenen | Calculatieloket.nl";
 const description = "Reken bruto om naar netto in 2026. Bereken je salaris per maand of jaar met de Belastingdienst tarieven. Een indicatie.";
@@ -92,7 +100,7 @@ const faq = [
   },
   {
     question: "Hoeveel netto is € 3.500 bruto in 2026?",
-    answer: "Ter indicatie: met loonheffingskorting en € 150 pensioenpremie per maand houd je bij € 3.500 bruto ongeveer € 2.760 netto per maand over. Pensioen, cao en bijtelling kunnen dit beïnvloeden.",
+    answer: `Ter indicatie: met loonheffingskorting en € 150 pensioenpremie per maand houd je bij € 3.500 bruto ongeveer ${netExample(3500)} netto per maand over. Pensioen, cao en bijtelling kunnen dit beïnvloeden.`,
   },
   {
     question: "Welke belastingtarieven gelden in 2026?",
@@ -160,11 +168,9 @@ const breadcrumbs = [
     <table class="rate-table">
       <thead><tr><th>Bruto per maand</th><th>Netto per maand (indicatie)</th></tr></thead>
       <tbody>
-        <tr><td>€ 2.500</td><td>Circa € 2.240</td></tr>
-        <tr><td>€ 3.000</td><td>Circa € 2.510</td></tr>
-        <tr><td>€ 3.500</td><td>Circa € 2.760</td></tr>
-        <tr><td>€ 4.500</td><td>Circa € 3.250</td></tr>
-        <tr><td>€ 5.500</td><td>Circa € 3.730</td></tr>
+        {[2500, 3000, 3500, 4500, 5500].map((gross) => (
+          <tr><td>{formatEuro(gross, 0)}</td><td>Circa {netExample(gross)}</td></tr>
+        ))}
       </tbody>
     </table>
 
