@@ -41,9 +41,8 @@ const initialRecommendations = getRecommendations({
 
 const totalMonthlyBenefit = initialResult.rentBenefit + initialResult.zorgBenefit;
 const totalYearlyBenefit = totalMonthlyBenefit * 12;
-const zorgBenefitMonthly = initialResult.zorgBenefit;
 
-const lastUpdated = "30 juni 2026";
+const lastUpdated = "22 september 2026";
 
 const quickIncomeAmounts = [25000, 35000, 45000, 60000];
 
@@ -82,6 +81,12 @@ const useCases = [
 ];
 
 const sources = [
+  {
+    label: "Officiële bron",
+    title: "Dienst Toeslagen — Berekening huurtoeslag 2026",
+    description: "Rekenstappen en bedragen voor de huurtoeslag in 2026.",
+    href: "https://download.belastingdienst.nl/toeslagen/docs/berekening_huurtoeslag_tg0831z62fd.pdf",
+  },
   {
     label: "Officiële bron",
     title: "Dienst Toeslagen — Huurtoeslag",
@@ -182,7 +187,7 @@ const breadcrumbSchema = {
 
   <CalculatorShell title="Toeslagen calculator 2026" subtitle="Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en huishouden.">
     <InputPanel title="Jouw situatie" slot="input">
-      <p class="input-note">Deze berekening geeft een eenvoudige indicatie. De officiële proefberekening van Dienst Toeslagen kijkt naar meer voorwaarden, zoals leeftijd, rekenhuur, vermogen en huishouden.</p>
+      <p class="input-note">Gebruik je geschatte toetsingsinkomen (ongeveer je bruto jaarinkomen). De huurtoeslagberekening gaat uit van 1 of 2 bewoners van 21 jaar of ouder. Vermogen, medebewoners en andere voorwaarden worden niet getoetst.</p>
 
       <div class="form-group">
         <label for="income">Bruto jaarinkomen</label>
@@ -232,8 +237,8 @@ const breadcrumbSchema = {
     <ResultPanel
       slot="result"
       title="Toeslag indicatie"
-      heroLabel="Zorgtoeslag indicatie"
-      heroValue={formatEuro(zorgBenefitMonthly, 0)}
+      heroLabel="Totaal toeslagen indicatie"
+      heroValue={formatEuro(totalMonthlyBenefit, 0)}
       heroSubtext="Per maand (indicatie)"
       badge="Indicatie"
     >
@@ -248,14 +253,14 @@ const breadcrumbSchema = {
       <div class="result-divider"></div>
       <div class="result-row"><span class="label">Zorgtoeslag per maand</span><span class="value" id="detailZorgBenefit">{formatEuro(initialResult.zorgBenefit, 0)}</span></div>
       <div class="result-row"><span class="label">Huurtoeslag per maand</span><span class="value" id="detailRentBenefit">{formatEuro(initialResult.rentBenefit, 0)}</span></div>
-      <p class="result-huurtoeslag-note" id="detailRentNote">Huurtoeslag is een vereenvoudigde indicatie. De officiële proefberekening van Dienst Toeslagen kijkt ook naar leeftijd, rekenhuur, vermogen en huishouden.</p>
+      <p class="result-huurtoeslag-note" id="detailRentNote">Huurtoeslag volgens de rekenstappen van 2026, aangenomen dat de bewoners 21 jaar of ouder zijn en aan de overige voorwaarden voldoen. Controleer je werkelijke recht met de officiële proefberekening.</p>
       <div class="result-divider"></div>
       <div class="result-row result-row-total"><span class="label">Geschatte toeslag per maand</span><span class="value" id="detailTotalMonthly">{formatEuro(totalMonthlyBenefit, 0)}</span></div>
       <div class="result-row result-row-total"><span class="label">Geschatte toeslag per jaar</span><span class="value" id="detailTotalYearly">{formatEuro(totalYearlyBenefit, 0)}</span></div>
 
       <div class="result-assumptions">
         <div class="result-assumptions-title">Gebruikte uitgangspunten</div>
-        <div class="result-row"><span class="label">Rekengrens huurtoeslag</span><span class="value">€ 932,93</span></div>
+        <div class="result-row"><span class="label">Maximale rekenhuur (21+)</span><span class="value">€ 932,93</span></div>
         <div class="result-row"><span class="label">Max. zorgtoeslag (alleen)</span><span class="value">€ 1.550/jaar</span></div>
         <div class="result-row"><span class="label">Max. zorgtoeslag (samen)</span><span class="value">€ 2.963/jaar</span></div>
       </div>
@@ -281,7 +286,7 @@ const breadcrumbSchema = {
 
     <ToolFooter categoryLink="/categorie/inkomen/" categoryLabel="Inkomen"
       slot="footer"
-      disclaimer="Deze berekening geeft een eenvoudige indicatie. De officiële proefberekening van Dienst Toeslagen kijkt naar meer voorwaarden, zoals leeftijd, rekenhuur, vermogen en huishouden. Aan deze indicatie kunnen geen rechten worden ontleend."
+      disclaimer="Deze indicatie neemt bewoners van 21 jaar of ouder aan. De officiële proefberekening van Dienst Toeslagen kijkt ook naar vermogen, medebewoners en andere voorwaarden. Aan deze indicatie kunnen geen rechten worden ontleend."
       lastUpdated={lastUpdated}
     />
   </CalculatorShell>
@@ -295,9 +300,9 @@ const breadcrumbSchema = {
     <p>Deze calculator gebruikt de publieke <a href="https://www.toeslagen.nl/huurtoeslag" target="_blank" rel="noopener">huurtoeslag</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag" target="_blank" rel="noopener">zorgtoeslag</a> regels van Dienst Toeslagen en de Belastingdienst. De uitkomst is een indicatie: je werkelijke toeslag wordt bepaald aan de hand van je definitieve toetsingsinkomen, vermogen en huishouden.</p>
 
     <h2>Hoe werkt deze berekening?</h2>
-    <p>Deze calculator geeft een <strong>eenvoudige indicatie</strong> van huurtoeslag en zorgtoeslag op basis van enkele 2026-parameters. Deze versie houdt geen rekening met vermogen, kinderen, leeftijd of de exacte rekenhuur van de Dienst Toeslagen.</p>
+    <p>Deze calculator geeft een <strong>indicatie</strong> van huurtoeslag en zorgtoeslag voor 2026. Voor huurtoeslag gebruikt hij de officiële rekenstappen voor 1 of 2 bewoners van 21 jaar of ouder. De uitkomst gaat ervan uit dat je aan de overige voorwaarden voldoet; vermogen, medebewoners en kinderen worden niet getoetst.</p>
     <ul class="calc-list">
-      <li><strong>Huurtoeslag:</strong> de indicatie gebruikt de rekengrens (€ 932,93) en een vereenvoudigde inkomensafhankelijke reductie. In de officiële berekening spelen ook leeftijd, huur en vermogen mee.</li>
+      <li><strong>Huurtoeslag:</strong> de berekening gebruikt de kale huur tot maximaal € 932,93, de basishuur, de kwaliteitskortingsgrens, de aftoppingsgrens en de inkomensafhankelijke correctie. Een kale huur boven € 932,93 sluit huurtoeslag in 2026 niet automatisch uit.</li>
       <li><strong>Zorgtoeslag:</strong> maximaal € 1.550/jaar (circa € 129/maand) voor alleenstaanden, € 2.963/jaar (circa € 247/maand) met partner. Inkomensgrens € 40.857 (alleen) / € 51.142 (samen). Vermogen wordt in deze indicatie niet meegenomen.</li>
     </ul>
 
@@ -419,7 +424,7 @@ const breadcrumbSchema = {
     const totalMonthly = result.rentBenefit + result.zorgBenefit;
     const totalYearly = totalMonthly * 12;
 
-    hero.textContent = formatEuro(result.zorgBenefit, 0);
+    hero.textContent = formatEuro(totalMonthly, 0);
     detailIncome.textContent = formatEuro(income, 0);
     detailHousehold.textContent = isCouple ? "Met partner" : "Alleenstaand";
     detailRent.textContent = formatEuro(rent, 0);

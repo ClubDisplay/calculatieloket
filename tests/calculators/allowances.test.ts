@@ -34,14 +34,15 @@ describe("Allowance Engine v0.1", () => {
     expect(rent).toBeDefined();
     expect(rent?.id).toBe("nl.allowance.rent.2026");
     expect(rent?.data.max_rent).toBe(932.93);
-    expect(rent?.data.base_benefit).toBe(425);
-    expect(rent?.data.own_payment_rate).toBe(0.15);
+    expect(rent?.data.base_rent_single).toBe(202.52);
+    expect(rent?.data.income_threshold_single).toBe(23425);
+    expect(rent?.data.reduction_rate_single).toBe(0.27);
   });
 
   describe("calculateRentBenefit", () => {
-    it("returns 0 when income exceeds the limit", () => {
+    it("returns 0 when the income correction consumes the whole benefit", () => {
       expect(calculateRentBenefit(50000, 700, false)).toBe(0);
-      expect(calculateRentBenefit(50000, 700, true)).toBe(0);
+      expect(calculateRentBenefit(60000, 700, true)).toBe(0);
     });
 
     it("returns 0 when rent is 0", () => {
@@ -50,7 +51,25 @@ describe("Allowance Engine v0.1", () => {
 
     it("returns a positive benefit for a low-income single person", () => {
       const benefit = calculateRentBenefit(20000, 700, false);
-      expect(benefit).toBeGreaterThan(0);
+      expect(benefit).toBe(426);
+    });
+
+    it.each([
+      [28000, 700, 323],
+      [29000, 710, 307], // Dienst Toeslagen 2026, rekenvoorbeeld 3
+      [35000, 700, 166],
+      [41000, 700, 31],
+      [45000, 700, 0],
+    ])("single: income %i and rent %i gives %i per month", (income, rent, expected) => {
+      expect(calculateRentBenefit(income, rent, false)).toBe(expected);
+    });
+
+    it("uses the two-person threshold and base rent for a couple", () => {
+      expect(calculateRentBenefit(40000, 700, true)).toBe(272);
+    });
+
+    it("does not treat the maximum rekenhuur as an eligibility limit", () => {
+      expect(calculateRentBenefit(28000, 1200, false)).toBe(calculateRentBenefit(28000, 932.93, false));
     });
   });
 
@@ -115,7 +134,7 @@ describe("Allowance Engine v0.1", () => {
     it("returns a valid result for the standard scenario", () => {
       const result = calculateAllowances(defaultInput);
       expect(result.valid).toBe(true);
-      expect(result.rentBenefit).toBeGreaterThanOrEqual(0);
+      expect(result.rentBenefit).toBe(323);
       expect(result.zorgBenefit).toBeGreaterThanOrEqual(0);
       expect(result.zorgBenefit).toBe(129);
     });
@@ -124,7 +143,7 @@ describe("Allowance Engine v0.1", () => {
       const result = calculateAllowances({ income: 25000, rent: 700, isCouple: false });
       expect(result.valid).toBe(true);
       expect(result.zorgBenefit).toBe(129);
-      expect(result.rentBenefit).toBeGreaterThanOrEqual(0);
+      expect(result.rentBenefit).toBe(391);
     });
 
     it("returns 0 benefits for high incomes", () => {
@@ -132,6 +151,12 @@ describe("Allowance Engine v0.1", () => {
       expect(result.valid).toBe(true);
       expect(result.rentBenefit).toBe(0);
       expect(result.zorgBenefit).toBe(0);
+    });
+
+    it("still shows a total when zorgtoeslag is zero but huurtoeslag is positive", () => {
+      const result = calculateAllowances({ income: 41000, isCouple: false, rent: 700 });
+      expect(result.zorgBenefit).toBe(0);
+      expect(result.rentBenefit).toBe(31);
     });
 
     it("calculates joint income correctly for a couple", () => {
