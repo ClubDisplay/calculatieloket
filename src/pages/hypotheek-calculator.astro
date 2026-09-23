@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
-import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
 import InputPanel from "../components/calculator/InputPanel.astro";
@@ -162,8 +161,6 @@ const breadcrumbSchema = {
       { name: "Bekijk je hypotheekindicatie", text: "De calculator toont het maximale hypotheekbedrag, bruto en netto maandlasten." },
     ]}
   />
-
-  <AdSlot slot="1234567894" format="auto" style="min-height:100px" />
 
   <Breadcrumbs items={[
     { label: "Home", href: "/" },

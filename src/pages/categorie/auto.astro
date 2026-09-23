@@ -7,7 +7,6 @@ import CategoryIntro from "../../components/category/CategoryIntro.astro";
 import CategoryFaq from "../../components/category/CategoryFaq.astro";
 import CategorySources from "../../components/category/CategorySources.astro";
 import RelatedCategories from "../../components/category/RelatedCategories.astro";
-import AdSlot from "../../components/AdSlot.astro";
 import {
   getCategoryList,
   getCalculatorsByCategory,
@@ -115,8 +114,6 @@ const faqSchema = {
   />
 
   <CategoryGrid title="Calculators voor auto" items={calculators} analyticsCategory="auto-page" />
-
-  <AdSlot slot="1234567898" format="auto" style="min-height:120px" />
 
   <CategoryIntro title="Alles over auto importeren berekenen">
     <p>

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
-import AdSlot from "../components/AdSlot.astro";
 import CrossSellCards from "../components/CrossSellCards.astro";
 import CalculatorShell from "../components/calculator/CalculatorShell.astro";
 import InputPanel from "../components/calculator/InputPanel.astro";
@@ -171,8 +170,6 @@ const breadcrumbSchema = {
       { name: "Bekijk het resultaat", text: "De calculator toont het bedrag exclusief, het btw-bedrag en het bedrag inclusief." },
     ]}
   />
-
-  <AdSlot slot="1234567890" format="auto" style="min-height:100px" />
 
   <Breadcrumbs items={[
     { label: "Home", href: "/" },

@@ -31,28 +31,17 @@ function loadAdSense() {
   s.async = true;
   s.crossOrigin = "anonymous";
   document.head.appendChild(s);
-  s.onload = function () {
-    gtag("consent", "update", {
-      ad_storage: "granted",
-      analytics_storage: "granted",
-      ad_user_data: "granted",
-      ad_personalization: "granted",
-    });
-    document.querySelectorAll(".adsbygoogle").forEach(function (el) {
-      (window.adsbygoogle || []).push({});
-    });
-  };
 }
 
-window.CookiebotOnConsentReady = function () {
+function loadAdsAfterConsent() {
   if (window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.marketing) {
     loadAdSense();
   }
-};
+}
 
-if (window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.marketing) {
-  loadAdSense();
-}`
+window.CookiebotOnConsentReady = loadAdsAfterConsent;
+window.CookiebotOnAccept = loadAdsAfterConsent;
+loadAdsAfterConsent();`
   : "";
 
 const pathname = Astro.url.pathname;
@@ -99,7 +88,7 @@ const jsonLd = {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {adsEnabled && cookiebotId && (
       <>
-        <script is:inline set:html={adsenseInlineScript}></script>
+        <script is:inline data-cookieconsent="ignore" set:html={adsenseInlineScript}></script>
         <script
           is:inline
           id="Cookiebot"

@@ -4,7 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import CategoryHero from "../components/category/CategoryHero.astro";
 import CategoryGrid from "../components/category/CategoryGrid.astro";
 import RelatedCategories from "../components/category/RelatedCategories.astro";
-import AdSlot from "../components/AdSlot.astro";
 import {
   getCategoryList,
   getCalculatorGroupsForHub,
@@ -153,8 +152,6 @@ const schemaJson = JSON.stringify([breadcrumbSchema, collectionSchema, articleSc
   <p class="hub-no-results" id="calcNoResults" style="display: none;">
     Geen calculators gevonden voor dit zoekwoord. <a href="/calculators/">Toon alle calculators</a>.
   </p>
-
-  <AdSlot slot="1234567892" format="auto" style="min-height:120px" />
 
   <RelatedCategories
     categories={categoryList}
