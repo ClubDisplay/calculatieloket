@@ -37,50 +37,41 @@ const sources: SourceItem[] = [
 
 const useCases: UseCaseItem[] = [
   {
-    id: "nettoloon",
-    title: "Nettoloon 2026",
-    description: "Bekijk hoeveel netto loon je overhoudt.",
+    id: "bruto-netto",
+    title: "Bruto-netto 2026",
+    description: "Bekijk hoeveel nettoloon je overhoudt.",
     template: "Bekijk je nettoloon voor {{bruto}} bruto per maand.",
-    href: "/nettoloon-2026/",
+    href: "/bruto-netto-2026/",
     accent: "#2563eb",
   },
   {
-    id: "bruto-netto",
-    title: "Bruto netto berekenen",
-    description: "Reken bruto om naar netto.",
-    template: "Reken {{bruto}} bruto om naar netto in 2026.",
-    href: "/bruto-netto-berekenen-2026/",
-    accent: "#3b82f6",
-  },
-  {
     id: "salaris",
-    title: "Salaris 2026",
-    description: "Bereken je salaris voor 2026.",
-    template: "Bekijk je salaris voor bruto {{bruto}} in 2026.",
-    href: "/salaris-2026-berekenen/",
+    title: "Salaris vergelijken",
+    description: "Vergelijk meerdere brutosalarissen en pensioenpercentages.",
+    template: "Vergelijk je salaris met {{bruto}} bruto per maand.",
+    href: "/salaris-calculator/",
     accent: "#0891b2",
   },
   {
     id: "hypotheek",
-    title: "Hypotheek indicatie",
-    description: "Bekijk een hypotheekindicatie.",
-    template: "Op basis van {{bruto_jaar}} bruto per jaar bekijk je een hypotheekindicatie.",
+    title: "Hypotheekindicatie",
+    description: "Bekijk een indicatie op basis van je bruto jaarinkomen.",
+    template: "Met {{bruto_jaar}} bruto per jaar kun je een hypotheekindicatie maken.",
     href: "/hypotheek-calculator/",
     accent: "#d97706",
   },
 ];
 
 const crossSell: CrossSellItem[] = [
-  { title: "Nettoloon 2026", description: "Bereken je netto loon.", href: "/nettoloon-2026/", accent: "#2563eb" },
-  { title: "Salaris 2026", description: "Bereken je salaris voor 2026.", href: "/salaris-2026-berekenen/", accent: "#3b82f6" },
-  { title: "Hypotheek indicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Bruto-netto 2026", description: "Bereken je nettoloon.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Salaris calculator", description: "Vergelijk bruto en netto.", href: "/salaris-calculator/", accent: "#0891b2" },
+  { title: "Hypotheekindicatie", description: "Bekijk hoeveel je kunt lenen.", href: "/hypotheek-calculator/", accent: "#d97706" },
 ];
 
 const relatedLinks = [
-  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — uitgebreide uitleg" },
-  { href: "/nettoloon-2026/", label: "Nettoloon 2026 — bereken je netto salaris" },
-  { href: "/salaris-2026-berekenen/", label: "Salaris 2026 berekenen" },
-  { href: "/bruto-netto-berekenen-2026/", label: "Bruto netto berekenen 2026" },
+  { href: "/bruto-netto-2026/", label: "Bruto-netto 2026 — uitgebreide uitleg" },
+  { href: "/salaris-calculator/", label: "Salaris vergelijken" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld berekenen" },
 ];
 
 const taxExamples = [2500, 3500, 5000].map((grossMonthlySalary) => {
