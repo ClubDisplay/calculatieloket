@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../Breadcrumbs.astro";
-import AdSlot from "../AdSlot.astro";
 import CrossSellCards from "../CrossSellCards.astro";
 import CalculatorShell from "./CalculatorShell.astro";
 import InputPanel from "./InputPanel.astro";
@@ -67,7 +66,6 @@ export interface Props {
   faq: Array<{ question: string; answer: string }>;
   howTo: { name: string; description: string; steps: HowToStep[] };
   lastUpdated?: string;
-  adSlot?: string;
   heroLabel?: string;
   heroMetric?: "net" | "tax";
   resultTitle?: string;
@@ -93,7 +91,6 @@ const {
   faq,
   howTo,
   lastUpdated = "27 juli 2026",
-  adSlot = "1234567898",
   heroLabel = "Jouw nettoloon per maand",
   heroMetric = "net",
   resultTitle = "Nettoloon 2026",
@@ -190,8 +187,6 @@ const articleSchema = articleIsoDate
   {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}
 
   <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT1M" steps={howTo.steps} />
-
-  <AdSlot slot={adSlot} format="auto" style="min-height:100px" />
 
   <Breadcrumbs items={breadcrumbs} />
 
@@ -320,8 +315,6 @@ const articleSchema = articleIsoDate
       ))}
     </ul>
   </div>
-
-  <AdSlot slot={adSlot} format="auto" style="min-height:280px" />
 
   <CrossSellCards title="Andere calculators die je helpen" items={crossSell} />
 </BaseLayout>

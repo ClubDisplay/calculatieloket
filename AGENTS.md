@@ -142,7 +142,6 @@ src/
       HowToSchema.astro
       InlineSources.astro
       FinancialJourney.astro
-    AdSlot.astro                # Handmatige AdSense placement
     Breadcrumbs.astro
     CookieConsent.astro         # GDPR banner — laadt AdSense na consent
     CrossSellCards.astro
@@ -222,7 +221,7 @@ PUBLIC_ADS_ENABLED=true
 - **Navigatie dropdowns**: gebruik altijd `<script is:inline>` voor globale layout-scripts zoals de navigatie. Gewone `<script>` tags worden door Astro als deferred modules behandeld, waardoor click handlers niet direct beschikbaar zijn.
 - **Disk space**: build hangt stil bij volle schijf (ENOSPC). Check met `df -h`.
 - **shiki module missing**: verwijder `node_modules` en installeer opnieuw.
-- **Ads loaden pas na cookie consent**: CookieConsent component blokkeert AdSense tot acceptatie.
+- **Auto ads laden pas na marketingtoestemming**: BaseLayout laadt de uitgeverscode via Cookiebot; er zijn geen handmatige advertentieblokken of voorbeeld-ID's.
 - **Calculator logic is client-side vanilla JS**. Scripts voor calculators staan inline in de pagina's of componenten.
 - **Audit faalt bij hard claims**: vermijd "recht op", "exact", "garantie" in nieuwe content.
 - **Sitemap count**: de build toont 45 pagina's, de sitemap bevat 44 (demo pagina wordt uitgesloten). Dat is correct.
@@ -254,3 +253,4 @@ PUBLIC_ADS_ENABLED=true
 - AdSense review kan lopen. Deploys van content-only wijzigingen zijn veilig.
 - Geen wijzigingen aan AdSense code zonder expliciete approval.
 - `PUBLIC_ADS_ENABLED=false` in development om advertenties te onderdrukken.
+- Voor Auto ads is naast de sitecode ook de Auto ads-schakelaar in het AdSense-account nodig. Controleer na goedkeuring of die schakelaar aan staat.

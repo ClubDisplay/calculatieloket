@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AdSlot from "../components/AdSlot.astro";
 ---
 
 <BaseLayout
@@ -19,8 +18,6 @@ import AdSlot from "../components/AdSlot.astro";
       </div>
     </div>
   </section>
-
-  <AdSlot slot="1234567893" format="auto" style="min-height:100px" />
 
   <!-- ===== POPULAIRE CALCULATORS ===== -->
   <section id="tools" class="popular-section">
