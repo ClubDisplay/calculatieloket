@@ -191,7 +191,7 @@ const articleSchema = articleIsoDate
 
   <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT1M" steps={howTo.steps} />
 
-  <AdSlot slot={adSlot} format="auto" style="min-height:100px" />
+  <AdSlot adSlot={adSlot} format="auto" style="min-height:100px" />
 
   <Breadcrumbs items={breadcrumbs} />
 
@@ -321,7 +321,7 @@ const articleSchema = articleIsoDate
     </ul>
   </div>
 
-  <AdSlot slot={adSlot} format="auto" style="min-height:280px" />
+  <AdSlot adSlot={adSlot} format="auto" style="min-height:280px" />
 
   <CrossSellCards title="Andere calculators die je helpen" items={crossSell} />
 </BaseLayout>

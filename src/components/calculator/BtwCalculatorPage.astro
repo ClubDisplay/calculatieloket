@@ -170,7 +170,7 @@ const defaultRateLabel = `${defaultRate}%`;
   {articleSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />}
   <HowToSchema slot="head" name={howTo.name} description={howTo.description} totalTime="PT30S" steps={howTo.steps} />
 
-  <AdSlot slot={adSlot} format="auto" style="min-height:100px" />
+  <AdSlot adSlot={adSlot} format="auto" style="min-height:100px" />
 
   <Breadcrumbs items={breadcrumbs} />
 
