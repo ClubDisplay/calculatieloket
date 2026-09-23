@@ -349,9 +349,9 @@ const defaultRateLabel = `${defaultRate}%`;
       } else if (id === "inclusief-exclusief") {
         anchor.href = `/btw-inclusief-exclusief/?bedrag=${amount}&tarief=${rate}&richting=${direction}`;
       } else if (id === "btw-21-procent") {
-        anchor.href = `/btw-21-procent-berekenen/?bedrag=${amount}&richting=${direction}`;
+        anchor.href = `/btw-calculator/?tarief=21&bedrag=${amount}&richting=${direction}`;
       } else if (id === "btw-9-procent") {
-        anchor.href = `/btw-9-procent-berekenen/?bedrag=${amount}&richting=${direction}`;
+        anchor.href = `/btw-calculator/?tarief=9&bedrag=${amount}&richting=${direction}`;
       }
     });
   }
