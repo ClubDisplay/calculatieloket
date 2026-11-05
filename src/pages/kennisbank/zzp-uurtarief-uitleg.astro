@@ -1,0 +1,151 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP uurtarief berekenen: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Hoe bepaal je als ZZP'er een goed uurtarief? Uitleg over kosten, facturabele uren, belasting, zelfstandigenaftrek en MKB-winstvrijstelling in 2026.";
+const h1 = "ZZP uurtarief berekenen: complete uitleg";
+
+const intro = [
+  "Als ZZP'er is je uurtarief één van de belangrijkste keuzes. Vraag je te weinig, dan werk je hard zonder voldoende inkomen. Vraag je te veel, dan loop je opdrachten mis. Een goed tarief begint bij de vraag: hoeveel wil ik netto verdienen, en welke kosten moet ik daarvoor dekken?",
+  "In deze uitleg behandelen we hoe je van een gewenst netto inkomen terugrekent naar een uurtarief, welke kosten je moet meenemen en welke rol belasting speelt. Gebruik de <a href=\"/zzp-calculator/\">ZZP calculator</a> voor een directe indicatie.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Zelfstandigenaftrek 2026",
+    description: "Actuele regels en voorwaarden voor de zelfstandigenaftrek.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "KVK — Starten als ZZP'er",
+    description: "Informatie over ondernemen, inschrijving en administratie.",
+    href: "https://www.kvk.nl/starten/zzper-worden-7-belangrijke-stappen/",
+  },
+  {
+    label: "Officiële bron",
+    title: "Ondernemersplein — MKB-winstvrijstelling",
+    description: "Uitleg over de MKB-winstvrijstelling voor ondernemers.",
+    href: "https://ondernemersplein.kvk.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP calculator", description: "Bereken je uurtarief en netto inkomen.", href: "/zzp-calculator/", accent: "#7c3aed" },
+  { title: "Bruto netto 2026", description: "Vergelijk je inkomen met loondienst.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "BTW calculator", description: "Bereken btw over je factuur.", href: "/btw-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — volledige berekening" },
+  { href: "/btw-calculator/", label: "BTW calculator — btw op je factuur" },
+  { href: "/bruto-netto-2026/", label: "Bruto-netto salaris — vergelijk met loondienst" },
+];
+
+const faq = [
+  {
+    question: "Hoe bereken je je ZZP uurtarief?",
+    answer: "Je rekent terug vanaf je gewenste netto inkomen: tel daar je zakelijke kosten en belasting bij op, en deel het totaal door het aantal uren dat je facturabel kunt werken. Onze calculator doet dit automatisch.",
+  },
+  {
+    question: "Wat is een realistisch uurtarief voor ZZP?",
+    answer: "Dat hangt af van je branche, ervaring en regio. Veel ZZP'ers hanteren uurtarieven tussen € 50 en € 150. Gebruik de calculator voor een indicatie op basis van je eigen situatie.",
+  },
+  {
+    question: "Hoeveel uren kan ik als ZZP'er factureren?",
+    answer: "De meeste ZZP'ers factureren ongeveer 60-70% van hun beschikbare tijd. De rest gaat naar administratie, acquisitie, vakantie, ziekte en opleiding.",
+  },
+  {
+    question: "Welke kosten moet ik meenemen in mijn tarief?",
+    answer: "Denk aan verzekeringen, pensioenreservering, accountant, internet, telefoon, reiskosten, apparatuur, kantoorruimte en niet-facturabele uren.",
+  },
+  {
+    question: "Wat is het verschil tussen omzet en winst?",
+    answer: "Omzet is wat je in totaal factureert. Winst is wat overblijft na aftrek van je zakelijke kosten. Over je winst betaal je inkomstenbelasting, waarna je netto inkomen overblijft.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "ZZP uurtarief uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "Open de ZZP calculator", description: "Vul in hoeveel je netto wilt verdienen en zie direct welk uurtarief je nodig hebt." }}
+>
+  <h2>Van gewenst inkomen naar uurtarief</h2>
+  <p>
+    Een uurtarief reken je niet van bovenaf, maar van onderaf. Je begint bij het bedrag dat je netto wilt overhouden, en werkt vervolgens terug. De opbouw ziet er zo uit:
+  </p>
+  <ol>
+    <li><strong>Gewenst netto inkomen</strong> — hoeveel wil je per maand of per jaar overhouden?</li>
+    <li><strong>Zakelijke kosten</strong> — verzekeringen, pensioen, accountant, software, reiskosten, apparatuur.</li>
+    <li><strong>Belasting</strong> — over je winst betaal je inkomstenbelasting, minus aftrekposten.</li>
+    <li><strong>Facturabele uren</strong> — het aantal uren dat je daadwerkelijk kunt declareren.</li>
+  </ol>
+  <p>
+    De formule is dan: <strong>(gewenst inkomen + kosten + belasting) ÷ facturabele uren = uurtarief</strong>. Omdat belasting afhangt van je winst, is dit een rondrekenende berekening. Onze calculator doet dat automatisch.
+  </p>
+
+  <h2>Facturabele versus beschikbare uren</h2>
+  <p>
+    Een jaar heeft grofweg 260 werkdagen, maar daarvan kun je lang niet alles declareren. Houd rekening met vakantie, feestdagen, ziekte, administratie, acquisitie en opleiding. De meeste ZZP'ers factureren uiteindelijk <strong>60-70% van hun beschikbare tijd</strong>. Hoe lager je facturabele percentage, hoe hoger je uurtarief moet zijn om hetzelfde inkomen te halen.
+  </p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Beschikbare uren</strong>
+      <p>Bijvoorbeeld 1.800 per jaar</p>
+    </div>
+    <div class="example-card">
+      <strong>Facturabel percentage</strong>
+      <p>Vaak 60-70%</p>
+    </div>
+    <div class="example-card">
+      <strong>Facturabele uren</strong>
+      <p>Bijvoorbeeld 1.080-1.260</p>
+    </div>
+    <div class="example-card">
+      <strong>Effect op tarief</strong>
+      <p>Lager percentage = hoger tarief</p>
+    </div>
+  </div>
+
+  <h2>Belasting voor ZZP'ers</h2>
+  <p>Als ZZP'er betaal je inkomstenbelasting over je winst in box 1. Daarop kun je aftrekposten toepassen die je belastbare winst verlagen:</p>
+  <ul>
+    <li><strong>Zelfstandigenaftrek</strong> — een vaste aftrek voor ondernemers die aan het urencriterium voldoen.</li>
+    <li><strong>Startersaftrek</strong> — een extra aftrek in de eerste jaren van je onderneming, onder voorwaarden.</li>
+    <li><strong>MKB-winstvrijstelling</strong> — een vrijstelling over een deel van je winst, na toepassing van de ondernemersaftrek.</li>
+  </ul>
+  <p>
+    De exacte bedragen en voorwaarden veranderen jaarlijks. Onze calculator houdt rekening met deze aftrekposten; controleer de actuele cijfers altijd via de Belastingdienst.
+  </p>
+
+  <h2>Vergeet je pensioen en verzekeringen niet</h2>
+  <p>
+    In loondienst bouwt je werkgever vaak pensioen op en ben je verzekerd voor arbeidsongeschiktheid. Als ZZP'er regel je dit zelf. Een vuistregel is om maandelijks een bedrag apart te zetten voor pensioen en een buffer voor ziekte. Deze reserveringen horen thuis in je tarief, anders verdien je op papier meer dan je in werkelijkheid overhoudt.
+  </p>
+
+  <h2>Veelgemaakte fouten bij het bepalen van je tarief</h2>
+  <ol>
+    <li><strong>Alleen naar het brutobedrag kijken.</strong> Reken je kosten, pensioen en belasting mee.</li>
+    <li><strong>Te veel facturabele uren inschatten.</strong> Wees realistisch over ziekte, vakantie en acquisitie.</li>
+    <li><strong>Jezelf vergelijken met loondienst.</strong> Een uurtarief van € 50 is niet hetzelfde als € 50 bruto per uur in loondienst.</li>
+    <li><strong>Geen buffer aanhouden.</strong> Zorg voor reserves voor periodes zonder opdrachten.</li>
+    <li><strong>Aftrekposten vergeten of verkeerd toepassen.</strong> Controleer de voorwaarden bij de Belastingdienst.</li>
+  </ol>
+</ContentHubPage>

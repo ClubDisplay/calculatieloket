@@ -1,0 +1,135 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Auto importkosten: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Wat kost een auto importeren naar Nederland? Uitleg over BPM, btw, RDW-keuring, kenteken en transportkosten, met stappenplan en veelgemaakte fouten.";
+const h1 = "Auto importkosten: complete uitleg";
+
+const intro = [
+  "Een auto importeren uit het buitenland kan flink schelen in aanschafprijs, maar de bijkomende kosten worden vaak onderschat. BPM, btw, keuringskosten en transport kunnen het prijsvoordeel snel kleiner maken.",
+  "In deze uitleg behandelen we alle kostenposten die bij auto-import komen kijken en geven we een stappenplan. Gebruik de <a href=\"/auto-importkosten-berekenen/\">auto importkosten calculator</a> voor een indicatie van de totale kosten.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "RDW — Voertuig invoeren",
+    description: "Stappen en eisen voor het invoeren van een voertuig uit de EU.",
+    href: "https://www.rdw.nl/invoeren-exporteren-doorvoeren/invoeren-binnen-europa",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — BPM",
+    description: "Informatie over de belasting van personenauto's en motorrijwielen.",
+    href: "https://www.belastingdienst.nl/bpm",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Auto importeren",
+    description: "Stappenplan voor het importeren van een auto uit het buitenland.",
+    href: "https://www.rijksoverheid.nl/vraag-en-antwoord/auto/hoe-kan-ik-een-auto-uit-het-buitenland-in-nederland-importeren-invoeren",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Auto importkosten", description: "Bereken de totale importkosten.", href: "/auto-importkosten-berekenen/", accent: "#2563eb" },
+  { title: "BTW calculator", description: "Reken btw over aankoop en kosten.", href: "/btw-calculator/", accent: "#d97706" },
+  { title: "ZZP calculator", description: "Bereken je uurtarief als ondernemer.", href: "/zzp-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/auto-importkosten-berekenen/", label: "Auto importkosten calculator — direct een indicatie" },
+  { href: "/btw-calculator/", label: "BTW calculator — btw berekenen" },
+  { href: "/btw-inclusief-exclusief/", label: "BTW inclusief/exclusief omrekenen" },
+];
+
+const faq = [
+  {
+    question: "Moet ik BPM betalen bij import?",
+    answer: "In de meeste gevallen wel, voor personenauto's, motoren en campers. De hoogte hangt af van het voertuigtype en de CO2-uitstoot. Elektrische auto's zijn vaak vrijgesteld.",
+  },
+  {
+    question: "Hoe zit het met btw bij import uit de EU?",
+    answer: "Bij aankoop bij een particulier in de EU betaal je meestal geen btw. Bij aankoop via een bedrijf kunnen de regels anders uitpakken, vooral bij nieuwe of bijna nieuwe voertuigen. Check je situatie bij de Belastingdienst.",
+  },
+  {
+    question: "Welke kosten komen er nog meer bij?",
+    answer: "Naast de aankoopprijs en BPM betaal je voor de RDW-keuring, het kenteken, een eventuele btw-aangifte en transport of reiskosten om de auto op te halen.",
+  },
+  {
+    question: "Hoe bereken ik de BPM?",
+    answer: "De BPM bereken je met de officiële BPM-tool van de Belastingdienst. Die houdt rekening met CO2-uitstoot, catalogusprijs en leeftijd van het voertuig. Onze calculator geeft een indicatie op basis van jouw inschatting.",
+  },
+  {
+    question: "Is de uitkomst van de calculator definitief?",
+    answer: "Nee. BPM, btw en keuringskosten kunnen per voertuig en situatie verschillen. Controleer de officiële informatie van RDW en Belastingdienst, en raadpleeg bij twijfel een importspecialist.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Auto importkosten uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="auto"
+  calculatorCta={{ href: "/auto-importkosten-berekenen/", title: "Open de auto importkosten calculator", description: "Tel aankoopprijs, BPM, btw en overige kosten bij elkaar op voor een totale indicatie." }}
+>
+  <h2>Welke kostenposten zijn er bij auto-import?</h2>
+  <p>Bij het importeren van een auto komen meerdere kostenposten bij elkaar:</p>
+  <ul>
+    <li><strong>Aankoopprijs</strong> — de prijs die je in het buitenland betaalt.</li>
+    <li><strong>BPM</strong> — de belasting van personenauto's en motorrijwielen. Vaak de grootste kostenpost.</li>
+    <li><strong>BTW</strong> — afhankelijk van de verkoper en de leeftijd van het voertuig kan btw verschuldigd zijn.</li>
+    <li><strong>RDW-keuring en kenteken</strong> — kosten voor de keuring, het kenteken en de tenaamstelling.</li>
+    <li><strong>Transport en reiskosten</strong> — het ophalen of laten vervoeren van de auto.</li>
+  </ul>
+
+  <h2>Wat is BPM?</h2>
+  <p>
+    BPM is de <strong>belasting van personenauto's en motorrijwielen</strong>. Je betaalt deze belasting wanneer je een auto in Nederland registreert. De hoogte hangt af van de CO2-uitstoot, de catalogusprijs en de leeftijd van het voertuig. Oudere auto's hebben vaak een lagere BPM door afschrijving; elektrische auto's zijn in veel gevallen vrijgesteld.
+  </p>
+  <p>
+    De exacte BPM bereken je met de officiële BPM-tool van de Belastingdienst. Onze calculator werkt met jouw eigen BPM-inschatting en is dus nadrukkelijk een indicatie.
+  </p>
+
+  <h2>Btw bij import uit de EU</h2>
+  <p>De btw-situatie hangt af van bij wie je koopt:</p>
+  <ul>
+    <li><strong>Particulier in de EU</strong> — meestal betaal je geen btw, ook niet bij import in Nederland.</li>
+    <li><strong>Bedrijf in de EU</strong> — bij nieuwe of bijna nieuwe voertuigen kan btw verschuldigd zijn. Controleer dit bij de Belastingdienst.</li>
+  </ul>
+  <p>
+    Twijfel je over een btw-bedrag? Gebruik de <a href="/btw-calculator/">BTW calculator</a> om bedragen om te rekenen.
+  </p>
+
+  <h2>Stappenplan voor het importeren van een auto</h2>
+  <ol>
+    <li><strong>Bereken de totale kosten</strong> — aankoop, BPM, btw, keuring, transport. Zo weet je of import echt voordelig is.</li>
+    <li><strong>Controleer het voertuig</strong> — kentekenhistorie, onderhoud en eventuele schade.</li>
+    <li><strong>Haal de auto op of laat hem vervoeren</strong> — regel transport en verzekering.</li>
+    <li><strong>Doe de BPM-aangifte</strong> — via de Belastingdienst, vóór de RDW-keuring.</li>
+    <li><strong>Keuring en kenteken</strong> — laat de auto keuren bij de RDW en vraag het kenteken aan.</li>
+  </ol>
+
+  <h2>Veelgemaakte fouten bij auto-import</h2>
+  <ol>
+    <li><strong>BPM onderschatten.</strong> Vooral bij auto's met een hoge CO2-uitstoot kan de BPM flink oplopen.</li>
+    <li><strong>Btw bij nieuwe of bijna nieuwe voertuigen vergeten.</strong> Bij aankoop via een buitenlands bedrijf kan btw verschuldigd zijn.</li>
+    <li><strong>Transport- en keuringskosten niet meerekenen.</strong> Deze kunnen het voordeel deels tenietdoen.</li>
+    <li><strong>Geen rekening houden met de afschrijving.</strong> Geïmporteerde auto's kunnen in Nederland een lagere restwaarde hebben.</li>
+    <li><strong>De BPM-aangifte te laat doen.</strong> Dit kan leiden tot boetes of vertraging bij de registratie.</li>
+  </ol>
+</ContentHubPage>

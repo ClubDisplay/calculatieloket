@@ -49,7 +49,7 @@ const homeFaqSchema = {
       "name": "Zijn de berekeningen gratis?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig.",
+        "text": "Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig en je kunt elke calculator zo vaak gebruiken als je wilt.",
       },
     },
     {
@@ -65,7 +65,39 @@ const homeFaqSchema = {
       "name": "Waarom is de uitkomst een indicatie?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We gebruiken officiële tarieven, maar je persoonlijke situatie kan afwijken. Gebruik de uitkomst als richtlijn.",
+        "text": "We gebruiken officiële tarieven en regels, maar je persoonlijke situatie kan afwijken. Gebruik de uitkomst daarom als richtlijn.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Welke berekeningen kan ik maken?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We bieden calculators voor salaris (bruto-netto), BTW, hypotheken, toeslagen, ZZP-inkomen en auto-importkosten. Op de overzichtspagina vind je alle beschikbare tools, gegroepeerd per onderwerp.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Hoe actueel zijn de tarieven en regels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We controleren de gebruikte tarieven en regels jaarlijks zodra de nieuwe belastingplannen en toeslagbedragen bekend zijn. Bij elke calculator vermelden we de gebruikte bronnen.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Kan ik de uitkomst gebruiken voor mijn belastingaangifte?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "De uitkomsten zijn bedoeld als indicatie en ter oriëntatie. Voor een belastingaangifte adviseren we de gegevens te controleren via de Belastingdienst of een belastingadviseur te raadplegen.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Hoe verdienen jullie geld?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "De site is gratis. We tonen advertenties via Google AdSense om de site draaiende te houden. Advertenties laden alleen nadat je toestemming hebt gegeven via de cookiebanner.",
       },
     },
   ],
@@ -146,6 +178,22 @@ const quickLinks = getQuickLinks();
     </div>
   </section>
 
+  <!-- ===== WAT IS CALCULATIELOKET ===== -->
+  <section class="hp-section hp-intro-section">
+    <h2 class="section-heading">Wat is Calculatieloket.nl?</h2>
+    <div class="hp-intro-copy">
+      <p>Calculatieloket.nl is een verzameling gratis online calculators voor veelvoorkomende financiële vragen. Of je nu wilt weten wat je netto overhoudt van je bruto salaris, hoeveel BTW je op een factuur moet rekenen, wat je maximale hypotheek is of op welke toeslagen je mogelijk aanspraak maakt — hier vind je een snelle, duidelijke tool.</p>
+      <p>Alle berekeningen gebeuren lokaal in je eigen browser. Je hebt geen account nodig en wat je invult wordt niet opgeslagen. De calculators zijn gebaseerd op officiële bronnen zoals de Belastingdienst, de Rijksoverheid en het Nibud, en worden jaarlijks gecontroleerd zodra er nieuwe tarieven of regels zijn.</p>
+      <p>Een uitkomst is altijd een indicatie. Jouw persoonlijke situatie kan afwijken, bijvoorbeeld door aftrekposten, een specifieke cao of een bijzondere woonsituatie. Gebruik de uitkomst daarom als richtlijn en raadpleeg bij twijfel de officiële bron. Voor persoonlijk financieel advies verwijzen we je naar een erkend adviseur.</p>
+    </div>
+    <ul class="hp-intro-usps">
+      <li><strong>Gratis en zonder account</strong> — elke calculator werkt direct, zonder registratie en zonder opslag van je invoer.</li>
+      <li><strong>Gebaseerd op officiële bronnen</strong> — we gebruiken publieke bronnen zoals de Belastingdienst, de Rijksoverheid en het Nibud.</li>
+      <li><strong>Altijd een indicatie</strong> — we geven richtlijnen, geen bindend advies, en controleren de tarieven jaarlijks.</li>
+      <li><strong>Privacyvriendelijk</strong> — berekeningen blijven in je browser en we bouwen geen profielen op.</li>
+    </ul>
+  </section>
+
   <!-- ===== MEESTGEZOCHT ===== -->
   <section id="populair" class="hp-section">
     <h2 class="section-heading">Meestgezocht</h2>
@@ -188,13 +236,70 @@ const quickLinks = getQuickLinks();
     </div>
   </section>
 
+  <!-- ===== KENNISBANK ===== -->
+  <section id="kennisbank" class="hp-section">
+    <h2 class="section-heading">Uitleg &amp; kennisbank</h2>
+    <p class="hp-kennisbank-intro">Naast de calculators vind je hier heldere uitleg over hoe de berekeningen werken. Zo snap je niet alleen de uitkomst, maar ook hoe die tot stand komt.</p>
+    <div class="hp-grid">
+      <a href="/kennisbank/btw-berekenen-uitleg/" class="hp-card" style="--hp-accent: #2563eb" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="btw-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">%</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">BTW berekenen: complete uitleg</h3>
+          <p class="hp-card-question">Tarieven, formules en voorbeelden stap voor stap uitgelegd.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="/kennisbank/bruto-netto-salaris-uitleg/" class="hp-card" style="--hp-accent: #7c3aed" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="bruto-netto-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">&euro;</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">Bruto-netto salaris: complete uitleg</h3>
+          <p class="hp-card-question">Loonheffing, heffingskortingen en vakantiegeld uitgelegd.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="/kennisbank/hypotheek-berekenen-uitleg/" class="hp-card" style="--hp-accent: #d97706" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="hypotheek-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">🏠</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">Hypotheek berekenen: complete uitleg</h3>
+          <p class="hp-card-question">Maximale hypotheek, maandlasten en rente uitgelegd.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="/kennisbank/zzp-uurtarief-uitleg/" class="hp-card" style="--hp-accent: #7c3aed" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="zzp-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">💼</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">ZZP uurtarief: complete uitleg</h3>
+          <p class="hp-card-question">Kosten, uren en belasting vertaald naar je tarief.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="/kennisbank/toeslagen-berekenen-uitleg/" class="hp-card" style="--hp-accent: #2563eb" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="toeslagen-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">€</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">Toeslagen: complete uitleg</h3>
+          <p class="hp-card-question">Huurtoeslag, zorgtoeslag en kindgebonden budget.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="/kennisbank/auto-importkosten-uitleg/" class="hp-card" style="--hp-accent: #059669" data-analytics="kennisbank-card" data-analytics-category="homepage" data-analytics-action="click" data-analytics-label="auto-import-uitleg">
+        <span class="hp-card-icon" aria-hidden="true">🚗</span>
+        <div class="hp-card-body">
+          <h3 class="hp-card-title">Auto importkosten: complete uitleg</h3>
+          <p class="hp-card-question">BPM, btw, keuring en transport uitgelegd.</p>
+        </div>
+        <span class="hp-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+
   <!-- ===== FAQ ===== -->
   <section class="faq-section">
     <h2 class="section-heading">Veelgestelde vragen</h2>
 
     <details class="faq-item">
       <summary>Zijn de berekeningen gratis?</summary>
-      <p>Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig.</p>
+      <p>Ja, alle berekeningen op Calculatieloket.nl zijn volledig gratis te gebruiken. Je hebt geen account nodig en je kunt elke calculator zo vaak gebruiken als je wilt.</p>
     </details>
 
     <details class="faq-item">
@@ -204,7 +309,27 @@ const quickLinks = getQuickLinks();
 
     <details class="faq-item">
       <summary>Waarom is de uitkomst een indicatie?</summary>
-      <p>We gebruiken officiële tarieven, maar je persoonlijke situatie kan afwijken. Gebruik de uitkomst als richtlijn.</p>
+      <p>We gebruiken officiële tarieven en regels, maar je persoonlijke situatie kan afwijken. Denk aan aftrekposten, een specifieke cao of bijzondere omstandigheden. Gebruik de uitkomst daarom als richtlijn en raadpleeg bij twijfel de officiële bron.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Welke berekeningen kan ik maken?</summary>
+      <p>We bieden calculators voor salaris (bruto-netto), BTW, hypotheken, toeslagen, ZZP-inkomen en auto-importkosten. Op de <a href="/calculators/">overzichtspagina</a> vind je alle beschikbare tools, gegroepeerd per onderwerp zoals Inkomen, Wonen, Belasting, Ondernemen en Auto.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Hoe actueel zijn de tarieven en regels?</summary>
+      <p>We controleren de gebruikte tarieven en regels jaarlijks zodra de nieuwe belastingplannen en toeslagbedragen bekend zijn. Bij elke calculator vermelden we welke bronnen we gebruiken, zodat je de gegevens zelf kunt verifiëren.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Kan ik de uitkomst gebruiken voor mijn belastingaangifte?</summary>
+      <p>De uitkomsten zijn bedoeld als indicatie en ter oriëntatie. Voor een belastingaangifte of een bindende berekening adviseren we je de gegevens te controleren via de Belastingdienst of een belastingadviseur te raadplegen.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Hoe verdienen jullie geld?</summary>
+      <p>De site is gratis. We tonen advertenties via Google AdSense om de site draaiende te houden. Advertenties laden alleen nadat je toestemming hebt gegeven via de cookiebanner; je kunt ze weigeren en alle calculators blijven dan volledig werken.</p>
     </details>
   </section>
 </BaseLayout>
@@ -676,6 +801,54 @@ const quickLinks = getQuickLinks();
     text-decoration: underline;
   }
 
+  /* ===== INTRO ===== */
+  .hp-intro-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
+  .hp-intro-copy p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin-bottom: 0.85rem;
+  }
+
+  .hp-intro-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hp-intro-usps {
+    list-style: none;
+    padding: 0;
+    margin: 1.1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1.25rem;
+  }
+
+  .hp-intro-usps li {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .hp-intro-usps li strong {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 600px) {
+    .hp-intro-usps {
+      grid-template-columns: 1fr;
+    }
+
+    .hp-grid--2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .hp-no-results {
     text-align: center;
     padding: 1rem;
@@ -687,6 +860,18 @@ const quickLinks = getQuickLinks();
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+  }
+
+  .hp-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hp-kennisbank-intro {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin: -0.25rem 0 0.9rem;
   }
 
   .hp-card {

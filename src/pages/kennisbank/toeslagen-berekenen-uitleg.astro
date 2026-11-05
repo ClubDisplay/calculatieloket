@@ -1,0 +1,135 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Toeslagen berekenen: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Hoe werken huurtoeslag, zorgtoeslag en kindgebonden budget in 2026? Uitleg over voorwaarden, inkomen, vermogen en waar je op moet letten.";
+const h1 = "Toeslagen berekenen: complete uitleg";
+
+const intro = [
+  "Toeslagen van de overheid kunnen een groot verschil maken in je maandbudget. Huurtoeslag en zorgtoeslag verlagen je woon- en zorgkosten; kindgebonden budget ondersteunt gezinnen met kinderen. Of je voor een toeslag in aanmerking komt, hangt af van je inkomen, vermogen en huishouden.",
+  "In deze uitleg behandelen we de belangrijkste toeslagen, de voorwaarden en hoe je een indicatie berekent. Let op: een toeslag is altijd afhankelijk van je persoonlijke situatie. Gebruik de <a href=\"/toeslagen-calculator/\">toeslagen calculator</a> voor een indicatie en doe de officiële proefberekening op Toeslagen.nl.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Dienst Toeslagen — Huurtoeslag",
+    description: "Voorwaarden, bedragen en aanvraagprocedure voor huurtoeslag.",
+    href: "https://www.toeslagen.nl/huurtoeslag",
+  },
+  {
+    label: "Officiële bron",
+    title: "Dienst Toeslagen — Zorgtoeslag",
+    description: "Inkomensgrenzen en voorwaarden voor zorgtoeslag.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/nl/zorgtoeslag/content/maximaal-inkomen-voor-zorgtoeslag",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Toeslagen",
+    description: "Overzicht van alle toeslagen en de spelregels.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/toeslagen",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Toeslagen calculator", description: "Bereken een indicatie van huur- en zorgtoeslag.", href: "/toeslagen-calculator/", accent: "#2563eb" },
+  { title: "Kindgebonden budget", description: "Bereken een indicatie voor gezinnen met kinderen.", href: "/kindgebonden-budget-berekenen/", accent: "#7c3aed" },
+  { title: "Bruto netto 2026", description: "Bereken je netto jaarinkomen.", href: "/bruto-netto-2026/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — huur- en zorgtoeslag indicatie" },
+  { href: "/kindgebonden-budget-berekenen/", label: "Kindgebonden budget berekenen" },
+  { href: "/bruto-netto-2026/", label: "Bruto-netto salaris — je toetsingsinkomen berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wie komt in aanmerking voor huurtoeslag?",
+    answer: "Huurtoeslag is voor huurders met een zelfstandige huurwoning en een relatief laag inkomen en vermogen. Je huurprijs mag niet te hoog zijn. Doe de officiële proefberekening op Toeslagen.nl om te checken of je in aanmerking komt.",
+  },
+  {
+    question: "Wie komt in aanmerking voor zorgtoeslag?",
+    answer: "Zorgtoeslag is voor mensen met een inkomen onder een bepaalde grens. De grens hangt af van je huishoudsituatie en verandert jaarlijks. Onze calculator geeft een indicatie op basis van de 2026 regels.",
+  },
+  {
+    question: "Wat is het toetsingsinkomen?",
+    answer: "Het toetsingsinkomen is het inkomen waarop de Dienst Toeslagen je toeslag baseert. Dit is ongeveer je bruto jaarinkomen, eventueel aangevuld met het inkomen van je toeslagpartner en ander inkomen.",
+  },
+  {
+    question: "Telt mijn vermogen mee?",
+    answer: "Ja. Spaargeld, beleggingen en ander vermogen kunnen invloed hebben op je toeslag. Deze eenvoudige indicatie houdt daar geen rekening mee; de officiële proefberekening wel.",
+  },
+  {
+    question: "Wat is een toeslagpartner?",
+    answer: "Je toeslagpartner is de persoon met wie je een gezamenlijk huishouden voert. Het inkomen en vermogen van je toeslagpartner tellen mee voor de berekening van je toeslag.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Toeslagen berekenen uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/toeslagen-calculator/", title: "Open de toeslagen calculator", description: "Vul je geschatte toetsingsinkomen en huishouden in en zie direct een indicatie van huur- en zorgtoeslag." }}
+>
+  <h2>Wat zijn toeslagen?</h2>
+  <p>
+    Toeslagen zijn bijdragen van de overheid die je maandelijkse kosten verlagen. De bekendste zijn <strong>huurtoeslag</strong> (voor huurders), <strong>zorgtoeslag</strong> (voor de zorgverzekering) en <strong>kindgebonden budget</strong> (voor gezinnen met kinderen). De Dienst Toeslagen voert deze regelingen uit.
+  </p>
+  <p>
+    Het gezamenlijke principe is dat de toeslag hoger wordt naarmate je inkomen lager is. Daarnaast spelen vermogen, huurprijs en huishoudsamenstelling een rol. Daardoor is er niet één vast bedrag, maar een glijdende schaal.
+  </p>
+
+  <h2>Huurtoeslag</h2>
+  <p>
+    Huurtoeslag is een tegemoetkoming in de huur voor huurders met een <strong>zelfstandige huurwoning</strong> en een relatief laag inkomen. De hoogte hangt af van je huurprijs, je inkomen, je vermogen en je huishouden. Let op: niet elke huurwoning komt in aanmerking, en er geldt een maximale huurprijs.
+  </p>
+  <p>
+    Of je in aanmerking komt, kun je het beste checken met de officiële proefberekening van de Dienst Toeslagen. Onze calculator geeft een eerste indicatie op basis van je inkomen en huur.
+  </p>
+
+  <h2>Zorgtoeslag</h2>
+  <p>
+    Zorgtoeslag is een bijdrage in de kosten van je zorgverzekering. Je kunt hiervoor in aanmerking komen als je inkomen onder een jaarlijks vastgestelde grens ligt. De grens verschilt voor alleenstaanden en partners en verandert elk jaar. Ook hier geldt dat een lager inkomen leidt tot een hogere toeslag, tot een maximumbedrag.
+  </p>
+  <p>
+    Ook voor zorgtoeslag geldt een vermogenstoets. Houd er rekening mee dat onze indicatie daar geen rekening mee houdt.
+  </p>
+
+  <h2>Kindgebonden budget</h2>
+  <p>
+    Kindgebonden budget is een bijdrage voor gezinnen met kinderen onder de 18 jaar. De hoogte hangt af van je inkomen, het aantal kinderen en hun leeftijden. Ook hier geldt: lager inkomen betekent een hoger budget. Je vraagt kindgebonden budget aan via de Dienst Toeslagen; vaak krijg je het automatisch als je al een andere toeslag ontvangt.
+  </p>
+
+  <h2>Waar moet je op letten?</h2>
+  <ul>
+    <li><strong>Schat je inkomen niet te laag in.</strong> Als je achteraf meer verdient, moet je toeslag mogelijk (gedeeltelijk) worden terugbetaald.</li>
+    <li><strong>Geef wijzigingen door.</strong> Verhuizing, nieuwe partner of een ander inkomen: geef het tijdig door aan de Dienst Toeslagen.</li>
+    <li><strong>Vermogen telt mee.</strong> Spaargeld en beleggingen kunnen je toeslag verlagen.</li>
+    <li><strong>Doe de officiële proefberekening.</strong> Onze calculator is een indicatie; Toeslagen.nl geeft het definitieve beeld.</li>
+  </ul>
+
+  <h2>Veelgemaakte fouten</h2>
+  <ol>
+    <li><strong>Alleen naar het bruto maandinkomen kijken.</strong> Toeslagen werken met een toetsingsinkomen op jaarbasis.</li>
+    <li><strong>Het inkomen van je toeslagpartner vergeten.</strong> Dit telt mee voor de berekening.</li>
+    <li><strong>Vermogen negeren.</strong> Ook spaargeld kan de toeslag beïnvloeden.</li>
+    <li><strong>Geen wijzigingen doorgeven.</strong> Dit kan leiden tot terugvorderingen.</li>
+    <li><strong>Een indicatie als definitief zien.</strong> Alleen de Dienst Toeslagen stelt je definitieve toeslag vast.</li>
+  </ol>
+</ContentHubPage>
