@@ -1,0 +1,114 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Sparen & vermogen: uitleg 2026 | Calculatieloket.nl";
+const description = "Hoe werkt belasting over sparen en vermogen (box 3)? Uitleg over het heffingsvrij vermogen, sparen versus beleggen en wat het betekent voor je financiën.";
+const h1 = "Sparen & vermogen: uitleg";
+
+const intro = [
+  "Spaargeld en beleggingen vallen in box 3 van de inkomstenbelasting: inkomen uit sparen en beleggen. Je betaalt niet over wat je daadwerkelijk verdient aan rente of rendement, maar over een forfaitair rendement op je vermogen boven een bepaalde drempel.",
+  "In deze uitleg leggen we uit hoe de belasting over vermogen werkt en waar je op moet letten bij sparen en beleggen. Gebruik de <a href=\"/bruto-netto-2026/\">bruto-netto calculator</a> om je netto inkomen te berekenen; vermogen beïnvloedt ook je toeslagen.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Box 3",
+    description: "Uitleg over de belasting over sparen en beleggen.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Vermogensbelasting",
+    description: "Informatie over het heffingsvrij vermogen en box 3.",
+    href: "https://www.rijksoverheid.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Bruto netto 2026", description: "Bereken je netto inkomen.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Hypotheek calculator", description: "Bereken je maximale hypotheek.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "ZZP calculator", description: "Bereken je uurtarief als ondernemer.", href: "/zzp-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je nettoloon berekenen" },
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — je leenbedrag berekenen" },
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — effect van vermogen" },
+];
+
+const faq = [
+  {
+    question: "Wat is box 3?",
+    answer: "Box 3 is de categorie 'inkomen uit sparen en beleggen' in de inkomstenbelasting. Hieronder vallen spaargeld, beleggingen en ander vermogen, boven het heffingsvrij vermogen.",
+  },
+  {
+    question: "Wat is het heffingsvrij vermogen?",
+    answer: "Het heffingsvrij vermogen is het bedrag aan vermogen waarover je geen belasting betaalt. Pas boven dit bedrag wordt er belasting over je vermogen berekend.",
+  },
+  {
+    question: "Betaal ik belasting over mijn spaargeld?",
+    answer: "Alleen als je totale vermogen boven het heffingsvrij vermogen uitkomt. Over het deel daarboven betaal je belasting op basis van een forfaitair rendement.",
+  },
+  {
+    question: "Heeft vermogen invloed op toeslagen?",
+    answer: "Ja. Vermogen kan je toeslagen verlagen, omdat het meetelt bij de toetsing. De officiële proefberekening op Toeslagen.nl houdt hier rekening mee.",
+  },
+  {
+    question: "Wat is het verschil tussen sparen en beleggen?",
+    answer: "Sparen is veilig maar levert meestal weinig op. Beleggen kan meer rendement opleveren, maar brengt risico met zich mee. In box 3 wordt voor beide een forfaitair rendement verondersteld.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Sparen & vermogen", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="5 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/bruto-netto-2026/", title: "Open de bruto-netto calculator", description: "Bereken je netto inkomen en zie wat dat betekent voor je financiële ruimte." }}
+>
+  <h2>Hoe werkt de belasting over vermogen?</h2>
+  <p>
+    Je vermogen — spaargeld, beleggingen en ander bezit minus schulden — valt in <strong>box 3</strong>. Je betaalt geen belasting over je werkelijke rente of rendement, maar over een <strong>forfaitair rendement</strong> dat de Belastingdienst veronderstelt. Alleen het vermogen boven het <strong>heffingsvrij vermogen</strong> wordt belast.
+  </p>
+  <p>
+    De exacte drempels en percentages veranderen regelmatig. Raadpleeg voor jouw situatie de actuele gegevens van de Belastingdienst.
+  </p>
+
+  <h2>Wat is het heffingsvrij vermogen?</h2>
+  <p>
+    Het heffingsvrij vermogen is het bedrag aan vermogen waarover je geen belasting betaalt. Voor fiscale partners geldt een gezamenlijke drempel. Pas over het vermogen dat boven deze drempel uitkomt, wordt belasting berekend.
+  </p>
+
+  <h2>Sparen versus beleggen</h2>
+  <p>
+    <strong>Sparen</strong> is veilig: je geld staat op een spaarrekening en is (tot een bepaald bedrag) beschermd door het depositogarantiestelsel. Het nadeel is dat de rente vaak laag is. <strong>Beleggen</strong> kan op de lange termijn meer rendement opleveren, maar brengt het risico van koersdalingen met zich mee. In box 3 worden beide behandeld op basis van een forfaitair rendement, waarbij beleggingen meestal zwaarder meetellen dan spaargeld.
+  </p>
+
+  <h2>Vermogen en toeslagen</h2>
+  <p>
+    Vermogen beïnvloedt niet alleen je belasting, maar ook je <strong>toeslagen</strong>. Huurtoeslag, zorgtoeslag en kindgebonden budget houden rekening met je vermogen. Een flink spaarbedrag kan je toeslag verlagen of zelfs tot nul terugbrengen. De officiële proefberekening op Toeslagen.nl houdt hier rekening mee; onze <a href="/toeslagen-calculator/">toeslagen calculator</a> geeft een indicatie zonder vermogenstoets.
+  </p>
+
+  <h2>Veelgemaakte fouten</h2>
+  <ol>
+    <li><strong>Alleen naar je spaarrente kijken.</strong> Ook beleggingen en ander bezit tellen mee in box 3.</li>
+    <li><strong>Schulden niet verrekenen.</strong> Bepaalde schulden mag je aftrekken van je vermogen.</li>
+    <li><strong>Het effect op toeslagen vergeten.</strong> Vermogen kan je toeslagen verlagen.</li>
+    <li><strong>Geen rekening houden met de jaarlijkse peildatum.</strong> De Belastingdienst kijkt naar je vermogen op 1 januari.</li>
+  </ol>
+</ContentHubPage>

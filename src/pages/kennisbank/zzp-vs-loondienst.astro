@@ -1,0 +1,142 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "ZZP vs loondienst: de verschillen uitgelegd | Calculatieloket.nl";
+const description = "ZZP of loondienst: wat zijn de verschillen in inkomen, zekerheid, pensioen en belasting? Een eerlijke vergelijking met rekenvoorbeelden.";
+const h1 = "ZZP vs loondienst: de verschillen uitgelegd";
+
+const intro = [
+  "Zzp'en of in loondienst werken: het is een keuze met grote financiële gevolgen. Een uurtarief van € 50 klinkt hoog, maar is niet te vergelijken met € 50 bruto per uur in loondienst. Als zzp'er regel je zelf je pensioen, verzekeringen en vangnet.",
+  "In deze uitleg zetten we beide vormen eerlijk naast elkaar. Zo zie je waar je op moet letten voordat je de stap maakt. Gebruik de <a href=\"/zzp-calculator/\">ZZP calculator</a> en de <a href=\"/bruto-netto-2026/\">bruto-netto calculator</a> om beide situaties door te rekenen.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "KVK — ZZP of loondienst",
+    description: "Informatie over de verschillen tussen ondernemen en werken in loondienst.",
+    href: "https://www.kvk.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Ondernemer of werknemer",
+    description: "Uitleg over de fiscale positie van ondernemers en werknemers.",
+    href: "https://www.belastingdienst.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "ZZP calculator", description: "Bereken je uurtarief en netto inkomen.", href: "/zzp-calculator/", accent: "#7c3aed" },
+  { title: "Bruto netto 2026", description: "Bereken je netto loon in loondienst.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Vakantiegeld calculator", description: "Bereken je vakantiegeld in loondienst.", href: "/vakantiegeld-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/zzp-calculator/", label: "ZZP calculator — je uurtarief berekenen" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je nettoloon berekenen" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator" },
+];
+
+const faq = [
+  {
+    question: "Wat verdient meer: ZZP of loondienst?",
+    answer: "Dat hangt af van je uurtarief, uren en kosten. Een ZZP-tarief van € 50 is niet hetzelfde als € 50 bruto per uur in loondienst, omdat je als zzp'er zelf pensioen, verzekeringen en vangnet regelt.",
+  },
+  {
+    question: "Welke zekerheden mis je als ZZP'er?",
+    answer: "Als zzp'er heb je geen doorbetaalde vakantiedagen, geen werkgeverspensioen en geen WW. Je regelt zelf verzekeringen en een buffer voor ziekte of periodes zonder opdrachten.",
+  },
+  {
+    question: "Hoe vergelijk ik beide situaties eerlijk?",
+    answer: "Reken je ZZP-tarief terug naar een netto inkomen en vergelijk dat met je netto loon in loondienst, inclusief vakantiegeld en pensioenopbouw.",
+  },
+  {
+    question: "Welke belastingvoordelen heeft een ZZP'er?",
+    answer: "Als zzp'er kun je onder voorwaarden gebruikmaken van de zelfstandigenaftrek, startersaftrek en MKB-winstvrijstelling. Daartegenover staat dat je zelf sociale premies niet op dezelfde manier opbouwt.",
+  },
+  {
+    question: "Wat is de beste eerste stap?",
+    answer: "Maak een berekening van beide scenario's en vraag advies bij de KVK of een boekhouder. Zo weet je welk uurtarief je minimaal nodig hebt om er niet op achteruit te gaan.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "ZZP vs loondienst", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="5 november 2026"
+  adSlot="1234567899"
+  categoryLabel="ondernemen"
+  calculatorCta={{ href: "/zzp-calculator/", title: "Open de ZZP calculator", description: "Reken je benodigde uurtarief uit en vergelijk het met je loondienstsituatie." }}
+>
+  <h2>Waarom een uurtarief niet te vergelijken is met een uurloon</h2>
+  <p>
+    In loondienst is je bruto uurloon slechts een deel van je totale pakket. Je werkgever betaalt daarnaast werkgeverslasten, pensioenpremie en verzekeringen, en je hebt doorbetaalde vakantiedagen. Als zzp'er moet je dit allemaal zelf uit je uurtarief bekostigen. Daarom is een ZZP-tarief van bijvoorbeeld € 50 per uur <strong>niet</strong> hetzelfde als € 50 bruto per uur in loondienst.
+  </p>
+
+  <h2>De belangrijkste verschillen op een rij</h2>
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>Onderwerp</th>
+        <th>Loondienst</th>
+        <th>ZZP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vakantiedagen</td>
+        <td>Doorbetaald</td>
+        <td>Zelf reserveren</td>
+      </tr>
+      <tr>
+        <td>Pensioen</td>
+        <td>Vaak via werkgever</td>
+        <td>Zelf opbouwen</td>
+      </tr>
+      <tr>
+        <td>Ziekte</td>
+        <td>Doorbetaling via werkgever</td>
+        <td>Zelf verzekeren of buffer</td>
+      </tr>
+      <tr>
+        <td>Belasting</td>
+        <td>Loonheffing via werkgever</td>
+        <td>Inkomstenbelasting + aftrekposten</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Hoe reken je het eerlijk door?</h2>
+  <ol>
+    <li>Bepaal je gewenste <strong>netto jaarinkomen</strong>.</li>
+    <li>Tel daar je <strong>zakelijke kosten</strong> bij op (verzekeringen, pensioen, accountant).</li>
+    <li>Reken terug naar een <strong>uurtarief</strong> via de ZZP calculator.</li>
+    <li>Vergelijk dat met je <strong>netto loon</strong> in loondienst, inclusief vakantiegeld en pensioen.</li>
+  </ol>
+
+  <h2>Belastingvoordelen van de ZZP'er</h2>
+  <p>
+    Ondernemers kunnen onder voorwaarden gebruikmaken van de <strong>zelfstandigenaftrek</strong>, de <strong>startersaftrek</strong> (in de eerste jaren) en de <strong>MKB-winstvrijstelling</strong>. Deze verlagen je belastbare winst. Daar staat tegenover dat je in loondienst automatisch sociale premies opbouwt via je werkgever.
+  </p>
+
+  <h2>Veelgemaakte fouten bij de vergelijking</h2>
+  <ol>
+    <li><strong>Alleen naar het uurtarief kijken.</strong> Vergelijk altijd netto inkomen, inclusief secundaire voorwaarden.</li>
+    <li><strong>Vakantiedagen en ziekte vergeten.</strong> Die moet je als zzp'er zelf financieren.</li>
+    <li><strong>Pensioenopbouw onderschatten.</strong> Zelf pensioen opbouwen kost een flink deel van je inkomen.</li>
+    <li><strong>Geen buffer aanhouden.</strong> Periodes zonder opdrachten horen bij het ondernemerschap.</li>
+  </ol>
+</ContentHubPage>

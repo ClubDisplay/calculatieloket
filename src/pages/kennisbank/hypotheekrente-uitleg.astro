@@ -1,0 +1,138 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Hypotheekrente & rentevaste periode: uitleg | Calculatieloket.nl";
+const description = "Wat is hypotheekrente en hoe werkt een rentevaste periode? Uitleg over vaste en variabele rente, en wat rente doet met je maandlasten en leenbedrag.";
+const h1 = "Hypotheekrente & rentevaste periode: uitleg";
+
+const intro = [
+  "De hypotheekrente is de belangrijkste prijsbepaler van je hypotheek. Een verschil van een paar tienden van een procent kan over 30 jaar tienduizenden euro's schelen. Daarnaast kies je een rentevaste periode, die bepaalt hoe lang je zekerheid hebt over je maandlasten.",
+  "In deze uitleg behandelen we hoe hypotheekrente werkt, het verschil tussen vaste en variabele rente, en wat een rentevaste periode voor jou betekent. Gebruik de <a href=\"/hypotheek-calculator/\">hypotheekcalculator</a> om het effect op je leenbedrag en maandlasten te zien.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "AFM — Hypotheekrente",
+    description: "Onafhankelijke uitleg over hypotheekrente en rentevaste periodes.",
+    href: "https://www.afm.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Hypotheek",
+    description: "Informatie over hypotheekvormen en rente.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/koopwoning",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Hypotheek calculator", description: "Bereken je maximale hypotheek en maandlasten.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Bruto netto 2026", description: "Bereken je netto jaarinkomen.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Toeslagen calculator", description: "Bekijk huur- en zorgtoeslag indicatie.", href: "/toeslagen-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — direct een indicatie" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je jaarinkomen berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wat is een rentevaste periode?",
+    answer: "Een rentevaste periode is de afgesproken termijn waarin je hypotheekrente vaststaat. Bijvoorbeeld 10, 20 of 30 jaar. Daarna wordt de rente opnieuw vastgesteld.",
+  },
+  {
+    question: "Wat is het verschil tussen vaste en variabele rente?",
+    answer: "Bij een vaste rente staat je rentepercentage voor de afgesproken periode vast. Bij een variabele rente kan het tussentijds veranderen, meestal gekoppeld aan de marktrente.",
+  },
+  {
+    question: "Wat is voordeliger: kort of lang vastzetten?",
+    answer: "Een kortere rentevaste periode heeft vaak een iets lagere rente, maar minder zekerheid. Een langere periode geeft meer zekerheid tegen een mogelijk hoger tarief. Wat past, hangt af van je situatie.",
+  },
+  {
+    question: "Wat doet de rente met mijn leenbedrag?",
+    answer: "Bij een lagere rente zijn je maandlasten lager, waardoor je een hoger leenbedrag kunt dragen. Bij een hogere rente daalt je maximale hypotheek.",
+  },
+  {
+    question: "Kan ik mijn rente tussentijds aanpassen?",
+    answer: "Meestal kun je je rentevaste periode alleen aanpassen tegen een vergoeding (boeterente). Bespreek dit met je geldverstrekker of adviseur.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Hypotheekrente uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="5 november 2026"
+  adSlot="1234567899"
+  categoryLabel="wonen"
+  calculatorCta={{ href: "/hypotheek-calculator/", title: "Open de hypotheekcalculator", description: "Vul je inkomen en een voorbeeldrente in en zie direct het effect op je leenbedrag en maandlasten." }}
+>
+  <h2>Wat is hypotheekrente?</h2>
+  <p>
+    Hypotheekrente is de vergoeding die je aan de geldverstrekker betaalt voor het lenen van geld. Het percentage wordt uitgedrukt per jaar en bepaalt samen met je leenbedrag en looptijd hoe hoog je maandlasten zijn. Omdat een hypotheek vaak tientallen jaren loopt, heeft zelfs een klein renteverschil een groot effect op de totale kosten.
+  </p>
+
+  <h2>Vaste versus variabele rente</h2>
+  <ul>
+    <li><strong>Vaste rente</strong> — je rentepercentage staat vast voor de afgesproken periode. Je weet precies waar je aan toe bent.</li>
+    <li><strong>Variabele rente</strong> — het percentage kan tussentijds veranderen. Dit kan voordelig zijn als de rente daalt, maar ook nadelig als die stijgt.</li>
+  </ul>
+  <p>
+    De meeste huiseigenaren kiezen voor een vaste rente, omdat dat zekerheid geeft over de maandlasten. Een variabele rente past beter bij mensen die een rentestijging kunnen opvangen.
+  </p>
+
+  <h2>De rentevaste periode</h2>
+  <p>
+    Bij een vaste rente kies je de <strong>rentevaste periode</strong>: bijvoorbeeld 5, 10, 20 of 30 jaar. Hoe langer de periode, hoe meer zekerheid je hebt — en vaak hoe hoger het tarief. Na afloop van de periode wordt de rente opnieuw vastgesteld op basis van de dan geldende marktrente. Op dat moment kun je vaak ook overstappen of aflossen.
+  </p>
+
+  <h2>Wat doet de rente met je leenbedrag?</h2>
+  <p>
+    De rente werkt direct door in je maximale hypotheek. Bij een lagere rente zijn je maandlasten lager, waardoor een geldverstrekker je een hoger leenbedrag toestaat. Bij een hogere rente daalt je maximale hypotheek. Daarom is het belangrijk om te rekenen met een realistische rente, en niet met een te optimistische.
+  </p>
+
+  <h2>Rekenvoorbeeld</h2>
+  <p>Een indicatie met een voorbeeldrente van 3,8% en een bruto jaarinkomen van € 60.000:</p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Bruto jaarinkomen</strong>
+      <p>€ 60.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Voorbeeldrente</strong>
+      <p>3,8% — 30 jaar vast</p>
+    </div>
+    <div class="example-card">
+      <strong>Indicatief leenbedrag</strong>
+      <p>Ongeveer € 340.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Effect van lagere rente</strong>
+      <p>Hoger leenbedrag mogelijk</p>
+    </div>
+  </div>
+  <p>
+    Dit is een indicatie, geen offerte. De exacte rente en het leenbedrag hangen af van de geldverstrekker en je persoonlijke situatie.
+  </p>
+
+  <h2>Veelgemaakte fouten</h2>
+  <ol>
+    <li><strong>Alleen naar de laagste rente kijken.</strong> Let ook op voorwaarden, boeterente en de hoogte van de afsluitkosten.</li>
+    <li><strong>Een te optimistische rente gebruiken.</strong> Reken met een iets hogere rente om te zien of je de lasten ook dan kunt dragen.</li>
+    <li><strong>De rentevaste periode niet afstemmen op je plannen.</strong> Ga je verhuizen of aflossen? Kies een periode die daarbij past.</li>
+    <li><strong>Tussentijds aanpassen zonder boeterente te checken.</strong> Rente aanpassen kan een vergoeding kosten.</li>
+  </ol>
+</ContentHubPage>
