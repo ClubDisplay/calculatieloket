@@ -1,0 +1,205 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "BTW berekenen: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Leer hoe BTW werkt in 2026: de tarieven (21%, 9%, 0%), het verschil tussen inclusief en exclusief btw, rekenformules met voorbeelden en veelgemaakte fouten.";
+const h1 = "BTW berekenen: complete uitleg";
+
+const intro = [
+  "BTW (belasting over de toegevoegde waarde) komt terug bij vrijwel elke aankoop en verkoop in Nederland. Voor ondernemers is correct BTW rekenen onderdeel van de dagelijkse administratie; voor consumenten is het handig om te begrijpen waarom een prijs inclusief of exclusief btw is.",
+  "In deze uitleg behandelen we de BTW-tarieven van 2026, het verschil tussen inclusief en exclusief, de rekenformules met concrete voorbeelden en de meest gemaakte fouten. Wil je direct een bedrag omrekenen? Gebruik dan de <a href=\"/btw-calculator/\">BTW calculator</a>.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — BTW-tarieven",
+    description: "Actuele btw-tarieven: 21%, 9% en 0%, en wanneer welk tarief geldt.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_tarieven",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — BTW berekenen",
+    description: "Officiële uitleg en rekenvoorbeelden voor het berekenen van btw.",
+    href: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — BTW",
+    description: "Algemene uitleg over belasting over de toegevoegde waarde.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/btw",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "BTW calculator", description: "Reken direct van exclusief naar inclusief btw en andersom.", href: "/btw-calculator/", accent: "#2563eb" },
+  { title: "BTW terugrekenen", description: "Haal de btw uit een inclusief bedrag.", href: "/btw-terugrekenen/", accent: "#7c3aed" },
+  { title: "BTW inclusief/exclusief", description: "Wissel bedragen om in beide richtingen.", href: "/btw-inclusief-exclusief/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/btw-calculator/", label: "BTW calculator — direct btw berekenen" },
+  { href: "/btw-terugrekenen/", label: "BTW terugrekenen — van inclusief naar exclusief" },
+  { href: "/btw-inclusief-exclusief/", label: "BTW inclusief/exclusief — beide richtingen" },
+];
+
+const faq = [
+  {
+    question: "Hoe bereken je btw over een bedrag?",
+    answer: "Vermenigvuldig het bedrag exclusief btw met het percentage gedeeld door 100. Bij 21%: btw = bedrag × 0,21. Het totaal inclusief btw is bedrag + btw.",
+  },
+  {
+    question: "Hoe reken je inclusief btw terug naar exclusief?",
+    answer: "Deel het bedrag inclusief btw door 1 plus het percentage gedeeld door 100. Bij 21%: exclusief = inclusief ÷ 1,21. De btw is het verschil tussen beide bedragen.",
+  },
+  {
+    question: "Wanneer gebruik je 21% btw?",
+    answer: "21% is het hoge (standaard)tarief voor de meeste goederen en diensten, zoals elektronica, kleding, horeca en professionele dienstverlening.",
+  },
+  {
+    question: "Wanneer gebruik je 9% btw?",
+    answer: "9% is het lage tarief voor basisbehoeften zoals voedingsmiddelen, water, boeken, medicijnen, kunst en bepaald vervoer. Controleer bij de Belastingdienst of jouw product of dienst onder dit tarief valt.",
+  },
+  {
+    question: "Wanneer geldt 0% btw?",
+    answer: "0% btw geldt voor specifieke situaties, zoals leveringen naar andere EU-landen. Je brengt 0% in rekening en vermeldt dit op de factuur. 0% is iets anders dan een vrijstelling.",
+  },
+];
+
+const howTo = {
+  name: "BTW berekenen",
+  description: "In drie stappen reken je zelf btw uit, van exclusief naar inclusief of andersom.",
+  steps: [
+    {
+      name: "Bepaal het juiste tarief",
+      text: "Kies 21%, 9% of 0% op basis van het product of de dienst. Controleer bij twijfel het tarief bij de Belastingdienst.",
+    },
+    {
+      name: "Kies de richting",
+      text: "Ga je van exclusief naar inclusief (btw erbij), of van inclusief naar exclusief (btw eruit)?",
+    },
+    {
+      name: "Pas de formule toe",
+      text: "Exclusief → inclusief: btw = bedrag × (tarief ÷ 100). Inclusief → exclusief: exclusief = bedrag ÷ (1 + tarief ÷ 100).",
+    },
+  ],
+};
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "BTW berekenen uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="belasting"
+  calculatorCta={{ href: "/btw-calculator/", title: "Open de BTW calculator", description: "Reken direct een bedrag om van exclusief naar inclusief btw, of andersom." }}
+>
+  <h2>Wat is btw?</h2>
+  <p>
+    BTW staat voor <strong>belasting over de toegevoegde waarde</strong>. Het is een verbruiksbelasting die je betaalt over vrijwel alle goederen en diensten. Een ondernemer berekent btw aan zijn klanten en draagt dit af aan de Belastingdienst. De btw die de ondernemer zelf betaalt over zakelijke inkopen, mag hij daar meestal vanaf trekken.
+  </p>
+  <p>
+    Voor de eindconsument is btw simpelweg onderdeel van de prijs. Voor ondernemers is het belangrijk om te weten of een bedrag <strong>inclusief of exclusief</strong> btw is, omdat dit direct invloed heeft op de factuur, de administratie en de periodieke btw-aangifte.
+  </p>
+
+  <h2>BTW-tarieven 2026</h2>
+  <p>Nederland kent drie btw-tarieven. Welke je toepast, hangt af van het product of de dienst:</p>
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>Tarief</th>
+        <th>Toepassing</th>
+        <th>Voorbeelden</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>21%</strong> (hoog)</td>
+        <td>Standaardtarief voor de meeste goederen en diensten</td>
+        <td>Elektronica, kleding, horeca, professionele diensten</td>
+      </tr>
+      <tr>
+        <td><strong>9%</strong> (laag)</td>
+        <td>Basisbehoeften</td>
+        <td>Voedingsmiddelen, water, boeken, medicijnen, kunst, bepaald vervoer</td>
+      </tr>
+      <tr>
+        <td><strong>0%</strong></td>
+        <td>Specifieke situaties</td>
+        <td>Leveringen naar andere EU-landen</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Het 0%-tarief is iets anders dan een vrijstelling. Bij 0% breng je wél 0% btw in rekening en vermeld je dit op de factuur; bij een vrijstelling bereken je helemaal geen btw. Controleer altijd bij de Belastingdienst welk tarief voor jouw situatie geldt.
+  </p>
+
+  <h2>Inclusief vs. exclusief btw</h2>
+  <p>
+    Een bedrag is <strong>exclusief btw</strong> als de btw er nog bij moet worden opgeteld. Een bedrag is <strong>inclusief btw</strong> als de btw al in het bedrag is verwerkt. Consumentenprijzen zijn in Nederland vrijwel altijd inclusief btw; zakelijke prijzen worden vaak exclusief btw genoemd.
+  </p>
+  <p>
+    Het verschil lijkt klein, maar kan op een factuur flink oplopen. Bij 21% btw is een bedrag van € 1.000 exclusief bijvoorbeeld € 1.210 inclusief. Daarom is het belangrijk om vóór het rekenen te bepalen in welke richting je werkt.
+  </p>
+
+  <h2>Hoe bereken je btw? Formules en voorbeelden</h2>
+  <p>Er zijn twee basisrichtingen, elk met een eigen formule:</p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Exclusief → inclusief</strong>
+      <p>btw = bedrag × (tarief ÷ 100)<br />totaal = bedrag + btw</p>
+    </div>
+    <div class="example-card">
+      <strong>Inclusief → exclusief</strong>
+      <p>exclusief = bedrag ÷ (1 + tarief ÷ 100)<br />btw = bedrag − exclusief</p>
+    </div>
+  </div>
+
+  <h3>Voorbeeld 1: btw erbij (21%)</h3>
+  <p>Je verkoopt een dienst voor <strong>€ 100 exclusief btw</strong> met het 21%-tarief:</p>
+  <ul>
+    <li>btw = € 100 × 0,21 = <strong>€ 21</strong></li>
+    <li>totaal inclusief btw = € 100 + € 21 = <strong>€ 121</strong></li>
+  </ul>
+
+  <h3>Voorbeeld 2: btw eruit (21%)</h3>
+  <p>Je ontvangt een factuur van <strong>€ 121 inclusief btw</strong> en wilt de btw eruit halen:</p>
+  <ul>
+    <li>exclusief = € 121 ÷ 1,21 = <strong>€ 100</strong></li>
+    <li>btw = € 121 − € 100 = <strong>€ 21</strong></li>
+  </ul>
+
+  <h3>Voorbeeld 3: 9%-tarief</h3>
+  <p>Een product kost <strong>€ 50 exclusief btw</strong> met het 9%-tarief:</p>
+  <ul>
+    <li>btw = € 50 × 0,09 = <strong>€ 4,50</strong></li>
+    <li>totaal inclusief btw = € 50 + € 4,50 = <strong>€ 54,50</strong></li>
+  </ul>
+
+  <h2>Veelgemaakte fouten bij btw berekenen</h2>
+  <ol>
+    <li><strong>21% van het inclusieve bedrag aftrekken.</strong> Btw terugrekenen doe je door te delen (÷ 1,21), niet door een percentage af te trekken.</li>
+    <li><strong>Het verkeerde tarief gebruiken.</strong> Controleer of 21%, 9% of 0% van toepassing is op jouw product of dienst.</li>
+    <li><strong>0% btw verwarren met een vrijstelling.</strong> Bij 0% vermeld je het tarief op de factuur; bij een vrijstelling niet.</li>
+    <li><strong>Afrondingsverschillen negeren.</strong> Bij facturen met meerdere regels kunnen kleine afrondingsverschillen ontstaan.</li>
+    <li><strong>Btw over btw rekenen.</strong> Tel nooit eerst de btw op en reken daar vervolgens nog eens btw over.</li>
+  </ol>
+
+  <h2>Wanneer welk tarief? Een richtlijn</h2>
+  <p>
+    Als richtlijn geldt: <strong>21%</strong> voor de meeste goederen en diensten, <strong>9%</strong> voor voedingsmiddelen, water, boeken, medicijnen, kunst en bepaald vervoer, en <strong>0%</strong> voor specifieke grensoverschrijdende leveringen. De grens tussen 9% en 21% is niet altijd duidelijk &mdash; bijvoorbeeld bij gemengde producten of diensten. Raadpleeg in dat geval de Belastingdienst of een adviseur.
+  </p>
+</ContentHubPage>

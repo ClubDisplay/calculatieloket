@@ -1,0 +1,179 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Bruto-netto salaris: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Wat is het verschil tussen bruto en netto salaris? Uitleg over loonheffing, heffingskortingen, pensioen en vakantiegeld in 2026, met rekenvoorbeelden.";
+const h1 = "Bruto-netto salaris: complete uitleg";
+
+const intro = [
+  "Het bedrag op je arbeidsovereenkomst is je bruto salaris, maar dat is niet wat er op je bankrekening verschijnt. Tussen bruto en netto zit loonheffing, premies volksverzekeringen en vaak een pensioenbijdrage.",
+  "In deze uitleg lees je hoe het bruto-netto traject werkt in 2026, welke heffingskortingen je belasting verlagen en waarom je netto salaris lager uitvalt dan je bruto bedrag. Wil je je eigen situatie doorrekenen? Gebruik dan de <a href=\"/bruto-netto-2026/\">bruto-netto calculator</a>.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Loonheffing 2026",
+    description: "Tarieven, heffingskortingen en rekenregels voor loonheffing.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Heffingskortingen",
+    description: "Uitleg over de algemene heffingskorting en arbeidskorting.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Minimumloon en vakantiegeld",
+    description: "Wettelijke regels rond vakantiegeld en arbeidsvoorwaarden.",
+    href: "https://www.rijksoverheid.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Bruto netto 2026", description: "Bereken je netto salaris voor 2026.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Salaris calculator", description: "Vergelijk bruto en netto salaris.", href: "/salaris-calculator/", accent: "#7c3aed" },
+  { title: "Vakantiegeld calculator", description: "Bereken je netto vakantiegeld.", href: "/vakantiegeld-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — direct je nettoloon berekenen" },
+  { href: "/salaris-calculator/", label: "Salaris calculator — bruto en netto vergelijken" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator" },
+  { href: "/loonheffing-berekenen-2026/", label: "Loonheffing berekenen 2026" },
+];
+
+const faq = [
+  {
+    question: "Wat is het verschil tussen bruto en netto salaris?",
+    answer: "Bruto is het bedrag vóór aftrek van belastingen en premies; netto is wat daadwerkelijk op je rekening komt. Het verschil bestaat uit loonheffing, premies volksverzekeringen en eventuele pensioenbijdragen.",
+  },
+  {
+    question: "Wat is loonheffing?",
+    answer: "Loonheffing is de verzamelnaam voor loonbelasting en premies volksverzekeringen die je werkgever inhoudt op je salaris en afdraagt aan de Belastingdienst.",
+  },
+  {
+    question: "Wat is de loonheffingskorting?",
+    answer: "De loonheffingskorting verlaagt de belasting die je betaalt. Werk je voor meerdere werkgevers, pas de korting dan maar bij één werkgever toe om achteraf bijbetalen te voorkomen.",
+  },
+  {
+    question: "Hoeveel vakantiegeld krijg ik?",
+    answer: "In Nederland heb je wettelijk recht op minimaal 8% van je bruto jaarsalaris aan vakantiegeld. Sommige cao's hanteren een hoger percentage. Over vakantiegeld betaal je ook belasting.",
+  },
+  {
+    question: "Waarom is mijn netto salaris lager dan verwacht?",
+    answer: "Naast loonheffing kan er pensioenpremie worden ingehouden, of een bijdrage voor een cao-fonds. Ook een te hoge loonheffingskorting of een tweede baan kan het netto bedrag beïnvloeden.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Bruto-netto salaris uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/bruto-netto-2026/", title: "Open de bruto-netto calculator", description: "Vul je bruto maandsalaris in en zie direct een indicatie van je nettoloon." }}
+>
+  <h2>Wat is bruto en wat is netto?</h2>
+  <p>
+    Je <strong>bruto salaris</strong> is het bedrag dat je werkgever met je heeft afgesproken, vóór alle inhoudingen. Je <strong>netto salaris</strong> is het bedrag dat daadwerkelijk op je rekening wordt gestort. Het verschil daartussen wordt bepaald door loonheffing, premies volksverzekeringen en meestal een pensioenbijdrage.
+  </p>
+  <p>
+    Hoe groot dat verschil is, hangt af van je inkomen, je leeftijd en of je de loonheffingskorting laat toepassen. Daarom kun je het netto bedrag van iemand anders niet zomaar met je eigen situatie vergelijken.
+  </p>
+
+  <h2>Welke inhoudingen zitten er tussen bruto en netto?</h2>
+  <p>De belangrijkste inhoudingen op je bruto salaris zijn:</p>
+  <ul>
+    <li><strong>Loonheffing</strong> — de verzamelnaam voor loonbelasting en premies volksverzekeringen. Je werkgever houdt dit in en draagt het af aan de Belastingdienst.</li>
+    <li><strong>Pensioenpremie</strong> — als je via je werkgever pensioen opbouwt, wordt er meestal een deel van je brutoloon ingehouden.</li>
+    <li><strong>Overige bijdragen</strong> — sommige sectoren kennen een cao-bijdrage of een bijdrage aan een opleidingsfonds.</li>
+  </ul>
+  <p>
+    Daartegenover staan <strong>heffingskortingen</strong> die je belasting verlagen. De twee belangrijkste zijn de algemene heffingskorting en de arbeidskorting. In 2026 bedraagt de algemene heffingskorting maximaal € 3.115 en kan de arbeidskorting oplopen tot € 5.685. Deze kortingen zijn afhankelijk van je inkomen: hoe hoger je inkomen, hoe lager de korting.
+  </p>
+
+  <h2>Box 1-tarieven 2026</h2>
+  <p>
+    Over je inkomen in box 1 (werk en woning) betaal je in 2026 een progressief tarief. De schijven zijn 35,75%, 37,56% en 49,50%. Hoe hoger je inkomen, hoe groter het deel dat in een hogere schijf valt. Dit is een van de redenen waarom een loonsverhoging netto minder oplevert dan bruto.
+  </p>
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>Schijf</th>
+        <th>Tarief 2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Schijf 1</td>
+        <td>35,75%</td>
+      </tr>
+      <tr>
+        <td>Schijf 2</td>
+        <td>37,56%</td>
+      </tr>
+      <tr>
+        <td>Schijf 3</td>
+        <td>49,50%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Dit zijn de tarieven zoals wij die hebben verwerkt in onze calculators. Voor de exacte schijfgrenzen en jouw persoonlijke situatie verwijzen we je naar de Belastingdienst.
+  </p>
+
+  <h2>De rol van vakantiegeld</h2>
+  <p>
+    De meeste werknemers in Nederland hebben recht op minimaal <strong>8% vakantiegeld</strong> over hun bruto jaarsalaris. Dit bedrag wordt vaak in mei of juni uitbetaald, of maandelijks gereserveerd. Omdat ook vakantiegeld belast wordt, is het nettobedrag lager dan je op basis van het bruto percentage zou verwachten.
+  </p>
+  <p>
+    Let op: als je in een hogere belastingschijf valt, kan het effectieve nettobedrag van je vakantiegeld relatief lager uitvallen. Onze <a href="/vakantiegeld-calculator/">vakantiegeld calculator</a> geeft hiervan een indicatie.
+  </p>
+
+  <h2>Rekenvoorbeeld: van bruto naar netto</h2>
+  <p>Een vereenvoudigd voorbeeld om het principe te laten zien:</p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Bruto maandsalaris</strong>
+      <p>€ 3.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Loonheffing en premies</strong>
+      <p>Worden ingehouden op het bruto bedrag.</p>
+    </div>
+    <div class="example-card">
+      <strong>Heffingskortingen</strong>
+      <p>Verlagen de te betalen loonheffing.</p>
+    </div>
+    <div class="example-card">
+      <strong>Netto maandsalaris</strong>
+      <p>Het bedrag dat op je rekening komt.</p>
+    </div>
+  </div>
+  <p>
+    De precieze uitkomst hangt af van je leeftijd, pensioenregeling en of je de loonheffingskorting toepast. Vul je gegevens in de <a href="/bruto-netto-2026/">bruto-netto calculator</a> in voor een persoonlijke indicatie.
+  </p>
+
+  <h2>Veelgemaakte fouten rond bruto-netto</h2>
+  <ol>
+    <li><strong>Alleen naar het brutobedrag kijken.</strong> Twee banen met hetzelfde bruto salaris kunnen netto verschillen door pensioen, leeftijd of kortingen.</li>
+    <li><strong>Loonheffingskorting bij twee werkgevers toepassen.</strong> Pas de korting maar bij één werkgever toe, anders kun je achteraf bijbetalen.</li>
+    <li><strong>Vakantiegeld vergeten.</strong> Reken je jaarinkomen inclusief vakantiegeld als je je netto jaarinkomen wilt weten.</li>
+    <li><strong>Geen rekening houden met toeslagen.</strong> Je netto salaris is niet je besteedbaar inkomen; toeslagen en aftrekposten beïnvloeden het totaalbeeld.</li>
+  </ol>
+</ContentHubPage>

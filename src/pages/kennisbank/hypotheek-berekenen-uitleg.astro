@@ -1,0 +1,176 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Hypotheek berekenen: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Hoe werkt een hypotheek? Uitleg over maximale hypotheek, maandlasten, rente, hypotheekrenteaftrek en NHG in 2026. Met rekenvoorbeelden en veelgemaakte fouten.";
+const h1 = "Hypotheek berekenen: complete uitleg";
+
+const intro = [
+  "Een huis kopen begint meestal met één vraag: hoeveel kan ik lenen? Je maximale hypotheek hangt af van je inkomen, de actuele rente en je persoonlijke situatie. Daarna komt de tweede vraag: wat worden mijn maandlasten?",
+  "In deze uitleg behandelen we hoe een hypotheek werkt, welke factoren je leenbedrag bepalen, het verschil tussen bruto en netto maandlasten, en de rol van de hypotheekrenteaftrek en NHG. Voor een persoonlijke indicatie gebruik je de <a href=\"/hypotheek-calculator/\">hypotheekcalculator</a>.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "AFM — Hypotheek",
+    description: "Onafhankelijke uitleg over hypotheken en wat een geldverstrekker toetst.",
+    href: "https://www.afm.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "NHG — Nationale Hypotheek Garantie",
+    description: "Uitleg over de voorwaarden en werking van NHG.",
+    href: "https://www.nhg.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Hypotheekrenteaftrek",
+    description: "Regels rond hypotheekrenteaftrek en eigen woning.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/koopwoning",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Hypotheek calculator", description: "Bereken je maximale hypotheek en maandlasten.", href: "/hypotheek-calculator/", accent: "#d97706" },
+  { title: "Bruto netto 2026", description: "Bereken je netto jaarinkomen.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Toeslagen calculator", description: "Bekijk een indicatie van huur- en zorgtoeslag.", href: "/toeslagen-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/hypotheek-calculator/", label: "Hypotheek calculator — direct een indicatie" },
+  { href: "/bruto-netto-2026/", label: "Bruto-netto salaris — je jaarinkomen berekenen" },
+];
+
+const faq = [
+  {
+    question: "Hoeveel hypotheek kan ik krijgen?",
+    answer: "Je maximale hypotheek hangt af van je bruto inkomen, de actuele rente, je studieschuld en andere vaste lasten. Gebruik onze calculator voor een indicatie en bespreek je situatie met een erkend adviseur.",
+  },
+  {
+    question: "Wat is het verschil tussen bruto en netto maandlasten?",
+    answer: "Bruto maandlasten zijn wat je aan de geldverstrekker betaalt. Netto maandlasten zijn wat je effectief betaalt na verrekening van de hypotheekrenteaftrek.",
+  },
+  {
+    question: "Wat is hypotheekrenteaftrek?",
+    answer: "Hypotheekrenteaftrek betekent dat je de betaalde hypotheekrente onder voorwaarden mag aftrekken van je belastbaar inkomen, waardoor je netto maandlasten lager uitvallen.",
+  },
+  {
+    question: "Wat is NHG?",
+    answer: "De Nationale Hypotheek Garantie (NHG) biedt een vangnet als je door omstandigheden je hypotheek niet meer kunt betalen. Je betaalt hiervoor een eenmalige borgtochtprovisie en krijgt vaak een rentekorting.",
+  },
+  {
+    question: "Is deze berekening een offerte?",
+    answer: "Nee. Het is een indicatie. Een geldverstrekker kijkt naar meer factoren, waaronder BKR-registratie, gezinssituatie, energielabel en de woningwaarde. Vraag altijd een officiële berekening aan bij een erkend hypotheekadviseur.",
+  },
+];
+
+const howTo = {
+  name: "Hypotheek indicatie berekenen",
+  description: "In drie stappen krijg je een indicatie van je maximale hypotheek.",
+  steps: [
+    {
+      name: "Vul je bruto jaarinkomen in",
+      text: "Gebruik je bruto jaarinkomen inclusief vakantiegeld, en tel eventueel het inkomen van je partner mee.",
+    },
+    {
+      name: "Kies een actuele voorbeeldrente",
+      text: "Voer de huidige hypotheekrente in, bijvoorbeeld 3,8%. Een lagere rente betekent meestal een hoger leenbedrag.",
+    },
+    {
+      name: "Bekijk je indicatie",
+      text: "De calculator toont je maximale hypotheekbedrag, bruto en netto maandlasten en totale rentekosten.",
+    },
+  ],
+};
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Hypotheek berekenen uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  howTo={howTo}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="wonen"
+  calculatorCta={{ href: "/hypotheek-calculator/", title: "Open de hypotheekcalculator", description: "Vul je bruto jaarinkomen en rente in en zie direct een indicatie van je maximale hypotheek en maandlasten." }}
+>
+  <h2>Wat is een hypotheek?</h2>
+  <p>
+    Een hypotheek is een lening voor de aankoop van een woning, met de woning als onderpand. Je betaalt de lening terug in maandelijkse termijnen die bestaan uit <strong>rente</strong> en <strong>aflossing</strong>. De meest voorkomende vorm in Nederland is de annuïteitenhypotheek, waarbij je maandbedrag gedurende de looptijd gelijk blijft maar de verhouding tussen rente en aflossing verschuift.
+  </p>
+
+  <h2>Hoeveel kun je lenen?</h2>
+  <p>Je maximale hypotheek wordt bepaald door een combinatie van factoren:</p>
+  <ul>
+    <li><strong>Je bruto inkomen</strong> — hoe hoger je inkomen, hoe meer je kunt lenen. Het inkomen van een partner telt mee.</li>
+    <li><strong>De actuele rente</strong> — bij een lagere rente zijn je maandlasten lager, waardoor je een hoger leenbedrag kunt dragen.</li>
+    <li><strong>Vaste lasten en verplichtingen</strong> — zoals een studieschuld, alimentatie of een doorlopend krediet.</li>
+    <li><strong>De woningwaarde</strong> — je kunt meestal niet meer lenen dan de woning waard is (maximaal 100% van de woningwaarde).</li>
+  </ul>
+  <p>
+    De relatie tussen inkomen en leenbedrag noemen we de <strong>inkomensfactor</strong>. Deze is niet vast, maar hangt af van de rentestand. Onze calculator gebruikt hier een indicatieve benadering van.
+  </p>
+
+  <h2>Bruto en netto maandlasten</h2>
+  <p>
+    Je <strong>bruto maandlasten</strong> zijn het bedrag dat je maandelijks aan de geldverstrekker betaalt (rente plus aflossing). Je <strong>netto maandlasten</strong> zijn lager, omdat je de betaalde hypotheekrente onder voorwaarden mag aftrekken van je belastbaar inkomen via de hypotheekrenteaftrek.
+  </p>
+  <p>
+    De hoogte van het belastingvoordeel hangt af van je belastingtarief en van de afbouw van de hypotheekrenteaftrek. Daardoor kan het netto verschil per situatie flink uiteenlopen.
+  </p>
+
+  <h2>De rol van de rente</h2>
+  <p>
+    De rente is de belangrijkste prijsbepaler van je hypotheek. Je kunt kiezen voor een <strong>rentevaste periode</strong>, bijvoorbeeld 10, 20 of 30 jaar, of voor een variabele rente. Een langere rentevaste periode geeft meer zekerheid, maar kost vaak iets meer. Een lagere rente betekent lagere maandlasten en een hoger leenbedrag; een hogere rente werkt andersom.
+  </p>
+
+  <h2>Wat is NHG?</h2>
+  <p>
+    De <strong>Nationale Hypotheek Garantie</strong> (NHG) is een vangnet voor huiseigenaren. Als je door bijvoorbeeld werkloosheid of een relatiebreuk je hypotheek niet meer kunt betalen en je huis met verlies moet verkopen, kan NHG onder voorwaarden het resterende deel kwijtschelden. Je betaalt hiervoor eenmalig een borgtochtprovisie en krijgt vaak een lagere rente. Of NHG voor jou mogelijk is, hangt af van de woningwaarde.
+  </p>
+
+  <h2>Rekenvoorbeeld</h2>
+  <p>Een vereenvoudigd voorbeeld op basis van veelgebruikte uitgangspunten:</p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Bruto jaarinkomen</strong>
+      <p>€ 60.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Voorbeeldrente</strong>
+      <p>3,8% — 30 jaar vast</p>
+    </div>
+    <div class="example-card">
+      <strong>Indicatief leenbedrag</strong>
+      <p>Ongeveer € 340.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Bruto maandlasten</strong>
+      <p>Rente + aflossing, maandelijks gelijk</p>
+    </div>
+  </div>
+  <p>
+    Dit is een indicatie, geen offerte. Een geldverstrekker toetst ook je BKR-registratie, gezinssituatie, energielabel en vaste lasten. Vraag voor een officiële berekening altijd een erkend hypotheekadviseur.
+  </p>
+
+  <h2>Veelgemaakte fouten bij hypotheekberekeningen</h2>
+  <ol>
+    <li><strong>Alleen naar het bruto maandbedrag kijken.</strong> Houd ook rekening met je netto lasten na hypotheekrenteaftrek.</li>
+    <li><strong>Studieschuld niet meenemen.</strong> Een studieschuld verlaagt je maximale hypotheek, ook als je die nog niet aflost.</li>
+    <li><strong>Bijkomende kosten vergeten.</strong> Denk aan overdrachtsbelasting, notaris, taxatie en advieskosten.</li>
+    <li><strong>De rente te optimistisch inschatten.</strong> Reken met een iets hogere rente om te zien of je de lasten ook dan kunt dragen.</li>
+    <li><strong>Geen rekening houden met onderhoud.</strong> Naast de hypotheek brengt een woning ook onderhouds- en verzekeringskosten met zich mee.</li>
+  </ol>
+</ContentHubPage>
