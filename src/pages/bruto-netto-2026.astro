@@ -10,6 +10,7 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import TrustPanel from "../components/calculator/TrustPanel.astro";
+import KennisbankLink from "../components/KennisbankLink.astro";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import HowToSchema from "../components/calculator/HowToSchema.astro";
 import InlineSources from "../components/calculator/InlineSources.astro";
@@ -330,6 +331,7 @@ const breadcrumbSchema = {
 
   <div class="calculator-card calc-content" id="calculator-content">
     <p class="badge-indicatie">Indicatie 2026</p>
+    <KennisbankLink href="/kennisbank/bruto-netto-salaris-uitleg/" label="Bruto-netto salaris: complete uitleg" description="Loonheffing, heffingskortingen en vakantiegeld uitgelegd." />
 
     <h2>Waarom kun je deze berekening vertrouwen?</h2>
     <p>Deze calculator is gebaseerd op de officiële <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1" target="_blank" rel="noopener">Box 1 tarieven</a>, <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026" target="_blank" rel="noopener">algemene heffingskorting</a> en <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026" target="_blank" rel="noopener">arbeidskorting</a> van de Belastingdienst voor 2026. De uitkomst is een indicatie: je loonstrook kan afwijken door cao, pensioen, bijtelling en persoonlijke factoren.</p>

@@ -10,6 +10,7 @@ import FaqAccordion from "../components/calculator/FaqAccordion.astro";
 import ToolFooter from "../components/calculator/ToolFooter.astro";
 import SourceCards from "../components/SourceCards.astro";
 import TrustPanel from "../components/calculator/TrustPanel.astro";
+import KennisbankLink from "../components/KennisbankLink.astro";
 import { calculateNetIncomeEstimate2026 } from "../lib/calculators/tax";
 import FinancialJourney from "../components/calculator/FinancialJourney.astro";
 import HowToSchema from "../components/calculator/HowToSchema.astro";
@@ -295,6 +296,7 @@ const breadcrumbSchema = {
 
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Salaris calculator 2026</h2>
+    <KennisbankLink href="/kennisbank/bruto-netto-salaris-uitleg/" label="Bruto-netto salaris: complete uitleg" description="Hoe je van bruto naar netto rekent, stap voor stap." />
     <p>Met deze interactieve salaris calculator reken je snel uit hoeveel je netto per maand en per jaar overhoudt in 2026. Vul je bruto maandsalaris, je pensioenpercentage als werknemer en de loonheffingskorting in. De calculator toont direct je nettobedrag, inclusief vakantiegeld, algemene heffingskorting en arbeidskorting.</p>
     <p>Wil je een uitgebreidere bruto-netto uitleg met de mogelijkheid om je pensioen als vast bedrag in te voeren? Gebruik dan de <a href="/bruto-netto-2026/">bruto-netto calculator</a>. Voor je hypotheek, toeslagen of ZZP-tarief gebruik je de <a href="/hypotheek-calculator/">hypotheek calculator</a>, <a href="/toeslagen-calculator/">toeslagen calculator</a> of <a href="/zzp-calculator/">ZZP calculator</a>.</p>
 
