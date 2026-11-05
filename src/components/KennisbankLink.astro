@@ -1,0 +1,87 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  description?: string;
+}
+
+const { href, label, description } = Astro.props;
+---
+
+<a
+  href={href}
+  class="kb-callout"
+  data-analytics="kennisbank-link"
+  data-analytics-category="calculator-page"
+  data-analytics-action="click"
+  data-analytics-label={label}
+>
+  <span class="kb-callout-icon" aria-hidden="true">📚</span>
+  <span class="kb-callout-body">
+    <span class="kb-callout-label">Lees de complete uitleg</span>
+    <span class="kb-callout-title">{label}</span>
+    {description && <span class="kb-callout-desc">{description}</span>}
+  </span>
+  <span class="kb-callout-arrow" aria-hidden="true">&rarr;</span>
+</a>
+
+<style>
+  .kb-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0.75rem 0 1.25rem;
+    padding: 0.9rem 1rem;
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+
+  .kb-callout:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-1px);
+  }
+
+  .kb-callout-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .kb-callout-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .kb-callout-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+  }
+
+  .kb-callout-title {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .kb-callout-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .kb-callout-arrow {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    align-self: center;
+    flex-shrink: 0;
+  }
+</style>
