@@ -1,0 +1,116 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Kindgebonden budget: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Wat is kindgebonden budget en wie komt ervoor in aanmerking? Uitleg over voorwaarden, inkomen, aantal kinderen en de relatie met kinderbijslag.";
+const h1 = "Kindgebonden budget: complete uitleg";
+
+const intro = [
+  "Kindgebonden budget is een maandelijkse bijdrage van de overheid voor gezinnen met kinderen. Het is bedoeld om de kosten van kinderen te ondersteunen, bovenop de kinderbijslag. Of je ervoor in aanmerking komt, hangt af van je inkomen, het aantal kinderen en hun leeftijden.",
+  "In deze uitleg leggen we uit hoe kindgebonden budget werkt, wat de voorwaarden zijn en hoe het zich verhoudt tot de kinderbijslag. Gebruik de <a href=\"/kindgebonden-budget-berekenen/\">kindgebonden budget calculator</a> voor een indicatie.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Dienst Toeslagen — Kindgebonden budget",
+    description: "Voorwaarden, bedragen en aanvraagprocedure voor kindgebonden budget.",
+    href: "https://www.toeslagen.nl/kindgebonden-budget",
+  },
+  {
+    label: "Officiële bron",
+    title: "SVB — Kinderbijslag",
+    description: "Informatie over de kinderbijslag, die losstaat van het kindgebonden budget.",
+    href: "https://www.svb.nl/nl/kinderbijslag",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Kindgebonden budget", description: "Bereken een indicatie voor jouw gezin.", href: "/kindgebonden-budget-berekenen/", accent: "#2563eb" },
+  { title: "Toeslagen calculator", description: "Bekijk huur- en zorgtoeslag indicatie.", href: "/toeslagen-calculator/", accent: "#7c3aed" },
+  { title: "Bruto netto 2026", description: "Bereken je netto jaarinkomen.", href: "/bruto-netto-2026/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/kindgebonden-budget-berekenen/", label: "Kindgebonden budget calculator — direct een indicatie" },
+  { href: "/toeslagen-calculator/", label: "Toeslagen calculator — huur- en zorgtoeslag" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je toetsingsinkomen berekenen" },
+];
+
+const faq = [
+  {
+    question: "Wat is kindgebonden budget?",
+    answer: "Kindgebonden budget is een maandelijkse bijdrage van de Dienst Toeslagen voor gezinnen met kinderen onder de 18 jaar. Het bedrag hangt af van je inkomen en het aantal kinderen.",
+  },
+  {
+    question: "Wie kan kindgebonden budget krijgen?",
+    answer: "Gezinnen met één of meer kinderen onder de 18 jaar kunnen in aanmerking komen. Je ontvangt kinderbijslag via de SVB, en het kindgebonden budget komt daar via de Dienst Toeslagen bovenop.",
+  },
+  {
+    question: "Is kindgebonden budget hetzelfde als kinderbijslag?",
+    answer: "Nee. Kinderbijslag is een vast bedrag per kind via de SVB. Kindgebonden budget is een inkomensafhankelijke toeslag via de Dienst Toeslagen.",
+  },
+  {
+    question: "Hoeveel kindgebonden budget krijg ik?",
+    answer: "Dat hangt af van je toetsingsinkomen, het aantal kinderen en hun leeftijden. Bij een lager inkomen is het bedrag hoger. Doe de officiële proefberekening op Toeslagen.nl voor het exacte bedrag.",
+  },
+  {
+    question: "Moet ik kindgebonden budget zelf aanvragen?",
+    answer: "Vaak krijg je kindgebonden budget automatisch als je al een andere toeslag ontvangt. Controleer dit op Toeslagen.nl of vraag het zelf aan.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Kindgebonden budget uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="5 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/kindgebonden-budget-berekenen/", title: "Open de kindgebonden budget calculator", description: "Vul je inkomen en gezinssituatie in en zie direct een indicatie van je kindgebonden budget." }}
+>
+  <h2>Wat is kindgebonden budget?</h2>
+  <p>
+    Kindgebonden budget is een maandelijkse toeslag van de <strong>Dienst Toeslagen</strong> voor gezinnen met kinderen onder de 18 jaar. Het is een aanvulling op de kinderbijslag en is bedoeld om de kosten voor kinderen te ondersteunen. In tegenstelling tot de kinderbijslag is het kindgebonden budget <strong>inkomensafhankelijk</strong>: hoe lager je inkomen, hoe hoger het bedrag.
+  </p>
+
+  <h2>Het verschil met kinderbijslag</h2>
+  <p>
+    De <strong>kinderbijslag</strong> wordt uitgekeerd door de SVB en is voor vrijwel alle gezinnen hetzelfde, ongeacht je inkomen. Het <strong>kindgebonden budget</strong> komt daar via de Dienst Toeslagen bovenop en wordt juist wél bepaald door je inkomen, het aantal kinderen en hun leeftijden. Veel gezinnen ontvangen beide regelingen naast elkaar.
+  </p>
+
+  <h2>Welke factoren bepalen de hoogte?</h2>
+  <ul>
+    <li><strong>Toetsingsinkomen</strong> — het gezamenlijke inkomen van jou en je toeslagpartner.</li>
+    <li><strong>Aantal kinderen</strong> — meer kinderen betekent een hoger budget.</li>
+    <li><strong>Leeftijd van de kinderen</strong> — de bedragen kunnen per leeftijdsgroep verschillen.</li>
+  </ul>
+  <p>
+    Ook vermogen kan invloed hebben. Onze calculator geeft een indicatie op basis van je inkomen en gezinssamenstelling; de officiële proefberekening op Toeslagen.nl houdt met alle factoren rekening.
+  </p>
+
+  <h2>Wanneer ontvang je het?</h2>
+  <p>
+    Het kindgebonden budget wordt maandelijks uitgekeerd, meestal rond de 20e van de maand. Als je al een andere toeslag ontvangt, krijg je het kindgebonden budget vaak automatisch. In andere gevallen vraag je het aan via Toeslagen.nl.
+  </p>
+
+  <h2>Veelgemaakte fouten</h2>
+  <ol>
+    <li><strong>Kindgebonden budget en kinderbijslag door elkaar halen.</strong> Het zijn twee verschillende regelingen.</li>
+    <li><strong>Het inkomen van je toeslagpartner niet meetellen.</strong> Dit telt mee voor het toetsingsinkomen.</li>
+    <li><strong>Wijzigingen niet doorgeven.</strong> Een verhuizing of ander inkomen kan het bedrag veranderen.</li>
+    <li><strong>Geen proefberekening doen.</strong> Een indicatie verschilt van het definitieve bedrag van de Dienst Toeslagen.</li>
+  </ol>
+</ContentHubPage>

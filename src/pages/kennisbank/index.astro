@@ -1,0 +1,266 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const articles = [
+  {
+    title: "BTW berekenen: complete uitleg",
+    href: "/kennisbank/btw-berekenen-uitleg/",
+    description: "Tarieven (21%, 9%, 0%), inclusief vs exclusief, formules met voorbeelden en veelgemaakte fouten.",
+    category: "Belasting",
+    accent: "#2563eb",
+    icon: "%",
+  },
+  {
+    title: "Bruto-netto salaris: complete uitleg",
+    href: "/kennisbank/bruto-netto-salaris-uitleg/",
+    description: "Loonheffing, heffingskortingen, Box 1-schijven en vakantiegeld stap voor stap uitgelegd.",
+    category: "Inkomen",
+    accent: "#7c3aed",
+    icon: "€",
+  },
+  {
+    title: "Loonheffing: complete uitleg",
+    href: "/kennisbank/loonheffing-uitleg/",
+    description: "Loonbelasting, premies volksverzekeringen, schijven en de loonheffingskorting.",
+    category: "Inkomen",
+    accent: "#2563eb",
+    icon: "€",
+  },
+  {
+    title: "Vakantiegeld: complete uitleg",
+    href: "/kennisbank/vakantiegeld-uitleg/",
+    description: "Het wettelijk minimum, bruto versus netto en het bijzonder tarief.",
+    category: "Inkomen",
+    accent: "#d97706",
+    icon: "🌴",
+  },
+  {
+    title: "Hypotheek berekenen: complete uitleg",
+    href: "/kennisbank/hypotheek-berekenen-uitleg/",
+    description: "Maximale hypotheek, maandlasten, rente, hypotheekrenteaftrek en NHG.",
+    category: "Wonen",
+    accent: "#d97706",
+    icon: "🏠",
+  },
+  {
+    title: "Hypotheekrente & rentevaste periode",
+    href: "/kennisbank/hypotheekrente-uitleg/",
+    description: "Vaste vs variabele rente en wat de rente doet met je leenbedrag en maandlasten.",
+    category: "Wonen",
+    accent: "#d97706",
+    icon: "🏠",
+  },
+  {
+    title: "ZZP uurtarief: complete uitleg",
+    href: "/kennisbank/zzp-uurtarief-uitleg/",
+    description: "Kosten, facturabele uren, belasting en aftrekposten vertaald naar je tarief.",
+    category: "Ondernemen",
+    accent: "#7c3aed",
+    icon: "💼",
+  },
+  {
+    title: "ZZP vs loondienst",
+    href: "/kennisbank/zzp-vs-loondienst/",
+    description: "Een eerlijke vergelijking van inkomen, zekerheid, pensioen en belasting.",
+    category: "Ondernemen",
+    accent: "#7c3aed",
+    icon: "💼",
+  },
+  {
+    title: "Toeslagen: complete uitleg",
+    href: "/kennisbank/toeslagen-berekenen-uitleg/",
+    description: "Huurtoeslag, zorgtoeslag en kindgebonden budget: voorwaarden en indicaties.",
+    category: "Toeslagen",
+    accent: "#2563eb",
+    icon: "€",
+  },
+  {
+    title: "Kindgebonden budget: complete uitleg",
+    href: "/kennisbank/kindgebonden-budget-uitleg/",
+    description: "De toeslag voor gezinnen met kinderen: voorwaarden en verschil met kinderbijslag.",
+    category: "Toeslagen",
+    accent: "#2563eb",
+    icon: "👶",
+  },
+  {
+    title: "Auto importkosten: complete uitleg",
+    href: "/kennisbank/auto-importkosten-uitleg/",
+    description: "BPM, btw, RDW-keuring en transport: alle kostenposten op een rij.",
+    category: "Auto",
+    accent: "#059669",
+    icon: "🚗",
+  },
+  {
+    title: "Bijtelling auto van de zaak",
+    href: "/kennisbank/bijtelling-auto-van-de-zaak/",
+    description: "Hoe bijtelling werkt en wat een auto van de zaak met je nettoloon doet.",
+    category: "Auto",
+    accent: "#059669",
+    icon: "🚗",
+  },
+  {
+    title: "Sparen & vermogen",
+    href: "/kennisbank/sparen-vermogen-uitleg/",
+    description: "Hoe box 3 werkt, het heffingsvrij vermogen en het effect op je toeslagen.",
+    category: "Inkomen",
+    accent: "#2563eb",
+    icon: "💰",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Kennisbank", item: "https://calculatieloket.nl/kennisbank/" },
+  ],
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Kennisbank — uitlegartikelen",
+  url: "https://calculatieloket.nl/kennisbank/",
+  description: "Overzicht van alle uitlegartikelen over BTW, salaris, hypotheek, ZZP, toeslagen en auto-kosten.",
+  hasPart: articles.map((a) => ({
+    "@type": "Article",
+    name: a.title,
+    url: `https://calculatieloket.nl${a.href}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Kennisbank - Uitlegartikelen | Calculatieloket.nl"
+  description="De kennisbank van Calculatieloket.nl: complete uitleg over BTW, bruto-netto salaris, hypotheek, ZZP, toeslagen, vakantiegeld en auto-kosten."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Kennisbank", current: true },
+    ]}
+    analyticsCategory="site-page"
+  />
+
+  <h1 class="page-title">Kennisbank</h1>
+  <p class="page-subtitle">Complete uitleg bij al onze calculators. Zo begrijp je niet alleen de uitkomst, maar ook hoe die tot stand komt.</p>
+
+  <div class="kb-grid">
+    {articles.map((article) => (
+      <a
+        href={article.href}
+        class="kb-card"
+        style={`--kb-accent: ${article.accent}`}
+        data-analytics="kennisbank-card"
+        data-analytics-category="kennisbank"
+        data-analytics-action="click"
+        data-analytics-label={article.href}
+      >
+        <div class="kb-card-top">
+          <span class="kb-card-icon" aria-hidden="true">{article.icon}</span>
+          <span class="kb-card-category">{article.category}</span>
+        </div>
+        <h2 class="kb-card-title">{article.title}</h2>
+        <p class="kb-card-desc">{article.description}</p>
+        <span class="kb-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .kb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .kb-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+    position: relative;
+  }
+
+  .kb-card:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--kb-accent, var(--color-primary));
+    transform: translateY(-1px);
+  }
+
+  .kb-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .kb-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--kb-accent, var(--color-primary));
+    font-size: 1.1rem;
+  }
+
+  .kb-card-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .kb-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .kb-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 0;
+    flex: 1;
+  }
+
+  .kb-card-arrow {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .kb-card:hover .kb-card-arrow {
+    transform: translateX(3px);
+    color: var(--kb-accent, var(--color-primary));
+  }
+
+  @media (max-width: 900px) {
+    .kb-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .kb-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Bijtelling auto van de zaak: uitleg 2026 | Calculatieloket.nl";
+const description = "Hoe werkt bijtelling voor een auto van de zaak? Uitleg over het bijtellingspercentage, cataloguswaarde en wat het betekent voor je netto loon.";
+const h1 = "Bijtelling auto van de zaak: uitleg";
+
+const intro = [
+  "Een auto van de zaak klinkt aantrekkelijk, maar als je er ook privé mee rijdt, betaal je bijtelling. Dat is een bedrag dat bij je belastbaar inkomen wordt opgeteld, waardoor je netto loon lager uitvalt. Hoeveel dat is, hangt af van de cataloguswaarde en het bijtellingspercentage.",
+  "In deze uitleg leggen we uit hoe bijtelling werkt en wat het betekent voor je salaris. Gebruik de <a href=\"/bruto-netto-2026/\">bruto-netto calculator</a> om het effect op je nettoloon te zien.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Auto van de zaak",
+    description: "Regels en percentages voor de bijtelling van een auto van de zaak.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Bijtelling auto",
+    description: "Uitleg over bijtelling en de voorwaarden voor privégebruik.",
+    href: "https://www.rijksoverheid.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Bruto netto 2026", description: "Bereken je nettoloon met en zonder bijtelling.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Auto importkosten", description: "Bereken de kosten van een auto importeren.", href: "/auto-importkosten-berekenen/", accent: "#059669" },
+  { title: "Salaris calculator", description: "Vergelijk bruto en netto salaris.", href: "/salaris-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/auto-importkosten-berekenen/", label: "Auto importkosten calculator" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je nettoloon berekenen" },
+  { href: "/btw-calculator/", label: "BTW calculator" },
+];
+
+const faq = [
+  {
+    question: "Wat is bijtelling?",
+    answer: "Bijtelling is een bedrag dat bij je belastbaar inkomen wordt opgeteld als je een auto van de zaak ook privé gebruikt. Over dat bedrag betaal je loonheffing, waardoor je netto loon lager wordt.",
+  },
+  {
+    question: "Hoe wordt de bijtelling berekend?",
+    answer: "De bijtelling is een percentage van de cataloguswaarde van de auto. Voor de meeste auto's geldt een standaardpercentage; voor elektrische auto's geldt vaak een lager percentage.",
+  },
+  {
+    question: "Wanneer betaal ik bijtelling?",
+    answer: "Als je per jaar meer dan 500 kilometer privé rijdt met de auto van de zaak. Blijf je daaronder, dan betaal je meestal geen bijtelling.",
+  },
+  {
+    question: "Wat is de cataloguswaarde?",
+    answer: "De cataloguswaarde is de oorspronkelijke nieuwprijs van de auto, inclusief btw en bpm, exclusief kortingen.",
+  },
+  {
+    question: "Is een auto van de zaak altijd voordelig?",
+    answer: "Niet altijd. De bijtelling verhoogt je belastbaar inkomen. Reken het effect op je nettoloon door voordat je een keuze maakt.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Bijtelling auto van de zaak", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="5 november 2026"
+  adSlot="1234567899"
+  categoryLabel="auto"
+  calculatorCta={{ href: "/bruto-netto-2026/", title: "Open de bruto-netto calculator", description: "Bereken je nettoloon en zie wat bijtelling voor je inkomen betekent." }}
+>
+  <h2>Wat is bijtelling?</h2>
+  <p>
+    Als je werkgever je een auto ter beschikking stelt en je rijdt er ook privé mee, dan ziet de Belastingdienst dat privégebruik als loon. Over dat 'loon in natura' betaal je belasting. De <strong>bijtelling</strong> is het bedrag dat daarvoor bij je belastbaar inkomen wordt opgeteld.
+  </p>
+
+  <h2>Hoe wordt bijtelling berekend?</h2>
+  <p>
+    De bijtelling is een <strong>percentage van de cataloguswaarde</strong> van de auto. De cataloguswaarde is de oorspronkelijke nieuwprijs inclusief btw en bpm, exclusief eventuele kortingen. Voor de meeste auto's op fossiele brandstof geldt een standaardpercentage; voor elektrische auto's geldt vaak een lager percentage om elektrisch rijden te stimuleren.
+  </p>
+  <p>
+    De exacte percentages veranderen regelmatig. Controleer daarom altijd de actuele percentages bij de Belastingdienst voordat je een berekening maakt.
+  </p>
+
+  <h2>De 500-kilometergrens</h2>
+  <p>
+    Rijd je per jaar <strong>minder dan 500 kilometer privé</strong> met de auto van de zaak, dan betaal je meestal geen bijtelling. Je moet dit dan wel kunnen aantonen, bijvoorbeeld met een rittenregistratie. Rijd je meer dan 500 kilometer privé, dan geldt de bijtelling over het hele jaar.
+  </p>
+
+  <h2>Wat betekent bijtelling voor je nettoloon?</h2>
+  <p>
+    De bijtelling wordt opgeteld bij je bruto salaris. Over dat hogere bedrag betaal je loonheffing, waardoor je netto loon lager uitvalt. Het effect hangt af van de cataloguswaarde, het bijtellingspercentage en je belastingtarief.
+  </p>
+
+  <h2>Rekenvoorbeeld (principe)</h2>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Cataloguswaarde</strong>
+      <p>€ 30.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Bijtellingspercentage</strong>
+      <p>Percentage van de cataloguswaarde</p>
+    </div>
+    <div class="example-card">
+      <strong>Bijtelling per jaar</strong>
+      <p>Percentage × cataloguswaarde</p>
+    </div>
+    <div class="example-card">
+      <strong>Effect op netto loon</strong>
+      <p>Loonheffing over de bijtelling</p>
+    </div>
+  </div>
+  <p>
+    Reken het effect op jouw situatie door met de <a href="/bruto-netto-2026/">bruto-netto calculator</a> en controleer de actuele percentages bij de Belastingdienst.
+  </p>
+
+  <h2>Veelgemaakte fouten</h2>
+  <ol>
+    <li><strong>Het effect op nettoloon onderschatten.</strong> De bijtelling verlaagt je netto loon merkbaar.</li>
+    <li><strong>De 500-kilometergrens verkeerd inschatten.</strong> Privé rijden zonder rittenregistratie kan tot naheffingen leiden.</li>
+    <li><strong>Korting op de cataloguswaarde meetellen.</strong> De bijtelling gaat uit van de oorspronkelijke cataloguswaarde, niet van de aankoopprijs.</li>
+    <li><strong>Verouderde percentages gebruiken.</strong> Check altijd de actuele percentages.</li>
+  </ol>
+</ContentHubPage>
