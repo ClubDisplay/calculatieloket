@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatieloket.nl/" },
+    { "@type": "ListItem", position: 2, name: "Onderhoud & updates", item: "https://calculatieloket.nl/onderhoud/" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Onderhoud & updates - Calculatieloket.nl"
+  description="Hoe Calculatieloket.nl haar calculators actueel houdt: jaarlijkse controle van tarieven en regels, officiële bronnen en een overzicht van recente updates."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Breadcrumbs
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Onderhoud & updates", current: true },
+    ]}
+    analyticsCategory="site-page"
+  />
+
+  <h1 class="page-title">Onderhoud &amp; updates</h1>
+  <p class="page-subtitle">Zo houden we onze calculators actueel, betrouwbaar en transparant.</p>
+
+  <div class="calculator-card">
+    <h2>Hoe we de site onderhouden</h2>
+    <p>Calculatieloket.nl werkt met een vaste onderhoudscyclus:</p>
+    <ul>
+      <li><strong>Jaarlijkse tariefcontrole</strong> — zodra de nieuwe belastingplannen, toeslagbedragen en premies bekend zijn, controleren we alle calculators en werken we de parameters bij.</li>
+      <li><strong>Officiële bronnen</strong> — we baseren onze berekeningen op publieke bronnen zoals de Belastingdienst, Dienst Toeslagen, Rijksoverheid, AFM, NHG, RDW en KVK.</li>
+      <li><strong>Transparantie</strong> — bij elke calculator vermelden we de gebruikte bronnen en de datum van de laatste update.</li>
+      <li><strong>Indicatieve uitkomsten</strong> — we presenteren elke uitkomst als indicatie, omdat persoonlijke situaties kunnen afwijken.</li>
+    </ul>
+
+    <h2>Recente updates</h2>
+    <ul>
+      <li><strong>4 november 2026</strong> — Kennisbank gelanceerd met uitgebreide uitlegartikelen over BTW, bruto-netto salaris, hypotheek, ZZP-uurtarief, toeslagen, auto-importkosten, vakantiegeld en loonheffing.</li>
+      <li><strong>4 november 2026</strong> — Homepage uitgebreid met een introductie, meer veelgestelde vragen en een overzicht van de kennisbank.</li>
+      <li><strong>1 juli 2026</strong> — Tarieven en regels voor 2026 verwerkt in alle calculators (Box 1-schijven, heffingskortingen, BTW-tarieven en toeslagbedragen).</li>
+    </ul>
+
+    <h2>Waarom een indicatie en geen advies?</h2>
+    <p>Onze calculators geven bewust een indicatie. Jouw persoonlijke situatie kan afwijken door bijvoorbeeld aftrekposten, een specifieke cao, je vermogen of je huishoudsamenstelling. Voor bindende berekeningen verwijzen we je naar de officiële instanties of een erkend adviseur.</p>
+
+    <h2>Een fout gezien?</h2>
+    <p>Klopt er iets niet, of heb je een suggestie voor een nieuwe calculator? Laat het ons weten via de <a href="/contact/">contactpagina</a>. We streven ernaar om binnen 2 werkdagen te reageren.</p>
+  </div>
+</BaseLayout>
