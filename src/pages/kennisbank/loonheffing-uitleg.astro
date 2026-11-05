@@ -1,0 +1,150 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Loonheffing: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Wat is loonheffing en hoe wordt het berekend? Uitleg over loonbelasting, premies volksverzekeringen, Box 1-schijven en heffingskortingen in 2026.";
+const h1 = "Loonheffing: complete uitleg";
+
+const intro = [
+  "Loonheffing is de verzamelnaam voor de belasting en premies die je werkgever inhoudt op je salaris. Het is daarmee de belangrijkste verklaring voor het verschil tussen je bruto en netto loon.",
+  "In deze uitleg behandelen we waaruit loonheffing bestaat, hoe de Box 1-schijven werken en welke rol heffingskortingen spelen. Gebruik de <a href=\"/loonheffing-berekenen-2026/\">loonheffing calculator</a> of de <a href=\"/bruto-netto-2026/\">bruto-netto calculator</a> voor een indicatie.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Loonheffing",
+    description: "Uitleg over loonbelasting, premies volksverzekeringen en de rekenregels.",
+    href: "https://www.belastingdienst.nl",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Heffingskortingen",
+    description: "Overzicht van de algemene heffingskorting en arbeidskorting.",
+    href: "https://www.belastingdienst.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Loonheffing berekenen", description: "Bereken een indicatie van je loonheffing.", href: "/loonheffing-berekenen-2026/", accent: "#2563eb" },
+  { title: "Bruto netto 2026", description: "Bereken je netto maandsalaris.", href: "/bruto-netto-2026/", accent: "#7c3aed" },
+  { title: "Salaris calculator", description: "Vergelijk bruto en netto salaris.", href: "/salaris-calculator/", accent: "#d97706" },
+];
+
+const relatedLinks = [
+  { href: "/loonheffing-berekenen-2026/", label: "Loonheffing calculator — direct een indicatie" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je nettoloon berekenen" },
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator" },
+];
+
+const faq = [
+  {
+    question: "Wat is loonheffing precies?",
+    answer: "Loonheffing is de verzamelnaam voor loonbelasting en premies volksverzekeringen. Je werkgever houdt dit in op je salaris en draagt het af aan de Belastingdienst.",
+  },
+  {
+    question: "Wat zijn premies volksverzekeringen?",
+    answer: "Dat zijn premies voor de AOW, Anw en Wlz. Ze worden samen met de loonbelasting ingehouden en zijn onderdeel van de loonheffing.",
+  },
+  {
+    question: "Wat is de loonheffingskorting?",
+    answer: "De loonheffingskorting verlaagt de belasting die je betaalt. Je vraagt deze aan bij je werkgever. Werk je voor meerdere werkgevers, pas de korting dan maar bij één werkgever toe.",
+  },
+  {
+    question: "Wat zijn heffingskortingen?",
+    answer: "Heffingskortingen zijn kortingen op je belasting. De belangrijkste zijn de algemene heffingskorting en de arbeidskorting. Ze worden lager naarmate je inkomen stijgt.",
+  },
+  {
+    question: "Waarom betaal ik over mijn bonus meer belasting?",
+    answer: "Eenmalige uitkeringen zoals bonussen en vakantiegeld vallen onder het bijzonder tarief, waardoor de inhouding relatief hoog kan uitvallen.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Loonheffing uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/loonheffing-berekenen-2026/", title: "Open de loonheffing calculator", description: "Vul je bruto salaris in en zie een indicatie van de loonheffing en je nettoloon." }}
+>
+  <h2>Waaruit bestaat loonheffing?</h2>
+  <p>
+    Loonheffing is de verzamelnaam voor twee componenten die je werkgever op je salaris inhoudt:
+  </p>
+  <ul>
+    <li><strong>Loonbelasting</strong> — de belasting over je loon, onderdeel van de inkomstenbelasting (box 1).</li>
+    <li><strong>Premies volksverzekeringen</strong> — premies voor de AOW, Anw en Wlz.</li>
+  </ul>
+  <p>
+    Samen vormen ze één inhouding. Je ziet op je loonstrook daarom meestal één bedrag aan loonheffing staan.
+  </p>
+
+  <h2>De Box 1-schijven van 2026</h2>
+  <p>
+    Over je inkomen in box 1 betaal je een progressief tarief. In 2026 zijn de schijven 35,75%, 37,56% en 49,50%. Hoe hoger je inkomen, hoe groter het deel dat in een hogere schijf valt.
+  </p>
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>Schijf</th>
+        <th>Tarief 2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Schijf 1</td>
+        <td>35,75%</td>
+      </tr>
+      <tr>
+        <td>Schijf 2</td>
+        <td>37,56%</td>
+      </tr>
+      <tr>
+        <td>Schijf 3</td>
+        <td>49,50%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    De exacte schijfgrenzen veranderen jaarlijks. Voor jouw persoonlijke situatie verwijzen we je naar de Belastingdienst of onze calculators.
+  </p>
+
+  <h2>Heffingskortingen: de korting op je belasting</h2>
+  <p>
+    Heffingskortingen verlagen de belasting die je uiteindelijk betaalt. De twee belangrijkste voor werknemers zijn:
+  </p>
+  <ul>
+    <li><strong>Algemene heffingskorting</strong> — in 2026 maximaal € 3.115. Deze geldt voor iedereen en wordt lager naarmate je inkomen stijgt.</li>
+    <li><strong>Arbeidskorting</strong> — in 2026 maximaal € 5.685. Deze geldt voor werkenden en stimuleert aan het werk blijven.</li>
+  </ul>
+  <p>
+    De <strong>loonheffingskorting</strong> is de manier waarop je werkgever deze kortingen alvast verrekent in je maandelijkse loonheffing. Zonder loonheffingskorting wordt er meer ingehouden en krijg je het verschil terug via je belastingaangifte.
+  </p>
+
+  <h2>Het bijzonder tarief</h2>
+  <p>
+    Voor eenmalige uitkeringen zoals vakantiegeld, bonussen en overwerk geldt het <strong>bijzonder tarief</strong>. Dit tarief is vaak hoger dan je reguliere tarief, omdat het rekening houdt met je totale jaarinkomen. Daardoor kan de inhouding op je vakantiegeld relatief hoog uitvallen.
+  </p>
+
+  <h2>Veelgemaakte fouten rond loonheffing</h2>
+  <ol>
+    <li><strong>Loonheffingskorting bij twee werkgevers toepassen.</strong> Pas de korting maar bij één werkgever toe, anders moet je mogelijk bijbetalen.</li>
+    <li><strong>Vergeten dat premies volksverzekeringen onderdeel zijn.</strong> De loonheffing is meer dan alleen belasting.</li>
+    <li><strong>Denken dat een hogere schijf over je hele inkomen geldt.</strong> Het progressieve tarief geldt alleen over het deel dat in die schijf valt.</li>
+    <li><strong>Geen rekening houden met het bijzonder tarief.</strong> Over bonussen en vakantiegeld kan relatief meer worden ingehouden.</li>
+  </ol>
+</ContentHubPage>

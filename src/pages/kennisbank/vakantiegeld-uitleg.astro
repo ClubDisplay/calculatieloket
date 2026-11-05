@@ -1,0 +1,135 @@
+---
+import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
+import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+
+const title = "Vakantiegeld: complete uitleg 2026 | Calculatieloket.nl";
+const description = "Hoeveel vakantiegeld krijg je in 2026? Uitleg over het wettelijke percentage van 8%, bruto versus netto vakantiegeld en het bijzonder tarief.";
+const h1 = "Vakantiegeld: complete uitleg";
+
+const intro = [
+  "Vakantiegeld is voor de meeste werknemers een welkome extra in mei of juni. Het wettelijk minimum is 8% van je bruto jaarsalaris, maar het bedrag dat netto op je rekening komt, valt lager uit dan je op basis van dat percentage zou verwachten.",
+  "In deze uitleg leggen we uit hoe vakantiegeld wordt berekend, waarom het belast wordt en wat het verschil is tussen bruto en netto. Gebruik de <a href=\"/vakantiegeld-calculator/\">vakantiegeld calculator</a> voor een directe indicatie.",
+];
+
+const sources: SourceItem[] = [
+  {
+    label: "Officiële bron",
+    title: "Rijksoverheid — Vakantiegeld",
+    description: "Wettelijke regels rond het minimumpercentage en de uitbetaling van vakantiegeld.",
+    href: "https://www.rijksoverheid.nl/onderwerpen/vakantiedagen-en-vakantiegeld",
+  },
+  {
+    label: "Officiële bron",
+    title: "Belastingdienst — Bijzonder tarief",
+    description: "Uitleg over het bijzonder tarief dat geldt voor vakantiegeld en andere eenmalige uitkeringen.",
+    href: "https://www.belastingdienst.nl",
+  },
+];
+
+const crossSell: CrossSellItem[] = [
+  { title: "Vakantiegeld calculator", description: "Bereken je bruto en netto vakantiegeld.", href: "/vakantiegeld-calculator/", accent: "#d97706" },
+  { title: "Bruto netto 2026", description: "Bereken je netto maandsalaris.", href: "/bruto-netto-2026/", accent: "#2563eb" },
+  { title: "Salaris calculator", description: "Vergelijk bruto en netto salaris.", href: "/salaris-calculator/", accent: "#7c3aed" },
+];
+
+const relatedLinks = [
+  { href: "/vakantiegeld-calculator/", label: "Vakantiegeld calculator — direct een indicatie" },
+  { href: "/bruto-netto-2026/", label: "Bruto netto 2026 — je nettoloon berekenen" },
+  { href: "/loonheffing-berekenen-2026/", label: "Loonheffing berekenen 2026" },
+];
+
+const faq = [
+  {
+    question: "Hoeveel vakantiegeld krijg ik?",
+    answer: "Het wettelijk minimum is 8% van je bruto jaarsalaris. Sommige cao's of arbeidsovereenkomsten hanteren een hoger percentage. Over het bedrag betaal je belasting.",
+  },
+  {
+    question: "Wanneer wordt vakantiegeld uitbetaald?",
+    answer: "De meeste werkgevers betalen vakantiegeld in mei of juni uit. Sommige betalen het maandelijks of per kwartaal. Kijk in je arbeidsovereenkomst of cao voor jouw situatie.",
+  },
+  {
+    question: "Waarom is mijn netto vakantiegeld lager?",
+    answer: "Vakantiegeld valt onder het bijzonder tarief. Dit tarief is vaak hoger dan het tarief over je gewone salaris, waardoor je relatief meer belasting betaalt over je vakantiegeld.",
+  },
+  {
+    question: "Krijg ik ook vakantiegeld als ik net in dienst ben?",
+    answer: "Ja, je bouwt vakantiegeld op over de periode dat je werkt. Als je bijvoorbeeld halverwege het jaar begint, bouw je vakantiegeld op over de gewerkte maanden.",
+  },
+  {
+    question: "Geldt 8% ook voor uitzendkrachten?",
+    answer: "Ook uitzendkrachten krijgen vakantiegeld. Het wordt vaak per periode uitbetaald of gereserveerd. Controleer je uitzendovereenkomst voor de exacte regeling.",
+  },
+];
+---
+
+<ContentHubPage
+  title={title}
+  description={description}
+  h1={h1}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Vakantiegeld uitleg", current: true },
+  ]}
+  intro={intro}
+  sources={sources}
+  faq={faq}
+  relatedLinks={relatedLinks}
+  crossSell={crossSell}
+  lastUpdated="4 november 2026"
+  adSlot="1234567899"
+  categoryLabel="inkomen"
+  calculatorCta={{ href: "/vakantiegeld-calculator/", title: "Open de vakantiegeld calculator", description: "Vul je bruto maandsalaris in en zie direct een indicatie van je bruto en netto vakantiegeld." }}
+>
+  <h2>Wat is vakantiegeld?</h2>
+  <p>
+    Vakantiegeld is een wettelijke uitkering van minimaal <strong>8% van je bruto jaarsalaris</strong>, bedoeld om je vakantie te bekostigen. Het wordt berekend over je bruto jaarsalaris, inclusief eventuele toeslagen en overwerk, maar meestal exclusief bonussen. Sommige cao's of arbeidsovereenkomsten hanteren een hoger percentage, bijvoorbeeld 8,33%.
+  </p>
+
+  <h2>Bruto versus netto vakantiegeld</h2>
+  <p>
+    Het percentage van 8% zegt iets over je <strong>bruto</strong> vakantiegeld. Het bedrag dat op je rekening komt, is je <strong>netto</strong> vakantiegeld. Daar is loonheffing op ingehouden. Omdat vakantiegeld onder het <strong>bijzonder tarief</strong> valt, is de belasting over dit bedrag vaak hoger dan over je gewone maandsalaris.
+  </p>
+
+  <h2>Wat is het bijzonder tarief?</h2>
+  <p>
+    Het bijzonder tarief geldt voor eenmalige uitkeringen zoals vakantiegeld, bonussen en overwerk. Je werkgever past dit tarief toe om te voorkomen dat je aan het einde van het jaar moet bijbetalen. Het tarief houdt rekening met je jaarinkomen, waardoor de inhouding op je vakantiegeld relatief hoog kan uitvallen.
+  </p>
+
+  <h2>Rekenvoorbeeld</h2>
+  <p>Een vereenvoudigd voorbeeld met het wettelijke minimumpercentage:</p>
+  <div class="example-grid">
+    <div class="example-card">
+      <strong>Bruto maandsalaris</strong>
+      <p>€ 3.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Bruto jaarsalaris</strong>
+      <p>€ 36.000</p>
+    </div>
+    <div class="example-card">
+      <strong>Bruto vakantiegeld (8%)</strong>
+      <p>€ 2.880</p>
+    </div>
+    <div class="example-card">
+      <strong>Netto vakantiegeld</strong>
+      <p>Lager door het bijzonder tarief</p>
+    </div>
+  </div>
+  <p>
+    De exacte netto-uitkomst hangt af van je jaarinkomen en de geldende tarieven. Vul je gegevens in de <a href="/vakantiegeld-calculator/">vakantiegeld calculator</a> in voor een persoonlijke indicatie.
+  </p>
+
+  <h2>Wanneer wordt vakantiegeld uitbetaald?</h2>
+  <p>
+    De meeste werkgevers betalen vakantiegeld eenmaal per jaar uit, vaak in mei of juni. Anderen reserveren het maandelijks en keren het bij de salarisbetaling uit. Wat voor jou geldt, staat in je arbeidsovereenkomst of cao.
+  </p>
+
+  <h2>Veelgemaakte fouten rond vakantiegeld</h2>
+  <ol>
+    <li><strong>Het bruto percentage als nettobedrag zien.</strong> Houd rekening met het bijzonder tarief.</li>
+    <li><strong>Bonussen meetellen in de 8%.</strong> Het wettelijke percentage geldt over het bruto jaarsalaris; bonussen tellen meestal niet mee.</li>
+    <li><strong>Vergeten dat je vakantiegeld opbouwt.</strong> Ook bij een kort dienstverband bouw je vakantiegeld op over de gewerkte periode.</li>
+    <li><strong>Geen rekening houden met een cao-percentage.</strong> Sommige sectoren hanteren meer dan 8%.</li>
+  </ol>
+</ContentHubPage>
