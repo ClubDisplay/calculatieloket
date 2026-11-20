@@ -240,9 +240,18 @@ const articleSchema = articleIsoDate
     color: var(--color-text);
   }
 
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+
   .rate-table {
     width: 100%;
+    min-width: 560px;
     border-collapse: collapse;
+  }
+
+  .calc-content > .rate-table {
     margin: 1rem 0 1.5rem;
   }
 
@@ -260,6 +269,11 @@ const articleSchema = articleIsoDate
 
   .rate-table tr:nth-child(even) {
     background: var(--color-surface);
+  }
+
+  .table-scroll:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .example-grid {

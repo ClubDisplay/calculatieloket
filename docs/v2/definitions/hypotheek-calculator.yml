@@ -98,11 +98,11 @@ outputs:
     name: grossMonthlyPayment
     type: money
   - label:
-      nl-NL: Netto maandlasten
+      nl-NL: Netto-indicatie
     decimals: 0
     group: result
     help_text:
-      nl-NL: Inclusief hypotheekrenteaftrek
+      nl-NL: Vereenvoudigde indicatie op basis van de gemiddelde rente over de looptijd
     name: netMonthlyPayment
     type: money
   - label:
@@ -208,9 +208,9 @@ journeys:
       priority: 3
 seo:
   title:
-    nl-NL: Hypotheek Calculator — Indicatie maandlasten en hypotheek
+    nl-NL: Hypotheek maandlasten berekenen 2026 | Bruto en netto
   description:
-    nl-NL: Bereken een indicatie van je hypotheeklasten, rentelasten en hypotheekbedrag op basis van je inkomen. Geen officiële hypotheekofferte.
+    nl-NL: Bereken indicatieve bruto en netto hypotheeklasten, je maximale hypotheek en rentekosten. Met uitleg, voorbeelden en duidelijke aannames voor 2026.
   keywords:
     nl-NL:
       - hypotheek calculator
@@ -222,15 +222,20 @@ seo:
     - HowTo
 sources:
   - url:
-      nl-NL: https://www.nibud.nl
+      nl-NL: https://www.afm.nl/consumenten/themas/hypotheken
+    domain: afm.nl
+    label:
+      nl-NL: AFM — Hypotheken
+  - url:
+      nl-NL: https://www.nibud.nl/onderwerpen/wonen/hypotheek-afsluiten/
     domain: nibud.nl
     label:
-      nl-NL: Nibud — Budgetvoorlichting
+      nl-NL: Nibud — Hypotheek afsluiten
   - url:
-      nl-NL: https://www.rijksoverheid.nl/hypotheek
+      nl-NL: https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/huis-kopen/hypotheek-aanvragen-wat-moet-ik-regelen
     domain: rijksoverheid.nl
     label:
-      nl-NL: Rijksoverheid — Hypotheek
+      nl-NL: Rijksoverheid — Hypotheek aanvragen
 disclaimers:
   nl-NL: Deze berekening is geen officiële hypotheekofferte. Geldverstrekkers gebruiken eigen acceptatieregels en kijken onder meer naar studieschuld, BKR, gezinssituatie, rentevaste periode, energieprestatie en vaste lasten. Vraag altijd een officiële berekening aan bij een hypotheekadviseur.
 privacy:
@@ -239,7 +244,7 @@ privacy:
   no_tracking: true
   no_personal_data: true
 maintenance:
-  last_review: '2026-06-29'
+  last_review: '2026-11-20'
   owner: Barry
   update_frequency: yearly
   review_on:

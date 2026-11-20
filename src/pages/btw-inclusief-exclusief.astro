@@ -18,8 +18,8 @@ import { calculateBtw } from "../lib/calculators/btw";
 import { getRecommendations } from "../lib/recommendations/engine";
 import { formatEuro } from "../lib/format/currency";
 
-const title = "BTW inclusief en exclusief berekenen — 21%, 9% en 0% | Calculatieloket.nl";
-const description = "Leer hoe je btw inclusief en exclusief berekent. Formules, voorbeelden en een gratis rekenmachine voor 21%, 9% en 0% btw. Gebaseerd op Belastingdienst tarieven.";
+const title = "Inclusief en exclusief btw: verschil en berekening | Calculatieloket.nl";
+const description = "Wat is het verschil tussen inclusief en exclusief btw? Bekijk formules, een bedragentabel en factuurvoorbeelden en reken direct om met 21%, 9% of 0%.";
 
 const defaultAmount = 100;
 const defaultRate = 21;
@@ -41,7 +41,16 @@ const heroLabel = defaultDirection === "excl" ? "Bedrag inclusief btw" : "Bedrag
 const heroValue = formatEuro(defaultDirection === "excl" ? initialResult.amountIncl : initialResult.amountExcl, 2);
 const heroSubtext = `Gebaseerd op ${defaultRate}% btw over ${formatEuro(defaultAmount, 2)}`;
 
-const lastUpdated = "4 augustus 2026";
+const comparisonRows = [50, 100, 250, 1000].map((amountExcl) => {
+  const result = calculateBtw({
+    amount: amountExcl,
+    rate: 21,
+    direction: "exclusive_to_inclusive",
+  });
+  return { amountExcl, btwAmount: result.btwAmount, amountIncl: result.amountIncl };
+});
+
+const lastUpdated = "20 november 2026";
 
 const quickAmounts = [100, 250, 500, 1000];
 
@@ -182,8 +191,8 @@ const breadcrumbSchema = {
   ]} />
 
   <section class="page-intro">
-    <h1>BTW inclusief en exclusief berekenen</h1>
-    <p><strong>Exclusief btw</strong> is het bedrag zonder btw. Dit is het nettobedrag dat een bedrijf ontvangt voor een product of dienst. <strong>Inclusief btw</strong> is het bedrag met btw erbij — dit is wat de klant uiteindelijk betaalt. Het <strong>btw-bedrag</strong> is het verschil tussen het inclusieve en het exclusieve bedrag.</p>
+    <h1>Verschil tussen inclusief en exclusief btw</h1>
+    <p><strong>Exclusief btw</strong> is het bedrag zonder btw. <strong>Inclusief btw</strong> is datzelfde bedrag plus de btw; dit is het totaal dat de klant betaalt. Het <strong>btw-bedrag</strong> is het verschil tussen beide bedragen.</p>
     <p>Op deze pagina lees je hoe je in twee richtingen rekent: van exclusief naar inclusief en andersom. Je vindt de formules, praktische voorbeelden en een rekenmachine die direct uitrekent welk bedrag exclusief, inclusief en het btw-bedrag is. Kies 21%, 9% of 0% btw. Wil je direct een inclusief bedrag terugrekenen naar exclusief? Gebruik dan onze <a href="/btw-terugrekenen/">BTW terugrekenen tool</a>.</p>
     <p>Bedrijven werken in hun administratie en offertes vaak met bedragen exclusief btw, terwijl consumenten in winkels en webshops meestal prijzen inclusief btw zien. Het is daarom handig om snel tussen beide te kunnen wisselen.</p>
   </section>
@@ -336,12 +345,50 @@ const breadcrumbSchema = {
       <li>Btw-bedrag: &euro;109 &minus; &euro;100 = <strong>&euro;9</strong></li>
     </ul>
 
+    <h2>Bedragentabel: exclusief naar inclusief bij 21% btw</h2>
+    <p>Gebruik deze tabel als controle bij veelvoorkomende bedragen. De bedragen zijn berekend met dezelfde rekenmodule als de calculator en afgerond op twee decimalen.</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Bedragen exclusief en inclusief 21 procent btw">
+      <table class="rate-table">
+        <thead><tr><th>Exclusief btw</th><th>21% btw</th><th>Inclusief btw</th></tr></thead>
+        <tbody>
+          {comparisonRows.map((row) => (
+            <tr>
+              <td>{formatEuro(row.amountExcl, 2)}</td>
+              <td>{formatEuro(row.btwAmount, 2)}</td>
+              <td>{formatEuro(row.amountIncl, 2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Factuurvoorbeeld met twee btw-tarieven</h2>
+    <p>Stel dat je een dienst verleent van € 100 exclusief 21% btw en een product levert van € 50 exclusief 9% btw. Je berekent de btw dan per factuurregel:</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Factuurvoorbeeld met twee btw-tarieven">
+      <table class="rate-table">
+        <thead><tr><th>Omschrijving</th><th>Exclusief</th><th>Tarief</th><th>Btw</th><th>Inclusief</th></tr></thead>
+        <tbody>
+          <tr><td>Dienst</td><td>€ 100,00</td><td>21%</td><td>€ 21,00</td><td>€ 121,00</td></tr>
+          <tr><td>Product</td><td>€ 50,00</td><td>9%</td><td>€ 4,50</td><td>€ 54,50</td></tr>
+          <tr><td><strong>Totaal</strong></td><td><strong>€ 150,00</strong></td><td>—</td><td><strong>€ 25,50</strong></td><td><strong>€ 175,50</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Het totaal exclusief btw is € 150,00, het totale btw-bedrag is € 25,50 en de klant betaalt € 175,50 inclusief btw. Je kunt dus niet één gemiddeld btw-percentage over het totaal gebruiken zonder rekening te houden met de verdeling tussen de tarieven.</p>
+
+    <h2>Wanneer zie je welk bedrag?</h2>
+    <ul class="calc-list">
+      <li><strong>Consumentenprijzen:</strong> in winkels en webshops zie je doorgaans prijzen inclusief btw.</li>
+      <li><strong>Zakelijke offertes en facturen:</strong> ondernemers vermelden vaak het bedrag exclusief btw, het tarief, het btw-bedrag en het totaal inclusief btw.</li>
+      <li><strong>Btw-aangifte:</strong> je administratie onderscheidt de omzet exclusief btw en de verschuldigde btw. Controleer je aanvulling altijd met je administratie of adviseur.</li>
+    </ul>
+
     <h2>Veelgemaakte fouten bij btw inclusief en exclusief berekenen</h2>
     <ul class="calc-list">
       <li><strong>21% van een inclusief bedrag aftrekken:</strong> dit is niet hetzelfde als btw terugrekenen. Je moet delen door 1,21, niet aftrekken of vermenigvuldigen met 0,79.</li>
       <li><strong>Verkeerd tarief toepassen:</strong> controleer welk btw-tarief (21% of 9%) van toepassing is op jouw product of dienst.</li>
       <li><strong>0% btw verwarren met vrijgesteld:</strong> het 0%-tarief is iets anders dan een btw-vrijstelling. Bij het nultarief breng je 0% btw in rekening maar vermeld je dit op je factuur. Een vrijstelling betekent dat je helemaal geen btw mag berekenen.</li>
-      <li><strong>Rondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine verschillen ontstaan door afronding. Dit is normaal, maar wees je ervan bewust.</li>
+      <li><strong>Afrondingsverschillen negeren:</strong> bij facturen met meerdere regels kunnen kleine verschillen ontstaan door afronding. Leg daarom per regel vast hoe je afrondt en controleer het factuurtotaal.</li>
       <li><strong>Niet controleren bij de Belastingdienst:</strong> btw-regels kunnen wijzigen. Controleer bij twijfel de officiële informatie van de <a href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/btw_berekenen_aan_uw_klanten/btw_berekenen/btw_tarief/btw_tarief" target="_blank" rel="noopener">Belastingdienst</a>.</li>
     </ul>
 
@@ -771,6 +818,29 @@ const breadcrumbSchema = {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     margin-top: 0.5rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .rate-table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+  }
+
+  .rate-table th,
+  .rate-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--color-border);
+  }
+
+  .rate-table th {
+    background: var(--color-primary-light);
+    font-weight: 700;
   }
 
   .formula-box {

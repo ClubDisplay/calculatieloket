@@ -42,7 +42,7 @@ const initialRecommendations = getRecommendations({
 const totalMonthlyBenefit = initialResult.rentBenefit + initialResult.zorgBenefit;
 const totalYearlyBenefit = totalMonthlyBenefit * 12;
 
-const lastUpdated = "22 september 2026";
+const lastUpdated = "20 november 2026";
 
 const quickIncomeAmounts = [25000, 35000, 45000, 60000];
 
@@ -291,7 +291,7 @@ const breadcrumbSchema = {
 
   <div class="calculator-card calc-content" id="calculator-content">
     <h2 class="page-title">Toeslagen calculator 2026</h2>
-    <KennisbankLink href="/kennisbank/toeslagen-berekenen-uitleg/" label="Toeslagen: complete uitleg" description="Huurtoeslag, zorgtoeslag en kindgebonden budget uitgelegd." />
+    <KennisbankLink href="/kennisbank/toeslagen-berekenen-uitleg/" label="Toeslagenkaart 2026: bedragen en grenzen" description="Bekijk de officiële bedragen, rekenstappen en een uitgewerkt voorbeeld." />
     <p>Bereken een indicatie van huurtoeslag en zorgtoeslag op basis van jouw inkomen, huur en situatie. Gebaseerd op de regels van 2026.</p>
     <p>Wil je weten wat je <a href="/bruto-netto-2026/">netto overhoudt</a> van het inkomen waarover je toeslagen berekent, of bekijk je <a href="/hypotheek-calculator/">hypotheekindicatie</a> en <a href="/zzp-calculator/">ZZP-uurtarief</a>.</p>
 
@@ -305,9 +305,15 @@ const breadcrumbSchema = {
       <li><strong>Zorgtoeslag:</strong> maximaal € 1.550/jaar (circa € 129/maand) voor alleenstaanden, € 2.963/jaar (circa € 247/maand) met partner. Inkomensgrens € 40.857 (alleen) / € 51.142 (samen). Vermogen wordt in deze indicatie niet meegenomen.</li>
     </ul>
 
-    <h2>Praktijkvoorbeeld</h2>
-    <p>De hoogte van je toeslag hangt af van je inkomen, huur en huishouden. Stel, je bent alleenstaand met een bruto jaarinkomen van <strong>€ 15.000</strong> en betaalt <strong>€ 650</strong> kale huur per maand. Deze eenvoudige indicatie geeft dan bijvoorbeeld een huurtoeslag en zorgtoeslag. Voor je exacte situatie moet je altijd de officiële proefberekening op <a href="https://www.toeslagen.nl" target="_blank" rel="noopener">Toeslagen.nl</a> doen.</p>
-    <p>Met een partner en een gezamenlijk inkomen verandert zowel de huurtoeslag als de zorgtoeslag. Probeer verschillende scenario's uit met de quick chips.</p>
+    <h2>Praktijkvoorbeeld met dezelfde rekenmodule</h2>
+    <p>Stel dat je alleenstaand bent, 21 jaar of ouder, een geschat toetsingsinkomen van <strong>{formatEuro(defaultIncome, 0)}</strong> hebt en <strong>{formatEuro(defaultRent, 0)}</strong> kale huur per maand betaalt. Zonder medebewoners en ervan uitgaande dat je aan de overige voorwaarden voldoet, toont de calculator:</p>
+    <ul class="calc-list">
+      <li>Huurtoeslag: <strong>{formatEuro(initialResult.rentBenefit, 0)} per maand</strong>.</li>
+      <li>Zorgtoeslag: <strong>{formatEuro(initialResult.zorgBenefit, 0)} per maand</strong>.</li>
+      <li>Gecombineerde indicatie: <strong>{formatEuro(totalMonthlyBenefit, 0)} per maand</strong>.</li>
+    </ul>
+    <p>Bij de huurtoeslag wordt eerst de rekenhuur bepaald. Daarna tellen de delen voor 100%, 65% en 40% mee en wordt de inkomensafhankelijke correctie afgetrokken. De zorgtoeslag volgt een aparte inkomenstabel. In de <a href="/kennisbank/toeslagen-berekenen-uitleg/">uitgebreide uitleg bij de Toeslagenkaart 2026</a> zie je deze stappen met bedragen uitgewerkt.</p>
+    <p>Vermogen, medebewoners en andere persoonlijke voorwaarden worden hier niet beoordeeld. Doe daarom ook altijd de officiële proefberekening op <a href="https://www.toeslagen.nl" target="_blank" rel="noopener">Toeslagen.nl</a>.</p>
 
     <h2>Veelgemaakte fouten</h2>
     <ul class="calc-list">

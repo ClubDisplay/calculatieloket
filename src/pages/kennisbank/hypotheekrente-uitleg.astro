@@ -1,6 +1,15 @@
 ---
 import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
 import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+import { calculateMortgage } from "../../lib/calculators/mortgage";
+import { formatEuro } from "../../lib/format/currency";
+
+const example = calculateMortgage({
+  income: 60000,
+  interestRate: 3.8,
+  termYears: 30,
+  includePartner: false,
+});
 
 const title = "Hypotheekrente & rentevaste periode: uitleg | Calculatieloket.nl";
 const description = "Wat is hypotheekrente en hoe werkt een rentevaste periode? Uitleg over vaste en variabele rente, en wat rente doet met je maandlasten en leenbedrag.";
@@ -16,13 +25,13 @@ const sources: SourceItem[] = [
     label: "Officiële bron",
     title: "AFM — Hypotheekrente",
     description: "Onafhankelijke uitleg over hypotheekrente en rentevaste periodes.",
-    href: "https://www.afm.nl",
+    href: "https://www.afm.nl/consumenten/themas/hypotheken",
   },
   {
     label: "Officiële bron",
     title: "Rijksoverheid — Hypotheek",
     description: "Informatie over hypotheekvormen en rente.",
-    href: "https://www.rijksoverheid.nl/onderwerpen/koopwoning",
+    href: "https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/huis-kopen/hypotheek-aanvragen-wat-moet-ik-regelen",
   },
 ];
 
@@ -67,7 +76,7 @@ const faq = [
   h1={h1}
   breadcrumbs={[
     { label: "Home", href: "/" },
-    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Kennisbank", href: "/kennisbank/" },
     { label: "Hypotheekrente uitleg", current: true },
   ]}
   intro={intro}
@@ -75,8 +84,7 @@ const faq = [
   faq={faq}
   relatedLinks={relatedLinks}
   crossSell={crossSell}
-  lastUpdated="5 november 2026"
-  adSlot="1234567899"
+  lastUpdated="20 november 2026"
   categoryLabel="wonen"
   calculatorCta={{ href: "/hypotheek-calculator/", title: "Open de hypotheekcalculator", description: "Vul je inkomen en een voorbeeldrente in en zie direct het effect op je leenbedrag en maandlasten." }}
 >
@@ -112,12 +120,12 @@ const faq = [
       <p>€ 60.000</p>
     </div>
     <div class="example-card">
-      <strong>Voorbeeldrente</strong>
-      <p>3,8% — 30 jaar vast</p>
+      <strong>Voorbeeldrente en looptijd</strong>
+      <p>3,8% — 30 jaar</p>
     </div>
     <div class="example-card">
       <strong>Indicatief leenbedrag</strong>
-      <p>Ongeveer € 340.000</p>
+      <p>{formatEuro(example.maxMortgage, 0)}</p>
     </div>
     <div class="example-card">
       <strong>Effect van lagere rente</strong>
@@ -125,7 +133,7 @@ const faq = [
     </div>
   </div>
   <p>
-    Dit is een indicatie, geen offerte. De exacte rente en het leenbedrag hangen af van de geldverstrekker en je persoonlijke situatie.
+    Dit is een indicatie op basis van de interne inkomensfactor van onze calculator, geen offerte of officiële leennorm. De aangeboden rente en het leenbedrag hangen af van de geldverstrekker en je persoonlijke situatie. Bespreek dit met een erkend hypotheekadviseur.
   </p>
 
   <h2>Veelgemaakte fouten</h2>

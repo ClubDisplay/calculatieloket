@@ -151,15 +151,17 @@ calculators:
     estimated_rpm: 0
     cluster: "wonen"
     official_sources:
-      - name: "Nibud — Budgetvoorlichting"
-        url: "https://www.nibud.nl"
-      - name: "Rijksoverheid — Hypotheek"
-        url: "https://www.rijksoverheid.nl/hypotheek"
+      - name: "AFM — Hypotheken"
+        url: "https://www.afm.nl/consumenten/themas/hypotheken"
+      - name: "Nibud — Hypotheek afsluiten"
+        url: "https://www.nibud.nl/onderwerpen/wonen/hypotheek-afsluiten/"
+      - name: "Rijksoverheid — Hypotheek aanvragen"
+        url: "https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/huis-kopen/hypotheek-aanvragen-wat-moet-ik-regelen"
     schema: "faq,howto"
     component_version: "2.0"
     engine_version: "1.0"      # Atlas Calculator Engine: src/lib/calculators/mortgage.ts
-    content_version: "2.0"
-    last_review: "2026-06-30"
+    content_version: "2.1"
+    last_review: "2026-11-20"
     owner: "Barry"
     notes: "Gemigreerd naar src/lib/calculators/mortgage.ts"
 

@@ -131,14 +131,16 @@ journeys:
       priority: 4
 seo:
   title:
-    nl-NL: Btw inclusief en exclusief berekenen — 21%, 9% en 0%
+    nl-NL: "Inclusief en exclusief btw: verschil en berekening | Calculatieloket.nl"
   description:
-    nl-NL: Bereken eenvoudig btw inclusief of exclusief. Kies 21%, 9% of 0% btw en krijg een duidelijke indicatie.
+    nl-NL: Wat is het verschil tussen inclusief en exclusief btw? Bekijk formules, een bedragentabel en factuurvoorbeelden en reken direct om met 21%, 9% of 0%.
   keywords:
     nl-NL:
       - btw inclusief exclusief
       - exclusief inclusief btw
       - btw omrekenen
+      - verschil inclusief en exclusief
+      - factuur inclusief exclusief btw
   schema:
     - WebSite
     - FAQPage
@@ -162,7 +164,7 @@ privacy:
   no_tracking: true
   no_personal_data: true
 maintenance:
-  last_review: '2026-06-29'
+  last_review: '2026-11-20'
   owner: Barry
   update_frequency: yearly
   review_on:
