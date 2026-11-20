@@ -440,7 +440,7 @@ export const calculators: CalculatorDefinition[] = [
     popular: true,
     isNew: false,
     badge: "Populair",
-    lastUpdated: "2026-06-30",
+    lastUpdated: "2026-11-20",
     question: "Krijg een indicatie van huur- of zorgtoeslag.",
     quickLinkLabel: "Toeslagen",
     seo: {
@@ -506,12 +506,12 @@ export const calculators: CalculatorDefinition[] = [
     popular: true,
     isNew: false,
     badge: "Populair",
-    lastUpdated: "2026-06-30",
+    lastUpdated: "2026-11-20",
     question: "Wat kan ik maximaal lenen?",
     quickLinkLabel: "Hypotheek",
     seo: {
-      title: "Hypotheek Calculator 2026 — Indicatie maandlasten | Calculatieloket.nl",
-      description: "Bereken een indicatie van je maximale hypotheek, maandlasten en totale rentekosten op basis van je inkomen en rente. Geen officiële offerte.",
+      title: "Hypotheek maandlasten berekenen 2026 | Bruto en netto",
+      description: "Bereken indicatieve bruto en netto hypotheeklasten, je maximale hypotheek en rentekosten. Met uitleg, voorbeelden en duidelijke aannames voor 2026.",
     },
     schema: {
       howTo: {
@@ -835,14 +835,14 @@ export const calculators: CalculatorDefinition[] = [
     featured: false,
     popular: false,
     isNew: false,
-    lastUpdated: "2026-07-02",
+    lastUpdated: "2026-11-20",
     seo: {
-      title: "BTW inclusief en exclusief berekenen — 21%, 9% en 0% | Calculatieloket.nl",
-      description: "Bereken btw inclusief en exclusief met 21%, 9% of 0% tarief. Zie direct bedrag exclusief, btw-bedrag en inclusief. Gebaseerd op Belastingdienst tarieven.",
+      title: "Inclusief en exclusief btw: verschil en berekening | Calculatieloket.nl",
+      description: "Wat is het verschil tussen inclusief en exclusief btw? Bekijk formules, een bedragentabel en factuurvoorbeelden en reken direct om met 21%, 9% of 0%.",
     },
     schema: {
       howTo: {
-        name: "BTW inclusief en exclusief berekenen",
+        name: "Inclusief en exclusief btw berekenen",
         description: "Stappen om btw te berekenen tussen exclusief en inclusief bedragen.",
         totalTime: "PT30S",
         steps: [

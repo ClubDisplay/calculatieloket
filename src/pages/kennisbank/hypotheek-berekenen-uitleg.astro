@@ -1,6 +1,15 @@
 ---
 import ContentHubPage from "../../components/calculator/ContentHubPage.astro";
 import type { SourceItem, CrossSellItem } from "../../components/calculator/ContentHubPage.astro";
+import { calculateMortgage } from "../../lib/calculators/mortgage";
+import { formatEuro } from "../../lib/format/currency";
+
+const example = calculateMortgage({
+  income: 60000,
+  interestRate: 3.8,
+  termYears: 30,
+  includePartner: false,
+});
 
 const title = "Hypotheek berekenen: complete uitleg 2026 | Calculatieloket.nl";
 const description = "Hoe werkt een hypotheek? Uitleg over maximale hypotheek, maandlasten, rente, hypotheekrenteaftrek en NHG in 2026. Met rekenvoorbeelden en veelgemaakte fouten.";
@@ -16,7 +25,7 @@ const sources: SourceItem[] = [
     label: "Officiële bron",
     title: "AFM — Hypotheek",
     description: "Onafhankelijke uitleg over hypotheken en wat een geldverstrekker toetst.",
-    href: "https://www.afm.nl",
+    href: "https://www.afm.nl/consumenten/themas/hypotheken",
   },
   {
     label: "Officiële bron",
@@ -28,7 +37,7 @@ const sources: SourceItem[] = [
     label: "Officiële bron",
     title: "Rijksoverheid — Hypotheekrenteaftrek",
     description: "Regels rond hypotheekrenteaftrek en eigen woning.",
-    href: "https://www.rijksoverheid.nl/onderwerpen/koopwoning",
+    href: "https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/huis-kopen/hypotheek-aanvragen-wat-moet-ik-regelen",
   },
 ];
 
@@ -92,7 +101,7 @@ const howTo = {
   h1={h1}
   breadcrumbs={[
     { label: "Home", href: "/" },
-    { label: "Kennisbank", href: "/#kennisbank" },
+    { label: "Kennisbank", href: "/kennisbank/" },
     { label: "Hypotheek berekenen uitleg", current: true },
   ]}
   intro={intro}
@@ -101,8 +110,7 @@ const howTo = {
   relatedLinks={relatedLinks}
   crossSell={crossSell}
   howTo={howTo}
-  lastUpdated="4 november 2026"
-  adSlot="1234567899"
+  lastUpdated="20 november 2026"
   categoryLabel="wonen"
   calculatorCta={{ href: "/hypotheek-calculator/", title: "Open de hypotheekcalculator", description: "Vul je bruto jaarinkomen en rente in en zie direct een indicatie van je maximale hypotheek en maandlasten." }}
 >
@@ -125,10 +133,10 @@ const howTo = {
 
   <h2>Bruto en netto maandlasten</h2>
   <p>
-    Je <strong>bruto maandlasten</strong> zijn het bedrag dat je maandelijks aan de geldverstrekker betaalt (rente plus aflossing). Je <strong>netto maandlasten</strong> zijn lager, omdat je de betaalde hypotheekrente onder voorwaarden mag aftrekken van je belastbaar inkomen via de hypotheekrenteaftrek.
+    Je <strong>bruto maandlasten</strong> zijn het bedrag dat je maandelijks aan de geldverstrekker betaalt (rente plus aflossing). Als je onder voorwaarden hypotheekrenteaftrek kunt toepassen, kan je netto woonlast na het belastingvoordeel lager zijn.
   </p>
   <p>
-    De hoogte van het belastingvoordeel hangt af van je belastingtarief en van de afbouw van de hypotheekrenteaftrek. Daardoor kan het netto verschil per situatie flink uiteenlopen.
+    De hoogte van het belastingvoordeel hangt onder andere af van je belastingpositie en de regels voor hypotheekrenteaftrek. Onze calculator gebruikt een gemiddelde rente over de hele looptijd voor een vereenvoudigde netto-indicatie. Je werkelijke netto last kan per jaar verschillen.
   </p>
 
   <h2>De rol van de rente</h2>
@@ -141,28 +149,36 @@ const howTo = {
     De <strong>Nationale Hypotheek Garantie</strong> (NHG) is een vangnet voor huiseigenaren. Als je door bijvoorbeeld werkloosheid of een relatiebreuk je hypotheek niet meer kunt betalen en je huis met verlies moet verkopen, kan NHG onder voorwaarden het resterende deel kwijtschelden. Je betaalt hiervoor eenmalig een borgtochtprovisie en krijgt vaak een lagere rente. Of NHG voor jou mogelijk is, hangt af van de woningwaarde.
   </p>
 
-  <h2>Rekenvoorbeeld</h2>
-  <p>Een vereenvoudigd voorbeeld op basis van veelgebruikte uitgangspunten:</p>
+  <h2>Rekenvoorbeeld met de calculator</h2>
+  <p>Dit voorbeeld gebruikt dezelfde rekenmodule als onze calculator, met één inkomen en zonder aanvullende verplichtingen:</p>
   <div class="example-grid">
     <div class="example-card">
       <strong>Bruto jaarinkomen</strong>
       <p>€ 60.000</p>
     </div>
     <div class="example-card">
-      <strong>Voorbeeldrente</strong>
-      <p>3,8% — 30 jaar vast</p>
+      <strong>Voorbeeldrente en looptijd</strong>
+      <p>3,8% — 30 jaar</p>
     </div>
     <div class="example-card">
       <strong>Indicatief leenbedrag</strong>
-      <p>Ongeveer € 340.000</p>
+      <p>{formatEuro(example.maxMortgage, 0)}</p>
     </div>
     <div class="example-card">
-      <strong>Bruto maandlasten</strong>
-      <p>Rente + aflossing, maandelijks gelijk</p>
+      <strong>Bruto maandlast</strong>
+      <p>{formatEuro(example.monthlyPayment, 0)}</p>
+    </div>
+    <div class="example-card">
+      <strong>Vereenvoudigde netto-indicatie</strong>
+      <p>{formatEuro(example.netMonthlyPayment, 0)} gemiddeld over de looptijd</p>
+    </div>
+    <div class="example-card">
+      <strong>Totale rentekosten</strong>
+      <p>{formatEuro(example.totalInterest, 0)}</p>
     </div>
   </div>
   <p>
-    Dit is een indicatie, geen offerte. Een geldverstrekker toetst ook je BKR-registratie, gezinssituatie, energielabel en vaste lasten. Vraag voor een officiële berekening altijd een erkend hypotheekadviseur.
+    Het leenbedrag gebruikt een interne, renteafhankelijke inkomensfactor en is geen officiële leennorm van Nibud of een bank. Een geldverstrekker toetst ook je BKR-registratie, gezinssituatie, energielabel, woningwaarde en vaste lasten. Vraag voor een persoonlijke berekening altijd een erkend hypotheekadviseur.
   </p>
 
   <h2>Veelgemaakte fouten bij hypotheekberekeningen</h2>
